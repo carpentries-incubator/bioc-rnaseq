@@ -31,6 +31,12 @@ suppressPackageStartupMessages({
 
 ```{r}
 se <- readRDS(gzcon(url("https://github.com/Bioconductor/bioconductor-teaching/blob/master/data/GSE96870/GSE96870_se.rds?raw=true")))
+se$sex <- factor(se$sex, levels = c("Female", "Male"))
+se$infection <- factor(gsub(" ", "", gsub("-", "", se$infection)),
+                       levels = c("NonInfected", "InfluenzaA"))
+se$time <- factor(gsub(" ", "", se$time), levels = c("Day0", "Day4", "Day8"))
+se$tissue <- factor(gsub(" ", "", se$tissue), levels = c("Cerebellum", "Spinalcord"))
+se$mouse <- factor(as.numeric(se$mouse))
 meta <- as.data.frame(colData(se))
 meta
 ```
@@ -44,8 +50,8 @@ vd$cooccurrenceplots
 # Simple example - compare males and females, non-infected spinal cord
 
 ```{r}
-meta_noninf_spc <- meta %>% filter(time == "Day 0" & 
-                                       tissue == "Spinal cord")
+meta_noninf_spc <- meta %>% filter(time == "Day0" & 
+                                       tissue == "Spinalcord")
 meta_noninf_spc
 vd <- VisualizeDesign(sampleData = meta_noninf_spc, 
                       designFormula = ~ sex)
@@ -55,13 +61,13 @@ vd$plotlist
 
 > ## Challenge: Can you do it?
 >
-> Set up the design formula to compare the three time points (Day 0, Day 4, Day 8) in the male spinal cord samples, and visualize it using `ExploreModelMatrix`. 
+> Set up the design formula to compare the three time points (Day0, Day4, Day8) in the male spinal cord samples, and visualize it using `ExploreModelMatrix`. 
 >
 >
 > > ## Solution
 > >
 > > ```{r, echo=TRUE}
-> > meta_male_spc <- meta %>% filter(sex == "Male" & tissue == "Spinal cord")
+> > meta_male_spc <- meta %>% filter(sex == "Male" & tissue == "Spinalcord")
 > > meta_male_spc
 > > vd <- VisualizeDesign(sampleData = meta_male_spc, designFormula = ~ time)
 > > vd$designmatrix
@@ -73,7 +79,7 @@ vd$plotlist
 # Factorial design without interactions
 
 ```{r}
-meta_noninf <- meta %>% filter(time == "Day 0")
+meta_noninf <- meta %>% filter(time == "Day0")
 meta_noninf
 vd <- VisualizeDesign(sampleData = meta_noninf, 
                       designFormula = ~ sex + tissue)
@@ -84,10 +90,47 @@ vd$plotlist
 # Factorial design with interactions
 
 ```{r}
-meta_noninf <- meta %>% filter(time == "Day 0")
+meta_noninf <- meta %>% filter(time == "Day0")
 meta_noninf
 vd <- VisualizeDesign(sampleData = meta_noninf, 
                       designFormula = ~ sex * tissue)
 vd$designmatrix
 vd$plotlist
 ```
+
+# Paired design
+
+```{r}
+meta_fem_day0 <- meta %>% filter(sex == "Female" & 
+                                     time == "Day0")
+meta_fem_day0
+vd <- VisualizeDesign(sampleData = meta_fem_day0,
+                      designFormula = ~ mouse + tissue)
+vd$designmatrix
+vd$plotlist
+```
+
+# Within- and between-subject comparisons
+
+```{r}
+meta_fem_day04 <- meta %>% 
+    filter(sex == "Female" & 
+               time %in% c("Day0", "Day4")) %>%
+    droplevels()
+meta_fem_day04
+design <- model.matrix(~ mouse, data = meta_fem_day04)
+design <- cbind(design, 
+                Spc.Day0 = meta_fem_day04$tissue == "Spinalcord" & 
+                    meta_fem_day04$time == "Day0",
+                Spc.Day4 = meta_fem_day04$tissue == "Spinalcord" & 
+                    meta_fem_day04$time == "Day4")
+rownames(design) <- rownames(meta_fem_day04)
+design
+vd <- VisualizeDesign(sampleData = meta_fem_day04 %>%
+                          select(time, tissue, mouse),
+                      designFormula = NULL, 
+                      designMatrix = design, flipCoordFitted = FALSE)
+vd$designmatrix
+vd$plotlist
+```
+

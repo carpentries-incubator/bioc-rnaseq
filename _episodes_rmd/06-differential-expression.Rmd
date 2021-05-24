@@ -4,7 +4,7 @@ title: "Differential expression analysis"
 teaching: XX
 exercises: XX
 questions:
-- "How do I find differentially expressed genes?"
+- "How do we find differentially expressed genes?"
 objectives:
 - "Explain the steps involved in a differential expression analysis."
 - "Explain how to perform these steps in R, using DESeq2."
@@ -15,4 +15,73 @@ keypoints:
 ```{r, include=FALSE}
 source("../bin/chunk-options.R")
 knitr_fig_path("06-")
+options(width = 120)
 ```
+
+```{r}
+suppressPackageStartupMessages({
+    library(SummarizedExperiment)
+    library(DESeq2)
+    library(ggplot2)
+    library(ExploreModelMatrix)
+    library(cowplot)
+    library(ComplexHeatmap)
+})
+```
+
+```{r}
+se <- readRDS(gzcon(url("https://github.com/Bioconductor/bioconductor-teaching/blob/master/data/GSE96870/GSE96870_se.rds?raw=true")))
+se$sex <- factor(se$sex, levels = c("Female", "Male"))
+se$infection <- factor(gsub(" ", "", gsub("-", "", se$infection)),
+                       levels = c("NonInfected", "InfluenzaA"))
+se$time <- factor(gsub(" ", "", se$time), levels = c("Day0", "Day4", "Day8"))
+se$tissue <- factor(gsub(" ", "", se$tissue), levels = c("Cerebellum", "Spinalcord"))
+se$mouse <- factor(as.numeric(se$mouse))
+se
+```
+
+```{r}
+dds <- DESeq2::DESeqDataSet(se[, se$tissue == "Cerebellum"],
+                            design = ~ sex + time)
+vsd <- DESeq2::vst(dds, blind = TRUE)
+pcaData <- DESeq2::plotPCA(vsd, intgroup = c("sex", "time"),
+                           returnData = TRUE)
+percentVar <- round(100 * attr(pcaData, "percentVar"))
+ggplot(pcaData, aes(x = PC1, y = PC2)) +
+    geom_point(aes(color = sex, shape = time), size = 3) +
+    theme_minimal() +
+    xlab(paste0("PC1: ", percentVar[1], "% variance")) +
+    ylab(paste0("PC2: ", percentVar[2], "% variance")) +
+    coord_fixed()
+```
+
+```{r}
+dds <- DESeq2::DESeq(dds)
+plotDispEsts(dds)
+
+## Day 8 vs Day 0
+resTime <- DESeq2::results(dds, contrast = c("time", "Day8", "Day0"))
+summary(resTime)
+head(resTime[order(resTime$pvalue), ])
+DESeq2::plotMA(resTime)
+
+## Male vs Female
+resSex <- DESeq2::results(dds, contrast = c("sex", "Male", "Female"))
+summary(resSex)
+head(resSex[order(resSex$pvalue), ])
+DESeq2::plotMA(resSex)
+```
+
+```{r}
+genes <- rownames(head(resTime[order(resTime$pvalue), ], 10))
+heatmapData <- assay(vsd)[genes, ]
+heatmapData <- t(scale(t(heatmapData)))
+heatmapColAnnot <- data.frame(colData(vsd)[, c("time", "sex")])
+idx <- order(vsd$time)
+heatmapData <- heatmapData[, idx]
+heatmapColAnnot <- HeatmapAnnotation(df = heatmapColAnnot[idx, ])
+ComplexHeatmap::Heatmap(heatmapData,
+                        top_annotation = heatmapColAnnot,
+                        cluster_rows = TRUE, cluster_columns = FALSE)
+```
+
