@@ -18,6 +18,13 @@ source("../bin/chunk-options.R")
 knitr_fig_path("03-")
 ```
 
+```{r}
+suppressPackageStartupMessages({
+    library(SummarizedExperiment)
+    library(ExploreModelMatrix)
+})
+```
+
 
 > ## Challenge: Can you do it?
 >
