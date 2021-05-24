@@ -13,6 +13,8 @@ objectives:
 - "Explore different designs and learn how to interpret coefficients."
 keypoints:
 - "Key point 1"
+editor_options: 
+  chunk_output_type: console
 ---
 
 
@@ -22,27 +24,602 @@ keypoints:
 suppressPackageStartupMessages({
     library(SummarizedExperiment)
     library(ExploreModelMatrix)
+    library(dplyr)
 })
 ~~~
 {: .language-r}
 
 
+~~~
+se <- readRDS(gzcon(url("https://github.com/Bioconductor/bioconductor-teaching/blob/master/data/GSE96870/GSE96870_se.rds?raw=true")))
+se$sex <- factor(se$sex, levels = c("Female", "Male"))
+se$infection <- factor(gsub(" ", "", gsub("-", "", se$infection)),
+                       levels = c("NonInfected", "InfluenzaA"))
+se$time <- factor(gsub(" ", "", se$time), levels = c("Day0", "Day4", "Day8"))
+se$tissue <- factor(gsub(" ", "", se$tissue), levels = c("Cerebellum", "Spinalcord"))
+se$mouse <- factor(as.numeric(se$mouse))
+meta <- as.data.frame(colData(se))
+meta
+~~~
+{: .language-r}
+
+
+
+~~~
+                     title geo_accession     organism     age    sex   infection  strain time     tissue mouse
+GSM2545336 CNS_RNA-seq_10C    GSM2545336 Mus musculus 8 weeks Female  InfluenzaA C57BL/6 Day8 Cerebellum    14
+GSM2545337 CNS_RNA-seq_11C    GSM2545337 Mus musculus 8 weeks Female NonInfected C57BL/6 Day0 Cerebellum     9
+GSM2545338 CNS_RNA-seq_12C    GSM2545338 Mus musculus 8 weeks Female NonInfected C57BL/6 Day0 Cerebellum    10
+GSM2545339 CNS_RNA-seq_13C    GSM2545339 Mus musculus 8 weeks Female  InfluenzaA C57BL/6 Day4 Cerebellum    15
+GSM2545340 CNS_RNA-seq_14C    GSM2545340 Mus musculus 8 weeks   Male  InfluenzaA C57BL/6 Day4 Cerebellum    18
+GSM2545341 CNS_RNA-seq_17C    GSM2545341 Mus musculus 8 weeks   Male  InfluenzaA C57BL/6 Day8 Cerebellum     6
+GSM2545342  CNS_RNA-seq_1C    GSM2545342 Mus musculus 8 weeks Female  InfluenzaA C57BL/6 Day8 Cerebellum     5
+GSM2545343 CNS_RNA-seq_20C    GSM2545343 Mus musculus 8 weeks   Male NonInfected C57BL/6 Day0 Cerebellum    11
+GSM2545344 CNS_RNA-seq_21C    GSM2545344 Mus musculus 8 weeks Female  InfluenzaA C57BL/6 Day4 Cerebellum    22
+GSM2545345 CNS_RNA-seq_22C    GSM2545345 Mus musculus 8 weeks   Male  InfluenzaA C57BL/6 Day4 Cerebellum    13
+GSM2545346 CNS_RNA-seq_25C    GSM2545346 Mus musculus 8 weeks   Male  InfluenzaA C57BL/6 Day8 Cerebellum    23
+GSM2545347 CNS_RNA-seq_26C    GSM2545347 Mus musculus 8 weeks   Male  InfluenzaA C57BL/6 Day8 Cerebellum    24
+GSM2545348 CNS_RNA-seq_27C    GSM2545348 Mus musculus 8 weeks Female NonInfected C57BL/6 Day0 Cerebellum     8
+GSM2545349 CNS_RNA-seq_28C    GSM2545349 Mus musculus 8 weeks   Male NonInfected C57BL/6 Day0 Cerebellum     7
+GSM2545350 CNS_RNA-seq_29C    GSM2545350 Mus musculus 8 weeks   Male  InfluenzaA C57BL/6 Day4 Cerebellum     1
+GSM2545351  CNS_RNA-seq_2C    GSM2545351 Mus musculus 8 weeks Female  InfluenzaA C57BL/6 Day8 Cerebellum    16
+GSM2545352 CNS_RNA-seq_30C    GSM2545352 Mus musculus 8 weeks Female  InfluenzaA C57BL/6 Day4 Cerebellum    21
+GSM2545353  CNS_RNA-seq_3C    GSM2545353 Mus musculus 8 weeks Female NonInfected C57BL/6 Day0 Cerebellum     4
+GSM2545354  CNS_RNA-seq_4C    GSM2545354 Mus musculus 8 weeks   Male NonInfected C57BL/6 Day0 Cerebellum     2
+GSM2545355 CNS_RNA-seq_571    GSM2545355 Mus musculus 8 weeks   Male  InfluenzaA C57BL/6 Day4 Spinalcord     1
+GSM2545356 CNS_RNA-seq_574    GSM2545356 Mus musculus 8 weeks   Male NonInfected C57BL/6 Day0 Spinalcord     2
+GSM2545357 CNS_RNA-seq_575    GSM2545357 Mus musculus 8 weeks   Male NonInfected C57BL/6 Day0 Spinalcord     3
+GSM2545358 CNS_RNA-seq_583    GSM2545358 Mus musculus 8 weeks Female NonInfected C57BL/6 Day0 Spinalcord     4
+GSM2545359 CNS_RNA-seq_585    GSM2545359 Mus musculus 8 weeks Female  InfluenzaA C57BL/6 Day8 Spinalcord     5
+GSM2545360 CNS_RNA-seq_589    GSM2545360 Mus musculus 8 weeks   Male  InfluenzaA C57BL/6 Day8 Spinalcord     6
+GSM2545361 CNS_RNA-seq_590    GSM2545361 Mus musculus 8 weeks   Male NonInfected C57BL/6 Day0 Spinalcord     7
+GSM2545362  CNS_RNA-seq_5C    GSM2545362 Mus musculus 8 weeks Female  InfluenzaA C57BL/6 Day4 Cerebellum    20
+GSM2545363  CNS_RNA-seq_6C    GSM2545363 Mus musculus 8 weeks   Male  InfluenzaA C57BL/6 Day4 Cerebellum    12
+GSM2545364 CNS_RNA-seq_709    GSM2545364 Mus musculus 8 weeks Female NonInfected C57BL/6 Day0 Spinalcord     8
+GSM2545365 CNS_RNA-seq_710    GSM2545365 Mus musculus 8 weeks Female NonInfected C57BL/6 Day0 Spinalcord     9
+GSM2545366 CNS_RNA-seq_711    GSM2545366 Mus musculus 8 weeks Female NonInfected C57BL/6 Day0 Spinalcord    10
+GSM2545367 CNS_RNA-seq_713    GSM2545367 Mus musculus 8 weeks   Male NonInfected C57BL/6 Day0 Spinalcord    11
+GSM2545368 CNS_RNA-seq_728    GSM2545368 Mus musculus 8 weeks   Male  InfluenzaA C57BL/6 Day4 Spinalcord    12
+GSM2545369 CNS_RNA-seq_729    GSM2545369 Mus musculus 8 weeks   Male  InfluenzaA C57BL/6 Day4 Spinalcord    13
+GSM2545370 CNS_RNA-seq_730    GSM2545370 Mus musculus 8 weeks Female  InfluenzaA C57BL/6 Day8 Spinalcord    14
+GSM2545371 CNS_RNA-seq_731    GSM2545371 Mus musculus 8 weeks Female  InfluenzaA C57BL/6 Day4 Spinalcord    15
+GSM2545372 CNS_RNA-seq_733    GSM2545372 Mus musculus 8 weeks   Male  InfluenzaA C57BL/6 Day8 Spinalcord    17
+GSM2545373 CNS_RNA-seq_735    GSM2545373 Mus musculus 8 weeks   Male  InfluenzaA C57BL/6 Day4 Spinalcord    18
+GSM2545374 CNS_RNA-seq_736    GSM2545374 Mus musculus 8 weeks Female  InfluenzaA C57BL/6 Day8 Spinalcord    19
+GSM2545375 CNS_RNA-seq_738    GSM2545375 Mus musculus 8 weeks Female  InfluenzaA C57BL/6 Day4 Spinalcord    20
+GSM2545376 CNS_RNA-seq_740    GSM2545376 Mus musculus 8 weeks Female  InfluenzaA C57BL/6 Day4 Spinalcord    21
+GSM2545377 CNS_RNA-seq_741    GSM2545377 Mus musculus 8 weeks Female  InfluenzaA C57BL/6 Day4 Spinalcord    22
+GSM2545378 CNS_RNA-seq_742    GSM2545378 Mus musculus 8 weeks   Male  InfluenzaA C57BL/6 Day8 Spinalcord    23
+GSM2545379 CNS_RNA-seq_743    GSM2545379 Mus musculus 8 weeks   Male  InfluenzaA C57BL/6 Day8 Spinalcord    24
+GSM2545380  CNS_RNA-seq_9C    GSM2545380 Mus musculus 8 weeks Female  InfluenzaA C57BL/6 Day8 Cerebellum    19
+~~~
+{: .output}
+
+
+~~~
+vd <- VisualizeDesign(sampleData = meta, 
+                      designFormula = ~ tissue + time + sex)
+vd$cooccurrenceplots
+~~~
+{: .language-r}
+
+
+
+~~~
+$`tissue = Cerebellum`
+~~~
+{: .output}
+
+<img src="../fig/rmd-03-unnamed-chunk-4-1.png" title="plot of chunk unnamed-chunk-4" alt="plot of chunk unnamed-chunk-4" width="612" style="display: block; margin: auto;" />
+
+~~~
+
+$`tissue = Spinalcord`
+~~~
+{: .output}
+
+<img src="../fig/rmd-03-unnamed-chunk-4-2.png" title="plot of chunk unnamed-chunk-4" alt="plot of chunk unnamed-chunk-4" width="612" style="display: block; margin: auto;" />
+
+# Simple example - compare males and females, non-infected spinal cord
+
+
+~~~
+meta_noninf_spc <- meta %>% filter(time == "Day0" & 
+                                       tissue == "Spinalcord")
+meta_noninf_spc
+~~~
+{: .language-r}
+
+
+
+~~~
+                     title geo_accession     organism     age    sex   infection  strain time     tissue mouse
+GSM2545356 CNS_RNA-seq_574    GSM2545356 Mus musculus 8 weeks   Male NonInfected C57BL/6 Day0 Spinalcord     2
+GSM2545357 CNS_RNA-seq_575    GSM2545357 Mus musculus 8 weeks   Male NonInfected C57BL/6 Day0 Spinalcord     3
+GSM2545358 CNS_RNA-seq_583    GSM2545358 Mus musculus 8 weeks Female NonInfected C57BL/6 Day0 Spinalcord     4
+GSM2545361 CNS_RNA-seq_590    GSM2545361 Mus musculus 8 weeks   Male NonInfected C57BL/6 Day0 Spinalcord     7
+GSM2545364 CNS_RNA-seq_709    GSM2545364 Mus musculus 8 weeks Female NonInfected C57BL/6 Day0 Spinalcord     8
+GSM2545365 CNS_RNA-seq_710    GSM2545365 Mus musculus 8 weeks Female NonInfected C57BL/6 Day0 Spinalcord     9
+GSM2545366 CNS_RNA-seq_711    GSM2545366 Mus musculus 8 weeks Female NonInfected C57BL/6 Day0 Spinalcord    10
+GSM2545367 CNS_RNA-seq_713    GSM2545367 Mus musculus 8 weeks   Male NonInfected C57BL/6 Day0 Spinalcord    11
+~~~
+{: .output}
+
+
+
+~~~
+vd <- VisualizeDesign(sampleData = meta_noninf_spc, 
+                      designFormula = ~ sex)
+vd$designmatrix
+~~~
+{: .language-r}
+
+
+
+~~~
+           (Intercept) sexMale
+GSM2545356           1       1
+GSM2545357           1       1
+GSM2545358           1       0
+GSM2545361           1       1
+GSM2545364           1       0
+GSM2545365           1       0
+GSM2545366           1       0
+GSM2545367           1       1
+~~~
+{: .output}
+
+
+
+~~~
+vd$plotlist
+~~~
+{: .language-r}
+
+
+
+~~~
+[[1]]
+~~~
+{: .output}
+
+<img src="../fig/rmd-03-unnamed-chunk-5-1.png" title="plot of chunk unnamed-chunk-5" alt="plot of chunk unnamed-chunk-5" width="612" style="display: block; margin: auto;" />
+
 > ## Challenge: Can you do it?
 >
-> What is the output of this command?
+> Set up the design formula to compare the three time points (Day0, Day4, Day8) in the male spinal cord samples, and visualize it using `ExploreModelMatrix`. 
 >
-> 
-> ~~~
-> paste("This", "new", "template", "looks", "good")
-> ~~~
-> {: .language-r}
 >
 > > ## Solution
 > >
 > > 
 > > ~~~
-> > [1] "This new template looks good"
+> > meta_male_spc <- meta %>% filter(sex == "Male" & tissue == "Spinalcord")
+> > meta_male_spc
+> > ~~~
+> > {: .language-r}
+> > 
+> > 
+> > 
+> > ~~~
+> >                      title geo_accession     organism     age  sex   infection  strain time     tissue mouse
+> > GSM2545355 CNS_RNA-seq_571    GSM2545355 Mus musculus 8 weeks Male  InfluenzaA C57BL/6 Day4 Spinalcord     1
+> > GSM2545356 CNS_RNA-seq_574    GSM2545356 Mus musculus 8 weeks Male NonInfected C57BL/6 Day0 Spinalcord     2
+> > GSM2545357 CNS_RNA-seq_575    GSM2545357 Mus musculus 8 weeks Male NonInfected C57BL/6 Day0 Spinalcord     3
+> > GSM2545360 CNS_RNA-seq_589    GSM2545360 Mus musculus 8 weeks Male  InfluenzaA C57BL/6 Day8 Spinalcord     6
+> > GSM2545361 CNS_RNA-seq_590    GSM2545361 Mus musculus 8 weeks Male NonInfected C57BL/6 Day0 Spinalcord     7
+> > GSM2545367 CNS_RNA-seq_713    GSM2545367 Mus musculus 8 weeks Male NonInfected C57BL/6 Day0 Spinalcord    11
+> > GSM2545368 CNS_RNA-seq_728    GSM2545368 Mus musculus 8 weeks Male  InfluenzaA C57BL/6 Day4 Spinalcord    12
+> > GSM2545369 CNS_RNA-seq_729    GSM2545369 Mus musculus 8 weeks Male  InfluenzaA C57BL/6 Day4 Spinalcord    13
+> > GSM2545372 CNS_RNA-seq_733    GSM2545372 Mus musculus 8 weeks Male  InfluenzaA C57BL/6 Day8 Spinalcord    17
+> > GSM2545373 CNS_RNA-seq_735    GSM2545373 Mus musculus 8 weeks Male  InfluenzaA C57BL/6 Day4 Spinalcord    18
+> > GSM2545378 CNS_RNA-seq_742    GSM2545378 Mus musculus 8 weeks Male  InfluenzaA C57BL/6 Day8 Spinalcord    23
+> > GSM2545379 CNS_RNA-seq_743    GSM2545379 Mus musculus 8 weeks Male  InfluenzaA C57BL/6 Day8 Spinalcord    24
 > > ~~~
 > > {: .output}
+> > 
+> > 
+> > 
+> > ~~~
+> > vd <- VisualizeDesign(sampleData = meta_male_spc, designFormula = ~ time)
+> > vd$designmatrix
+> > ~~~
+> > {: .language-r}
+> > 
+> > 
+> > 
+> > ~~~
+> >            (Intercept) timeDay4 timeDay8
+> > GSM2545355           1        1        0
+> > GSM2545356           1        0        0
+> > GSM2545357           1        0        0
+> > GSM2545360           1        0        1
+> > GSM2545361           1        0        0
+> > GSM2545367           1        0        0
+> > GSM2545368           1        1        0
+> > GSM2545369           1        1        0
+> > GSM2545372           1        0        1
+> > GSM2545373           1        1        0
+> > GSM2545378           1        0        1
+> > GSM2545379           1        0        1
+> > ~~~
+> > {: .output}
+> > 
+> > 
+> > 
+> > ~~~
+> > vd$plotlist
+> > ~~~
+> > {: .language-r}
+> > 
+> > 
+> > 
+> > ~~~
+> > [[1]]
+> > ~~~
+> > {: .output}
+> > 
+> > <img src="../fig/rmd-03-unnamed-chunk-6-1.png" title="plot of chunk unnamed-chunk-6" alt="plot of chunk unnamed-chunk-6" width="612" style="display: block; margin: auto;" />
 > {: .solution}
 {: .challenge}
+
+# Factorial design without interactions
+
+
+~~~
+meta_noninf <- meta %>% filter(time == "Day0")
+meta_noninf
+~~~
+{: .language-r}
+
+
+
+~~~
+                     title geo_accession     organism     age    sex   infection  strain time     tissue mouse
+GSM2545337 CNS_RNA-seq_11C    GSM2545337 Mus musculus 8 weeks Female NonInfected C57BL/6 Day0 Cerebellum     9
+GSM2545338 CNS_RNA-seq_12C    GSM2545338 Mus musculus 8 weeks Female NonInfected C57BL/6 Day0 Cerebellum    10
+GSM2545343 CNS_RNA-seq_20C    GSM2545343 Mus musculus 8 weeks   Male NonInfected C57BL/6 Day0 Cerebellum    11
+GSM2545348 CNS_RNA-seq_27C    GSM2545348 Mus musculus 8 weeks Female NonInfected C57BL/6 Day0 Cerebellum     8
+GSM2545349 CNS_RNA-seq_28C    GSM2545349 Mus musculus 8 weeks   Male NonInfected C57BL/6 Day0 Cerebellum     7
+GSM2545353  CNS_RNA-seq_3C    GSM2545353 Mus musculus 8 weeks Female NonInfected C57BL/6 Day0 Cerebellum     4
+GSM2545354  CNS_RNA-seq_4C    GSM2545354 Mus musculus 8 weeks   Male NonInfected C57BL/6 Day0 Cerebellum     2
+GSM2545356 CNS_RNA-seq_574    GSM2545356 Mus musculus 8 weeks   Male NonInfected C57BL/6 Day0 Spinalcord     2
+GSM2545357 CNS_RNA-seq_575    GSM2545357 Mus musculus 8 weeks   Male NonInfected C57BL/6 Day0 Spinalcord     3
+GSM2545358 CNS_RNA-seq_583    GSM2545358 Mus musculus 8 weeks Female NonInfected C57BL/6 Day0 Spinalcord     4
+GSM2545361 CNS_RNA-seq_590    GSM2545361 Mus musculus 8 weeks   Male NonInfected C57BL/6 Day0 Spinalcord     7
+GSM2545364 CNS_RNA-seq_709    GSM2545364 Mus musculus 8 weeks Female NonInfected C57BL/6 Day0 Spinalcord     8
+GSM2545365 CNS_RNA-seq_710    GSM2545365 Mus musculus 8 weeks Female NonInfected C57BL/6 Day0 Spinalcord     9
+GSM2545366 CNS_RNA-seq_711    GSM2545366 Mus musculus 8 weeks Female NonInfected C57BL/6 Day0 Spinalcord    10
+GSM2545367 CNS_RNA-seq_713    GSM2545367 Mus musculus 8 weeks   Male NonInfected C57BL/6 Day0 Spinalcord    11
+~~~
+{: .output}
+
+
+
+~~~
+vd <- VisualizeDesign(sampleData = meta_noninf, 
+                      designFormula = ~ sex + tissue)
+vd$designmatrix
+~~~
+{: .language-r}
+
+
+
+~~~
+           (Intercept) sexMale tissueSpinalcord
+GSM2545337           1       0                0
+GSM2545338           1       0                0
+GSM2545343           1       1                0
+GSM2545348           1       0                0
+GSM2545349           1       1                0
+GSM2545353           1       0                0
+GSM2545354           1       1                0
+GSM2545356           1       1                1
+GSM2545357           1       1                1
+GSM2545358           1       0                1
+GSM2545361           1       1                1
+GSM2545364           1       0                1
+GSM2545365           1       0                1
+GSM2545366           1       0                1
+GSM2545367           1       1                1
+~~~
+{: .output}
+
+
+
+~~~
+vd$plotlist
+~~~
+{: .language-r}
+
+
+
+~~~
+[[1]]
+~~~
+{: .output}
+
+<img src="../fig/rmd-03-unnamed-chunk-7-1.png" title="plot of chunk unnamed-chunk-7" alt="plot of chunk unnamed-chunk-7" width="612" style="display: block; margin: auto;" />
+
+# Factorial design with interactions
+
+
+~~~
+meta_noninf <- meta %>% filter(time == "Day0")
+meta_noninf
+~~~
+{: .language-r}
+
+
+
+~~~
+                     title geo_accession     organism     age    sex   infection  strain time     tissue mouse
+GSM2545337 CNS_RNA-seq_11C    GSM2545337 Mus musculus 8 weeks Female NonInfected C57BL/6 Day0 Cerebellum     9
+GSM2545338 CNS_RNA-seq_12C    GSM2545338 Mus musculus 8 weeks Female NonInfected C57BL/6 Day0 Cerebellum    10
+GSM2545343 CNS_RNA-seq_20C    GSM2545343 Mus musculus 8 weeks   Male NonInfected C57BL/6 Day0 Cerebellum    11
+GSM2545348 CNS_RNA-seq_27C    GSM2545348 Mus musculus 8 weeks Female NonInfected C57BL/6 Day0 Cerebellum     8
+GSM2545349 CNS_RNA-seq_28C    GSM2545349 Mus musculus 8 weeks   Male NonInfected C57BL/6 Day0 Cerebellum     7
+GSM2545353  CNS_RNA-seq_3C    GSM2545353 Mus musculus 8 weeks Female NonInfected C57BL/6 Day0 Cerebellum     4
+GSM2545354  CNS_RNA-seq_4C    GSM2545354 Mus musculus 8 weeks   Male NonInfected C57BL/6 Day0 Cerebellum     2
+GSM2545356 CNS_RNA-seq_574    GSM2545356 Mus musculus 8 weeks   Male NonInfected C57BL/6 Day0 Spinalcord     2
+GSM2545357 CNS_RNA-seq_575    GSM2545357 Mus musculus 8 weeks   Male NonInfected C57BL/6 Day0 Spinalcord     3
+GSM2545358 CNS_RNA-seq_583    GSM2545358 Mus musculus 8 weeks Female NonInfected C57BL/6 Day0 Spinalcord     4
+GSM2545361 CNS_RNA-seq_590    GSM2545361 Mus musculus 8 weeks   Male NonInfected C57BL/6 Day0 Spinalcord     7
+GSM2545364 CNS_RNA-seq_709    GSM2545364 Mus musculus 8 weeks Female NonInfected C57BL/6 Day0 Spinalcord     8
+GSM2545365 CNS_RNA-seq_710    GSM2545365 Mus musculus 8 weeks Female NonInfected C57BL/6 Day0 Spinalcord     9
+GSM2545366 CNS_RNA-seq_711    GSM2545366 Mus musculus 8 weeks Female NonInfected C57BL/6 Day0 Spinalcord    10
+GSM2545367 CNS_RNA-seq_713    GSM2545367 Mus musculus 8 weeks   Male NonInfected C57BL/6 Day0 Spinalcord    11
+~~~
+{: .output}
+
+
+
+~~~
+vd <- VisualizeDesign(sampleData = meta_noninf, 
+                      designFormula = ~ sex * tissue)
+vd$designmatrix
+~~~
+{: .language-r}
+
+
+
+~~~
+           (Intercept) sexMale tissueSpinalcord sexMale:tissueSpinalcord
+GSM2545337           1       0                0                        0
+GSM2545338           1       0                0                        0
+GSM2545343           1       1                0                        0
+GSM2545348           1       0                0                        0
+GSM2545349           1       1                0                        0
+GSM2545353           1       0                0                        0
+GSM2545354           1       1                0                        0
+GSM2545356           1       1                1                        1
+GSM2545357           1       1                1                        1
+GSM2545358           1       0                1                        0
+GSM2545361           1       1                1                        1
+GSM2545364           1       0                1                        0
+GSM2545365           1       0                1                        0
+GSM2545366           1       0                1                        0
+GSM2545367           1       1                1                        1
+~~~
+{: .output}
+
+
+
+~~~
+vd$plotlist
+~~~
+{: .language-r}
+
+
+
+~~~
+[[1]]
+~~~
+{: .output}
+
+<img src="../fig/rmd-03-unnamed-chunk-8-1.png" title="plot of chunk unnamed-chunk-8" alt="plot of chunk unnamed-chunk-8" width="612" style="display: block; margin: auto;" />
+
+# Paired design
+
+
+~~~
+meta_fem_day0 <- meta %>% filter(sex == "Female" & 
+                                     time == "Day0")
+meta_fem_day0
+~~~
+{: .language-r}
+
+
+
+~~~
+                     title geo_accession     organism     age    sex   infection  strain time     tissue mouse
+GSM2545337 CNS_RNA-seq_11C    GSM2545337 Mus musculus 8 weeks Female NonInfected C57BL/6 Day0 Cerebellum     9
+GSM2545338 CNS_RNA-seq_12C    GSM2545338 Mus musculus 8 weeks Female NonInfected C57BL/6 Day0 Cerebellum    10
+GSM2545348 CNS_RNA-seq_27C    GSM2545348 Mus musculus 8 weeks Female NonInfected C57BL/6 Day0 Cerebellum     8
+GSM2545353  CNS_RNA-seq_3C    GSM2545353 Mus musculus 8 weeks Female NonInfected C57BL/6 Day0 Cerebellum     4
+GSM2545358 CNS_RNA-seq_583    GSM2545358 Mus musculus 8 weeks Female NonInfected C57BL/6 Day0 Spinalcord     4
+GSM2545364 CNS_RNA-seq_709    GSM2545364 Mus musculus 8 weeks Female NonInfected C57BL/6 Day0 Spinalcord     8
+GSM2545365 CNS_RNA-seq_710    GSM2545365 Mus musculus 8 weeks Female NonInfected C57BL/6 Day0 Spinalcord     9
+GSM2545366 CNS_RNA-seq_711    GSM2545366 Mus musculus 8 weeks Female NonInfected C57BL/6 Day0 Spinalcord    10
+~~~
+{: .output}
+
+
+
+~~~
+vd <- VisualizeDesign(sampleData = meta_fem_day0,
+                      designFormula = ~ mouse + tissue)
+vd$designmatrix
+~~~
+{: .language-r}
+
+
+
+~~~
+           (Intercept) mouse2 mouse3 mouse4 mouse5 mouse6 mouse7 mouse8 mouse9 mouse10 mouse11 mouse12 mouse13 mouse14
+GSM2545337           1      0      0      0      0      0      0      0      1       0       0       0       0       0
+GSM2545338           1      0      0      0      0      0      0      0      0       1       0       0       0       0
+GSM2545348           1      0      0      0      0      0      0      1      0       0       0       0       0       0
+GSM2545353           1      0      0      1      0      0      0      0      0       0       0       0       0       0
+GSM2545358           1      0      0      1      0      0      0      0      0       0       0       0       0       0
+GSM2545364           1      0      0      0      0      0      0      1      0       0       0       0       0       0
+GSM2545365           1      0      0      0      0      0      0      0      1       0       0       0       0       0
+GSM2545366           1      0      0      0      0      0      0      0      0       1       0       0       0       0
+           mouse15 mouse16 mouse17 mouse18 mouse19 mouse20 mouse21 mouse22 mouse23 mouse24 tissueSpinalcord
+GSM2545337       0       0       0       0       0       0       0       0       0       0                0
+GSM2545338       0       0       0       0       0       0       0       0       0       0                0
+GSM2545348       0       0       0       0       0       0       0       0       0       0                0
+GSM2545353       0       0       0       0       0       0       0       0       0       0                0
+GSM2545358       0       0       0       0       0       0       0       0       0       0                1
+GSM2545364       0       0       0       0       0       0       0       0       0       0                1
+GSM2545365       0       0       0       0       0       0       0       0       0       0                1
+GSM2545366       0       0       0       0       0       0       0       0       0       0                1
+~~~
+{: .output}
+
+
+
+~~~
+vd$plotlist
+~~~
+{: .language-r}
+
+
+
+~~~
+[[1]]
+~~~
+{: .output}
+
+<img src="../fig/rmd-03-unnamed-chunk-9-1.png" title="plot of chunk unnamed-chunk-9" alt="plot of chunk unnamed-chunk-9" width="612" style="display: block; margin: auto;" />
+
+# Within- and between-subject comparisons
+
+
+~~~
+meta_fem_day04 <- meta %>% 
+    filter(sex == "Female" & 
+               time %in% c("Day0", "Day4")) %>%
+    droplevels()
+meta_fem_day04
+~~~
+{: .language-r}
+
+
+
+~~~
+                     title geo_accession     organism     age    sex   infection  strain time     tissue mouse
+GSM2545337 CNS_RNA-seq_11C    GSM2545337 Mus musculus 8 weeks Female NonInfected C57BL/6 Day0 Cerebellum     9
+GSM2545338 CNS_RNA-seq_12C    GSM2545338 Mus musculus 8 weeks Female NonInfected C57BL/6 Day0 Cerebellum    10
+GSM2545339 CNS_RNA-seq_13C    GSM2545339 Mus musculus 8 weeks Female  InfluenzaA C57BL/6 Day4 Cerebellum    15
+GSM2545344 CNS_RNA-seq_21C    GSM2545344 Mus musculus 8 weeks Female  InfluenzaA C57BL/6 Day4 Cerebellum    22
+GSM2545348 CNS_RNA-seq_27C    GSM2545348 Mus musculus 8 weeks Female NonInfected C57BL/6 Day0 Cerebellum     8
+GSM2545352 CNS_RNA-seq_30C    GSM2545352 Mus musculus 8 weeks Female  InfluenzaA C57BL/6 Day4 Cerebellum    21
+GSM2545353  CNS_RNA-seq_3C    GSM2545353 Mus musculus 8 weeks Female NonInfected C57BL/6 Day0 Cerebellum     4
+GSM2545358 CNS_RNA-seq_583    GSM2545358 Mus musculus 8 weeks Female NonInfected C57BL/6 Day0 Spinalcord     4
+GSM2545362  CNS_RNA-seq_5C    GSM2545362 Mus musculus 8 weeks Female  InfluenzaA C57BL/6 Day4 Cerebellum    20
+GSM2545364 CNS_RNA-seq_709    GSM2545364 Mus musculus 8 weeks Female NonInfected C57BL/6 Day0 Spinalcord     8
+GSM2545365 CNS_RNA-seq_710    GSM2545365 Mus musculus 8 weeks Female NonInfected C57BL/6 Day0 Spinalcord     9
+GSM2545366 CNS_RNA-seq_711    GSM2545366 Mus musculus 8 weeks Female NonInfected C57BL/6 Day0 Spinalcord    10
+GSM2545371 CNS_RNA-seq_731    GSM2545371 Mus musculus 8 weeks Female  InfluenzaA C57BL/6 Day4 Spinalcord    15
+GSM2545375 CNS_RNA-seq_738    GSM2545375 Mus musculus 8 weeks Female  InfluenzaA C57BL/6 Day4 Spinalcord    20
+GSM2545376 CNS_RNA-seq_740    GSM2545376 Mus musculus 8 weeks Female  InfluenzaA C57BL/6 Day4 Spinalcord    21
+GSM2545377 CNS_RNA-seq_741    GSM2545377 Mus musculus 8 weeks Female  InfluenzaA C57BL/6 Day4 Spinalcord    22
+~~~
+{: .output}
+
+
+
+~~~
+design <- model.matrix(~ mouse, data = meta_fem_day04)
+design <- cbind(design, 
+                Spc.Day0 = meta_fem_day04$tissue == "Spinalcord" & 
+                    meta_fem_day04$time == "Day0",
+                Spc.Day4 = meta_fem_day04$tissue == "Spinalcord" & 
+                    meta_fem_day04$time == "Day4")
+rownames(design) <- rownames(meta_fem_day04)
+design
+~~~
+{: .language-r}
+
+
+
+~~~
+           (Intercept) mouse8 mouse9 mouse10 mouse15 mouse20 mouse21 mouse22 Spc.Day0 Spc.Day4
+GSM2545337           1      0      1       0       0       0       0       0        0        0
+GSM2545338           1      0      0       1       0       0       0       0        0        0
+GSM2545339           1      0      0       0       1       0       0       0        0        0
+GSM2545344           1      0      0       0       0       0       0       1        0        0
+GSM2545348           1      1      0       0       0       0       0       0        0        0
+GSM2545352           1      0      0       0       0       0       1       0        0        0
+GSM2545353           1      0      0       0       0       0       0       0        0        0
+GSM2545358           1      0      0       0       0       0       0       0        1        0
+GSM2545362           1      0      0       0       0       1       0       0        0        0
+GSM2545364           1      1      0       0       0       0       0       0        1        0
+GSM2545365           1      0      1       0       0       0       0       0        1        0
+GSM2545366           1      0      0       1       0       0       0       0        1        0
+GSM2545371           1      0      0       0       1       0       0       0        0        1
+GSM2545375           1      0      0       0       0       1       0       0        0        1
+GSM2545376           1      0      0       0       0       0       1       0        0        1
+GSM2545377           1      0      0       0       0       0       0       1        0        1
+~~~
+{: .output}
+
+
+
+~~~
+vd <- VisualizeDesign(sampleData = meta_fem_day04 %>%
+                          select(time, tissue, mouse),
+                      designFormula = NULL, 
+                      designMatrix = design, flipCoordFitted = FALSE)
+vd$designmatrix
+~~~
+{: .language-r}
+
+
+
+~~~
+           (Intercept) mouse8 mouse9 mouse10 mouse15 mouse20 mouse21 mouse22 Spc.Day0 Spc.Day4
+GSM2545337           1      0      1       0       0       0       0       0        0        0
+GSM2545338           1      0      0       1       0       0       0       0        0        0
+GSM2545339           1      0      0       0       1       0       0       0        0        0
+GSM2545344           1      0      0       0       0       0       0       1        0        0
+GSM2545348           1      1      0       0       0       0       0       0        0        0
+GSM2545352           1      0      0       0       0       0       1       0        0        0
+GSM2545353           1      0      0       0       0       0       0       0        0        0
+GSM2545358           1      0      0       0       0       0       0       0        1        0
+GSM2545362           1      0      0       0       0       1       0       0        0        0
+GSM2545364           1      1      0       0       0       0       0       0        1        0
+GSM2545365           1      0      1       0       0       0       0       0        1        0
+GSM2545366           1      0      0       1       0       0       0       0        1        0
+GSM2545371           1      0      0       0       1       0       0       0        0        1
+GSM2545375           1      0      0       0       0       1       0       0        0        1
+GSM2545376           1      0      0       0       0       0       1       0        0        1
+GSM2545377           1      0      0       0       0       0       0       1        0        1
+~~~
+{: .output}
+
+
+
+~~~
+vd$plotlist
+~~~
+{: .language-r}
+
+
+
+~~~
+$`time = Day0`
+~~~
+{: .output}
+
+<img src="../fig/rmd-03-unnamed-chunk-10-1.png" title="plot of chunk unnamed-chunk-10" alt="plot of chunk unnamed-chunk-10" width="612" style="display: block; margin: auto;" />
+
+~~~
+
+$`time = Day4`
+~~~
+{: .output}
+
+<img src="../fig/rmd-03-unnamed-chunk-10-2.png" title="plot of chunk unnamed-chunk-10" alt="plot of chunk unnamed-chunk-10" width="612" style="display: block; margin: auto;" />
+

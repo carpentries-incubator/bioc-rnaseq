@@ -13,8 +13,13 @@ BugReports: {{ BugReports }}
 Encoding: UTF-8
 Imports: 
     BiocManager,
+    ComplexHeatmap,
+    cowplot,
     desc,
+    DESeq2,
+    dplyr,
     ExploreModelMatrix,
+    ggplot2,
     knitr,
     renv,
     rmarkdown,
