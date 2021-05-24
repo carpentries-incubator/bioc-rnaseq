@@ -18,6 +18,22 @@ keypoints:
 
 
 
+~~~
+suppressPackageStartupMessages({
+    library(SummarizedExperiment)
+    library(ExploreModelMatrix)
+})
+~~~
+{: .language-r}
+
+
+
+~~~
+Error in library(SummarizedExperiment): there is no package called 'SummarizedExperiment'
+~~~
+{: .error}
+
+
 > ## Challenge: Can you do it?
 >
 > What is the output of this command?
