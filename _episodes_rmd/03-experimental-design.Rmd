@@ -1,0 +1,36 @@
+---
+source: Rmd
+title: "Experimental design"
+teaching: XX
+exercises: XX
+questions:
+- "How do we design experiments optimally?"
+- "How do we interpret a given design?"
+objectives:
+- "Explain the formula notation and design matrices."
+- "Explore different designs and learn how to interpret coefficients."
+keypoints:
+- "Key point 1"
+---
+
+```{r, include=FALSE}
+source("../bin/chunk-options.R")
+knitr_fig_path("03-")
+```
+
+
+> ## Challenge: Can you do it?
+>
+> What is the output of this command?
+>
+> ```{r, eval=FALSE}
+> paste("This", "new", "template", "looks", "good")
+> ```
+>
+> > ## Solution
+> >
+> > ```{r, echo=FALSE}
+> > paste("This", "new", "template", "looks", "good")
+> > ```
+> {: .solution}
+{: .challenge}

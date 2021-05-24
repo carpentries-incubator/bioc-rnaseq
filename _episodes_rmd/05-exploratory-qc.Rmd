@@ -1,0 +1,18 @@
+---
+source: Rmd
+title: "Exploratory analysis and quality control"
+teaching: XX
+exercises: XX
+questions:
+- ""
+objectives:
+- "Learn how to explore the gene expression matrix and perform common quality control steps."
+- "Learn how to set up an interactive application for exploratory analysis."
+keypoints:
+- "Key point 1"
+---
+
+```{r, include=FALSE}
+source("../bin/chunk-options.R")
+knitr_fig_path("05-")
+```
