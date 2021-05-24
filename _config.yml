@@ -10,7 +10,7 @@
 carpentry: "incubator"
 
 # Overall title for pages.
-title: "Lesson Title" # FIXME
+title: "RNA-seq analysis with Bioconductor" # FIXME
 
 # Life cycle stage of the lesson
 # See this page for more details: https://cdh.carpentries.org/the-lesson-life-cycle.html
@@ -30,7 +30,7 @@ kind: "lesson"
 repository: <USERNAME>/<PROJECT>
 
 # Email address, no mailto:
-email: "team@carpentries.org" # FIXME
+email: "charlotte.soneson@fmi.ch" # FIXME
 
 # Sites.
 amy_site: "https://amy.carpentries.org/"
