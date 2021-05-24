@@ -1,0 +1,17 @@
+---
+source: Rmd
+title: "Gene set analysis"
+teaching: XX
+exercises: XX
+questions:
+- ""
+objectives:
+- "Explain how to perform gene set analysis in R."
+keypoints:
+- "Key point 1"
+---
+
+```{r, include=FALSE}
+source("../bin/chunk-options.R")
+knitr_fig_path("07-")
+```

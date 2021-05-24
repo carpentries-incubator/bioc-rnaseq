@@ -1,0 +1,18 @@
+---
+source: Rmd
+title: "Importing and annotating quantified data into R"
+teaching: XX
+exercises: XX
+questions:
+- "How do we get our data into R?"
+objectives:
+- "Learn how to import the quantifications into a SummarizedExperiment object."
+- "Learn how to add additional gene annotations to the object."
+keypoints:
+- "Key point 1"
+---
+
+```{r, include=FALSE}
+source("../bin/chunk-options.R")
+knitr_fig_path("04-")
+```
