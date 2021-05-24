@@ -6,7 +6,7 @@ install_required_packages <- function(lib = NULL, repos = getOption("repos")) {
 
   message("lib paths: ", paste(lib, collapse = ", "))
   missing_pkgs <- setdiff(
-    c("rprojroot", "desc", "remotes", "renv"),
+    c("rprojroot", "desc", "remotes", "renv", "BiocManager"),
     rownames(installed.packages(lib.loc = lib))
   )
 
@@ -38,15 +38,21 @@ identify_dependencies <- function() {
 
 create_description <- function(required_pkgs) {
   d <- desc::description$new("!new")
+  d$set("Package", "foo")
   lapply(required_pkgs, function(x) d$set_dep(x))
   d$write("DESCRIPTION")
 }
 
 install_dependencies <- function(required_pkgs, ...) {
 
-  create_description(required_pkgs)
-  on.exit(file.remove("DESCRIPTION"))
-  remotes::install_deps(dependencies = TRUE, ...)
+  missing_pkgs <- setdiff(
+    required_pkgs,
+    rownames(installed.packages())
+  )
+  BiocManager::install(required_pkgs)
+  # create_description(required_pkgs)
+  # on.exit(file.remove("DESCRIPTION"))
+  # remotes::install_deps(dependencies = TRUE, ...)
 
   if (require("knitr") && packageVersion("knitr") < '1.9.19') {
     stop("knitr must be version 1.9.20 or higher")
