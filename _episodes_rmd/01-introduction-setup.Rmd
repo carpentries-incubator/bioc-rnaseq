@@ -19,6 +19,9 @@ knitr_fig_path("01-")
 
 # Download data
 
+The data we will use in this lesson is obtained from the [Gene Expression Omnibus](https://www.ncbi.nlm.nih.gov/geo/), accession number [GSE96870](https://www.ncbi.nlm.nih.gov/geo/query/acc.cgi?acc=GSE96870).
+
+
 ```{r}
 dir.create("data", showWarnings = FALSE)
 download.file(
