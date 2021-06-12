@@ -17,6 +17,8 @@ keypoints:
 
 
 
+
+
 ~~~
 suppressPackageStartupMessages({
     library(SummarizedExperiment)
@@ -30,31 +32,12 @@ suppressPackageStartupMessages({
 {: .language-r}
 
 
+
 ~~~
-se <- readRDS(gzcon(url("https://github.com/Bioconductor/bioconductor-teaching/blob/master/data/GSE96870/GSE96870_se.rds?raw=true")))
-se$sex <- factor(se$sex, levels = c("Female", "Male"))
-se$infection <- factor(gsub(" ", "", gsub("-", "", se$infection)),
-                       levels = c("NonInfected", "InfluenzaA"))
-se$time <- factor(gsub(" ", "", se$time), levels = c("Day0", "Day4", "Day8"))
-se$tissue <- factor(gsub(" ", "", se$tissue), levels = c("Cerebellum", "Spinalcord"))
-se$mouse <- factor(as.numeric(se$mouse))
-se
+se <- readRDS("data/GSE96870_se.rds")
 ~~~
 {: .language-r}
 
-
-
-~~~
-class: SummarizedExperiment 
-dim: 41786 45 
-metadata(0):
-assays(1): counts
-rownames(41786): Xkr4 LOC105243853 ... TrnT TrnP
-rowData names(4): gene ENTREZID product gbkey
-colnames(45): GSM2545336 GSM2545337 ... GSM2545379 GSM2545380
-colData names(10): title geo_accession ... tissue mouse
-~~~
-{: .output}
 
 
 ~~~
@@ -73,7 +56,7 @@ ggplot(pcaData, aes(x = PC1, y = PC2)) +
 ~~~
 {: .language-r}
 
-<img src="../fig/rmd-06-unnamed-chunk-4-1.png" title="plot of chunk unnamed-chunk-4" alt="plot of chunk unnamed-chunk-4" width="612" style="display: block; margin: auto;" />
+<img src="../fig/rmd-06-unnamed-chunk-5-1.png" title="plot of chunk unnamed-chunk-5" alt="plot of chunk unnamed-chunk-5" width="612" style="display: block; margin: auto;" />
 
 
 ~~~
@@ -130,7 +113,7 @@ plotDispEsts(dds)
 ~~~
 {: .language-r}
 
-<img src="../fig/rmd-06-unnamed-chunk-5-1.png" title="plot of chunk unnamed-chunk-5" alt="plot of chunk unnamed-chunk-5" width="612" style="display: block; margin: auto;" />
+<img src="../fig/rmd-06-unnamed-chunk-6-1.png" title="plot of chunk unnamed-chunk-6" alt="plot of chunk unnamed-chunk-6" width="612" style="display: block; margin: auto;" />
 
 ~~~
 ## Day 8 vs Day 0
@@ -186,7 +169,7 @@ DESeq2::plotMA(resTime)
 ~~~
 {: .language-r}
 
-<img src="../fig/rmd-06-unnamed-chunk-5-2.png" title="plot of chunk unnamed-chunk-5" alt="plot of chunk unnamed-chunk-5" width="612" style="display: block; margin: auto;" />
+<img src="../fig/rmd-06-unnamed-chunk-6-2.png" title="plot of chunk unnamed-chunk-6" alt="plot of chunk unnamed-chunk-6" width="612" style="display: block; margin: auto;" />
 
 ~~~
 ## Male vs Female
@@ -242,7 +225,7 @@ DESeq2::plotMA(resSex)
 ~~~
 {: .language-r}
 
-<img src="../fig/rmd-06-unnamed-chunk-5-3.png" title="plot of chunk unnamed-chunk-5" alt="plot of chunk unnamed-chunk-5" width="612" style="display: block; margin: auto;" />
+<img src="../fig/rmd-06-unnamed-chunk-6-3.png" title="plot of chunk unnamed-chunk-6" alt="plot of chunk unnamed-chunk-6" width="612" style="display: block; margin: auto;" />
 
 
 ~~~
@@ -259,5 +242,5 @@ ComplexHeatmap::Heatmap(heatmapData,
 ~~~
 {: .language-r}
 
-<img src="../fig/rmd-06-unnamed-chunk-6-1.png" title="plot of chunk unnamed-chunk-6" alt="plot of chunk unnamed-chunk-6" width="612" style="display: block; margin: auto;" />
+<img src="../fig/rmd-06-unnamed-chunk-7-1.png" title="plot of chunk unnamed-chunk-7" alt="plot of chunk unnamed-chunk-7" width="612" style="display: block; margin: auto;" />
 

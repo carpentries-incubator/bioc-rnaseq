@@ -15,3 +15,19 @@ keypoints:
 ---
 
 
+
+# Download data
+
+The data we will use in this lesson is obtained from the [Gene Expression Omnibus](https://www.ncbi.nlm.nih.gov/geo/), accession number [GSE96870](https://www.ncbi.nlm.nih.gov/geo/query/acc.cgi?acc=GSE96870).
+
+
+
+~~~
+dir.create("data", showWarnings = FALSE)
+download.file(
+    url = "https://github.com/Bioconductor/bioconductor-teaching/blob/master/data/GSE96870/GSE96870_se.rds?raw=true", 
+    destfile = "data/GSE96870_se.rds"
+)
+~~~
+{: .language-r}
+

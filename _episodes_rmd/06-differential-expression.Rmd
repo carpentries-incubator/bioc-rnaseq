@@ -12,6 +12,16 @@ keypoints:
 - "Key point 1"
 ---
 
+```{r, echo=FALSE, purl=FALSE, message=FALSE}
+if (!file.exists("data/GSE96870_se.rds")) {
+    dir.create("data", showWarnings = FALSE)
+    download.file(
+        url = "https://github.com/Bioconductor/bioconductor-teaching/blob/master/data/GSE96870/GSE96870_se.rds?raw=true", 
+        destfile = "data/GSE96870_se.rds"
+    )
+}
+```
+
 ```{r, include=FALSE}
 source("../bin/chunk-options.R")
 knitr_fig_path("06-")
@@ -29,16 +39,11 @@ suppressPackageStartupMessages({
 })
 ```
 
+
 ```{r}
-se <- readRDS(gzcon(url("https://github.com/Bioconductor/bioconductor-teaching/blob/master/data/GSE96870/GSE96870_se.rds?raw=true")))
-se$sex <- factor(se$sex, levels = c("Female", "Male"))
-se$infection <- factor(gsub(" ", "", gsub("-", "", se$infection)),
-                       levels = c("NonInfected", "InfluenzaA"))
-se$time <- factor(gsub(" ", "", se$time), levels = c("Day0", "Day4", "Day8"))
-se$tissue <- factor(gsub(" ", "", se$tissue), levels = c("Cerebellum", "Spinalcord"))
-se$mouse <- factor(as.numeric(se$mouse))
-se
+se <- readRDS("data/GSE96870_se.rds")
 ```
+
 
 ```{r}
 dds <- DESeq2::DESeqDataSet(se[, se$tissue == "Cerebellum"],
