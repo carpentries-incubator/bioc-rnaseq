@@ -43,20 +43,8 @@ se <- readRDS("data/GSE96870_se.rds")
 ~~~
 dds <- DESeq2::DESeqDataSet(se[, se$tissue == "Cerebellum"],
                             design = ~ sex + time)
-vsd <- DESeq2::vst(dds, blind = TRUE)
-pcaData <- DESeq2::plotPCA(vsd, intgroup = c("sex", "time"),
-                           returnData = TRUE)
-percentVar <- round(100 * attr(pcaData, "percentVar"))
-ggplot(pcaData, aes(x = PC1, y = PC2)) +
-    geom_point(aes(color = sex, shape = time), size = 3) +
-    theme_minimal() +
-    xlab(paste0("PC1: ", percentVar[1], "% variance")) +
-    ylab(paste0("PC2: ", percentVar[2], "% variance")) +
-    coord_fixed()
 ~~~
 {: .language-r}
-
-<img src="../fig/rmd-06-unnamed-chunk-5-1.png" title="plot of chunk unnamed-chunk-5" alt="plot of chunk unnamed-chunk-5" width="612" style="display: block; margin: auto;" />
 
 
 ~~~
@@ -231,16 +219,99 @@ DESeq2::plotMA(resSex)
 ~~~
 genes <- rownames(head(resTime[order(resTime$pvalue), ], 10))
 heatmapData <- assay(vsd)[genes, ]
+~~~
+{: .language-r}
+
+
+
+~~~
+Error in h(simpleError(msg, call)): error in evaluating the argument 'x' in selecting a method for function 'assay': object 'vsd' not found
+~~~
+{: .error}
+
+
+
+~~~
 heatmapData <- t(scale(t(heatmapData)))
+~~~
+{: .language-r}
+
+
+
+~~~
+Error in h(simpleError(msg, call)): error in evaluating the argument 'x' in selecting a method for function 't': error in evaluating the argument 'x' in selecting a method for function 't': object 'heatmapData' not found
+~~~
+{: .error}
+
+
+
+~~~
 heatmapColAnnot <- data.frame(colData(vsd)[, c("time", "sex")])
+~~~
+{: .language-r}
+
+
+
+~~~
+Error in h(simpleError(msg, call)): error in evaluating the argument 'x' in selecting a method for function 'colData': object 'vsd' not found
+~~~
+{: .error}
+
+
+
+~~~
 idx <- order(vsd$time)
+~~~
+{: .language-r}
+
+
+
+~~~
+Error in eval(quote(list(...)), env): object 'vsd' not found
+~~~
+{: .error}
+
+
+
+~~~
 heatmapData <- heatmapData[, idx]
+~~~
+{: .language-r}
+
+
+
+~~~
+Error in eval(expr, envir, enclos): object 'heatmapData' not found
+~~~
+{: .error}
+
+
+
+~~~
 heatmapColAnnot <- HeatmapAnnotation(df = heatmapColAnnot[idx, ])
+~~~
+{: .language-r}
+
+
+
+~~~
+Error in as.list.environment(environment()): object 'heatmapColAnnot' not found
+~~~
+{: .error}
+
+
+
+~~~
 ComplexHeatmap::Heatmap(heatmapData,
                         top_annotation = heatmapColAnnot,
                         cluster_rows = TRUE, cluster_columns = FALSE)
 ~~~
 {: .language-r}
 
-<img src="../fig/rmd-06-unnamed-chunk-7-1.png" title="plot of chunk unnamed-chunk-7" alt="plot of chunk unnamed-chunk-7" width="612" style="display: block; margin: auto;" />
+
+
+~~~
+Error in is.data.frame(matrix): object 'heatmapData' not found
+~~~
+{: .error}
 
