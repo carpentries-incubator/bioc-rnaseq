@@ -48,16 +48,6 @@ se <- readRDS("data/GSE96870_se.rds")
 ```{r}
 dds <- DESeq2::DESeqDataSet(se[, se$tissue == "Cerebellum"],
                             design = ~ sex + time)
-vsd <- DESeq2::vst(dds, blind = TRUE)
-pcaData <- DESeq2::plotPCA(vsd, intgroup = c("sex", "time"),
-                           returnData = TRUE)
-percentVar <- round(100 * attr(pcaData, "percentVar"))
-ggplot(pcaData, aes(x = PC1, y = PC2)) +
-    geom_point(aes(color = sex, shape = time), size = 3) +
-    theme_minimal() +
-    xlab(paste0("PC1: ", percentVar[1], "% variance")) +
-    ylab(paste0("PC2: ", percentVar[2], "% variance")) +
-    coord_fixed()
 ```
 
 ```{r}
