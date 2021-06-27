@@ -36,6 +36,8 @@ suppressPackageStartupMessages({
     library(vsn)
     library(ggplot2)
     library(ComplexHeatmap)
+    library(RColorBrewer)
+    library(hexbin)
 })
 ```
 
@@ -87,7 +89,7 @@ dds <- estimateSizeFactors(dds)
 ggplot(data.frame(libSize = colSums(assay(dds, "counts")),
                   sizeFactor = sizeFactors(dds)),
        aes(x = libSize, y = sizeFactor)) + 
-    geom_point(size = 3) + theme_bw() + 
+    geom_point(size = 5) + theme_bw() + 
     labs(x = "Library size", y = "Size factor")
 ```
 
