@@ -25,8 +25,23 @@ The data we will use in this lesson is obtained from the [Gene Expression Omnibu
 ```{r}
 dir.create("data", showWarnings = FALSE)
 download.file(
-    url = "https://github.com/Bioconductor/bioconductor-teaching/blob/master/data/GSE96870/GSE96870_se.rds?raw=true", 
-    destfile = "data/GSE96870_se.rds"
+    url = "https://github.com/Bioconductor/bioconductor-teaching/blob/master/data/GSE96870/GSE96870_counts_cerebellum.csv?raw=true", 
+    destfile = "data/GSE96870_counts_cerebellum.csv"
+)
+
+download.file(
+    url = "https://github.com/Bioconductor/bioconductor-teaching/blob/master/data/GSE96870/GSE96870_coldata_cerebellum.csv?raw=true", 
+    destfile = "data/GSE96870_coldata_cerebellum.csv"
+)
+
+download.file(
+    url = "https://github.com/Bioconductor/bioconductor-teaching/blob/master/data/GSE96870/GSE96870_coldata_all.csv?raw=true", 
+    destfile = "data/GSE96870_coldata_all.csv"
+)
+
+download.file(
+    url = "https://github.com/Bioconductor/bioconductor-teaching/blob/master/data/GSE96870/GSE96870_rowdata.tsv?raw=true", 
+    destfile = "data/GSE96870_rowdata.tsv"
 )
 ```
 

@@ -16,13 +16,7 @@ editor_options:
 ---
 
 ```{r, echo=FALSE, purl=FALSE, message=FALSE}
-if (!file.exists("data/GSE96870_se.rds")) {
-    dir.create("data", showWarnings = FALSE)
-    download.file(
-        url = "https://github.com/Bioconductor/bioconductor-teaching/blob/master/data/GSE96870/GSE96870_se.rds?raw=true", 
-        destfile = "data/GSE96870_se.rds"
-    )
-}
+source("download_data.R")
 ```
 
 ```{r, include=FALSE}
@@ -40,8 +34,7 @@ suppressPackageStartupMessages({
 ```
 
 ```{r}
-se <- readRDS("data/GSE96870_se.rds")
-meta <- as.data.frame(colData(se))
+meta <- read.csv("data/GSE96870_coldata_all.csv", row.names = 1)
 meta
 ```
 
@@ -51,7 +44,7 @@ vd <- VisualizeDesign(sampleData = meta,
 vd$cooccurrenceplots
 ```
 
-# Simple example - compare males and females, non-infected spinal cord
+# Compare males and females, non-infected spinal cord
 
 ```{r}
 meta_noninf_spc <- meta %>% filter(time == "Day0" & 
