@@ -22,6 +22,7 @@ Imports:
     ggplot2,
     hexbin,
     knitr,
+    org.Mm.eg.db,
     RColorBrewer,
     renv,
     rmarkdown,

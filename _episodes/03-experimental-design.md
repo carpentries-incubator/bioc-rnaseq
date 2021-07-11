@@ -33,8 +33,7 @@ suppressPackageStartupMessages({
 
 
 ~~~
-se <- readRDS("data/GSE96870_se.rds")
-meta <- as.data.frame(colData(se))
+meta <- read.csv("data/GSE96870_coldata_all.csv", row.names = 1)
 meta
 ~~~
 {: .language-r}
@@ -116,7 +115,7 @@ $`tissue = Spinalcord`
 
 <img src="../fig/rmd-03-unnamed-chunk-5-2.png" title="plot of chunk unnamed-chunk-5" alt="plot of chunk unnamed-chunk-5" width="612" style="display: block; margin: auto;" />
 
-# Simple example - compare males and females, non-infected spinal cord
+# Compare males and females, non-infected spinal cord
 
 
 ~~~
@@ -452,24 +451,15 @@ vd$designmatrix
 
 
 ~~~
-           (Intercept) mouse2 mouse3 mouse4 mouse5 mouse6 mouse7 mouse8 mouse9 mouse10 mouse11 mouse12 mouse13 mouse14
-GSM2545337           1      0      0      0      0      0      0      0      1       0       0       0       0       0
-GSM2545338           1      0      0      0      0      0      0      0      0       1       0       0       0       0
-GSM2545348           1      0      0      0      0      0      0      1      0       0       0       0       0       0
-GSM2545353           1      0      0      1      0      0      0      0      0       0       0       0       0       0
-GSM2545358           1      0      0      1      0      0      0      0      0       0       0       0       0       0
-GSM2545364           1      0      0      0      0      0      0      1      0       0       0       0       0       0
-GSM2545365           1      0      0      0      0      0      0      0      1       0       0       0       0       0
-GSM2545366           1      0      0      0      0      0      0      0      0       1       0       0       0       0
-           mouse15 mouse16 mouse17 mouse18 mouse19 mouse20 mouse21 mouse22 mouse23 mouse24 tissueSpinalcord
-GSM2545337       0       0       0       0       0       0       0       0       0       0                0
-GSM2545338       0       0       0       0       0       0       0       0       0       0                0
-GSM2545348       0       0       0       0       0       0       0       0       0       0                0
-GSM2545353       0       0       0       0       0       0       0       0       0       0                0
-GSM2545358       0       0       0       0       0       0       0       0       0       0                1
-GSM2545364       0       0       0       0       0       0       0       0       0       0                1
-GSM2545365       0       0       0       0       0       0       0       0       0       0                1
-GSM2545366       0       0       0       0       0       0       0       0       0       0                1
+           (Intercept) mouse tissueSpinalcord
+GSM2545337           1     9                0
+GSM2545338           1    10                0
+GSM2545348           1     8                0
+GSM2545353           1     4                0
+GSM2545358           1     4                1
+GSM2545364           1     8                1
+GSM2545365           1     9                1
+GSM2545366           1    10                1
 ~~~
 {: .output}
 
@@ -541,23 +531,23 @@ design
 
 
 ~~~
-           (Intercept) mouse8 mouse9 mouse10 mouse15 mouse20 mouse21 mouse22 Spc.Day0 Spc.Day4
-GSM2545337           1      0      1       0       0       0       0       0        0        0
-GSM2545338           1      0      0       1       0       0       0       0        0        0
-GSM2545339           1      0      0       0       1       0       0       0        0        0
-GSM2545344           1      0      0       0       0       0       0       1        0        0
-GSM2545348           1      1      0       0       0       0       0       0        0        0
-GSM2545352           1      0      0       0       0       0       1       0        0        0
-GSM2545353           1      0      0       0       0       0       0       0        0        0
-GSM2545358           1      0      0       0       0       0       0       0        1        0
-GSM2545362           1      0      0       0       0       1       0       0        0        0
-GSM2545364           1      1      0       0       0       0       0       0        1        0
-GSM2545365           1      0      1       0       0       0       0       0        1        0
-GSM2545366           1      0      0       1       0       0       0       0        1        0
-GSM2545371           1      0      0       0       1       0       0       0        0        1
-GSM2545375           1      0      0       0       0       1       0       0        0        1
-GSM2545376           1      0      0       0       0       0       1       0        0        1
-GSM2545377           1      0      0       0       0       0       0       1        0        1
+           (Intercept) mouse Spc.Day0 Spc.Day4
+GSM2545337           1     9        0        0
+GSM2545338           1    10        0        0
+GSM2545339           1    15        0        0
+GSM2545344           1    22        0        0
+GSM2545348           1     8        0        0
+GSM2545352           1    21        0        0
+GSM2545353           1     4        0        0
+GSM2545358           1     4        1        0
+GSM2545362           1    20        0        0
+GSM2545364           1     8        1        0
+GSM2545365           1     9        1        0
+GSM2545366           1    10        1        0
+GSM2545371           1    15        0        1
+GSM2545375           1    20        0        1
+GSM2545376           1    21        0        1
+GSM2545377           1    22        0        1
 ~~~
 {: .output}
 
@@ -575,23 +565,23 @@ vd$designmatrix
 
 
 ~~~
-           (Intercept) mouse8 mouse9 mouse10 mouse15 mouse20 mouse21 mouse22 Spc.Day0 Spc.Day4
-GSM2545337           1      0      1       0       0       0       0       0        0        0
-GSM2545338           1      0      0       1       0       0       0       0        0        0
-GSM2545339           1      0      0       0       1       0       0       0        0        0
-GSM2545344           1      0      0       0       0       0       0       1        0        0
-GSM2545348           1      1      0       0       0       0       0       0        0        0
-GSM2545352           1      0      0       0       0       0       1       0        0        0
-GSM2545353           1      0      0       0       0       0       0       0        0        0
-GSM2545358           1      0      0       0       0       0       0       0        1        0
-GSM2545362           1      0      0       0       0       1       0       0        0        0
-GSM2545364           1      1      0       0       0       0       0       0        1        0
-GSM2545365           1      0      1       0       0       0       0       0        1        0
-GSM2545366           1      0      0       1       0       0       0       0        1        0
-GSM2545371           1      0      0       0       1       0       0       0        0        1
-GSM2545375           1      0      0       0       0       1       0       0        0        1
-GSM2545376           1      0      0       0       0       0       1       0        0        1
-GSM2545377           1      0      0       0       0       0       0       1        0        1
+           (Intercept) mouse Spc.Day0 Spc.Day4
+GSM2545337           1     9        0        0
+GSM2545338           1    10        0        0
+GSM2545339           1    15        0        0
+GSM2545344           1    22        0        0
+GSM2545348           1     8        0        0
+GSM2545352           1    21        0        0
+GSM2545353           1     4        0        0
+GSM2545358           1     4        1        0
+GSM2545362           1    20        0        0
+GSM2545364           1     8        1        0
+GSM2545365           1     9        1        0
+GSM2545366           1    10        1        0
+GSM2545371           1    15        0        1
+GSM2545375           1    20        0        1
+GSM2545376           1    21        0        1
+GSM2545377           1    22        0        1
 ~~~
 {: .output}
 

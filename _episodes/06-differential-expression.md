@@ -47,6 +47,14 @@ dds <- DESeq2::DESeqDataSet(se[, se$tissue == "Cerebellum"],
 {: .language-r}
 
 
+
+~~~
+Warning in DESeq2::DESeqDataSet(se[, se$tissue == "Cerebellum"], design = ~sex + : some variables in design formula are
+characters, converting to factors
+~~~
+{: .warning}
+
+
 ~~~
 dds <- DESeq2::DESeq(dds)
 ~~~
@@ -217,101 +225,20 @@ DESeq2::plotMA(resSex)
 
 
 ~~~
+vsd <- DESeq2::vst(dds, blind = TRUE)
+
 genes <- rownames(head(resTime[order(resTime$pvalue), ], 10))
 heatmapData <- assay(vsd)[genes, ]
-~~~
-{: .language-r}
-
-
-
-~~~
-Error in h(simpleError(msg, call)): error in evaluating the argument 'x' in selecting a method for function 'assay': object 'vsd' not found
-~~~
-{: .error}
-
-
-
-~~~
 heatmapData <- t(scale(t(heatmapData)))
-~~~
-{: .language-r}
-
-
-
-~~~
-Error in h(simpleError(msg, call)): error in evaluating the argument 'x' in selecting a method for function 't': error in evaluating the argument 'x' in selecting a method for function 't': object 'heatmapData' not found
-~~~
-{: .error}
-
-
-
-~~~
 heatmapColAnnot <- data.frame(colData(vsd)[, c("time", "sex")])
-~~~
-{: .language-r}
-
-
-
-~~~
-Error in h(simpleError(msg, call)): error in evaluating the argument 'x' in selecting a method for function 'colData': object 'vsd' not found
-~~~
-{: .error}
-
-
-
-~~~
 idx <- order(vsd$time)
-~~~
-{: .language-r}
-
-
-
-~~~
-Error in eval(quote(list(...)), env): object 'vsd' not found
-~~~
-{: .error}
-
-
-
-~~~
 heatmapData <- heatmapData[, idx]
-~~~
-{: .language-r}
-
-
-
-~~~
-Error in eval(expr, envir, enclos): object 'heatmapData' not found
-~~~
-{: .error}
-
-
-
-~~~
 heatmapColAnnot <- HeatmapAnnotation(df = heatmapColAnnot[idx, ])
-~~~
-{: .language-r}
-
-
-
-~~~
-Error in as.list.environment(environment()): object 'heatmapColAnnot' not found
-~~~
-{: .error}
-
-
-
-~~~
 ComplexHeatmap::Heatmap(heatmapData,
                         top_annotation = heatmapColAnnot,
                         cluster_rows = TRUE, cluster_columns = FALSE)
 ~~~
 {: .language-r}
 
-
-
-~~~
-Error in is.data.frame(matrix): object 'heatmapData' not found
-~~~
-{: .error}
+<img src="../fig/rmd-06-unnamed-chunk-7-1.png" title="plot of chunk unnamed-chunk-7" alt="plot of chunk unnamed-chunk-7" width="612" style="display: block; margin: auto;" />
 

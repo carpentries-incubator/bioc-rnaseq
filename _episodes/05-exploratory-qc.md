@@ -54,6 +54,14 @@ dds <- DESeq2::DESeqDataSet(se[, se$tissue == "Cerebellum"],
 ~~~
 {: .language-r}
 
+
+
+~~~
+Warning in DESeq2::DESeqDataSet(se[, se$tissue == "Cerebellum"], design = ~sex
++ : some variables in design formula are characters, converting to factors
+~~~
+{: .warning}
+
 # Library size differences
 
 
@@ -166,7 +174,7 @@ pcaData <- DESeq2::plotPCA(vsd, intgroup = c("sex", "time"),
                            returnData = TRUE)
 percentVar <- round(100 * attr(pcaData, "percentVar"))
 ggplot(pcaData, aes(x = PC1, y = PC2)) +
-    geom_point(aes(color = sex, shape = time), size = 3) +
+    geom_point(aes(color = sex, shape = time), size = 5) +
     theme_minimal() +
     xlab(paste0("PC1: ", percentVar[1], "% variance")) +
     ylab(paste0("PC2: ", percentVar[2], "% variance")) +
@@ -210,11 +218,11 @@ other attached packages:
  [1] hexbin_1.28.2               RColorBrewer_1.1-2         
  [3] ComplexHeatmap_2.8.0        ggplot2_3.3.5              
  [5] vsn_3.60.0                  DESeq2_1.32.0              
- [7] SummarizedExperiment_1.22.0 Biobase_2.52.0             
- [9] GenomicRanges_1.44.0        GenomeInfoDb_1.28.0        
-[11] IRanges_2.26.0              S4Vectors_0.30.0           
-[13] BiocGenerics_0.38.0         MatrixGenerics_1.4.0       
-[15] matrixStats_0.59.0          knitr_1.33                 
+ [7] knitr_1.33                  SummarizedExperiment_1.22.0
+ [9] Biobase_2.52.0              GenomicRanges_1.44.0       
+[11] GenomeInfoDb_1.28.1         IRanges_2.26.0             
+[13] S4Vectors_0.30.0            BiocGenerics_0.38.0        
+[15] MatrixGenerics_1.4.0        matrixStats_0.59.0         
 
 loaded via a namespace (and not attached):
  [1] httr_1.4.2             foreach_1.5.1          bit64_4.0.5           
@@ -226,7 +234,7 @@ loaded via a namespace (and not attached):
 [19] Matrix_1.3-3           XML_3.99-0.6           pkgconfig_2.0.3       
 [22] GetoptLong_1.0.5       genefilter_1.74.0      zlibbioc_1.38.0       
 [25] purrr_0.3.4            xtable_1.8-4           scales_1.1.1          
-[28] affyio_1.62.0          BiocParallel_1.26.0    tibble_3.1.2          
+[28] affyio_1.62.0          BiocParallel_1.26.1    tibble_3.1.2          
 [31] annotate_1.70.0        KEGGREST_1.32.0        farver_2.1.0          
 [34] generics_0.1.0         ellipsis_0.3.2         cachem_1.0.5          
 [37] withr_2.4.2            survival_3.2-11        magrittr_2.0.1        
@@ -241,7 +249,7 @@ loaded via a namespace (and not attached):
 [64] codetools_0.2-18       gtable_0.3.0           DBI_1.1.1             
 [67] R6_2.5.0               dplyr_1.0.7            fastmap_1.1.0         
 [70] bit_4.0.4              utf8_1.2.1             clue_0.3-59           
-[73] shape_1.4.6            stringi_1.6.2          Rcpp_1.0.6            
+[73] shape_1.4.6            stringi_1.6.2          Rcpp_1.0.7            
 [76] vctrs_0.3.8            geneplotter_1.70.0     png_0.1-7             
 [79] tidyselect_1.1.1       xfun_0.24             
 ~~~
