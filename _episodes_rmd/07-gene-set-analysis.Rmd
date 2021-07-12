@@ -26,7 +26,12 @@ options(width = 120)
 Recall the differential expression analysis.
 
 ```{r, message=FALSE}
+library(SummmarizedExperiment)
 library(DESeq2)
+```
+
+```{r}
+se <- readRDS("data/GSE96870_se.rds")
 ```
 
 ```{r}
