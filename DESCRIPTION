@@ -29,4 +29,5 @@ Imports:
     rprojroot,
     stringr,
     SummarizedExperiment,
+    TxDb.Mmusculus.UCSC.mm10.knownGene,
     vsn

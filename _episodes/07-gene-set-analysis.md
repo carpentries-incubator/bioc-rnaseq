@@ -6,9 +6,11 @@ title: "Gene set analysis"
 teaching: XX
 exercises: XX
 questions:
-- ""
+- "How do we find differentially expressed pathways?"
 objectives:
-- "Explain how to perform gene set analysis in R."
+- "Explain how to find differentially expressed pathways with gene set analysis in R."
+- "Understand how differentially expressed genes can enrich a gene set."
+- "Explain how to perform a gene set analysis in R, using clusterProfiler."
 keypoints:
 - "Key point 1"
 ---
@@ -16,3 +18,369 @@ keypoints:
 
 
 
+
+Recall the differential expression analysis.
+
+
+~~~
+library(DESeq2)
+~~~
+{: .language-r}
+
+
+~~~
+dds <- DESeq2::DESeqDataSet(se[, se$tissue == "Cerebellum"],
+                            design = ~ sex + time)
+~~~
+{: .language-r}
+
+
+
+~~~
+Error in is(se, "RangedSummarizedExperiment"): object 'se' not found
+~~~
+{: .error}
+
+
+~~~
+dds <- DESeq2::DESeq(dds)
+~~~
+{: .language-r}
+
+
+
+~~~
+Error in is(object, "DESeqDataSet"): object 'dds' not found
+~~~
+{: .error}
+
+Fetch results for the contrast between male and female mice.
+
+
+~~~
+resSex <- DESeq2::results(dds, contrast = c("sex", "Male", "Female"))
+~~~
+{: .language-r}
+
+
+
+~~~
+Error in is(object, "DESeqDataSet"): object 'dds' not found
+~~~
+{: .error}
+
+
+
+~~~
+summary(resSex)
+~~~
+{: .language-r}
+
+
+
+~~~
+Error in h(simpleError(msg, call)): error in evaluating the argument 'object' in selecting a method for function 'summary': object 'resSex' not found
+~~~
+{: .error}
+
+Select differentially expressed (DE) genes between males and females
+with FDR < 5%.
+
+
+~~~
+sexDE <- as.data.frame(subset(resSex, padj < 0.05))
+~~~
+{: .language-r}
+
+
+
+~~~
+Error in h(simpleError(msg, call)): error in evaluating the argument 'x' in selecting a method for function 'as.data.frame': error in evaluating the argument 'x' in selecting a method for function 'subset': object 'resSex' not found
+~~~
+{: .error}
+
+
+
+~~~
+dim(sexDE)
+~~~
+{: .language-r}
+
+
+
+~~~
+Error in eval(expr, envir, enclos): object 'sexDE' not found
+~~~
+{: .error}
+
+
+
+~~~
+sexDE <- sexDE[order(abs(sexDE$log2FoldChange), decreasing=TRUE), ]
+~~~
+{: .language-r}
+
+
+
+~~~
+Error in eval(expr, envir, enclos): object 'sexDE' not found
+~~~
+{: .error}
+
+
+
+~~~
+head(sexDE)
+~~~
+{: .language-r}
+
+
+
+~~~
+Error in h(simpleError(msg, call)): error in evaluating the argument 'x' in selecting a method for function 'head': object 'sexDE' not found
+~~~
+{: .error}
+
+
+
+~~~
+sexDEgenes <- rownames(sexDE)
+~~~
+{: .language-r}
+
+
+
+~~~
+Error in h(simpleError(msg, call)): error in evaluating the argument 'x' in selecting a method for function 'rownames': object 'sexDE' not found
+~~~
+{: .error}
+
+
+
+~~~
+head(sexDEgenes)
+~~~
+{: .language-r}
+
+
+
+~~~
+Error in h(simpleError(msg, call)): error in evaluating the argument 'x' in selecting a method for function 'head': object 'sexDEgenes' not found
+~~~
+{: .error}
+
+
+
+~~~
+length(sexDEgenes)
+~~~
+{: .language-r}
+
+
+
+~~~
+Error in eval(expr, envir, enclos): object 'sexDEgenes' not found
+~~~
+{: .error}
+
+Fetch chromosome location for all mouse genes and build a subset of them
+located in the sex chrosomes X and Y.
+
+
+~~~
+library(TxDb.Mmusculus.UCSC.mm10.knownGene)
+txdb <- TxDb.Mmusculus.UCSC.mm10.knownGene
+allmousegenes <- genes(txdb)
+sexGenesEntrez <- names(allmousegenes)[as.character(seqnames(allmousegenes)) %in% c("chrX", "chrY")]
+head(sexGenesEntrez)
+~~~
+{: .language-r}
+
+
+
+~~~
+[1] "100034363" "100034729" "100038363" "100038584" "100038941" "100038977"
+~~~
+{: .output}
+
+
+
+~~~
+length(sexGenesEntrez)
+~~~
+{: .language-r}
+
+
+
+~~~
+[1] 1064
+~~~
+{: .output}
+
+Further subset those mouse genes located in sex chromosomes to those for which we have
+expression profiles.
+
+
+~~~
+sexGenesSE <- sexGenesEntrez[sexGenesEntrez %in% as.character(rowData(se)$ENTREZID)]
+~~~
+{: .language-r}
+
+
+
+~~~
+Error in h(simpleError(msg, call)): error in evaluating the argument 'table' in selecting a method for function '%in%': error in evaluating the argument 'x' in selecting a method for function 'rowData': object 'se' not found
+~~~
+{: .error}
+
+
+
+~~~
+length(sexGenesSE)
+~~~
+{: .language-r}
+
+
+
+~~~
+Error in eval(expr, envir, enclos): object 'sexGenesSE' not found
+~~~
+{: .error}
+
+Because our subset of mouse genes in sex chromosomes are provided as Entrez identifiers,
+let's build a table to match gene symbols to Entrez identifiers in our data.
+
+
+~~~
+sym2entrez <- rowData(se)$ENTREZID
+~~~
+{: .language-r}
+
+
+
+~~~
+Error in h(simpleError(msg, call)): error in evaluating the argument 'x' in selecting a method for function 'rowData': object 'se' not found
+~~~
+{: .error}
+
+
+
+~~~
+names(sym2entrez) <- rownames(se)
+~~~
+{: .language-r}
+
+
+
+~~~
+Error in h(simpleError(msg, call)): error in evaluating the argument 'x' in selecting a method for function 'rownames': object 'se' not found
+~~~
+{: .error}
+
+Build a contingency table and conduct a one-tailed Fisher's exact test that verifies
+the association between being DE and being located in a sex chromosome.
+
+
+~~~
+N <- nrow(se)
+~~~
+{: .language-r}
+
+
+
+~~~
+Error in h(simpleError(msg, call)): error in evaluating the argument 'x' in selecting a method for function 'nrow': object 'se' not found
+~~~
+{: .error}
+
+
+
+~~~
+n <- length(sexDEgenes)
+~~~
+{: .language-r}
+
+
+
+~~~
+Error in eval(expr, envir, enclos): object 'sexDEgenes' not found
+~~~
+{: .error}
+
+
+
+~~~
+m <- length(sexGenesSE)
+~~~
+{: .language-r}
+
+
+
+~~~
+Error in eval(expr, envir, enclos): object 'sexGenesSE' not found
+~~~
+{: .error}
+
+
+
+~~~
+k <- length(intersect(sexGenesSE, sym2entrez[sexDEgenes])) 
+~~~
+{: .language-r}
+
+
+
+~~~
+Error in h(simpleError(msg, call)): error in evaluating the argument 'x' in selecting a method for function 'intersect': object 'sexGenesSE' not found
+~~~
+{: .error}
+
+
+
+~~~
+dnames <- list(GS=c("inside", "outside"), DE=c("yes", "no"))
+t <- matrix(c(k, n-k, m-k, N+k-n-m),
+                        nrow=2, ncol=2, dimnames=dnames)
+~~~
+{: .language-r}
+
+
+
+~~~
+Error in matrix(c(k, n - k, m - k, N + k - n - m), nrow = 2, ncol = 2, : object 'k' not found
+~~~
+{: .error}
+
+
+
+~~~
+t
+~~~
+{: .language-r}
+
+
+
+~~~
+standardGeneric for "t" defined from package "base"
+
+function (x) 
+standardGeneric("t")
+<environment: 0x557a450c1dd8>
+Methods may be defined for arguments: x
+Use  showMethods(t)  for currently available ones.
+~~~
+{: .output}
+
+
+
+~~~
+fisher.test(t, alternative="greater")
+~~~
+{: .language-r}
+
+
+
+~~~
+Error in fisher.test(t, alternative = "greater"): if 'x' is not a matrix, 'y' must be given
+~~~
+{: .error}
