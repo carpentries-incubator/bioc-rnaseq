@@ -23,7 +23,27 @@ Recall the differential expression analysis.
 
 
 ~~~
+library(SummmarizedExperiment)
+~~~
+{: .language-r}
+
+
+
+~~~
+Error in library(SummmarizedExperiment): there is no package called 'SummmarizedExperiment'
+~~~
+{: .error}
+
+
+
+~~~
 library(DESeq2)
+~~~
+{: .language-r}
+
+
+~~~
+se <- readRDS("data/GSE96870_se.rds")
 ~~~
 {: .language-r}
 
@@ -37,9 +57,10 @@ dds <- DESeq2::DESeqDataSet(se[, se$tissue == "Cerebellum"],
 
 
 ~~~
-Error in is(se, "RangedSummarizedExperiment"): object 'se' not found
+Warning in DESeq2::DESeqDataSet(se[, se$tissue == "Cerebellum"], design = ~sex + : some variables in design formula are
+characters, converting to factors
 ~~~
-{: .error}
+{: .warning}
 
 
 ~~~
@@ -47,31 +68,11 @@ dds <- DESeq2::DESeq(dds)
 ~~~
 {: .language-r}
 
-
-
-~~~
-Error in is(object, "DESeqDataSet"): object 'dds' not found
-~~~
-{: .error}
-
 Fetch results for the contrast between male and female mice.
 
 
 ~~~
 resSex <- DESeq2::results(dds, contrast = c("sex", "Male", "Female"))
-~~~
-{: .language-r}
-
-
-
-~~~
-Error in is(object, "DESeqDataSet"): object 'dds' not found
-~~~
-{: .error}
-
-
-
-~~~
 summary(resSex)
 ~~~
 {: .language-r}
@@ -79,9 +80,18 @@ summary(resSex)
 
 
 ~~~
-Error in h(simpleError(msg, call)): error in evaluating the argument 'object' in selecting a method for function 'summary': object 'resSex' not found
+
+out of 32652 with nonzero total read count
+adjusted p-value < 0.1
+LFC > 0 (up)       : 53, 0.16%
+LFC < 0 (down)     : 71, 0.22%
+outliers [1]       : 10, 0.031%
+low counts [2]     : 13717, 42%
+(mean count < 6)
+[1] see 'cooksCutoff' argument of ?results
+[2] see 'independentFiltering' argument of ?results
 ~~~
-{: .error}
+{: .output}
 
 Select differentially expressed (DE) genes between males and females
 with FDR < 5%.
@@ -89,19 +99,6 @@ with FDR < 5%.
 
 ~~~
 sexDE <- as.data.frame(subset(resSex, padj < 0.05))
-~~~
-{: .language-r}
-
-
-
-~~~
-Error in h(simpleError(msg, call)): error in evaluating the argument 'x' in selecting a method for function 'as.data.frame': error in evaluating the argument 'x' in selecting a method for function 'subset': object 'resSex' not found
-~~~
-{: .error}
-
-
-
-~~~
 dim(sexDE)
 ~~~
 {: .language-r}
@@ -109,27 +106,14 @@ dim(sexDE)
 
 
 ~~~
-Error in eval(expr, envir, enclos): object 'sexDE' not found
+[1] 54  6
 ~~~
-{: .error}
+{: .output}
 
 
 
 ~~~
 sexDE <- sexDE[order(abs(sexDE$log2FoldChange), decreasing=TRUE), ]
-~~~
-{: .language-r}
-
-
-
-~~~
-Error in eval(expr, envir, enclos): object 'sexDE' not found
-~~~
-{: .error}
-
-
-
-~~~
 head(sexDE)
 ~~~
 {: .language-r}
@@ -137,27 +121,20 @@ head(sexDE)
 
 
 ~~~
-Error in h(simpleError(msg, call)): error in evaluating the argument 'x' in selecting a method for function 'head': object 'sexDE' not found
+               baseMean log2FoldChange     lfcSE      stat        pvalue          padj
+Eif2s3y       1410.8750       12.62514 0.5652155  22.33685 1.620659e-110 1.022366e-106
+Kdm5d          692.1672       12.55386 0.5936267  21.14773  2.895664e-99  1.370011e-95
+Uty            667.4375       12.01728 0.5935911  20.24505  3.927797e-91  1.486671e-87
+Ddx3y         2072.9436       11.87241 0.3974927  29.86825 5.087220e-196 4.813782e-192
+Xist         22603.0359      -11.60429 0.3362822 -34.50761 6.168523e-261 1.167393e-256
+LOC105243748    52.9669        9.08325 0.5976242  15.19893  3.594320e-52  1.133708e-48
 ~~~
-{: .error}
+{: .output}
 
 
 
 ~~~
 sexDEgenes <- rownames(sexDE)
-~~~
-{: .language-r}
-
-
-
-~~~
-Error in h(simpleError(msg, call)): error in evaluating the argument 'x' in selecting a method for function 'rownames': object 'sexDE' not found
-~~~
-{: .error}
-
-
-
-~~~
 head(sexDEgenes)
 ~~~
 {: .language-r}
@@ -165,9 +142,9 @@ head(sexDEgenes)
 
 
 ~~~
-Error in h(simpleError(msg, call)): error in evaluating the argument 'x' in selecting a method for function 'head': object 'sexDEgenes' not found
+[1] "Eif2s3y"      "Kdm5d"        "Uty"          "Ddx3y"        "Xist"         "LOC105243748"
 ~~~
-{: .error}
+{: .output}
 
 
 
@@ -179,9 +156,9 @@ length(sexDEgenes)
 
 
 ~~~
-Error in eval(expr, envir, enclos): object 'sexDEgenes' not found
+[1] 54
 ~~~
-{: .error}
+{: .output}
 
 Fetch chromosome location for all mouse genes and build a subset of them
 located in the sex chrosomes X and Y.
@@ -223,19 +200,6 @@ expression profiles.
 
 ~~~
 sexGenesSE <- sexGenesEntrez[sexGenesEntrez %in% as.character(rowData(se)$ENTREZID)]
-~~~
-{: .language-r}
-
-
-
-~~~
-Error in h(simpleError(msg, call)): error in evaluating the argument 'table' in selecting a method for function '%in%': error in evaluating the argument 'x' in selecting a method for function 'rowData': object 'se' not found
-~~~
-{: .error}
-
-
-
-~~~
 length(sexGenesSE)
 ~~~
 {: .language-r}
@@ -243,9 +207,9 @@ length(sexGenesSE)
 
 
 ~~~
-Error in eval(expr, envir, enclos): object 'sexGenesSE' not found
+[1] 1060
 ~~~
-{: .error}
+{: .output}
 
 Because our subset of mouse genes in sex chromosomes are provided as Entrez identifiers,
 let's build a table to match gene symbols to Entrez identifiers in our data.
@@ -253,29 +217,9 @@ let's build a table to match gene symbols to Entrez identifiers in our data.
 
 ~~~
 sym2entrez <- rowData(se)$ENTREZID
-~~~
-{: .language-r}
-
-
-
-~~~
-Error in h(simpleError(msg, call)): error in evaluating the argument 'x' in selecting a method for function 'rowData': object 'se' not found
-~~~
-{: .error}
-
-
-
-~~~
 names(sym2entrez) <- rownames(se)
 ~~~
 {: .language-r}
-
-
-
-~~~
-Error in h(simpleError(msg, call)): error in evaluating the argument 'x' in selecting a method for function 'rownames': object 'se' not found
-~~~
-{: .error}
 
 Build a contingency table and conduct a one-tailed Fisher's exact test that verifies
 the association between being DE and being located in a sex chromosome.
@@ -283,77 +227,12 @@ the association between being DE and being located in a sex chromosome.
 
 ~~~
 N <- nrow(se)
-~~~
-{: .language-r}
-
-
-
-~~~
-Error in h(simpleError(msg, call)): error in evaluating the argument 'x' in selecting a method for function 'nrow': object 'se' not found
-~~~
-{: .error}
-
-
-
-~~~
 n <- length(sexDEgenes)
-~~~
-{: .language-r}
-
-
-
-~~~
-Error in eval(expr, envir, enclos): object 'sexDEgenes' not found
-~~~
-{: .error}
-
-
-
-~~~
 m <- length(sexGenesSE)
-~~~
-{: .language-r}
-
-
-
-~~~
-Error in eval(expr, envir, enclos): object 'sexGenesSE' not found
-~~~
-{: .error}
-
-
-
-~~~
 k <- length(intersect(sexGenesSE, sym2entrez[sexDEgenes])) 
-~~~
-{: .language-r}
-
-
-
-~~~
-Error in h(simpleError(msg, call)): error in evaluating the argument 'x' in selecting a method for function 'intersect': object 'sexGenesSE' not found
-~~~
-{: .error}
-
-
-
-~~~
 dnames <- list(GS=c("inside", "outside"), DE=c("yes", "no"))
 t <- matrix(c(k, n-k, m-k, N+k-n-m),
                         nrow=2, ncol=2, dimnames=dnames)
-~~~
-{: .language-r}
-
-
-
-~~~
-Error in matrix(c(k, n - k, m - k, N + k - n - m), nrow = 2, ncol = 2, : object 'k' not found
-~~~
-{: .error}
-
-
-
-~~~
 t
 ~~~
 {: .language-r}
@@ -361,13 +240,10 @@ t
 
 
 ~~~
-standardGeneric for "t" defined from package "base"
-
-function (x) 
-standardGeneric("t")
-<environment: 0x557a450c1dd8>
-Methods may be defined for arguments: x
-Use  showMethods(t)  for currently available ones.
+         DE
+GS        yes    no
+  inside   14  1046
+  outside  40 40686
 ~~~
 {: .output}
 
@@ -381,6 +257,16 @@ fisher.test(t, alternative="greater")
 
 
 ~~~
-Error in fisher.test(t, alternative = "greater"): if 'x' is not a matrix, 'y' must be given
+
+	Fisher's Exact Test for Count Data
+
+data:  t
+p-value = 5.303e-11
+alternative hypothesis: true odds ratio is greater than 1
+95 percent confidence interval:
+ 7.612423      Inf
+sample estimates:
+odds ratio 
+  13.60958 
 ~~~
-{: .error}
+{: .output}
