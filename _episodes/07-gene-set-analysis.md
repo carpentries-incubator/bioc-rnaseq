@@ -23,20 +23,7 @@ Recall the differential expression analysis.
 
 
 ~~~
-library(SummmarizedExperiment)
-~~~
-{: .language-r}
-
-
-
-~~~
-Error in library(SummmarizedExperiment): there is no package called 'SummmarizedExperiment'
-~~~
-{: .error}
-
-
-
-~~~
+library(SummarizedExperiment)
 library(DESeq2)
 ~~~
 {: .language-r}
