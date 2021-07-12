@@ -4,9 +4,11 @@ title: "Gene set analysis"
 teaching: XX
 exercises: XX
 questions:
-- ""
+- "How do we find differentially expressed pathways?"
 objectives:
-- "Explain how to perform gene set analysis in R."
+- "Explain how to find differentially expressed pathways with gene set analysis in R."
+- "Understand how differentially expressed genes can enrich a gene set."
+- "Explain how to perform a gene set analysis in R, using clusterProfiler."
 keypoints:
 - "Key point 1"
 ---
@@ -18,4 +20,83 @@ source("download_data.R")
 ```{r, include=FALSE}
 source("../bin/chunk-options.R")
 knitr_fig_path("07-")
+options(width = 120)
+```
+
+Recall the differential expression analysis.
+
+```{r, message=FALSE}
+library(DESeq2)
+```
+
+```{r}
+dds <- DESeq2::DESeqDataSet(se[, se$tissue == "Cerebellum"],
+                            design = ~ sex + time)
+```
+
+```{r, message=FALSE}
+dds <- DESeq2::DESeq(dds)
+```
+
+Fetch results for the contrast between male and female mice.
+
+```{r}
+resSex <- DESeq2::results(dds, contrast = c("sex", "Male", "Female"))
+summary(resSex)
+```
+
+Select differentially expressed (DE) genes between males and females
+with FDR < 5%.
+
+```{r}
+sexDE <- as.data.frame(subset(resSex, padj < 0.05))
+dim(sexDE)
+sexDE <- sexDE[order(abs(sexDE$log2FoldChange), decreasing=TRUE), ]
+head(sexDE)
+sexDEgenes <- rownames(sexDE)
+head(sexDEgenes)
+length(sexDEgenes)
+```
+
+Fetch chromosome location for all mouse genes and build a subset of them
+located in the sex chrosomes X and Y.
+
+```{r, message=FALSE}
+library(TxDb.Mmusculus.UCSC.mm10.knownGene)
+txdb <- TxDb.Mmusculus.UCSC.mm10.knownGene
+allmousegenes <- genes(txdb)
+sexGenesEntrez <- names(allmousegenes)[as.character(seqnames(allmousegenes)) %in% c("chrX", "chrY")]
+head(sexGenesEntrez)
+length(sexGenesEntrez)
+```
+
+Further subset those mouse genes located in sex chromosomes to those for which we have
+expression profiles.
+
+```{r}
+sexGenesSE <- sexGenesEntrez[sexGenesEntrez %in% as.character(rowData(se)$ENTREZID)]
+length(sexGenesSE)
+```
+
+Because our subset of mouse genes in sex chromosomes are provided as Entrez identifiers,
+let's build a table to match gene symbols to Entrez identifiers in our data.
+
+```{r}
+sym2entrez <- rowData(se)$ENTREZID
+names(sym2entrez) <- rownames(se)
+```
+
+Build a contingency table and conduct a one-tailed Fisher's exact test that verifies
+the association between being DE and being located in a sex chromosome.
+
+```{r}
+N <- nrow(se)
+n <- length(sexDEgenes)
+m <- length(sexGenesSE)
+k <- length(intersect(sexGenesSE, sym2entrez[sexDEgenes])) 
+dnames <- list(GS=c("inside", "outside"), DE=c("yes", "no"))
+t <- matrix(c(k, n-k, m-k, N+k-n-m),
+                        nrow=2, ncol=2, dimnames=dnames)
+t
+fisher.test(t, alternative="greater")
 ```
