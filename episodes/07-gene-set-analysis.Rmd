@@ -26,7 +26,7 @@ options(width = 120)
 Recall the differential expression analysis.
 
 ```{r, message=FALSE}
-library(SummmarizedExperiment)
+library(SummarizedExperiment)
 library(DESeq2)
 ```
 
