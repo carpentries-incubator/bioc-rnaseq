@@ -13,15 +13,18 @@ BugReports: {{ BugReports }}
 Encoding: UTF-8
 Imports: 
     BiocManager,
+    clusterProfiler,
     ComplexHeatmap,
     cowplot,
     desc,
     DESeq2,
     dplyr,
+    enrichplot,
     ExploreModelMatrix,
     GenomicRanges,
     ggplot2,
     hexbin,
+    kableExtra,
     knitr,
     org.Mm.eg.db,
     RColorBrewer,
