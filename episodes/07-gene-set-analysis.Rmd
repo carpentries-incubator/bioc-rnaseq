@@ -23,7 +23,8 @@ knitr_fig_path("07-")
 options(width = 120)
 ```
 
-Recall the differential expression analysis.
+First, we are going to explore the basic concept of enriching a gene set with
+differentially expressed (DE) genes. Recall the differential expression analysis.
 
 ```{r, message=FALSE}
 library(SummarizedExperiment)
@@ -50,8 +51,7 @@ resSex <- DESeq2::results(dds, contrast = c("sex", "Male", "Female"))
 summary(resSex)
 ```
 
-Select differentially expressed (DE) genes between males and females
-with FDR < 5%.
+Select DE genes between males and females with FDR < 5%.
 
 ```{r}
 sexDE <- as.data.frame(subset(resSex, padj < 0.05))
@@ -71,8 +71,8 @@ length(xygenes)
 ```
 
 Build a contingency table and conduct a one-tailed Fisher's exact test that
-verifies the association between genes being DE between males and females and
-being located in a sex chromosome.
+verifies the association between genes being DE between male and female mice
+and being located in a sex chromosome.
 
 ```{r}
 N <- nrow(se)
@@ -84,4 +84,58 @@ t <- matrix(c(k, n-k, m-k, N+k-n-m),
                         nrow=2, ncol=2, dimnames=dnames)
 t
 fisher.test(t, alternative="greater")
+```
+
+Second, let's perform a gene set analysis for an entire collection of gene sets
+using the Bioconductor package
+[clusterProfiler](https://bioconductor.org/packages/clusterProfiler). For this
+purpose, we will fetch the results for the contrast between two time points.
+
+```{r}
+resTime <- DESeq2::results(dds, contrast = c("time", "Day8", "Day0"))
+summary(resTime)
+```
+
+Select DE genes between `Day0` and `Day8` with FDR < 5% and minimum 1.5-fold
+change.
+
+```{r}
+timeDE <- as.data.frame(subset(resTime, padj < 0.05 & abs(log2FoldChange) > log2(1.5)))
+dim(timeDE)
+timeDE <- timeDE[order(abs(timeDE$log2FoldChange), decreasing=TRUE), ]
+head(timeDE)
+timeDEgenes <- rownames(timeDE)
+head(timeDEgenes)
+length(timeDEgenes)
+```
+
+Call the `enrichGO()` function from
+[clusterProfiler](https://bioconductor.org/packages/clusterProfiler)
+as follows.
+
+```{r}
+library(clusterProfiler)
+library(org.Mm.eg.db)
+library(enrichplot)
+
+resTimeGO <- enrichGO(gene = timeDEgenes,
+                      keyType = "SYMBOL",
+                      universe = rownames(se),
+                      OrgDb = org.Mm.eg.db,
+                      ont = "BP",
+                      pvalueCutoff = 0.01,
+                      qvalueCutoff = 0.01)
+dim(resTimeGO)
+```
+
+Let's build a more readable table of results.
+
+```{r}
+library(kableExtra)
+
+resTimeGOtab <- as.data.frame(resTimeGO)
+resTimeGOtab$ID <- NULL
+resTimeGOtab$geneID <- sapply(strsplit(resTimeGO$geneID, "/"), paste, collapse=", ")
+ktab <- kable(resTimeGOtab, row.names=TRUE, caption="GO results for DE genes between time points.")
+kable_styling(ktab, bootstrap_options=c("stripped", "hover", "responsive"), fixed_thead=TRUE)
 ```
