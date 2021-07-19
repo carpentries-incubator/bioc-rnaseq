@@ -219,39 +219,39 @@ other attached packages:
  [3] ComplexHeatmap_2.8.0        ggplot2_3.3.5              
  [5] vsn_3.60.0                  DESeq2_1.32.0              
  [7] knitr_1.33                  SummarizedExperiment_1.22.0
- [9] Biobase_2.52.0              GenomicRanges_1.44.0       
-[11] GenomeInfoDb_1.28.1         IRanges_2.26.0             
-[13] S4Vectors_0.30.0            BiocGenerics_0.38.0        
-[15] MatrixGenerics_1.4.0        matrixStats_0.59.0         
+ [9] Biobase_2.52.0              MatrixGenerics_1.4.0       
+[11] matrixStats_0.59.0          GenomicRanges_1.44.0       
+[13] GenomeInfoDb_1.28.1         IRanges_2.26.0             
+[15] S4Vectors_0.30.0            BiocGenerics_0.38.0        
 
 loaded via a namespace (and not attached):
- [1] bitops_1.0-7           bit64_4.0.5            doParallel_1.0.16     
- [4] httr_1.4.2             tools_4.1.0            utf8_1.2.1            
- [7] R6_2.5.0               affyio_1.62.0          DBI_1.1.1             
-[10] colorspace_2.0-2       GetoptLong_1.0.5       withr_2.4.2           
-[13] tidyselect_1.1.1       bit_4.0.4              compiler_4.1.0        
-[16] preprocessCore_1.54.0  Cairo_1.5-12.2         DelayedArray_0.18.0   
-[19] labeling_0.4.2         scales_1.1.1           genefilter_1.74.0     
-[22] affy_1.70.0            stringr_1.4.0          digest_0.6.27         
-[25] XVector_0.32.0         pkgconfig_2.0.3        highr_0.9             
-[28] fastmap_1.1.0          limma_3.48.1           rlang_0.4.11          
-[31] GlobalOptions_0.1.2    RSQLite_2.2.7          shape_1.4.6           
-[34] generics_0.1.0         farver_2.1.0           BiocParallel_1.26.1   
-[37] dplyr_1.0.7            RCurl_1.98-1.3         magrittr_2.0.1        
-[40] GenomeInfoDbData_1.2.6 Matrix_1.3-3           Rcpp_1.0.7            
-[43] munsell_0.5.0          fansi_0.5.0            lifecycle_1.0.0       
-[46] stringi_1.6.2          zlibbioc_1.38.0        blob_1.2.1            
-[49] crayon_1.4.1           lattice_0.20-44        Biostrings_2.60.1     
-[52] splines_4.1.0          annotate_1.70.0        circlize_0.4.13       
-[55] KEGGREST_1.32.0        locfit_1.5-9.4         pillar_1.6.1          
-[58] rjson_0.2.20           geneplotter_1.70.0     codetools_0.2-18      
-[61] XML_3.99-0.6           glue_1.4.2             evaluate_0.14         
-[64] BiocManager_1.30.16    png_0.1-7              vctrs_0.3.8           
-[67] foreach_1.5.1          gtable_0.3.0           purrr_0.3.4           
-[70] clue_0.3-59            assertthat_0.2.1       cachem_1.0.5          
-[73] xfun_0.24              xtable_1.8-4           survival_3.2-11       
-[76] tibble_3.1.2           iterators_1.0.13       AnnotationDbi_1.54.1  
-[79] memoise_2.0.0          cluster_2.1.2          ellipsis_0.3.2        
+ [1] httr_1.4.2             foreach_1.5.1          bit64_4.0.5           
+ [4] splines_4.1.0          highr_0.9              BiocManager_1.30.16   
+ [7] affy_1.70.0            blob_1.2.1             GenomeInfoDbData_1.2.6
+[10] pillar_1.6.1           RSQLite_2.2.7          lattice_0.20-44       
+[13] glue_1.4.2             limma_3.48.1           digest_0.6.27         
+[16] XVector_0.32.0         colorspace_2.0-2       preprocessCore_1.54.0 
+[19] Matrix_1.3-3           XML_3.99-0.6           pkgconfig_2.0.3       
+[22] GetoptLong_1.0.5       genefilter_1.74.0      zlibbioc_1.38.0       
+[25] purrr_0.3.4            xtable_1.8-4           scales_1.1.1          
+[28] affyio_1.62.0          BiocParallel_1.26.1    tibble_3.1.2          
+[31] annotate_1.70.0        KEGGREST_1.32.0        farver_2.1.0          
+[34] generics_0.1.0         ellipsis_0.3.2         cachem_1.0.5          
+[37] withr_2.4.2            survival_3.2-11        magrittr_2.0.1        
+[40] crayon_1.4.1           memoise_2.0.0          evaluate_0.14         
+[43] fansi_0.5.0            doParallel_1.0.16      Cairo_1.5-12.2        
+[46] tools_4.1.0            GlobalOptions_0.1.2    lifecycle_1.0.0       
+[49] stringr_1.4.0          munsell_0.5.0          locfit_1.5-9.4        
+[52] cluster_2.1.2          DelayedArray_0.18.0    AnnotationDbi_1.54.1  
+[55] Biostrings_2.60.1      compiler_4.1.0         rlang_0.4.11          
+[58] RCurl_1.98-1.3         iterators_1.0.13       circlize_0.4.13       
+[61] rjson_0.2.20           labeling_0.4.2         bitops_1.0-7          
+[64] codetools_0.2-18       gtable_0.3.0           DBI_1.1.1             
+[67] R6_2.5.0               dplyr_1.0.7            fastmap_1.1.0         
+[70] bit_4.0.4              utf8_1.2.1             clue_0.3-59           
+[73] shape_1.4.6            stringi_1.6.2          Rcpp_1.0.7            
+[76] vctrs_0.3.8            geneplotter_1.70.0     png_0.1-7             
+[79] tidyselect_1.1.1       xfun_0.24             
 ~~~
 {: .output}
 

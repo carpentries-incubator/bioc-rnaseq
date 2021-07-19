@@ -147,76 +147,32 @@ length(sexDEgenes)
 ~~~
 {: .output}
 
-Fetch chromosome location for all mouse genes and build a subset of them
-located in the sex chrosomes X and Y.
+Build a gene set formed by genes located in the sex chromosomes X and Y.
 
 
 ~~~
-library(TxDb.Mmusculus.UCSC.mm10.knownGene)
-txdb <- TxDb.Mmusculus.UCSC.mm10.knownGene
-allmousegenes <- genes(txdb)
-sexGenesEntrez <- names(allmousegenes)[as.character(seqnames(allmousegenes)) %in% c("chrX", "chrY")]
-head(sexGenesEntrez)
+xygenes <- rownames(se)[decode(seqnames(rowRanges(se)) %in% c("X", "Y"))]
+length(xygenes)
 ~~~
 {: .language-r}
 
 
 
 ~~~
-[1] "100034363" "100034729" "100038363" "100038584" "100038941" "100038977"
+[1] 2123
 ~~~
 {: .output}
 
-
-
-~~~
-length(sexGenesEntrez)
-~~~
-{: .language-r}
-
-
-
-~~~
-[1] 1064
-~~~
-{: .output}
-
-Further subset those mouse genes located in sex chromosomes to those for which we have
-expression profiles.
-
-
-~~~
-sexGenesSE <- sexGenesEntrez[sexGenesEntrez %in% as.character(rowData(se)$ENTREZID)]
-length(sexGenesSE)
-~~~
-{: .language-r}
-
-
-
-~~~
-[1] 1060
-~~~
-{: .output}
-
-Because our subset of mouse genes in sex chromosomes are provided as Entrez identifiers,
-let's build a table to match gene symbols to Entrez identifiers in our data.
-
-
-~~~
-sym2entrez <- rowData(se)$ENTREZID
-names(sym2entrez) <- rownames(se)
-~~~
-{: .language-r}
-
-Build a contingency table and conduct a one-tailed Fisher's exact test that verifies
-the association between being DE and being located in a sex chromosome.
+Build a contingency table and conduct a one-tailed Fisher's exact test that
+verifies the association between genes being DE between males and females and
+being located in a sex chromosome.
 
 
 ~~~
 N <- nrow(se)
 n <- length(sexDEgenes)
-m <- length(sexGenesSE)
-k <- length(intersect(sexGenesSE, sym2entrez[sexDEgenes])) 
+m <- length(xygenes)
+k <- length(intersect(xygenes, sexDEgenes)) 
 dnames <- list(GS=c("inside", "outside"), DE=c("yes", "no"))
 t <- matrix(c(k, n-k, m-k, N+k-n-m),
                         nrow=2, ncol=2, dimnames=dnames)
@@ -229,8 +185,8 @@ t
 ~~~
          DE
 GS        yes    no
-  inside   14  1046
-  outside  40 40686
+  inside   18  2105
+  outside  36 39627
 ~~~
 {: .output}
 
@@ -248,12 +204,12 @@ fisher.test(t, alternative="greater")
 	Fisher's Exact Test for Count Data
 
 data:  t
-p-value = 5.303e-11
+p-value = 7.944e-11
 alternative hypothesis: true odds ratio is greater than 1
 95 percent confidence interval:
- 7.612423      Inf
+ 5.541517      Inf
 sample estimates:
 odds ratio 
-  13.60958 
+  9.411737 
 ~~~
 {: .output}

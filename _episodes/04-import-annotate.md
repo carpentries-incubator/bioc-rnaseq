@@ -50,6 +50,21 @@ rowdata <- read.delim("data/GSE96870_rowdata.tsv", sep = "\t",
 ~~~
 {: .language-r}
 
+
+
+~~~
+Warning in file(file, "rt"): cannot open file 'data/GSE96870_rowdata.tsv': No
+such file or directory
+~~~
+{: .warning}
+
+
+
+~~~
+Error in file(file, "rt"): cannot open the connection
+~~~
+{: .error}
+
 Mention other ways of getting annotations, and practice querying org package.
 Important to use the right annotation source/version. 
 
@@ -88,15 +103,9 @@ table(rowdata$gbkey)
 
 
 ~~~
-
-     C_region     D_segment          exon     J_segment      misc_RNA 
-           20            23          4008            94          1988 
-         mRNA         ncRNA precursor_RNA          rRNA          tRNA 
-        21198         12285          1187            35           413 
-    V_segment 
-          535 
+Error in eval(quote(list(...)), env): object 'rowdata' not found
 ~~~
-{: .output}
+{: .error}
 
 
 # Assemble SummarizedExperiment
@@ -105,7 +114,19 @@ table(rowdata$gbkey)
 ~~~
 stopifnot(rownames(rowdata) == rownames(counts),
           rownames(coldata) == colnames(counts))
+~~~
+{: .language-r}
 
+
+
+~~~
+Error in h(simpleError(msg, call)): error in evaluating the argument 'x' in selecting a method for function 'rownames': object 'rowdata' not found
+~~~
+{: .error}
+
+
+
+~~~
 se <- SummarizedExperiment(
     assays = list(counts = as.matrix(counts)),
     rowData = rowdata,
@@ -114,6 +135,13 @@ se <- SummarizedExperiment(
 ~~~
 {: .language-r}
 
+
+
+~~~
+Error in SummarizedExperiment(assays = list(counts = as.matrix(counts)), : object 'rowdata' not found
+~~~
+{: .error}
+
 # Save SummarizedExperiment
 
 
@@ -121,6 +149,13 @@ se <- SummarizedExperiment(
 saveRDS(se, "data/GSE96870_se.rds")
 ~~~
 {: .language-r}
+
+
+
+~~~
+Error in saveRDS(se, "data/GSE96870_se.rds"): object 'se' not found
+~~~
+{: .error}
 
 # Session info
 
@@ -154,10 +189,10 @@ attached base packages:
 other attached packages:
  [1] org.Mm.eg.db_3.13.0         AnnotationDbi_1.54.1       
  [3] knitr_1.33                  SummarizedExperiment_1.22.0
- [5] Biobase_2.52.0              GenomicRanges_1.44.0       
- [7] GenomeInfoDb_1.28.1         IRanges_2.26.0             
- [9] S4Vectors_0.30.0            BiocGenerics_0.38.0        
-[11] MatrixGenerics_1.4.0        matrixStats_0.59.0         
+ [5] Biobase_2.52.0              MatrixGenerics_1.4.0       
+ [7] matrixStats_0.59.0          GenomicRanges_1.44.0       
+ [9] GenomeInfoDb_1.28.1         IRanges_2.26.0             
+[11] S4Vectors_0.30.0            BiocGenerics_0.38.0        
 
 loaded via a namespace (and not attached):
  [1] Rcpp_1.0.7             compiler_4.1.0         XVector_0.32.0        

@@ -19,6 +19,7 @@ Imports:
     DESeq2,
     dplyr,
     ExploreModelMatrix,
+    GenomicRanges,
     ggplot2,
     hexbin,
     knitr,
@@ -29,5 +30,4 @@ Imports:
     rprojroot,
     stringr,
     SummarizedExperiment,
-    TxDb.Mmusculus.UCSC.mm10.knownGene,
     vsn

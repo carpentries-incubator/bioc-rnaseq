@@ -46,3 +46,20 @@ download.file(
 ~~~
 {: .language-r}
 
+
+
+~~~
+Warning in download.file(url = "https://github.com/Bioconductor/bioconductor-
+teaching/blob/master/data/GSE96870/GSE96870_rowdata.tsv?raw=true", : cannot open
+URL 'https://github.com/Bioconductor/bioconductor-teaching/blob/master/data/
+GSE96870/GSE96870_rowdata.tsv?raw=true': HTTP status was '404 Not Found'
+~~~
+{: .warning}
+
+
+
+~~~
+Error in download.file(url = "https://github.com/Bioconductor/bioconductor-teaching/blob/master/data/GSE96870/GSE96870_rowdata.tsv?raw=true", : cannot open URL 'https://github.com/Bioconductor/bioconductor-teaching/blob/master/data/GSE96870/GSE96870_rowdata.tsv?raw=true'
+~~~
+{: .error}
+
