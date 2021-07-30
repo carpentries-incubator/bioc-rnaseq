@@ -25,8 +25,10 @@ options(width = 120)
 
 > ## Contribute!
 >
-> This episode is intended to introduce the concept of how a gene set becomes
-> significantly enriched by a subset of differentially expressed (DE) genes.
+> This episode is intended to introduce the concept of how to carry out a
+> functional analysis of a subset of differentially expressed (DE) genes,
+> by means of assessing how significantly DE genes enrich gene sets of
+> our interest.
 {: .callout}
 
 First, we are going to explore the basic concept of enriching a gene set with
@@ -69,6 +71,17 @@ head(sexDEgenes)
 length(sexDEgenes)
 ```
 
+# Enrichment of a curated gene set
+
+> ## Contribute!
+>
+> Here we illustrate how to assess the enrichment of one gene set
+> we curate ourselves with our subset of DE genes with sex-specific
+> expression. Here we form such a gene set with genes from sex
+> chromosomes. Could you think of another more accurate gene set formed
+> by genes with sex-specific expression?
+{: .callout}
+
 Build a gene set formed by genes located in the sex chromosomes X and Y.
 
 ```{r, message=FALSE}
@@ -91,6 +104,17 @@ t <- matrix(c(k, n-k, m-k, N+k-n-m),
 t
 fisher.test(t, alternative="greater")
 ```
+
+# Gene ontology analysis with clusterProfiler
+
+> ## Contribute!
+>
+> Here we illustrate how to assess the enrichment on the entire
+> collection of Gene Ontology (GO) gene sets using the package
+> clusterProfiler. Could we illustrate any missing important feature
+> of this package for this analysis objective? Could we briefly
+> mention other packages that may be useful for this task?
+{: .callout}
 
 Second, let's perform a gene set analysis for an entire collection of gene sets
 using the Bioconductor package
