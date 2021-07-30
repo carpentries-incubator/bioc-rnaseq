@@ -220,21 +220,21 @@ other attached packages:
  [5] vsn_3.60.0                  DESeq2_1.32.0              
  [7] knitr_1.33                  SummarizedExperiment_1.22.0
  [9] Biobase_2.52.0              MatrixGenerics_1.4.0       
-[11] matrixStats_0.59.0          GenomicRanges_1.44.0       
+[11] matrixStats_0.60.0          GenomicRanges_1.44.0       
 [13] GenomeInfoDb_1.28.1         IRanges_2.26.0             
 [15] S4Vectors_0.30.0            BiocGenerics_0.38.0        
 
 loaded via a namespace (and not attached):
  [1] httr_1.4.2             foreach_1.5.1          bit64_4.0.5           
  [4] splines_4.1.0          highr_0.9              BiocManager_1.30.16   
- [7] affy_1.70.0            blob_1.2.1             GenomeInfoDbData_1.2.6
-[10] pillar_1.6.1           RSQLite_2.2.7          lattice_0.20-44       
+ [7] affy_1.70.0            blob_1.2.2             GenomeInfoDbData_1.2.6
+[10] pillar_1.6.2           RSQLite_2.2.7          lattice_0.20-44       
 [13] glue_1.4.2             limma_3.48.1           digest_0.6.27         
 [16] XVector_0.32.0         colorspace_2.0-2       preprocessCore_1.54.0 
 [19] Matrix_1.3-3           XML_3.99-0.6           pkgconfig_2.0.3       
 [22] GetoptLong_1.0.5       genefilter_1.74.0      zlibbioc_1.38.0       
 [25] purrr_0.3.4            xtable_1.8-4           scales_1.1.1          
-[28] affyio_1.62.0          BiocParallel_1.26.1    tibble_3.1.2          
+[28] affyio_1.62.0          BiocParallel_1.26.1    tibble_3.1.3          
 [31] annotate_1.70.0        KEGGREST_1.32.0        farver_2.1.0          
 [34] generics_0.1.0         ellipsis_0.3.2         cachem_1.0.5          
 [37] withr_2.4.2            survival_3.2-11        magrittr_2.0.1        
@@ -248,8 +248,8 @@ loaded via a namespace (and not attached):
 [61] rjson_0.2.20           labeling_0.4.2         bitops_1.0-7          
 [64] codetools_0.2-18       gtable_0.3.0           DBI_1.1.1             
 [67] R6_2.5.0               dplyr_1.0.7            fastmap_1.1.0         
-[70] bit_4.0.4              utf8_1.2.1             clue_0.3-59           
-[73] shape_1.4.6            stringi_1.6.2          Rcpp_1.0.7            
+[70] bit_4.0.4              utf8_1.2.2             clue_0.3-59           
+[73] shape_1.4.6            stringi_1.7.3          Rcpp_1.0.7            
 [76] vctrs_0.3.8            geneplotter_1.70.0     png_0.1-7             
 [79] tidyselect_1.1.1       xfun_0.24             
 ~~~

@@ -19,6 +19,12 @@ keypoints:
 
 
 
+> ## Contribute!
+>
+> This episode is intended to introduce the concept of how a gene set becomes
+> significantly enriched by a subset of differentially expressed (DE) genes.
+{: .callout}
+
 First, we are going to explore the basic concept of enriching a gene set with
 differentially expressed (DE) genes. Recall the differential expression analysis.
 
@@ -316,102 +322,7 @@ as follows.
 
 ~~~
 library(clusterProfiler)
-~~~
-{: .language-r}
-
-
-
-~~~
-
-~~~
-{: .output}
-
-
-
-~~~
-clusterProfiler v4.0.2  For help: https://yulab-smu.top/biomedical-knowledge-mining-book/
-
-If you use clusterProfiler in published research, please cite:
-T Wu, E Hu, S Xu, M Chen, P Guo, Z Dai, T Feng, L Zhou, W Tang, L Zhan, X Fu, S Liu, X Bo, and G Yu. clusterProfiler 4.0: A universal enrichment tool for interpreting omics data. The Innovation. 2021, doi: 10.1016/j.xinn.2021.100141
-~~~
-{: .output}
-
-
-
-~~~
-
-Attaching package: 'clusterProfiler'
-~~~
-{: .output}
-
-
-
-~~~
-The following object is masked from 'package:IRanges':
-
-    slice
-~~~
-{: .output}
-
-
-
-~~~
-The following object is masked from 'package:S4Vectors':
-
-    rename
-~~~
-{: .output}
-
-
-
-~~~
-The following object is masked from 'package:stats':
-
-    filter
-~~~
-{: .output}
-
-
-
-~~~
 library(org.Mm.eg.db)
-~~~
-{: .language-r}
-
-
-
-~~~
-Loading required package: AnnotationDbi
-~~~
-{: .output}
-
-
-
-~~~
-
-Attaching package: 'AnnotationDbi'
-~~~
-{: .output}
-
-
-
-~~~
-The following object is masked from 'package:clusterProfiler':
-
-    select
-~~~
-{: .output}
-
-
-
-~~~
-
-~~~
-{: .output}
-
-
-
-~~~
 library(enrichplot)
 
 resTimeGO <- enrichGO(gene = timeDEgenes,
@@ -429,6 +340,47 @@ dim(resTimeGO)
 
 ~~~
 [1] 32  9
+~~~
+{: .output}
+
+
+
+~~~
+head(resTimeGO)
+~~~
+{: .language-r}
+
+
+
+~~~
+                   ID                                           Description GeneRatio   BgRatio       pvalue
+GO:0071674 GO:0071674                            mononuclear cell migration   32/1142 166/20469 6.296646e-10
+GO:0035456 GO:0035456                           response to interferon-beta   16/1142  48/20469 3.291098e-09
+GO:0050900 GO:0050900                                   leukocyte migration   49/1142 355/20469 4.355926e-09
+GO:0030595 GO:0030595                                  leukocyte chemotaxis   34/1142 214/20469 3.265849e-08
+GO:0035458 GO:0035458                  cellular response to interferon-beta   13/1142  38/20469 6.940867e-08
+GO:0002523 GO:0002523 leukocyte migration involved in inflammatory response   10/1142  23/20469 1.649290e-07
+               p.adjust       qvalue
+GO:0071674 3.080319e-06 2.852712e-06
+GO:0035456 7.103063e-06 6.578212e-06
+GO:0050900 7.103063e-06 6.578212e-06
+GO:0030595 3.994133e-05 3.699003e-05
+GO:0035458 6.790944e-05 6.289156e-05
+GO:0002523 1.344721e-04 1.245358e-04
+                                                                                                                                                                                                                                                                                     geneID
+GO:0071674                                                                                              Tnfsf18/Aire/Ccl17/Ccr7/Nlrp12/Ccl2/Retnlg/Apod/Il12a/Ccl5/Fpr2/Fut7/Ccl7/Spn/Itgb3/Grem1/Ptk2b/Lgals3/Adam8/Dusp1/Ch25h/Nbl1/Alox5/Padi2/Plg/Calr/Ager/Ccl6/Mdk/Itga4/Hsd3b7/Trpm4
+GO:0035456                                                                                                                                                                          Tgtp1/Tgtp2/F830016B08Rik/Iigp1/Ifitm6/Igtp/Gm4951/Bst2/Irgm1/Gbp6/Ifi47/Aim2/Ifitm7/Irgm2/Ifit1/Ifi204
+GO:0050900 Tnfsf18/Aire/Ccl17/Ccr7/Nlrp12/Bst1/Ccl2/Retnlg/Ppbp/Cxcl5/Apod/Il12a/Ccl5/Fpr2/Umodl1/Fut7/Ccl7/Ccl28/Spn/Sell/Itgb3/Grem1/Cxcl1/Ptk2b/Lgals3/Adam8/Pf4/Dusp1/Ch25h/S100a8/Nbl1/Alox5/Padi2/Plg/Edn3/Il33/Ptn/Ada/Calr/Ager/Ccl6/Prex1/Aoc3/Itgam/Mdk/Itga4/Hsd3b7/P2ry12/Trpm4
+GO:0030595                                                                                  Tnfsf18/Ccl17/Ccr7/Bst1/Ccl2/Retnlg/Ppbp/Cxcl5/Il12a/Ccl5/Fpr2/Ccl7/Sell/Grem1/Cxcl1/Ptk2b/Lgals3/Adam8/Pf4/Dusp1/Ch25h/S100a8/Nbl1/Alox5/Padi2/Edn3/Ptn/Calr/Ccl6/Prex1/Itgam/Mdk/Hsd3b7/Trpm4
+GO:0035458                                                                                                                                                                                             Tgtp1/Tgtp2/F830016B08Rik/Iigp1/Igtp/Gm4951/Irgm1/Gbp6/Ifi47/Aim2/Irgm2/Ifit1/Ifi204
+GO:0002523                                                                                                                                                                                                                             Ccl2/Ppbp/Fut7/Adam8/S100a8/Alox5/Ptn/Aoc3/Itgam/Mdk
+           Count
+GO:0071674    32
+GO:0035456    16
+GO:0050900    49
+GO:0030595    34
+GO:0035458    13
+GO:0002523    10
 ~~~
 {: .output}
 

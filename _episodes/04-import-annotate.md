@@ -190,7 +190,7 @@ other attached packages:
  [1] org.Mm.eg.db_3.13.0         AnnotationDbi_1.54.1       
  [3] knitr_1.33                  SummarizedExperiment_1.22.0
  [5] Biobase_2.52.0              MatrixGenerics_1.4.0       
- [7] matrixStats_0.59.0          GenomicRanges_1.44.0       
+ [7] matrixStats_0.60.0          GenomicRanges_1.44.0       
  [9] GenomeInfoDb_1.28.1         IRanges_2.26.0             
 [11] S4Vectors_0.30.0            BiocGenerics_0.38.0        
 
@@ -204,8 +204,8 @@ loaded via a namespace (and not attached):
 [19] fastmap_1.1.0          GenomeInfoDbData_1.2.6 stringr_1.4.0         
 [22] httr_1.4.2             Biostrings_2.60.1      vctrs_0.3.8           
 [25] bit64_4.0.5            grid_4.1.0             R6_2.5.0              
-[28] blob_1.2.1             magrittr_2.0.1         KEGGREST_1.32.0       
-[31] stringi_1.6.2          RCurl_1.98-1.3         cachem_1.0.5          
+[28] blob_1.2.2             magrittr_2.0.1         KEGGREST_1.32.0       
+[31] stringi_1.7.3          RCurl_1.98-1.3         cachem_1.0.5          
 [34] crayon_1.4.1          
 ~~~
 {: .output}
