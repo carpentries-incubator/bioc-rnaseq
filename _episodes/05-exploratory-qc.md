@@ -20,6 +20,12 @@ editor_options:
 
 
 
+> ## Contribute!
+>
+> This episode is intended to introduce various types of exploratory analysis 
+> and QC steps taken before a formal statistical analysis is done.
+{: .callout}
+
 
 ~~~
 suppressPackageStartupMessages({

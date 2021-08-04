@@ -21,6 +21,13 @@ editor_options:
 
 
 
+> ## Contribute!
+>
+> This episode is intended to discuss experimental design - what it means, 
+> why it is important, how you would translate your metadata into a suitable 
+> design matrix, how coefficients are to be interpreted. 
+{: .callout}
+
 
 ~~~
 suppressPackageStartupMessages({

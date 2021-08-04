@@ -23,6 +23,12 @@ source("../bin/chunk-options.R")
 knitr_fig_path("05-")
 ```
 
+> ## Contribute!
+>
+> This episode is intended to introduce various types of exploratory analysis 
+> and QC steps taken before a formal statistical analysis is done.
+{: .callout}
+
 ```{r}
 suppressPackageStartupMessages({
     library(SummarizedExperiment)

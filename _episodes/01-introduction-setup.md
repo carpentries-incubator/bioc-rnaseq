@@ -40,26 +40,9 @@ download.file(
 )
 
 download.file(
-    url = "https://github.com/Bioconductor/bioconductor-teaching/blob/master/data/GSE96870/GSE96870_rowdata.tsv?raw=true", 
-    destfile = "data/GSE96870_rowdata.tsv"
+    url = "https://github.com/Bioconductor/bioconductor-teaching/blob/master/data/GSE96870/GSE96870_rowranges.tsv?raw=true", 
+    destfile = "data/GSE96870_rowranges.tsv"
 )
 ~~~
 {: .language-r}
-
-
-
-~~~
-Warning in download.file(url = "https://github.com/Bioconductor/bioconductor-
-teaching/blob/master/data/GSE96870/GSE96870_rowdata.tsv?raw=true", : cannot open
-URL 'https://github.com/Bioconductor/bioconductor-teaching/blob/master/data/
-GSE96870/GSE96870_rowdata.tsv?raw=true': HTTP status was '404 Not Found'
-~~~
-{: .warning}
-
-
-
-~~~
-Error in download.file(url = "https://github.com/Bioconductor/bioconductor-teaching/blob/master/data/GSE96870/GSE96870_rowdata.tsv?raw=true", : cannot open URL 'https://github.com/Bioconductor/bioconductor-teaching/blob/master/data/GSE96870/GSE96870_rowdata.tsv?raw=true'
-~~~
-{: .error}
 

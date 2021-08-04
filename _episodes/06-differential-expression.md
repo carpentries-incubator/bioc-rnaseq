@@ -18,6 +18,14 @@ keypoints:
 
 
 
+> ## Contribute!
+>
+> This episode is intended to introduce the concepts required to perform 
+> differential expression analysis with RNA-seq data. Explain concepts like 
+> size factors, count modeling (Negative Binomial), dispersion, interpretation 
+> of the test output, multiple testing correction. 
+{: .callout}
+
 
 ~~~
 suppressPackageStartupMessages({
@@ -31,6 +39,7 @@ suppressPackageStartupMessages({
 ~~~
 {: .language-r}
 
+# Load data
 
 
 ~~~
@@ -38,6 +47,7 @@ se <- readRDS("data/GSE96870_se.rds")
 ~~~
 {: .language-r}
 
+# Create DESeqDataSet 
 
 
 ~~~
@@ -53,6 +63,15 @@ Warning in DESeq2::DESeqDataSet(se[, se$tissue == "Cerebellum"], design = ~sex +
 characters, converting to factors
 ~~~
 {: .warning}
+
+# Run DESeq()
+
+> ## Contribute!
+>
+> The concepts may be clearer if the steps of DESeq() are first performed 
+> separately, followed by a note that they can be performed in a single step
+> using DESeq().
+{: .callout}
 
 
 ~~~
@@ -111,6 +130,14 @@ plotDispEsts(dds)
 
 <img src="../fig/rmd-06-unnamed-chunk-6-1.png" title="plot of chunk unnamed-chunk-6" alt="plot of chunk unnamed-chunk-6" width="612" style="display: block; margin: auto;" />
 
+# Extract results for specific contrasts
+
+> ## Contribute!
+>
+> Refer back to the episode about experimental design.
+{: .callout}
+
+
 ~~~
 ## Day 8 vs Day 0
 resTime <- DESeq2::results(dds, contrast = c("time", "Day8", "Day0"))
@@ -165,7 +192,7 @@ DESeq2::plotMA(resTime)
 ~~~
 {: .language-r}
 
-<img src="../fig/rmd-06-unnamed-chunk-6-2.png" title="plot of chunk unnamed-chunk-6" alt="plot of chunk unnamed-chunk-6" width="612" style="display: block; margin: auto;" />
+<img src="../fig/rmd-06-unnamed-chunk-7-1.png" title="plot of chunk unnamed-chunk-7" alt="plot of chunk unnamed-chunk-7" width="612" style="display: block; margin: auto;" />
 
 ~~~
 ## Male vs Female
@@ -221,7 +248,15 @@ DESeq2::plotMA(resSex)
 ~~~
 {: .language-r}
 
-<img src="../fig/rmd-06-unnamed-chunk-6-3.png" title="plot of chunk unnamed-chunk-6" alt="plot of chunk unnamed-chunk-6" width="612" style="display: block; margin: auto;" />
+<img src="../fig/rmd-06-unnamed-chunk-7-2.png" title="plot of chunk unnamed-chunk-7" alt="plot of chunk unnamed-chunk-7" width="612" style="display: block; margin: auto;" />
+
+# Visualize selected set of genes
+
+> ## Contribute!
+>
+> Here we intend to practice how to interpret the results from the 
+> differential expression analysis. Refer back to the exploratory/QC episode.
+{: .callout}
 
 
 ~~~
@@ -240,5 +275,5 @@ ComplexHeatmap::Heatmap(heatmapData,
 ~~~
 {: .language-r}
 
-<img src="../fig/rmd-06-unnamed-chunk-7-1.png" title="plot of chunk unnamed-chunk-7" alt="plot of chunk unnamed-chunk-7" width="612" style="display: block; margin: auto;" />
+<img src="../fig/rmd-06-unnamed-chunk-8-1.png" title="plot of chunk unnamed-chunk-8" alt="plot of chunk unnamed-chunk-8" width="612" style="display: block; margin: auto;" />
 

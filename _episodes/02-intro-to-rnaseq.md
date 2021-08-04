@@ -18,3 +18,9 @@ keypoints:
 
 
 
+
+> ## Contribute!
+>
+> This episode is intended to introduce important concepts in RNA-seq data, 
+> to bring everyone up to speed.
+{: .callout}

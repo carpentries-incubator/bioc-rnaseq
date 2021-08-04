@@ -18,6 +18,15 @@ keypoints:
 
 
 
+> ## Contribute!
+>
+> This episode is intended to show how we can assemble a SummarizedExperiment 
+> starting from individual count, rowdata and coldata files. Moreover, we will 
+> practice adding annotations for the genes, and discuss related concepts 
+> and things to keep in mind (annotation sources, versions, 'helper' packages 
+> like tximeta).
+{: .callout}
+
 # Read the data
 
 ## Counts
@@ -44,26 +53,11 @@ Need to be careful - the descriptions contain both commas and ' (e.g., 5')
 
 
 ~~~
-rowdata <- read.delim("data/GSE96870_rowdata.tsv", sep = "\t", 
-                      header = TRUE, quote = "",
-                      row.names = 1)
+rowranges <- read.delim("data/GSE96870_rowranges.tsv", sep = "\t", 
+                        colClasses = c(ENTREZID = "character"),
+                        header = TRUE, quote = "", row.names = 5)
 ~~~
 {: .language-r}
-
-
-
-~~~
-Warning in file(file, "rt"): cannot open file 'data/GSE96870_rowdata.tsv': No
-such file or directory
-~~~
-{: .warning}
-
-
-
-~~~
-Error in file(file, "rt"): cannot open the connection
-~~~
-{: .error}
 
 Mention other ways of getting annotations, and practice querying org package.
 Important to use the right annotation source/version. 
@@ -96,51 +90,38 @@ Check feature types
 
 
 ~~~
-table(rowdata$gbkey)
+table(rowranges$gbkey)
 ~~~
 {: .language-r}
 
 
 
 ~~~
-Error in eval(quote(list(...)), env): object 'rowdata' not found
+
+     C_region     D_segment          exon     J_segment      misc_RNA 
+           20            23          4008            94          1988 
+         mRNA         ncRNA precursor_RNA          rRNA          tRNA 
+        21198         12285          1187            35           413 
+    V_segment 
+          535 
 ~~~
-{: .error}
+{: .output}
 
 
 # Assemble SummarizedExperiment
 
 
 ~~~
-stopifnot(rownames(rowdata) == rownames(counts),
+stopifnot(rownames(rowranges) == rownames(counts),
           rownames(coldata) == colnames(counts))
-~~~
-{: .language-r}
 
-
-
-~~~
-Error in h(simpleError(msg, call)): error in evaluating the argument 'x' in selecting a method for function 'rownames': object 'rowdata' not found
-~~~
-{: .error}
-
-
-
-~~~
 se <- SummarizedExperiment(
     assays = list(counts = as.matrix(counts)),
-    rowData = rowdata,
+    rowRanges = as(rowranges, "GRanges"),
     colData = coldata
 )
 ~~~
 {: .language-r}
-
-
-
-~~~
-Error in SummarizedExperiment(assays = list(counts = as.matrix(counts)), : object 'rowdata' not found
-~~~
-{: .error}
 
 # Save SummarizedExperiment
 
@@ -149,13 +130,6 @@ Error in SummarizedExperiment(assays = list(counts = as.matrix(counts)), : objec
 saveRDS(se, "data/GSE96870_se.rds")
 ~~~
 {: .language-r}
-
-
-
-~~~
-Error in saveRDS(se, "data/GSE96870_se.rds"): object 'se' not found
-~~~
-{: .error}
 
 # Session info
 
