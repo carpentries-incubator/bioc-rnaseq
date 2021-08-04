@@ -40,8 +40,8 @@ download.file(
 )
 
 download.file(
-    url = "https://github.com/Bioconductor/bioconductor-teaching/blob/master/data/GSE96870/GSE96870_rowdata.tsv?raw=true", 
-    destfile = "data/GSE96870_rowdata.tsv"
+    url = "https://github.com/Bioconductor/bioconductor-teaching/blob/master/data/GSE96870/GSE96870_rowranges.tsv?raw=true", 
+    destfile = "data/GSE96870_rowranges.tsv"
 )
 ```
 
