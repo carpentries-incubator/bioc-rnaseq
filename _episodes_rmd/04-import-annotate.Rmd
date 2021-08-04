@@ -21,6 +21,15 @@ source("../bin/chunk-options.R")
 knitr_fig_path("04-")
 ```
 
+> ## Contribute!
+>
+> This episode is intended to show how we can assemble a SummarizedExperiment 
+> starting from individual count, rowdata and coldata files. Moreover, we will 
+> practice adding annotations for the genes, and discuss related concepts 
+> and things to keep in mind (annotation sources, versions, 'helper' packages 
+> like tximeta).
+{: .callout}
+
 # Read the data
 
 ## Counts
@@ -42,9 +51,9 @@ coldata <- read.csv("data/GSE96870_coldata_cerebellum.csv",
 Need to be careful - the descriptions contain both commas and ' (e.g., 5')
 
 ```{r}
-rowdata <- read.delim("data/GSE96870_rowdata.tsv", sep = "\t", 
-                      header = TRUE, quote = "",
-                      row.names = 1)
+rowranges <- read.delim("data/GSE96870_rowranges.tsv", sep = "\t", 
+                        colClasses = c(ENTREZID = "character"),
+                        header = TRUE, quote = "", row.names = 5)
 ```
 
 Mention other ways of getting annotations, and practice querying org package.
@@ -60,19 +69,19 @@ mapIds(org.Mm.eg.db, keys = "497097", column = "SYMBOL", keytype = "ENTREZID")
 Check feature types
 
 ```{r}
-table(rowdata$gbkey)
+table(rowranges$gbkey)
 ```
 
 
 # Assemble SummarizedExperiment
 
 ```{r}
-stopifnot(rownames(rowdata) == rownames(counts),
+stopifnot(rownames(rowranges) == rownames(counts),
           rownames(coldata) == colnames(counts))
 
 se <- SummarizedExperiment(
     assays = list(counts = as.matrix(counts)),
-    rowData = rowdata,
+    rowRanges = as(rowranges, "GRanges"),
     colData = coldata
 )
 ```

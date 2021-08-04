@@ -21,3 +21,9 @@ source("download_data.R")
 source("../bin/chunk-options.R")
 knitr_fig_path("02-")
 ```
+
+> ## Contribute!
+>
+> This episode is intended to introduce important concepts in RNA-seq data, 
+> to bring everyone up to speed.
+{: .callout}
