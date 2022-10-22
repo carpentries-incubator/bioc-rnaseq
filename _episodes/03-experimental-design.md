@@ -112,7 +112,7 @@ $`tissue = Cerebellum`
 ~~~
 {: .output}
 
-<img src="../fig/rmd-03-unnamed-chunk-5-1.png" title="plot of chunk unnamed-chunk-5" alt="plot of chunk unnamed-chunk-5" width="612" style="display: block; margin: auto;" />
+<img src="../fig/rmd-03-unnamed-chunk-5-1.png" alt="plot of chunk unnamed-chunk-5" width="612" style="display: block; margin: auto;" />
 
 ~~~
 
@@ -120,7 +120,7 @@ $`tissue = Spinalcord`
 ~~~
 {: .output}
 
-<img src="../fig/rmd-03-unnamed-chunk-5-2.png" title="plot of chunk unnamed-chunk-5" alt="plot of chunk unnamed-chunk-5" width="612" style="display: block; margin: auto;" />
+<img src="../fig/rmd-03-unnamed-chunk-5-2.png" alt="plot of chunk unnamed-chunk-5" width="612" style="display: block; margin: auto;" />
 
 # Compare males and females, non-infected spinal cord
 
@@ -185,7 +185,7 @@ vd$plotlist
 ~~~
 {: .output}
 
-<img src="../fig/rmd-03-unnamed-chunk-6-1.png" title="plot of chunk unnamed-chunk-6" alt="plot of chunk unnamed-chunk-6" width="612" style="display: block; margin: auto;" />
+<img src="../fig/rmd-03-unnamed-chunk-6-1.png" alt="plot of chunk unnamed-chunk-6" width="612" style="display: block; margin: auto;" />
 
 > ## Challenge: Can you do it?
 >
@@ -261,7 +261,7 @@ vd$plotlist
 > > ~~~
 > > {: .output}
 > > 
-> > <img src="../fig/rmd-03-unnamed-chunk-7-1.png" title="plot of chunk unnamed-chunk-7" alt="plot of chunk unnamed-chunk-7" width="612" style="display: block; margin: auto;" />
+> > <img src="../fig/rmd-03-unnamed-chunk-7-1.png" alt="plot of chunk unnamed-chunk-7" width="612" style="display: block; margin: auto;" />
 > {: .solution}
 {: .challenge}
 
@@ -341,7 +341,7 @@ vd$plotlist
 ~~~
 {: .output}
 
-<img src="../fig/rmd-03-unnamed-chunk-8-1.png" title="plot of chunk unnamed-chunk-8" alt="plot of chunk unnamed-chunk-8" width="612" style="display: block; margin: auto;" />
+<img src="../fig/rmd-03-unnamed-chunk-8-1.png" alt="plot of chunk unnamed-chunk-8" width="612" style="display: block; margin: auto;" />
 
 # Factorial design with interactions
 
@@ -419,7 +419,7 @@ vd$plotlist
 ~~~
 {: .output}
 
-<img src="../fig/rmd-03-unnamed-chunk-9-1.png" title="plot of chunk unnamed-chunk-9" alt="plot of chunk unnamed-chunk-9" width="612" style="display: block; margin: auto;" />
+<img src="../fig/rmd-03-unnamed-chunk-9-1.png" alt="plot of chunk unnamed-chunk-9" width="612" style="display: block; margin: auto;" />
 
 # Paired design
 
@@ -484,7 +484,7 @@ vd$plotlist
 ~~~
 {: .output}
 
-<img src="../fig/rmd-03-unnamed-chunk-10-1.png" title="plot of chunk unnamed-chunk-10" alt="plot of chunk unnamed-chunk-10" width="612" style="display: block; margin: auto;" />
+<img src="../fig/rmd-03-unnamed-chunk-10-1.png" alt="plot of chunk unnamed-chunk-10" width="612" style="display: block; margin: auto;" />
 
 # Within- and between-subject comparisons
 
@@ -606,7 +606,7 @@ $`time = Day0`
 ~~~
 {: .output}
 
-<img src="../fig/rmd-03-unnamed-chunk-11-1.png" title="plot of chunk unnamed-chunk-11" alt="plot of chunk unnamed-chunk-11" width="612" style="display: block; margin: auto;" />
+<img src="../fig/rmd-03-unnamed-chunk-11-1.png" alt="plot of chunk unnamed-chunk-11" width="612" style="display: block; margin: auto;" />
 
 ~~~
 
@@ -614,5 +614,5 @@ $`time = Day4`
 ~~~
 {: .output}
 
-<img src="../fig/rmd-03-unnamed-chunk-11-2.png" title="plot of chunk unnamed-chunk-11" alt="plot of chunk unnamed-chunk-11" width="612" style="display: block; margin: auto;" />
+<img src="../fig/rmd-03-unnamed-chunk-11-2.png" alt="plot of chunk unnamed-chunk-11" width="612" style="display: block; margin: auto;" />
 

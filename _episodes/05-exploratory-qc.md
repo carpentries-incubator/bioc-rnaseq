@@ -81,7 +81,7 @@ ggplot(data.frame(sample = colnames(dds),
 ~~~
 {: .language-r}
 
-<img src="../fig/rmd-05-unnamed-chunk-6-1.png" title="plot of chunk unnamed-chunk-6" alt="plot of chunk unnamed-chunk-6" width="612" style="display: block; margin: auto;" />
+<img src="../fig/rmd-05-unnamed-chunk-6-1.png" alt="plot of chunk unnamed-chunk-6" width="612" style="display: block; margin: auto;" />
 
 Differences in the total number of reads assigned to genes between samples typically occur for technical reasons. 
 In practice, it means that we can not simply compare the raw read count directly between samples and conclude that a sample with a higher read count also expresses the gene more strongly - the higher count may be caused by an overall higher number of reads in that sample. 
@@ -110,7 +110,7 @@ ggplot(data.frame(libSize = colSums(assay(dds, "counts")),
 ~~~
 {: .language-r}
 
-<img src="../fig/rmd-05-unnamed-chunk-7-1.png" title="plot of chunk unnamed-chunk-7" alt="plot of chunk unnamed-chunk-7" width="612" style="display: block; margin: auto;" />
+<img src="../fig/rmd-05-unnamed-chunk-7-1.png" alt="plot of chunk unnamed-chunk-7" width="612" style="display: block; margin: auto;" />
 
 # Transform data
 
@@ -125,7 +125,7 @@ meanSdPlot(assay(dds), ranks = FALSE)
 ~~~
 {: .language-r}
 
-<img src="../fig/rmd-05-unnamed-chunk-8-1.png" title="plot of chunk unnamed-chunk-8" alt="plot of chunk unnamed-chunk-8" width="612" style="display: block; margin: auto;" />
+<img src="../fig/rmd-05-unnamed-chunk-8-1.png" alt="plot of chunk unnamed-chunk-8" width="612" style="display: block; margin: auto;" />
 
 There are two ways around this: either we develop methods specifically adapted to count data, or we adapt (transform) the count data so that the existing methods are applicable. 
 Both ways have been explored; however, at the moment the second approach is arguably more widely applied in practice. 
@@ -137,7 +137,7 @@ meanSdPlot(assay(vsd), ranks = FALSE)
 ~~~
 {: .language-r}
 
-<img src="../fig/rmd-05-unnamed-chunk-9-1.png" title="plot of chunk unnamed-chunk-9" alt="plot of chunk unnamed-chunk-9" width="612" style="display: block; margin: auto;" />
+<img src="../fig/rmd-05-unnamed-chunk-9-1.png" alt="plot of chunk unnamed-chunk-9" width="612" style="display: block; margin: auto;" />
 
 # Heatmaps and clustering
 
@@ -160,7 +160,7 @@ ComplexHeatmap::Heatmap(
 ~~~
 {: .language-r}
 
-<img src="../fig/rmd-05-unnamed-chunk-10-1.png" title="plot of chunk unnamed-chunk-10" alt="plot of chunk unnamed-chunk-10" width="612" style="display: block; margin: auto;" />
+<img src="../fig/rmd-05-unnamed-chunk-10-1.png" alt="plot of chunk unnamed-chunk-10" width="612" style="display: block; margin: auto;" />
 
 # PCA
 
@@ -189,7 +189,7 @@ ggplot(pcaData, aes(x = PC1, y = PC2)) +
 ~~~
 {: .language-r}
 
-<img src="../fig/rmd-05-unnamed-chunk-11-1.png" title="plot of chunk unnamed-chunk-11" alt="plot of chunk unnamed-chunk-11" width="612" style="display: block; margin: auto;" />
+<img src="../fig/rmd-05-unnamed-chunk-11-1.png" alt="plot of chunk unnamed-chunk-11" width="612" style="display: block; margin: auto;" />
 
 # Session info
 
@@ -202,9 +202,9 @@ sessionInfo()
 
 
 ~~~
-R version 4.1.0 (2021-05-18)
+R version 4.2.1 (2022-06-23)
 Platform: x86_64-pc-linux-gnu (64-bit)
-Running under: Ubuntu 20.04.2 LTS
+Running under: Ubuntu 20.04.5 LTS
 
 Matrix products: default
 BLAS:   /usr/lib/x86_64-linux-gnu/blas/libblas.so.3.9.0
@@ -217,47 +217,47 @@ locale:
 [10] LC_TELEPHONE=C         LC_MEASUREMENT=C.UTF-8 LC_IDENTIFICATION=C   
 
 attached base packages:
- [1] grid      parallel  stats4    stats     graphics  grDevices utils    
- [8] datasets  methods   base     
+[1] grid      stats4    stats     graphics  grDevices utils     datasets 
+[8] methods   base     
 
 other attached packages:
- [1] hexbin_1.28.2               RColorBrewer_1.1-2         
- [3] ComplexHeatmap_2.8.0        ggplot2_3.3.5              
- [5] vsn_3.60.0                  DESeq2_1.32.0              
- [7] knitr_1.33                  SummarizedExperiment_1.22.0
- [9] Biobase_2.52.0              MatrixGenerics_1.4.0       
-[11] matrixStats_0.60.0          GenomicRanges_1.44.0       
-[13] GenomeInfoDb_1.28.1         IRanges_2.26.0             
-[15] S4Vectors_0.30.0            BiocGenerics_0.38.0        
+ [1] hexbin_1.28.2               RColorBrewer_1.1-3         
+ [3] ComplexHeatmap_2.12.1       ggplot2_3.3.6              
+ [5] vsn_3.64.0                  DESeq2_1.36.0              
+ [7] knitr_1.40                  SummarizedExperiment_1.26.1
+ [9] Biobase_2.56.0              MatrixGenerics_1.8.1       
+[11] matrixStats_0.62.0          GenomicRanges_1.48.0       
+[13] GenomeInfoDb_1.32.4         IRanges_2.30.1             
+[15] S4Vectors_0.34.0            BiocGenerics_0.42.0        
 
 loaded via a namespace (and not attached):
- [1] httr_1.4.2             foreach_1.5.1          bit64_4.0.5           
- [4] splines_4.1.0          highr_0.9              BiocManager_1.30.16   
- [7] affy_1.70.0            blob_1.2.2             GenomeInfoDbData_1.2.6
-[10] pillar_1.6.2           RSQLite_2.2.7          lattice_0.20-44       
-[13] glue_1.4.2             limma_3.48.1           digest_0.6.27         
-[16] XVector_0.32.0         colorspace_2.0-2       preprocessCore_1.54.0 
-[19] Matrix_1.3-3           XML_3.99-0.6           pkgconfig_2.0.3       
-[22] GetoptLong_1.0.5       genefilter_1.74.0      zlibbioc_1.38.0       
-[25] purrr_0.3.4            xtable_1.8-4           scales_1.1.1          
-[28] affyio_1.62.0          BiocParallel_1.26.1    tibble_3.1.3          
-[31] annotate_1.70.0        KEGGREST_1.32.0        farver_2.1.0          
-[34] generics_0.1.0         ellipsis_0.3.2         cachem_1.0.5          
-[37] withr_2.4.2            survival_3.2-11        magrittr_2.0.1        
-[40] crayon_1.4.1           memoise_2.0.0          evaluate_0.14         
-[43] fansi_0.5.0            doParallel_1.0.16      Cairo_1.5-12.2        
-[46] tools_4.1.0            GlobalOptions_0.1.2    lifecycle_1.0.0       
-[49] stringr_1.4.0          munsell_0.5.0          locfit_1.5-9.4        
-[52] cluster_2.1.2          DelayedArray_0.18.0    AnnotationDbi_1.54.1  
-[55] Biostrings_2.60.1      compiler_4.1.0         rlang_0.4.11          
-[58] RCurl_1.98-1.3         iterators_1.0.13       circlize_0.4.13       
-[61] rjson_0.2.20           labeling_0.4.2         bitops_1.0-7          
-[64] codetools_0.2-18       gtable_0.3.0           DBI_1.1.1             
-[67] R6_2.5.0               dplyr_1.0.7            fastmap_1.1.0         
-[70] bit_4.0.4              utf8_1.2.2             clue_0.3-59           
-[73] shape_1.4.6            stringi_1.7.3          Rcpp_1.0.7            
-[76] vctrs_0.3.8            geneplotter_1.70.0     png_0.1-7             
-[79] tidyselect_1.1.1       xfun_0.24             
+ [1] httr_1.4.4             foreach_1.5.2          bit64_4.0.5           
+ [4] splines_4.2.1          highr_0.9              BiocManager_1.30.18   
+ [7] affy_1.74.0            blob_1.2.3             GenomeInfoDbData_1.2.8
+[10] pillar_1.8.1           RSQLite_2.2.18         lattice_0.20-45       
+[13] glue_1.6.2             limma_3.52.4           digest_0.6.30         
+[16] XVector_0.36.0         colorspace_2.0-3       preprocessCore_1.58.0 
+[19] Matrix_1.5-1           XML_3.99-0.11          pkgconfig_2.0.3       
+[22] GetoptLong_1.0.5       genefilter_1.78.0      zlibbioc_1.42.0       
+[25] xtable_1.8-4           scales_1.2.1           affyio_1.66.0         
+[28] BiocParallel_1.30.4    tibble_3.1.8           annotate_1.74.0       
+[31] KEGGREST_1.36.3        farver_2.1.1           generics_0.1.3        
+[34] cachem_1.0.6           withr_2.5.0            cli_3.4.1             
+[37] survival_3.4-0         magrittr_2.0.3         crayon_1.5.2          
+[40] memoise_2.0.1          evaluate_0.17          fansi_1.0.3           
+[43] doParallel_1.0.17      tools_4.2.1            GlobalOptions_0.1.2   
+[46] lifecycle_1.0.3        stringr_1.4.1          munsell_0.5.0         
+[49] locfit_1.5-9.6         cluster_2.1.4          DelayedArray_0.22.0   
+[52] AnnotationDbi_1.58.0   Biostrings_2.64.1      compiler_4.2.1        
+[55] rlang_1.0.6            RCurl_1.98-1.9         iterators_1.0.14      
+[58] circlize_0.4.15        rjson_0.2.21           labeling_0.4.2        
+[61] bitops_1.0-7           gtable_0.3.1           codetools_0.2-18      
+[64] DBI_1.1.3              R6_2.5.1               dplyr_1.0.10          
+[67] fastmap_1.1.0          bit_4.0.4              utf8_1.2.2            
+[70] clue_0.3-62            shape_1.4.6            stringi_1.7.8         
+[73] parallel_4.2.1         Rcpp_1.0.9             vctrs_0.5.0           
+[76] geneplotter_1.74.0     png_0.1-7              tidyselect_1.2.0      
+[79] xfun_0.34             
 ~~~
 {: .output}
 

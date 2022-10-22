@@ -128,7 +128,7 @@ plotDispEsts(dds)
 ~~~
 {: .language-r}
 
-<img src="../fig/rmd-06-unnamed-chunk-6-1.png" title="plot of chunk unnamed-chunk-6" alt="plot of chunk unnamed-chunk-6" width="612" style="display: block; margin: auto;" />
+<img src="../fig/rmd-06-unnamed-chunk-6-1.png" alt="plot of chunk unnamed-chunk-6" width="612" style="display: block; margin: auto;" />
 
 # Extract results for specific contrasts
 
@@ -192,7 +192,7 @@ DESeq2::plotMA(resTime)
 ~~~
 {: .language-r}
 
-<img src="../fig/rmd-06-unnamed-chunk-7-1.png" title="plot of chunk unnamed-chunk-7" alt="plot of chunk unnamed-chunk-7" width="612" style="display: block; margin: auto;" />
+<img src="../fig/rmd-06-unnamed-chunk-7-1.png" alt="plot of chunk unnamed-chunk-7" width="612" style="display: block; margin: auto;" />
 
 ~~~
 ## Male vs Female
@@ -248,7 +248,7 @@ DESeq2::plotMA(resSex)
 ~~~
 {: .language-r}
 
-<img src="../fig/rmd-06-unnamed-chunk-7-2.png" title="plot of chunk unnamed-chunk-7" alt="plot of chunk unnamed-chunk-7" width="612" style="display: block; margin: auto;" />
+<img src="../fig/rmd-06-unnamed-chunk-7-2.png" alt="plot of chunk unnamed-chunk-7" width="612" style="display: block; margin: auto;" />
 
 # Visualize selected set of genes
 
@@ -275,5 +275,5 @@ ComplexHeatmap::Heatmap(heatmapData,
 ~~~
 {: .language-r}
 
-<img src="../fig/rmd-06-unnamed-chunk-8-1.png" title="plot of chunk unnamed-chunk-8" alt="plot of chunk unnamed-chunk-8" width="612" style="display: block; margin: auto;" />
+<img src="../fig/rmd-06-unnamed-chunk-8-1.png" alt="plot of chunk unnamed-chunk-8" width="612" style="display: block; margin: auto;" />
 
