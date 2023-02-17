@@ -14,7 +14,7 @@ carpentry: 'incubator'
 title: 'RNA-seq analysis with Bioconductor'
 
 # Date the lesson was created (YYYY-MM-DD, this is empty by default)
-created: ~
+created: '2020-09-15'
 
 # Comma-separated list of keywords for the lesson
 keywords: 'software, data, lesson, The Carpentries'
@@ -27,7 +27,7 @@ life_cycle: 'pre-alpha'
 license: 'CC-BY 4.0'
 
 # Link to the source repository for this lesson
-source: 'https://github.com/fishtree-attempt/bioc-rnaseq/'
+source: 'https://github.com/carpentries-incubator/bioc-rnaseq'
 
 # Default branch of your lesson
 branch: 'main'
@@ -82,5 +82,4 @@ profiles:
 # sandpaper and varnish versions) should live
 
 
-url: https://preview.carpentries.org/bioc-rnaseq
-workbench-beta: 'true'
+url: 'https://carpentries-incubator.github.io/bioc-rnaseq'
