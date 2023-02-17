@@ -1,16 +1,9 @@
 ---
 source: Rmd
-title: "Exploratory analysis and quality control"
+title: Exploratory analysis and quality control
 teaching: XX
 exercises: XX
-questions:
-- ""
-objectives:
-- "Learn how to explore the gene expression matrix and perform common quality control steps."
-- "Learn how to set up an interactive application for exploratory analysis."
-keypoints:
-- "Key point 1"
-editor_options: 
+editor_options:
   chunk_output_type: console
 ---
 
@@ -18,16 +11,32 @@ editor_options:
 source("download_data.R")
 ```
 
+::::::::::::::::::::::::::::::::::::::: objectives
+
+- Learn how to explore the gene expression matrix and perform common quality control steps.
+- Learn how to set up an interactive application for exploratory analysis.
+
+::::::::::::::::::::::::::::::::::::::::::::::::::
+
+:::::::::::::::::::::::::::::::::::::::: questions
+
+- 
+::::::::::::::::::::::::::::::::::::::::::::::::::
+
 ```{r, include=FALSE}
 source("../bin/chunk-options.R")
 knitr_fig_path("05-")
 ```
 
-> ## Contribute!
->
-> This episode is intended to introduce various types of exploratory analysis 
-> and QC steps taken before a formal statistical analysis is done.
-{: .callout}
+:::::::::::::::::::::::::::::::::::::::::  callout
+
+### Contribute!
+
+This episode is intended to introduce various types of exploratory analysis
+and QC steps taken before a formal statistical analysis is done.
+
+
+::::::::::::::::::::::::::::::::::::::::::::::::::
 
 ```{r}
 suppressPackageStartupMessages({
@@ -46,10 +55,10 @@ se <- readRDS("data/GSE96870_se.rds")
 ```
 
 Exploratory analysis is crucial for quality control and to get to know our data.
-It can help us detect quality problems, sample swaps and contamination, as well as give us a sense of the most salient patterns present in the data. 
-In this episode, we will learn about two common ways of performing exploratory analysis for RNA-seq data; namely clustering and principal component analysis (PCA). 
+It can help us detect quality problems, sample swaps and contamination, as well as give us a sense of the most salient patterns present in the data.
+In this episode, we will learn about two common ways of performing exploratory analysis for RNA-seq data; namely clustering and principal component analysis (PCA).
 These tools are in no way limited to (or developed for) analysis of RNA-seq data.
-However, there are certain characteristics of count assays that need to be taken into account when they are applied to this type of data. 
+However, there are certain characteristics of count assays that need to be taken into account when they are applied to this type of data.
 
 ```{r}
 se <- se[rowSums(assay(se, "counts")) > 5, ]
@@ -57,7 +66,7 @@ dds <- DESeq2::DESeqDataSet(se[, se$tissue == "Cerebellum"],
                             design = ~ sex + time)
 ```
 
-# Library size differences
+## Library size differences
 
 ```{r}
 ggplot(data.frame(sample = colnames(dds), 
@@ -68,21 +77,21 @@ ggplot(data.frame(sample = colnames(dds),
     theme(axis.text.x = element_text(angle = 90, hjust = 1, vjust = 0.5))
 ```
 
-Differences in the total number of reads assigned to genes between samples typically occur for technical reasons. 
-In practice, it means that we can not simply compare the raw read count directly between samples and conclude that a sample with a higher read count also expresses the gene more strongly - the higher count may be caused by an overall higher number of reads in that sample. 
-In the rest of this section, we will use the term _library size_ to refer to the total number of reads assigned to genes for a sample. 
-We need to adjust for the differences in library size between samples, to avoid drawing incorrect conclusions. 
+Differences in the total number of reads assigned to genes between samples typically occur for technical reasons.
+In practice, it means that we can not simply compare the raw read count directly between samples and conclude that a sample with a higher read count also expresses the gene more strongly - the higher count may be caused by an overall higher number of reads in that sample.
+In the rest of this section, we will use the term *library size* to refer to the total number of reads assigned to genes for a sample.
+We need to adjust for the differences in library size between samples, to avoid drawing incorrect conclusions.
 The way this is typically done for RNA-seq data can be described as a two-step procedure.
-First, we estimate _size factors_ - sample-specific correction factors such that if the raw counts were to be divided by these factors, the resulting values would be more comparable across samples. 
-Next, these size factors are incorporated into the statistical analysis of the data. 
+First, we estimate *size factors* - sample-specific correction factors such that if the raw counts were to be divided by these factors, the resulting values would be more comparable across samples.
+Next, these size factors are incorporated into the statistical analysis of the data.
 It is important to pay close attention to how this is done in practice for a given analysis method.
 Sometimes the division of the counts by the size factors needs to be done explicitly by the analyst.
-Other times (as we will see for the differential expression analysis) it is important that they are provided separately to the analysis tool, which will then use them appropriately in the statistical model. 
+Other times (as we will see for the differential expression analysis) it is important that they are provided separately to the analysis tool, which will then use them appropriately in the statistical model.
 
-With `DESeq2`, size factors are calculated using the `estimateSizeFactors()` function. 
-The size factors estimated by this function combines an adjustment for differences in library sizes with an adjustment for differences in the RNA composition of the samples. 
-The latter is important due to the compositional nature of RNA-seq data. 
-There is a fixed number of reads to distribute between the genes, and if a single (or a few) very highly expressed gene consume a large part of the reads, all other genes will consequently receive very low counts. 
+With `DESeq2`, size factors are calculated using the `estimateSizeFactors()` function.
+The size factors estimated by this function combines an adjustment for differences in library sizes with an adjustment for differences in the RNA composition of the samples.
+The latter is important due to the compositional nature of RNA-seq data.
+There is a fixed number of reads to distribute between the genes, and if a single (or a few) very highly expressed gene consume a large part of the reads, all other genes will consequently receive very low counts.
 
 ```{r}
 dds <- estimateSizeFactors(dds)
@@ -93,26 +102,26 @@ ggplot(data.frame(libSize = colSums(assay(dds, "counts")),
     labs(x = "Library size", y = "Size factor")
 ```
 
-# Transform data
+## Transform data
 
-There is a rich literature on methods for exploratory analysis. 
-Most of these work best in situations where the variance of the input data (here, each gene) is relatively independent of the average value. 
+There is a rich literature on methods for exploratory analysis.
+Most of these work best in situations where the variance of the input data (here, each gene) is relatively independent of the average value.
 For read count data such as RNA-seq, this is not the case.
-In fact, the variance increases with the average read count. 
+In fact, the variance increases with the average read count.
 
 ```{r}
 meanSdPlot(assay(dds), ranks = FALSE)
 ```
 
-There are two ways around this: either we develop methods specifically adapted to count data, or we adapt (transform) the count data so that the existing methods are applicable. 
-Both ways have been explored; however, at the moment the second approach is arguably more widely applied in practice. 
+There are two ways around this: either we develop methods specifically adapted to count data, or we adapt (transform) the count data so that the existing methods are applicable.
+Both ways have been explored; however, at the moment the second approach is arguably more widely applied in practice.
 
 ```{r}
 vsd <- DESeq2::vst(dds, blind = TRUE)
 meanSdPlot(assay(vsd), ranks = FALSE)
 ```
 
-# Heatmaps and clustering
+## Heatmaps and clustering
 
 ```{r}
 dst <- dist(t(assay(vsd)))
@@ -132,17 +141,16 @@ ComplexHeatmap::Heatmap(
 
 ```
 
-# PCA
+## PCA
 
 Principal component analysis is a dimensionality reduction method, which projects the samples into a lower-dimensional space.
 This lower-dimensional representation can be used for visualization, or as the input for other analysis methods.
 The principal components are defined in such a way that they are orthogonal, and that the projection of the samples into the space they span contains as much variance as possible.
-It is an _unsupervised_ method in the sense that no external information about the samples (e.g., the treatment condition) is taken into account. 
-In the plot below we represent the samples in a two-dimensional principal component space. 
-For each of the two dimensions, we indicate the fraction of the total variance that is represented by that component. 
-By definition, the first principal component will always represent more of the variance than the subsequent ones. 
-The fraction of explained variance is a measure of how much of the 'signal' in the data that is retained when we project the samples from the original, high-dimensional space to the low-dimensional space for visualization. 
-
+It is an *unsupervised* method in the sense that no external information about the samples (e.g., the treatment condition) is taken into account.
+In the plot below we represent the samples in a two-dimensional principal component space.
+For each of the two dimensions, we indicate the fraction of the total variance that is represented by that component.
+By definition, the first principal component will always represent more of the variance than the subsequent ones.
+The fraction of explained variance is a measure of how much of the 'signal' in the data that is retained when we project the samples from the original, high-dimensional space to the low-dimensional space for visualization.
 
 ```{r}
 pcaData <- DESeq2::plotPCA(vsd, intgroup = c("sex", "time"),
@@ -157,12 +165,16 @@ ggplot(pcaData, aes(x = PC1, y = PC2)) +
     scale_color_manual(values = c(Male = "blue", Female = "red"))
 ```
 
-# Session info
+## Session info
 
 ```{r}
 sessionInfo()
 ```
 
+:::::::::::::::::::::::::::::::::::::::: keypoints
 
+- Key point 1
+
+::::::::::::::::::::::::::::::::::::::::::::::::::
 
 

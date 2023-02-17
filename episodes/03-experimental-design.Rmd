@@ -1,17 +1,9 @@
 ---
 source: Rmd
-title: "Experimental design"
+title: Experimental design
 teaching: XX
 exercises: XX
-questions:
-- "How do we design experiments optimally?"
-- "How do we interpret a given design?"
-objectives:
-- "Explain the formula notation and design matrices."
-- "Explore different designs and learn how to interpret coefficients."
-keypoints:
-- "Key point 1"
-editor_options: 
+editor_options:
   chunk_output_type: console
 ---
 
@@ -19,18 +11,36 @@ editor_options:
 source("download_data.R")
 ```
 
+::::::::::::::::::::::::::::::::::::::: objectives
+
+- Explain the formula notation and design matrices.
+- Explore different designs and learn how to interpret coefficients.
+
+::::::::::::::::::::::::::::::::::::::::::::::::::
+
+:::::::::::::::::::::::::::::::::::::::: questions
+
+- How do we design experiments optimally?
+- How do we interpret a given design?
+
+::::::::::::::::::::::::::::::::::::::::::::::::::
+
 ```{r, include=FALSE}
 source("../bin/chunk-options.R")
 knitr_fig_path("03-")
 options(width = 120)
 ```
 
-> ## Contribute!
->
-> This episode is intended to discuss experimental design - what it means, 
-> why it is important, how you would translate your metadata into a suitable 
-> design matrix, how coefficients are to be interpreted. 
-{: .callout}
+:::::::::::::::::::::::::::::::::::::::::  callout
+
+### Contribute!
+
+This episode is intended to discuss experimental design - what it means,
+why it is important, how you would translate your metadata into a suitable
+design matrix, how coefficients are to be interpreted.
+
+
+::::::::::::::::::::::::::::::::::::::::::::::::::
 
 ```{r}
 suppressPackageStartupMessages({
@@ -51,7 +61,7 @@ vd <- VisualizeDesign(sampleData = meta,
 vd$cooccurrenceplots
 ```
 
-# Compare males and females, non-infected spinal cord
+## Compare males and females, non-infected spinal cord
 
 ```{r}
 meta_noninf_spc <- meta %>% filter(time == "Day0" & 
@@ -63,24 +73,29 @@ vd$designmatrix
 vd$plotlist
 ```
 
-> ## Challenge: Can you do it?
->
-> Set up the design formula to compare the three time points (Day0, Day4, Day8) in the male spinal cord samples, and visualize it using `ExploreModelMatrix`. 
->
->
-> > ## Solution
-> >
-> > ```{r, echo=TRUE}
-> > meta_male_spc <- meta %>% filter(sex == "Male" & tissue == "Spinalcord")
-> > meta_male_spc
-> > vd <- VisualizeDesign(sampleData = meta_male_spc, designFormula = ~ time)
-> > vd$designmatrix
-> > vd$plotlist
-> > ```
-> {: .solution}
-{: .challenge}
+:::::::::::::::::::::::::::::::::::::::  challenge
 
-# Factorial design without interactions
+### Challenge: Can you do it?
+
+Set up the design formula to compare the three time points (Day0, Day4, Day8) in the male spinal cord samples, and visualize it using `ExploreModelMatrix`.
+
+:::::::::::::::  solution
+
+### Solution
+
+```{r, echo=TRUE}
+meta_male_spc <- meta %>% filter(sex == "Male" & tissue == "Spinalcord")
+meta_male_spc
+vd <- VisualizeDesign(sampleData = meta_male_spc, designFormula = ~ time)
+vd$designmatrix
+vd$plotlist
+```
+
+:::::::::::::::::::::::::
+
+::::::::::::::::::::::::::::::::::::::::::::::::::
+
+## Factorial design without interactions
 
 ```{r}
 meta_noninf <- meta %>% filter(time == "Day0")
@@ -91,7 +106,7 @@ vd$designmatrix
 vd$plotlist
 ```
 
-# Factorial design with interactions
+## Factorial design with interactions
 
 ```{r}
 meta_noninf <- meta %>% filter(time == "Day0")
@@ -102,7 +117,7 @@ vd$designmatrix
 vd$plotlist
 ```
 
-# Paired design
+## Paired design
 
 ```{r}
 meta_fem_day0 <- meta %>% filter(sex == "Female" & 
@@ -114,7 +129,7 @@ vd$designmatrix
 vd$plotlist
 ```
 
-# Within- and between-subject comparisons
+## Within- and between-subject comparisons
 
 ```{r}
 meta_fem_day04 <- meta %>% 
@@ -137,4 +152,11 @@ vd <- VisualizeDesign(sampleData = meta_fem_day04 %>%
 vd$designmatrix
 vd$plotlist
 ```
+
+:::::::::::::::::::::::::::::::::::::::: keypoints
+
+- Key point 1
+
+::::::::::::::::::::::::::::::::::::::::::::::::::
+
 

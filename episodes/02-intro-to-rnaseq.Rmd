@@ -1,29 +1,47 @@
 ---
 source: Rmd
-title: "Introduction to RNA-seq"
+title: Introduction to RNA-seq
 teaching: XX
 exercises: XX
-questions:
-- "What is RNA-seq?"
-objectives:
-- "Explain what RNA-seq is and what the generated data looks like."
-- "Provide an overview of common quality control steps for the raw data."
-- "Explain how gene expression levels can be estimated from raw data."
-keypoints:
-- "Key point 1"
 ---
 
 ```{r, echo=FALSE, purl=FALSE, message=FALSE}
 source("download_data.R")
 ```
 
+::::::::::::::::::::::::::::::::::::::: objectives
+
+- Explain what RNA-seq is and what the generated data looks like.
+- Provide an overview of common quality control steps for the raw data.
+- Explain how gene expression levels can be estimated from raw data.
+
+::::::::::::::::::::::::::::::::::::::::::::::::::
+
+:::::::::::::::::::::::::::::::::::::::: questions
+
+- What is RNA-seq?
+
+::::::::::::::::::::::::::::::::::::::::::::::::::
+
 ```{r, include=FALSE}
 source("../bin/chunk-options.R")
 knitr_fig_path("02-")
 ```
 
-> ## Contribute!
->
-> This episode is intended to introduce important concepts in RNA-seq data, 
-> to bring everyone up to speed.
-{: .callout}
+:::::::::::::::::::::::::::::::::::::::::  callout
+
+## Contribute!
+
+This episode is intended to introduce important concepts in RNA-seq data,
+to bring everyone up to speed.
+
+
+::::::::::::::::::::::::::::::::::::::::::::::::::
+
+:::::::::::::::::::::::::::::::::::::::: keypoints
+
+- Key point 1
+
+::::::::::::::::::::::::::::::::::::::::::::::::::
+
+

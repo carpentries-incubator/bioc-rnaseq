@@ -1,21 +1,27 @@
 ---
 source: Rmd
-title: "Gene set analysis"
+title: Gene set analysis
 teaching: XX
 exercises: XX
-questions:
-- "How do we find differentially expressed pathways?"
-objectives:
-- "Explain how to find differentially expressed pathways with gene set analysis in R."
-- "Understand how differentially expressed genes can enrich a gene set."
-- "Explain how to perform a gene set analysis in R, using clusterProfiler."
-keypoints:
-- "Key point 1"
 ---
 
 ```{r, echo=FALSE, purl=FALSE, message=FALSE}
 source("download_data.R")
 ```
+
+::::::::::::::::::::::::::::::::::::::: objectives
+
+- Explain how to find differentially expressed pathways with gene set analysis in R.
+- Understand how differentially expressed genes can enrich a gene set.
+- Explain how to perform a gene set analysis in R, using clusterProfiler.
+
+::::::::::::::::::::::::::::::::::::::::::::::::::
+
+:::::::::::::::::::::::::::::::::::::::: questions
+
+- How do we find differentially expressed pathways?
+
+::::::::::::::::::::::::::::::::::::::::::::::::::
 
 ```{r, include=FALSE}
 source("../bin/chunk-options.R")
@@ -23,13 +29,17 @@ knitr_fig_path("07-")
 options(width = 120)
 ```
 
-> ## Contribute!
->
-> This episode is intended to introduce the concept of how to carry out a
-> functional analysis of a subset of differentially expressed (DE) genes,
-> by means of assessing how significantly DE genes enrich gene sets of
-> our interest.
-{: .callout}
+:::::::::::::::::::::::::::::::::::::::::  callout
+
+### Contribute!
+
+This episode is intended to introduce the concept of how to carry out a
+functional analysis of a subset of differentially expressed (DE) genes,
+by means of assessing how significantly DE genes enrich gene sets of
+our interest.
+
+
+::::::::::::::::::::::::::::::::::::::::::::::::::
 
 First, we are going to explore the basic concept of enriching a gene set with
 differentially expressed (DE) genes. Recall the differential expression analysis.
@@ -59,7 +69,7 @@ resSex <- DESeq2::results(dds, contrast = c("sex", "Male", "Female"))
 summary(resSex)
 ```
 
-Select DE genes between males and females with FDR < 5%.
+Select DE genes between males and females with FDR \< 5%.
 
 ```{r}
 sexDE <- as.data.frame(subset(resSex, padj < 0.05))
@@ -71,16 +81,20 @@ head(sexDEgenes)
 length(sexDEgenes)
 ```
 
-# Enrichment of a curated gene set
+## Enrichment of a curated gene set
 
-> ## Contribute!
->
-> Here we illustrate how to assess the enrichment of one gene set
-> we curate ourselves with our subset of DE genes with sex-specific
-> expression. Here we form such a gene set with genes from sex
-> chromosomes. Could you think of another more accurate gene set formed
-> by genes with sex-specific expression?
-{: .callout}
+:::::::::::::::::::::::::::::::::::::::::  callout
+
+### Contribute!
+
+Here we illustrate how to assess the enrichment of one gene set
+we curate ourselves with our subset of DE genes with sex-specific
+expression. Here we form such a gene set with genes from sex
+chromosomes. Could you think of another more accurate gene set formed
+by genes with sex-specific expression?
+
+
+::::::::::::::::::::::::::::::::::::::::::::::::::
 
 Build a gene set formed by genes located in the sex chromosomes X and Y.
 
@@ -105,16 +119,20 @@ t
 fisher.test(t, alternative="greater")
 ```
 
-# Gene ontology analysis with clusterProfiler
+## Gene ontology analysis with clusterProfiler
 
-> ## Contribute!
->
-> Here we illustrate how to assess the enrichment on the entire
-> collection of Gene Ontology (GO) gene sets using the package
-> clusterProfiler. Could we illustrate any missing important feature
-> of this package for this analysis objective? Could we briefly
-> mention other packages that may be useful for this task?
-{: .callout}
+:::::::::::::::::::::::::::::::::::::::::  callout
+
+### Contribute!
+
+Here we illustrate how to assess the enrichment on the entire
+collection of Gene Ontology (GO) gene sets using the package
+clusterProfiler. Could we illustrate any missing important feature
+of this package for this analysis objective? Could we briefly
+mention other packages that may be useful for this task?
+
+
+::::::::::::::::::::::::::::::::::::::::::::::::::
 
 Second, let's perform a gene set analysis for an entire collection of gene sets
 using the Bioconductor package
@@ -126,7 +144,7 @@ resTime <- DESeq2::results(dds, contrast = c("time", "Day8", "Day0"))
 summary(resTime)
 ```
 
-Select DE genes between `Day0` and `Day8` with FDR < 5% and minimum 1.5-fold
+Select DE genes between `Day0` and `Day8` with FDR \< 5% and minimum 1.5-fold
 change.
 
 ```{r}
@@ -170,3 +188,11 @@ resTimeGOtab$geneID <- sapply(strsplit(resTimeGO$geneID, "/"), paste, collapse="
 ktab <- kable(resTimeGOtab, row.names=TRUE, caption="GO results for DE genes between time points.")
 kable_styling(ktab, bootstrap_options=c("stripped", "hover", "responsive"), fixed_thead=TRUE)
 ```
+
+:::::::::::::::::::::::::::::::::::::::: keypoints
+
+- Key point 1
+
+::::::::::::::::::::::::::::::::::::::::::::::::::
+
+

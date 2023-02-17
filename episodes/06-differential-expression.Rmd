@@ -1,20 +1,26 @@
 ---
 source: Rmd
-title: "Differential expression analysis"
+title: Differential expression analysis
 teaching: XX
 exercises: XX
-questions:
-- "How do we find differentially expressed genes?"
-objectives:
-- "Explain the steps involved in a differential expression analysis."
-- "Explain how to perform these steps in R, using DESeq2."
-keypoints:
-- "Key point 1"
 ---
 
 ```{r, echo=FALSE, purl=FALSE, message=FALSE}
 source("download_data.R")
 ```
+
+::::::::::::::::::::::::::::::::::::::: objectives
+
+- Explain the steps involved in a differential expression analysis.
+- Explain how to perform these steps in R, using DESeq2.
+
+::::::::::::::::::::::::::::::::::::::::::::::::::
+
+:::::::::::::::::::::::::::::::::::::::: questions
+
+- How do we find differentially expressed genes?
+
+::::::::::::::::::::::::::::::::::::::::::::::::::
 
 ```{r, include=FALSE}
 source("../bin/chunk-options.R")
@@ -22,13 +28,17 @@ knitr_fig_path("06-")
 options(width = 120)
 ```
 
-> ## Contribute!
->
-> This episode is intended to introduce the concepts required to perform 
-> differential expression analysis with RNA-seq data. Explain concepts like 
-> size factors, count modeling (Negative Binomial), dispersion, interpretation 
-> of the test output, multiple testing correction. 
-{: .callout}
+:::::::::::::::::::::::::::::::::::::::::  callout
+
+### Contribute!
+
+This episode is intended to introduce the concepts required to perform
+differential expression analysis with RNA-seq data. Explain concepts like
+size factors, count modeling (Negative Binomial), dispersion, interpretation
+of the test output, multiple testing correction.
+
+
+::::::::::::::::::::::::::::::::::::::::::::::::::
 
 ```{r}
 suppressPackageStartupMessages({
@@ -41,39 +51,47 @@ suppressPackageStartupMessages({
 })
 ```
 
-# Load data
+## Load data
 
 ```{r}
 se <- readRDS("data/GSE96870_se.rds")
 ```
 
-# Create DESeqDataSet 
+## Create DESeqDataSet
 
 ```{r}
 dds <- DESeq2::DESeqDataSet(se[, se$tissue == "Cerebellum"],
                             design = ~ sex + time)
 ```
 
-# Run DESeq()
+## Run DESeq()
 
-> ## Contribute!
->
-> The concepts may be clearer if the steps of DESeq() are first performed 
-> separately, followed by a note that they can be performed in a single step
-> using DESeq().
-{: .callout}
+:::::::::::::::::::::::::::::::::::::::::  callout
+
+### Contribute!
+
+The concepts may be clearer if the steps of DESeq() are first performed
+separately, followed by a note that they can be performed in a single step
+using DESeq().
+
+
+::::::::::::::::::::::::::::::::::::::::::::::::::
 
 ```{r}
 dds <- DESeq2::DESeq(dds)
 plotDispEsts(dds)
 ```
 
-# Extract results for specific contrasts
+## Extract results for specific contrasts
 
-> ## Contribute!
->
-> Refer back to the episode about experimental design.
-{: .callout}
+:::::::::::::::::::::::::::::::::::::::::  callout
+
+### Contribute!
+
+Refer back to the episode about experimental design.
+
+
+::::::::::::::::::::::::::::::::::::::::::::::::::
 
 ```{r}
 ## Day 8 vs Day 0
@@ -89,13 +107,17 @@ head(resSex[order(resSex$pvalue), ])
 DESeq2::plotMA(resSex)
 ```
 
-# Visualize selected set of genes
+## Visualize selected set of genes
 
-> ## Contribute!
->
-> Here we intend to practice how to interpret the results from the 
-> differential expression analysis. Refer back to the exploratory/QC episode.
-{: .callout}
+:::::::::::::::::::::::::::::::::::::::::  callout
+
+### Contribute!
+
+Here we intend to practice how to interpret the results from the
+differential expression analysis. Refer back to the exploratory/QC episode.
+
+
+::::::::::::::::::::::::::::::::::::::::::::::::::
 
 ```{r}
 vsd <- DESeq2::vst(dds, blind = TRUE)
@@ -111,4 +133,11 @@ ComplexHeatmap::Heatmap(heatmapData,
                         top_annotation = heatmapColAnnot,
                         cluster_rows = TRUE, cluster_columns = FALSE)
 ```
+
+:::::::::::::::::::::::::::::::::::::::: keypoints
+
+- Key point 1
+
+::::::::::::::::::::::::::::::::::::::::::::::::::
+
 

@@ -1,52 +1,62 @@
 ---
 source: Rmd
-title: "Importing and annotating quantified data into R"
+title: Importing and annotating quantified data into R
 teaching: XX
 exercises: XX
-questions:
-- "How do we get our data into R?"
-objectives:
-- "Learn how to import the quantifications into a SummarizedExperiment object."
-- "Learn how to add additional gene annotations to the object."
-keypoints:
-- "Key point 1"
 ---
 
 ```{r, echo=FALSE, purl=FALSE, message=FALSE}
 source("download_data.R")
 ```
 
+::::::::::::::::::::::::::::::::::::::: objectives
+
+- Learn how to import the quantifications into a SummarizedExperiment object.
+- Learn how to add additional gene annotations to the object.
+
+::::::::::::::::::::::::::::::::::::::::::::::::::
+
+:::::::::::::::::::::::::::::::::::::::: questions
+
+- How do we get our data into R?
+
+::::::::::::::::::::::::::::::::::::::::::::::::::
+
 ```{r, include=FALSE}
 source("../bin/chunk-options.R")
 knitr_fig_path("04-")
 ```
 
-> ## Contribute!
->
-> This episode is intended to show how we can assemble a SummarizedExperiment 
-> starting from individual count, rowdata and coldata files. Moreover, we will 
-> practice adding annotations for the genes, and discuss related concepts 
-> and things to keep in mind (annotation sources, versions, 'helper' packages 
-> like tximeta).
-{: .callout}
+:::::::::::::::::::::::::::::::::::::::::  callout
 
-# Read the data
+### Contribute!
 
-## Counts
+This episode is intended to show how we can assemble a SummarizedExperiment
+starting from individual count, rowdata and coldata files. Moreover, we will
+practice adding annotations for the genes, and discuss related concepts
+and things to keep in mind (annotation sources, versions, 'helper' packages
+like tximeta).
+
+
+::::::::::::::::::::::::::::::::::::::::::::::::::
+
+## Read the data
+
+### Counts
 
 ```{r}
 counts <- read.csv("data/GSE96870_counts_cerebellum.csv", 
                    row.names = 1)
 ```
 
-## Sample annotations
+### Sample annotations
 
 ```{r}
 coldata <- read.csv("data/GSE96870_coldata_cerebellum.csv",
                     row.names = 1)
 ```
 
-## Gene annotations
+### Gene annotations
 
 Need to be careful - the descriptions contain both commas and ' (e.g., 5')
 
@@ -57,7 +67,7 @@ rowranges <- read.delim("data/GSE96870_rowranges.tsv", sep = "\t",
 ```
 
 Mention other ways of getting annotations, and practice querying org package.
-Important to use the right annotation source/version. 
+Important to use the right annotation source/version.
 
 ```{r}
 suppressPackageStartupMessages({
@@ -72,8 +82,7 @@ Check feature types
 table(rowranges$gbkey)
 ```
 
-
-# Assemble SummarizedExperiment
+## Assemble SummarizedExperiment
 
 ```{r}
 stopifnot(rownames(rowranges) == rownames(counts),
@@ -86,14 +95,22 @@ se <- SummarizedExperiment(
 )
 ```
 
-# Save SummarizedExperiment
+## Save SummarizedExperiment
 
 ```{r}
 saveRDS(se, "data/GSE96870_se.rds")
 ```
 
-# Session info
+## Session info
 
 ```{r}
 sessionInfo()
 ```
+
+:::::::::::::::::::::::::::::::::::::::: keypoints
+
+- Key point 1
+
+::::::::::::::::::::::::::::::::::::::::::::::::::
+
+
