@@ -24,9 +24,6 @@ source("download_data.R")
 ::::::::::::::::::::::::::::::::::::::::::::::::::
 
 ```{r, include=FALSE}
-source("../bin/chunk-options.R")
-knitr_fig_path("07-")
-options(width = 120)
 ```
 
 :::::::::::::::::::::::::::::::::::::::::  callout
