@@ -29,8 +29,10 @@ editor_options:
 
 ### Contribute!
 
-This episode is intended to provide a recap of the typical biological questions which would require an RNA-seq analysis approach; introduce what is an experimental design, then discuss the experimental designs in the context of the typical biological questions, interpretation of design parameters (treatmet, control, interaction, p-value, etc). 
-It is important therfore to understand, what question to ask, which design to use, why that design, how to analysise the data and output.
+This episode is intended to discuss experimental design - what it means,
+why it is important, how you would translate your metadata into a suitable
+design matrix, how coefficients are to be interpreted.
+
 
 ::::::::::::::::::::::::::::::::::::::::::::::::::
 
