@@ -259,7 +259,7 @@
       </div>
       <hr></nav><main id="main-content" class="main-content"><div class="container lesson-content">
         <h1>Introduction to RNA-seq</h1>
-        <p> Last updated on 2023-02-22 | 
+        <p> Last updated on 2023-02-25 | 
         
         <a href="https://github.com/carpentries-incubator/bioc-rnaseq/edit/main/episodes/02-intro-to-rnaseq.Rmd" class="external-link">Edit this page <i aria-hidden="true" data-feather="edit"></i></a></p>
         
@@ -281,6 +281,16 @@
 <div class="inner">
 <h3 class="card-title">Questions</h3>
 <ul><li>What is RNA-seq?</li>
+<li>How does RNA-seq data look like?</li>
+<li>Where can the data be obtained?</li>
+<li>What are the typical research questions that would require an
+RNA-seq solution? Gives an overview of experimental design as well.</li>
+<li>What would be the general workflow for a typical RNA-seq analysis?
+This should also state the Tools/resources required.</li>
+<li>What are the typical quality issues encountered in RNA-seq
+analysis?</li>
+<li>How is gene expression estimated?</li>
+<li>In what functional roles are the expressed genes envolved in?</li>
 </ul></div>
 </div>
 </div>
@@ -288,16 +298,21 @@
 <div class="card-body">
 <div class="inner bordered">
 <h3 class="card-title">Objectives</h3>
-<ul><li>Explain RNA-seq</li>
-<li>Sources of RNA-seq data - and typical research questions needing
-this approach.</li>
+<ul><li>To explain RNA-seq</li>
+<li>To provide sources of RNA-seq data - and typical research questions
+needing this approach.</li>
 <li>How does the RNA-seq data look like?</li>
-<li>Overview of data handling procedures to answer biological
-questions.</li>
-<li>Provide an overview of common quality control issues and steps for
-the raw data.</li>
+<li>To provide an overview of data handling procedures to answer
+biological questions.</li>
+<li>To provide an overview of common quality control issues and steps
+for the raw data.</li>
 <li>Explain how gene expression levels can be estimated from raw
 data.</li>
+<li>To determine gene expression level changes in more than one
+state/treatment</li>
+<li>To provide an overview of gene expression
+presentation/visualisation</li>
+<li>To provide an overview of gene set analysis</li>
 </ul></div>
 </div>
 </div>
@@ -313,8 +328,9 @@ data.</li>
 <div class="callout-content">
 <p>This episode is intended to introduce important concepts in RNA-seq,
 such as the biology of RNA-seq, typical research questions, experimental
-design, data processing, QC issues and ways around them, and use of
-Bioconductor for RNA-seq analysis to bring everyone up to speed.</p>
+design, data processing, QC issues and ways around them, functional
+analysis of the expressed genes and use of Bioconductor for RNA-seq
+analysis pipelines to bring everyone up to speed.</p>
 </div>
 </div>
 </div>
@@ -326,7 +342,21 @@ Bioconductor for RNA-seq analysis to bring everyone up to speed.</p>
 <h3 class="callout-title">Keypoints<a class="anchor" aria-label="anchor" href="#keypoints1"></a>
 </h3>
 <div class="callout-content">
-<ul><li>Key point 1</li>
+<ul><li>RNA-seq is a technique of measuring the amount of RNA expressed
+within a cell/tissue and state at a given time</li>
+<li>Sequencing procedures are used to determine the order of bases in
+each RNA</li>
+<li>The number of unique fragments gives gene counts</li>
+<li>The counts are normalised to factor in other quality parameter such
+as library size, etc</li>
+<li>Before processing of reads - they should be checked and filetered
+for quality.</li>
+<li>A number of pipelines can be used for reproducibility of the output
+(web based or command line.</li>
+<li>Calculated expression levels can be compared across states to get
+differential gene expression.</li>
+<li>The set of genes in any of the states at a given time can tell us
+about the functional /physiological state of the cell/tissue /etc</li>
 </ul></div>
 </div>
 </div>
@@ -386,8 +416,8 @@ Bioconductor for RNA-seq analysis to bring everyone up to speed.</p>
   "url": "https://carpentries-incubator.github.io/bioc-rnaseq/instructor/02-intro-to-rnaseq.html",
   "identifier": "https://carpentries-incubator.github.io/bioc-rnaseq/instructor/02-intro-to-rnaseq.html",
   "dateCreated": "2020-09-15",
-  "dateModified": "2023-02-22",
-  "datePublished": "2023-02-22"
+  "dateModified": "2023-02-25",
+  "datePublished": "2023-02-25"
 }
 
   </script><script>
