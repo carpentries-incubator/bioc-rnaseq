@@ -59,13 +59,14 @@ contact: 'charlotte.soneson@fmi.ch'
 
 # Order of episodes in your lesson
 episodes: 
-- 01-introduction-setup.Rmd
+- 01-introduction.Rmd
 - 02-intro-to-rnaseq.Rmd
-- 03-experimental-design.Rmd
-- 04-import-annotate.Rmd
-- 05-exploratory-qc.Rmd
-- 06-differential-expression.Rmd
-- 07-gene-set-analysis.Rmd
+- 03-setup.Rmd
+- 04-experimental-design.Rmd
+- 05-import-annotate.Rmd
+- 06-exploratory-qc.Rmd
+- 07-differential-expression.Rmd
+- 08-gene-set-analysis.Rmd
 
 # Information for Learners
 learners: 
