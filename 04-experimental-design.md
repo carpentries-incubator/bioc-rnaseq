@@ -29,10 +29,8 @@ editor_options:
 
 ### Contribute!
 
-This episode is intended to discuss experimental design - what it means,
-why it is important, how you would translate your metadata into a suitable
-design matrix, how coefficients are to be interpreted.
-
+This episode is intended to provide a recap of the typical biological questions which would require an RNA-seq analysis approach; introduce what is an experimental design, then discuss the experimental designs in the context of the typical biological questions, interpretation of design parameters (treatmet, control, interaction, p-value, etc). 
+It is important therfore to understand, what question to ask, which design to use, why that design, how to analysise the data and output.
 
 ::::::::::::::::::::::::::::::::::::::::::::::::::
 
@@ -157,14 +155,14 @@ vd$cooccurrenceplots
 $`tissue = Cerebellum`
 ```
 
-<img src="fig/03-experimental-design-rendered-unnamed-chunk-5-1.png" style="display: block; margin: auto;" />
+<img src="fig/04-experimental-design-rendered-unnamed-chunk-5-1.png" style="display: block; margin: auto;" />
 
 ```{.output}
 
 $`tissue = Spinalcord`
 ```
 
-<img src="fig/03-experimental-design-rendered-unnamed-chunk-5-2.png" style="display: block; margin: auto;" />
+<img src="fig/04-experimental-design-rendered-unnamed-chunk-5-2.png" style="display: block; margin: auto;" />
 
 ## Compare males and females, non-infected spinal cord
 
@@ -222,7 +220,7 @@ vd$plotlist
 [[1]]
 ```
 
-<img src="fig/03-experimental-design-rendered-unnamed-chunk-6-1.png" style="display: block; margin: auto;" />
+<img src="fig/04-experimental-design-rendered-unnamed-chunk-6-1.png" style="display: block; margin: auto;" />
 
 :::::::::::::::::::::::::::::::::::::::  challenge
 
@@ -298,7 +296,7 @@ vd$plotlist
 [[1]]
 ```
 
-<img src="fig/03-experimental-design-rendered-unnamed-chunk-7-1.png" style="display: block; margin: auto;" />
+<img src="fig/04-experimental-design-rendered-unnamed-chunk-7-1.png" style="display: block; margin: auto;" />
 
 :::::::::::::::::::::::::
 
@@ -380,7 +378,7 @@ vd$plotlist
 [[1]]
 ```
 
-<img src="fig/03-experimental-design-rendered-unnamed-chunk-8-1.png" style="display: block; margin: auto;" />
+<img src="fig/04-experimental-design-rendered-unnamed-chunk-8-1.png" style="display: block; margin: auto;" />
 
 ## Factorial design with interactions
 
@@ -458,7 +456,7 @@ vd$plotlist
 [[1]]
 ```
 
-<img src="fig/03-experimental-design-rendered-unnamed-chunk-9-1.png" style="display: block; margin: auto;" />
+<img src="fig/04-experimental-design-rendered-unnamed-chunk-9-1.png" style="display: block; margin: auto;" />
 
 ## Paired design
 
@@ -516,7 +514,7 @@ vd$plotlist
 [[1]]
 ```
 
-<img src="fig/03-experimental-design-rendered-unnamed-chunk-10-1.png" style="display: block; margin: auto;" />
+<img src="fig/04-experimental-design-rendered-unnamed-chunk-10-1.png" style="display: block; margin: auto;" />
 
 ## Within- and between-subject comparisons
 
@@ -633,14 +631,14 @@ vd$plotlist
 $`time = Day0`
 ```
 
-<img src="fig/03-experimental-design-rendered-unnamed-chunk-11-1.png" style="display: block; margin: auto;" />
+<img src="fig/04-experimental-design-rendered-unnamed-chunk-11-1.png" style="display: block; margin: auto;" />
 
 ```{.output}
 
 $`time = Day4`
 ```
 
-<img src="fig/03-experimental-design-rendered-unnamed-chunk-11-2.png" style="display: block; margin: auto;" />
+<img src="fig/04-experimental-design-rendered-unnamed-chunk-11-2.png" style="display: block; margin: auto;" />
 
 :::::::::::::::::::::::::::::::::::::::: keypoints
 

@@ -79,7 +79,7 @@ ggplot(data.frame(sample = colnames(dds),
     theme(axis.text.x = element_text(angle = 90, hjust = 1, vjust = 0.5))
 ```
 
-<img src="fig/05-exploratory-qc-rendered-unnamed-chunk-5-1.png" style="display: block; margin: auto;" />
+<img src="fig/06-exploratory-qc-rendered-unnamed-chunk-5-1.png" style="display: block; margin: auto;" />
 
 Differences in the total number of reads assigned to genes between samples typically occur for technical reasons.
 In practice, it means that we can not simply compare the raw read count directly between samples and conclude that a sample with a higher read count also expresses the gene more strongly - the higher count may be caused by an overall higher number of reads in that sample.
@@ -107,7 +107,7 @@ ggplot(data.frame(libSize = colSums(assay(dds, "counts")),
     labs(x = "Library size", y = "Size factor")
 ```
 
-<img src="fig/05-exploratory-qc-rendered-unnamed-chunk-6-1.png" style="display: block; margin: auto;" />
+<img src="fig/06-exploratory-qc-rendered-unnamed-chunk-6-1.png" style="display: block; margin: auto;" />
 
 ## Transform data
 
@@ -121,7 +121,7 @@ In fact, the variance increases with the average read count.
 meanSdPlot(assay(dds), ranks = FALSE)
 ```
 
-<img src="fig/05-exploratory-qc-rendered-unnamed-chunk-7-1.png" style="display: block; margin: auto;" />
+<img src="fig/06-exploratory-qc-rendered-unnamed-chunk-7-1.png" style="display: block; margin: auto;" />
 
 There are two ways around this: either we develop methods specifically adapted to count data, or we adapt (transform) the count data so that the existing methods are applicable.
 Both ways have been explored; however, at the moment the second approach is arguably more widely applied in practice.
@@ -132,7 +132,7 @@ vsd <- DESeq2::vst(dds, blind = TRUE)
 meanSdPlot(assay(vsd), ranks = FALSE)
 ```
 
-<img src="fig/05-exploratory-qc-rendered-unnamed-chunk-8-1.png" style="display: block; margin: auto;" />
+<img src="fig/06-exploratory-qc-rendered-unnamed-chunk-8-1.png" style="display: block; margin: auto;" />
 
 ## Heatmaps and clustering
 
@@ -154,7 +154,7 @@ ComplexHeatmap::Heatmap(
 )
 ```
 
-<img src="fig/05-exploratory-qc-rendered-unnamed-chunk-9-1.png" style="display: block; margin: auto;" />
+<img src="fig/06-exploratory-qc-rendered-unnamed-chunk-9-1.png" style="display: block; margin: auto;" />
 
 ## PCA
 
@@ -181,7 +181,7 @@ ggplot(pcaData, aes(x = PC1, y = PC2)) +
     scale_color_manual(values = c(Male = "blue", Female = "red"))
 ```
 
-<img src="fig/05-exploratory-qc-rendered-unnamed-chunk-10-1.png" style="display: block; margin: auto;" />
+<img src="fig/06-exploratory-qc-rendered-unnamed-chunk-10-1.png" style="display: block; margin: auto;" />
 
 ## Session info
 
@@ -193,7 +193,7 @@ sessionInfo()
 ```{.output}
 R version 4.2.2 Patched (2022-11-10 r83330)
 Platform: x86_64-pc-linux-gnu (64-bit)
-Running under: Ubuntu 22.04.1 LTS
+Running under: Ubuntu 22.04.2 LTS
 
 Matrix products: default
 BLAS:   /usr/lib/x86_64-linux-gnu/blas/libblas.so.3.10.0
