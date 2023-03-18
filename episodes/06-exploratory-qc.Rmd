@@ -20,7 +20,10 @@ source("download_data.R")
 
 :::::::::::::::::::::::::::::::::::::::: questions
 
-- 
+- Why is exploratory analysis an essential part of an RNA-seq analysis? 
+- How should one preprocess the raw count matrix for exploratory analysis?  
+- Are two dimensions sufficient to represent your data?
+
 ::::::::::::::::::::::::::::::::::::::::::::::::::
 
 :::::::::::::::::::::::::::::::::::::::::  callout
@@ -168,7 +171,9 @@ sessionInfo()
 
 :::::::::::::::::::::::::::::::::::::::: keypoints
 
-- Key point 1
+- Exploratory analysis is essential for quality control and to detect potential problems with a data set. 
+- Different classes of exploratory analysis methods expect differently preprocessed data. The most commonly used methods expect counts to be normalized and log-transformed (or similar- more sensitive/sophisticated), to be closer to homoskedastic. Other methods work directly on the raw counts.  
+
 
 ::::::::::::::::::::::::::::::::::::::::::::::::::
 

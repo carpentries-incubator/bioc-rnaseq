@@ -14,7 +14,7 @@ carpentry: 'incubator'
 title: 'RNA-seq analysis with Bioconductor'
 
 # Date the lesson was created (YYYY-MM-DD, this is empty by default)
-created: '2020-09-15'
+created: ~
 
 # Comma-separated list of keywords for the lesson
 keywords: 'software, data, lesson, The Carpentries'
@@ -67,6 +67,7 @@ episodes:
 - 06-exploratory-qc.Rmd
 - 07-differential-expression.Rmd
 - 08-gene-set-analysis.Rmd
+- 09-next-steps.Rmd
 
 # Information for Learners
 learners: 
@@ -82,5 +83,4 @@ profiles:
 # This space below is where custom yaml items (e.g. pinning
 # sandpaper and varnish versions) should live
 
-
-url: 'https://carpentries-incubator.github.io/bioc-rnaseq'
+url: https://carpentries-incubator.github.io/bioc-rnaseq
