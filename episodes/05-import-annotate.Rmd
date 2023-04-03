@@ -18,7 +18,9 @@ source("download_data.R")
 
 :::::::::::::::::::::::::::::::::::::::: questions
 
-- How do we get our data into R?
+- How can one import quantified gene expression data into an object suitable for downstream statistical analysis in R?
+- What types of gene identifiers are typically used, and how are mappings between them done? 
+
 
 ::::::::::::::::::::::::::::::::::::::::::::::::::
 
@@ -104,7 +106,9 @@ sessionInfo()
 
 :::::::::::::::::::::::::::::::::::::::: keypoints
 
-- Key point 1
+- Depending on the gene expression quantification tool used, there are different ways (often distributed in Bioconductor packages) to read the output into a SummarizedExperiment or DGEList object for further processing in R.
+- Stable gene identifiers such as Ensembl or Entrez IDs should preferably be used as the main identifiers throughout an RNA-seq analysis, with gene symbols added for easier interpretation.
+
 
 ::::::::::::::::::::::::::::::::::::::::::::::::::
 
