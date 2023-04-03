@@ -217,6 +217,15 @@
   </div><!--/div.accordion-item-->
 </div><!--/div.accordion-flush-->
 
+<div class="accordion accordion-flush" id="accordionFlush10">
+  <div class="accordion-item">
+    <div class="accordion-header" id="flush-heading10">
+        <a href="09-next-steps.html">9. Next steps</a>
+    </div><!--/div.accordion-header-->
+        
+  </div><!--/div.accordion-item-->
+</div><!--/div.accordion-flush-->
+
                 </div>
               </div>
             </div>
@@ -297,6 +306,9 @@ sequencing.</li>
  1. <a href="01-introduction.html">Introduction and setup</a>
 </td>
 <td>
+How does Bioconductor facilitate RNA-seq analysis?<br>What are some
+common results and visualizations in a typical RNA-seq
+analysis?<br>What experimental data will we work with in this lesson?
 </td>
 </tr><tr><td>
 <span class="visually-hidden">Duration: </span>00h 10m
@@ -305,14 +317,12 @@ sequencing.</li>
  2. <a href="02-intro-to-rnaseq.html">Introduction to RNA-seq</a>
 </td>
 <td>
-What is RNA-seq?<br>How does RNA-seq data look like?<br>Where can the
-data be obtained?<br>What are the typical research questions that would
-require an RNA-seq solution? Gives an overview of experimental design as
-well.<br>What would be the general workflow for a typical RNA-seq
-analysis? This should also state the Tools/resources required.<br>What
-are the typical quality issues encountered in RNA-seq analysis?<br>How
-is gene expression estimated?<br>In what functional roles are the
-expressed genes envolved in?
+What are the different choices to consider when planning an RNA-seq
+experiment?<br>How does one process the raw fastq files to generate a
+table with read counts per gene and sample?<br>Where does one find
+information about annotated genes for a given organism?<br>Which are
+the most commonly used Bioconductor packages for statistical analysis of
+RNA-seq data?<br>What are the typical steps in an RNA-seq analysis?
 </td>
 </tr><tr><td>
 <span class="visually-hidden">Duration: </span>00h 20m
@@ -329,8 +339,8 @@ expressed genes envolved in?
  4. <a href="04-experimental-design.html">Experimental design</a>
 </td>
 <td>
-How do we design experiments optimally?<br>How do we interpret a given
-design?
+How can one translate biological questions and comparisons to
+statistical terms suitable for use with RNA-seq analysis packages?
 </td>
 </tr><tr><td>
 <span class="visually-hidden">Duration: </span>00h 40m
@@ -340,7 +350,10 @@ design?
 quantified data into R</a>
 </td>
 <td>
-How do we get our data into R?
+How can one import quantified gene expression data into an object
+suitable for downstream statistical analysis in R?<br>What types of
+gene identifiers are typically used, and how are mappings between them
+done?
 </td>
 </tr><tr><td>
 <span class="visually-hidden">Duration: </span>00h 50m
@@ -350,6 +363,10 @@ How do we get our data into R?
 control</a>
 </td>
 <td>
+Why is exploratory analysis an essential part of an RNA-seq
+analysis?<br>How should one preprocess the raw count matrix for
+exploratory analysis?<br>Are two dimensions sufficient to represent
+your data?
 </td>
 </tr><tr><td>
 <span class="visually-hidden">Duration: </span>01h 00m
@@ -359,7 +376,8 @@ control</a>
 analysis</a>
 </td>
 <td>
-How do we find differentially expressed genes?
+What are the steps performed in a typical differential expression
+analysis?<br>How does one interpret the output of DESeq2?
 </td>
 </tr><tr><td>
 <span class="visually-hidden">Duration: </span>01h 10m
@@ -368,10 +386,23 @@ How do we find differentially expressed genes?
  8. <a href="08-gene-set-analysis.html">Gene set analysis</a>
 </td>
 <td>
-How do we find differentially expressed pathways?
+Why do we perform gene set enrichment analysis?<br>How does one
+retrieve predefined sets of genes with shared characteristics for gene
+set testing?<br>What different classes of methods are available for
+gene set analysis?
 </td>
 </tr><tr><td>
 <span class="visually-hidden">Duration: </span>01h 20m
+</td>
+<td>
+ 9. <a href="09-next-steps.html">Next steps</a>
+</td>
+<td>
+How to go further from here?<br>What other types of analyses can be
+done with RNA-seq data?
+</td>
+</tr><tr><td>
+<span class="visually-hidden">Duration: </span>01h 30m
 </td>
 <td>
 Finish
@@ -410,8 +441,8 @@ Finish
         <p>Materials licensed under <a href="../LICENSE.html">CC-BY 4.0</a> by the authors</p>
         
         <p><a href="https://creativecommons.org/licenses/by-sa/4.0/" class="external-link">Template licensed under CC-BY 4.0</a> by <a href="https://carpentries.org" class="external-link">The Carpentries</a></p>
-        <p>Built with <a href="https://github.com/carpentries/sandpaper" class="external-link">sandpaper (0.11.9)</a>,
-        <a href="https://github.com/carpentries/pegboard/tree/0.4.3" class="external-link">pegboard (0.4.3)</a>,
+        <p>Built with <a href="https://github.com/carpentries/sandpaper/tree/0.11.13" class="external-link">sandpaper (0.11.13)</a>,
+        <a href="https://github.com/carpentries/pegboard/tree/0.5.1" class="external-link">pegboard (0.5.1)</a>,
       and <a href="https://github.com/carpentries/varnish/tree/0.2.15" class="external-link">varnish (0.2.15)</a>.</p>
 			</div>
 		</footer></div> <!-- / div.container -->
@@ -433,8 +464,8 @@ Finish
   "url": "https://carpentries-incubator.github.io/bioc-rnaseqinstructor/index.html",
   "identifier": "https://carpentries-incubator.github.io/bioc-rnaseqinstructor/index.html",
   "dateCreated": "2020-09-15",
-  "dateModified": "2023-03-14",
-  "datePublished": "2023-03-14"
+  "dateModified": "2023-04-03",
+  "datePublished": "2023-04-03"
 }
 
   </script><script>

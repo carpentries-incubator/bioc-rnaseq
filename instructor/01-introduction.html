@@ -144,19 +144,12 @@
 <div class="accordion accordion-flush" id="accordionFlushcurrent">
   <div class="accordion-item">
     <div class="accordion-header" id="flush-headingcurrent">
-      <button class="accordion-button" type="button" data-bs-toggle="collapse" data-bs-target="#flush-collapsecurrent" aria-expanded="true" aria-controls="flush-collapsecurrent">
         <span class="visually-hidden">Current Chapter</span>
         <span class="current-chapter">
         Introduction and setup
         </span>
-      </button>
+      
     </div><!--/div.accordion-header-->
-        
-    <div id="flush-collapsecurrent" class="accordion-collapse collapse show" aria-labelledby="flush-headingcurrent" data-bs-parent="#accordionFlushcurrent">
-      <div class="accordion-body">
-        <ul><li><a href="#download-data">Download data</a></li>
-        </ul></div><!--/div.accordion-body-->
-    </div><!--/div.accordion-collapse-->
         
   </div><!--/div.accordion-item-->
 </div><!--/div.accordion-flush-->
@@ -224,6 +217,15 @@
   </div><!--/div.accordion-item-->
 </div><!--/div.accordion-flush-->
 
+<div class="accordion accordion-flush" id="accordionFlush10">
+  <div class="accordion-item">
+    <div class="accordion-header" id="flush-heading10">
+        <a href="09-next-steps.html">9. Next steps</a>
+    </div><!--/div.accordion-header-->
+        
+  </div><!--/div.accordion-item-->
+</div><!--/div.accordion-flush-->
+
                 </div>
               </div>
             </div>
@@ -275,7 +277,7 @@
       </div>
       <hr></nav><main id="main-content" class="main-content"><div class="container lesson-content">
         <h1>Introduction and setup</h1>
-        <p> Last updated on 2023-03-14 | 
+        <p> Last updated on 2023-04-03 | 
         
         <a href="https://github.com/carpentries-incubator/bioc-rnaseq/edit/main/episodes/01-introduction.Rmd" class="external-link">Edit this page <i aria-hidden="true" data-feather="edit"></i></a></p>
         
@@ -296,49 +298,26 @@
 <div class="card-body">
 <div class="inner">
 <h3 class="card-title">Questions</h3>
-<ul><li>
-</li></ul></div>
+<ul><li>How does Bioconductor facilitate RNA-seq analysis?</li>
+<li>What are some common results and visualizations in a typical RNA-seq
+analysis?</li>
+<li>What experimental data will we work with in this lesson?</li>
+</ul></div>
 </div>
 </div>
 <div class="col-md-8">
 <div class="card-body">
 <div class="inner bordered">
 <h3 class="card-title">Objectives</h3>
-<ul><li>Install required packages.</li>
-<li>Download the data.</li>
+<ul><li>Provide an overview of the lesson.</li>
+<li>Show some common types of results and visualizations generated in
+RNA-seq analyses.</li>
+<li>Introduce the experimental data that will be used throughout the
+lesson.</li>
 </ul></div>
 </div>
 </div>
 </div>
-</div>
-<section id="download-data"><h2 class="section-heading">Download data<a class="anchor" aria-label="anchor" href="#download-data"></a>
-</h2>
-<hr class="half-width"><p>The data we will use in this lesson is obtained from the <a href="https://www.ncbi.nlm.nih.gov/geo/" class="external-link">Gene Expression Omnibus</a>,
-accession number <a href="https://www.ncbi.nlm.nih.gov/geo/query/acc.cgi?acc=GSE96870" class="external-link">GSE96870</a>.</p>
-<div class="codewrapper sourceCode" id="cb1">
-<h3 class="code-label">R<i aria-hidden="true" data-feather="chevron-left"></i><i aria-hidden="true" data-feather="chevron-right"></i>
-</h3>
-<pre class="downlit sourceCode r">
-<code class="sourceCode R"><span><span class="fu">dir.create</span><span class="op">(</span><span class="st">"data"</span>, showWarnings <span class="op">=</span> <span class="cn">FALSE</span><span class="op">)</span></span>
-<span><span class="fu">download.file</span><span class="op">(</span></span>
-<span>    url <span class="op">=</span> <span class="st">"https://github.com/Bioconductor/bioconductor-teaching/blob/master/data/GSE96870/GSE96870_counts_cerebellum.csv?raw=true"</span>, </span>
-<span>    destfile <span class="op">=</span> <span class="st">"data/GSE96870_counts_cerebellum.csv"</span></span>
-<span><span class="op">)</span></span>
-<span></span>
-<span><span class="fu">download.file</span><span class="op">(</span></span>
-<span>    url <span class="op">=</span> <span class="st">"https://github.com/Bioconductor/bioconductor-teaching/blob/master/data/GSE96870/GSE96870_coldata_cerebellum.csv?raw=true"</span>, </span>
-<span>    destfile <span class="op">=</span> <span class="st">"data/GSE96870_coldata_cerebellum.csv"</span></span>
-<span><span class="op">)</span></span>
-<span></span>
-<span><span class="fu">download.file</span><span class="op">(</span></span>
-<span>    url <span class="op">=</span> <span class="st">"https://github.com/Bioconductor/bioconductor-teaching/blob/master/data/GSE96870/GSE96870_coldata_all.csv?raw=true"</span>, </span>
-<span>    destfile <span class="op">=</span> <span class="st">"data/GSE96870_coldata_all.csv"</span></span>
-<span><span class="op">)</span></span>
-<span></span>
-<span><span class="fu">download.file</span><span class="op">(</span></span>
-<span>    url <span class="op">=</span> <span class="st">"https://github.com/Bioconductor/bioconductor-teaching/blob/master/data/GSE96870/GSE96870_rowranges.tsv?raw=true"</span>, </span>
-<span>    destfile <span class="op">=</span> <span class="st">"data/GSE96870_rowranges.tsv"</span></span>
-<span><span class="op">)</span></span></code></pre>
 </div>
 <div id="keypoints1" class="callout keypoints">
 <div class="callout-square">
@@ -348,11 +327,19 @@ accession number <a href="https://www.ncbi.nlm.nih.gov/geo/query/acc.cgi?acc=GSE
 <h3 class="callout-title">Keypoints<a class="anchor" aria-label="anchor" href="#keypoints1"></a>
 </h3>
 <div class="callout-content">
-<ul><li>Key point 1</li>
+<ul><li>Bioconductor provides a range of packages for quantification,
+statistical analysis and visualization of RNA-seq data.</li>
+<li>Results from an RNA-seq differential expression analysis are often
+represented using MA plots, volcano plots and tables with statistical
+results</li>
+<li>The data that will be used in this lesson come from …</li>
 </ul></div>
 </div>
 </div>
-</section></div> <!-- / div.lesson-content -->
+
+
+
+      </div> <!-- / div.lesson-content -->
     </main><!-- / main#main-content.main-content --><nav class="bottom-pagination mx-md-4" aria-label="Previous and Next Chapter"><div class="d-block d-sm-block d-md-none">
         <a class="chapter-link" href="../instructor/index.html"><i aria-hidden="true" class="small-arrow" data-feather="arrow-left"></i>Previous</a>
         <a class="chapter-link float-end" href="../instructor/02-intro-to-rnaseq.html">Next<i aria-hidden="true" class="small-arrow" data-feather="arrow-right"></i></a>
@@ -382,8 +369,8 @@ accession number <a href="https://www.ncbi.nlm.nih.gov/geo/query/acc.cgi?acc=GSE
         <p>Materials licensed under <a href="../LICENSE.html">CC-BY 4.0</a> by the authors</p>
         
         <p><a href="https://creativecommons.org/licenses/by-sa/4.0/" class="external-link">Template licensed under CC-BY 4.0</a> by <a href="https://carpentries.org" class="external-link">The Carpentries</a></p>
-        <p>Built with <a href="https://github.com/carpentries/sandpaper" class="external-link">sandpaper (0.11.9)</a>,
-        <a href="https://github.com/carpentries/pegboard/tree/0.4.3" class="external-link">pegboard (0.4.3)</a>,
+        <p>Built with <a href="https://github.com/carpentries/sandpaper/tree/0.11.13" class="external-link">sandpaper (0.11.13)</a>,
+        <a href="https://github.com/carpentries/pegboard/tree/0.5.1" class="external-link">pegboard (0.5.1)</a>,
       and <a href="https://github.com/carpentries/varnish/tree/0.2.15" class="external-link">varnish (0.2.15)</a>.</p>
 			</div>
 		</footer></div> <!-- / div.container -->
@@ -405,8 +392,8 @@ accession number <a href="https://www.ncbi.nlm.nih.gov/geo/query/acc.cgi?acc=GSE
   "url": "https://carpentries-incubator.github.io/bioc-rnaseqinstructor/01-introduction.html",
   "identifier": "https://carpentries-incubator.github.io/bioc-rnaseqinstructor/01-introduction.html",
   "dateCreated": "2020-09-15",
-  "dateModified": "2023-03-14",
-  "datePublished": "2023-03-14"
+  "dateModified": "2023-04-03",
+  "datePublished": "2023-04-03"
 }
 
   </script><script>

@@ -273,6 +273,18 @@
 </div>
 <!--/div.accordion-flush-->
 
+<div class="accordion accordion-flush" id="accordionFlush10">
+  <div class="accordion-item">
+    <div class="accordion-header" id="flush-heading10">
+        <a href="09-next-steps.html">9. Next steps</a>
+    </div>
+<!--/div.accordion-header-->
+        
+  </div>
+<!--/div.accordion-item-->
+</div>
+<!--/div.accordion-flush-->
+
                 </div>
               </div>
             </div>
@@ -330,49 +342,91 @@
 <section id="01-introduction"><h2 class="section-heading"><a href="01-introduction.html">Introduction and setup</a></h2>
 <hr class="half-width">
 <ul>
-<li>Key point 1</li>
+<li>Bioconductor provides a range of packages for quantification,
+statistical analysis and visualization of RNA-seq data.</li>
+<li>Results from an RNA-seq differential expression analysis are often
+represented using MA plots, volcano plots and tables with statistical
+results</li>
+<li>The data that will be used in this lesson come from …</li>
 </ul></section><section id="02-intro-to-rnaseq"><h2 class="section-heading"><a href="02-intro-to-rnaseq.html">Introduction to RNA-seq</a></h2>
 <hr class="half-width">
 <ul>
 <li>RNA-seq is a technique of measuring the amount of RNA expressed
-within a cell/tissue and state at a given time</li>
-<li>Sequencing procedures are used to determine the order of bases in
-each RNA</li>
-<li>The number of unique fragments gives gene counts</li>
-<li>The counts are normalised to factor in other quality parameter such
-as library size, etc</li>
-<li>Before processing of reads - they should be checked and filetered
-for quality.</li>
-<li>A number of pipelines can be used for reproducibility of the output
-(web based or command line.</li>
-<li>Calculated expression levels can be compared across states to get
-differential gene expression.</li>
-<li>The set of genes in any of the states at a given time can tell us
-about the functional /physiological state of the cell/tissue /etc</li>
+within a cell/tissue and state at a given time.</li>
+<li>Many choices have to be made when planning an RNA-seq experiment,
+such as whether to perform poly-A selection or ribosomal depletion,
+whether to apply a stranded or an unstranded protocol, and whether to
+sequence the reads in a single-end or paired-end fashion. Each of the
+choices have consequences for the processing and interpretation of the
+data.</li>
+<li>Many approaches exist for quantification of RNA-seq data. Some
+methods align reads to the genome and count the number of reads
+overlapping gene loci. Other methods map reads to the transcriptome and
+use a probabilistic approach to estimate the abundance of each gene or
+transcript.</li>
+<li>Information about annotated genes can be accessed via several
+sources, including Ensembl, UCSC and GENCODE.</li>
+<li>The most commonly used Bioconductor packages for statistical
+analysis of RNA-seq data are <code>DESeq2</code>, <code>edgeR</code> and
+<code>limma</code>.</li>
 </ul></section><section id="03-setup"><h2 class="section-heading"><a href="03-setup.html">Setup</a></h2>
 <hr class="half-width">
-<ul><li>
-</li></ul></section><section id="04-experimental-design"><h2 class="section-heading"><a href="04-experimental-design.html">Experimental design</a></h2>
+<ul>
+<li>When starting to use a new Bioconductor package, it is often good
+practice to go through the accompanying vignette and test some of the
+commands on the provided example data, before applying it to one’s own
+data.</li>
+</ul></section><section id="04-experimental-design"><h2 class="section-heading"><a href="04-experimental-design.html">Experimental design</a></h2>
 <hr class="half-width">
 <ul>
-<li>Key point 1</li>
+<li>The formula framework in R allows creation of design matrices, which
+details the variables expected to be associated with systematic
+differences in gene expression levels.</li>
+<li>Comparisons of interest can be defined using contrasts, which are
+linear combinations of the model coefficients.</li>
 </ul></section><section id="05-import-annotate"><h2 class="section-heading"><a href="05-import-annotate.html">Importing and annotating quantified data into R</a></h2>
 <hr class="half-width">
 <ul>
-<li>Key point 1</li>
+<li>Depending on the gene expression quantification tool used, there are
+different ways (often distributed in Bioconductor packages) to read the
+output into a SummarizedExperiment or DGEList object for further
+processing in R.</li>
+<li>Stable gene identifiers such as Ensembl or Entrez IDs should
+preferably be used as the main identifiers throughout an RNA-seq
+analysis, with gene symbols added for easier interpretation.</li>
 </ul></section><section id="06-exploratory-qc"><h2 class="section-heading"><a href="06-exploratory-qc.html">Exploratory analysis and quality control</a></h2>
 <hr class="half-width">
 <ul>
-<li>Key point 1</li>
+<li>Exploratory analysis is essential for quality control and to detect
+potential problems with a data set.</li>
+<li>Different classes of exploratory analysis methods expect differently
+preprocessed data. The most commonly used methods expect counts to be
+normalized and log-transformed (or similar- more
+sensitive/sophisticated), to be closer to homoskedastic. Other methods
+work directly on the raw counts.</li>
 </ul></section><section id="07-differential-expression"><h2 class="section-heading"><a href="07-differential-expression.html">Differential expression analysis</a></h2>
 <hr class="half-width">
 <ul>
-<li>Key point 1</li>
+<li>With DESeq2, the main steps of a differential expression analysis
+(size factor estimation, dispersion estimation, calculation of test
+statistics) are wrapped in a single function: DESeq().</li>
+<li>Independent filtering of lowly expressed genes is often
+beneficial.</li>
 </ul></section><section id="08-gene-set-analysis"><h2 class="section-heading"><a href="08-gene-set-analysis.html">Gene set analysis</a></h2>
 <hr class="half-width">
 <ul>
-<li>Key point 1</li>
-</ul></section>
+<li>Gene set enrichment analysis helps to answer “what are the common
+biological functions affected in the experiment”.</li>
+<li>Gene sets can be retrieved from several online resources, including
+mSigDB, KEGG, reactome, Gene Ontology.</li>
+<li>A rich set of gene set analysis methods are available. Some methods
+require genes to be classified into ‘significant’ and ‘non-significant’
+before the gene set analysis, while others ingest the full ranking of
+genes.</li>
+</ul></section><section id="09-next-steps"><h2 class="section-heading"><a href="09-next-steps.html">Next steps</a></h2>
+<hr class="half-width">
+<ul><li>
+</li></ul></section>
 </div>
     </main>
 </div>
@@ -397,8 +451,8 @@ about the functional /physiological state of the cell/tissue /etc</li>
         <p>Materials licensed under <a href="LICENSE.html">CC-BY 4.0</a> by the authors</p>
         
         <p><a href="https://creativecommons.org/licenses/by-sa/4.0/" class="external-link">Template licensed under CC-BY 4.0</a> by <a href="https://carpentries.org" class="external-link">The Carpentries</a></p>
-        <p>Built with <a href="https://github.com/carpentries/sandpaper" class="external-link">sandpaper (0.11.9)</a>,
-        <a href="https://github.com/carpentries/pegboard/tree/0.4.3" class="external-link">pegboard (0.4.3)</a>,
+        <p>Built with <a href="https://github.com/carpentries/sandpaper/tree/0.11.13" class="external-link">sandpaper (0.11.13)</a>,
+        <a href="https://github.com/carpentries/pegboard/tree/0.5.1" class="external-link">pegboard (0.5.1)</a>,
       and <a href="https://github.com/carpentries/varnish/tree/0.2.15" class="external-link">varnish (0.2.15)</a>.</p>
 			</div>
 		</footer>
@@ -421,8 +475,8 @@ about the functional /physiological state of the cell/tissue /etc</li>
   "url": "https://carpentries-incubator.github.io/bioc-rnaseqkey-points.html",
   "identifier": "https://carpentries-incubator.github.io/bioc-rnaseqkey-points.html",
   "dateCreated": "2020-09-15",
-  "dateModified": "2023-03-14",
-  "datePublished": "2023-03-14"
+  "dateModified": "2023-04-03",
+  "datePublished": "2023-04-03"
 }
 
   </script><script>

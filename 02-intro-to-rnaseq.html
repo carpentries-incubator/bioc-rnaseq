@@ -86,11 +86,11 @@
   RNA-seq analysis with Bioconductor
 </div>
 
-<aside class="col-md-12 lesson-progress"><div style="width: 12%" class="percentage">
-    12%
+<aside class="col-md-12 lesson-progress"><div style="width: 11%" class="percentage">
+    11%
   </div>
   <div class="progress incubator">
-    <div class="progress-bar incubator" role="progressbar" style="width: 12%" aria-valuenow="12" aria-label="Lesson Progress" aria-valuemin="0" aria-valuemax="100">
+    <div class="progress-bar incubator" role="progressbar" style="width: 11%" aria-valuenow="11" aria-label="Lesson Progress" aria-valuemin="0" aria-valuemax="100">
     </div>
   </div>
 </aside><div class="container">
@@ -218,6 +218,15 @@
   </div><!--/div.accordion-item-->
 </div><!--/div.accordion-flush-->
 
+<div class="accordion accordion-flush" id="accordionFlush10">
+  <div class="accordion-item">
+    <div class="accordion-header" id="flush-heading10">
+        <a href="09-next-steps.html">9. Next steps</a>
+    </div><!--/div.accordion-header-->
+        
+  </div><!--/div.accordion-item-->
+</div><!--/div.accordion-flush-->
+
                 </div>
               </div>
             </div>
@@ -269,7 +278,7 @@
       </div>
       <hr></nav><main id="main-content" class="main-content"><div class="container lesson-content">
         <h1>Introduction to RNA-seq</h1>
-        <p> Last updated on 2023-03-14 | 
+        <p> Last updated on 2023-04-03 | 
         
         <a href="https://github.com/carpentries-incubator/bioc-rnaseq/edit/main/episodes/02-intro-to-rnaseq.Rmd" class="external-link">Edit this page <i aria-hidden="true" data-feather="edit"></i></a></p>
         
@@ -288,17 +297,15 @@
 <div class="card-body">
 <div class="inner">
 <h3 class="card-title">Questions</h3>
-<ul><li>What is RNA-seq?</li>
-<li>How does RNA-seq data look like?</li>
-<li>Where can the data be obtained?</li>
-<li>What are the typical research questions that would require an
-RNA-seq solution? Gives an overview of experimental design as well.</li>
-<li>What would be the general workflow for a typical RNA-seq analysis?
-This should also state the Tools/resources required.</li>
-<li>What are the typical quality issues encountered in RNA-seq
-analysis?</li>
-<li>How is gene expression estimated?</li>
-<li>In what functional roles are the expressed genes envolved in?</li>
+<ul><li>What are the different choices to consider when planning an RNA-seq
+experiment?</li>
+<li>How does one process the raw fastq files to generate a table with
+read counts per gene and sample?</li>
+<li>Where does one find information about annotated genes for a given
+organism?</li>
+<li>Which are the most commonly used Bioconductor packages for
+statistical analysis of RNA-seq data?</li>
+<li>What are the typical steps in an RNA-seq analysis?</li>
 </ul></div>
 </div>
 </div>
@@ -306,21 +313,11 @@ analysis?</li>
 <div class="card-body">
 <div class="inner bordered">
 <h3 class="card-title">Objectives</h3>
-<ul><li>To explain RNA-seq</li>
-<li>To provide sources of RNA-seq data - and typical research questions
-needing this approach.</li>
-<li>How does the RNA-seq data look like?</li>
-<li>To provide an overview of data handling procedures to answer
-biological questions.</li>
-<li>To provide an overview of common quality control issues and steps
-for the raw data.</li>
-<li>Explain how gene expression levels can be estimated from raw
-data.</li>
-<li>To determine gene expression level changes in more than one
-state/treatment</li>
-<li>To provide an overview of gene expression
-presentation/visualisation</li>
-<li>To provide an overview of gene set analysis</li>
+<ul><li>Explain what RNA-seq is.</li>
+<li>Describe some of the most common design choices that have to be made
+before running an RNA-seq experiment.</li>
+<li>Provide an overview of the procedure to go from the raw data to the
+read count matrix that will be used for downstream analysis.</li>
 </ul></div>
 </div>
 </div>
@@ -351,20 +348,23 @@ analysis pipelines to bring everyone up to speed.</p>
 </h3>
 <div class="callout-content">
 <ul><li>RNA-seq is a technique of measuring the amount of RNA expressed
-within a cell/tissue and state at a given time</li>
-<li>Sequencing procedures are used to determine the order of bases in
-each RNA</li>
-<li>The number of unique fragments gives gene counts</li>
-<li>The counts are normalised to factor in other quality parameter such
-as library size, etc</li>
-<li>Before processing of reads - they should be checked and filetered
-for quality.</li>
-<li>A number of pipelines can be used for reproducibility of the output
-(web based or command line.</li>
-<li>Calculated expression levels can be compared across states to get
-differential gene expression.</li>
-<li>The set of genes in any of the states at a given time can tell us
-about the functional /physiological state of the cell/tissue /etc</li>
+within a cell/tissue and state at a given time.</li>
+<li>Many choices have to be made when planning an RNA-seq experiment,
+such as whether to perform poly-A selection or ribosomal depletion,
+whether to apply a stranded or an unstranded protocol, and whether to
+sequence the reads in a single-end or paired-end fashion. Each of the
+choices have consequences for the processing and interpretation of the
+data.</li>
+<li>Many approaches exist for quantification of RNA-seq data. Some
+methods align reads to the genome and count the number of reads
+overlapping gene loci. Other methods map reads to the transcriptome and
+use a probabilistic approach to estimate the abundance of each gene or
+transcript.</li>
+<li>Information about annotated genes can be accessed via several
+sources, including Ensembl, UCSC and GENCODE.</li>
+<li>The most commonly used Bioconductor packages for statistical
+analysis of RNA-seq data are <code>DESeq2</code>, <code>edgeR</code> and
+<code>limma</code>.</li>
 </ul></div>
 </div>
 </div>
@@ -401,8 +401,8 @@ about the functional /physiological state of the cell/tissue /etc</li>
         <p>Materials licensed under <a href="LICENSE.html">CC-BY 4.0</a> by the authors</p>
         
         <p><a href="https://creativecommons.org/licenses/by-sa/4.0/" class="external-link">Template licensed under CC-BY 4.0</a> by <a href="https://carpentries.org" class="external-link">The Carpentries</a></p>
-        <p>Built with <a href="https://github.com/carpentries/sandpaper" class="external-link">sandpaper (0.11.9)</a>,
-        <a href="https://github.com/carpentries/pegboard/tree/0.4.3" class="external-link">pegboard (0.4.3)</a>,
+        <p>Built with <a href="https://github.com/carpentries/sandpaper/tree/0.11.13" class="external-link">sandpaper (0.11.13)</a>,
+        <a href="https://github.com/carpentries/pegboard/tree/0.5.1" class="external-link">pegboard (0.5.1)</a>,
       and <a href="https://github.com/carpentries/varnish/tree/0.2.15" class="external-link">varnish (0.2.15)</a>.</p>
 			</div>
 		</footer></div> <!-- / div.container -->
@@ -424,8 +424,8 @@ about the functional /physiological state of the cell/tissue /etc</li>
   "url": "https://carpentries-incubator.github.io/bioc-rnaseq02-intro-to-rnaseq.html",
   "identifier": "https://carpentries-incubator.github.io/bioc-rnaseq02-intro-to-rnaseq.html",
   "dateCreated": "2020-09-15",
-  "dateModified": "2023-03-14",
-  "datePublished": "2023-03-14"
+  "dateModified": "2023-04-03",
+  "datePublished": "2023-04-03"
 }
 
   </script><script>
