@@ -14,7 +14,7 @@ carpentry: 'incubator'
 title: 'RNA-seq analysis with Bioconductor'
 
 # Date the lesson was created (YYYY-MM-DD, this is empty by default)
-created: ~
+created: '2020-09-15'
 
 # Comma-separated list of keywords for the lesson
 keywords: 'software, data, lesson, The Carpentries'
