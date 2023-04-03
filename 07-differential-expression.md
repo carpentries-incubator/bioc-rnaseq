@@ -16,7 +16,9 @@ exercises: XX
 
 :::::::::::::::::::::::::::::::::::::::: questions
 
-- How do we find differentially expressed genes?
+- What are the steps performed in a typical differential expression analysis? 
+- How does one interpret the output of DESeq2?
+
 
 ::::::::::::::::::::::::::::::::::::::::::::::::::
 
@@ -260,7 +262,9 @@ ComplexHeatmap::Heatmap(heatmapData,
 
 :::::::::::::::::::::::::::::::::::::::: keypoints
 
-- Key point 1
+- With DESeq2, the main steps of a differential expression analysis (size factor estimation, dispersion estimation, calculation of test statistics) are wrapped in a single function: DESeq().
+- Independent filtering of lowly expressed genes is often beneficial. 
+
 
 ::::::::::::::::::::::::::::::::::::::::::::::::::
 

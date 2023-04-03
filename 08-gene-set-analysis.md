@@ -17,7 +17,10 @@ exercises: XX
 
 :::::::::::::::::::::::::::::::::::::::: questions
 
-- How do we find differentially expressed pathways?
+- Why do we perform gene set enrichment analysis?
+- How does one retrieve predefined sets of genes with shared characteristics for gene set testing?
+- What different classes of methods are available for gene set analysis? 
+
 
 ::::::::::::::::::::::::::::::::::::::::::::::::::
 
@@ -578,7 +581,10 @@ kable_styling(ktab, bootstrap_options=c("stripped", "hover", "responsive"), fixe
 
 :::::::::::::::::::::::::::::::::::::::: keypoints
 
-- Key point 1
+- Gene set enrichment analysis helps to answer “what are the common biological functions affected in the experiment”.
+- Gene sets can be retrieved from several online resources, including mSigDB, KEGG, reactome, Gene Ontology.
+- A rich set of gene set analysis methods are available. Some methods require genes to be classified into 'significant' and 'non-significant' before the gene set analysis, while others ingest the full ranking of genes. 
+
 
 ::::::::::::::::::::::::::::::::::::::::::::::::::
 

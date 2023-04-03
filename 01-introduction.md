@@ -9,47 +9,27 @@ exercises: XX
 
 ::::::::::::::::::::::::::::::::::::::: objectives
 
-- Install required packages.
-- Download the data.
+- Provide an overview of the lesson.
+- Show some common types of results and visualizations generated in RNA-seq analyses.
+- Introduce the experimental data that will be used throughout the lesson.
 
 ::::::::::::::::::::::::::::::::::::::::::::::::::
 
 :::::::::::::::::::::::::::::::::::::::: questions
 
-- 
+- How does Bioconductor facilitate RNA-seq analysis? 
+- What are some common results and visualizations in a typical RNA-seq analysis? 
+- What experimental data will we work with in this lesson? 
+
 ::::::::::::::::::::::::::::::::::::::::::::::::::
 
-## Download data
-
-The data we will use in this lesson is obtained from the [Gene Expression Omnibus](https://www.ncbi.nlm.nih.gov/geo/), accession number [GSE96870](https://www.ncbi.nlm.nih.gov/geo/query/acc.cgi?acc=GSE96870).
-
-
-```r
-dir.create("data", showWarnings = FALSE)
-download.file(
-    url = "https://github.com/Bioconductor/bioconductor-teaching/blob/master/data/GSE96870/GSE96870_counts_cerebellum.csv?raw=true", 
-    destfile = "data/GSE96870_counts_cerebellum.csv"
-)
-
-download.file(
-    url = "https://github.com/Bioconductor/bioconductor-teaching/blob/master/data/GSE96870/GSE96870_coldata_cerebellum.csv?raw=true", 
-    destfile = "data/GSE96870_coldata_cerebellum.csv"
-)
-
-download.file(
-    url = "https://github.com/Bioconductor/bioconductor-teaching/blob/master/data/GSE96870/GSE96870_coldata_all.csv?raw=true", 
-    destfile = "data/GSE96870_coldata_all.csv"
-)
-
-download.file(
-    url = "https://github.com/Bioconductor/bioconductor-teaching/blob/master/data/GSE96870/GSE96870_rowranges.tsv?raw=true", 
-    destfile = "data/GSE96870_rowranges.tsv"
-)
-```
 
 :::::::::::::::::::::::::::::::::::::::: keypoints
 
-- Key point 1
+- Bioconductor provides a range of packages for quantification, statistical analysis and visualization of RNA-seq data.
+- Results from an RNA-seq differential expression analysis are often represented using MA plots, volcano plots and tables with statistical results 
+- The data that will be used in this lesson come from ...
+
 
 ::::::::::::::::::::::::::::::::::::::::::::::::::
 

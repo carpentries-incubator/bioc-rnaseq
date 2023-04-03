@@ -18,7 +18,10 @@ editor_options:
 
 :::::::::::::::::::::::::::::::::::::::: questions
 
-- 
+- Why is exploratory analysis an essential part of an RNA-seq analysis? 
+- How should one preprocess the raw count matrix for exploratory analysis?  
+- Are two dimensions sufficient to represent your data?
+
 ::::::::::::::::::::::::::::::::::::::::::::::::::
 
 :::::::::::::::::::::::::::::::::::::::::  callout
@@ -191,7 +194,7 @@ sessionInfo()
 ```
 
 ```{.output}
-R version 4.2.2 Patched (2022-11-10 r83330)
+R version 4.2.3 (2023-03-15)
 Platform: x86_64-pc-linux-gnu (64-bit)
 Running under: Ubuntu 22.04.2 LTS
 
@@ -210,47 +213,49 @@ attached base packages:
 [8] methods   base     
 
 other attached packages:
- [1] hexbin_1.28.2               RColorBrewer_1.1-3         
- [3] ComplexHeatmap_2.14.0       ggplot2_3.4.0              
+ [1] hexbin_1.28.3               RColorBrewer_1.1-3         
+ [3] ComplexHeatmap_2.14.0       ggplot2_3.4.1              
  [5] vsn_3.66.0                  DESeq2_1.38.3              
  [7] SummarizedExperiment_1.28.0 Biobase_2.58.0             
  [9] MatrixGenerics_1.10.0       matrixStats_0.63.0         
 [11] GenomicRanges_1.50.2        GenomeInfoDb_1.34.9        
-[13] IRanges_2.32.0              S4Vectors_0.36.1           
+[13] IRanges_2.32.0              S4Vectors_0.36.2           
 [15] BiocGenerics_0.44.0        
 
 loaded via a namespace (and not attached):
- [1] httr_1.4.4             bit64_4.0.5            foreach_1.5.2         
- [4] highr_0.10             BiocManager_1.30.19    affy_1.76.0           
- [7] blob_1.2.3             renv_0.17.0-38         GenomeInfoDbData_1.2.9
-[10] pillar_1.8.1           RSQLite_2.3.0          lattice_0.20-45       
-[13] glue_1.6.2             limma_3.54.1           digest_0.6.31         
+ [1] httr_1.4.5             bit64_4.0.5            foreach_1.5.2         
+ [4] highr_0.10             BiocManager_1.30.20    affy_1.76.0           
+ [7] blob_1.2.4             renv_0.17.2            GenomeInfoDbData_1.2.9
+[10] pillar_1.9.0           RSQLite_2.3.1          lattice_0.20-45       
+[13] glue_1.6.2             limma_3.54.2           digest_0.6.31         
 [16] XVector_0.38.0         colorspace_2.1-0       preprocessCore_1.60.2 
-[19] Matrix_1.5-3           XML_3.99-0.13          pkgconfig_2.0.3       
+[19] Matrix_1.5-3           XML_3.99-0.14          pkgconfig_2.0.3       
 [22] GetoptLong_1.0.5       zlibbioc_1.44.0        xtable_1.8-4          
-[25] scales_1.2.1           affyio_1.68.0          BiocParallel_1.32.5   
-[28] tibble_3.1.8           annotate_1.76.0        KEGGREST_1.38.0       
-[31] farver_2.1.1           generics_0.1.3         cachem_1.0.6          
-[34] withr_2.5.0            cli_3.6.0              magrittr_2.0.3        
+[25] scales_1.2.1           affyio_1.68.0          BiocParallel_1.32.6   
+[28] tibble_3.2.1           annotate_1.76.0        KEGGREST_1.38.0       
+[31] farver_2.1.1           generics_0.1.3         cachem_1.0.7          
+[34] withr_2.5.0            cli_3.6.1              magrittr_2.0.3        
 [37] crayon_1.5.2           memoise_2.0.1          evaluate_0.20         
-[40] fansi_1.0.4            doParallel_1.0.17      tools_4.2.2           
+[40] fansi_1.0.4            doParallel_1.0.17      tools_4.2.3           
 [43] GlobalOptions_0.1.2    lifecycle_1.0.3        munsell_0.5.0         
 [46] locfit_1.5-9.7         cluster_2.1.4          DelayedArray_0.24.0   
-[49] AnnotationDbi_1.60.0   Biostrings_2.66.0      compiler_4.2.2        
-[52] rlang_1.0.6            RCurl_1.98-1.10        iterators_1.0.14      
+[49] AnnotationDbi_1.60.2   Biostrings_2.66.0      compiler_4.2.3        
+[52] rlang_1.1.0            RCurl_1.98-1.12        iterators_1.0.14      
 [55] circlize_0.4.15        rjson_0.2.21           labeling_0.4.2        
-[58] bitops_1.0-7           gtable_0.3.1           codetools_0.2-19      
+[58] bitops_1.0-7           gtable_0.3.3           codetools_0.2-19      
 [61] DBI_1.1.3              R6_2.5.1               knitr_1.42            
-[64] dplyr_1.1.0            fastmap_1.1.0          bit_4.0.5             
+[64] dplyr_1.1.1            fastmap_1.1.1          bit_4.0.5             
 [67] utf8_1.2.3             clue_0.3-64            shape_1.4.6           
-[70] parallel_4.2.2         Rcpp_1.0.10            vctrs_0.5.2           
+[70] parallel_4.2.3         Rcpp_1.0.10            vctrs_0.6.1           
 [73] geneplotter_1.76.0     png_0.1-8              tidyselect_1.2.0      
-[76] xfun_0.37             
+[76] xfun_0.38             
 ```
 
 :::::::::::::::::::::::::::::::::::::::: keypoints
 
-- Key point 1
+- Exploratory analysis is essential for quality control and to detect potential problems with a data set. 
+- Different classes of exploratory analysis methods expect differently preprocessed data. The most commonly used methods expect counts to be normalized and log-transformed (or similar- more sensitive/sophisticated), to be closer to homoskedastic. Other methods work directly on the raw counts.  
+
 
 ::::::::::::::::::::::::::::::::::::::::::::::::::
 

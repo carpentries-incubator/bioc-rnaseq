@@ -9,28 +9,20 @@ exercises: XX
 
 ::::::::::::::::::::::::::::::::::::::: objectives
 
-- To explain RNA-seq
-- To provide sources of RNA-seq data - and typical research questions needing this approach.
-- How does the RNA-seq data look like?
-- To provide an overview of data handling procedures to answer biological questions.
-- To provide an overview of common quality control issues and steps for the raw data.
-- Explain how gene expression levels can be estimated from raw data.
-- To determine gene expression level changes in more than one state/treatment
-- To provide an overview of gene expression presentation/visualisation 
-- To provide an overview of gene set analysis
+- Explain what RNA-seq is.
+- Describe some of the most common design choices that have to be made before running an RNA-seq experiment.
+- Provide an overview of the procedure to go from the raw data to the read count matrix that will be used for downstream analysis.
 
 ::::::::::::::::::::::::::::::::::::::::::::::::::
 
 :::::::::::::::::::::::::::::::::::::::: questions
 
-- What is RNA-seq?
-- How does RNA-seq data look like?
-- Where can the data be obtained?
-- What are the typical research questions that would require an RNA-seq solution? Gives an overview of experimental design as well.
-- What would be the general workflow for a typical RNA-seq analysis? This should also state the Tools/resources required.
-- What are the typical quality issues encountered in RNA-seq analysis?
-- How is gene expression estimated?
-- In what functional roles are the expressed genes envolved in?
+- What are the different choices to consider when planning an RNA-seq experiment? 
+- How does one process the raw fastq files to generate a table with read counts per gene and sample?
+- Where does one find information about annotated genes for a given organism?
+- Which are the most commonly used Bioconductor packages for statistical analysis of RNA-seq data?
+- What are the typical steps in an RNA-seq analysis?
+
 
 ::::::::::::::::::::::::::::::::::::::::::::::::::
 
@@ -45,14 +37,12 @@ This episode is intended to introduce important concepts in RNA-seq, such as the
 
 :::::::::::::::::::::::::::::::::::::::: keypoints
 
-- RNA-seq is a technique of measuring the amount of RNA expressed within a cell/tissue and state at a given time
-- Sequencing procedures are used to determine the order of bases in each RNA
-- The number of unique fragments gives gene counts
-- The counts are normalised to factor in other quality parameter such as library size, etc
-- Before processing of reads - they should be checked and filetered for quality.
-- A number of pipelines can be used for reproducibility of the output (web based or command line.
-- Calculated expression levels can be compared across states to get differential gene expression.
-- The set of genes in any of the states at a given time can tell us about the functional /physiological state of the cell/tissue /etc
+- RNA-seq is a technique of measuring the amount of RNA expressed within a cell/tissue and state at a given time.
+- Many choices have to be made when planning an RNA-seq experiment, such as whether to perform poly-A selection or ribosomal depletion, whether to apply a stranded or an unstranded protocol, and whether to sequence the reads in a single-end or paired-end fashion. Each of the choices have consequences for the processing and interpretation of the data. 
+- Many approaches exist for quantification of RNA-seq data. Some methods align reads to the genome and count the number of reads overlapping gene loci. Other methods map reads to the transcriptome and use a probabilistic approach to estimate the abundance of each gene or transcript. 
+- Information about annotated genes can be accessed via several sources, including Ensembl, UCSC and GENCODE. 
+- The most commonly used Bioconductor packages for statistical analysis of RNA-seq data are `DESeq2`, `edgeR` and `limma`. 
+
 
 ::::::::::::::::::::::::::::::::::::::::::::::::::
 

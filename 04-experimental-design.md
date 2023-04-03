@@ -18,8 +18,7 @@ editor_options:
 
 :::::::::::::::::::::::::::::::::::::::: questions
 
-- How do we design experiments optimally?
-- How do we interpret a given design?
+- How can one translate biological questions and comparisons to statistical terms suitable for use with RNA-seq analysis packages?
 
 ::::::::::::::::::::::::::::::::::::::::::::::::::
 
@@ -642,7 +641,9 @@ $`time = Day4`
 
 :::::::::::::::::::::::::::::::::::::::: keypoints
 
-- Key point 1
+- The formula framework in R allows creation of design matrices, which details the variables expected to be associated with systematic differences in gene expression levels. 
+- Comparisons of interest can be defined using contrasts, which are linear combinations of the model coefficients. 
+
 
 ::::::::::::::::::::::::::::::::::::::::::::::::::
 
