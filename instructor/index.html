@@ -412,7 +412,22 @@ Finish
 </tr></tbody></table><p>
       The actual schedule may vary slightly depending on the topics and exercises chosen by the instructor.
       </p>
-      </section><section id="setup"><p>FIXME</p>
+      </section><section id="setup"><p>Check you have the most recent versions of R and RStudio. See the
+instructions under “If you already have R and RStudio installed” in <a href="https://carpentries-incubator.github.io/bioc-intro/#r-and-rstudio" class="external-link">Introduction
+to R</a>. You will also need to install the packages below that will be
+used during the workshop.</p>
+<div class="codewrapper sourceCode" id="cb1">
+<h3 class="code-label">R<i aria-hidden="true" data-feather="chevron-left"></i><i aria-hidden="true" data-feather="chevron-right"></i>
+</h3>
+<pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="fu">install.packages</span><span class="op">(</span><span class="st">"BiocManager"</span><span class="op">)</span></span>
+<span><span class="fu">BiocManager</span><span class="fu">::</span><span class="fu">install</span><span class="op">(</span><span class="fu">c</span><span class="op">(</span><span class="st">"tidyverse"</span>, <span class="st">"SummarizedExperiment"</span>,</span>
+<span>                       <span class="st">"ExploreModelMatrix"</span>, <span class="st">"org.Mm.eg.db"</span>,</span>
+<span>                       <span class="st">"DESeq2"</span>, <span class="st">"vsn"</span>, <span class="st">"ComplexHeatmap"</span>,</span>
+<span>                       <span class="st">"RColorBrewer"</span>, <span class="st">"hexbin"</span>, <span class="st">"cowplot"</span>,</span>
+<span>                       <span class="st">"clusterProfiler"</span>, <span class="st">"enrichplot"</span>, <span class="st">"kableExtra"</span><span class="op">)</span><span class="op">)</span></span></code></pre>
+</div>
+
 
       </section></main><nav class="bottom-pagination mx-md-4" aria-label="Next Chapter"><!-- content for small screens --><div class="d-block d-sm-block d-md-none">
         <a class="chapter-link float-end" href="../instructor/01-introduction.html">Next<i aria-hidden="true" class="small-arrow" data-feather="arrow-right"></i></a>
