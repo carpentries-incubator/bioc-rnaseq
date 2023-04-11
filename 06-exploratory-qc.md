@@ -225,7 +225,7 @@ other attached packages:
 loaded via a namespace (and not attached):
  [1] httr_1.4.5             bit64_4.0.5            foreach_1.5.2         
  [4] highr_0.10             BiocManager_1.30.20    affy_1.76.0           
- [7] blob_1.2.4             renv_0.17.2            GenomeInfoDbData_1.2.9
+ [7] blob_1.2.4             renv_0.17.3            GenomeInfoDbData_1.2.9
 [10] pillar_1.9.0           RSQLite_2.3.1          lattice_0.20-45       
 [13] glue_1.6.2             limma_3.54.2           digest_0.6.31         
 [16] XVector_0.38.0         colorspace_2.1-0       preprocessCore_1.60.2 

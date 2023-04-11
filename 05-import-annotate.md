@@ -167,7 +167,7 @@ loaded via a namespace (and not attached):
 [22] httr_1.4.5             knitr_1.42             Biostrings_2.66.0     
 [25] vctrs_0.6.1            bit64_4.0.5            grid_4.2.3            
 [28] R6_2.5.1               blob_1.2.4             KEGGREST_1.38.0       
-[31] renv_0.17.2            RCurl_1.98-1.12        cachem_1.0.7          
+[31] renv_0.17.3            RCurl_1.98-1.12        cachem_1.0.7          
 [34] crayon_1.5.2          
 ```
 
