@@ -9,6 +9,7 @@
 # cp: Carpentries (to use for instructor training for instance)
 # incubator: The Carpentries Incubator
 carpentry: 'incubator'
+varnish: mblue9/varnish
 
 # Overall title for pages.
 title: 'RNA-seq analysis with Bioconductor'
