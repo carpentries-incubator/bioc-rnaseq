@@ -1,5 +1,5 @@
 ---
-Is this workshop for me: Hypothetical attendees of the RNA-Seq workshop
+Is this workshop for me?: Hypothetical attendees of the RNA-Seq workshop
 ---
 
 # Learner Profile 1: Graduate Student in Molecular Biology
