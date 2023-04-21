@@ -1,8 +1,6 @@
 ---
-title: Hypothetical attendees of the RNA-Seq workshop
+Is this workshop for me: Hypothetical attendees of the RNA-Seq workshop
 ---
-
-This is a placeholder file. Please add content here. 
 
 # Learner Profile 1: Graduate Student in Molecular Biology
 
