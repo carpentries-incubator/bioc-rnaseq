@@ -6,7 +6,7 @@ Is this workshop for me?: Hypothetical attendees of the RNA-Seq workshop
 
 **Name:** Emily Thompson
 
-**Background:** Emily is a first-year Ph.D. student in Molecular Biology at a top-tier research university. She has a strong background in basic molecular biology techniques, such as PCR, cloning, and gene expression analysis (although not bulk RNA-Seq). She completed an undergraduate-level statistics course a couple of years ago and recently completed an Introduction to R workshop, gaining basic R programming skills,  but lacks experience in RNA-Seq data analysis.
+**Background:** Emily is a first-year Ph.D. student in Molecular Biology at a research university. She has a strong background in basic molecular biology techniques, such as PCR, cloning, and gene expression analysis (although not bulk RNA-Seq). She completed an undergraduate-level statistics course a couple of years ago and recently completed an Introduction to R workshop, gaining basic R programming skills,  but lacks experience in RNA-Seq data analysis.
 
 **Objective:** Emily's research project focuses on characterizing gene expression changes in response to specific environmental stressors in a model organism. She is interested in attending the RNA-Seq Analysis with Bioconductor workshop to learn how to analyze RNA-Seq data using R and Bioconductor, and identify differentially expressed genes that could be potential targets for future functional studies.
 
