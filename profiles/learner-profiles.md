@@ -2,7 +2,7 @@
 Is this workshop for me?: Hypothetical attendees of the RNA-Seq workshop
 ---
 
-# Learner Profile 1: Graduate Student in Molecular Biology
+## Learner Profile 1: Graduate Student in Molecular Biology
 
 **Name:** Emily Thompson
 
@@ -24,7 +24,7 @@ Is this workshop for me?: Hypothetical attendees of the RNA-Seq workshop
 
 ---
 
-# Learner Profile 2: Bioinformatics Analyst in Biotech
+## Learner Profile 2: Bioinformatics Analyst in Biotech
 
 **Name:** Alex Gomez
 
@@ -46,7 +46,7 @@ Is this workshop for me?: Hypothetical attendees of the RNA-Seq workshop
 
 ---
 
-# Learner Profile 3: Post-doc in Plant Sciences
+## Learner Profile 3: Post-doc in Plant Sciences
 
 **Name:** Zhao Liu
 
