@@ -35,36 +35,6 @@ This episode is intended to introduce important concepts in RNA-seq, such as the
 
 ::::::::::::::::::::::::::::::::::::::::::::::::::
 
-
-# RNA-seq quantification: from reads to count matrix
-
-There is a plethroa of RNA quantification pipelines, and the most common approaches can be categorized into three main types:
-
-1. Align reads to the genome, and count the number of reads that map to each gene.
-   This is the one of simplest methods. For species for which the transcriptome is poorly annotated, this would be the preferred approach.
-   Example: `STAR` alignment to GRCz11 + `Rsubread` [featureCounts](https://doi.org/10.1093%2Fnar%2Fgkz114)
-
-2. Align reads to the transcriptome, quantify transcript expression, and summarize transcript expression into gene expression.
-   This approach can produce accurate quantification results based [independent benchmarking](https://doi.org/10.1186/s13059-016-0940-1), 
-   particularly for high-quality samples without DNA contamination.
-   Example: RSEM quantification using `rsem-calculate-expression --star` on the GENCODE GRCh38 transcriptome + `tximport`
-
-3. Pseudoalign reads against the transcriptome, using the corresponding genome as a decoy, quantifying transcript expression in the process, 
-   and summarize the transcript-level expression into gene-level expression.
-   The advantages of this approach include: computational efficiency, mitigation of the effect of DNA contamination, and GC bias correction.
-   Example: `salmon quant --gcBias` + `tximport`
-   
-At typical sequencing read depth, gene expression quantification is often more accurate than transcript expression quantification.
-However, gene expression quantification can be [improved](https://doi.org/10.12688/f1000research.7563.1)
-by first quantifying transcript expression and then summarizing it to gene expression.
-
-Other tools used in RNA-seq quantification include: TopHat2, bowtie2, kallisto, HTseq, among many others.
-
-Choosing the appropriate RNA-seq quanitification would depend on the quality of the transcriptome annotation,
-the quality of the RNA-seq library preparation, the presence of contaminating sequences, among many factors.
-Often time, it would be important to compare the quantification results of multiple approaches.
-
-
 :::::::::::::::::::::::::::::::::::::::: keypoints
 
 - RNA-seq is a technique of measuring the amount of RNA expressed within a cell/tissue and state at a given time.

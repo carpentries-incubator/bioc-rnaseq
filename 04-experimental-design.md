@@ -463,10 +463,6 @@ vd$plotlist
 ```r
 meta_fem_day0 <- meta %>% filter(sex == "Female" & 
                                      time == "Day0")
-
-# ensure that mouse is treated as a categorical variable
-meta_fem_day0$mouse <- factor(meta_fem_day0$mouse)
-
 meta_fem_day0
 ```
 
@@ -498,15 +494,15 @@ vd$designmatrix
 ```
 
 ```{.output}
-           (Intercept) mouse8 mouse9 mouse10 tissueSpinalcord
-GSM2545337           1      0      1       0                0
-GSM2545338           1      0      0       1                0
-GSM2545348           1      1      0       0                0
-GSM2545353           1      0      0       0                0
-GSM2545358           1      0      0       0                1
-GSM2545364           1      1      0       0                1
-GSM2545365           1      0      1       0                1
-GSM2545366           1      0      0       1                1
+           (Intercept) mouse tissueSpinalcord
+GSM2545337           1     9                0
+GSM2545338           1    10                0
+GSM2545348           1     8                0
+GSM2545353           1     4                0
+GSM2545358           1     4                1
+GSM2545364           1     8                1
+GSM2545365           1     9                1
+GSM2545366           1    10                1
 ```
 
 ```r
