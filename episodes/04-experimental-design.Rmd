@@ -116,7 +116,12 @@ vd$plotlist
 ```{r}
 meta_fem_day0 <- meta %>% filter(sex == "Female" & 
                                      time == "Day0")
+
+# ensure that mouse is treated as a categorical variable
+meta_fem_day0$mouse <- factor(meta_fem_day0$mouse)
+
 meta_fem_day0
+
 vd <- VisualizeDesign(sampleData = meta_fem_day0,
                       designFormula = ~ mouse + tissue)
 vd$designmatrix
