@@ -130,12 +130,12 @@ sessionInfo()
 ```
 
 ```{.output}
-R version 4.2.3 (2023-03-15)
+R version 4.3.0 (2023-04-21)
 Platform: x86_64-pc-linux-gnu (64-bit)
 Running under: Ubuntu 22.04.2 LTS
 
 Matrix products: default
-BLAS:   /usr/lib/x86_64-linux-gnu/blas/libblas.so.3.10.0
+BLAS:   /usr/lib/x86_64-linux-gnu/blas/libblas.so.3.10.0 
 LAPACK: /usr/lib/x86_64-linux-gnu/lapack/liblapack.so.3.10.0
 
 locale:
@@ -144,31 +144,34 @@ locale:
  [7] LC_PAPER=C.UTF-8       LC_NAME=C              LC_ADDRESS=C          
 [10] LC_TELEPHONE=C         LC_MEASUREMENT=C.UTF-8 LC_IDENTIFICATION=C   
 
+time zone: UTC
+tzcode source: system (glibc)
+
 attached base packages:
 [1] stats4    stats     graphics  grDevices utils     datasets  methods  
 [8] base     
 
 other attached packages:
- [1] org.Mm.eg.db_3.16.0         AnnotationDbi_1.60.2       
- [3] SummarizedExperiment_1.28.0 Biobase_2.58.0             
- [5] MatrixGenerics_1.10.0       matrixStats_0.63.0         
- [7] GenomicRanges_1.50.2        GenomeInfoDb_1.34.9        
- [9] IRanges_2.32.0              S4Vectors_0.36.2           
-[11] BiocGenerics_0.44.0        
+ [1] org.Mm.eg.db_3.17.0         AnnotationDbi_1.62.1       
+ [3] SummarizedExperiment_1.30.1 Biobase_2.60.0             
+ [5] MatrixGenerics_1.12.0       matrixStats_0.63.0         
+ [7] GenomicRanges_1.52.0        GenomeInfoDb_1.36.0        
+ [9] IRanges_2.34.0              S4Vectors_0.38.1           
+[11] BiocGenerics_0.46.0        
 
 loaded via a namespace (and not attached):
- [1] compiler_4.2.3         BiocManager_1.30.20    XVector_0.38.0        
- [4] bitops_1.0-7           tools_4.2.3            zlibbioc_1.44.0       
- [7] bit_4.0.5              RSQLite_2.3.1          evaluate_0.20         
-[10] memoise_2.0.1          lattice_0.20-45        pkgconfig_2.0.3       
-[13] png_0.1-8              rlang_1.1.0            Matrix_1.5-3          
-[16] DelayedArray_0.24.0    DBI_1.1.3              cli_3.6.1             
-[19] xfun_0.38              fastmap_1.1.1          GenomeInfoDbData_1.2.9
-[22] httr_1.4.5             knitr_1.42             Biostrings_2.66.0     
-[25] vctrs_0.6.1            bit64_4.0.5            grid_4.2.3            
-[28] R6_2.5.1               blob_1.2.4             KEGGREST_1.38.0       
-[31] renv_0.17.3            RCurl_1.98-1.12        cachem_1.0.7          
-[34] crayon_1.5.2          
+ [1] Matrix_1.5-4            bit_4.0.5               compiler_4.3.0         
+ [4] BiocManager_1.30.20     renv_0.17.3             crayon_1.5.2           
+ [7] blob_1.2.4              Biostrings_2.68.0       bitops_1.0-7           
+[10] png_0.1-8               fastmap_1.1.1           lattice_0.21-8         
+[13] R6_2.5.1                XVector_0.40.0          S4Arrays_1.0.1         
+[16] knitr_1.42              DelayedArray_0.26.2     GenomeInfoDbData_1.2.10
+[19] DBI_1.1.3               rlang_1.1.1             KEGGREST_1.40.0        
+[22] cachem_1.0.8            xfun_0.39               bit64_4.0.5            
+[25] RSQLite_2.3.1           memoise_2.0.1           cli_3.6.1              
+[28] zlibbioc_1.46.0         grid_4.3.0              vctrs_0.6.2            
+[31] evaluate_0.21           RCurl_1.98-1.12         httr_1.4.6             
+[34] pkgconfig_2.0.3         tools_4.3.0            
 ```
 
 :::::::::::::::::::::::::::::::::::::::: keypoints

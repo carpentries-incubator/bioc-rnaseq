@@ -322,7 +322,7 @@ dim(resTimeGO)
 ```
 
 ```{.output}
-[1] 17  9
+[1] 18  9
 ```
 
 ```r
@@ -331,32 +331,32 @@ head(resTimeGO)
 
 ```{.output}
                    ID                                           Description
-GO:0035456 GO:0035456                           response to interferon-beta
 GO:0071674 GO:0071674                            mononuclear cell migration
-GO:0035458 GO:0035458                  cellular response to interferon-beta
+GO:0035456 GO:0035456                           response to interferon-beta
 GO:0050900 GO:0050900                                   leukocyte migration
 GO:0030595 GO:0030595                                  leukocyte chemotaxis
+GO:0035458 GO:0035458                  cellular response to interferon-beta
 GO:0002523 GO:0002523 leukocyte migration involved in inflammatory response
            GeneRatio   BgRatio       pvalue     p.adjust       qvalue
-GO:0035456   17/1260  54/21417 6.434058e-09 3.254347e-05 3.082930e-05
-GO:0071674   32/1260 179/21417 1.596474e-08 4.037482e-05 3.824814e-05
-GO:0035458   15/1260  47/21417 4.064983e-08 6.749342e-05 6.393832e-05
-GO:0050900   50/1260 375/21417 5.337558e-08 6.749342e-05 6.393832e-05
-GO:0030595   34/1260 222/21417 2.880367e-07 2.913780e-04 2.760302e-04
-GO:0002523   10/1260  25/21417 6.944905e-07 5.854555e-04 5.546176e-04
-                                                                                                                                                                                                                                                                                             geneID
-GO:0035456                                                                                                                                                                            Tgtp1/Tgtp2/F830016B08Rik/Iigp1/Ifitm6/Igtp/Gm4951/Bst2/Oas1c/Irgm1/Gbp6/Ifi47/Aim2/Ifitm7/Irgm2/Ifit1/Ifi204
-GO:0071674                                                                                                    Tnfsf18/Aire/Ccl17/Ccr7/Nlrp12/Ccl2/Retnlg/Apod/Il12a/Ccl5/Fut7/Ccl7/Spn/Itgb3/Grem1/Ptk2b/Lgals3/Adam8/Dusp1/Ch25h/Nbl1/Alox5/Padi2/Plg/Calr/Ager/Slamf9/Ccl6/Mdk/Itga4/Hsd3b7/Trpm4
-GO:0035458                                                                                                                                                                                        Tgtp1/Tgtp2/F830016B08Rik/Iigp1/Igtp/Gm4951/Oas1c/Irgm1/Gbp6/Ifi47/Aim2/Ifitm7/Irgm2/Ifit1/Ifi204
-GO:0050900 Tnfsf18/Aire/Ccl17/Ccr7/Nlrp12/Bst1/Ccl2/Retnlg/Ppbp/Cxcl5/Apod/Il12a/Ccl5/Umodl1/Fut7/Ccl7/Ccl28/Spn/Sell/Itgb3/Grem1/Cxcl1/Ptk2b/Lgals3/Adam8/Pf4/Dusp1/Ch25h/S100a8/Nbl1/Alox5/Padi2/Plg/Edn3/Il33/Ptn/Ada/Enpp1/Calr/Ager/Slamf9/Ccl6/Prex1/Aoc3/Itgam/Mdk/Itga4/Hsd3b7/P2ry12/Trpm4
-GO:0030595                                                                                        Tnfsf18/Ccl17/Ccr7/Bst1/Ccl2/Retnlg/Ppbp/Cxcl5/Il12a/Ccl5/Ccl7/Sell/Grem1/Cxcl1/Ptk2b/Lgals3/Adam8/Pf4/Dusp1/Ch25h/S100a8/Nbl1/Alox5/Padi2/Edn3/Ptn/Calr/Slamf9/Ccl6/Prex1/Itgam/Mdk/Hsd3b7/Trpm4
-GO:0002523                                                                                                                                                                                                                                     Ccl2/Ppbp/Fut7/Adam8/S100a8/Alox5/Ptn/Aoc3/Itgam/Mdk
+GO:0071674   32/1245 178/21025 1.612273e-08 7.986143e-05 7.581201e-05
+GO:0035456   17/1245  59/21025 3.142295e-08 7.986143e-05 7.581201e-05
+GO:0050900   50/1245 374/21025 5.961138e-08 1.010016e-04 9.588020e-05
+GO:0030595   34/1245 221/21025 2.991816e-07 3.801850e-04 3.609074e-04
+GO:0035458   14/1245  48/21025 4.368673e-07 4.441193e-04 4.216000e-04
+GO:0002523   10/1245  25/21025 7.368444e-07 6.242300e-04 5.925780e-04
+                                                                                                                                                                                                                                                                                           geneID
+GO:0071674                                                                                                  Tnfsf18/Aire/Ccl17/Ccr7/Nlrp12/Ccl2/Retnlg/Apod/Il12a/Ccl5/Fut7/Ccl7/Spn/Itgb3/Grem1/Ptk2b/Lgals3/Adam8/Dusp1/Ch25h/Nbl1/Alox5/Padi2/Plg/Calr/Ager/Slamf9/Ccl6/Mdk/Itga4/Hsd3b7/Trpm4
+GO:0035456                                                                                                                                                                          Tgtp1/Tgtp2/F830016B08Rik/Iigp1/Ifitm6/Igtp/Gm4951/Bst2/Oas1c/Irgm1/Gbp6/Ifi47/Aim2/Ifitm7/Irgm2/Ifit1/Ifi204
+GO:0050900 Tnfsf18/Aire/Ccl17/Ccr7/Nlrp12/Bst1/Ccl2/Retnlg/Ppbp/Cxcl5/Apod/Il12a/Ccl5/Fut7/Ccl7/Ccl28/Spn/Sell/Itgb3/Grem1/Cxcl1/Ptk2b/Lgals3/Adam8/Pf4/Dusp1/Ch25h/S100a8/Nbl1/Alox5/Padi2/Plg/Edn3/Il33/Ptn/Ada/Emp2/Enpp1/Calr/Ager/Slamf9/Ccl6/Prex1/Aoc3/Itgam/Mdk/Itga4/Hsd3b7/P2ry12/Trpm4
+GO:0030595                                                                                      Tnfsf18/Ccl17/Ccr7/Bst1/Ccl2/Retnlg/Ppbp/Cxcl5/Il12a/Ccl5/Ccl7/Sell/Grem1/Cxcl1/Ptk2b/Lgals3/Adam8/Pf4/Dusp1/Ch25h/S100a8/Nbl1/Alox5/Padi2/Edn3/Ptn/Calr/Slamf9/Ccl6/Prex1/Itgam/Mdk/Hsd3b7/Trpm4
+GO:0035458                                                                                                                                                                                             Tgtp1/Tgtp2/F830016B08Rik/Iigp1/Igtp/Gm4951/Oas1c/Irgm1/Gbp6/Ifi47/Aim2/Irgm2/Ifit1/Ifi204
+GO:0002523                                                                                                                                                                                                                                   Ccl2/Ppbp/Fut7/Adam8/S100a8/Alox5/Ptn/Aoc3/Itgam/Mdk
            Count
-GO:0035456    17
 GO:0071674    32
-GO:0035458    15
+GO:0035456    17
 GO:0050900    50
 GO:0030595    34
+GO:0035458    14
 GO:0002523    10
 ```
 
@@ -390,191 +390,202 @@ kable_styling(ktab, bootstrap_options=c("stripped", "hover", "responsive"), fixe
  </thead>
 <tbody>
   <tr>
-   <td style="text-align:left;"> GO:0035456 </td>
-   <td style="text-align:left;"> response to interferon-beta </td>
-   <td style="text-align:left;"> 17/1260 </td>
-   <td style="text-align:left;"> 54/21417 </td>
-   <td style="text-align:right;"> 0.00e+00 </td>
-   <td style="text-align:right;"> 0.0000325 </td>
-   <td style="text-align:right;"> 0.0000308 </td>
-   <td style="text-align:left;"> Tgtp1, Tgtp2, F830016B08Rik, Iigp1, Ifitm6, Igtp, Gm4951, Bst2, Oas1c, Irgm1, Gbp6, Ifi47, Aim2, Ifitm7, Irgm2, Ifit1, Ifi204 </td>
-   <td style="text-align:right;"> 17 </td>
-  </tr>
-  <tr>
    <td style="text-align:left;"> GO:0071674 </td>
    <td style="text-align:left;"> mononuclear cell migration </td>
-   <td style="text-align:left;"> 32/1260 </td>
-   <td style="text-align:left;"> 179/21417 </td>
+   <td style="text-align:left;"> 32/1245 </td>
+   <td style="text-align:left;"> 178/21025 </td>
    <td style="text-align:right;"> 0.00e+00 </td>
-   <td style="text-align:right;"> 0.0000404 </td>
-   <td style="text-align:right;"> 0.0000382 </td>
+   <td style="text-align:right;"> 0.0000799 </td>
+   <td style="text-align:right;"> 0.0000758 </td>
    <td style="text-align:left;"> Tnfsf18, Aire, Ccl17, Ccr7, Nlrp12, Ccl2, Retnlg, Apod, Il12a, Ccl5, Fut7, Ccl7, Spn, Itgb3, Grem1, Ptk2b, Lgals3, Adam8, Dusp1, Ch25h, Nbl1, Alox5, Padi2, Plg, Calr, Ager, Slamf9, Ccl6, Mdk, Itga4, Hsd3b7, Trpm4 </td>
    <td style="text-align:right;"> 32 </td>
   </tr>
   <tr>
-   <td style="text-align:left;"> GO:0035458 </td>
-   <td style="text-align:left;"> cellular response to interferon-beta </td>
-   <td style="text-align:left;"> 15/1260 </td>
-   <td style="text-align:left;"> 47/21417 </td>
+   <td style="text-align:left;"> GO:0035456 </td>
+   <td style="text-align:left;"> response to interferon-beta </td>
+   <td style="text-align:left;"> 17/1245 </td>
+   <td style="text-align:left;"> 59/21025 </td>
    <td style="text-align:right;"> 0.00e+00 </td>
-   <td style="text-align:right;"> 0.0000675 </td>
-   <td style="text-align:right;"> 0.0000639 </td>
-   <td style="text-align:left;"> Tgtp1, Tgtp2, F830016B08Rik, Iigp1, Igtp, Gm4951, Oas1c, Irgm1, Gbp6, Ifi47, Aim2, Ifitm7, Irgm2, Ifit1, Ifi204 </td>
-   <td style="text-align:right;"> 15 </td>
+   <td style="text-align:right;"> 0.0000799 </td>
+   <td style="text-align:right;"> 0.0000758 </td>
+   <td style="text-align:left;"> Tgtp1, Tgtp2, F830016B08Rik, Iigp1, Ifitm6, Igtp, Gm4951, Bst2, Oas1c, Irgm1, Gbp6, Ifi47, Aim2, Ifitm7, Irgm2, Ifit1, Ifi204 </td>
+   <td style="text-align:right;"> 17 </td>
   </tr>
   <tr>
    <td style="text-align:left;"> GO:0050900 </td>
    <td style="text-align:left;"> leukocyte migration </td>
-   <td style="text-align:left;"> 50/1260 </td>
-   <td style="text-align:left;"> 375/21417 </td>
+   <td style="text-align:left;"> 50/1245 </td>
+   <td style="text-align:left;"> 374/21025 </td>
    <td style="text-align:right;"> 1.00e-07 </td>
-   <td style="text-align:right;"> 0.0000675 </td>
-   <td style="text-align:right;"> 0.0000639 </td>
-   <td style="text-align:left;"> Tnfsf18, Aire, Ccl17, Ccr7, Nlrp12, Bst1, Ccl2, Retnlg, Ppbp, Cxcl5, Apod, Il12a, Ccl5, Umodl1, Fut7, Ccl7, Ccl28, Spn, Sell, Itgb3, Grem1, Cxcl1, Ptk2b, Lgals3, Adam8, Pf4, Dusp1, Ch25h, S100a8, Nbl1, Alox5, Padi2, Plg, Edn3, Il33, Ptn, Ada, Enpp1, Calr, Ager, Slamf9, Ccl6, Prex1, Aoc3, Itgam, Mdk, Itga4, Hsd3b7, P2ry12, Trpm4 </td>
+   <td style="text-align:right;"> 0.0001010 </td>
+   <td style="text-align:right;"> 0.0000959 </td>
+   <td style="text-align:left;"> Tnfsf18, Aire, Ccl17, Ccr7, Nlrp12, Bst1, Ccl2, Retnlg, Ppbp, Cxcl5, Apod, Il12a, Ccl5, Fut7, Ccl7, Ccl28, Spn, Sell, Itgb3, Grem1, Cxcl1, Ptk2b, Lgals3, Adam8, Pf4, Dusp1, Ch25h, S100a8, Nbl1, Alox5, Padi2, Plg, Edn3, Il33, Ptn, Ada, Emp2, Enpp1, Calr, Ager, Slamf9, Ccl6, Prex1, Aoc3, Itgam, Mdk, Itga4, Hsd3b7, P2ry12, Trpm4 </td>
    <td style="text-align:right;"> 50 </td>
   </tr>
   <tr>
    <td style="text-align:left;"> GO:0030595 </td>
    <td style="text-align:left;"> leukocyte chemotaxis </td>
-   <td style="text-align:left;"> 34/1260 </td>
-   <td style="text-align:left;"> 222/21417 </td>
+   <td style="text-align:left;"> 34/1245 </td>
+   <td style="text-align:left;"> 221/21025 </td>
    <td style="text-align:right;"> 3.00e-07 </td>
-   <td style="text-align:right;"> 0.0002914 </td>
-   <td style="text-align:right;"> 0.0002760 </td>
+   <td style="text-align:right;"> 0.0003802 </td>
+   <td style="text-align:right;"> 0.0003609 </td>
    <td style="text-align:left;"> Tnfsf18, Ccl17, Ccr7, Bst1, Ccl2, Retnlg, Ppbp, Cxcl5, Il12a, Ccl5, Ccl7, Sell, Grem1, Cxcl1, Ptk2b, Lgals3, Adam8, Pf4, Dusp1, Ch25h, S100a8, Nbl1, Alox5, Padi2, Edn3, Ptn, Calr, Slamf9, Ccl6, Prex1, Itgam, Mdk, Hsd3b7, Trpm4 </td>
    <td style="text-align:right;"> 34 </td>
   </tr>
   <tr>
+   <td style="text-align:left;"> GO:0035458 </td>
+   <td style="text-align:left;"> cellular response to interferon-beta </td>
+   <td style="text-align:left;"> 14/1245 </td>
+   <td style="text-align:left;"> 48/21025 </td>
+   <td style="text-align:right;"> 4.00e-07 </td>
+   <td style="text-align:right;"> 0.0004441 </td>
+   <td style="text-align:right;"> 0.0004216 </td>
+   <td style="text-align:left;"> Tgtp1, Tgtp2, F830016B08Rik, Iigp1, Igtp, Gm4951, Oas1c, Irgm1, Gbp6, Ifi47, Aim2, Irgm2, Ifit1, Ifi204 </td>
+   <td style="text-align:right;"> 14 </td>
+  </tr>
+  <tr>
    <td style="text-align:left;"> GO:0002523 </td>
    <td style="text-align:left;"> leukocyte migration involved in inflammatory response </td>
-   <td style="text-align:left;"> 10/1260 </td>
-   <td style="text-align:left;"> 25/21417 </td>
+   <td style="text-align:left;"> 10/1245 </td>
+   <td style="text-align:left;"> 25/21025 </td>
    <td style="text-align:right;"> 7.00e-07 </td>
-   <td style="text-align:right;"> 0.0005855 </td>
-   <td style="text-align:right;"> 0.0005546 </td>
+   <td style="text-align:right;"> 0.0006242 </td>
+   <td style="text-align:right;"> 0.0005926 </td>
    <td style="text-align:left;"> Ccl2, Ppbp, Fut7, Adam8, S100a8, Alox5, Ptn, Aoc3, Itgam, Mdk </td>
    <td style="text-align:right;"> 10 </td>
   </tr>
   <tr>
    <td style="text-align:left;"> GO:0050953 </td>
    <td style="text-align:left;"> sensory perception of light stimulus </td>
-   <td style="text-align:left;"> 26/1260 </td>
-   <td style="text-align:left;"> 162/21417 </td>
-   <td style="text-align:right;"> 2.90e-06 </td>
-   <td style="text-align:right;"> 0.0020909 </td>
-   <td style="text-align:right;"> 0.0019808 </td>
+   <td style="text-align:left;"> 26/1245 </td>
+   <td style="text-align:left;"> 164/21025 </td>
+   <td style="text-align:right;"> 4.10e-06 </td>
+   <td style="text-align:right;"> 0.0029769 </td>
+   <td style="text-align:right;"> 0.0028259 </td>
    <td style="text-align:left;"> Aipl1, Vsx2, Nxnl2, Lrit3, Cryba2, Bfsp2, Lrat, Gabrr2, Lum, Rlbp1, Pde6g, Gpr179, Col1a1, Cplx3, Best1, Ush1g, Rs1, Rdh5, Guca1b, Th, Ppef2, Rbp4, Olfm2, Rom1, Vsx1, Rpe65 </td>
    <td style="text-align:right;"> 26 </td>
   </tr>
   <tr>
    <td style="text-align:left;"> GO:0071675 </td>
    <td style="text-align:left;"> regulation of mononuclear cell migration </td>
-   <td style="text-align:left;"> 21/1260 </td>
-   <td style="text-align:left;"> 117/21417 </td>
-   <td style="text-align:right;"> 4.20e-06 </td>
-   <td style="text-align:right;"> 0.0026851 </td>
-   <td style="text-align:right;"> 0.0025436 </td>
+   <td style="text-align:left;"> 21/1245 </td>
+   <td style="text-align:left;"> 117/21025 </td>
+   <td style="text-align:right;"> 4.70e-06 </td>
+   <td style="text-align:right;"> 0.0029799 </td>
+   <td style="text-align:right;"> 0.0028288 </td>
    <td style="text-align:left;"> Tnfsf18, Aire, Ccr7, Ccl2, Apod, Il12a, Ccl5, Ccl7, Spn, Itgb3, Grem1, Ptk2b, Lgals3, Adam8, Dusp1, Nbl1, Padi2, Calr, Ager, Mdk, Itga4 </td>
    <td style="text-align:right;"> 21 </td>
   </tr>
   <tr>
-   <td style="text-align:left;"> GO:0007601 </td>
-   <td style="text-align:left;"> visual perception </td>
-   <td style="text-align:left;"> 25/1260 </td>
-   <td style="text-align:left;"> 158/21417 </td>
-   <td style="text-align:right;"> 5.80e-06 </td>
-   <td style="text-align:right;"> 0.0032508 </td>
-   <td style="text-align:right;"> 0.0030795 </td>
-   <td style="text-align:left;"> Aipl1, Vsx2, Nxnl2, Lrit3, Cryba2, Bfsp2, Lrat, Gabrr2, Lum, Rlbp1, Pde6g, Gpr179, Col1a1, Cplx3, Best1, Rs1, Rdh5, Guca1b, Th, Ppef2, Rbp4, Olfm2, Rom1, Vsx1, Rpe65 </td>
-   <td style="text-align:right;"> 25 </td>
-  </tr>
-  <tr>
-   <td style="text-align:left;"> GO:0034341 </td>
-   <td style="text-align:left;"> response to interferon-gamma </td>
-   <td style="text-align:left;"> 22/1260 </td>
-   <td style="text-align:left;"> 135/21417 </td>
-   <td style="text-align:right;"> 1.28e-05 </td>
-   <td style="text-align:right;"> 0.0056936 </td>
-   <td style="text-align:right;"> 0.0053937 </td>
-   <td style="text-align:left;"> Ccl17, Gbp4, Ccl2, Tgtp1, H2-Q7, Il12rb1, Ifitm6, Ccl5, Ccl7, Igtp, Nos2, Nlrc5, Bst2, Irgm1, Gbp6, Capg, Ifitm7, Gbp9, Gbp5, Irgm2, Ccl6, Aqp4 </td>
-   <td style="text-align:right;"> 22 </td>
-  </tr>
-  <tr>
    <td style="text-align:left;"> GO:0060326 </td>
    <td style="text-align:left;"> cell chemotaxis </td>
-   <td style="text-align:left;"> 38/1260 </td>
-   <td style="text-align:left;"> 308/21417 </td>
-   <td style="text-align:right;"> 1.30e-05 </td>
-   <td style="text-align:right;"> 0.0056936 </td>
-   <td style="text-align:right;"> 0.0053937 </td>
+   <td style="text-align:left;"> 38/1245 </td>
+   <td style="text-align:left;"> 298/21025 </td>
+   <td style="text-align:right;"> 7.00e-06 </td>
+   <td style="text-align:right;"> 0.0039475 </td>
+   <td style="text-align:right;"> 0.0037473 </td>
    <td style="text-align:left;"> Tnfsf18, Ccl17, Ccr7, Bst1, Ccl2, Retnlg, Ppbp, Cxcl5, Nr4a1, Il12a, Ccl5, Ccl7, Ccl28, Sell, Grem1, Cxcl1, Ptk2b, Lgals3, Adam8, Pf4, Dusp1, Ch25h, S100a8, Nbl1, Alox5, Padi2, Edn3, Ptn, Plxnb3, Calr, Lpar1, Slamf9, Ccl6, Prex1, Itgam, Mdk, Hsd3b7, Trpm4 </td>
    <td style="text-align:right;"> 38 </td>
   </tr>
   <tr>
-   <td style="text-align:left;"> GO:0002685 </td>
-   <td style="text-align:left;"> regulation of leukocyte migration </td>
-   <td style="text-align:left;"> 31/1260 </td>
-   <td style="text-align:left;"> 230/21417 </td>
-   <td style="text-align:right;"> 1.41e-05 </td>
-   <td style="text-align:right;"> 0.0056936 </td>
-   <td style="text-align:right;"> 0.0053937 </td>
-   <td style="text-align:left;"> Tnfsf18, Aire, Ccr7, Bst1, Ccl2, Apod, Il12a, Ccl5, Fut7, Ccl7, Ccl28, Spn, Sell, Itgb3, Grem1, Ptk2b, Lgals3, Adam8, Dusp1, Nbl1, Padi2, Edn3, Il33, Ptn, Ada, Calr, Ager, Aoc3, Mdk, Itga4, P2ry12 </td>
-   <td style="text-align:right;"> 31 </td>
+   <td style="text-align:left;"> GO:0007601 </td>
+   <td style="text-align:left;"> visual perception </td>
+   <td style="text-align:left;"> 25/1245 </td>
+   <td style="text-align:left;"> 160/21025 </td>
+   <td style="text-align:right;"> 8.10e-06 </td>
+   <td style="text-align:right;"> 0.0041224 </td>
+   <td style="text-align:right;"> 0.0039134 </td>
+   <td style="text-align:left;"> Aipl1, Vsx2, Nxnl2, Lrit3, Cryba2, Bfsp2, Lrat, Gabrr2, Lum, Rlbp1, Pde6g, Gpr179, Col1a1, Cplx3, Best1, Rs1, Rdh5, Guca1b, Th, Ppef2, Rbp4, Olfm2, Rom1, Vsx1, Rpe65 </td>
+   <td style="text-align:right;"> 25 </td>
   </tr>
   <tr>
-   <td style="text-align:left;"> GO:0036336 </td>
-   <td style="text-align:left;"> dendritic cell migration </td>
-   <td style="text-align:left;"> 9/1260 </td>
-   <td style="text-align:left;"> 27/21417 </td>
-   <td style="text-align:right;"> 1.46e-05 </td>
-   <td style="text-align:right;"> 0.0056936 </td>
-   <td style="text-align:right;"> 0.0053937 </td>
-   <td style="text-align:left;"> Tnfsf18, Ccr7, Nlrp12, Retnlg, Il12a, Alox5, Calr, Slamf9, Trpm4 </td>
-   <td style="text-align:right;"> 9 </td>
+   <td style="text-align:left;"> GO:0002460 </td>
+   <td style="text-align:left;"> adaptive immune response based on somatic recombination of immune receptors built from immunoglobulin superfamily domains </td>
+   <td style="text-align:left;"> 42/1245 </td>
+   <td style="text-align:left;"> 350/21025 </td>
+   <td style="text-align:right;"> 1.09e-05 </td>
+   <td style="text-align:right;"> 0.0050165 </td>
+   <td style="text-align:right;"> 0.0047621 </td>
+   <td style="text-align:left;"> Tnfsf18, Aire, Ccr7, Gzmb, Cd70, H2-Q6, H2-Q7, Il12a, Il12rb1, H2-Q4, Il18rap, Fut7, Spn, Icosl, Pirb, H2-Q2, Irf7, Cd274, Tnfrsf13c, Il2rb, Masp2, C8g, C4b, Il33, H2-Q1, Ada, Emp2, C3, Enpp1, Tfrc, Cd46, H2-K1, Rorc, Csf2rb, Ager, H2-T23, Tap2, Tnfsf13b, Pla2g4a, Trpm4, Parp3, Klhl6 </td>
+   <td style="text-align:right;"> 42 </td>
   </tr>
   <tr>
    <td style="text-align:left;"> GO:1990266 </td>
    <td style="text-align:left;"> neutrophil migration </td>
-   <td style="text-align:left;"> 21/1260 </td>
-   <td style="text-align:left;"> 127/21417 </td>
-   <td style="text-align:right;"> 1.59e-05 </td>
-   <td style="text-align:right;"> 0.0057426 </td>
-   <td style="text-align:right;"> 0.0054401 </td>
-   <td style="text-align:left;"> Ccl17, Ccr7, Bst1, Ccl2, Ppbp, Cxcl5, Ccl5, Umodl1, Fut7, Ccl7, Sell, Cxcl1, Lgals3, Adam8, Pf4, S100a8, Edn3, Ccl6, Prex1, Itgam, Mdk </td>
+   <td style="text-align:left;"> 21/1245 </td>
+   <td style="text-align:left;"> 125/21025 </td>
+   <td style="text-align:right;"> 1.36e-05 </td>
+   <td style="text-align:right;"> 0.0057697 </td>
+   <td style="text-align:right;"> 0.0054771 </td>
+   <td style="text-align:left;"> Ccl17, Ccr7, Bst1, Ccl2, Ppbp, Cxcl5, Ccl5, Fut7, Ccl7, Sell, Cxcl1, Lgals3, Adam8, Pf4, S100a8, Edn3, Emp2, Ccl6, Prex1, Itgam, Mdk </td>
    <td style="text-align:right;"> 21 </td>
   </tr>
   <tr>
-   <td style="text-align:left;"> GO:0016264 </td>
-   <td style="text-align:left;"> gap junction assembly </td>
-   <td style="text-align:left;"> 7/1260 </td>
-   <td style="text-align:left;"> 16/21417 </td>
-   <td style="text-align:right;"> 1.71e-05 </td>
-   <td style="text-align:right;"> 0.0057811 </td>
-   <td style="text-align:right;"> 0.0054766 </td>
-   <td style="text-align:left;"> Gjd3, Aplnr, Gja5, Agt, Hopx, Cav1, Ace </td>
-   <td style="text-align:right;"> 7 </td>
+   <td style="text-align:left;"> GO:0036336 </td>
+   <td style="text-align:left;"> dendritic cell migration </td>
+   <td style="text-align:left;"> 9/1245 </td>
+   <td style="text-align:left;"> 27/21025 </td>
+   <td style="text-align:right;"> 1.54e-05 </td>
+   <td style="text-align:right;"> 0.0057975 </td>
+   <td style="text-align:right;"> 0.0055036 </td>
+   <td style="text-align:left;"> Tnfsf18, Ccr7, Nlrp12, Retnlg, Il12a, Alox5, Calr, Slamf9, Trpm4 </td>
+   <td style="text-align:right;"> 9 </td>
+  </tr>
+  <tr>
+   <td style="text-align:left;"> GO:0002685 </td>
+   <td style="text-align:left;"> regulation of leukocyte migration </td>
+   <td style="text-align:left;"> 31/1245 </td>
+   <td style="text-align:left;"> 230/21025 </td>
+   <td style="text-align:right;"> 1.60e-05 </td>
+   <td style="text-align:right;"> 0.0057975 </td>
+   <td style="text-align:right;"> 0.0055036 </td>
+   <td style="text-align:left;"> Tnfsf18, Aire, Ccr7, Bst1, Ccl2, Apod, Il12a, Ccl5, Fut7, Ccl7, Ccl28, Spn, Sell, Itgb3, Grem1, Ptk2b, Lgals3, Adam8, Dusp1, Nbl1, Padi2, Edn3, Il33, Ptn, Ada, Calr, Ager, Aoc3, Mdk, Itga4, P2ry12 </td>
+   <td style="text-align:right;"> 31 </td>
   </tr>
   <tr>
    <td style="text-align:left;"> GO:0030593 </td>
    <td style="text-align:left;"> neutrophil chemotaxis </td>
-   <td style="text-align:left;"> 18/1260 </td>
-   <td style="text-align:left;"> 100/21417 </td>
-   <td style="text-align:right;"> 1.94e-05 </td>
-   <td style="text-align:right;"> 0.0061338 </td>
-   <td style="text-align:right;"> 0.0058107 </td>
+   <td style="text-align:left;"> 18/1245 </td>
+   <td style="text-align:left;"> 100/21025 </td>
+   <td style="text-align:right;"> 2.11e-05 </td>
+   <td style="text-align:right;"> 0.0071625 </td>
+   <td style="text-align:right;"> 0.0067993 </td>
    <td style="text-align:left;"> Ccl17, Ccr7, Bst1, Ccl2, Ppbp, Cxcl5, Ccl5, Ccl7, Sell, Cxcl1, Lgals3, Pf4, S100a8, Edn3, Ccl6, Prex1, Itgam, Mdk </td>
    <td style="text-align:right;"> 18 </td>
   </tr>
   <tr>
+   <td style="text-align:left;"> GO:0016264 </td>
+   <td style="text-align:left;"> gap junction assembly </td>
+   <td style="text-align:left;"> 7/1245 </td>
+   <td style="text-align:left;"> 17/21025 </td>
+   <td style="text-align:right;"> 2.88e-05 </td>
+   <td style="text-align:right;"> 0.0086355 </td>
+   <td style="text-align:right;"> 0.0081976 </td>
+   <td style="text-align:left;"> Gjd3, Aplnr, Gja5, Agt, Hopx, Cav1, Ace </td>
+   <td style="text-align:right;"> 7 </td>
+  </tr>
+  <tr>
    <td style="text-align:left;"> GO:1903028 </td>
    <td style="text-align:left;"> positive regulation of opsonization </td>
-   <td style="text-align:left;"> 6/1260 </td>
-   <td style="text-align:left;"> 12/21417 </td>
-   <td style="text-align:right;"> 2.78e-05 </td>
-   <td style="text-align:right;"> 0.0082825 </td>
-   <td style="text-align:right;"> 0.0078462 </td>
+   <td style="text-align:left;"> 6/1245 </td>
+   <td style="text-align:left;"> 12/21025 </td>
+   <td style="text-align:right;"> 2.89e-05 </td>
+   <td style="text-align:right;"> 0.0086355 </td>
+   <td style="text-align:right;"> 0.0081976 </td>
    <td style="text-align:left;"> Pla2g5, Masp2, C4b, Colec11, C3, Cfp </td>
    <td style="text-align:right;"> 6 </td>
+  </tr>
+  <tr>
+   <td style="text-align:left;"> GO:0034341 </td>
+   <td style="text-align:left;"> response to type II interferon </td>
+   <td style="text-align:left;"> 22/1245 </td>
+   <td style="text-align:left;"> 142/21025 </td>
+   <td style="text-align:right;"> 3.18e-05 </td>
+   <td style="text-align:right;"> 0.0089664 </td>
+   <td style="text-align:right;"> 0.0085118 </td>
+   <td style="text-align:left;"> Ccl17, Gbp4, Ccl2, Tgtp1, H2-Q7, Il12rb1, Ifitm6, Ccl5, Ccl7, Igtp, Nos2, Nlrc5, Bst2, Irgm1, Gbp6, Capg, Ifitm7, Gbp9, Gbp5, Irgm2, Ccl6, Aqp4 </td>
+   <td style="text-align:right;"> 22 </td>
   </tr>
 </tbody>
 </table>

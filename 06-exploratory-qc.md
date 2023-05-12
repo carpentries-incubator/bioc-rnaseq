@@ -194,12 +194,12 @@ sessionInfo()
 ```
 
 ```{.output}
-R version 4.2.3 (2023-03-15)
+R version 4.3.0 (2023-04-21)
 Platform: x86_64-pc-linux-gnu (64-bit)
 Running under: Ubuntu 22.04.2 LTS
 
 Matrix products: default
-BLAS:   /usr/lib/x86_64-linux-gnu/blas/libblas.so.3.10.0
+BLAS:   /usr/lib/x86_64-linux-gnu/blas/libblas.so.3.10.0 
 LAPACK: /usr/lib/x86_64-linux-gnu/lapack/liblapack.so.3.10.0
 
 locale:
@@ -208,47 +208,45 @@ locale:
  [7] LC_PAPER=C.UTF-8       LC_NAME=C              LC_ADDRESS=C          
 [10] LC_TELEPHONE=C         LC_MEASUREMENT=C.UTF-8 LC_IDENTIFICATION=C   
 
+time zone: UTC
+tzcode source: system (glibc)
+
 attached base packages:
 [1] grid      stats4    stats     graphics  grDevices utils     datasets 
 [8] methods   base     
 
 other attached packages:
  [1] hexbin_1.28.3               RColorBrewer_1.1-3         
- [3] ComplexHeatmap_2.14.0       ggplot2_3.4.1              
- [5] vsn_3.66.0                  DESeq2_1.38.3              
- [7] SummarizedExperiment_1.28.0 Biobase_2.58.0             
- [9] MatrixGenerics_1.10.0       matrixStats_0.63.0         
-[11] GenomicRanges_1.50.2        GenomeInfoDb_1.34.9        
-[13] IRanges_2.32.0              S4Vectors_0.36.2           
-[15] BiocGenerics_0.44.0        
+ [3] ComplexHeatmap_2.16.0       ggplot2_3.4.2              
+ [5] vsn_3.68.0                  DESeq2_1.40.1              
+ [7] SummarizedExperiment_1.30.1 Biobase_2.60.0             
+ [9] MatrixGenerics_1.12.0       matrixStats_0.63.0         
+[11] GenomicRanges_1.52.0        GenomeInfoDb_1.36.0        
+[13] IRanges_2.34.0              S4Vectors_0.38.1           
+[15] BiocGenerics_0.46.0        
 
 loaded via a namespace (and not attached):
- [1] httr_1.4.5             bit64_4.0.5            foreach_1.5.2         
- [4] highr_0.10             BiocManager_1.30.20    affy_1.76.0           
- [7] blob_1.2.4             renv_0.17.3            GenomeInfoDbData_1.2.9
-[10] pillar_1.9.0           RSQLite_2.3.1          lattice_0.20-45       
-[13] glue_1.6.2             limma_3.54.2           digest_0.6.31         
-[16] XVector_0.38.0         colorspace_2.1-0       preprocessCore_1.60.2 
-[19] Matrix_1.5-3           XML_3.99-0.14          pkgconfig_2.0.3       
-[22] GetoptLong_1.0.5       zlibbioc_1.44.0        xtable_1.8-4          
-[25] scales_1.2.1           affyio_1.68.0          BiocParallel_1.32.6   
-[28] tibble_3.2.1           annotate_1.76.0        KEGGREST_1.38.0       
-[31] farver_2.1.1           generics_0.1.3         cachem_1.0.7          
-[34] withr_2.5.0            cli_3.6.1              magrittr_2.0.3        
-[37] crayon_1.5.2           memoise_2.0.1          evaluate_0.20         
-[40] fansi_1.0.4            doParallel_1.0.17      tools_4.2.3           
-[43] GlobalOptions_0.1.2    lifecycle_1.0.3        munsell_0.5.0         
-[46] locfit_1.5-9.7         cluster_2.1.4          DelayedArray_0.24.0   
-[49] AnnotationDbi_1.60.2   Biostrings_2.66.0      compiler_4.2.3        
-[52] rlang_1.1.0            RCurl_1.98-1.12        iterators_1.0.14      
-[55] circlize_0.4.15        rjson_0.2.21           labeling_0.4.2        
-[58] bitops_1.0-7           gtable_0.3.3           codetools_0.2-19      
-[61] DBI_1.1.3              R6_2.5.1               knitr_1.42            
-[64] dplyr_1.1.1            fastmap_1.1.1          bit_4.0.5             
-[67] utf8_1.2.3             clue_0.3-64            shape_1.4.6           
-[70] parallel_4.2.3         Rcpp_1.0.10            vctrs_0.6.1           
-[73] geneplotter_1.76.0     png_0.1-8              tidyselect_1.2.0      
-[76] xfun_0.38             
+ [1] shape_1.4.6             circlize_0.4.15         gtable_0.3.3           
+ [4] rjson_0.2.21            xfun_0.39               GlobalOptions_0.1.2    
+ [7] lattice_0.21-8          vctrs_0.6.2             tools_4.3.0            
+[10] bitops_1.0-7            generics_0.1.3          parallel_4.3.0         
+[13] tibble_3.2.1            fansi_1.0.4             highr_0.10             
+[16] cluster_2.1.4           pkgconfig_2.0.3         Matrix_1.5-4           
+[19] lifecycle_1.0.3         GenomeInfoDbData_1.2.10 farver_2.1.1           
+[22] compiler_4.3.0          munsell_0.5.0           codetools_0.2-19       
+[25] clue_0.3-64             RCurl_1.98-1.12         preprocessCore_1.62.1  
+[28] pillar_1.9.0            crayon_1.5.2            BiocParallel_1.34.1    
+[31] affy_1.78.0             DelayedArray_0.26.2     limma_3.56.1           
+[34] iterators_1.0.14        foreach_1.5.2           tidyselect_1.2.0       
+[37] locfit_1.5-9.7          digest_0.6.31           dplyr_1.1.2            
+[40] labeling_0.4.2          colorspace_2.1-0        cli_3.6.1              
+[43] magrittr_2.0.3          S4Arrays_1.0.1          utf8_1.2.3             
+[46] withr_2.5.0             scales_1.2.1            XVector_0.40.0         
+[49] affyio_1.70.0           GetoptLong_1.0.5        png_0.1-8              
+[52] evaluate_0.21           knitr_1.42              doParallel_1.0.17      
+[55] rlang_1.1.1             Rcpp_1.0.10             glue_1.6.2             
+[58] BiocManager_1.30.20     renv_0.17.3             R6_2.5.1               
+[61] zlibbioc_1.46.0        
 ```
 
 :::::::::::::::::::::::::::::::::::::::: keypoints
