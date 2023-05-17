@@ -114,7 +114,7 @@ fitting model and testing
 plotDispEsts(dds)
 ```
 
-<img src="fig/07-differential-expression-rendered-unnamed-chunk-6-1.png" style="display: block; margin: auto;" />
+<img src="fig/05-differential-expression-rendered-unnamed-chunk-6-1.png" style="display: block; margin: auto;" />
 
 ## Extract results for specific contrasts
 
@@ -177,7 +177,7 @@ A330076C08Rik 2.57077e-48
 DESeq2::plotMA(resTime)
 ```
 
-<img src="fig/07-differential-expression-rendered-unnamed-chunk-7-1.png" style="display: block; margin: auto;" />
+<img src="fig/05-differential-expression-rendered-unnamed-chunk-7-1.png" style="display: block; margin: auto;" />
 
 ```r
 ## Male vs Female
@@ -228,7 +228,7 @@ LOC105243748  1.13371e-48
 DESeq2::plotMA(resSex)
 ```
 
-<img src="fig/07-differential-expression-rendered-unnamed-chunk-7-2.png" style="display: block; margin: auto;" />
+<img src="fig/05-differential-expression-rendered-unnamed-chunk-7-2.png" style="display: block; margin: auto;" />
 
 ## Visualize selected set of genes
 
@@ -258,7 +258,7 @@ ComplexHeatmap::Heatmap(heatmapData,
                         cluster_rows = TRUE, cluster_columns = FALSE)
 ```
 
-<img src="fig/07-differential-expression-rendered-unnamed-chunk-8-1.png" style="display: block; margin: auto;" />
+<img src="fig/05-differential-expression-rendered-unnamed-chunk-8-1.png" style="display: block; margin: auto;" />
 
 :::::::::::::::::::::::::::::::::::::::: keypoints
 

@@ -12,6 +12,7 @@ exercises: XX
 - Explain what RNA-seq is.
 - Describe some of the most common design choices that have to be made before running an RNA-seq experiment.
 - Provide an overview of the procedure to go from the raw data to the read count matrix that will be used for downstream analysis.
+- Show some common types of results and visualizations generated in RNA-seq analyses.
 
 ::::::::::::::::::::::::::::::::::::::::::::::::::
 
