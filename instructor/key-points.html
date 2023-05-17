@@ -183,7 +183,7 @@
 <div class="accordion accordion-flush" id="accordionFlush2">
   <div class="accordion-item">
     <div class="accordion-header" id="flush-heading2">
-        <a href="01-introduction.html">1. Introduction and setup</a>
+        <a href="01-intro-to-rnaseq.html">1. Introduction to RNA-seq</a>
     </div>
 <!--/div.accordion-header-->
         
@@ -195,7 +195,7 @@
 <div class="accordion accordion-flush" id="accordionFlush3">
   <div class="accordion-item">
     <div class="accordion-header" id="flush-heading3">
-        <a href="02-intro-to-rnaseq.html">2. Introduction to RNA-seq</a>
+        <a href="02-setup.html">2. Project set up</a>
     </div>
 <!--/div.accordion-header-->
         
@@ -207,7 +207,7 @@
 <div class="accordion accordion-flush" id="accordionFlush4">
   <div class="accordion-item">
     <div class="accordion-header" id="flush-heading4">
-        <a href="03-setup.html">3. Setup</a>
+        <a href="03-import-annotate.html">3. Importing and annotating quantified data into R</a>
     </div>
 <!--/div.accordion-header-->
         
@@ -219,7 +219,7 @@
 <div class="accordion accordion-flush" id="accordionFlush5">
   <div class="accordion-item">
     <div class="accordion-header" id="flush-heading5">
-        <a href="04-experimental-design.html">4. Experimental design</a>
+        <a href="04-exploratory-qc.html">4. Exploratory analysis and quality control</a>
     </div>
 <!--/div.accordion-header-->
         
@@ -231,7 +231,7 @@
 <div class="accordion accordion-flush" id="accordionFlush6">
   <div class="accordion-item">
     <div class="accordion-header" id="flush-heading6">
-        <a href="05-import-annotate.html">5. Importing and annotating quantified data into R</a>
+        <a href="05-differential-expression.html">5. Differential expression analysis</a>
     </div>
 <!--/div.accordion-header-->
         
@@ -243,7 +243,7 @@
 <div class="accordion accordion-flush" id="accordionFlush7">
   <div class="accordion-item">
     <div class="accordion-header" id="flush-heading7">
-        <a href="06-exploratory-qc.html">6. Exploratory analysis and quality control</a>
+        <a href="06-gene-set-analysis.html">6. Gene set analysis</a>
     </div>
 <!--/div.accordion-header-->
         
@@ -255,7 +255,7 @@
 <div class="accordion accordion-flush" id="accordionFlush8">
   <div class="accordion-item">
     <div class="accordion-header" id="flush-heading8">
-        <a href="07-differential-expression.html">7. Differential expression analysis</a>
+        <a href="07-next-steps.html">7. Next steps</a>
     </div>
 <!--/div.accordion-header-->
         
@@ -267,19 +267,7 @@
 <div class="accordion accordion-flush" id="accordionFlush9">
   <div class="accordion-item">
     <div class="accordion-header" id="flush-heading9">
-        <a href="08-gene-set-analysis.html">8. Gene set analysis</a>
-    </div>
-<!--/div.accordion-header-->
-        
-  </div>
-<!--/div.accordion-item-->
-</div>
-<!--/div.accordion-flush-->
-
-<div class="accordion accordion-flush" id="accordionFlush10">
-  <div class="accordion-item">
-    <div class="accordion-header" id="flush-heading10">
-        <a href="09-next-steps.html">9. Next steps</a>
+        <a href="08-extra-design.html">8. Extra exploration of design matrices</a>
     </div>
 <!--/div.accordion-header-->
         
@@ -341,16 +329,7 @@
     <main id="main-content" class="main-content"><div class="container lesson-content">
         
         
-<section id="01-introduction"><h2 class="section-heading"><a href="01-introduction.html">Introduction and setup</a></h2>
-<hr class="half-width">
-<ul>
-<li>Bioconductor provides a range of packages for quantification,
-statistical analysis and visualization of RNA-seq data.</li>
-<li>Results from an RNA-seq differential expression analysis are often
-represented using MA plots, volcano plots and tables with statistical
-results</li>
-<li>The data that will be used in this lesson come from …</li>
-</ul></section><section id="02-intro-to-rnaseq"><h2 class="section-heading"><a href="02-intro-to-rnaseq.html">Introduction to RNA-seqRNA-seq quantification: from reads to count matrix<a class="anchor" aria-label="anchor" href="#rna-seq-quantification-from-reads-to-count-matrix"></a></a></h2>
+<section id="01-intro-to-rnaseq"><h2 class="section-heading"><a href="01-intro-to-rnaseq.html">Introduction to RNA-seqRNA-seq quantification: from reads to count matrix<a class="anchor" aria-label="anchor" href="#rna-seq-quantification-from-reads-to-count-matrix"></a></a></h2>
 <hr class="half-width">
 <ul>
 <li>RNA-seq is a technique of measuring the amount of RNA expressed
@@ -371,22 +350,14 @@ sources, including Ensembl, UCSC and GENCODE.</li>
 <li>The most commonly used Bioconductor packages for statistical
 analysis of RNA-seq data are <code>DESeq2</code>, <code>edgeR</code> and
 <code>limma</code>.</li>
-</ul></section><section id="03-setup"><h2 class="section-heading"><a href="03-setup.html">Setup</a></h2>
+</ul></section><section id="02-setup"><h2 class="section-heading"><a href="02-setup.html">Project set up</a></h2>
 <hr class="half-width">
 <ul>
 <li>When starting to use a new Bioconductor package, it is often good
 practice to go through the accompanying vignette and test some of the
 commands on the provided example data, before applying it to one’s own
 data.</li>
-</ul></section><section id="04-experimental-design"><h2 class="section-heading"><a href="04-experimental-design.html">Experimental design</a></h2>
-<hr class="half-width">
-<ul>
-<li>The formula framework in R allows creation of design matrices, which
-details the variables expected to be associated with systematic
-differences in gene expression levels.</li>
-<li>Comparisons of interest can be defined using contrasts, which are
-linear combinations of the model coefficients.</li>
-</ul></section><section id="05-import-annotate"><h2 class="section-heading"><a href="05-import-annotate.html">Importing and annotating quantified data into R</a></h2>
+</ul></section><section id="03-import-annotate"><h2 class="section-heading"><a href="03-import-annotate.html">Importing and annotating quantified data into R</a></h2>
 <hr class="half-width">
 <ul>
 <li>Depending on the gene expression quantification tool used, there are
@@ -396,7 +367,7 @@ processing in R.</li>
 <li>Stable gene identifiers such as Ensembl or Entrez IDs should
 preferably be used as the main identifiers throughout an RNA-seq
 analysis, with gene symbols added for easier interpretation.</li>
-</ul></section><section id="06-exploratory-qc"><h2 class="section-heading"><a href="06-exploratory-qc.html">Exploratory analysis and quality control</a></h2>
+</ul></section><section id="04-exploratory-qc"><h2 class="section-heading"><a href="04-exploratory-qc.html">Exploratory analysis and quality control</a></h2>
 <hr class="half-width">
 <ul>
 <li>Exploratory analysis is essential for quality control and to detect
@@ -406,7 +377,7 @@ preprocessed data. The most commonly used methods expect counts to be
 normalized and log-transformed (or similar- more
 sensitive/sophisticated), to be closer to homoskedastic. Other methods
 work directly on the raw counts.</li>
-</ul></section><section id="07-differential-expression"><h2 class="section-heading"><a href="07-differential-expression.html">Differential expression analysis</a></h2>
+</ul></section><section id="05-differential-expression"><h2 class="section-heading"><a href="05-differential-expression.html">Differential expression analysis</a></h2>
 <hr class="half-width">
 <ul>
 <li>With DESeq2, the main steps of a differential expression analysis
@@ -414,7 +385,7 @@ work directly on the raw counts.</li>
 statistics) are wrapped in a single function: DESeq().</li>
 <li>Independent filtering of lowly expressed genes is often
 beneficial.</li>
-</ul></section><section id="08-gene-set-analysis"><h2 class="section-heading"><a href="08-gene-set-analysis.html">Gene set analysis</a></h2>
+</ul></section><section id="06-gene-set-analysis"><h2 class="section-heading"><a href="06-gene-set-analysis.html">Gene set analysis</a></h2>
 <hr class="half-width">
 <ul>
 <li>Gene set enrichment analysis helps to answer “what are the common
@@ -425,10 +396,18 @@ mSigDB, KEGG, reactome, Gene Ontology.</li>
 require genes to be classified into ‘significant’ and ‘non-significant’
 before the gene set analysis, while others ingest the full ranking of
 genes.</li>
-</ul></section><section id="09-next-steps"><h2 class="section-heading"><a href="09-next-steps.html">Next steps</a></h2>
+</ul></section><section id="07-next-steps"><h2 class="section-heading"><a href="07-next-steps.html">Next steps</a></h2>
 <hr class="half-width">
 <ul><li>
-</li></ul></section>
+</li></ul></section><section id="08-extra-design"><h2 class="section-heading"><a href="08-extra-design.html">Extra exploration of design matrices</a></h2>
+<hr class="half-width">
+<ul>
+<li>The formula framework in R allows creation of design matrices, which
+details the variables expected to be associated with systematic
+differences in gene expression levels.</li>
+<li>Comparisons of interest can be defined using contrasts, which are
+linear combinations of the model coefficients.</li>
+</ul></section>
 </div>
     </main>
 </div>
@@ -453,7 +432,7 @@ genes.</li>
         <p>Materials licensed under <a href="../LICENSE.html">CC-BY 4.0</a> by the authors</p>
         
         <p><a href="https://creativecommons.org/licenses/by-sa/4.0/" class="external-link">Template licensed under CC-BY 4.0</a> by <a href="https://carpentries.org" class="external-link">The Carpentries</a></p>
-        <p>Built with <a href="https://github.com/carpentries/sandpaper/tree/0.11.16" class="external-link">sandpaper (0.11.16)</a>,
+        <p>Built with <a href="https://github.com/carpentries/sandpaper/tree/0.11.17" class="external-link">sandpaper (0.11.17)</a>,
         <a href="https://github.com/carpentries/pegboard" class="external-link">pegboard (0.5.3)</a>,
       and <a href="https://github.com/mblue9/varnish/tree/3403ad0dd37f7641c6442330fcc182937e7964c5" class="external-link">varnish (0.2.16)</a>.</p>
 			</div>
@@ -477,8 +456,8 @@ genes.</li>
   "url": "https://carpentries-incubator.github.io/bioc-rnaseq/instructor/key-points.html",
   "identifier": "https://carpentries-incubator.github.io/bioc-rnaseq/instructor/key-points.html",
   "dateCreated": "2020-09-15",
-  "dateModified": "2023-05-16",
-  "datePublished": "2023-05-16"
+  "dateModified": "2023-05-17",
+  "datePublished": "2023-05-17"
 }
 
   </script><script>

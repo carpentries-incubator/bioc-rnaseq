@@ -154,7 +154,7 @@
 <div class="accordion accordion-flush" id="accordionFlush2">
   <div class="accordion-item">
     <div class="accordion-header" id="flush-heading2">
-        <a href="01-introduction.html">1. Introduction and setup</a>
+        <a href="01-intro-to-rnaseq.html">1. Introduction to RNA-seq</a>
     </div><!--/div.accordion-header-->
         
   </div><!--/div.accordion-item-->
@@ -163,7 +163,7 @@
 <div class="accordion accordion-flush" id="accordionFlush3">
   <div class="accordion-item">
     <div class="accordion-header" id="flush-heading3">
-        <a href="02-intro-to-rnaseq.html">2. Introduction to RNA-seq</a>
+        <a href="02-setup.html">2. Project set up</a>
     </div><!--/div.accordion-header-->
         
   </div><!--/div.accordion-item-->
@@ -172,7 +172,7 @@
 <div class="accordion accordion-flush" id="accordionFlush4">
   <div class="accordion-item">
     <div class="accordion-header" id="flush-heading4">
-        <a href="03-setup.html">3. Setup</a>
+        <a href="03-import-annotate.html">3. Importing and annotating quantified data into R</a>
     </div><!--/div.accordion-header-->
         
   </div><!--/div.accordion-item-->
@@ -181,7 +181,7 @@
 <div class="accordion accordion-flush" id="accordionFlush5">
   <div class="accordion-item">
     <div class="accordion-header" id="flush-heading5">
-        <a href="04-experimental-design.html">4. Experimental design</a>
+        <a href="04-exploratory-qc.html">4. Exploratory analysis and quality control</a>
     </div><!--/div.accordion-header-->
         
   </div><!--/div.accordion-item-->
@@ -190,7 +190,7 @@
 <div class="accordion accordion-flush" id="accordionFlush6">
   <div class="accordion-item">
     <div class="accordion-header" id="flush-heading6">
-        <a href="05-import-annotate.html">5. Importing and annotating quantified data into R</a>
+        <a href="05-differential-expression.html">5. Differential expression analysis</a>
     </div><!--/div.accordion-header-->
         
   </div><!--/div.accordion-item-->
@@ -199,7 +199,7 @@
 <div class="accordion accordion-flush" id="accordionFlush7">
   <div class="accordion-item">
     <div class="accordion-header" id="flush-heading7">
-        <a href="06-exploratory-qc.html">6. Exploratory analysis and quality control</a>
+        <a href="06-gene-set-analysis.html">6. Gene set analysis</a>
     </div><!--/div.accordion-header-->
         
   </div><!--/div.accordion-item-->
@@ -208,7 +208,7 @@
 <div class="accordion accordion-flush" id="accordionFlush8">
   <div class="accordion-item">
     <div class="accordion-header" id="flush-heading8">
-        <a href="07-differential-expression.html">7. Differential expression analysis</a>
+        <a href="07-next-steps.html">7. Next steps</a>
     </div><!--/div.accordion-header-->
         
   </div><!--/div.accordion-item-->
@@ -217,16 +217,7 @@
 <div class="accordion accordion-flush" id="accordionFlush9">
   <div class="accordion-item">
     <div class="accordion-header" id="flush-heading9">
-        <a href="08-gene-set-analysis.html">8. Gene set analysis</a>
-    </div><!--/div.accordion-header-->
-        
-  </div><!--/div.accordion-item-->
-</div><!--/div.accordion-flush-->
-
-<div class="accordion accordion-flush" id="accordionFlush10">
-  <div class="accordion-item">
-    <div class="accordion-header" id="flush-heading10">
-        <a href="09-next-steps.html">9. Next steps</a>
+        <a href="08-extra-design.html">8. Extra exploration of design matrices</a>
     </div><!--/div.accordion-header-->
         
   </div><!--/div.accordion-item-->
@@ -273,18 +264,27 @@
         <!-- START: inst/pkgdown/templates/content-syllabus.html -->
   <div class="col-xl-8 col-lg-12 primary-content">
     <nav class="lesson-content mx-md-4" aria-label="Next Chapter"><!-- content for small screens --><div class="d-block d-sm-block d-md-none">
-        <a class="chapter-link float-end" href="../instructor/01-introduction.html">Next<i aria-hidden="true" class="small-arrow" data-feather="arrow-right"></i></a>
+        <a class="chapter-link float-end" href="../instructor/01-intro-to-rnaseq.html">Next<i aria-hidden="true" class="small-arrow" data-feather="arrow-right"></i></a>
       </div>
       <!-- content for large screens -->
       <div class="d-none d-sm-none d-md-block">
-        <a class="chapter-link float-end" href="../instructor/01-introduction.html" rel="next">Next: Introduction and... <i aria-hidden="true" class="small-arrow" data-feather="arrow-right"></i></a>
+        <a class="chapter-link float-end" href="../instructor/01-intro-to-rnaseq.html" rel="next">Next: Introduction to... <i aria-hidden="true" class="small-arrow" data-feather="arrow-right"></i></a>
       </div>
       <hr></nav><main id="main-content" class="main-content"><h1 class="schedule-heading">Summary and Schedule</h1>
       
 
-<p>FIXME: This lesson introduces the learner to RNA-seq analysis with <a href="https://bioconductor.org/" class="external-link">Bioconductor</a>.</p>
+<p>RNA-Seq has revolutionized the field of genomics, enabling
+researchers to gain insights into gene expression, transcriptome
+dynamics, and molecular pathways. <a href="https://bioconductor.org/" class="external-link">Bioconductor</a> is an open-source
+software project that provides a rich set of tools for analyzing
+high-throughput genomic data, including RNA-Seq data. This <a href="https://carpentries.org/" class="external-link">Carpentries</a>-style workshop is
+designed to equip participants with the essential skills and knowledge
+needed to analyze RNA sequencing (RNA-Seq) data using the Bioconductor
+ecosystem. Throughout this workshop, you will delve into key concepts,
+including data preprocessing, quality control, differential gene
+expression analysis, visualization of results, and gene set
+analysis.</p>
 <!-- this is an html comment -->
-<p>{% comment %} This is a comment in Liquid {% endcomment %}</p>
 <div id="prereq1" class="callout prereq">
 <div class="callout-square">
 <i class="callout-icon" data-feather="check"></i>
@@ -309,18 +309,7 @@ such as <a href="https://pubmed.gov/31341269" class="external-link">Stark 2019 N
 <span class="visually-hidden">Duration: </span>00h 00m
 </td>
 <td>
- 1. <a href="01-introduction.html">Introduction and setup</a>
-</td>
-<td>
-How does Bioconductor facilitate RNA-seq analysis?<br>What are some
-common results and visualizations in a typical RNA-seq
-analysis?<br>What experimental data will we work with in this lesson?
-</td>
-</tr><tr><td>
-<span class="visually-hidden">Duration: </span>00h 10m
-</td>
-<td>
- 2. <a href="02-intro-to-rnaseq.html">Introduction to RNA-seq</a>
+ 1. <a href="01-intro-to-rnaseq.html">Introduction to RNA-seq</a>
 </td>
 <td>
 What are the different choices to consider when planning an RNA-seq
@@ -331,28 +320,21 @@ the most commonly used Bioconductor packages for statistical analysis of
 RNA-seq data?<br>What are the typical steps in an RNA-seq analysis?
 </td>
 </tr><tr><td>
+<span class="visually-hidden">Duration: </span>00h 10m
+</td>
+<td>
+ 2. <a href="02-setup.html">Project set up</a>
+</td>
+<td>
+How can you use RStudio’s project system for a particular
+analysis?<br>How best to organise your directory structure for any
+analysis?
+</td>
+</tr><tr><td>
 <span class="visually-hidden">Duration: </span>00h 20m
 </td>
 <td>
- 3. <a href="03-setup.html">Setup</a>
-</td>
-<td>
-</td>
-</tr><tr><td>
-<span class="visually-hidden">Duration: </span>00h 30m
-</td>
-<td>
- 4. <a href="04-experimental-design.html">Experimental design</a>
-</td>
-<td>
-How can one translate biological questions and comparisons to
-statistical terms suitable for use with RNA-seq analysis packages?
-</td>
-</tr><tr><td>
-<span class="visually-hidden">Duration: </span>00h 40m
-</td>
-<td>
- 5. <a href="05-import-annotate.html">Importing and annotating
+ 3. <a href="03-import-annotate.html">Importing and annotating
 quantified data into R</a>
 </td>
 <td>
@@ -362,10 +344,10 @@ gene identifiers are typically used, and how are mappings between them
 done?
 </td>
 </tr><tr><td>
-<span class="visually-hidden">Duration: </span>00h 50m
+<span class="visually-hidden">Duration: </span>00h 30m
 </td>
 <td>
- 6. <a href="06-exploratory-qc.html">Exploratory analysis and quality
+ 4. <a href="04-exploratory-qc.html">Exploratory analysis and quality
 control</a>
 </td>
 <td>
@@ -375,10 +357,10 @@ exploratory analysis?<br>Are two dimensions sufficient to represent
 your data?
 </td>
 </tr><tr><td>
-<span class="visually-hidden">Duration: </span>01h 00m
+<span class="visually-hidden">Duration: </span>00h 40m
 </td>
 <td>
- 7. <a href="07-differential-expression.html">Differential expression
+ 5. <a href="05-differential-expression.html">Differential expression
 analysis</a>
 </td>
 <td>
@@ -386,10 +368,10 @@ What are the steps performed in a typical differential expression
 analysis?<br>How does one interpret the output of DESeq2?
 </td>
 </tr><tr><td>
-<span class="visually-hidden">Duration: </span>01h 10m
+<span class="visually-hidden">Duration: </span>00h 50m
 </td>
 <td>
- 8. <a href="08-gene-set-analysis.html">Gene set analysis</a>
+ 6. <a href="06-gene-set-analysis.html">Gene set analysis</a>
 </td>
 <td>
 Why do we perform gene set enrichment analysis?<br>How does one
@@ -398,17 +380,28 @@ set testing?<br>What different classes of methods are available for
 gene set analysis?
 </td>
 </tr><tr><td>
-<span class="visually-hidden">Duration: </span>01h 20m
+<span class="visually-hidden">Duration: </span>01h 00m
 </td>
 <td>
- 9. <a href="09-next-steps.html">Next steps</a>
+ 7. <a href="07-next-steps.html">Next steps</a>
 </td>
 <td>
 How to go further from here?<br>What other types of analyses can be
 done with RNA-seq data?
 </td>
 </tr><tr><td>
-<span class="visually-hidden">Duration: </span>01h 30m
+<span class="visually-hidden">Duration: </span>01h 10m
+</td>
+<td>
+ 8. <a href="08-extra-design.html">Extra exploration of design
+matrices</a>
+</td>
+<td>
+How can one translate biological questions and comparisons to
+statistical terms suitable for use with RNA-seq analysis packages?
+</td>
+</tr><tr><td>
+<span class="visually-hidden">Duration: </span>01h 20m
 </td>
 <td>
 Finish
@@ -421,7 +414,9 @@ Finish
       </section><section id="setup"><p>Check you have the most recent versions of R and RStudio. See the
 instructions under “If you already have R and RStudio installed” in <a href="https://carpentries-incubator.github.io/bioc-intro/#r-and-rstudio" class="external-link">Introduction
 to R</a>. You will also need to install the packages below that will be
-used during the workshop.</p>
+used during the workshop. <em>Please do this before the workshop. If you
+need help, an instructor will be available 30 min before the
+workshop.</em></p>
 <div class="codewrapper sourceCode" id="cb1">
 <h3 class="code-label">R<i aria-hidden="true" data-feather="chevron-left"></i><i aria-hidden="true" data-feather="chevron-right"></i>
 </h3>
@@ -436,11 +431,11 @@ used during the workshop.</p>
 
 
       </section></main><nav class="bottom-pagination mx-md-4" aria-label="Next Chapter"><!-- content for small screens --><div class="d-block d-sm-block d-md-none">
-        <a class="chapter-link float-end" href="../instructor/01-introduction.html">Next<i aria-hidden="true" class="small-arrow" data-feather="arrow-right"></i></a>
+        <a class="chapter-link float-end" href="../instructor/01-intro-to-rnaseq.html">Next<i aria-hidden="true" class="small-arrow" data-feather="arrow-right"></i></a>
       </div>
       <!-- content for large screens -->
       <div class="d-none d-sm-none d-md-block">
-        <a class="chapter-link float-end" href="../instructor/01-introduction.html" rel="next">Next: Introduction and... <i aria-hidden="true" class="small-arrow" data-feather="arrow-right"></i></a>
+        <a class="chapter-link float-end" href="../instructor/01-intro-to-rnaseq.html" rel="next">Next: Introduction to... <i aria-hidden="true" class="small-arrow" data-feather="arrow-right"></i></a>
       </div>
     </nav></div>
 <!-- END  : inst/pkgdown/templates/content-syllabus.html -->
@@ -462,7 +457,7 @@ used during the workshop.</p>
         <p>Materials licensed under <a href="../LICENSE.html">CC-BY 4.0</a> by the authors</p>
         
         <p><a href="https://creativecommons.org/licenses/by-sa/4.0/" class="external-link">Template licensed under CC-BY 4.0</a> by <a href="https://carpentries.org" class="external-link">The Carpentries</a></p>
-        <p>Built with <a href="https://github.com/carpentries/sandpaper/tree/0.11.16" class="external-link">sandpaper (0.11.16)</a>,
+        <p>Built with <a href="https://github.com/carpentries/sandpaper/tree/0.11.17" class="external-link">sandpaper (0.11.17)</a>,
         <a href="https://github.com/carpentries/pegboard" class="external-link">pegboard (0.5.3)</a>,
       and <a href="https://github.com/mblue9/varnish/tree/3403ad0dd37f7641c6442330fcc182937e7964c5" class="external-link">varnish (0.2.16)</a>.</p>
 			</div>
@@ -485,8 +480,8 @@ used during the workshop.</p>
   "url": "https://carpentries-incubator.github.io/bioc-rnaseq/instructor/index.html",
   "identifier": "https://carpentries-incubator.github.io/bioc-rnaseq/instructor/index.html",
   "dateCreated": "2020-09-15",
-  "dateModified": "2023-05-16",
-  "datePublished": "2023-05-16"
+  "dateModified": "2023-05-17",
+  "datePublished": "2023-05-17"
 }
 
   </script><script>

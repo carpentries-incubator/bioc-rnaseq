@@ -1,6 +1,9 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
   <url>
+    <loc>https://carpentries-incubator.github.io/bioc-rnaseq/01-intro-to-rnaseq.html</loc>
+  </url>
+  <url>
     <loc>https://carpentries-incubator.github.io/bioc-rnaseq/01-introduction-setup.html</loc>
   </url>
   <url>
@@ -10,7 +13,13 @@
     <loc>https://carpentries-incubator.github.io/bioc-rnaseq/02-intro-to-rnaseq.html</loc>
   </url>
   <url>
+    <loc>https://carpentries-incubator.github.io/bioc-rnaseq/02-setup.html</loc>
+  </url>
+  <url>
     <loc>https://carpentries-incubator.github.io/bioc-rnaseq/03-experimental-design.html</loc>
+  </url>
+  <url>
+    <loc>https://carpentries-incubator.github.io/bioc-rnaseq/03-import-annotate.html</loc>
   </url>
   <url>
     <loc>https://carpentries-incubator.github.io/bioc-rnaseq/03-setup.html</loc>
@@ -19,7 +28,13 @@
     <loc>https://carpentries-incubator.github.io/bioc-rnaseq/04-experimental-design.html</loc>
   </url>
   <url>
+    <loc>https://carpentries-incubator.github.io/bioc-rnaseq/04-exploratory-qc.html</loc>
+  </url>
+  <url>
     <loc>https://carpentries-incubator.github.io/bioc-rnaseq/04-import-annotate.html</loc>
+  </url>
+  <url>
+    <loc>https://carpentries-incubator.github.io/bioc-rnaseq/05-differential-expression.html</loc>
   </url>
   <url>
     <loc>https://carpentries-incubator.github.io/bioc-rnaseq/05-exploratory-qc.html</loc>
@@ -34,10 +49,19 @@
     <loc>https://carpentries-incubator.github.io/bioc-rnaseq/06-exploratory-qc.html</loc>
   </url>
   <url>
+    <loc>https://carpentries-incubator.github.io/bioc-rnaseq/06-gene-set-analysis.html</loc>
+  </url>
+  <url>
     <loc>https://carpentries-incubator.github.io/bioc-rnaseq/07-differential-expression.html</loc>
   </url>
   <url>
     <loc>https://carpentries-incubator.github.io/bioc-rnaseq/07-gene-set-analysis.html</loc>
+  </url>
+  <url>
+    <loc>https://carpentries-incubator.github.io/bioc-rnaseq/07-next-steps.html</loc>
+  </url>
+  <url>
+    <loc>https://carpentries-incubator.github.io/bioc-rnaseq/08-extra-design.html</loc>
   </url>
   <url>
     <loc>https://carpentries-incubator.github.io/bioc-rnaseq/08-gene-set-analysis.html</loc>
@@ -67,6 +91,9 @@
     <loc>https://carpentries-incubator.github.io/bioc-rnaseq/index.html</loc>
   </url>
   <url>
+    <loc>https://carpentries-incubator.github.io/bioc-rnaseq/instructor/01-intro-to-rnaseq.html</loc>
+  </url>
+  <url>
     <loc>https://carpentries-incubator.github.io/bioc-rnaseq/instructor/01-introduction-setup.html</loc>
   </url>
   <url>
@@ -76,7 +103,13 @@
     <loc>https://carpentries-incubator.github.io/bioc-rnaseq/instructor/02-intro-to-rnaseq.html</loc>
   </url>
   <url>
+    <loc>https://carpentries-incubator.github.io/bioc-rnaseq/instructor/02-setup.html</loc>
+  </url>
+  <url>
     <loc>https://carpentries-incubator.github.io/bioc-rnaseq/instructor/03-experimental-design.html</loc>
+  </url>
+  <url>
+    <loc>https://carpentries-incubator.github.io/bioc-rnaseq/instructor/03-import-annotate.html</loc>
   </url>
   <url>
     <loc>https://carpentries-incubator.github.io/bioc-rnaseq/instructor/03-setup.html</loc>
@@ -85,7 +118,13 @@
     <loc>https://carpentries-incubator.github.io/bioc-rnaseq/instructor/04-experimental-design.html</loc>
   </url>
   <url>
+    <loc>https://carpentries-incubator.github.io/bioc-rnaseq/instructor/04-exploratory-qc.html</loc>
+  </url>
+  <url>
     <loc>https://carpentries-incubator.github.io/bioc-rnaseq/instructor/04-import-annotate.html</loc>
+  </url>
+  <url>
+    <loc>https://carpentries-incubator.github.io/bioc-rnaseq/instructor/05-differential-expression.html</loc>
   </url>
   <url>
     <loc>https://carpentries-incubator.github.io/bioc-rnaseq/instructor/05-exploratory-qc.html</loc>
@@ -100,10 +139,19 @@
     <loc>https://carpentries-incubator.github.io/bioc-rnaseq/instructor/06-exploratory-qc.html</loc>
   </url>
   <url>
+    <loc>https://carpentries-incubator.github.io/bioc-rnaseq/instructor/06-gene-set-analysis.html</loc>
+  </url>
+  <url>
     <loc>https://carpentries-incubator.github.io/bioc-rnaseq/instructor/07-differential-expression.html</loc>
   </url>
   <url>
     <loc>https://carpentries-incubator.github.io/bioc-rnaseq/instructor/07-gene-set-analysis.html</loc>
+  </url>
+  <url>
+    <loc>https://carpentries-incubator.github.io/bioc-rnaseq/instructor/07-next-steps.html</loc>
+  </url>
+  <url>
+    <loc>https://carpentries-incubator.github.io/bioc-rnaseq/instructor/08-extra-design.html</loc>
   </url>
   <url>
     <loc>https://carpentries-incubator.github.io/bioc-rnaseq/instructor/08-gene-set-analysis.html</loc>
