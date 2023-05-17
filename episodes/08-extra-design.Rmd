@@ -1,6 +1,6 @@
 ---
 source: Rmd
-title: Extra: explore design matrices
+title: Extra exploration of design matrices
 teaching: XX
 exercises: XX
 editor_options:
