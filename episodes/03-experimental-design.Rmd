@@ -1,6 +1,6 @@
 ---
 source: Rmd
-title: Experimental design
+title: Extra: explore design matrices
 teaching: XX
 exercises: XX
 editor_options:
