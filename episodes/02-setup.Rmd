@@ -1,23 +1,33 @@
 ---
 source: Rmd
-title: Project set up
+title: RStudio Project and Experimental Data
 teaching: XX
 exercises: XX
 ---
 
 :::::::::::::::::::::::::::::::::::::: questions 
 
-- How can you use RStudio's project system for a particular analysis?
-- How best to organise your directory structure for any analysis?
+- How do you use RStudio project to manage your analysis project?
+- What is the best way to set up directories for an analysis?
+- How to download data set from Gene Expression Omnibus (GEO)?
 
 ::::::::::::::::::::::::::::::::::::::::::::::::
 
 ::::::::::::::::::::::::::::::::::::: objectives
 
-- Set up an RStudio project for the analysis, including directory structure.
+- Create an RStudio project and the directories required for an analysis.
 - Download the data set that will be used for the remaining episodes.
 
 ::::::::::::::::::::::::::::::::::::::::::::::::
+
+## What is RStudio project?
+
+In this lesson, we will be using RStudio, a free integrated development environment (IDE)
+for writing and running R code. 
+Additionally, we will leverage RStudio projects, a feature built-in to RStudio for managing our analysis project.
+If you require assistance with RStudio or its general usage, please refer to our
+[Introduction to data analysis with R and Bioconductor](https://carpentries-incubator.github.io/bioc-intro/20-r-rstudio.html#how-to-learn-more-during-and-after-the-course)
+lesson.
 
 ## Download data
 
