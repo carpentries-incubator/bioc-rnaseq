@@ -8,26 +8,33 @@ exercises: XX
 :::::::::::::::::::::::::::::::::::::: questions 
 
 - How do you use RStudio project to manage your analysis project?
-- What is the best way to set up directories for an analysis?
-- How to download data set from Gene Expression Omnibus (GEO)?
+- What is the most effective way for organising directories for an analysis project?
+- How to download a data set from Gene Expression Omnibus (GEO)?
 
 ::::::::::::::::::::::::::::::::::::::::::::::::
 
 ::::::::::::::::::::::::::::::::::::: objectives
 
-- Create an RStudio project and the directories required for an analysis.
-- Download the data set that will be used for the remaining episodes.
+- Create an RStudio project and the necessary directories for carrying out an analysis.
+- Download the data set that will be used for the subsequent episodes.
 
 ::::::::::::::::::::::::::::::::::::::::::::::::
 
 ## What is RStudio project?
 
-In this lesson, we will be using RStudio, a free integrated development environment (IDE)
-for writing and running R code. 
-Additionally, we will leverage RStudio projects, a feature built-in to RStudio for managing our analysis project.
+In this lesson, we will be using RStudio, a free integrated development environment (IDE),
+to assist us in developing the R code necessary for analysing a RNAseq data.
+Importantly, we will leverage RStudio projects, a feature built-in to RStudio for managing our analysis project.
+
+:::::::::::::::::::::::::::::::::::::::  prereq
+
+## Navigating RStudio
 If you require assistance with RStudio or its general usage, please refer to our
-[Introduction to data analysis with R and Bioconductor](https://carpentries-incubator.github.io/bioc-intro/20-r-rstudio.html#how-to-learn-more-during-and-after-the-course)
+[Introduction to data analysis with R and Bioconductor](https://carpentries-incubator.github.io/bioc-intro/20-r-rstudio.html)
 lesson.
+
+:::::::::::::::::::::::::::::::::::::::
+
 
 ## Download data
 
