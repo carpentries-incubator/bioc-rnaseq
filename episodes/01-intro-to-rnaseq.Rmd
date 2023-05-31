@@ -33,7 +33,7 @@ source("download_data.R")
 
 ## Contribute!
 
-This episode is intended to introduce important concepts in RNA-seq, such as the biology of RNA-seq, typical research questions, experimental design,  data processing, QC issues and ways around them, functional analysis of the expressed genes and use of Bioconductor for RNA-seq analysis pipelines to bring everyone up to speed.  See this [link](https://docs.google.com/document/d/12hUqVo2MhgYH9IT8ShJKSZgeMLzjeUh2EKdxM_siWwM/edit#) on how to contribute
+This episode is intended to introduce important concepts in RNA-seq, such as the biology of RNA-seq, typical research questions, experimental design,  data processing, QC issues and ways around them, functional analysis of the expressed genes and use of Bioconductor for RNA-seq analysis pipelines to bring everyone up to speed.  See this [link](https://docs.google.com/document/d/12hUqVo2MhgYH9IT8ShJKSZgeMLzjeUh2EKdxM_siWwM) on how to contribute
 
 
 ::::::::::::::::::::::::::::::::::::::::::::::::::
