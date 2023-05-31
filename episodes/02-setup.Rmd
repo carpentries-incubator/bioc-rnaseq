@@ -78,7 +78,7 @@ Initially, this working directory should contain four distinct directories:
 This folder should ideally only house raw data and not be modified unless you 
 receive a new dataset (even then, if you have the storage capacity, we suggest you retain 
 the previous dataset as well in case you need it again in the future). 
-For RNAseq data analysis, this directory will typically contain `*.fastq` files 
+For RNA-seq data analysis, this directory will typically contain `*.fastq` files 
 and any related metadata files for the experiment.
 * `scripts`: for storing the R scripts you've written and utilised for analysing the data.
 * `documents`: for storing documents related to your analysis, 
@@ -151,9 +151,9 @@ some data into a file will, by default, be directe to a path relative to your pr
 If you wish to close the project, perhaps to open another project, create a new one, or take a break
 from the project, you can do so by using to `File` > `Close Project` option located in the menu bar.
 
-## Download the RNAseq data for subsequent episodes
+## Download the RNA-seq data for subsequent episodes
 
-Finally, we will learn how to use R to download the RNAseq data required for the 
+Finally, we will learn how to use R to download the RNA-seq data required for the 
 subsequent episodes of the lesson. 
 The dataset we will be using was generated to investigate the impact upper-respiratory infection 
 have on changes in RNA transcription in the cerebellum and spinal cord of mice. 
