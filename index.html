@@ -274,16 +274,17 @@
       <hr></nav><main id="main-content" class="main-content"><h1 class="schedule-heading">Summary and Setup</h1>
       
 
-<p>RNA sequencing (RNA-seq) has revolutionized the field of genomics,
-enabling researchers to gain insights into gene expression,
-transcriptome dynamics, and molecular pathways. <a href="https://bioconductor.org/" class="external-link">Bioconductor</a> is an open-source
+<p>RNA-Seq has revolutionized the field of genomics, enabling
+researchers to gain insights into gene expression, transcriptome
+dynamics, and molecular pathways. <a href="https://bioconductor.org/" class="external-link">Bioconductor</a> is an open-source
 software project that provides a rich set of tools for analyzing
-high-throughput genomic data, including RNA-seq data. This <a href="https://carpentries.org/" class="external-link">Carpentries</a>-style workshop is
+high-throughput genomic data, including RNA-Seq data. This <a href="https://carpentries.org/" class="external-link">Carpentries</a>-style workshop is
 designed to equip participants with the essential skills and knowledge
-needed to analyze RNA-seq data using the Bioconductor ecosystem.
-Throughout this workshop, you will delve into key concepts, including
-data preprocessing, quality control, differential gene expression
-analysis, visualization of results, and gene set analysis.</p>
+needed to analyze RNA sequencing (RNA-Seq) data using the Bioconductor
+ecosystem. Throughout this workshop, you will delve into key concepts,
+including data preprocessing, quality control, differential gene
+expression analysis, visualization of results, and gene set
+analysis.</p>
 <!-- this is an html comment -->
 <div id="prerequisites" class="callout prereq">
 <div class="callout-square">
@@ -293,28 +294,23 @@ analysis, visualization of results, and gene set analysis.</p>
 <h3 class="callout-title">Prerequisites<a class="anchor" aria-label="anchor" href="#prerequisites"></a>
 </h3>
 <div class="callout-content">
-<ul><li>Familiarity with R/Bioconductor, especially the <a href="https://carpentries-incubator.github.io/bioc-intro/23-starting-with-r.html" class="external-link">Introduction
-to R</a> episode of <a href="https://carpentries-incubator.github.io/bioc-intro/20-r-rstudio.html" class="external-link">Introduction
-to data analysis with R and Bioconductor</a> lesson.</li>
+<ul><li>Familiarity with R/Bioconductor, especially the <a href="https://carpentries-incubator.github.io/bioc-intro/" class="external-link">‘Introduction
+to R’</a> module.</li>
 <li>Familiarity with statistical hypothesis testing, such as <a href="https://web.stanford.edu/class/bios221/book/06-chap.html" class="external-link">Chapter
-6</a> of Modern Statistics for Modern Biology book by Holmes and
-Huber.</li>
-<li>Familiarity with the biology of gene expression and RNA-seq, such as
-<a href="https://pubmed.gov/31341269" class="external-link">RNA sequencing: the teenage
-years</a> manuscript by Hadfield et.al.</li>
+6 Testing</a>.</li>
+<li>Familiarity with the biology of gene expression and RNA sequencing,
+such as <a href="https://pubmed.gov/31341269" class="external-link">Stark 2019 NRG</a>.</li>
 </ul></div>
 </div>
 </div>
 
 
-      <section id="setup"><p>Ensure that you have the most recent versions of R and RStudio
-installed on your computer. For detailed instructions on how to do this,
-you can refer to the section “If you already have R and RStudio
-installed” in the <a href="https://carpentries-incubator.github.io/bioc-intro/#r-and-rstudio" class="external-link">Introduction
-to R</a> episode of the <a href="https://carpentries-incubator.github.io/bioc-intro" class="external-link">Introduction
-to data analysis with R and Bioconductor</a> lesson.</p>
-<p>Additionally, you will also need to install the following packages
-that will be used throughout the lesson.</p>
+      <section id="setup"><p>Check you have the most recent versions of R and RStudio. See the
+instructions under “If you already have R and RStudio installed” in <a href="https://carpentries-incubator.github.io/bioc-intro/#r-and-rstudio" class="external-link">Introduction
+to R</a>. You will also need to install the packages below that will be
+used during the workshop. <em>Please do this before the workshop. If you
+need help, an instructor will be available 30 min before the
+workshop.</em></p>
 <div class="codewrapper sourceCode" id="cb1">
 <h3 class="code-label">R<i aria-hidden="true" data-feather="chevron-left"></i><i aria-hidden="true" data-feather="chevron-right"></i>
 </h3>
@@ -326,9 +322,6 @@ that will be used throughout the lesson.</p>
 <span>                       <span class="st">"RColorBrewer"</span>, <span class="st">"hexbin"</span>, <span class="st">"cowplot"</span>,</span>
 <span>                       <span class="st">"clusterProfiler"</span>, <span class="st">"enrichplot"</span>, <span class="st">"kableExtra"</span><span class="op">)</span><span class="op">)</span></span></code></pre>
 </div>
-<p><em>If you are attending a workshop, please complete all of the above
-before the workshop. Should you need help, an instructor will be
-available 30 minutes before the workshop commences to assist.</em></p>
 
 
       </section></main><nav class="bottom-pagination mx-md-4" aria-label="Next Chapter"><!-- content for small screens --><div class="d-block d-sm-block d-md-none">
