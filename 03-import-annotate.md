@@ -130,7 +130,7 @@ sessionInfo()
 ```
 
 ```{.output}
-R version 4.3.0 (2023-04-21)
+R version 4.3.1 (2023-06-16)
 Platform: x86_64-pc-linux-gnu (64-bit)
 Running under: Ubuntu 22.04.2 LTS
 
@@ -152,26 +152,26 @@ attached base packages:
 [8] base     
 
 other attached packages:
- [1] org.Mm.eg.db_3.17.0         AnnotationDbi_1.62.1       
- [3] SummarizedExperiment_1.30.1 Biobase_2.60.0             
- [5] MatrixGenerics_1.12.0       matrixStats_0.63.0         
- [7] GenomicRanges_1.52.0        GenomeInfoDb_1.36.0        
- [9] IRanges_2.34.0              S4Vectors_0.38.1           
+ [1] org.Mm.eg.db_3.17.0         AnnotationDbi_1.62.2       
+ [3] SummarizedExperiment_1.30.2 Biobase_2.60.0             
+ [5] MatrixGenerics_1.12.2       matrixStats_1.0.0          
+ [7] GenomicRanges_1.52.0        GenomeInfoDb_1.36.1        
+ [9] IRanges_2.34.1              S4Vectors_0.38.1           
 [11] BiocGenerics_0.46.0        
 
 loaded via a namespace (and not attached):
- [1] Matrix_1.5-4            bit_4.0.5               compiler_4.3.0         
- [4] BiocManager_1.30.20     renv_0.17.3             crayon_1.5.2           
- [7] blob_1.2.4              Biostrings_2.68.0       bitops_1.0-7           
+ [1] Matrix_1.5-4.1          bit_4.0.5               compiler_4.3.1         
+ [4] BiocManager_1.30.21     renv_0.17.3             crayon_1.5.2           
+ [7] blob_1.2.4              Biostrings_2.68.1       bitops_1.0-7           
 [10] png_0.1-8               fastmap_1.1.1           lattice_0.21-8         
-[13] R6_2.5.1                XVector_0.40.0          S4Arrays_1.0.1         
-[16] knitr_1.42              DelayedArray_0.26.2     GenomeInfoDbData_1.2.10
+[13] R6_2.5.1                XVector_0.40.0          S4Arrays_1.0.4         
+[16] knitr_1.43              DelayedArray_0.26.6     GenomeInfoDbData_1.2.10
 [19] DBI_1.1.3               rlang_1.1.1             KEGGREST_1.40.0        
 [22] cachem_1.0.8            xfun_0.39               bit64_4.0.5            
 [25] RSQLite_2.3.1           memoise_2.0.1           cli_3.6.1              
-[28] zlibbioc_1.46.0         grid_4.3.0              vctrs_0.6.2            
-[31] evaluate_0.21           RCurl_1.98-1.12         httr_1.4.6             
-[34] pkgconfig_2.0.3         tools_4.3.0            
+[28] zlibbioc_1.46.0         grid_4.3.1              rstudioapi_0.14        
+[31] vctrs_0.6.3             evaluate_0.21           RCurl_1.98-1.12        
+[34] httr_1.4.6              pkgconfig_2.0.3         tools_4.3.1            
 ```
 
 :::::::::::::::::::::::::::::::::::::::: keypoints
