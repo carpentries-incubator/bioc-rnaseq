@@ -331,7 +331,7 @@
         
 <section id="aio-01-intro-to-rnaseq"><p>Content from <a href="01-intro-to-rnaseq.html">Introduction to RNA-seq</a></p>
 <hr>
-<p> Last updated on 2023-07-07 | 
+<p> Last updated on 2023-07-11 | 
         
         <a href="https://github.com/carpentries-incubator/bioc-rnaseq/edit/main/episodes/01-intro-to-rnaseq.Rmd" class="external-link">Edit this page <i aria-hidden="true" data-feather="edit"></i></a></p>
 <p>Estimated time <i aria-hidden="true" data-feather="clock"></i> NA minutes </p>
@@ -465,7 +465,7 @@ analysis of RNA-seq data are <code>DESeq2</code>, <code>edgeR</code> and
 </div>
 </div></section><section id="aio-02-setup"><p>Content from <a href="02-setup.html">RStudio Project and Experimental Data</a></p>
 <hr>
-<p> Last updated on 2023-07-07 | 
+<p> Last updated on 2023-07-11 | 
         
         <a href="https://github.com/carpentries-incubator/bioc-rnaseq/edit/main/episodes/02-setup.Rmd" class="external-link">Edit this page <i aria-hidden="true" data-feather="edit"></i></a></p>
 <p>Estimated time <i aria-hidden="true" data-feather="clock"></i> NA minutes </p>
@@ -807,7 +807,7 @@ downloading datasets from the internet.</li>
 </div>
 </section></section><section id="aio-03-import-annotate"><p>Content from <a href="03-import-annotate.html">Importing and annotating quantified data into R</a></p>
 <hr>
-<p> Last updated on 2023-07-07 | 
+<p> Last updated on 2023-07-11 | 
         
         <a href="https://github.com/carpentries-incubator/bioc-rnaseq/edit/main/episodes/03-import-annotate.Rmd" class="external-link">Edit this page <i aria-hidden="true" data-feather="edit"></i></a></p>
 <p>Estimated time <i aria-hidden="true" data-feather="clock"></i> NA minutes </p>
@@ -1007,17 +1007,18 @@ other attached packages:
 
 loaded via a namespace (and not attached):
  [1] Matrix_1.5-4.1          bit_4.0.5               compiler_4.3.1         
- [4] BiocManager_1.30.21     renv_0.17.3             crayon_1.5.2           
+ [4] BiocManager_1.30.21     renv_1.0.0              crayon_1.5.2           
  [7] blob_1.2.4              Biostrings_2.68.1       bitops_1.0-7           
-[10] png_0.1-8               fastmap_1.1.1           lattice_0.21-8         
-[13] R6_2.5.1                XVector_0.40.0          S4Arrays_1.0.4         
-[16] knitr_1.43              DelayedArray_0.26.6     GenomeInfoDbData_1.2.10
-[19] DBI_1.1.3               rlang_1.1.1             KEGGREST_1.40.0        
-[22] cachem_1.0.8            xfun_0.39               bit64_4.0.5            
-[25] RSQLite_2.3.1           memoise_2.0.1           cli_3.6.1              
-[28] zlibbioc_1.46.0         grid_4.3.1              rstudioapi_0.14        
-[31] vctrs_0.6.3             evaluate_0.21           RCurl_1.98-1.12        
-[34] httr_1.4.6              pkgconfig_2.0.3         tools_4.3.1            </code></pre>
+[10] png_0.1-8               fastmap_1.1.1           yaml_2.3.7             
+[13] lattice_0.21-8          R6_2.5.1                XVector_0.40.0         
+[16] S4Arrays_1.0.4          knitr_1.43              DelayedArray_0.26.6    
+[19] GenomeInfoDbData_1.2.10 DBI_1.1.3               rlang_1.1.1            
+[22] KEGGREST_1.40.0         cachem_1.0.8            xfun_0.39              
+[25] bit64_4.0.5             RSQLite_2.3.1           memoise_2.0.1          
+[28] cli_3.6.1               zlibbioc_1.46.0         grid_4.3.1             
+[31] rstudioapi_0.15.0       vctrs_0.6.3             evaluate_0.21          
+[34] RCurl_1.98-1.12         httr_1.4.6              pkgconfig_2.0.3        
+[37] tools_4.3.1            </code></pre>
 </div>
 <div id="keypoints1" class="callout keypoints">
 <div class="callout-square">
@@ -1041,7 +1042,7 @@ analysis, with gene symbols added for easier interpretation.</li>
 </div>
 </section></section><section id="aio-04-exploratory-qc"><p>Content from <a href="04-exploratory-qc.html">Exploratory analysis and quality control</a></p>
 <hr>
-<p> Last updated on 2023-07-07 | 
+<p> Last updated on 2023-07-11 | 
         
         <a href="https://github.com/carpentries-incubator/bioc-rnaseq/edit/main/episodes/04-exploratory-qc.Rmd" class="external-link">Edit this page <i aria-hidden="true" data-feather="edit"></i></a></p>
 <p>Estimated time <i aria-hidden="true" data-feather="clock"></i> NA minutes </p>
@@ -1328,19 +1329,19 @@ loaded via a namespace (and not attached):
 [16] cluster_2.1.4           pkgconfig_2.0.3         Matrix_1.5-4.1         
 [19] lifecycle_1.0.3         GenomeInfoDbData_1.2.10 farver_2.1.1           
 [22] compiler_4.3.1          munsell_0.5.0           codetools_0.2-19       
-[25] clue_0.3-64             RCurl_1.98-1.12         preprocessCore_1.62.1  
-[28] pillar_1.9.0            crayon_1.5.2            BiocParallel_1.34.2    
-[31] affy_1.78.0             DelayedArray_0.26.6     limma_3.56.2           
-[34] iterators_1.0.14        foreach_1.5.2           tidyselect_1.2.0       
-[37] locfit_1.5-9.8          digest_0.6.33           dplyr_1.1.2            
-[40] labeling_0.4.2          colorspace_2.1-0        cli_3.6.1              
-[43] magrittr_2.0.3          S4Arrays_1.0.4          utf8_1.2.3             
-[46] withr_2.5.0             scales_1.2.1            XVector_0.40.0         
-[49] affyio_1.70.0           GetoptLong_1.0.5        png_0.1-8              
-[52] evaluate_0.21           knitr_1.43              doParallel_1.0.17      
-[55] rlang_1.1.1             Rcpp_1.0.11             glue_1.6.2             
-[58] BiocManager_1.30.21     renv_0.17.3             rstudioapi_0.14        
-[61] R6_2.5.1                zlibbioc_1.46.0        </code></pre>
+[25] clue_0.3-64             RCurl_1.98-1.12         yaml_2.3.7             
+[28] preprocessCore_1.62.1   pillar_1.9.0            crayon_1.5.2           
+[31] BiocParallel_1.34.2     affy_1.78.1             DelayedArray_0.26.6    
+[34] limma_3.56.2            iterators_1.0.14        foreach_1.5.2          
+[37] tidyselect_1.2.0        locfit_1.5-9.8          digest_0.6.33          
+[40] dplyr_1.1.2             labeling_0.4.2          colorspace_2.1-0       
+[43] cli_3.6.1               magrittr_2.0.3          S4Arrays_1.0.4         
+[46] utf8_1.2.3              withr_2.5.0             scales_1.2.1           
+[49] XVector_0.40.0          affyio_1.70.0           GetoptLong_1.0.5       
+[52] png_0.1-8               evaluate_0.21           knitr_1.43             
+[55] doParallel_1.0.17       rlang_1.1.1             Rcpp_1.0.11            
+[58] glue_1.6.2              BiocManager_1.30.21     renv_1.0.0             
+[61] rstudioapi_0.15.0       R6_2.5.1                zlibbioc_1.46.0        </code></pre>
 </div>
 <div id="keypoints1" class="callout keypoints">
 <div class="callout-square">
@@ -1364,7 +1365,7 @@ work directly on the raw counts.</li>
 </div>
 </section></section><section id="aio-05-differential-expression"><p>Content from <a href="05-differential-expression.html">Differential expression analysis</a></p>
 <hr>
-<p> Last updated on 2023-07-07 | 
+<p> Last updated on 2023-07-11 | 
         
         <a href="https://github.com/carpentries-incubator/bioc-rnaseq/edit/main/episodes/05-differential-expression.Rmd" class="external-link">Edit this page <i aria-hidden="true" data-feather="edit"></i></a></p>
 <p>Estimated time <i aria-hidden="true" data-feather="clock"></i> NA minutes </p>
@@ -1696,7 +1697,7 @@ beneficial.</li>
 </div>
 </section></section><section id="aio-06-gene-set-analysis"><p>Content from <a href="06-gene-set-analysis.html">Gene set analysis</a></p>
 <hr>
-<p> Last updated on 2023-07-07 | 
+<p> Last updated on 2023-07-11 | 
         
         <a href="https://github.com/carpentries-incubator/bioc-rnaseq/edit/main/episodes/06-gene-set-analysis.Rmd" class="external-link">Edit this page <i aria-hidden="true" data-feather="edit"></i></a></p>
 <p>Estimated time <i aria-hidden="true" data-feather="clock"></i> NA minutes </p>
@@ -2740,7 +2741,7 @@ genes.</li>
 </div>
 </section></section><section id="aio-07-next-steps"><p>Content from <a href="07-next-steps.html">Next steps</a></p>
 <hr>
-<p> Last updated on 2023-07-07 | 
+<p> Last updated on 2023-07-11 | 
         
         <a href="https://github.com/carpentries-incubator/bioc-rnaseq/edit/main/episodes/07-next-steps.Rmd" class="external-link">Edit this page <i aria-hidden="true" data-feather="edit"></i></a></p>
 <p>Estimated time <i aria-hidden="true" data-feather="clock"></i> NA minutes </p>
@@ -2786,7 +2787,7 @@ genes.</li>
 </div>
 </div></section><section id="aio-08-extra-design"><p>Content from <a href="08-extra-design.html">Extra exploration of design matrices</a></p>
 <hr>
-<p> Last updated on 2023-07-07 | 
+<p> Last updated on 2023-07-11 | 
         
         <a href="https://github.com/carpentries-incubator/bioc-rnaseq/edit/main/episodes/08-extra-design.Rmd" class="external-link">Edit this page <i aria-hidden="true" data-feather="edit"></i></a></p>
 <p>Estimated time <i aria-hidden="true" data-feather="clock"></i> NA minutes </p>
@@ -3551,7 +3552,7 @@ linear combinations of the model coefficients.</li>
         <p>Materials licensed under <a href="../LICENSE.html">CC-BY 4.0</a> by the authors</p>
         
         <p><a href="https://creativecommons.org/licenses/by-sa/4.0/" class="external-link">Template licensed under CC-BY 4.0</a> by <a href="https://carpentries.org" class="external-link">The Carpentries</a></p>
-        <p>Built with <a href="https://github.com/carpentries/sandpaper/tree/0.12.4" class="external-link">sandpaper (0.12.4)</a>,
+        <p>Built with <a href="https://github.com/carpentries/sandpaper" class="external-link">sandpaper (0.12.5)</a>,
         <a href="https://github.com/carpentries/pegboard" class="external-link">pegboard (0.5.3)</a>,
       and <a href="https://github.com/mblue9/varnish/tree/3403ad0dd37f7641c6442330fcc182937e7964c5" class="external-link">varnish (0.2.16)</a>.</p>
 			</div>
@@ -3575,8 +3576,8 @@ linear combinations of the model coefficients.</li>
   "url": "https://carpentries-incubator.github.io/bioc-rnaseq/instructor/aio.html",
   "identifier": "https://carpentries-incubator.github.io/bioc-rnaseq/instructor/aio.html",
   "dateCreated": "2020-09-15",
-  "dateModified": "2023-07-07",
-  "datePublished": "2023-07-07"
+  "dateModified": "2023-07-11",
+  "datePublished": "2023-07-11"
 }
 
   </script><script>
