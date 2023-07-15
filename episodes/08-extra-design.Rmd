@@ -42,7 +42,7 @@ suppressPackageStartupMessages({
 
 Next, we read the metadata table for our data set. 
 As seen in previous episodes, the metadata contains information about the age, sex, infection status, time of measurement and tissue of the collected samples. 
-Note that Day0 always correspond to non-infected samples, and that infected samples are collected on days 4 and 8.
+Note that Day0 always corresponds to non-infected samples, and that infected samples are collected on days 4 and 8.
 Moreover, all mice have the same age (8 weeks). 
 Hence, in the first part of this episode we consider only the sex, tissue and time variables further. 
 
@@ -65,7 +65,7 @@ vd$cooccurrenceplots
 
 ### Challenge
 
-Based on this visualization, would you say that the data set is balanced, or are there combinations of predictor variables that are severely underrepresented?
+Based on this visualization, would you say that the data set is balanced, or are there combinations of predictor variables that are severely over- or underrepresented?
 
 ::::::::::::::::::::::::::::::::::::::::::::::::::
 
