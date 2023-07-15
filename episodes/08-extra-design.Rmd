@@ -65,7 +65,7 @@ vd$cooccurrenceplots
 
 ### Challenge
 
-Based on this visualization, would you say that the data set is balanced, or are there combinations of predictor variables that are severaly underrepresented?
+Based on this visualization, would you say that the data set is balanced, or are there combinations of predictor variables that are severely underrepresented?
 
 ::::::::::::::::::::::::::::::::::::::::::::::::::
 
