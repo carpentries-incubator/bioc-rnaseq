@@ -6,6 +6,10 @@ exercises: XX
 ---
 
 
+```{.warning}
+Warning: replacing previous import 'S4Arrays::makeNindexFromArrayViewport' by
+'DelayedArray::makeNindexFromArrayViewport' when loading 'SummarizedExperiment'
+```
 
 ::::::::::::::::::::::::::::::::::::::: objectives
 
@@ -132,7 +136,7 @@ sessionInfo()
 ```
 
 ```{.output}
-R version 4.3.1 (2023-06-16)
+R version 4.3.0 (2023-04-21)
 Platform: x86_64-pc-linux-gnu (64-bit)
 Running under: Ubuntu 22.04.2 LTS
 
@@ -162,7 +166,7 @@ other attached packages:
 [11] BiocGenerics_0.46.0        
 
 loaded via a namespace (and not attached):
- [1] Matrix_1.5-4.1          bit_4.0.5               compiler_4.3.1         
+ [1] Matrix_1.5-1            bit_4.0.5               compiler_4.3.0         
  [4] BiocManager_1.30.21     renv_1.0.0              crayon_1.5.2           
  [7] blob_1.2.4              Biostrings_2.68.1       bitops_1.0-7           
 [10] png_0.1-8               fastmap_1.1.1           yaml_2.3.7             
@@ -171,10 +175,10 @@ loaded via a namespace (and not attached):
 [19] GenomeInfoDbData_1.2.10 DBI_1.1.3               rlang_1.1.1            
 [22] KEGGREST_1.40.0         cachem_1.0.8            xfun_0.39              
 [25] bit64_4.0.5             RSQLite_2.3.1           memoise_2.0.1          
-[28] cli_3.6.1               zlibbioc_1.46.0         grid_4.3.1             
+[28] cli_3.6.1               zlibbioc_1.46.0         grid_4.3.0             
 [31] rstudioapi_0.15.0       vctrs_0.6.3             evaluate_0.21          
 [34] RCurl_1.98-1.12         httr_1.4.6              pkgconfig_2.0.3        
-[37] tools_4.3.1            
+[37] tools_4.3.0            
 ```
 
 :::::::::::::::::::::::::::::::::::::::: keypoints

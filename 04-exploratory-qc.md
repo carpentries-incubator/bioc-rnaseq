@@ -8,6 +8,10 @@ editor_options:
 ---
 
 
+```{.warning}
+Warning: replacing previous import 'S4Arrays::makeNindexFromArrayViewport' by
+'DelayedArray::makeNindexFromArrayViewport' when loading 'SummarizedExperiment'
+```
 
 ::::::::::::::::::::::::::::::::::::::: objectives
 
@@ -194,7 +198,7 @@ sessionInfo()
 ```
 
 ```{.output}
-R version 4.3.1 (2023-06-16)
+R version 4.3.0 (2023-04-21)
 Platform: x86_64-pc-linux-gnu (64-bit)
 Running under: Ubuntu 22.04.2 LTS
 
@@ -228,12 +232,12 @@ other attached packages:
 loaded via a namespace (and not attached):
  [1] shape_1.4.6             circlize_0.4.15         gtable_0.3.3           
  [4] rjson_0.2.21            xfun_0.39               GlobalOptions_0.1.2    
- [7] lattice_0.21-8          vctrs_0.6.3             tools_4.3.1            
-[10] bitops_1.0-7            generics_0.1.3          parallel_4.3.1         
+ [7] lattice_0.21-8          vctrs_0.6.3             tools_4.3.0            
+[10] bitops_1.0-7            generics_0.1.3          parallel_4.3.0         
 [13] tibble_3.2.1            fansi_1.0.4             highr_0.10             
-[16] cluster_2.1.4           pkgconfig_2.0.3         Matrix_1.5-4.1         
+[16] cluster_2.1.4           pkgconfig_2.0.3         Matrix_1.5-1           
 [19] lifecycle_1.0.3         GenomeInfoDbData_1.2.10 farver_2.1.1           
-[22] compiler_4.3.1          munsell_0.5.0           codetools_0.2-19       
+[22] compiler_4.3.0          munsell_0.5.0           codetools_0.2-19       
 [25] clue_0.3-64             RCurl_1.98-1.12         yaml_2.3.7             
 [28] preprocessCore_1.62.1   pillar_1.9.0            crayon_1.5.2           
 [31] BiocParallel_1.34.2     affy_1.78.1             DelayedArray_0.26.6    

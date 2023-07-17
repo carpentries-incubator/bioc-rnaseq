@@ -6,6 +6,10 @@ exercises: XX
 ---
 
 
+```{.warning}
+Warning: replacing previous import 'S4Arrays::makeNindexFromArrayViewport' by
+'DelayedArray::makeNindexFromArrayViewport' when loading 'SummarizedExperiment'
+```
 
 ::::::::::::::::::::::::::::::::::::::: objectives
 

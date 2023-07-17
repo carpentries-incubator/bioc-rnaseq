@@ -1,13 +1,17 @@
 ---
 source: Rmd
 title: Extra exploration of design matrices
-teaching: XX
-exercises: XX
+teaching: 30
+exercises: 30
 editor_options:
   chunk_output_type: console
 ---
 
 
+```{.warning}
+Warning: replacing previous import 'S4Arrays::makeNindexFromArrayViewport' by
+'DelayedArray::makeNindexFromArrayViewport' when loading 'SummarizedExperiment'
+```
 
 ::::::::::::::::::::::::::::::::::::::: objectives
 
@@ -24,14 +28,10 @@ editor_options:
 
 
 
-:::::::::::::::::::::::::::::::::::::::::  callout
+## Loading required packages and reading data
 
-### Contribute!
-
-This episode is intended to provide a recap of the typical biological questions which would require an RNA-seq analysis approach; introduce what is an experimental design, then discuss the experimental designs in the context of the typical biological questions, interpretation of design parameters (treatmet, control, interaction, p-value, etc). 
-It is important therfore to understand, what question to ask, which design to use, why that design, how to analysise the data and output.
-
-::::::::::::::::::::::::::::::::::::::::::::::::::
+We start by loading a few packages that will be needed in this episode. 
+In particular, the [ExploreModelMatrix](https://bioconductor.org/packages/ExploreModelMatrix/) package provides resources for exploring design matrices in a graphical fashion, for easier interpretation. 
 
 
 ```r
@@ -41,6 +41,12 @@ suppressPackageStartupMessages({
     library(dplyr)
 })
 ```
+
+Next, we read the metadata table for our data set. 
+As seen in previous episodes, the metadata contains information about the age, sex, infection status, time of measurement and tissue of the collected samples. 
+Note that Day0 always corresponds to non-infected samples, and that infected samples are collected on days 4 and 8.
+Moreover, all mice have the same age (8 weeks). 
+Hence, in the first part of this episode we consider only the sex, tissue and time variables further. 
 
 
 ```r
@@ -143,6 +149,30 @@ GSM2545379  InfluenzaA C57BL/6 Day8 Spinalcord    24
 GSM2545380  InfluenzaA C57BL/6 Day8 Cerebellum    19
 ```
 
+```r
+table(meta$time, meta$infection)
+```
+
+```{.output}
+      
+       InfluenzaA NonInfected
+  Day0          0          15
+  Day4         16           0
+  Day8         14           0
+```
+
+```r
+table(meta$age)
+```
+
+```{.output}
+
+8 weeks 
+     45 
+```
+
+We can start by visualizing the number of observations for each combination of the three predictor variables. 
+
 
 ```r
 vd <- VisualizeDesign(sampleData = meta, 
@@ -163,7 +193,122 @@ $`tissue = Spinalcord`
 
 <img src="fig/08-extra-design-rendered-unnamed-chunk-5-2.png" style="display: block; margin: auto;" />
 
+:::::::::::::::::::::::::::::::::::::::  challenge
+
+### Challenge
+
+Based on this visualization, would you say that the data set is balanced, or are there combinations of predictor variables that are severely over- or underrepresented?
+
+::::::::::::::::::::::::::::::::::::::::::::::::::
+
+
 ## Compare males and females, non-infected spinal cord
+
+Next, we will set up our first design matrix. 
+Here, we will focus on the uninfected (Day0) spinal cord samples, and our aim is to compare the male and female mice. 
+Thus, we first subset the metadata to only the samples of interest, and next set up and visualize the design matrix with a single predictor variable (sex). 
+By defining the design formula as `~ sex`, we tell R to include an intercept in the design. 
+This intercept will represent the 'baseline' level of the predictor variable, which in this case is selected to be the Female mice. 
+If not explicitly specified, R will order the values of the predictor in alphabetical order and select the first one as the reference or baseline level. 
+
+
+```r
+## Subset metadata
+meta_noninf_spc <- meta %>% filter(time == "Day0" & 
+                                       tissue == "Spinalcord")
+meta_noninf_spc
+```
+
+```{.output}
+                     title geo_accession     organism     age    sex
+GSM2545356 CNS_RNA-seq_574    GSM2545356 Mus musculus 8 weeks   Male
+GSM2545357 CNS_RNA-seq_575    GSM2545357 Mus musculus 8 weeks   Male
+GSM2545358 CNS_RNA-seq_583    GSM2545358 Mus musculus 8 weeks Female
+GSM2545361 CNS_RNA-seq_590    GSM2545361 Mus musculus 8 weeks   Male
+GSM2545364 CNS_RNA-seq_709    GSM2545364 Mus musculus 8 weeks Female
+GSM2545365 CNS_RNA-seq_710    GSM2545365 Mus musculus 8 weeks Female
+GSM2545366 CNS_RNA-seq_711    GSM2545366 Mus musculus 8 weeks Female
+GSM2545367 CNS_RNA-seq_713    GSM2545367 Mus musculus 8 weeks   Male
+             infection  strain time     tissue mouse
+GSM2545356 NonInfected C57BL/6 Day0 Spinalcord     2
+GSM2545357 NonInfected C57BL/6 Day0 Spinalcord     3
+GSM2545358 NonInfected C57BL/6 Day0 Spinalcord     4
+GSM2545361 NonInfected C57BL/6 Day0 Spinalcord     7
+GSM2545364 NonInfected C57BL/6 Day0 Spinalcord     8
+GSM2545365 NonInfected C57BL/6 Day0 Spinalcord     9
+GSM2545366 NonInfected C57BL/6 Day0 Spinalcord    10
+GSM2545367 NonInfected C57BL/6 Day0 Spinalcord    11
+```
+
+```r
+## Use ExploreModelMatrix to create a design matrix and visualizations, given 
+## the desired design formula. 
+vd <- VisualizeDesign(sampleData = meta_noninf_spc, 
+                      designFormula = ~ sex)
+vd$designmatrix
+```
+
+```{.output}
+           (Intercept) sexMale
+GSM2545356           1       1
+GSM2545357           1       1
+GSM2545358           1       0
+GSM2545361           1       1
+GSM2545364           1       0
+GSM2545365           1       0
+GSM2545366           1       0
+GSM2545367           1       1
+```
+
+```r
+vd$plotlist
+```
+
+```{.output}
+[[1]]
+```
+
+<img src="fig/08-extra-design-rendered-unnamed-chunk-6-1.png" style="display: block; margin: auto;" />
+
+```r
+## Note that we can also generate the design matrix like this
+model.matrix(~ sex, data = meta_noninf_spc)
+```
+
+```{.output}
+           (Intercept) sexMale
+GSM2545356           1       1
+GSM2545357           1       1
+GSM2545358           1       0
+GSM2545361           1       1
+GSM2545364           1       0
+GSM2545365           1       0
+GSM2545366           1       0
+GSM2545367           1       1
+attr(,"assign")
+[1] 0 1
+attr(,"contrasts")
+attr(,"contrasts")$sex
+[1] "contr.treatment"
+```
+
+:::::::::::::::::::::::::::::::::::::::  challenge
+
+### Challenge
+
+With this design, what is the interpretation of the `sexMale` coefficient?
+
+::::::::::::::::::::::::::::::::::::::::::::::::::
+
+:::::::::::::::::::::::::::::::::::::::  challenge
+
+### Challenge
+
+Set up the design formula to compare male and female spinal cord samples from Day0 as above, but instruct R to not include an intercept in the model. How does this change the interpretation of the coefficients? What contrast would have to be specified to compare the mean expression of a gene between male and female mice? 
+
+:::::::::::::::  solution
+
+### Solution
 
 
 ```r
@@ -195,20 +340,20 @@ GSM2545367 NonInfected C57BL/6 Day0 Spinalcord    11
 
 ```r
 vd <- VisualizeDesign(sampleData = meta_noninf_spc, 
-                      designFormula = ~ sex)
+                      designFormula = ~ 0 + sex)
 vd$designmatrix
 ```
 
 ```{.output}
-           (Intercept) sexMale
-GSM2545356           1       1
-GSM2545357           1       1
-GSM2545358           1       0
-GSM2545361           1       1
-GSM2545364           1       0
-GSM2545365           1       0
-GSM2545366           1       0
-GSM2545367           1       1
+           sexFemale sexMale
+GSM2545356         0       1
+GSM2545357         0       1
+GSM2545358         1       0
+GSM2545361         0       1
+GSM2545364         1       0
+GSM2545365         1       0
+GSM2545366         1       0
+GSM2545367         0       1
 ```
 
 ```r
@@ -219,11 +364,15 @@ vd$plotlist
 [[1]]
 ```
 
-<img src="fig/08-extra-design-rendered-unnamed-chunk-6-1.png" style="display: block; margin: auto;" />
+<img src="fig/08-extra-design-rendered-unnamed-chunk-7-1.png" style="display: block; margin: auto;" />
+
+:::::::::::::::::::::::::
+
+::::::::::::::::::::::::::::::::::::::::::::::::::
 
 :::::::::::::::::::::::::::::::::::::::  challenge
 
-### Challenge: Can you do it?
+### Challenge
 
 Set up the design formula to compare the three time points (Day0, Day4, Day8) in the male spinal cord samples, and visualize it using `ExploreModelMatrix`.
 
@@ -295,13 +444,16 @@ vd$plotlist
 [[1]]
 ```
 
-<img src="fig/08-extra-design-rendered-unnamed-chunk-7-1.png" style="display: block; margin: auto;" />
+<img src="fig/08-extra-design-rendered-unnamed-chunk-8-1.png" style="display: block; margin: auto;" />
 
 :::::::::::::::::::::::::
 
 ::::::::::::::::::::::::::::::::::::::::::::::::::
 
 ## Factorial design without interactions
+
+Next, we again consider only non-infected mice, but fit a model incorporating both sex and tissue as predictors. 
+We assume that the tissue differences are the same for both male and female mice, and consequently fit an additive model, without interaction terms. 
 
 
 ```r
@@ -377,9 +529,12 @@ vd$plotlist
 [[1]]
 ```
 
-<img src="fig/08-extra-design-rendered-unnamed-chunk-8-1.png" style="display: block; margin: auto;" />
+<img src="fig/08-extra-design-rendered-unnamed-chunk-9-1.png" style="display: block; margin: auto;" />
 
 ## Factorial design with interactions
+
+In the previous model, we assumed that the tissue differences were the same for both male and female mice. 
+To allow for the estimation of sex-specific tissue differences (at the expense of having one additional coefficient to estimate from the data), we can include an interaction term in the model. 
 
 
 ```r
@@ -423,6 +578,9 @@ GSM2545367 NonInfected C57BL/6 Day0 Spinalcord    11
 ```
 
 ```r
+## Define a design including an interaction term
+## Note that ~ sex * tissue is equivalent to 
+## ~ sex + tissue + sex:tissue
 vd <- VisualizeDesign(sampleData = meta_noninf, 
                       designFormula = ~ sex * tissue)
 vd$designmatrix
@@ -455,9 +613,14 @@ vd$plotlist
 [[1]]
 ```
 
-<img src="fig/08-extra-design-rendered-unnamed-chunk-9-1.png" style="display: block; margin: auto;" />
+<img src="fig/08-extra-design-rendered-unnamed-chunk-10-1.png" style="display: block; margin: auto;" />
 
 ## Paired design
+
+In this particular data set the samples are paired - the same mice have contributed both the cerebellum and spinal cord samples. 
+This information was not included in the previous models. 
+However, accounting for it can increase power to detect tissue differences by eliminating variability in baseline expression levels between mice. 
+Here, we define a paired design for the female non-infected mice, aimed at testing for differences between tissues after accounting for baseline differences between mice.
 
 
 ```r
@@ -517,9 +680,15 @@ vd$plotlist
 [[1]]
 ```
 
-<img src="fig/08-extra-design-rendered-unnamed-chunk-10-1.png" style="display: block; margin: auto;" />
+<img src="fig/08-extra-design-rendered-unnamed-chunk-11-1.png" style="display: block; margin: auto;" />
 
 ## Within- and between-subject comparisons
+
+In some situations, we need to combine the types of models considered above. 
+For example, let's say that we want to investigate if the tissue differences are different for infected and non-infected female mice. 
+In this case, each mice only contributes to one of the infection groups (each mice is either infected or non-infected), but contributes both a cerebellum and a spinal cord sample.
+One way to view this type of design is as two paired experiments, one for each infection group (see the [edgeR user guide section 3.5](https://www.bioconductor.org/packages/release/bioc/vignettes/edgeR/inst/doc/edgeRUsersGuide.pdf)).
+We can then easily compare the two tissues in each infection group, and contrast the tissue differences between the infection groups. 
 
 
 ```r
@@ -527,6 +696,9 @@ meta_fem_day04 <- meta %>%
     filter(sex == "Female" & 
                time %in% c("Day0", "Day4")) %>%
     droplevels()
+# ensure that mouse is treated as a categorical variable
+meta_fem_day04$mouse <- factor(meta_fem_day04$mouse)
+
 meta_fem_day04
 ```
 
@@ -579,23 +751,40 @@ design
 ```
 
 ```{.output}
-           (Intercept) mouse Spc.Day0 Spc.Day4
-GSM2545337           1     9        0        0
-GSM2545338           1    10        0        0
-GSM2545339           1    15        0        0
-GSM2545344           1    22        0        0
-GSM2545348           1     8        0        0
-GSM2545352           1    21        0        0
-GSM2545353           1     4        0        0
-GSM2545358           1     4        1        0
-GSM2545362           1    20        0        0
-GSM2545364           1     8        1        0
-GSM2545365           1     9        1        0
-GSM2545366           1    10        1        0
-GSM2545371           1    15        0        1
-GSM2545375           1    20        0        1
-GSM2545376           1    21        0        1
-GSM2545377           1    22        0        1
+           (Intercept) mouse8 mouse9 mouse10 mouse15 mouse20 mouse21 mouse22
+GSM2545337           1      0      1       0       0       0       0       0
+GSM2545338           1      0      0       1       0       0       0       0
+GSM2545339           1      0      0       0       1       0       0       0
+GSM2545344           1      0      0       0       0       0       0       1
+GSM2545348           1      1      0       0       0       0       0       0
+GSM2545352           1      0      0       0       0       0       1       0
+GSM2545353           1      0      0       0       0       0       0       0
+GSM2545358           1      0      0       0       0       0       0       0
+GSM2545362           1      0      0       0       0       1       0       0
+GSM2545364           1      1      0       0       0       0       0       0
+GSM2545365           1      0      1       0       0       0       0       0
+GSM2545366           1      0      0       1       0       0       0       0
+GSM2545371           1      0      0       0       1       0       0       0
+GSM2545375           1      0      0       0       0       1       0       0
+GSM2545376           1      0      0       0       0       0       1       0
+GSM2545377           1      0      0       0       0       0       0       1
+           Spc.Day0 Spc.Day4
+GSM2545337        0        0
+GSM2545338        0        0
+GSM2545339        0        0
+GSM2545344        0        0
+GSM2545348        0        0
+GSM2545352        0        0
+GSM2545353        0        0
+GSM2545358        1        0
+GSM2545362        0        0
+GSM2545364        1        0
+GSM2545365        1        0
+GSM2545366        1        0
+GSM2545371        0        1
+GSM2545375        0        1
+GSM2545376        0        1
+GSM2545377        0        1
 ```
 
 ```r
@@ -607,23 +796,40 @@ vd$designmatrix
 ```
 
 ```{.output}
-           (Intercept) mouse Spc.Day0 Spc.Day4
-GSM2545337           1     9        0        0
-GSM2545338           1    10        0        0
-GSM2545339           1    15        0        0
-GSM2545344           1    22        0        0
-GSM2545348           1     8        0        0
-GSM2545352           1    21        0        0
-GSM2545353           1     4        0        0
-GSM2545358           1     4        1        0
-GSM2545362           1    20        0        0
-GSM2545364           1     8        1        0
-GSM2545365           1     9        1        0
-GSM2545366           1    10        1        0
-GSM2545371           1    15        0        1
-GSM2545375           1    20        0        1
-GSM2545376           1    21        0        1
-GSM2545377           1    22        0        1
+           (Intercept) mouse8 mouse9 mouse10 mouse15 mouse20 mouse21 mouse22
+GSM2545337           1      0      1       0       0       0       0       0
+GSM2545338           1      0      0       1       0       0       0       0
+GSM2545339           1      0      0       0       1       0       0       0
+GSM2545344           1      0      0       0       0       0       0       1
+GSM2545348           1      1      0       0       0       0       0       0
+GSM2545352           1      0      0       0       0       0       1       0
+GSM2545353           1      0      0       0       0       0       0       0
+GSM2545358           1      0      0       0       0       0       0       0
+GSM2545362           1      0      0       0       0       1       0       0
+GSM2545364           1      1      0       0       0       0       0       0
+GSM2545365           1      0      1       0       0       0       0       0
+GSM2545366           1      0      0       1       0       0       0       0
+GSM2545371           1      0      0       0       1       0       0       0
+GSM2545375           1      0      0       0       0       1       0       0
+GSM2545376           1      0      0       0       0       0       1       0
+GSM2545377           1      0      0       0       0       0       0       1
+           Spc.Day0 Spc.Day4
+GSM2545337        0        0
+GSM2545338        0        0
+GSM2545339        0        0
+GSM2545344        0        0
+GSM2545348        0        0
+GSM2545352        0        0
+GSM2545353        0        0
+GSM2545358        1        0
+GSM2545362        0        0
+GSM2545364        1        0
+GSM2545365        1        0
+GSM2545366        1        0
+GSM2545371        0        1
+GSM2545375        0        1
+GSM2545376        0        1
+GSM2545377        0        1
 ```
 
 ```r
@@ -634,14 +840,14 @@ vd$plotlist
 $`time = Day0`
 ```
 
-<img src="fig/08-extra-design-rendered-unnamed-chunk-11-1.png" style="display: block; margin: auto;" />
+<img src="fig/08-extra-design-rendered-unnamed-chunk-12-1.png" style="display: block; margin: auto;" />
 
 ```{.output}
 
 $`time = Day4`
 ```
 
-<img src="fig/08-extra-design-rendered-unnamed-chunk-11-2.png" style="display: block; margin: auto;" />
+<img src="fig/08-extra-design-rendered-unnamed-chunk-12-2.png" style="display: block; margin: auto;" />
 
 :::::::::::::::::::::::::::::::::::::::: keypoints
 

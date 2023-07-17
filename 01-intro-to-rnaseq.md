@@ -6,6 +6,10 @@ exercises: XX
 ---
 
 
+```{.warning}
+Warning: replacing previous import 'S4Arrays::makeNindexFromArrayViewport' by
+'DelayedArray::makeNindexFromArrayViewport' when loading 'SummarizedExperiment'
+```
 
 ::::::::::::::::::::::::::::::::::::::: objectives
 
@@ -61,7 +65,7 @@ by first quantifying transcript expression and then summarizing it to gene expre
 
 Other tools used in RNA-seq quantification include: TopHat2, bowtie2, kallisto, HTseq, among many others.
 
-Choosing the appropriate RNA-seq quanitification would depend on the quality of the transcriptome annotation,
+Choosing the appropriate RNA-seq quantification would depend on the quality of the transcriptome annotation,
 the quality of the RNA-seq library preparation, the presence of contaminating sequences, among many factors.
 Often time, it would be important to compare the quantification results of multiple approaches.
 
