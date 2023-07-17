@@ -37,6 +37,8 @@ like tximeta).
 
 ## Read the data
 
+Let't read in the data files that we downloaded in the last episode:
+
 ### Counts
 
 
