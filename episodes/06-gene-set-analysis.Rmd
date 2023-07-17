@@ -164,9 +164,11 @@ title(paste0("|universe| = ", length(totalGenes)))
 In the Venn diagram, we can observe that around 1.1% (13/1134) of genes in the
 _XY gene set_ are DE. Compared to the global fraction of DE genes (54/21198 =
 0.25%), it seems there is a strong relations between DE genes and the gene
-set. On the other hand, it is quite expected because the two events are
-actually biologically relevant where one is from a comparison between genders
-and the other is the set of gender-related genes.
+set. We can also compare the fraction of DE genes that belong to the gene set
+(13/54 = 24.1%) and the global fraction of _XY gene set_ in the genome
+(1134/21198 = 5.3%). On the other hand, it is quite expected because the two
+events are actually biologically relevant where one is from a comparison
+between genders and the other is the set of gender-related genes.
 
 Then, how to statistically measure the enrichment or over-representation? Let's
 go to the next section.
@@ -456,14 +458,14 @@ an overview of statistical methods used in ORA analysis.
 
 ## Gene set resources
 
-We have learnt the basic method for performing ORA analysis. Now we go to the
-second component of the analysis: the gene sets.
+We have learnt the basic methods of ORA analysis. Now we go to the second
+component of the analysis: the gene sets.
 
 Gene sets represent prior knowledge of what is the general shared biological
 attribute of genes in the gene set. For example, in a "cell cycle" gene set,
 all the genes are involved in the cell cycle process. Thus, if DE genes are
 significantly enriched in the "cell cycle" gene set, which means there are
-significantly more cell cycle genes are differentially expressed than
+significantly more cell cycle genes differentially expressed than
 expected, we can conclude that the normal function of cell cycle process may
 be affected.
 
@@ -584,10 +586,12 @@ and MSigDB databases.
 
 ### Gene Ontology gene sets 
 
-Gene Ontology (GO) is the standard source for gene set enrichment analysis.
-The associations between GO terms and genes are integrated in the Bioconductor
-standard packages: _the oragnism annotation packages_. In current Bioconductor
-release 3.17, there are the following organism packages:
+Gene Ontology (GO) is the standard source for gene set enrichment analysis. GO
+contains three namespaces of biological process (BP), cellular components (CC)
+and molecular function (MF) which describe a biological entity from different
+aspect. The associations between GO terms and genes are integrated in the
+Bioconductor standard packages: _the oragnism annotation packages_. In current
+Bioconductor release 3.17, there are the following organism packages:
 
 <center>
 
@@ -609,7 +613,7 @@ There are four sections in the name of an organism package. The naming
 convention is: `org` simply means "organism". The second section corresponds
 to a specific organism, e.g. `Hs` for human and `Mm` for mouse. The third
 section corresponds to the primary gene ID type used in the package, where
-normally `eg` is used which means "entrez genes" because data is mostly
+normally `eg` is used which means "Entrez genes" because data is mostly
 retrieved from the NCBI database. However, for some organisms, the primary ID
 can be from its own primary database, e.g. `sgd` for Yeast which corresponds
 to the [Saccharomyces Genome Database](https://www.yeastgenome.org/), the
@@ -617,11 +621,11 @@ primary database for yeast. The last section is always "db", which simply
 implies it is a database package.
 
 Taking the **org.Hs.eg.db** package as an example, all the data is stored in a
-database object _org.Hs.eg.db_ in the `OrgDb` class. The object contains a
-connection to a local SQLite database. Users can simply think _org.Hs.eg.db_
+database object `org.Hs.eg.db` in the `OrgDb` class. The object contains a
+connection to a local SQLite database. Users can simply think `org.Hs.eg.db`
 as a huge table that contains ID mappings between various databases. GO gene
 sets are essentially mappings between GO terms and genes. Let's try to extract
-it from the _org.Hs.eg.db_ object.
+it from the `org.Hs.eg.db` object.
 
 All the columns (the key column or the source column) can be obtained by
 `keytypes()`:
@@ -631,7 +635,7 @@ library(org.Hs.eg.db)
 keytypes(org.Hs.eg.db)
 ```
 
-To get the GO gene set, we first obtain all GO IDs under the BP (biological
+To get the GO gene sets, we first obtain all GO IDs under the BP (biological
 process) namespace. As shown in the output from `keytype()`, `"ONTOLOGY"` is also a
 valid "key column", thus we can query "_select all GO IDs where the corresponding
 ONTOLOGY is BP_", which is translated into the following code:
@@ -648,7 +652,7 @@ that namespace. And since we only query for one GO "ONTOLOGY", we directly take
 the first element from the list returned by `mapIds()`.
 
 Next we do mapping from GO IDs to gene Entrez IDs. Now the query becomes "_providing
-a vector of GO IDs, select ENTREZIDs which correspond every one of them_".
+a vector of GO IDs, select ENTREZIDs which correspond to every one of them_".
 
 ```{r}
 BPGeneSets = mapIds(org.Hs.eg.db, keys = BP_Id, keytype = "GOALL", 
@@ -660,16 +664,17 @@ the database. As GO has a hierarchical structure where a child term is a
 sub-class of a parent term. All the genes annotated to a child term are also
 annotated to its parent terms. To reduce the duplicated information when
 annotating genes to GO terms, genes are normally annotated to the most
-specific offspring terms in the database. Upstream merging should be done by
-tools which perform analysis. In this way, the mapping between `"GO"` and
-`"ENTREZID"` only contains "primary" annotations which is not complete, and
-mapping between "GOALL" and "ENTREZID" is the correct one to use.
+specific offspring terms in the GO hierarchy. Upstream merging of gene
+annotations should be done by the tools which perform analysis. In this way,
+the mapping between `"GO"` and `"ENTREZID"` only contains "primary"
+annotations which is not complete, and mapping between `"GOALL"` and
+`"ENTREZID"` is the correct one to use.
 
 We filter out GO gene sets with no gene annotated.
 
 ```{r}
 BPGeneSets = BPGeneSets[sapply(BPGeneSets, length) > 0]
-BPGeneSets[2:3]
+BPGeneSets[2:3] # BPGeneSets[[1]] is too long
 ```
 
 In most cases, because `OrgDb` is a standard Bioconductor data structure, most
@@ -692,8 +697,8 @@ long descriptions are available in the package **GO.db**.
 
 Bioconductor has already provided a large number of organism packages.
 However, if the organism you are working on is not supported there, you may
-consider to look for with the **AnnotationHub** package, which additionally
-provide the `OrgDb` objects for approximately 2000 organisms. The `OrgDb`
+consider to look for it with the **AnnotationHub** package, which additionally
+provide `OrgDb` objects for approximately 2000 organisms. The `OrgDb`
 object can be directly used in the ORA analysis introduced in the next section.
 
 ::::::::::::::::::::::::::::::::::::::::::::::::::
@@ -701,12 +706,16 @@ object can be directly used in the ORA analysis introduced in the next section.
 
 ### KEGG gene sets
 
-
-[KEGG pathway](https://www.genome.jp/kegg/pathway.html) provides its data via
-a REST API (https://rest.kegg.jp/). There are several commands to retrieve
-specific types of data. To retrieve the pathway gene sets, we can use the
-"link" command as shown in the following URL ("link" means to link genes to
-pathways). When you enter the URL in the web brower:
+A biological pathway is a series of interactions among molecules in a cell
+that leads to a certain product or a change in a cell^[The definition is from
+Wikipedia: https://en.wikipedia.org/wiki/Biological_pathway.]. A pathway
+involes a list of genes playing different roles which constructs the "pathway
+gene set". [KEGG pathway](https://www.genome.jp/kegg/pathway.html) is the
+mostly used database for pathways. It provides its data via a REST API
+(https://rest.kegg.jp/). There are several commands to retrieve specific types
+of data. To retrieve the pathway gene sets, we can use the "link" command as
+shown in the following URL ("link" means to link genes to pathways). When you
+enter the URL in the web brower:
 
 ```
 https://rest.kegg.jp/link/pathway/hsa
@@ -764,9 +773,10 @@ licence](https://www.kegg.jp/kegg/legal.html).
 
 ### Further reading
 
-Instead directly reading from the URLs, there are also R packages which
-help to obtain data from the KEGG database, such as the **KEGGREST** package
-or the `download_KEGG()` function from the **clusterProfiler** package. 
+Instead directly reading from the URLs, there are also R packages which help
+to obtain data from the KEGG database, such as the **KEGGREST** package or the
+`download_KEGG()` function from the **clusterProfiler** package. But
+essentially, they all obtain KEGG data with the REST API.
 
 ::::::::::::::::::::::::::::::::::::::::::::::::::
 
@@ -791,10 +801,14 @@ One convenient way is to use the **msigdbr** package. The advantages is
 
 Let's check which organisms are supported and which gene sets collections it provides.
 
+```{r, echo = FALSE}
+options(pillar.print_max = 30)
+```
+
 ```{r}
 library(msigdbr)
 msigdbr_species()
-print(msigdbr_collections(), n = 30)
+msigdbr_collections()
 ```
 
 The first column in the above output is the primary category of gene sets.
@@ -897,11 +911,11 @@ resTimeGO = enrichGO(gene = timeDEgenes,
 
 Oops, something seems wrong. Well, this is a common mistake where the gene ID
 types do not match between DE genes and the gene sets. Thankfully, the
-message clearly explains the reason. The ID type for gene sets is entrez ID
+message clearly explains the reason. The ID type for gene sets is Entrez ID
 and it cannot match any DE gene.
 
 There are two ways to solve this problem. 1. Convert gene IDs in `timeDEgenes`
-to symbols in advances; or 2. Simply specify the ID type of the DE genes and
+to Entrez IDs in advance; or 2. Simply specify the ID type of DE genes and
 let `enrichGO()` do the conversion job (recall various gene ID types are also
 stored in the `OrgDb` object). Let's choose the second way.
 
@@ -942,7 +956,7 @@ of all genes in ORA, which we will touch in the end of this section.
 
 There are several additional arguments in `enrichGO()`:
 
-- `universe`: the unverse set of genes, i.e. total genes to use. By default it
+- `universe`: the universe set of genes, i.e. total genes to use. By default it
   uses union of genes in all gene sets. If it is set, DE genes and all gene
   sets will take intersections with it. We will discuss it in the end of this section.
 - `minGSSize`: Minimal size of gene sets. Normally gene sets with very small
@@ -963,11 +977,11 @@ stored in `resTimeGO@result`. However, directly retrieving the slot of an S4
 object is highly unrecommended.]. This function design might not be proper
 because a function should return all the results no matter they are
 significant or not. Later users may need to use the complete enrichment table
-for downstream anlaysis. On the other hand, the meaning of `pvalueCutoff` is
-not precise and there is redundancy between `pvalueCutoff` and `pvalueCutoff`
-(adjusted _p_-values and _q_-values are always not smaller than the raw
-_p_-values). Thus it is suggested to set both `pvalueCutoff` and
-`qvalueCutoff` to 1.
+for downstream anlaysis. Second, the meaning of `pvalueCutoff` is not precise
+and there is redundancy between `pvalueCutoff` and `pvalueCutoff` (adjusted
+_p_-values and _q_-values are always non-smaller than raw _p_-values). Thus it
+is suggested to set both `pvalueCutoff` and `qvalueCutoff` to 1 in
+`enrichGO()`.
 
 ```{r message = TRUE, warning = TRUE}
 resTimeGO = enrichGO(gene = timeDEgenes, 
@@ -1042,7 +1056,7 @@ head(resTimeKEGGTable)
 
 Extending ORA to other organisms is rather simple.
 
-1. Make sure the DE genes are in Entrez IDs.
+1. Make sure the DE genes are Entrez IDs.
 2. Choose the corresponding KEGG organism code.
 
 ::::::::::::::::::::::::::::::::::::::::::::::::::
@@ -1063,7 +1077,7 @@ head(gene_sets)
 ```
 
 As mentioned before, it is important the gene ID type in the gene sets should
-be the same as in the DE genes, so we choose the `"gene_symbol"` column.
+be the same as in the DE genes, so here we choose the `"gene_symbol"` column.
 
 ```{r}
 resTimeHallmark = enricher(gene = timeDEgenes, 
@@ -1079,8 +1093,8 @@ head(resTimeHallmarkTable)
 
 ### Further reading
 
-Implementing ORA is rather simple. The following code performs ORA on a list of gene sets.
-Try to read and understand the code.
+Implementing ORA is rather simple. The following function `ora()` performs ORA
+on a list of gene sets. Try to read and understand the code.
 
 ```{r}
 ora = function(genes, gene_sets, universe = NULL) {
@@ -1090,14 +1104,17 @@ ora = function(genes, gene_sets, universe = NULL) {
         universe = unique(universe)
     }
 
+    # make sure genes are unique
     genes = intersect(genes, universe)
     gene_sets = lapply(gene_sets, intersect, universe)
 
+    # calculate different numbers
     n_11 = sapply(gene_sets, function(x) length(intersect(genes, x)))
     n_10 = length(genes)
     n_01 = sapply(gene_sets, length)
     n = length(universe)
 
+    # calculate p-values
     p = 1 - phyper(n_11 - 1, n_10, n - n_10, n_01)
 
     df = data.frame(
@@ -1141,7 +1158,7 @@ following different universe settings:
 
 
 If the universe is set, DE genes as well as genes in the gene sets are first
-intersected to the universe. However, in general the universe affects four
+intersected to the universe. However, in general the universe affects three
 values of $n_{22}$, $n_{02}$ and $n_{20}$ more, which correspond to the non-DE
 genes or non-gene-set genes.
 
@@ -1156,18 +1173,18 @@ genes or non-gene-set genes.
 
 In the contigency table, we are testing the dependency of whether genes being
 DE and whether genes being in the gene set. In the model, each gene has a
-definite attribute of being either DE or non-DE and each gene has a definite
-attribute of either belonging to the gene set or not. If a larger universe is
-used, such as total genes where there are genes not measured nor will never
-annotated to gene sets (let's call them _non-informative genes_, e.g.
-non-proteining coding genes or not-expressed genes), all the non-informative
-genes are implicitly assigned with an attribute of being non-DE or not in the
-gene set. This implicit assignment is not proper because these genes provide
-no information and they should not be included in the analysis. Adding them to
-the analysis increases $n_{22}$, $n_{02}$ or $n_{20}$, makes the observation
-$n_{11}$ getting further away from the null distribution, eventually generates
-a smaller _p_-value. Similar reason, small universes generate large
-_p_-values.
+definite attribute of being either DE or non-DE and each gene has a second
+definite attribute of either belonging to the gene set or not. If a larger
+universe is used, such as total genes where there are genes not measured nor
+will never annotated to gene sets (let's call them _non-informative genes_,
+e.g. non-proteining coding genes or not-expressed genes), all the
+non-informative genes are implicitly assigned with an attribute of being
+non-DE or not in the gene set. This implicit assignment is not proper because
+these genes provide no information and they should not be included in the
+analysis. Adding them to the analysis increases $n_{22}$, $n_{02}$ or
+$n_{20}$, makes the observation $n_{11}$ getting further away from the null
+distribution, eventually generates a smaller _p_-value. For the similar
+reason, small universes tend to generate large _p_-values.
 
 
 In `enrichGO()`/`enrichKEGG()`/`enricher()`, universe genes can be set via the
@@ -1182,8 +1199,8 @@ Check the more discusstions at https://twitter.com/mdziemann/status/162640779793
 
 
 We can do a simple experiment on the small MSigDB hallmark gene sets. We use
-the `ora()` function which we have implemented and using three different
-universe settings.
+the `ora()` function which we have implemented in previous "Further reading"
+section and we compare three different universe settings.
 
 ```{r}
 # all genes in the gene sets collection ~ 4k genes
@@ -1198,16 +1215,16 @@ df3 = ora(timeDEgenes, HallmakrGeneSets,
 # so we can directly compare them
 plot(df1$p_value, df2$p_value, col = 2, pch = 16, 
     xlim = c(0, 1), ylim = c(0, 1), 
-    xlab = "all hallmark genes (p-values)", ylab = "p-values",
+    xlab = "all hallmark genes as universe (p-values)", ylab = "p-values",
     main = "compare universes")
 points(df1$p_value, df3$p_value, col = 4, pch = 16)
 abline(a = 0, b = 1, lty = 2)
-legend("topleft", legend = c("all protein-coding genes", "all gene symbols"), 
+legend("topleft", legend = c("all protein-coding genes as universe", "all genes as universe"), 
     pch = 16, col = c(2, 4))
 ```
 
 It is very straightforward to see, with a larger universe, there are more
-significant gene sets, which may produce potentially more falst positives.
+significant gene sets, which may produce potentially more false positives.
 This is definitely worse when using all genes in the genome as universe.
 
 Based on the discussion in this section, the recommendation of using universe is:
@@ -1242,7 +1259,7 @@ resTimeGOTable = as.data.frame(resTimeGO)
 head(resTimeGOTable)
 ```
 
-`barplot()` and `dotplot()` generates plots for a small number of significant gene sets.
+`barplot()` and `dotplot()` generate plots for a small number of significant gene sets.
 Note the two functions are directly applied on `resTimeGO` returned by `enrichGO()`.
 
 ```{r}
@@ -1257,26 +1274,27 @@ table. Both plots include the top 20 most significant terms. On dotplot,
 terms are ordered by the values on x-axis (the `GeneRatio`).
 
 Now we need to talk about "what is a good visualization?". The essential two
-questions are _what is the key message a plot transfer to readers_ and _what
-is the major graphical element_. In the barplot or dotplot, the major
-graphical element which readers may notice the easiest is the height of bars
-or the offset of dots to the origin. The most message of the ORA anaysis is
-the enrichment. The two examples from `barplot()` and `dotplot()` actually
-fail to transfer such information to readers. In the first barplot where
-`"Count"` is used as values on x-axis, the numer of DE genes in gene sets is
-not a good measure of the enrichment because it has a positive relation to the
-size of gene sets. A high value of `"Count"` does not mean it is more enriched.
+questions are "_what is the key message a plot transfer to readers?_" and
+"_what is the major graphical element in the plot?_". In the barplot or
+dotplot, the major graphical element which readers may notice the easiest is
+the height of bars or the offset of dots to the origin. The most important
+message of the ORA anaysis is of course "the enrichment". The two examples from
+`barplot()` and `dotplot()` actually fail to transfer such information to
+readers. In the first barplot where `"Count"` is used as values on x-axis, the
+numer of DE genes in gene sets is not a good measure of the enrichment because
+it has a positive relation to the size of gene sets. A high value of `"Count"`
+does not mean the gene set is more enriched.
 
 It is the same reason for dotplot where `"GeneRatio"` is used as values on
 x-axis. Gene ratio is calculated as the fraction of DE genes from a certain
-gene set. The dotplot puts multiple gene sets in the same plot and the aim is
-to compare between gene sets, thus gene sets should be "scaled" to make them
-comparible. `"GeneRatio"` is not scaled for different gene sets and it still
-has a positive relation to the gene set size, which can be observed in the
-dotplot where higher the gene ratio, larger the dot size). Actually
-"GeneRatio" has the same effect as "Count" (GeneRatio = Count/Total_DE_Genes),
-so as has been explained in the previous paragraph, `"GeneRatio"` is not a good
-measure for enrichment either.
+gene set (GeneRatio = Count/Total_DE_Genes). The dotplot puts multiple gene
+sets in the same plot and the aim is to compare between gene sets, thus gene
+sets should be "scaled" to make them comparible. `"GeneRatio"` is not scaled
+for different gene sets and it still has a positive relation to the gene set
+size, which can be observed in the dotplot where higher the gene ratio, larger
+the dot size. Actually "GeneRatio" has the same effect as "Count" (GeneRatio =
+Count/Total_DE_Genes), so as has been explained in the previous paragraph,
+`"GeneRatio"` is not a good measure for enrichment either.
 
 Now let's try to make a more reasonable barplot and dotplot to show the
 enrichment of ORA.
@@ -1287,9 +1305,9 @@ from that!). Let's take these numbers from the enrichment table.
 
 ```{r}
 n_11 = resTimeGOTable$Count
-n_10 = 983  ## length(intersect(resTimeGO@gene, resTimeGO@universe))
+n_10 = 983  # length(intersect(resTimeGO@gene, resTimeGO@universe))
 n_01 = as.numeric(gsub("/.*$", "", resTimeGOTable$BgRatio))
-n = 28943  ## length(resTimeGO@universe)
+n = 28943  # length(resTimeGO@universe)
 ```
 
 Instead of using `GeneRatio`, we use the fraction of DE genes in the gene sets
@@ -1297,7 +1315,7 @@ which are kind like a "scaled" value for all gene sets. Let's calculate it:
 
 ```{r}
 resTimeGOTable$DE_Ratio = n_11/n_01
-resTimeGOTable$GS_size = n_01
+resTimeGOTable$GS_size = n_01  # size of gene sets
 ```
 
 Then intuitively, if a gene set has a higher `DE_Ratio` value, we could say DE
@@ -1307,9 +1325,11 @@ statistically.] in it.
 We can measure the enrichment in two other ways. First, the log2 fold
 enrichment, defined as:
 
-$$ \log_2(\mathrm{Fold\_enrichment}) = \frac{n_{11}/n_{10}}{n_{01}/n} = \frac{n_{11}n}{n_{10}n_{01}} $$
+$$ \log_2(\mathrm{Fold\_enrichment}) = \frac{n_{11}/n_{10}}{n_{01}/n} = \frac{n_{11}/n_{01}}{n_{10}/n} = \frac{n_{11}n}{n_{10}n_{01}} $$
 
-which is the log2 of the ratio of _DE% in the gene set_ and _DE% in the universe_.
+which is the log2 of the ratio of _DE% in the gene set_ and _DE% in the
+universe_ or the log2 of the ratio of _gene\_set% in the DE genes_ and
+_gene\_set% in the universe_. The two are identical.
 
 ```{r}
 resTimeGOTable$log2_Enrichment = log( (n_11/n_10)/(n_01/n) )
@@ -1319,8 +1339,10 @@ Second, it is also common to use _z_-score which is
 
 $$ z = \frac{n_{11} - \mu}{\sigma} $$
 
-where $\mu$ and $\sigma$ are [the mean and standard deviation of the hypergeometric distribution](https://en.wikipedia.org/wiki/Hypergeometric_distribution).
-They can be calculated as:
+where $\mu$ and $\sigma$ are [the mean and standard deviation of the
+hypergeometric
+distribution](https://en.wikipedia.org/wiki/Hypergeometric_distribution). They
+can be calculated as:
 
 ```{r}
 hyper_mean = n_01*n_10/n
@@ -1337,7 +1359,8 @@ We will use log2 fold change as the primary variable to map to bar heights and
 directly with the **ggplot2** package. We also add the adjusted _p_-values as
 labels on the bars.
 
-
+In `resTimeGOTable`, gene sets are already ordered by the significance, so we
+take the first 10 gene sets which are the 10 most significant gene sets.
 
 ```{r, fig.width= 8, fig.height = 6}
 library(ggplot2)
@@ -1350,8 +1373,8 @@ ggplot(resTimeGOTable[1:10, ],
     ylab("")
 ```
 
-In the next example, we use _z_-score as the primary variable to map to the offset
-to origin, `DE_Ratio` and `Count` to map to dot colors and sizes. 
+In the next example, we use _z_-score as the primary variable to map to the
+offset to origin, `DE_Ratio` and `Count` to map to dot colors and sizes.
 
 ```{r, fig.width = 8, fig.height = 6}
 library(ggplot2)
@@ -1368,7 +1391,7 @@ inflammatory response" is relatively small but highly enriched.
 Another useful visualization is the volcano plot. You may be aware of in
 differential expression analysis, in the volcano plot, x-axis corresponds to
 log2 fold changes of the differential expression, and y-axis corresponds to
-adjusted _p_-values. So it is actually similar here where we use log2 fold
+the adjusted _p_-values. It is actually similar here where we use log2 fold
 enrichment on x-axis.
 
 Since we only look at the over-representation, the volcano plot is one-sided.
@@ -1390,13 +1413,14 @@ curves. The trends are especially clear in the right bottom of the plot.
 Actually each "curve" corresponds to a same `"Count"` value (number of DE
 genes in a gene set). The volcano plot shows very clearly that the enrichment
 has a positive relation to the gene set size where a large gene set can easily
-reach a small _p_-value with a small DE_ratio, while a small gene set needs to
-have a large DE ratio to be significant.
+reach a small _p_-value with a small DE_ratio and a small log2 fold
+enrichment, while a small gene set needs to have a large DE ratio to be
+significant.
 
 
 It is also common that we perform ORA analysis on up-regulated genes and
-down-regulated separately. And we want to combine the significant terms from
-the two ORA analysis in one plot. In the following code, we generate
+down-regulated separately. And we want to combine the significant gene sets from
+the two ORA analysis in one plot. In the following code, we first generate
 two enrichment tables for up-regulated genes and down-regulated separately.
 
 ```{r}
@@ -1458,14 +1482,16 @@ ggplot(rbind(resTimeGOupTable[1:5, ],
 ```
 
 
-It is often that GO enrichment returns a long list of significant GO terms
-(e.g. several hundreds). This makes it difficult to summarize the common
-functions from the long list. The last package we will introduce is the
-**simplifyEnrichment** package which puts GO terms into clusters and
+Specifically for GO enrichment, it is often that GO enrichment returns a long
+list of significant GO terms (e.g. several hundreds). This makes it difficult
+to summarize the common functions from the long list. The last package we will
+introduce is the **simplifyEnrichment** package which partitions GO terms into
+clusters based on their semantic similarity^[The semantic similarity between
+GO terms considers the topological relations in the GO hierarchy.] and
 summarizes their common functions via word clouds.
 
-The input of the `simplifyGO()` is a vector of GO IDs. It is recommended
-to have at least 100 GO IDs for visualization.
+The input of the `simplifyGO()` function is a vector of GO IDs. It is recommended
+to have at least 100 GO IDs for summarization and visualization.
 
 ```{r, fig.width = 8.5, fig.height = 5}
 GO_ID = resTimeGOTable$ID[resTimeGOTable$p.adjust < 0.1]
