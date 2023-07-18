@@ -1377,7 +1377,6 @@ In the next example, we use _z_-score as the primary variable to map to the
 offset to origin, `DE_Ratio` and `Count` to map to dot colors and sizes.
 
 ```{r, fig.width = 8, fig.height = 6}
-library(ggplot2)
 ggplot(resTimeGOTable[1:10, ], 
         aes(x = zScore, y = factor(Description, levels = rev(Description)), 
             col = DE_Ratio, size = Count)) +
@@ -1493,11 +1492,17 @@ summarizes their common functions via word clouds.
 The input of the `simplifyGO()` function is a vector of GO IDs. It is recommended
 to have at least 100 GO IDs for summarization and visualization.
 
-```{r, fig.width = 8.5, fig.height = 5}
+```{r, eval = FALSE}
 GO_ID = resTimeGOTable$ID[resTimeGOTable$p.adjust < 0.1]
 library(simplifyEnrichment)
 simplifyGO(GO_ID)
 ```
+
+<!-- Carpentry CI cannot install RcppParallel which is indirectly depended by simplifyenrichment,
+    so the plot is not generated on the fly.
+ -->
+
+<img src="simplifyEnrichment.png" />
 
 :::::::::::::::::::::::::::::::::::::::::  callout
 
