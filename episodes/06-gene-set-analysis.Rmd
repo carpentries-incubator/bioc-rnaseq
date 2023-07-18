@@ -327,13 +327,13 @@ grid.rect(0.45, 0.25, width = 0.66-0.45, height = 0.8-0.25, just = c("left", "bo
 grid.circle(x, y, 0.02,
     gp = gpar(fill = sample(c("red", "blue"), 30, replace = TRUE)))
 grid.lines(c(0.45, 0.45, 0.66, 0.66), c(0.8, 0.25, 0.25, 0.8))
-ComplexHeatmap:::grid.text(ComplexHeatmap:::gt_render("In total _n_ genes"), x = 0.1, y = 0.9, just = "left", gp = gpar(fontsize = 16))
-ComplexHeatmap:::grid.text(ComplexHeatmap:::gt_render("Pick _n_<sub>+1</sub> XY genes"), x = 0.6, y = 0.9, just = "left", gp = gpar(fontsize = 16))
+grid.text("In total n genes", x = 0.1, y = 0.9, just = "left", gp = gpar(fontsize = 16))
+grid.text("Pick n_+1 XY genes", x = 0.6, y = 0.9, just = "left", gp = gpar(fontsize = 16))
 grid.lines(c(0.52, 0.59), c(0.8, 0.89))
 grid.circle(0.1, 0.05, 0.02, gp = gpar(fill = "red"))
-ComplexHeatmap:::grid.text(ComplexHeatmap:::gt_render("_n_<sub>1+</sub> DE genes"), 0.13, 0.05, just = "left", gp = gpar(fontsize = 16))
+grid.text("n_1+ DE genes", 0.13, 0.05, just = "left", gp = gpar(fontsize = 16))
 grid.circle(0.1+0.2, 0.05, 0.02, gp = gpar(fill = "blue"))
-ComplexHeatmap:::grid.text(ComplexHeatmap:::gt_render("_n_<sub>2+</sub> non-DE genes"), 0.13+0.2, 0.05, just = "left", gp = gpar(fontsize = 16))
+grid.text("n_2+ non-DE genes", 0.13+0.2, 0.05, just = "left", gp = gpar(fontsize = 16))
 ```
 
 We first calculate the total number of ways of picking $n_{+1}$ genes from
