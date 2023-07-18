@@ -243,7 +243,7 @@
 <div class="accordion accordion-flush" id="accordionFlush7">
   <div class="accordion-item">
     <div class="accordion-header" id="flush-heading7">
-        <a href="06-gene-set-analysis.html">6. Gene set analysis</a>
+        <a href="06-gene-set-analysis.html">6. Gene set enrichment analysis</a>
     </div>
 <!--/div.accordion-header-->
         
@@ -388,17 +388,13 @@ work directly on the raw counts.</li>
 statistics) are wrapped in a single function: DESeq().</li>
 <li>Independent filtering of lowly expressed genes is often
 beneficial.</li>
-</ul></section><section id="06-gene-set-analysis"><h2 class="section-heading"><a href="06-gene-set-analysis.html">Gene set analysis</a></h2>
+</ul></section><section id="06-gene-set-analysis"><h2 class="section-heading"><a href="06-gene-set-analysis.html">Gene set enrichment analysis</a></h2>
 <hr class="half-width">
 <ul>
-<li>Gene set enrichment analysis helps to answer “what are the common
-biological functions affected in the experiment”.</li>
-<li>Gene sets can be retrieved from several online resources, including
-mSigDB, KEGG, reactome, Gene Ontology.</li>
-<li>A rich set of gene set analysis methods are available. Some methods
-require genes to be classified into ‘significant’ and ‘non-significant’
-before the gene set analysis, while others ingest the full ranking of
-genes.</li>
+<li>ORA analysis is based on the gene counts and it is based on Fisher’s
+exact test or the hypergeometric distribution.</li>
+<li>In R, it is easy to obtain gene sets from a large number of
+sources.</li>
 </ul></section><section id="07-next-steps"><h2 class="section-heading"><a href="07-next-steps.html">Next steps</a></h2>
 <hr class="half-width">
 <ul>
