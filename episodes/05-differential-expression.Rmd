@@ -91,7 +91,7 @@ dds <- DESeqDataSetFromMatrix(countData = assays(se)$counts,
 - most genes are not differentially expressed
 - the probability of a read mapping to a specific gene is the same for all samples within the same group
 
-As shown in the [previous section](../episodes/04-exploratory-qc.Rmd) on exploratory data analysis the total counts of a sample (even from the same condition) depends on the library size (total number of reads sequenced). To compare the variability of counts from a specific gene between and within groups we first need to account for library sizes and compositional effects before variance estimation. 
+As shown in the [previous section](../episodes/04-exploratory-qc.Rmd) on exploratory data analysis the total counts of a sample (even from the same condition) depends on the library size (total number of reads sequenced). To compare the variability of counts from a specific gene between and within groups we first need to account for library sizes and compositional effects. 
 Recall the `estimateSizeFactors()` function from the previous section:
 
 ```{r}
@@ -108,7 +108,7 @@ dds <- estimateSizeFactors(dds)
 
 ## Statistical modeling
 
-To test for group differences `DESeq2` and `edgeR` use generalized linear models. Thereby, RNA-seq counts are modeled as __negative binomial__ distribution to account for a limited number of replicates per group, a mean-variance dependency (see [exploratory data analysis](../episodes/04-exploratory-qc.Rmd)) and a skewed count distribution. 
+`DESeq2` and `edgeR` model RNA-seq counts as __negative binomial__ distribution to account for a limited number of replicates per group, a mean-variance dependency (see [exploratory data analysis](../episodes/04-exploratory-qc.Rmd)) and a skewed count distribution. 
 
 ### Dispersion
 
@@ -116,7 +116,7 @@ The within-group variance of the counts for a gene following a negative binomial
 
 $var = \mu + \theta \mu^2$
 
-$\theta$ represents the gene-specific __dispersion__, a measure of variability or spread in the data. As a second step, we need to estimate gene-wise dispersions to get the expected within-group variance and test for group differences. Good dispersion estimates are challenging with a few sample per group only. Thus, information from genes with similar expression pattern are used instead of replicates. Gene-wise dispersion estimates are *shrinked* towards center values of the observed distribution of dispersions. With `DESeq2` we can get dispersion estimates using the `estimateDispersions()` function.
+$\theta$ represents the gene-specific __dispersion__, a measure of variability or spread in the data. As a second step, we need to estimate gene-wise dispersions to get the expected within-group variance and test for group differences. Good dispersion estimates are challenging with a few sample per group only. Thus, information from genes with similar expression pattern are "borrowed". Gene-wise dispersion estimates are *shrinked* towards center values of the observed distribution of dispersions. With `DESeq2` we can get dispersion estimates using the `estimateDispersions()` function.
 We can visualize the effect of *shrinkage* using `plotDispEsts()`:
 
 ```{r}
@@ -154,7 +154,7 @@ dds <- nbinomWaldTest(dds)
 
 ## Explore results for specific contrasts
 
-The `result()` function can be used to extract gene-wise statistics, such as log2 fold changes and (adjusted) p-values. By default these statistics will be based on the __last variable__ of the design formular. For comparisons `DESeq2` defines so called contrasts, which refer to the factor levels of the reference variable. By default the first factor level in alphabetical order will be used as *reference level* and the *last level* will be used for comparison. You can explicitly specify the contrast by using the `contrast` argument of the `results()` function. Names of all available contrasts can be accessed using `resultsNames()`.
+The `results()` function can be used to extract gene-wise statistics, such as log2 fold changes and (adjusted) p-values. By default these statistics will be based on the __last variable__ (reference variable) of the design formular. For comparisons `DESeq2` defines so called contrasts, which refer to the factor levels of the reference variable. By default the first factor level in alphabetical order will be used as *reference level* and the *last level* will be used for comparison. You can explicitly specify the contrast by using the `contrast` or `name` argument of the `results()` function. Names of all available contrasts can be accessed using `resultsNames()`.
 
 
 ::::::::::::::::::::::::::::::::::::: challenge 
@@ -184,7 +184,7 @@ To explore the output of the `results()` function we can use the `summary()` fun
 
 ```{r}
 ## Day 8 vs Day 0
-resTime <- DESeq2::results(dds, contrast = c("time", "Day8", "Day0"))
+resTime <- results(dds, contrast = c("time", "Day8", "Day0"))
 summary(resTime)
 head(resTime[order(resTime$pvalue), ])
 ```
@@ -194,8 +194,8 @@ Both of the below ways of specifying the contrast are essentially equivalent.
 The `name` parameter can be accessed using `resultsNames()`.
 
 ```{r}
-resTime <- DESeq2::results(dds, contrast = c("time", "Day8", "Day0"))
-resTime <- DESeq2::results(dds, name = "time_Day8_vs_Day0")
+resTime <- results(dds, contrast = c("time", "Day8", "Day0"))
+resTime <- results(dds, name = "time_Day8_vs_Day0")
 ```
 
 :::::::::::::::::::::::::::::::::::::::::::::::::
@@ -212,7 +212,7 @@ Explore the DE genes between males and females.
 
 ```{r}
 ## Male vs Female
-resSex <- DESeq2::results(dds, contrast = c("sex", "Male", "Female"))
+resSex <- results(dds, contrast = c("sex", "Male", "Female"))
 summary(resSex)
 head(resSex[order(resSex$pvalue), ])
 ```
@@ -236,7 +236,7 @@ to calculate __adjusted p-values__ (padj) for DE results.
 ## Independent Filtering and log-fold shrinkage
 
 We can visualize the results in many ways. A good check is to explore the relationship between log2fold changes, significant results and the genes mean count.
-`DESeq2` provides a useful function to do so, ``.
+`DESeq2` provides a useful function to do so, `plotMA()`.
 
 ```{r}
 plotMA(resTime)
@@ -259,9 +259,9 @@ By default `indepent_filtering` is set to `TRUE`. What happens without filtering
 :::::::::::::::::::::::: solution 
 
 ```{r}
-resTimeNotFiltered <- DESeq2::results(dds, 
-                                   contrast = c("time", "Day8", "Day0"), 
-                                   independentFiltering = FALSE)
+resTimeNotFiltered <- results(dds,
+                              contrast = c("time", "Day8", "Day0"), 
+                              independentFiltering = FALSE)
 summary(resTime)
 summary(resTimeNotFiltered)
 ```
@@ -274,21 +274,29 @@ Genes with very low counts are not likely to see significant differences typical
 
 ## Visualize selected set of genes
 
-The amount of DE genes can be overwhelming and a ranked list of genes can still be hard to interpret with regards to an experimental question. Visualizing gene expression can help to detect expression pattern or group of genes with related functions. We will perform systematic detection of over represented groups of genes in the [next section](../episodes/06-gene-set-analysis.Rmd). Before visualization can help us to get a good intuition about what to expect.
+The amount of DE genes can be overwhelming and a ranked list of genes can still be hard to interpret with regards to an experimental question. Visualizing gene expression can help to detect expression pattern or group of genes with related functions. We will perform systematic detection of over represented groups of genes in the [next section](../episodes/06-gene-set-analysis.Rmd). Before this visualization can already help us to get a good intuition about what to expect.
 
 We will use transformed data (see [exploratory data analysis](../episodes/04-exploratory-qc.Rmd)) and the top differentially expressed genes for visualization. A heatmap can reveal expression pattern across sample groups (columns) and automatically orders genes (rows) according to their similarity. 
 
 
 ```{r}
-vsd <- DESeq2::vst(dds, blind = TRUE)
+# Transform counts
+vsd <- vst(dds, blind = TRUE)
 
+# Get top DE genes
 genes <- rownames(head(resTime[order(resTime$pvalue), ], 10))
 heatmapData <- assay(vsd)[genes, ]
+
+# Scale counts for visualization
 heatmapData <- t(scale(t(heatmapData)))
+
+# Add annotation
 heatmapColAnnot <- data.frame(colData(vsd)[, c("time", "sex")])
 idx <- order(vsd$time)
 heatmapData <- heatmapData[, idx]
 heatmapColAnnot <- HeatmapAnnotation(df = heatmapColAnnot[idx, ])
+
+# Plot as heatmap
 ComplexHeatmap::Heatmap(heatmapData,
                         top_annotation = heatmapColAnnot,
                         cluster_rows = TRUE, cluster_columns = FALSE)
