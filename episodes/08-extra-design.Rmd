@@ -1,8 +1,8 @@
 ---
 source: Rmd
 title: Extra exploration of design matrices
-teaching: XX
-exercises: XX
+teaching: 30
+exercises: 30
 editor_options:
   chunk_output_type: console
 ---
@@ -27,14 +27,10 @@ source("download_data.R")
 ```{r, include=FALSE}
 ```
 
-:::::::::::::::::::::::::::::::::::::::::  callout
+## Loading required packages and reading data
 
-### Contribute!
-
-This episode is intended to provide a recap of the typical biological questions which would require an RNA-seq analysis approach; introduce what is an experimental design, then discuss the experimental designs in the context of the typical biological questions, interpretation of design parameters (treatmet, control, interaction, p-value, etc). 
-It is important therfore to understand, what question to ask, which design to use, why that design, how to analysise the data and output.
-
-::::::::::::::::::::::::::::::::::::::::::::::::::
+We start by loading a few packages that will be needed in this episode. 
+In particular, the [ExploreModelMatrix](https://bioconductor.org/packages/ExploreModelMatrix/) package provides resources for exploring design matrices in a graphical fashion, for easier interpretation. 
 
 ```{r}
 suppressPackageStartupMessages({
@@ -44,10 +40,20 @@ suppressPackageStartupMessages({
 })
 ```
 
+Next, we read the metadata table for our data set. 
+As seen in previous episodes, the metadata contains information about the age, sex, infection status, time of measurement and tissue of the collected samples. 
+Note that Day0 always corresponds to non-infected samples, and that infected samples are collected on days 4 and 8.
+Moreover, all mice have the same age (8 weeks). 
+Hence, in the first part of this episode we consider only the sex, tissue and time variables further. 
+
 ```{r}
 meta <- read.csv("data/GSE96870_coldata_all.csv", row.names = 1)
 meta
+table(meta$time, meta$infection)
+table(meta$age)
 ```
+
+We can start by visualizing the number of observations for each combination of the three predictor variables. 
 
 ```{r}
 vd <- VisualizeDesign(sampleData = meta, 
@@ -55,21 +61,76 @@ vd <- VisualizeDesign(sampleData = meta,
 vd$cooccurrenceplots
 ```
 
+:::::::::::::::::::::::::::::::::::::::  challenge
+
+### Challenge
+
+Based on this visualization, would you say that the data set is balanced, or are there combinations of predictor variables that are severely over- or underrepresented?
+
+::::::::::::::::::::::::::::::::::::::::::::::::::
+
+
 ## Compare males and females, non-infected spinal cord
 
+Next, we will set up our first design matrix. 
+Here, we will focus on the uninfected (Day0) spinal cord samples, and our aim is to compare the male and female mice. 
+Thus, we first subset the metadata to only the samples of interest, and next set up and visualize the design matrix with a single predictor variable (sex). 
+By defining the design formula as `~ sex`, we tell R to include an intercept in the design. 
+This intercept will represent the 'baseline' level of the predictor variable, which in this case is selected to be the Female mice. 
+If not explicitly specified, R will order the values of the predictor in alphabetical order and select the first one as the reference or baseline level. 
+
 ```{r}
+## Subset metadata
 meta_noninf_spc <- meta %>% filter(time == "Day0" & 
                                        tissue == "Spinalcord")
 meta_noninf_spc
+
+## Use ExploreModelMatrix to create a design matrix and visualizations, given 
+## the desired design formula. 
 vd <- VisualizeDesign(sampleData = meta_noninf_spc, 
                       designFormula = ~ sex)
 vd$designmatrix
 vd$plotlist
+
+## Note that we can also generate the design matrix like this
+model.matrix(~ sex, data = meta_noninf_spc)
 ```
 
 :::::::::::::::::::::::::::::::::::::::  challenge
 
-### Challenge: Can you do it?
+### Challenge
+
+With this design, what is the interpretation of the `sexMale` coefficient?
+
+::::::::::::::::::::::::::::::::::::::::::::::::::
+
+:::::::::::::::::::::::::::::::::::::::  challenge
+
+### Challenge
+
+Set up the design formula to compare male and female spinal cord samples from Day0 as above, but instruct R to not include an intercept in the model. How does this change the interpretation of the coefficients? What contrast would have to be specified to compare the mean expression of a gene between male and female mice? 
+
+:::::::::::::::  solution
+
+### Solution
+
+```{r, echo=TRUE}
+meta_noninf_spc <- meta %>% filter(time == "Day0" & 
+                                       tissue == "Spinalcord")
+meta_noninf_spc
+vd <- VisualizeDesign(sampleData = meta_noninf_spc, 
+                      designFormula = ~ 0 + sex)
+vd$designmatrix
+vd$plotlist
+```
+
+:::::::::::::::::::::::::
+
+::::::::::::::::::::::::::::::::::::::::::::::::::
+
+:::::::::::::::::::::::::::::::::::::::  challenge
+
+### Challenge
 
 Set up the design formula to compare the three time points (Day0, Day4, Day8) in the male spinal cord samples, and visualize it using `ExploreModelMatrix`.
 
@@ -91,6 +152,9 @@ vd$plotlist
 
 ## Factorial design without interactions
 
+Next, we again consider only non-infected mice, but fit a model incorporating both sex and tissue as predictors. 
+We assume that the tissue differences are the same for both male and female mice, and consequently fit an additive model, without interaction terms. 
+
 ```{r}
 meta_noninf <- meta %>% filter(time == "Day0")
 meta_noninf
@@ -102,9 +166,16 @@ vd$plotlist
 
 ## Factorial design with interactions
 
+In the previous model, we assumed that the tissue differences were the same for both male and female mice. 
+To allow for the estimation of sex-specific tissue differences (at the expense of having one additional coefficient to estimate from the data), we can include an interaction term in the model. 
+
 ```{r}
 meta_noninf <- meta %>% filter(time == "Day0")
 meta_noninf
+
+## Define a design including an interaction term
+## Note that ~ sex * tissue is equivalent to 
+## ~ sex + tissue + sex:tissue
 vd <- VisualizeDesign(sampleData = meta_noninf, 
                       designFormula = ~ sex * tissue)
 vd$designmatrix
@@ -112,6 +183,11 @@ vd$plotlist
 ```
 
 ## Paired design
+
+In this particular data set the samples are paired - the same mice have contributed both the cerebellum and spinal cord samples. 
+This information was not included in the previous models. 
+However, accounting for it can increase power to detect tissue differences by eliminating variability in baseline expression levels between mice. 
+Here, we define a paired design for the female non-infected mice, aimed at testing for differences between tissues after accounting for baseline differences between mice.
 
 ```{r}
 meta_fem_day0 <- meta %>% filter(sex == "Female" & 
@@ -130,11 +206,20 @@ vd$plotlist
 
 ## Within- and between-subject comparisons
 
+In some situations, we need to combine the types of models considered above. 
+For example, let's say that we want to investigate if the tissue differences are different for infected and non-infected female mice. 
+In this case, each mice only contributes to one of the infection groups (each mice is either infected or non-infected), but contributes both a cerebellum and a spinal cord sample.
+One way to view this type of design is as two paired experiments, one for each infection group (see the [edgeR user guide section 3.5](https://www.bioconductor.org/packages/release/bioc/vignettes/edgeR/inst/doc/edgeRUsersGuide.pdf)).
+We can then easily compare the two tissues in each infection group, and contrast the tissue differences between the infection groups. 
+
 ```{r}
 meta_fem_day04 <- meta %>% 
     filter(sex == "Female" & 
                time %in% c("Day0", "Day4")) %>%
     droplevels()
+# ensure that mouse is treated as a categorical variable
+meta_fem_day04$mouse <- factor(meta_fem_day04$mouse)
+
 meta_fem_day04
 design <- model.matrix(~ mouse, data = meta_fem_day04)
 design <- cbind(design, 
