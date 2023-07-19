@@ -72,6 +72,37 @@ set databases and how to access them in R. Then, we will learn how to perform
 ORA analysis with the Bioconductor package **clusterProfiler**. And in the
 end, we will learn several visualization methods on the GSEA results.
 
+Following is a list of packages that will be used in this episode:
+
+
+```{r, eval = FALSE}
+library(SummarizedExperiment)
+library(DESeq2)
+library(gplots)
+library(microbenchmark)
+library(org.Hs.eg.db)
+library(org.Mm.eg.db)
+library(msigdbr)
+library(clusterProfiler)
+library(enrichplot)
+library(ggplot2)
+library(simplifyEnrichment)
+```
+
+```{r, echo = FALSE}
+library(SummarizedExperiment)
+library(DESeq2)
+library(gplots)
+library(microbenchmark)
+library(org.Hs.eg.db)
+library(org.Mm.eg.db)
+library(msigdbr)
+library(clusterProfiler)
+library(enrichplot)
+library(ggplot2)
+# simplifyEnrichment cannot be installed in sandpaper ci
+```
+
 ## The statistical method
 
 To demonstrate the ORA analysis, we use a list of DE genes from a comparison
@@ -1502,7 +1533,7 @@ simplifyGO(GO_ID)
     so the plot is not generated on the fly.
  -->
 
-<img src="simplifyEnrichment.png" />
+<img src="fig/simplifyEnrichment.png" />
 
 :::::::::::::::::::::::::::::::::::::::::  callout
 
