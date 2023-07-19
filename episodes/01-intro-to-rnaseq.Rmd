@@ -5,7 +5,7 @@ teaching: XX
 exercises: XX
 ---
 
-```{r, echo=FALSE, purl=FALSE, message=FALSE}
+```{r, echo=FALSE, purl=FALSE, message=FALSE, warning = FALSE}
 source("download_data.R")
 ```
 
