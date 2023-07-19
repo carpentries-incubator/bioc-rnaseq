@@ -9,17 +9,17 @@ exercises: XX
 source("download_data.R")
 ```
 
-::: objectives
+::::::::::::::::::::::::::::::::::::::: objectives
 -   Learn how to import the quantifications into a SummarizedExperiment object.
 -   Learn how to add additional gene annotations to the object.
-:::
+::::::::::::::::::::::::::::::::::::::::::::::::::
 
-::: questions
+:::::::::::::::::::::::::::::::::::::::: questions
 -   How can one import quantified gene expression data into an object suitable for downstream statistical analysis in R?
 -   What types of gene identifiers are typically used, and how are mappings between them done?
-:::
-
 ::::::::::::::::::::::::::::::::::::::::::::::::::
+
+
 
 ## Read the data
 
