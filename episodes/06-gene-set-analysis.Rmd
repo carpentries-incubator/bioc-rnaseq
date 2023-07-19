@@ -1496,8 +1496,8 @@ up-regulated genes and the first 5 most significant terms for down-regulated
 genes. The following **ggplot2** code should be easy to read.
 
 ```{r, fig.width= 10, fig.height = 6}
-# The name of the 4th term is too long, we wrap it into two lines.
-resTimeGOupTable[4, "Description"] = paste(strwrap(resTimeGOupTable[4, "Description"]), collapse = "\n")
+# The name of the 3rd term is too long, we wrap it into two lines.
+resTimeGOupTable[3, "Description"] = paste(strwrap(resTimeGOupTable[3, "Description"]), collapse = "\n")
 
 direction = c(rep("up", 5), rep("down", 5))
 ggplot(rbind(resTimeGOupTable[1:5, ],
@@ -1560,3 +1560,4 @@ more information.
 - In R, it is easy to obtain gene sets from a large number of sources.
 
 ::::::::::::::::::::::::::::::::::::::::::::::::::
+
