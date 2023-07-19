@@ -1834,7 +1834,7 @@ count files</a>.</p>
   Instructor Note
   </h3>
 </button>
-<div id="collapseInstructor1" class="accordion-collapse collapse" data-bs-parent="#accordionInstructor1" aria-labelledby="headingInstructor1">
+<div id="collapseInstructor1" class="accordion-collapse collapse" aria-labelledby="headingInstructor1" data-bs-parent="#accordionInstructor1">
 <div class="accordion-body">
 <p>The function to generate a <code>DESeqDataSet</code> needs to be
 adapted depending on the input type, e.g,</p>
@@ -1900,7 +1900,7 @@ function from the previous section:</p>
   Instructor Note
   </h3>
 </button>
-<div id="collapseInstructor2" class="accordion-collapse collapse" data-bs-parent="#accordionInstructor2" aria-labelledby="headingInstructor2">
+<div id="collapseInstructor2" class="accordion-collapse collapse" aria-labelledby="headingInstructor2" data-bs-parent="#accordionInstructor2">
 <div class="accordion-body">
 <p><em>DESeq2</em> uses the <strong>“Relative Log Expression”
 (RLE)</strong> method to calculate sample-wise <em>size factors</em>
@@ -2051,7 +2051,7 @@ object.</em></p>
   Show me the solution
   </h4>
 </button>
-<div id="collapseSolution1" class="accordion-collapse collapse" data-bs-parent="#accordionSolution1" aria-labelledby="headingSolution1">
+<div id="collapseSolution1" class="accordion-collapse collapse" aria-labelledby="headingSolution1" data-bs-parent="#accordionSolution1">
 <div class="accordion-body">
 <p>The <strong>reference level</strong> can be interpreted as your
 experiments <strong>“control group”</strong> and the <strong>last
@@ -2140,7 +2140,7 @@ A330076C08Rik 2.57077e-48</code></pre>
   Instructor Note
   </h3>
 </button>
-<div id="collapseInstructor3" class="accordion-collapse collapse" data-bs-parent="#accordionInstructor3" aria-labelledby="headingInstructor3">
+<div id="collapseInstructor3" class="accordion-collapse collapse" aria-labelledby="headingInstructor3" data-bs-parent="#accordionInstructor3">
 <div class="accordion-body">
 <p>Both of the below ways of specifying the contrast are essentially
 equivalent. The <code>name</code> parameter can be accessed using
@@ -2177,7 +2177,7 @@ contrast.</em></p>
   Show me the solution
   </h4>
 </button>
-<div id="collapseSolution2" class="accordion-collapse collapse" data-bs-parent="#accordionSolution2" aria-labelledby="headingSolution2">
+<div id="collapseSolution2" class="accordion-collapse collapse" aria-labelledby="headingSolution2" data-bs-parent="#accordionSolution2">
 <div class="accordion-body">
 <div class="codewrapper sourceCode" id="cb25">
 <h3 class="code-label">R<i aria-hidden="true" data-feather="chevron-left"></i><i aria-hidden="true" data-feather="chevron-right"></i>
@@ -2322,7 +2322,7 @@ results then?</p>
   Show me the solution
   </h4>
 </button>
-<div id="collapseSolution3" class="accordion-collapse collapse" data-bs-parent="#accordionSolution3" aria-labelledby="headingSolution3">
+<div id="collapseSolution3" class="accordion-collapse collapse" aria-labelledby="headingSolution3" data-bs-parent="#accordionSolution3">
 <div class="accordion-body">
 <div class="codewrapper sourceCode" id="cb34">
 <h3 class="code-label">R<i aria-hidden="true" data-feather="chevron-left"></i><i aria-hidden="true" data-feather="chevron-right"></i>
@@ -2448,7 +2448,7 @@ beneficial.</li>
 </div>
 </section></section><section id="aio-06-gene-set-analysis"><p>Content from <a href="06-gene-set-analysis.html">Gene set enrichment analysis</a></p>
 <hr>
-<p> Last updated on 2023-07-18 | 
+<p> Last updated on 2023-07-19 | 
         
         <a href="https://github.com/carpentries-incubator/bioc-rnaseq/edit/main/episodes/06-gene-set-analysis.Rmd" class="external-link">Edit this page <i aria-hidden="true" data-feather="edit"></i></a></p>
 <p>Estimated time <i aria-hidden="true" data-feather="clock"></i> NA minutes </p>
@@ -2521,6 +2521,24 @@ gene set databases and how to access them in R. Then, we will learn how
 to perform ORA analysis with the Bioconductor package
 <strong>clusterProfiler</strong>. And in the end, we will learn several
 visualization methods on the GSEA results.</p>
+<p>Following is a list of packages that will be used in this
+episode:</p>
+<div class="codewrapper sourceCode" id="cb1">
+<h3 class="code-label">R<i aria-hidden="true" data-feather="chevron-left"></i><i aria-hidden="true" data-feather="chevron-right"></i>
+</h3>
+<pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="kw">library</span><span class="op">(</span><span class="va">SummarizedExperiment</span><span class="op">)</span></span>
+<span><span class="kw">library</span><span class="op">(</span><span class="va">DESeq2</span><span class="op">)</span></span>
+<span><span class="kw">library</span><span class="op">(</span><span class="va">gplots</span><span class="op">)</span></span>
+<span><span class="kw">library</span><span class="op">(</span><span class="va">microbenchmark</span><span class="op">)</span></span>
+<span><span class="kw">library</span><span class="op">(</span><span class="va">org.Hs.eg.db</span><span class="op">)</span></span>
+<span><span class="kw">library</span><span class="op">(</span><span class="va">org.Mm.eg.db</span><span class="op">)</span></span>
+<span><span class="kw">library</span><span class="op">(</span><span class="va">msigdbr</span><span class="op">)</span></span>
+<span><span class="kw">library</span><span class="op">(</span><span class="va">clusterProfiler</span><span class="op">)</span></span>
+<span><span class="kw">library</span><span class="op">(</span><span class="va">enrichplot</span><span class="op">)</span></span>
+<span><span class="kw">library</span><span class="op">(</span><span class="va">ggplot2</span><span class="op">)</span></span>
+<span><span class="kw">library</span><span class="op">(</span><span class="va">simplifyEnrichment</span><span class="op">)</span></span></code></pre>
+</div>
 <section id="the-statistical-method"><h2 class="section-heading">The statistical method<a class="anchor" aria-label="anchor" href="#the-statistical-method"></a>
 </h2>
 <hr class="half-width">
@@ -2534,7 +2552,7 @@ FDR &lt; 0.05, and save it in the object <code>sexDEgenes</code>.</p>
 constructed in the script <a href="https://github.com/carpentries-incubator/bioc-rnaseq/blob/main/episodes/download_data.R" class="external-link"><code>download_data.R</code></a>.
 In the following code, there are also comments that explain every step
 of the analysis.</p>
-<div class="codewrapper sourceCode" id="cb1">
+<div class="codewrapper sourceCode" id="cb2">
 <h3 class="code-label">R<i aria-hidden="true" data-feather="chevron-left"></i><i aria-hidden="true" data-feather="chevron-right"></i>
 </h3>
 <pre class="downlit sourceCode r">
@@ -2564,7 +2582,7 @@ of the analysis.</p>
 </div>
 <p>Let’s check the number of DE genes and how they look like. It seems
 the number of DE genes is very small, but it is OK for this example.</p>
-<div class="codewrapper sourceCode" id="cb2">
+<div class="codewrapper sourceCode" id="cb3">
 <h3 class="code-label">R<i aria-hidden="true" data-feather="chevron-left"></i><i aria-hidden="true" data-feather="chevron-right"></i>
 </h3>
 <pre class="downlit sourceCode r">
@@ -2575,7 +2593,7 @@ the number of DE genes is very small, but it is OK for this example.</p>
 </h3>
 <pre class="output" tabindex="0"><code>[1] 54</code></pre>
 </div>
-<div class="codewrapper sourceCode" id="cb4">
+<div class="codewrapper sourceCode" id="cb5">
 <h3 class="code-label">R<i aria-hidden="true" data-feather="chevron-left"></i><i aria-hidden="true" data-feather="chevron-right"></i>
 </h3>
 <pre class="downlit sourceCode r">
@@ -2596,7 +2614,7 @@ object on which <code>seqnames()</code> is applied to extract chromosome
 names. <code>seqnames()</code> returns a special data format and we need
 to explicitly convert it to a normal vector by
 <code>as.vector()</code>.</p>
-<div class="codewrapper sourceCode" id="cb6">
+<div class="codewrapper sourceCode" id="cb7">
 <h3 class="code-label">R<i aria-hidden="true" data-feather="chevron-left"></i><i aria-hidden="true" data-feather="chevron-right"></i>
 </h3>
 <pre class="downlit sourceCode r">
@@ -2610,7 +2628,7 @@ to explicitly convert it to a normal vector by
 </h3>
 <pre class="output" tabindex="0"><code>[1] "Gm21950"   "Gm14346"   "Gm14345"   "Gm14351"   "Spin2-ps1" "Gm3701"   </code></pre>
 </div>
-<div class="codewrapper sourceCode" id="cb8">
+<div class="codewrapper sourceCode" id="cb9">
 <h3 class="code-label">R<i aria-hidden="true" data-feather="chevron-left"></i><i aria-hidden="true" data-feather="chevron-right"></i>
 </h3>
 <pre class="downlit sourceCode r">
@@ -2637,7 +2655,7 @@ conversion in the ORA analysis.</p>
 <p>Since the DE genes and the gene set can be mathematically thought as
 two sets, a natural way is to first visualize them with a Venn
 diagram.</p>
-<div class="codewrapper sourceCode" id="cb10">
+<div class="codewrapper sourceCode" id="cb11">
 <h3 class="code-label">R<i aria-hidden="true" data-feather="chevron-left"></i><i aria-hidden="true" data-feather="chevron-right"></i>
 </h3>
 <pre class="downlit sourceCode r">
@@ -2646,7 +2664,7 @@ diagram.</p>
 <span>               <span class="st">"XY gene set"</span> <span class="op">=</span> <span class="va">XYGeneSet</span><span class="op">)</span><span class="op">)</span><span class="op">)</span></span>
 <span><span class="fu">title</span><span class="op">(</span><span class="fu">paste0</span><span class="op">(</span><span class="st">"|universe| = "</span>, <span class="fu">length</span><span class="op">(</span><span class="va">totalGenes</span><span class="op">)</span><span class="op">)</span><span class="op">)</span></span></code></pre>
 </div>
-<figure><img src="../fig/06-gene-set-analysis-rendered-unnamed-chunk-5-1.png" style="display: block; margin: auto;" class="figure mx-auto d-block"></figure><p>In the Venn diagram, we can observe that around 1.1% (13/1134) of
+<figure><img src="../fig/06-gene-set-analysis-rendered-unnamed-chunk-7-1.png" style="display: block; margin: auto;" class="figure mx-auto d-block"></figure><p>In the Venn diagram, we can observe that around 1.1% (13/1134) of
 genes in the <em>XY gene set</em> are DE. Compared to the global
 fraction of DE genes (54/21198 = 0.25%), it seems there is a strong
 relations between DE genes and the gene set. We can also compare the
@@ -2697,7 +2715,7 @@ the <em>XY gene set</em> (i.e. the number of member genes), <span class="math i
 </center>
 <p>These numbers can be obtained as in the following code<a href="#fn1" class="footnote-ref" id="fnref1"><sup>1</sup></a>. Note we replace
 <code>+</code> with <code>0</code> in the R variable names.</p>
-<div class="codewrapper sourceCode" id="cb11">
+<div class="codewrapper sourceCode" id="cb12">
 <h3 class="code-label">R<i aria-hidden="true" data-feather="chevron-left"></i><i aria-hidden="true" data-feather="chevron-right"></i>
 </h3>
 <pre class="downlit sourceCode r">
@@ -2707,7 +2725,7 @@ the <em>XY gene set</em> (i.e. the number of member genes), <span class="math i
 <span><span class="va">n_11</span> <span class="op">&lt;-</span> <span class="fu">length</span><span class="op">(</span><span class="fu">intersect</span><span class="op">(</span><span class="va">sexDEgenes</span>, <span class="va">XYGeneSet</span><span class="op">)</span><span class="op">)</span></span></code></pre>
 </div>
 <p>Other values can be obtained by:</p>
-<div class="codewrapper sourceCode" id="cb12">
+<div class="codewrapper sourceCode" id="cb13">
 <h3 class="code-label">R<i aria-hidden="true" data-feather="chevron-left"></i><i aria-hidden="true" data-feather="chevron-right"></i>
 </h3>
 <pre class="downlit sourceCode r">
@@ -2718,7 +2736,7 @@ the <em>XY gene set</em> (i.e. the number of member genes), <span class="math i
 <span><span class="va">n_22</span> <span class="op">&lt;-</span> <span class="va">n_02</span> <span class="op">-</span> <span class="va">n_12</span></span></code></pre>
 </div>
 <p>All the values are:</p>
-<div class="codewrapper sourceCode" id="cb13">
+<div class="codewrapper sourceCode" id="cb14">
 <h3 class="code-label">R<i aria-hidden="true" data-feather="chevron-left"></i><i aria-hidden="true" data-feather="chevron-right"></i>
 </h3>
 <pre class="downlit sourceCode r">
@@ -2771,7 +2789,7 @@ function <code>fisher.test()</code> to perform the test. The input is
 the top-left 2x2 sub-matrix. We specify
 <code>alternative = "greater"</code> in the function because we are only
 interested in over-representation.</p>
-<div class="codewrapper sourceCode" id="cb15">
+<div class="codewrapper sourceCode" id="cb16">
 <h3 class="code-label">R<i aria-hidden="true" data-feather="chevron-left"></i><i aria-hidden="true" data-feather="chevron-right"></i>
 </h3>
 <pre class="downlit sourceCode r">
@@ -2799,7 +2817,7 @@ strong enrichment in the <em>XY gene set</em>.</p>
 <p>Results of the Fisher’s Exact test can be saved into an object
 <code>t</code>, which is a simple list, and the <em>p</em>-value can be
 obtained by <code>t$p.value</code>.</p>
-<div class="codewrapper sourceCode" id="cb17">
+<div class="codewrapper sourceCode" id="cb18">
 <h3 class="code-label">R<i aria-hidden="true" data-feather="chevron-left"></i><i aria-hidden="true" data-feather="chevron-right"></i>
 </h3>
 <pre class="downlit sourceCode r">
@@ -2863,7 +2881,7 @@ on rows, and put whether genes are DE on columns.</p>
 </table>
 </center>
 <p>And the corresponding <code>fisher.test()</code> is:</p>
-<div class="codewrapper sourceCode" id="cb19">
+<div class="codewrapper sourceCode" id="cb20">
 <h3 class="code-label">R<i aria-hidden="true" data-feather="chevron-left"></i><i aria-hidden="true" data-feather="chevron-right"></i>
 </h3>
 <pre class="downlit sourceCode r">
@@ -2900,7 +2918,7 @@ grab <span class="math inline">\(n_{+1}\)</span> genes (the size of the
 gene set) from the box and we want to ask <strong>what is the
 probability of having <span class="math inline">\(n_{11}\)</span> DE
 genes in our hand?</strong></p>
-<figure><img src="../fig/06-gene-set-analysis-rendered-unnamed-chunk-12-1.png" width="80%" style="display: block; margin: auto;" class="figure mx-auto d-block"></figure><p>We first calculate the total number of ways of picking <span class="math inline">\(n_{+1}\)</span> genes from total <span class="math inline">\(n\)</span> genes, without distinguishing whether
+<figure><img src="../fig/06-gene-set-analysis-rendered-unnamed-chunk-14-1.png" width="80%" style="display: block; margin: auto;" class="figure mx-auto d-block"></figure><p>We first calculate the total number of ways of picking <span class="math inline">\(n_{+1}\)</span> genes from total <span class="math inline">\(n\)</span> genes, without distinguishing whether
 they are DE or not: <span class="math inline">\(\binom{n}{n_{+1}}\)</span>.</p>
 <p>Next, in the <span class="math inline">\(n_{+1}\)</span> genes that
 have been picked, there are <span class="math inline">\(n_{11}\)</span>
@@ -2940,7 +2958,7 @@ probability of being over-representated):</p>
 \]</span></p>
 <p>In R, the function <code>phyper()</code> calculates <em>p</em>-values
 from the hypergeometric distribution. There are four arguments:</p>
-<div class="codewrapper sourceCode" id="cb21">
+<div class="codewrapper sourceCode" id="cb22">
 <h3 class="code-label">R<i aria-hidden="true" data-feather="chevron-left"></i><i aria-hidden="true" data-feather="chevron-right"></i>
 </h3>
 <pre class="downlit sourceCode r">
@@ -2963,14 +2981,14 @@ to transform it a little bit:</p>
 <p><span class="math display">\[ \mathrm{Pr}(X \geqslant q) = 1 -
 \mathrm{Pr}(X &lt; q) = 1 - \mathrm{Pr}(X \leqslant q-1)\]</span></p>
 <p>Then, the correct use of <code>phyper()</code> is:</p>
-<div class="codewrapper sourceCode" id="cb22">
+<div class="codewrapper sourceCode" id="cb23">
 <h3 class="code-label">R<i aria-hidden="true" data-feather="chevron-left"></i><i aria-hidden="true" data-feather="chevron-right"></i>
 </h3>
 <pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="fl">1</span> <span class="op">-</span> <span class="fu">phyper</span><span class="op">(</span><span class="va">q</span> <span class="op">-</span> <span class="fl">1</span>, <span class="va">m</span>, <span class="va">n</span>, <span class="va">k</span><span class="op">)</span></span></code></pre>
 </div>
 <p>Let’s pluigin in our variables:</p>
-<div class="codewrapper sourceCode" id="cb23">
+<div class="codewrapper sourceCode" id="cb24">
 <h3 class="code-label">R<i aria-hidden="true" data-feather="chevron-left"></i><i aria-hidden="true" data-feather="chevron-right"></i>
 </h3>
 <pre class="downlit sourceCode r">
@@ -2984,7 +3002,7 @@ to transform it a little bit:</p>
 <p>Optionally, <code>lower.tail</code> argument can be specified which
 directly calculates <em>p</em>-values from the upper tail of the
 distribution.</p>
-<div class="codewrapper sourceCode" id="cb25">
+<div class="codewrapper sourceCode" id="cb26">
 <h3 class="code-label">R<i aria-hidden="true" data-feather="chevron-left"></i><i aria-hidden="true" data-feather="chevron-right"></i>
 </h3>
 <pre class="downlit sourceCode r">
@@ -2997,7 +3015,7 @@ distribution.</p>
 </div>
 <p>If we switch <code>n_01</code> and <code>n_10</code>, the
 <em>p</em>-values are identical:</p>
-<div class="codewrapper sourceCode" id="cb27">
+<div class="codewrapper sourceCode" id="cb28">
 <h3 class="code-label">R<i aria-hidden="true" data-feather="chevron-left"></i><i aria-hidden="true" data-feather="chevron-right"></i>
 </h3>
 <pre class="downlit sourceCode r">
@@ -3013,7 +3031,7 @@ distribution.</p>
 Fisher’s exact test, hypergeometric distribution is the exact
 distribution of its statistic.</p>
 <p>Let’s test the runtime of the two functions:</p>
-<div class="codewrapper sourceCode" id="cb29">
+<div class="codewrapper sourceCode" id="cb30">
 <h3 class="code-label">R<i aria-hidden="true" data-feather="chevron-left"></i><i aria-hidden="true" data-feather="chevron-right"></i>
 </h3>
 <pre class="downlit sourceCode r">
@@ -3029,8 +3047,8 @@ distribution of its statistic.</p>
 </h3>
 <pre class="output" tabindex="0"><code>Unit: microseconds
    expr   min     lq    mean median    uq   max neval
- fisher 282.2 286.45 297.559  288.5 299.5 550.3   100
-  hyper   1.7   1.90   2.473    2.3   2.6  18.8   100</code></pre>
+ fisher 284.3 289.45 300.904 293.75 303.7 569.0   100
+  hyper   1.7   1.90   2.376   2.30   2.7   6.8   100</code></pre>
 </div>
 <p>It is very astonishing that <code>phyper()</code> is hundreds of
 times faster than <code>fisher.test()</code>. Main reason is in
@@ -3099,7 +3117,7 @@ simply treated as a vector of genes. Thus, naturally, a collection of
 gene sets can be represented as a list of vectors. In the following
 example, there are three gene sets with 3, 5 and 2 genes. Some genes
 exist in multiple gene sets.</p>
-<div class="codewrapper sourceCode" id="cb31">
+<div class="codewrapper sourceCode" id="cb32">
 <h3 class="code-label">R<i aria-hidden="true" data-feather="chevron-left"></i><i aria-hidden="true" data-feather="chevron-right"></i>
 </h3>
 <pre class="downlit sourceCode r">
@@ -3125,7 +3143,7 @@ $gene_set_3
 as a two-column data frame. The order of the gene set column and the
 gene column, i.e. which column locates as the first column, are quite
 arbitrary. Different tools may require differently.</p>
-<div class="codewrapper sourceCode" id="cb33">
+<div class="codewrapper sourceCode" id="cb34">
 <h3 class="code-label">R<i aria-hidden="true" data-feather="chevron-left"></i><i aria-hidden="true" data-feather="chevron-right"></i>
 </h3>
 <pre class="downlit sourceCode r">
@@ -3194,7 +3212,7 @@ convert a list to a two-column data frame?</p>
 </button>
 <div id="collapseSolution1" class="accordion-collapse collapse" data-bs-parent="#accordionSolution1" aria-labelledby="headingSolution1">
 <div class="accordion-body">
-<div class="codewrapper sourceCode" id="cb37">
+<div class="codewrapper sourceCode" id="cb38">
 <h3 class="code-label">R<i aria-hidden="true" data-feather="chevron-left"></i><i aria-hidden="true" data-feather="chevron-right"></i>
 </h3>
 <pre class="downlit sourceCode r">
@@ -3205,7 +3223,7 @@ convert a list to a two-column data frame?</p>
 </div>
 <p>To convert <code>lt</code> to a data frame (e.g. let’s put gene sets
 in the first column):</p>
-<div class="codewrapper sourceCode" id="cb38">
+<div class="codewrapper sourceCode" id="cb39">
 <h3 class="code-label">R<i aria-hidden="true" data-feather="chevron-left"></i><i aria-hidden="true" data-feather="chevron-right"></i>
 </h3>
 <pre class="downlit sourceCode r">
@@ -3229,7 +3247,7 @@ in the first column):</p>
 10 gene_set_3 gene_7</code></pre>
 </div>
 <p>To convert <code>df</code> back to the list:</p>
-<div class="codewrapper sourceCode" id="cb40">
+<div class="codewrapper sourceCode" id="cb41">
 <h3 class="code-label">R<i aria-hidden="true" data-feather="chevron-left"></i><i aria-hidden="true" data-feather="chevron-right"></i>
 </h3>
 <pre class="downlit sourceCode r">
@@ -3355,7 +3373,7 @@ sets are essentially mappings between GO terms and genes. Let’s try to
 extract it from the <code>org.Hs.eg.db</code> object.</p>
 <p>All the columns (the key column or the source column) can be obtained
 by <code>keytypes()</code>:</p>
-<div class="codewrapper sourceCode" id="cb42">
+<div class="codewrapper sourceCode" id="cb43">
 <h3 class="code-label">R<i aria-hidden="true" data-feather="chevron-left"></i><i aria-hidden="true" data-feather="chevron-right"></i>
 </h3>
 <pre class="downlit sourceCode r">
@@ -3378,7 +3396,7 @@ by <code>keytypes()</code>:</p>
 column”, thus we can query “<em>select all GO IDs where the
 corresponding ONTOLOGY is BP</em>”, which is translated into the
 following code:</p>
-<div class="codewrapper sourceCode" id="cb44">
+<div class="codewrapper sourceCode" id="cb45">
 <h3 class="code-label">R<i aria-hidden="true" data-feather="chevron-left"></i><i aria-hidden="true" data-feather="chevron-right"></i>
 </h3>
 <pre class="downlit sourceCode r">
@@ -3401,7 +3419,7 @@ take the first element from the list returned by
 <p>Next we do mapping from GO IDs to gene Entrez IDs. Now the query
 becomes “<em>providing a vector of GO IDs, select ENTREZIDs which
 correspond to every one of them</em>”.</p>
-<div class="codewrapper sourceCode" id="cb46">
+<div class="codewrapper sourceCode" id="cb47">
 <h3 class="code-label">R<i aria-hidden="true" data-feather="chevron-left"></i><i aria-hidden="true" data-feather="chevron-right"></i>
 </h3>
 <pre class="downlit sourceCode r">
@@ -3420,7 +3438,7 @@ perform analysis. In this way, the mapping between <code>"GO"</code> and
 complete, and mapping between <code>"GOALL"</code> and
 <code>"ENTREZID"</code> is the correct one to use.</p>
 <p>We filter out GO gene sets with no gene annotated.</p>
-<div class="codewrapper sourceCode" id="cb47">
+<div class="codewrapper sourceCode" id="cb48">
 <h3 class="code-label">R<i aria-hidden="true" data-feather="chevron-left"></i><i aria-hidden="true" data-feather="chevron-right"></i>
 </h3>
 <pre class="downlit sourceCode r">
@@ -3491,7 +3509,7 @@ hsa:126 path:hsa00010</code></pre>
 <p>We can directly read the text output with <code>read.table()</code>.
 Wrapping the URL with the function <code>url()</code>, you can pretend
 to directly read data from the remote web server.</p>
-<div class="codewrapper sourceCode" id="cb51">
+<div class="codewrapper sourceCode" id="cb52">
 <h3 class="code-label">R<i aria-hidden="true" data-feather="chevron-left"></i><i aria-hidden="true" data-feather="chevron-right"></i>
 </h3>
 <pre class="downlit sourceCode r">
@@ -3513,7 +3531,7 @@ to directly read data from the remote web server.</p>
 Entrez ID type. Let’s remove the <code>"hsa:"</code> prefix, also we
 remove the <code>"path:"</code> prefix for pathway IDs in the second
 column.</p>
-<div class="codewrapper sourceCode" id="cb53">
+<div class="codewrapper sourceCode" id="cb54">
 <h3 class="code-label">R<i aria-hidden="true" data-feather="chevron-left"></i><i aria-hidden="true" data-feather="chevron-right"></i>
 </h3>
 <pre class="downlit sourceCode r">
@@ -3533,7 +3551,7 @@ column.</p>
 6   128 hsa00010</code></pre>
 </div>
 <p>The full pathway names can be obtained via the “list” command.</p>
-<div class="codewrapper sourceCode" id="cb55">
+<div class="codewrapper sourceCode" id="cb56">
 <h3 class="code-label">R<i aria-hidden="true" data-feather="chevron-left"></i><i aria-hidden="true" data-feather="chevron-right"></i>
 </h3>
 <pre class="downlit sourceCode r">
@@ -3595,7 +3613,7 @@ obtain gene sets from MSigDB. One convenient way is to use the
 orthologs.</p>
 <p>Let’s check which organisms are supported and which gene sets
 collections it provides.</p>
-<div class="codewrapper sourceCode" id="cb57">
+<div class="codewrapper sourceCode" id="cb58">
 <h3 class="code-label">R<i aria-hidden="true" data-feather="chevron-left"></i><i aria-hidden="true" data-feather="chevron-right"></i>
 </h3>
 <pre class="downlit sourceCode r">
@@ -3629,7 +3647,7 @@ collections it provides.</p>
 19 Sus scrofa                      pig, pigs, swine, wild boar                  
 20 Xenopus tropicalis              tropical clawed frog, western clawed frog    </code></pre>
 </div>
-<div class="codewrapper sourceCode" id="cb59">
+<div class="codewrapper sourceCode" id="cb60">
 <h3 class="code-label">R<i aria-hidden="true" data-feather="chevron-left"></i><i aria-hidden="true" data-feather="chevron-right"></i>
 </h3>
 <pre class="downlit sourceCode r">
@@ -3671,14 +3689,14 @@ shown in the second column. The description of gene sets collections
 from MSigDB is in the following figure.</p>
 <figure><img src="../fig/msigdb.png" class="figure mx-auto d-block"></figure><p>The core function <code>msigdbr()</code> retrieves gene sets in a
 specific category (or a subcategory if it exists).</p>
-<div class="codewrapper sourceCode" id="cb61">
+<div class="codewrapper sourceCode" id="cb62">
 <h3 class="code-label">R<i aria-hidden="true" data-feather="chevron-left"></i><i aria-hidden="true" data-feather="chevron-right"></i>
 </h3>
 <pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="fu">msigdbr</span><span class="op">(</span><span class="va">species</span>, <span class="va">category</span>, <span class="va">subcategory</span><span class="op">)</span></span></code></pre>
 </div>
 <p>For example, we want to obtain the hallmark gene sets for mouse.</p>
-<div class="codewrapper sourceCode" id="cb62">
+<div class="codewrapper sourceCode" id="cb63">
 <h3 class="code-label">R<i aria-hidden="true" data-feather="chevron-left"></i><i aria-hidden="true" data-feather="chevron-right"></i>
 </h3>
 <pre class="downlit sourceCode r">
@@ -3708,7 +3726,7 @@ see, The three major gene IDs type <code>"gene_symbol"</code>,
 <code>"entrez_gene"</code> and <code>"ensembl_gene"</code> are all
 included in the table. So users can easily pick one with the same gene
 ID type as in the DE gene list. For example:</p>
-<div class="codewrapper sourceCode" id="cb64">
+<div class="codewrapper sourceCode" id="cb65">
 <h3 class="code-label">R<i aria-hidden="true" data-feather="chevron-left"></i><i aria-hidden="true" data-feather="chevron-right"></i>
 </h3>
 <pre class="downlit sourceCode r">
@@ -3732,7 +3750,7 @@ ID type as in the DE gene list. For example:</p>
 10 HALLMARK_ADIPOGENESIS ENSMUSG00000022994
 # ℹ 7,374 more rows</code></pre>
 </div>
-<div class="codewrapper sourceCode" id="cb66">
+<div class="codewrapper sourceCode" id="cb67">
 <h3 class="code-label">R<i aria-hidden="true" data-feather="chevron-left"></i><i aria-hidden="true" data-feather="chevron-right"></i>
 </h3>
 <pre class="downlit sourceCode r">
@@ -3761,7 +3779,7 @@ ID type as in the DE gene list. For example:</p>
 e.g. <code>"CP:KEGG"</code> from <code>"C2"</code>, you can simply
 specify both <code>category</code> and <code>subcategory</code>
 arguments:</p>
-<div class="codewrapper sourceCode" id="cb68">
+<div class="codewrapper sourceCode" id="cb69">
 <h3 class="code-label">R<i aria-hidden="true" data-feather="chevron-left"></i><i aria-hidden="true" data-feather="chevron-right"></i>
 </h3>
 <pre class="downlit sourceCode r">
@@ -3791,7 +3809,7 @@ filter DE genes, we additionally add a filtering on the log2 fold
 change. This is recommended when the number of DE genes is too large.
 The filtering on log2 fold change can be thought as a filtering from the
 biology aspect.</p>
-<div class="codewrapper sourceCode" id="cb69">
+<div class="codewrapper sourceCode" id="cb70">
 <h3 class="code-label">R<i aria-hidden="true" data-feather="chevron-left"></i><i aria-hidden="true" data-feather="chevron-right"></i>
 </h3>
 <pre class="downlit sourceCode r">
@@ -3808,7 +3826,7 @@ biology aspect.</p>
 <pre class="output" tabindex="0"><code>[1] "3110035E14Rik" "Sgk3"          "Kcnb2"         "Sbspon"       
 [5] "Gsta3"         "Lman2l"       </code></pre>
 </div>
-<div class="codewrapper sourceCode" id="cb71">
+<div class="codewrapper sourceCode" id="cb72">
 <h3 class="code-label">R<i aria-hidden="true" data-feather="chevron-left"></i><i aria-hidden="true" data-feather="chevron-right"></i>
 </h3>
 <pre class="downlit sourceCode r">
@@ -3832,7 +3850,7 @@ object which is from the organism package <strong>org.Mm.eg.db</strong>
 <code>"BP"</code>, <code>"CC"</code> and <code>"MF"</code>). The GO gene
 sets are automatically retrieved and processed from
 <code>org.Mm.eg.db</code> in <code>enrichGO()</code>.</p>
-<div class="codewrapper sourceCode" id="cb73">
+<div class="codewrapper sourceCode" id="cb74">
 <h3 class="code-label">R<i aria-hidden="true" data-feather="chevron-left"></i><i aria-hidden="true" data-feather="chevron-right"></i>
 </h3>
 <pre class="downlit sourceCode r">
@@ -3850,7 +3868,7 @@ sets are automatically retrieved and processed from
 <div class="codewrapper">
 <h3 class="code-label">OUTPUT<i aria-hidden="true" data-feather="chevron-left"></i><i aria-hidden="true" data-feather="chevron-right"></i>
 </h3>
-<pre class="output" tabindex="0"><code>--&gt; Expected input gene ID: 16449,23967,635253,72938,15375,12416</code></pre>
+<pre class="output" tabindex="0"><code>--&gt; Expected input gene ID: 13804,15446,74453,212517,271639,16875</code></pre>
 </div>
 <div class="codewrapper">
 <h3 class="code-label">OUTPUT<i aria-hidden="true" data-feather="chevron-left"></i><i aria-hidden="true" data-feather="chevron-right"></i>
@@ -3870,7 +3888,7 @@ conversion job (recall various gene ID types are also stored in the
 <code>keyType = "SYMBOL"</code> to explicitly tell the function that DE
 genes are in gene symbols. Recall that all valid values for
 <code>keyType</code> are in <code>keytypes(org.Mm.eg.db)</code>.</p>
-<div class="codewrapper sourceCode" id="cb77">
+<div class="codewrapper sourceCode" id="cb78">
 <h3 class="code-label">R<i aria-hidden="true" data-feather="chevron-left"></i><i aria-hidden="true" data-feather="chevron-right"></i>
 </h3>
 <pre class="downlit sourceCode r">
@@ -3987,7 +4005,7 @@ table for downstream anlaysis. Second, the meaning of
 <em>p</em>-values). Thus it is suggested to set both
 <code>pvalueCutoff</code> and <code>qvalueCutoff</code> to 1 in
 <code>enrichGO()</code>.</p>
-<div class="codewrapper sourceCode" id="cb79">
+<div class="codewrapper sourceCode" id="cb80">
 <h3 class="code-label">R<i aria-hidden="true" data-feather="chevron-left"></i><i aria-hidden="true" data-feather="chevron-right"></i>
 </h3>
 <pre class="downlit sourceCode r">
@@ -4070,7 +4088,7 @@ only take the first one if there are multiple hits by setting
 options for <code>multiVals</code>, check the documentation). We also
 remove genes with no mapping available (with <code>NA</code> after the
 mapping)<a href="#fn5" class="footnote-ref" id="fnref5"><sup>5</sup></a>.</p>
-<div class="codewrapper sourceCode" id="cb81">
+<div class="codewrapper sourceCode" id="cb82">
 <h3 class="code-label">R<i aria-hidden="true" data-feather="chevron-left"></i><i aria-hidden="true" data-feather="chevron-right"></i>
 </h3>
 <pre class="downlit sourceCode r">
@@ -4082,7 +4100,7 @@ mapping)<a href="#fn5" class="footnote-ref" id="fnref5"><sup>5</sup></a>.</p>
 </h3>
 <pre class="output" tabindex="0"><code>'select()' returned 1:1 mapping between keys and columns</code></pre>
 </div>
-<div class="codewrapper sourceCode" id="cb83">
+<div class="codewrapper sourceCode" id="cb84">
 <h3 class="code-label">R<i aria-hidden="true" data-feather="chevron-left"></i><i aria-hidden="true" data-feather="chevron-right"></i>
 </h3>
 <pre class="downlit sourceCode r">
@@ -4099,7 +4117,7 @@ mapping)<a href="#fn5" class="footnote-ref" id="fnref5"><sup>5</sup></a>.</p>
 it is suggested to set <code>pvalueCutoff</code> and
 <code>qvalueCutoff</code> both to 1 and convert the result to a data
 frame.</p>
-<div class="codewrapper sourceCode" id="cb85">
+<div class="codewrapper sourceCode" id="cb86">
 <h3 class="code-label">R<i aria-hidden="true" data-feather="chevron-left"></i><i aria-hidden="true" data-feather="chevron-right"></i>
 </h3>
 <pre class="downlit sourceCode r">
@@ -4128,12 +4146,12 @@ mmu00591                                      Linoleic acid metabolism - Mus mus
 mmu04913                                       Ovarian steroidogenesis - Mus musculus (house mouse)
 mmu04061 Viral protein interaction with cytokine and cytokine receptor - Mus musculus (house mouse)
          GeneRatio BgRatio       pvalue     p.adjust       qvalue
-mmu00590    16/452 85/9327 2.536407e-06 0.0007761404 0.0006861647
-mmu00565    11/452 48/9327 1.358365e-05 0.0015199802 0.0013437733
-mmu00592     8/452 25/9327 1.490177e-05 0.0015199802 0.0013437733
-mmu00591    11/452 50/9327 2.056762e-05 0.0015734230 0.0013910207
-mmu04913    12/452 63/9327 4.053030e-05 0.0024804542 0.0021929024
-mmu04061    14/452 95/9327 1.785817e-04 0.0081798521 0.0072315858
+mmu00590    16/452 85/9325 2.543404e-06 0.0007782817 0.0006880578
+mmu00565    11/452 48/9325 1.361090e-05 0.0015223475 0.0013458662
+mmu00592     8/452 25/9325 1.492498e-05 0.0015223475 0.0013458662
+mmu00591    11/452 50/9325 2.060848e-05 0.0015765483 0.0013937837
+mmu04913    12/452 63/9325 4.061474e-05 0.0024856223 0.0021974714
+mmu04061    14/452 95/9325 1.789780e-04 0.0082005770 0.0072499081
                                                                                                        geneID
 mmu00590 18783/19215/211429/329502/78390/19223/67103/242546/13118/18781/18784/11689/232889/15446/237625/11687
 mmu00565                               18783/211429/329502/78390/22239/18781/18784/232889/320981/237625/53897
@@ -4175,7 +4193,7 @@ need to directly use the low-level enrichment function
 <code>enricher()</code> which accepts self-defined gene sets. The gene
 sets should be in a format of a two-column data frame of genes and gene
 sets (or a class that can be converted to a data frame).</p>
-<div class="codewrapper sourceCode" id="cb87">
+<div class="codewrapper sourceCode" id="cb88">
 <h3 class="code-label">R<i aria-hidden="true" data-feather="chevron-left"></i><i aria-hidden="true" data-feather="chevron-right"></i>
 </h3>
 <pre class="downlit sourceCode r">
@@ -4203,7 +4221,7 @@ sets (or a class that can be converted to a data frame).</p>
 <p>As mentioned before, it is important the gene ID type in the gene
 sets should be the same as in the DE genes, so here we choose the
 <code>"gene_symbol"</code> column.</p>
-<div class="codewrapper sourceCode" id="cb89">
+<div class="codewrapper sourceCode" id="cb90">
 <h3 class="code-label">R<i aria-hidden="true" data-feather="chevron-left"></i><i aria-hidden="true" data-feather="chevron-right"></i>
 </h3>
 <pre class="downlit sourceCode r">
@@ -4264,7 +4282,7 @@ HALLMARK_INFLAMMATORY_RESPONSE     22</code></pre>
 <p>Implementing ORA is rather simple. The following function
 <code>ora()</code> performs ORA on a list of gene sets. Try to read and
 understand the code.</p>
-<div class="codewrapper sourceCode" id="cb91">
+<div class="codewrapper sourceCode" id="cb92">
 <h3 class="code-label">R<i aria-hidden="true" data-feather="chevron-left"></i><i aria-hidden="true" data-feather="chevron-right"></i>
 </h3>
 <pre class="downlit sourceCode r">
@@ -4300,7 +4318,7 @@ understand the code.</p>
 <span><span class="op">}</span></span></code></pre>
 </div>
 <p>Test on the MSigDB hallmark gene sets:</p>
-<div class="codewrapper sourceCode" id="cb92">
+<div class="codewrapper sourceCode" id="cb93">
 <h3 class="code-label">R<i aria-hidden="true" data-feather="chevron-left"></i><i aria-hidden="true" data-feather="chevron-right"></i>
 </h3>
 <pre class="downlit sourceCode r">
@@ -4421,7 +4439,7 @@ collection</em></a>. Thus the universe setting in
 We use the <code>ora()</code> function which we have implemented in
 previous “Further reading” section and we compare three different
 universe settings.</p>
-<div class="codewrapper sourceCode" id="cb94">
+<div class="codewrapper sourceCode" id="cb95">
 <h3 class="code-label">R<i aria-hidden="true" data-feather="chevron-left"></i><i aria-hidden="true" data-feather="chevron-right"></i>
 </h3>
 <pre class="downlit sourceCode r">
@@ -4444,7 +4462,7 @@ universe settings.</p>
 <span><span class="fu">legend</span><span class="op">(</span><span class="st">"topleft"</span>, legend <span class="op">=</span> <span class="fu">c</span><span class="op">(</span><span class="st">"all protein-coding genes as universe"</span>, <span class="st">"all genes as universe"</span><span class="op">)</span>, </span>
 <span>    pch <span class="op">=</span> <span class="fl">16</span>, col <span class="op">=</span> <span class="fu">c</span><span class="op">(</span><span class="fl">2</span>, <span class="fl">4</span><span class="op">)</span><span class="op">)</span></span></code></pre>
 </div>
-<figure><img src="../fig/06-gene-set-analysis-rendered-unnamed-chunk-45-1.png" style="display: block; margin: auto;" class="figure mx-auto d-block"></figure><p>It is very straightforward to see, with a larger universe, there are
+<figure><img src="../fig/06-gene-set-analysis-rendered-unnamed-chunk-47-1.png" style="display: block; margin: auto;" class="figure mx-auto d-block"></figure><p>It is very straightforward to see, with a larger universe, there are
 more significant gene sets, which may produce potentially more false
 positives. This is definitely worse when using all genes in the genome
 as universe.</p>
@@ -4471,7 +4489,7 @@ normally do better jobs. Recently the visualization code in
 <strong>enrichplot</strong> package. The full sets of visualizations
 that <strong>enrichplot</strong> supports can be found from <a href="https://yulab-smu.top/biomedical-knowledge-mining-book/enrichplot.html" class="external-link uri">https://yulab-smu.top/biomedical-knowledge-mining-book/enrichplot.html</a>.</p>
 <p>We first re-generate the enrichment table.</p>
-<div class="codewrapper sourceCode" id="cb95">
+<div class="codewrapper sourceCode" id="cb96">
 <h3 class="code-label">R<i aria-hidden="true" data-feather="chevron-left"></i><i aria-hidden="true" data-feather="chevron-right"></i>
 </h3>
 <pre class="downlit sourceCode r">
@@ -4521,19 +4539,19 @@ GO:0097529    31</code></pre>
 a small number of significant gene sets. Note the two functions are
 directly applied on <code>resTimeGO</code> returned by
 <code>enrichGO()</code>.</p>
-<div class="codewrapper sourceCode" id="cb97">
+<div class="codewrapper sourceCode" id="cb98">
 <h3 class="code-label">R<i aria-hidden="true" data-feather="chevron-left"></i><i aria-hidden="true" data-feather="chevron-right"></i>
 </h3>
 <pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="fu">barplot</span><span class="op">(</span><span class="va">resTimeGO</span>, showCategory <span class="op">=</span> <span class="fl">20</span><span class="op">)</span></span></code></pre>
 </div>
-<figure><img src="../fig/06-gene-set-analysis-rendered-unnamed-chunk-47-1.png" style="display: block; margin: auto;" class="figure mx-auto d-block"></figure><div class="codewrapper sourceCode" id="cb98">
+<figure><img src="../fig/06-gene-set-analysis-rendered-unnamed-chunk-49-1.png" style="display: block; margin: auto;" class="figure mx-auto d-block"></figure><div class="codewrapper sourceCode" id="cb99">
 <h3 class="code-label">R<i aria-hidden="true" data-feather="chevron-left"></i><i aria-hidden="true" data-feather="chevron-right"></i>
 </h3>
 <pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="fu">dotplot</span><span class="op">(</span><span class="va">resTimeGO</span>, showCategory <span class="op">=</span> <span class="fl">20</span><span class="op">)</span></span></code></pre>
 </div>
-<figure><img src="../fig/06-gene-set-analysis-rendered-unnamed-chunk-47-2.png" style="display: block; margin: auto;" class="figure mx-auto d-block"></figure><p>Barplots can map two variables to the plot, one to the height of bars
+<figure><img src="../fig/06-gene-set-analysis-rendered-unnamed-chunk-49-2.png" style="display: block; margin: auto;" class="figure mx-auto d-block"></figure><p>Barplots can map two variables to the plot, one to the height of bars
 and the other to the colors of bars; while for dotplot, sizes of dots
 can be mapped to a third variable. The variable names are in the colum
 names of the result table. Both plots include the top 20 most
@@ -4570,7 +4588,7 @@ the enrichment of ORA.</p>
 genes on gene sets. Recall the denotations in the 2x2 contigency table
 (we are too far from that!). Let’s take these numbers from the
 enrichment table.</p>
-<div class="codewrapper sourceCode" id="cb99">
+<div class="codewrapper sourceCode" id="cb100">
 <h3 class="code-label">R<i aria-hidden="true" data-feather="chevron-left"></i><i aria-hidden="true" data-feather="chevron-right"></i>
 </h3>
 <pre class="downlit sourceCode r">
@@ -4582,7 +4600,7 @@ enrichment table.</p>
 <p>Instead of using <code>GeneRatio</code>, we use the fraction of DE
 genes in the gene sets which are kind like a “scaled” value for all gene
 sets. Let’s calculate it:</p>
-<div class="codewrapper sourceCode" id="cb100">
+<div class="codewrapper sourceCode" id="cb101">
 <h3 class="code-label">R<i aria-hidden="true" data-feather="chevron-left"></i><i aria-hidden="true" data-feather="chevron-right"></i>
 </h3>
 <pre class="downlit sourceCode r">
@@ -4600,7 +4618,7 @@ enrichment, defined as:</p>
 <em>DE% in the universe</em> or the log2 of the ratio of <em>gene_set%
 in the DE genes</em> and <em>gene_set% in the universe</em>. The two are
 identical.</p>
-<div class="codewrapper sourceCode" id="cb101">
+<div class="codewrapper sourceCode" id="cb102">
 <h3 class="code-label">R<i aria-hidden="true" data-feather="chevron-left"></i><i aria-hidden="true" data-feather="chevron-right"></i>
 </h3>
 <pre class="downlit sourceCode r">
@@ -4612,7 +4630,7 @@ identical.</p>
 <p>where <span class="math inline">\(\mu\)</span> and <span class="math inline">\(\sigma\)</span> are <a href="https://en.wikipedia.org/wiki/Hypergeometric_distribution" class="external-link">the
 mean and standard deviation of the hypergeometric distribution</a>. They
 can be calculated as:</p>
-<div class="codewrapper sourceCode" id="cb102">
+<div class="codewrapper sourceCode" id="cb103">
 <h3 class="code-label">R<i aria-hidden="true" data-feather="chevron-left"></i><i aria-hidden="true" data-feather="chevron-right"></i>
 </h3>
 <pre class="downlit sourceCode r">
@@ -4631,7 +4649,7 @@ bars.</p>
 <p>In <code>resTimeGOTable</code>, gene sets are already ordered by the
 significance, so we take the first 10 gene sets which are the 10 most
 significant gene sets.</p>
-<div class="codewrapper sourceCode" id="cb103">
+<div class="codewrapper sourceCode" id="cb104">
 <h3 class="code-label">R<i aria-hidden="true" data-feather="chevron-left"></i><i aria-hidden="true" data-feather="chevron-right"></i>
 </h3>
 <pre class="downlit sourceCode r">
@@ -4644,10 +4662,10 @@ significant gene sets.</p>
 <span>        label <span class="op">=</span> <span class="fu">sprintf</span><span class="op">(</span><span class="st">"%.2e"</span>, <span class="va">p.adjust</span><span class="op">)</span><span class="op">)</span>, hjust <span class="op">=</span> <span class="fl">1</span>, col <span class="op">=</span> <span class="st">"white"</span><span class="op">)</span> <span class="op">+</span></span>
 <span>    <span class="fu">ylab</span><span class="op">(</span><span class="st">""</span><span class="op">)</span></span></code></pre>
 </div>
-<figure><img src="../fig/06-gene-set-analysis-rendered-unnamed-chunk-52-1.png" style="display: block; margin: auto;" class="figure mx-auto d-block"></figure><p>In the next example, we use <em>z</em>-score as the primary variable
+<figure><img src="../fig/06-gene-set-analysis-rendered-unnamed-chunk-54-1.png" style="display: block; margin: auto;" class="figure mx-auto d-block"></figure><p>In the next example, we use <em>z</em>-score as the primary variable
 to map to the offset to origin, <code>DE_Ratio</code> and
 <code>Count</code> to map to dot colors and sizes.</p>
-<div class="codewrapper sourceCode" id="cb104">
+<div class="codewrapper sourceCode" id="cb105">
 <h3 class="code-label">R<i aria-hidden="true" data-feather="chevron-left"></i><i aria-hidden="true" data-feather="chevron-right"></i>
 </h3>
 <pre class="downlit sourceCode r">
@@ -4657,7 +4675,7 @@ to map to the offset to origin, <code>DE_Ratio</code> and
 <span>    <span class="fu">geom_point</span><span class="op">(</span><span class="op">)</span> <span class="op">+</span></span>
 <span>    <span class="fu">ylab</span><span class="op">(</span><span class="st">""</span><span class="op">)</span></span></code></pre>
 </div>
-<figure><img src="../fig/06-gene-set-analysis-rendered-unnamed-chunk-53-1.png" style="display: block; margin: auto;" class="figure mx-auto d-block"></figure><p>Both plots can highlight the gene set “leukocyte migration involved
+<figure><img src="../fig/06-gene-set-analysis-rendered-unnamed-chunk-55-1.png" style="display: block; margin: auto;" class="figure mx-auto d-block"></figure><p>Both plots can highlight the gene set “leukocyte migration involved
 in inflammatory response” is relatively small but highly enriched.</p>
 <p>Another useful visualization is the volcano plot. You may be aware of
 in differential expression analysis, in the volcano plot, x-axis
@@ -4669,7 +4687,7 @@ one-sided. We can set two cutoffs on the log2 fold enrichment and
 adjusted <em>p</em>-values, then the gene sets on the top right region
 can be thought as being both statistically significant and also
 biologically sensible.</p>
-<div class="codewrapper sourceCode" id="cb105">
+<div class="codewrapper sourceCode" id="cb106">
 <h3 class="code-label">R<i aria-hidden="true" data-feather="chevron-left"></i><i aria-hidden="true" data-feather="chevron-right"></i>
 </h3>
 <pre class="downlit sourceCode r">
@@ -4680,7 +4698,7 @@ biologically sensible.</p>
 <span>    <span class="fu">geom_hline</span><span class="op">(</span>yintercept <span class="op">=</span> <span class="op">-</span><span class="fu">log10</span><span class="op">(</span><span class="fl">0.01</span><span class="op">)</span>, lty <span class="op">=</span> <span class="fl">2</span>, col <span class="op">=</span> <span class="st">"#444444"</span><span class="op">)</span> <span class="op">+</span></span>
 <span>    <span class="fu">geom_vline</span><span class="op">(</span>xintercept <span class="op">=</span> <span class="fl">1.5</span>, lty <span class="op">=</span> <span class="fl">2</span>, col <span class="op">=</span> <span class="st">"#444444"</span><span class="op">)</span></span></code></pre>
 </div>
-<figure><img src="../fig/06-gene-set-analysis-rendered-unnamed-chunk-54-1.png" style="display: block; margin: auto;" class="figure mx-auto d-block"></figure><p>In the “volcano plot”, we can observe the plot is composed by a list
+<figure><img src="../fig/06-gene-set-analysis-rendered-unnamed-chunk-56-1.png" style="display: block; margin: auto;" class="figure mx-auto d-block"></figure><p>In the “volcano plot”, we can observe the plot is composed by a list
 of curves. The trends are especially clear in the right bottom of the
 plot. Actually each “curve” corresponds to a same <code>"Count"</code>
 value (number of DE genes in a gene set). The volcano plot shows very
@@ -4693,7 +4711,7 @@ and down-regulated separately. And we want to combine the significant
 gene sets from the two ORA analysis in one plot. In the following code,
 we first generate two enrichment tables for up-regulated genes and
 down-regulated separately.</p>
-<div class="codewrapper sourceCode" id="cb106">
+<div class="codewrapper sourceCode" id="cb107">
 <h3 class="code-label">R<i aria-hidden="true" data-feather="chevron-left"></i><i aria-hidden="true" data-feather="chevron-right"></i>
 </h3>
 <pre class="downlit sourceCode r">
@@ -4737,7 +4755,7 @@ down-regulated separately.</p>
 for up-regulated genes and the first 5 most significant terms for
 down-regulated genes. The following <strong>ggplot2</strong> code should
 be easy to read.</p>
-<div class="codewrapper sourceCode" id="cb107">
+<div class="codewrapper sourceCode" id="cb108">
 <h3 class="code-label">R<i aria-hidden="true" data-feather="chevron-left"></i><i aria-hidden="true" data-feather="chevron-right"></i>
 </h3>
 <pre class="downlit sourceCode r">
@@ -4755,7 +4773,7 @@ be easy to read.</p>
 <span>        label <span class="op">=</span> <span class="fu">sprintf</span><span class="op">(</span><span class="st">"%.2e"</span>, <span class="va">p.adjust</span><span class="op">)</span><span class="op">)</span>, hjust <span class="op">=</span> <span class="fl">1</span>, col <span class="op">=</span> <span class="st">"white"</span><span class="op">)</span> <span class="op">+</span></span>
 <span>    <span class="fu">ylab</span><span class="op">(</span><span class="st">""</span><span class="op">)</span></span></code></pre>
 </div>
-<figure><img src="../fig/06-gene-set-analysis-rendered-unnamed-chunk-56-1.png" style="display: block; margin: auto;" class="figure mx-auto d-block"></figure><p>Specifically for GO enrichment, it is often that GO enrichment
+<figure><img src="../fig/06-gene-set-analysis-rendered-unnamed-chunk-58-1.png" style="display: block; margin: auto;" class="figure mx-auto d-block"></figure><p>Specifically for GO enrichment, it is often that GO enrichment
 returns a long list of significant GO terms (e.g. several hundreds).
 This makes it difficult to summarize the common functions from the long
 list. The last package we will introduce is the
@@ -4765,7 +4783,7 @@ common functions via word clouds.</p>
 <p>The input of the <code>simplifyGO()</code> function is a vector of GO
 IDs. It is recommended to have at least 100 GO IDs for summarization and
 visualization.</p>
-<div class="codewrapper sourceCode" id="cb108">
+<div class="codewrapper sourceCode" id="cb109">
 <h3 class="code-label">R<i aria-hidden="true" data-feather="chevron-left"></i><i aria-hidden="true" data-feather="chevron-right"></i>
 </h3>
 <pre class="downlit sourceCode r">
@@ -4776,7 +4794,7 @@ visualization.</p>
 <!-- Carpentry CI cannot install RcppParallel which is indirectly depended by simplifyenrichment,
     so the plot is not generated on the fly.
  -->
-<figure><img src="../simplifyEnrichment.png" class="figure mx-auto d-block"></figure><div id="further-reading-5" class="callout callout">
+<figure><img src="../fig/simplifyEnrichment.png" class="figure mx-auto d-block"></figure><div id="further-reading-5" class="callout callout">
 <div class="callout-square">
 <i class="callout-icon" data-feather="bell"></i>
 </div>
@@ -5305,7 +5323,7 @@ mean expression of a gene between male and female mice?</p>
   Show me the solution
   </h4>
 </button>
-<div id="collapseSolution1" class="accordion-collapse collapse" data-bs-parent="#accordionSolution1" aria-labelledby="headingSolution1">
+<div id="collapseSolution1" class="accordion-collapse collapse" aria-labelledby="headingSolution1" data-bs-parent="#accordionSolution1">
 <div class="accordion-body">
 <div class="codewrapper sourceCode" id="cb20">
 <h3 class="code-label">R<i aria-hidden="true" data-feather="chevron-left"></i><i aria-hidden="true" data-feather="chevron-right"></i>
@@ -5395,7 +5413,7 @@ Day4, Day8) in the male spinal cord samples, and visualize it using
   Show me the solution
   </h4>
 </button>
-<div id="collapseSolution2" class="accordion-collapse collapse" data-bs-parent="#accordionSolution2" aria-labelledby="headingSolution2">
+<div id="collapseSolution2" class="accordion-collapse collapse" aria-labelledby="headingSolution2" data-bs-parent="#accordionSolution2">
 <div class="accordion-body">
 <div class="codewrapper sourceCode" id="cb26">
 <h3 class="code-label">R<i aria-hidden="true" data-feather="chevron-left"></i><i aria-hidden="true" data-feather="chevron-right"></i>
