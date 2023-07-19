@@ -63,6 +63,26 @@ set databases and how to access them in R. Then, we will learn how to perform
 ORA analysis with the Bioconductor package **clusterProfiler**. And in the
 end, we will learn several visualization methods on the GSEA results.
 
+Following is a list of packages that will be used in this episode:
+
+
+
+```r
+library(SummarizedExperiment)
+library(DESeq2)
+library(gplots)
+library(microbenchmark)
+library(org.Hs.eg.db)
+library(org.Mm.eg.db)
+library(msigdbr)
+library(clusterProfiler)
+library(enrichplot)
+library(ggplot2)
+library(simplifyEnrichment)
+```
+
+
+
 ## The statistical method
 
 To demonstrate the ORA analysis, we use a list of DE genes from a comparison
@@ -178,7 +198,7 @@ plot(venn(list("sexDEgenes"  = sexDEgenes,
 title(paste0("|universe| = ", length(totalGenes)))
 ```
 
-<img src="fig/06-gene-set-analysis-rendered-unnamed-chunk-5-1.png" style="display: block; margin: auto;" />
+<img src="fig/06-gene-set-analysis-rendered-unnamed-chunk-7-1.png" style="display: block; margin: auto;" />
 
 In the Venn diagram, we can observe that around 1.1% (13/1134) of genes in the
 _XY gene set_ are DE. Compared to the global fraction of DE genes (54/21198 =
@@ -362,7 +382,7 @@ genes are marked as non-DE genes (in blue). We grab $n_{+1}$ genes (the size
 of the gene set) from the box and we want to ask **what is the probability of
 having $n_{11}$ DE genes in our hand?**
 
-<img src="fig/06-gene-set-analysis-rendered-unnamed-chunk-12-1.png" width="80%" style="display: block; margin: auto;" />
+<img src="fig/06-gene-set-analysis-rendered-unnamed-chunk-14-1.png" width="80%" style="display: block; margin: auto;" />
 
 We first calculate the total number of ways of picking $n_{+1}$ genes from
 total $n$ genes, without distinguishing whether they are DE or not:
@@ -484,8 +504,8 @@ microbenchmark(
 ```{.output}
 Unit: microseconds
    expr   min     lq    mean median    uq   max neval
- fisher 282.2 286.45 297.559  288.5 299.5 550.3   100
-  hyper   1.7   1.90   2.473    2.3   2.6  18.8   100
+ fisher 284.3 289.45 300.904 293.75 303.7 569.0   100
+  hyper   1.7   1.90   2.376   2.30   2.7   6.8   100
 ```
 
 It is very astonishing that `phyper()` is hundreds of times faster than
@@ -1213,7 +1233,7 @@ resTimeGO = enrichGO(gene = timeDEgenes,
 ```
 
 ```{.output}
---> Expected input gene ID: 16449,23967,635253,72938,15375,12416
+--> Expected input gene ID: 13804,15446,74453,212517,271639,16875
 ```
 
 ```{.output}
@@ -1454,12 +1474,12 @@ mmu00591                                      Linoleic acid metabolism - Mus mus
 mmu04913                                       Ovarian steroidogenesis - Mus musculus (house mouse)
 mmu04061 Viral protein interaction with cytokine and cytokine receptor - Mus musculus (house mouse)
          GeneRatio BgRatio       pvalue     p.adjust       qvalue
-mmu00590    16/452 85/9327 2.536407e-06 0.0007761404 0.0006861647
-mmu00565    11/452 48/9327 1.358365e-05 0.0015199802 0.0013437733
-mmu00592     8/452 25/9327 1.490177e-05 0.0015199802 0.0013437733
-mmu00591    11/452 50/9327 2.056762e-05 0.0015734230 0.0013910207
-mmu04913    12/452 63/9327 4.053030e-05 0.0024804542 0.0021929024
-mmu04061    14/452 95/9327 1.785817e-04 0.0081798521 0.0072315858
+mmu00590    16/452 85/9325 2.543404e-06 0.0007782817 0.0006880578
+mmu00565    11/452 48/9325 1.361090e-05 0.0015223475 0.0013458662
+mmu00592     8/452 25/9325 1.492498e-05 0.0015223475 0.0013458662
+mmu00591    11/452 50/9325 2.060848e-05 0.0015765483 0.0013937837
+mmu04913    12/452 63/9325 4.061474e-05 0.0024856223 0.0021974714
+mmu04061    14/452 95/9325 1.789780e-04 0.0082005770 0.0072499081
                                                                                                        geneID
 mmu00590 18783/19215/211429/329502/78390/19223/67103/242546/13118/18781/18784/11689/232889/15446/237625/11687
 mmu00565                               18783/211429/329502/78390/22239/18781/18784/232889/320981/237625/53897
@@ -1726,7 +1746,7 @@ legend("topleft", legend = c("all protein-coding genes as universe", "all genes 
     pch = 16, col = c(2, 4))
 ```
 
-<img src="fig/06-gene-set-analysis-rendered-unnamed-chunk-45-1.png" style="display: block; margin: auto;" />
+<img src="fig/06-gene-set-analysis-rendered-unnamed-chunk-47-1.png" style="display: block; margin: auto;" />
 
 It is very straightforward to see, with a larger universe, there are more
 significant gene sets, which may produce potentially more false positives.
@@ -1804,13 +1824,13 @@ Note the two functions are directly applied on `resTimeGO` returned by `enrichGO
 barplot(resTimeGO, showCategory = 20)
 ```
 
-<img src="fig/06-gene-set-analysis-rendered-unnamed-chunk-47-1.png" style="display: block; margin: auto;" />
+<img src="fig/06-gene-set-analysis-rendered-unnamed-chunk-49-1.png" style="display: block; margin: auto;" />
 
 ```r
 dotplot(resTimeGO, showCategory = 20)
 ```
 
-<img src="fig/06-gene-set-analysis-rendered-unnamed-chunk-47-2.png" style="display: block; margin: auto;" />
+<img src="fig/06-gene-set-analysis-rendered-unnamed-chunk-49-2.png" style="display: block; margin: auto;" />
 
 Barplots can map two variables to the plot, one to the height of bars and the
 other to the colors of bars; while for dotplot, sizes of dots can be mapped to
@@ -1923,7 +1943,7 @@ ggplot(resTimeGOTable[1:10, ],
     ylab("")
 ```
 
-<img src="fig/06-gene-set-analysis-rendered-unnamed-chunk-52-1.png" style="display: block; margin: auto;" />
+<img src="fig/06-gene-set-analysis-rendered-unnamed-chunk-54-1.png" style="display: block; margin: auto;" />
 
 In the next example, we use _z_-score as the primary variable to map to the
 offset to origin, `DE_Ratio` and `Count` to map to dot colors and sizes.
@@ -1937,7 +1957,7 @@ ggplot(resTimeGOTable[1:10, ],
     ylab("")
 ```
 
-<img src="fig/06-gene-set-analysis-rendered-unnamed-chunk-53-1.png" style="display: block; margin: auto;" />
+<img src="fig/06-gene-set-analysis-rendered-unnamed-chunk-55-1.png" style="display: block; margin: auto;" />
 
 Both plots can highlight the gene set "leukocyte migration involved in
 inflammatory response" is relatively small but highly enriched.
@@ -1963,7 +1983,7 @@ ggplot(resTimeGOTable,
     geom_vline(xintercept = 1.5, lty = 2, col = "#444444")
 ```
 
-<img src="fig/06-gene-set-analysis-rendered-unnamed-chunk-54-1.png" style="display: block; margin: auto;" />
+<img src="fig/06-gene-set-analysis-rendered-unnamed-chunk-56-1.png" style="display: block; margin: auto;" />
 
 In the "volcano plot", we can observe the plot is composed by a list of
 curves. The trends are especially clear in the right bottom of the plot.
@@ -2040,7 +2060,7 @@ ggplot(rbind(resTimeGOupTable[1:5, ],
     ylab("")
 ```
 
-<img src="fig/06-gene-set-analysis-rendered-unnamed-chunk-56-1.png" style="display: block; margin: auto;" />
+<img src="fig/06-gene-set-analysis-rendered-unnamed-chunk-58-1.png" style="display: block; margin: auto;" />
 
 
 Specifically for GO enrichment, it is often that GO enrichment returns a long
@@ -2065,7 +2085,7 @@ simplifyGO(GO_ID)
     so the plot is not generated on the fly.
  -->
 
-<img src="simplifyEnrichment.png" />
+<img src="fig/simplifyEnrichment.png" />
 
 :::::::::::::::::::::::::::::::::::::::::  callout
 
