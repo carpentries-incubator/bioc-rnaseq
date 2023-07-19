@@ -15,7 +15,7 @@ BiocManager::install(c("tidyverse", "SummarizedExperiment",
                        "ExploreModelMatrix", "org.Mm.eg.db",
                        "DESeq2", "vsn", "ComplexHeatmap",
                        "RColorBrewer", "hexbin", "cowplot",
-                       "clusterProfiler", "enrichplot", "kableExtra"))
+                       "clusterProfiler", "enrichplot", "kableExtra","apeglm"))
 ```
 
 *If you are attending a workshop, please complete all of the above before the workshop. Should you need help, an instructor will be available 30 minutes before the workshop commences to assist.*
