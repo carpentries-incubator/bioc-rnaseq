@@ -37,6 +37,15 @@ like tximeta).
 
 ::::::::::::::::::::::::::::::::::::::::::::::::::
 
+## Load the packages
+```{r}
+suppressPackageStartupMessages({
+    library(AnnotationDbi)
+    library(org.Mm.eg.db)
+    library(SummarizedExperiment)
+})
+```
+
 ## Read the data
 
 ### Counts
@@ -54,24 +63,61 @@ coldata <- read.csv("data/GSE96870_coldata_cerebellum.csv",
 ```
 
 ### Gene annotations
-
 Need to be careful - the descriptions contain both commas and ' (e.g., 5')
-
 ```{r}
 rowranges <- read.delim("data/GSE96870_rowranges.tsv", sep = "\t", 
                         colClasses = c(ENTREZID = "character"),
                         header = TRUE, quote = "", row.names = 5)
 ```
 
+
+The main function we will use is `mapIds`:
+```
+mapIds(annopkg, keys, column, keytype, ..., multiVals)
+```
+
+Where 
+- *annopkg* is the annotation package    
+- *keys* are the IDs that we **know**    
+- *column* is the value we **want**    
+- *keytype* is the type of key used
+
+
 Mention other ways of getting annotations, and practice querying org package.
 Important to use the right annotation source/version.
 
 ```{r}
-suppressPackageStartupMessages({
-    library(org.Mm.eg.db)
-})
 mapIds(org.Mm.eg.db, keys = "497097", column = "SYMBOL", keytype = "ENTREZID")
 ```
+
+Different from the `select` function, `mapIds` function handles 1:many mapping 
+between keys and columns through an additional argument, 'multiVals'.
+
+```{r echo=FALSE, eval=FALSE}
+library(hgu95av2.db) # Affymetrix Human Genome U95 Set annotation data
+keys <- head(keys(hgu95av2.db, "ENTREZID"))
+last <- function(x){x[[length(x)]]}
+
+mapIds(hgu95av2.db, keys = keys, column = "ALIAS", keytype = "ENTREZID")
+mapIds(hgu95av2.db, keys = keys, column = "ALIAS", keytype = "ENTREZID", multiVals = last)
+mapIds(hgu95av2.db, keys = keys, column = "ALIAS", keytype = "ENTREZID", multiVals = "list")
+```
+
+```{r}
+packageVersion("org.Mm.eg.db") # double-check the version of gene annotation
+```
+
+There are many gene annotations available, including RefGene, Ensemble, and 
+UCSC. Characteristics of gene annotations differ based on their annotation 
+strategies and information sources. For example, RefSeq human gene models 
+(i.e., Entrez from NCBI) are well supported and broadly used in various studies.
+The UCSC Known Genes dataset is based on protein data from Swiss-Prot/TrEMBL 
+(UniProt) and the associated mRNA data from GenBank, and serves as a foundation 
+for the UCSC Genome Browser. Ensembl genes contain both automated genome 
+annotation and manual curation.
+
+You can find more information in Bioconductor [Annotation Workshop](https://jmacdon.github.io/Bioc2022Anno/articles/AnnotationWorkshop.html)
+material.
 
 Check feature types
 
@@ -80,6 +126,35 @@ table(rowranges$gbkey)
 ```
 
 ## Assemble SummarizedExperiment
+
+`SummarizedExperiment` objects are widely used to represent expression data 
+and other rectangular data (feature x sample data). The _SummarizedExperiment_ 
+package contains two classes: 
+`SummarizedExperiment` and `RangedSummarizedExperiment`.
+
+`SummarizedExperiment` is a matrix-like container where rows represent features
+of interest (e.g., genes, transcripts, exons, etc.) and columns represent
+samples. The objects contain one or more assays, each represented by a
+matrix-like object of numeric or other mode. 
+
+Information about these features is stored in a `DataFrame` object, accessible 
+using the function `rowData()`. Each row of the `DataFrame` provides information 
+on the feature in the corresponding row of the `SummarizedExperiment` object. 
+Columns of the `DataFrame` represent different attributes of the features of 
+interest (e.g., gene or transcript IDs, etc). Sample meta-data describing the 
+samples can be accessed using `colData()`, which returns a `DataFrame` that can 
+store any number of descriptive columns for each sample row.
+
+`RangedSummarizedExperiment` is the child of the `SummarizedExperiment` class
+which means that all the methods on `SummarizedExperiment` also work on a
+`RangedSummarizedExperiment`.
+
+The fundamental difference between the two classes is that the rows of a
+`RangedSummarizedExperiment` object represent genomic ranges of interest
+instead of a `DataFrame` of features, which is accessible using the
+`rowRanges()` function.
+
+![Summarized Experiment](https://raw.githubusercontent.com/Bioconductor/SummarizedExperiment/devel/vignettes/SE.svg)
 
 ```{r}
 stopifnot(rownames(rowranges) == rownames(counts),
