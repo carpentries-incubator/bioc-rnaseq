@@ -75,7 +75,7 @@ end, we will learn several visualization methods on the GSEA results.
 Following is a list of packages that will be used in this episode:
 
 
-```{r}
+```{r, eval = FALSE}
 library(SummarizedExperiment)
 library(DESeq2)
 library(gplots)
@@ -87,6 +87,20 @@ library(clusterProfiler)
 library(enrichplot)
 library(ggplot2)
 library(simplifyEnrichment)
+```
+
+```{r, echo = FALSE}
+library(SummarizedExperiment)
+library(DESeq2)
+library(gplots)
+library(microbenchmark)
+library(org.Hs.eg.db)
+library(org.Mm.eg.db)
+library(msigdbr)
+library(clusterProfiler)
+library(enrichplot)
+library(ggplot2)
+# simplifyEnrichment cannot be installed in sandpaper ci
 ```
 
 ## The statistical method
