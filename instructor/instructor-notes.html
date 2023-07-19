@@ -336,7 +336,66 @@
 <hr class="half-width"></section><section id="03-import-annotate"><h2 class="section-heading"><a href="03-import-annotate.html">Importing and annotating quantified data into R</a></h2>
 <hr class="half-width"></section><section id="04-exploratory-qc"><h2 class="section-heading"><a href="04-exploratory-qc.html">Exploratory analysis and quality control</a></h2>
 <hr class="half-width"></section><section id="05-differential-expression"><h2 class="section-heading"><a href="05-differential-expression.html">Differential expression analysis</a></h2>
-<hr class="half-width"></section><section id="06-gene-set-analysis"><h2 class="section-heading"><a href="06-gene-set-analysis.html">Gene set enrichment analysis</a></h2>
+<hr class="half-width">
+<h3 id="05-differential-expression-headingInstructor1">
+<a href="05-differential-expression.html#headingInstructor1">Instructor Note</a><a class="anchor" aria-label="anchor" href="#05-differential-expression-headingInstructor1"></a>
+</h3>
+<p>The function to generate a <code>DESeqDataSet</code> needs to be
+adapted depending on the input type, e.g,</p>
+<div class="codewrapper sourceCode" id="cb5">
+<h3 class="code-label">R<i aria-hidden="true" data-feather="chevron-left"></i><i aria-hidden="true" data-feather="chevron-right"></i>
+</h3>
+<pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="co">#From SummarizedExperiment object</span></span>
+<span><span class="va">ddsSE</span> <span class="op">&lt;-</span> <span class="fu">DESeqDataSet</span><span class="op">(</span><span class="va">se</span>, design <span class="op">=</span> <span class="op">~</span> <span class="va">cell</span> <span class="op">+</span> <span class="va">dex</span><span class="op">)</span></span></code></pre>
+</div>
+<div class="codewrapper">
+<h3 class="code-label">ERROR<i aria-hidden="true" data-feather="chevron-left"></i><i aria-hidden="true" data-feather="chevron-right"></i>
+</h3>
+<pre class="error" tabindex="0"><code>Error in DESeqDataSet(se, design = ~cell + dex): all variables in design formula must be columns in colData</code></pre>
+</div>
+<div class="codewrapper sourceCode" id="cb7">
+<h3 class="code-label">R<i aria-hidden="true" data-feather="chevron-left"></i><i aria-hidden="true" data-feather="chevron-right"></i>
+</h3>
+<pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="co">#From count matrix</span></span>
+<span><span class="va">dds</span> <span class="op">&lt;-</span> <span class="fu">DESeqDataSetFromMatrix</span><span class="op">(</span>countData <span class="op">=</span> <span class="fu">assays</span><span class="op">(</span><span class="va">se</span><span class="op">)</span><span class="op">$</span><span class="va">counts</span>,</span>
+<span>                              colData <span class="op">=</span> <span class="fu">colData</span><span class="op">(</span><span class="va">se</span><span class="op">)</span>,</span>
+<span>                              design <span class="op">=</span> <span class="op">~</span> <span class="va">condition</span><span class="op">)</span></span></code></pre>
+</div>
+<div class="codewrapper">
+<h3 class="code-label">ERROR<i aria-hidden="true" data-feather="chevron-left"></i><i aria-hidden="true" data-feather="chevron-right"></i>
+</h3>
+<pre class="error" tabindex="0"><code>Error in DESeqDataSet(se, design = design, ignoreRank): all variables in design formula must be columns in colData</code></pre>
+</div>
+<hr>
+<br><h3 id="05-differential-expression-headingInstructor2">
+<a href="05-differential-expression.html#headingInstructor2">Instructor Note</a><a class="anchor" aria-label="anchor" href="#05-differential-expression-headingInstructor2"></a>
+</h3>
+<p><em>DESeq2</em> uses the <strong>“Relative Log Expression”
+(RLE)</strong> method to calculate sample-wise <em>size factors</em>
+tĥat account for read depth and library composition. <em>edgeR</em> uses
+the <strong>“Trimmed Mean of M-Values” (TMM)</strong> method to account
+for library size differences and compositional effects. <em>edgeR</em>’s
+<em>normalization factors</em> and <em>DESeq2</em>’s <em>size
+factors</em> yield similar results, but are not equivalent theoretical
+parameters.</p>
+<hr>
+<br><h3 id="05-differential-expression-headingInstructor3">
+<a href="05-differential-expression.html#headingInstructor3">Instructor Note</a><a class="anchor" aria-label="anchor" href="#05-differential-expression-headingInstructor3"></a>
+</h3>
+<p>Both of the below ways of specifying the contrast are essentially
+equivalent. The <code>name</code> parameter can be accessed using
+<code>resultsNames()</code>.</p>
+<div class="codewrapper sourceCode" id="cb24">
+<h3 class="code-label">R<i aria-hidden="true" data-feather="chevron-left"></i><i aria-hidden="true" data-feather="chevron-right"></i>
+</h3>
+<pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="va">resTime</span> <span class="op">&lt;-</span> <span class="fu">results</span><span class="op">(</span><span class="va">dds</span>, contrast <span class="op">=</span> <span class="fu">c</span><span class="op">(</span><span class="st">"time"</span>, <span class="st">"Day8"</span>, <span class="st">"Day0"</span><span class="op">)</span><span class="op">)</span></span>
+<span><span class="va">resTime</span> <span class="op">&lt;-</span> <span class="fu">results</span><span class="op">(</span><span class="va">dds</span>, name <span class="op">=</span> <span class="st">"time_Day8_vs_Day0"</span><span class="op">)</span></span></code></pre>
+</div>
+<hr>
+<br></section><section id="06-gene-set-analysis"><h2 class="section-heading"><a href="06-gene-set-analysis.html">Gene set enrichment analysis</a></h2>
 <hr class="half-width"></section><section id="07-next-steps"><h2 class="section-heading"><a href="07-next-steps.html">Next steps</a></h2>
 <hr class="half-width"></section><section id="08-extra-design"><h2 class="section-heading"><a href="08-extra-design.html">Extra exploration of design matrices</a></h2>
 <hr class="half-width"></section></section>
