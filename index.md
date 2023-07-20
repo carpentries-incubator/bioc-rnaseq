@@ -13,9 +13,8 @@ RNA sequencing (RNA-seq) has revolutionized the field of genomics, enabling rese
 
 ## Prerequisites
 
-- Familiarity with R/Bioconductor, especially the 
-[Introduction to R](https://carpentries-incubator.github.io/bioc-intro/23-starting-with-r.html) episode
-of [Introduction to data analysis with R and Bioconductor](https://carpentries-incubator.github.io/bioc-intro/20-r-rstudio.html)
+- Familiarity with R/Bioconductor, such as the
+[Introduction to data analysis with R and Bioconductor](https://carpentries-incubator.github.io/bioc-intro/)
 lesson.
 - Familiarity with statistical hypothesis testing, such as 
 [Chapter 6](https://web.stanford.edu/class/bios221/book/06-chap.html) of Modern Statistics for Modern Biology book
