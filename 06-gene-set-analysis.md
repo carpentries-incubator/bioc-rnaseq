@@ -503,9 +503,9 @@ microbenchmark(
 
 ```{.output}
 Unit: microseconds
-   expr   min     lq    mean median    uq   max neval
- fisher 284.3 289.45 300.904 293.75 303.7 569.0   100
-  hyper   1.7   1.90   2.376   2.30   2.7   6.8   100
+   expr   min     lq    mean median    uq    max neval
+ fisher 400.7 444.45 499.793 471.75 515.6 1055.5   100
+  hyper   1.8   2.55   5.059   4.85   5.5   25.0   100
 ```
 
 It is very astonishing that `phyper()` is hundreds of times faster than
@@ -1233,7 +1233,7 @@ resTimeGO = enrichGO(gene = timeDEgenes,
 ```
 
 ```{.output}
---> Expected input gene ID: 13804,15446,74453,212517,271639,16875
+--> Expected input gene ID: 21821,18430,16532,16410,106389,22042
 ```
 
 ```{.output}
@@ -2045,8 +2045,8 @@ genes. The following **ggplot2** code should be easy to read.
 
 
 ```r
-# The name of the 4th term is too long, we wrap it into two lines.
-resTimeGOupTable[4, "Description"] = paste(strwrap(resTimeGOupTable[4, "Description"]), collapse = "\n")
+# The name of the 3rd term is too long, we wrap it into two lines.
+resTimeGOupTable[3, "Description"] = paste(strwrap(resTimeGOupTable[3, "Description"]), collapse = "\n")
 
 direction = c(rep("up", 5), rep("down", 5))
 ggplot(rbind(resTimeGOupTable[1:5, ],
@@ -2112,3 +2112,28 @@ more information.
 - In R, it is easy to obtain gene sets from a large number of sources.
 
 ::::::::::::::::::::::::::::::::::::::::::::::::::
+
+
+
+<script>
+$(function() {
+    
+    // if it is a general "callout", we need to filter the callout title
+    // value for callout_title can be partial from the complete title
+    var callout_title = "reading";  // short for "further reading"
+    
+    // then we select those callouts with the specified title
+    var callout = $(".callout").filter(function(index) {
+        var title = $(this).find(".callout-title").text();
+        return title.indexOf(callout_title) >= 0;
+    });
+    callout.css("border-color", "#2b8cbe"); // select a color, this is for the left border of the box
+    callout.find(".callout-square").css("background", "#2b8cbe"); // select a color, this is for the left border of the box
+    
+    // if you want to replace the default icon, go to https://feathericons.com/, and get the source of the svg icon
+    var svg = '<svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-book-open callout-icon"><path d="M2 3h6a4 4 0 0 1 4 4v14a3 3 0 0 0-3-3H2z"></path><path d="M22 3h-6a4 4 0 0 0-4 4v14a3 3 0 0 1 3-3h7z"></path></svg>';
+    // then update it with the new icon
+    callout.find(".callout-square").html(svg);
+
+});
+</script>

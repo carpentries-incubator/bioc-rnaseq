@@ -12,10 +12,12 @@ Additionally, you will also need to install the following packages that will be 
 ```r
 install.packages("BiocManager")
 BiocManager::install(c("tidyverse", "SummarizedExperiment",
-                       "ExploreModelMatrix", "org.Mm.eg.db",
+                       "ExploreModelMatrix", "org.Hs.eg.db", "org.Mm.eg.db",
                        "DESeq2", "vsn", "ComplexHeatmap",
                        "RColorBrewer", "hexbin", "cowplot",
-                       "clusterProfiler", "enrichplot", "kableExtra"))
+                       "clusterProfiler", "enrichplot", "kableExtra",
+                       "msigdbr", "gplots", "ggplot2", "simplifyEnrichment","apeglm"))
+
 ```
 
 *If you are attending a workshop, please complete all of the above before the workshop. Should you need help, an instructor will be available 30 minutes before the workshop commences to assist.*
