@@ -138,12 +138,12 @@ if(sum(colnames(counts) %in%  rownames(coldata)) == ncol(counts)) {
 :::::::::::::::::::::::::::::::::::::::  challenge
 
 If the feature (i.e., genes) in the assay (e.g., `counts`) and the gene
-annotation table (e.g., `rowranges``) are different, how can we fix them? 
+annotation table (e.g., `rowranges`) are different, how can we fix them? 
 Write a code using `if-else` statement. 
 
 ::::::::::::::::::::::::::::::::::: solution
 
-```{r}
+```{r eval=FALSE}
 if(sum(rownames(counts) %in%  rownames(rowranges)) == nrow(counts)) {
   tempindex <- match(rownames(counts), rownames(rowranges))
   coldata <- coldata[tempindex, ]
