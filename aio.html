@@ -468,7 +468,7 @@ analysis of RNA-seq data are <code>DESeq2</code>, <code>edgeR</code> and
 </div>
 </div></section><section id="aio-02-setup"><p>Content from <a href="02-setup.html">RStudio Project and Experimental Data</a></p>
 <hr>
-<p> Last updated on 2023-07-17 | 
+<p> Last updated on 2023-07-25 | 
         
         <a href="https://github.com/carpentries-incubator/bioc-rnaseq/edit/main/episodes/02-setup.Rmd" class="external-link">Edit this page <i aria-hidden="true" data-feather="edit"></i></a></p>
 <div class="text-end">
@@ -483,9 +483,10 @@ analysis of RNA-seq data are <code>DESeq2</code>, <code>edgeR</code> and
 <h3 class="card-title">Questions</h3>
 <ul>
 <li>How do you use RStudio project to manage your analysis project?</li>
-<li>What is the most effective way for organising directories for an
+<li>What is the most effective way to organize directories for an
 analysis project?</li>
-<li>How to download a dataset from the internet and save as a file.</li>
+<li>How to download a dataset from the internet and save it as a
+file.</li>
 </ul>
 </div>
 </div>
@@ -495,8 +496,8 @@ analysis project?</li>
 <div class="inner bordered">
 <h3 class="card-title">Objectives</h3>
 <ul>
-<li>Create an RStudio project and the the directories required for
-storing the files pertinent to an analysis project.</li>
+<li>Create an RStudio project and the directories required for storing
+the files pertinent to an analysis project.</li>
 <li>Download the data set that will be used for the subsequent
 episodes.</li>
 </ul>
@@ -516,8 +517,8 @@ when dealing with multiple versions of scripts and output files,
 necessitating efficient organisation. If these are not well-managed from
 the beginning, resuming the project after a break, or sharing the
 project with someone else becomes challenging and time-consuming, as we
-struggle to recall the project’s status and to navigate the directory
-tree. Additionally without proper organisation, the project’s complexity
+struggle to recall the project’s status and navigate the directory tree.
+Additionally, without proper organisation, the project’s complexity
 could lead to frequent use of the <code>setwd</code> function to switch
 between different working directories, resulting in a disorganised
 workspace.</p>
@@ -558,7 +559,7 @@ to data analysis with R and Bioconductor</a> lesson.</p>
 </div>
 </div>
 <p>Finally, in this lesson, we will also learn to use the R function
-<code>download.files</code> to download the data for the subsequent
+<code>download.file</code> to download the data for the subsequent
 episodes.</p>
 </section><section id="structuring-your-working-directory"><h2 class="section-heading">Structuring your working directory<a class="anchor" aria-label="anchor" href="#structuring-your-working-directory"></a>
 </h2>
@@ -618,7 +619,7 @@ directory, create the four fundamental directories previously discussed
   Show me the solution
   </h4>
 </button>
-<div id="collapseSolution1" class="accordion-collapse collapse" data-bs-parent="#accordionSolution1" aria-labelledby="headingSolution1">
+<div id="collapseSolution1" class="accordion-collapse collapse" aria-labelledby="headingSolution1" data-bs-parent="#accordionSolution1">
 <div class="accordion-body">
 <figure style="text-align: center"><img src="fig/02_setup/folders_working_dir.png" alt="Your working directory should look like this" width="1221" class="figure mx-auto d-block"><figcaption>
 Your working directory should look like this
@@ -664,9 +665,8 @@ directory as your working directory in R.</p>
 Your R working directory should now be set to where the .Rproj file
 resides.
 </figcaption></figure><p>From this point forward, any R code that you execute that involves
-reading in data from a file, or saving some data into a file will, by
-default, be directe to a path relative to your project’s working
-directory.</p>
+reading data from a file or saving data in a file will, by default, be
+directed to a path relative to your project’s working directory.</p>
 <p>If you wish to close the project, perhaps to open another project,
 create a new one, or take a break from the project, you can do so by
 using to <code>File</code> &gt; <code>Close Project</code> option
@@ -688,7 +688,7 @@ of the National Academy of Sciences 114.30 (2017): E6107-E6116.</p>
 <p>The dataset is available at <a href="https://www.ncbi.nlm.nih.gov/geo/" class="external-link">Gene Expression Omnibus
 (GEO)</a>, under the accession number <a href="https://www.ncbi.nlm.nih.gov/geo/query/acc.cgi?acc=GSE96870" class="external-link">GSE96870</a>.
 Downloading data from GEO is not straightforward (and won’t be covered
-in this lesson). Hence, we have made the data available on our Github
+in this lesson). Hence, we have made the data available on our GitHub
 repository for easier access.</p>
 <p>To download the files, we will use the R function
 <code>download.file</code>, which necessitates at least two parameters:
@@ -762,7 +762,7 @@ into the <code>data</code> folder in your working directory.</p>
   Show me the solution
   </h4>
 </button>
-<div id="collapseSolution2" class="accordion-collapse collapse" data-bs-parent="#accordionSolution2" aria-labelledby="headingSolution2">
+<div id="collapseSolution2" class="accordion-collapse collapse" aria-labelledby="headingSolution2" data-bs-parent="#accordionSolution2">
 <div class="accordion-body">
 <div class="codewrapper sourceCode" id="cb2">
 <h3 class="code-label">R<i aria-hidden="true" data-feather="chevron-left"></i><i aria-hidden="true" data-feather="chevron-right"></i>
@@ -801,7 +801,7 @@ working directory is crucial for maintaining order and ensuring easy
 access in the future.</li>
 <li>RStudio project serves as a valuable tool for managing your
 project’s working directory and facilitating analysis.</li>
-<li>The <code>download.files</code> function in R can be used for
+<li>The <code>download.file</code> function in R can be used for
 downloading datasets from the internet.</li>
 </ul>
 </div>
@@ -809,12 +809,18 @@ downloading datasets from the internet.</li>
 </div>
 </section></section><section id="aio-03-import-annotate"><p>Content from <a href="03-import-annotate.html">Importing and annotating quantified data into R</a></p>
 <hr>
-<p> Last updated on 2023-07-19 | 
+<p> Last updated on 2023-07-25 | 
         
         <a href="https://github.com/carpentries-incubator/bioc-rnaseq/edit/main/episodes/03-import-annotate.Rmd" class="external-link">Edit this page <i aria-hidden="true" data-feather="edit"></i></a></p>
 <div class="text-end">
           <button role="button" aria-pressed="false" tabindex="0" id="expand-code" class="pull-right"> Expand All Solutions <i aria-hidden="true" data-feather="plus"></i></button>
         </div>
+<div class="codewrapper">
+<h3 class="code-label">WARNING<i aria-hidden="true" data-feather="chevron-left"></i><i aria-hidden="true" data-feather="chevron-right"></i>
+</h3>
+<pre class="warning" tabindex="0"><code>Warning: replacing previous import 'S4Arrays::makeNindexFromArrayViewport' by
+'DelayedArray::makeNindexFromArrayViewport' when loading 'SummarizedExperiment'</code></pre>
+</div>
 <div class="overview card">
 <h2 class="card-header">Overview</h2>
 <div class="row g-0">
@@ -845,30 +851,45 @@ object.</li>
 </div>
 </div>
 </div>
-<section id="read-the-data"><h2 class="section-heading">Read the data<a class="anchor" aria-label="anchor" href="#read-the-data"></a>
+<section id="load-libraries"><h2 class="section-heading">Load libraries<a class="anchor" aria-label="anchor" href="#load-libraries"></a>
+</h2>
+<hr class="half-width">
+<div class="codewrapper sourceCode" id="cb2">
+<h3 class="code-label">R<i aria-hidden="true" data-feather="chevron-left"></i><i aria-hidden="true" data-feather="chevron-right"></i>
+</h3>
+<pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="fu">suppressPackageStartupMessages</span><span class="op">(</span><span class="op">{</span></span>
+<span>    <span class="kw">library</span><span class="op">(</span><span class="va">AnnotationDbi</span><span class="op">)</span></span>
+<span>    <span class="kw">library</span><span class="op">(</span><span class="va">org.Mm.eg.db</span><span class="op">)</span></span>
+<span>    <span class="kw">library</span><span class="op">(</span><span class="va">hgu95av2.db</span><span class="op">)</span></span>
+<span>    <span class="kw">library</span><span class="op">(</span><span class="va">SummarizedExperiment</span><span class="op">)</span></span>
+<span><span class="op">}</span><span class="op">)</span></span></code></pre>
+</div>
+</section><section id="load-data"><h2 class="section-heading">Load data<a class="anchor" aria-label="anchor" href="#load-data"></a>
 </h2>
 <hr class="half-width">
 <p>In the last episode, we used R to download 4 files from the internet
 and saved them on our computer. But we do not have these files loaded
 into R yet so that we can work with them. The original experimental
 design in <a href="https://pubmed.ncbi.nlm.nih.gov/28696309/" class="external-link">Blackmore
-et al. 2017</a> was fairly complex: 8 week old male and female mice were
+et al. 2017</a> was fairly complex: 8-12 weeks old male and female mice,
+with two different genetic backgrounds (wild-type and D2D), were
 collected at Day 0 (before influenza infection), Day 4 and Day 8 after
 influenza infection. From each mouse, cerebellum and spinal cord tissues
-were taken for RNA-Seq. There were originally 4 mice per Sex X Day
-group, but a few were lost along the way for a total of 45 samples. For
-this workshop we are going to simplify the analysis by only using the 22
-cerebellum samples. Expression quantification was done using STAR to
-align to the mouse genome and then counting reads that map to genes. In
-addition to the counts per gene per sample, we also need information on
-which sample belongs to which Sex/Timepoint/Replicate . And for the
-genes, it is helpful to have extra information called annotation.</p>
-<p>Let’t read in the data files that we downloaded in the last
-episode:</p>
+were taken for RNA-seq. There were originally 4 mice per ‘Sex X Day x
+Genotype’ group, but a few were lost along the way resulting in a total
+of 45 samples. For this workshop, we are going to simplify the analysis
+by only using the 22 cerebellum samples. Expression quantification was
+done using STAR to align to the mouse genome and then counting reads
+that map to genes. In addition to the counts per gene per sample, we
+also need information on which sample belongs to which Sex/Time
+point/Replicate. And for the genes, it is helpful to have extra
+information called annotation. Let’s read in the data files that we
+downloaded in the last episode:</p>
 <div class="section level3">
 <h3 id="counts">Counts<a class="anchor" aria-label="anchor" href="#counts"></a>
 </h3>
-<div class="codewrapper sourceCode" id="cb1">
+<div class="codewrapper sourceCode" id="cb3">
 <h3 class="code-label">R<i aria-hidden="true" data-feather="chevron-left"></i><i aria-hidden="true" data-feather="chevron-right"></i>
 </h3>
 <pre class="downlit sourceCode r">
@@ -881,7 +902,7 @@ episode:</p>
 </h3>
 <pre class="output" tabindex="0"><code>[1] 41786    22</code></pre>
 </div>
-<div class="codewrapper sourceCode" id="cb3">
+<div class="codewrapper sourceCode" id="cb5">
 <h3 class="code-label">R<i aria-hidden="true" data-feather="chevron-left"></i><i aria-hidden="true" data-feather="chevron-right"></i>
 </h3>
 <pre class="downlit sourceCode r">
@@ -903,7 +924,7 @@ sample is what.</p>
 </h3>
 <p>Next read in the sample annotations. Because samples are in columns
 in the count matrix, we will name the object <code>coldata</code>:</p>
-<div class="codewrapper sourceCode" id="cb4">
+<div class="codewrapper sourceCode" id="cb6">
 <h3 class="code-label">R<i aria-hidden="true" data-feather="chevron-left"></i><i aria-hidden="true" data-feather="chevron-right"></i>
 </h3>
 <pre class="downlit sourceCode r">
@@ -916,7 +937,7 @@ in the count matrix, we will name the object <code>coldata</code>:</p>
 </h3>
 <pre class="output" tabindex="0"><code>[1] 22 10</code></pre>
 </div>
-<div class="codewrapper sourceCode" id="cb6">
+<div class="codewrapper sourceCode" id="cb8">
 <h3 class="code-label">R<i aria-hidden="true" data-feather="chevron-left"></i><i aria-hidden="true" data-feather="chevron-right"></i>
 </h3>
 <pre class="downlit sourceCode r">
@@ -939,22 +960,29 @@ separated value (.csv) format, but we cannot use that for our gene
 annotation file because the descriptions can contain commas that would
 prevent a .csv file from being read in correctly. Instead the gene
 annotation file is in tab separated value (.tsv) format. Likewise, the
-descriptions can contain the single quote ’ (e.g., 5’), which by default
-R assumes indicates a character entry. So we have to use a more generic
-function <code>read.delim()</code> with extra arguments to specify that
-we have tab-separated data (<code>sep = "\t"</code>) with no quotes used
-(<code>quote = ""</code>). We also put in other arguments to specify
-that the first row contains our column names (<code>header</code>), the
-gene symbols that should be our <code>row.names</code> are in the 5th
-column, and that NCBI’s species-specific gene ENTREZIDs should be read
-in as character data even though they look like numbers.</p>
-<div class="codewrapper sourceCode" id="cb7">
+descriptions can contain the single quote <code>'</code> (e.g., 5’),
+which by default R assumes indicates a character entry. So we have to
+use a more generic function <code>read.delim()</code> with extra
+arguments to specify that we have tab-separated data
+(<code>sep = "\t"</code>) with no quotes used (<code>quote = ""</code>).
+We also put in other arguments to specify that the first row contains
+our column names (<code>header = TRUE</code>), the gene symbols that
+should be our <code>row.names</code> are in the 5th column
+(<code>row.names = 5</code>), and that NCBI’s species-specific gene ID
+(i.e., ENTREZID) should be read in as character data even though they
+look like numbers (<code>colClasses</code> argument). You can look up
+this details on available arguments by simply entering the function name
+starting with question mark. (e.g., <code>?read.delim</code>)</p>
+<div class="codewrapper sourceCode" id="cb9">
 <h3 class="code-label">R<i aria-hidden="true" data-feather="chevron-left"></i><i aria-hidden="true" data-feather="chevron-right"></i>
 </h3>
 <pre class="downlit sourceCode r">
-<code class="sourceCode R"><span><span class="va">rowranges</span> <span class="op">&lt;-</span> <span class="fu">read.delim</span><span class="op">(</span><span class="st">"data/GSE96870_rowranges.tsv"</span>, sep <span class="op">=</span> <span class="st">"\t"</span>, </span>
+<code class="sourceCode R"><span><span class="va">rowranges</span> <span class="op">&lt;-</span> <span class="fu">read.delim</span><span class="op">(</span><span class="st">"data/GSE96870_rowranges.tsv"</span>, </span>
+<span>                        sep <span class="op">=</span> <span class="st">"\t"</span>, </span>
 <span>                        colClasses <span class="op">=</span> <span class="fu">c</span><span class="op">(</span>ENTREZID <span class="op">=</span> <span class="st">"character"</span><span class="op">)</span>,</span>
-<span>                        header <span class="op">=</span> <span class="cn">TRUE</span>, quote <span class="op">=</span> <span class="st">""</span>, row.names <span class="op">=</span> <span class="fl">5</span><span class="op">)</span></span>
+<span>                        header <span class="op">=</span> <span class="cn">TRUE</span>, </span>
+<span>                        quote <span class="op">=</span> <span class="st">""</span>, </span>
+<span>                        row.names <span class="op">=</span> <span class="fl">5</span><span class="op">)</span></span>
 <span><span class="fu">dim</span><span class="op">(</span><span class="va">rowranges</span><span class="op">)</span></span></code></pre>
 </div>
 <div class="codewrapper">
@@ -962,45 +990,21 @@ in as character data even though they look like numbers.</p>
 </h3>
 <pre class="output" tabindex="0"><code>[1] 41786     7</code></pre>
 </div>
-<div class="codewrapper sourceCode" id="cb9">
+<div class="codewrapper sourceCode" id="cb11">
 <h3 class="code-label">R<i aria-hidden="true" data-feather="chevron-left"></i><i aria-hidden="true" data-feather="chevron-right"></i>
 </h3>
 <pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="co"># View(rowranges)</span></span></code></pre>
 </div>
 <p>For each of the 41,786 genes, we have the <code>seqnames</code>
-(e.g., chromosome), <code>start</code> and <code>end</code> position,
-<code>strand</code>, <code>ENTREZID</code>, <code>product</code>
-description and the type of gene (<code>gbkey</code>). Depending on who
-generates your count data, you might not have a nice file of additional
-gene annotations. There may only be the count row names, which could be
-symbols or ENTREZIDs or another database’s ID. Bioconductor has many
-packages and functions that can help you get additional annotation
-information for your genes. This is covered in more detail in <a href="https://carpentries-incubator.github.io/bioc-rnaseq/06-gene-set-analysis.html#gene-set-resources" class="external-link">Episode
-6 Gene set enrichment analysis</a> but here is a short example:</p>
-<div class="codewrapper sourceCode" id="cb10">
-<h3 class="code-label">R<i aria-hidden="true" data-feather="chevron-left"></i><i aria-hidden="true" data-feather="chevron-right"></i>
-</h3>
-<pre class="downlit sourceCode r">
-<code class="sourceCode R"><span><span class="fu">suppressPackageStartupMessages</span><span class="op">(</span><span class="op">{</span></span>
-<span>    <span class="kw">library</span><span class="op">(</span><span class="va">org.Mm.eg.db</span><span class="op">)</span></span>
-<span><span class="op">}</span><span class="op">)</span></span>
-<span><span class="fu">mapIds</span><span class="op">(</span><span class="va">org.Mm.eg.db</span>, keys <span class="op">=</span> <span class="st">"497097"</span>, column <span class="op">=</span> <span class="st">"SYMBOL"</span>, keytype <span class="op">=</span> <span class="st">"ENTREZID"</span><span class="op">)</span></span></code></pre>
-</div>
-<div class="codewrapper">
-<h3 class="code-label">OUTPUT<i aria-hidden="true" data-feather="chevron-left"></i><i aria-hidden="true" data-feather="chevron-right"></i>
-</h3>
-<pre class="output" tabindex="0"><code>'select()' returned 1:1 mapping between keys and columns</code></pre>
-</div>
-<div class="codewrapper">
-<h3 class="code-label">OUTPUT<i aria-hidden="true" data-feather="chevron-left"></i><i aria-hidden="true" data-feather="chevron-right"></i>
-</h3>
-<pre class="output" tabindex="0"><code><span><span class="fl">497097</span> </span>
-<span><span class="st">"Xkr4"</span> </span></code></pre>
-</div>
-<p>The <code>gbkey</code> column shows us what types of genes we have,
-so we can check what they are and how many genes of each we have:</p>
-<div class="codewrapper sourceCode" id="cb13">
+(e.g., chromosome number), <code>start</code> and <code>end</code>
+positions, <code>strand</code>, <code>ENTREZID</code>, gene product
+description (<code>product</code>) and the feature type
+(<code>gbkey</code>). These gene-level metadata are useful for the
+downstream analysis. For example, from the <code>gbkey</code> column, we
+can check what types of genes and how many of them are in our
+dataset:</p>
+<div class="codewrapper sourceCode" id="cb12">
 <h3 class="code-label">R<i aria-hidden="true" data-feather="chevron-left"></i><i aria-hidden="true" data-feather="chevron-right"></i>
 </h3>
 <pre class="downlit sourceCode r">
@@ -1017,8 +1021,26 @@ so we can check what they are and how many genes of each we have:</p>
     V_segment 
           535 </code></pre>
 </div>
-<p>[have the below be a Challenge discussion ala <a href="https://carpentries-incubator.github.io/bioc-intro/10-data-organisation.html#challenge-discuss-the-following-points-with-your-neighbour" class="external-link uri">https://carpentries-incubator.github.io/bioc-intro/10-data-organisation.html#challenge-discuss-the-following-points-with-your-neighbour</a>
-? ]</p>
+<div id="challenge-discuss-the-following-points-with-your-neighbor" class="callout discussion">
+<div class="callout-square">
+<i class="callout-icon" data-feather="message-circle"></i>
+</div>
+<div id="challenge-discuss-the-following-points-with-your-neighbor" class="callout-inner">
+<h3 class="callout-title">Challenge: Discuss the following points with
+your neighbor<a class="anchor" aria-label="anchor" href="#challenge-discuss-the-following-points-with-your-neighbor"></a>
+</h3>
+<div class="callout-content">
+<ul>
+<li>Have you used spreadsheets, in your research, courses, or at
+home?</li>
+<li>What kind of operations do you do in spreadsheets?</li>
+<li>Which ones do you think spreadsheets are good for?</li>
+<li>Have you accidentally done something in a spreadsheet program that
+made you frustrated or sad?</li>
+</ul>
+</div>
+</div>
+</div>
 <p>Suppose we decide we only want to analyze mRNA genes and not any of
 the others. We could remove these genes from the <code>rowranges</code>
 object, but we also have to remember to remove them correctly from the
@@ -1031,21 +1053,23 @@ annotations.</p>
 <code>SummarizedExperiment</code>. The details of a
 <code>SummarizedExperiment</code> were covered extensively at the end of
 the <a href="https://carpentries-incubator.github.io/bioc-intro/60-next-steps.html#next-steps" class="external-link">Introduction
-to data analysis with R and Bioconductor</a> workshop. It was designed
-to hold any type of quantitative ’omics data (“<code>assay</code>”)
-along with linked sample annotations (“<code>colData</code>”) and
-feature annotations with (<code>rowRanges</code>) or without
-(<code>rowData</code>) chromosome, start and stop positions. Once these
-three tables are (correctly!) linked, subsetting either samples and/or
-features will correctly subset the <code>assay</code>,
-<code>colData</code> and <code>rowRanges</code>. Additionally, most
-Bioconductor packages are built around the same core data infrastructure
-so they will recognize and be able to manipulate
+to data analysis with R and Bioconductor</a> workshop. As a reminder,
+let’s take a look at the figure below representing the anatomy of the
+<code>SummarizedExperiment</code> class:</p>
+<figure><img src="https://uclouvain-cbio.github.io/WSBIM1322/figs/SE.svg" width="80%" style="display: block; margin: auto;" class="figure mx-auto d-block"></figure><p>It is designed to hold any type of quantitative ’omics data
+(<code>assays</code>) along with linked sample annotations
+(<code>colData</code>) and feature annotations with
+(<code>rowRanges</code>) or without (<code>rowData</code>) chromosome,
+start and stop positions. Once these three tables are (correctly!)
+linked, subsetting either samples and/or features will correctly subset
+the <code>assay</code>, <code>colData</code> and <code>rowRanges</code>.
+Additionally, most Bioconductor packages are built around the same core
+data infrastructure so they will recognize and be able to manipulate
 <code>SummarizedExperiment</code> objects. Two of the most popular
-RNA-Seq statistical analysis packages have their own extended S4 classes
-similar to a <code>SummarizedExperiment</code> with addition slots for
-statistical results: <a href="http://bioconductor.org/packages/devel/bioc/vignettes/DESeq2/inst/doc/DESeq2.html#the-deseqdataset" class="external-link">DESeq2’s</a>
-<code>DESeqDataSet</code> and <a href="https://www.rdocumentation.org/packages/edgeR/versions/3.14.0/topics/DGEList-class" class="external-link">edgeR’s</a>
+RNA-seq statistical analysis packages have their own extended S4 classes
+similar to a <code>SummarizedExperiment</code> with the additional slots
+for statistical results: <a href="http://bioconductor.org/packages/devel/bioc/vignettes/DESeq2/inst/doc/DESeq2.html#the-deseqdataset" class="external-link">DESeq2</a>
+s <code>DESeqDataSet</code> and <a href="https://www.rdocumentation.org/packages/edgeR/versions/3.14.0/topics/DGEList-class" class="external-link">edgeR</a>’s
 <code>DGEList</code>. No matter which one you end up using for
 statistical analysis, you can start by putting your data in a
 <code>SummarizedExperiment</code>.</p>
@@ -1056,13 +1080,16 @@ statistical analysis, you can start by putting your data in a
 <p>We will create a <code>SummarizedExperiment</code> from these
 objects:</p>
 <ul>
-<li><p>The <code>count</code> object will be used as the
-<strong><code>assay</code></strong></p></li>
-<li><p>The <code>coldata</code> object with sample information will be
-used as the <strong>sample metadata</strong> <code>colData</code>
-slot</p></li>
-<li><p>The ‘rowranges’ object describing the genes will be used as the
-<strong>features metadata</strong> <code>rowRanges</code> slot</p></li>
+<li>The <code>count</code> object will be saved in <code>assays</code>
+slot<br>
+</li>
+<li>The <code>coldata</code> object with sample information will be
+stored in <code>colData</code> slot (<em><strong>sample
+metadata</strong></em>)<br>
+</li>
+<li>The <code>rowranges</code> object describing the genes will be
+stored in <code>rowRanges</code> slot (<em><strong>features
+metadata</strong></em>)</li>
 </ul>
 <p>Before we put them together, you ABSOLUTELY MUST MAKE SURE THE
 SAMPLES AND GENES ARE IN THE SAME ORDER! Even though we saw that
@@ -1070,29 +1097,29 @@ SAMPLES AND GENES ARE IN THE SAME ORDER! Even though we saw that
 samples and <code>count</code> and <code>rowranges</code> had the same
 number of genes, we never explicitly checked to see if they were in the
 same order. One way to check:</p>
-<div class="codewrapper sourceCode" id="cb15">
+<div class="codewrapper sourceCode" id="cb14">
 <h3 class="code-label">R<i aria-hidden="true" data-feather="chevron-left"></i><i aria-hidden="true" data-feather="chevron-right"></i>
 </h3>
 <pre class="downlit sourceCode r">
-<code class="sourceCode R"><span><span class="fu">all.equal</span><span class="op">(</span><span class="fu">colnames</span><span class="op">(</span><span class="va">counts</span><span class="op">)</span>, <span class="fu">rownames</span><span class="op">(</span><span class="va">coldata</span><span class="op">)</span><span class="op">)</span></span></code></pre>
+<code class="sourceCode R"><span><span class="fu">all.equal</span><span class="op">(</span><span class="fu">colnames</span><span class="op">(</span><span class="va">counts</span><span class="op">)</span>, <span class="fu">rownames</span><span class="op">(</span><span class="va">coldata</span><span class="op">)</span><span class="op">)</span> <span class="co"># samples</span></span></code></pre>
 </div>
 <div class="codewrapper">
 <h3 class="code-label">OUTPUT<i aria-hidden="true" data-feather="chevron-left"></i><i aria-hidden="true" data-feather="chevron-right"></i>
 </h3>
 <pre class="output" tabindex="0"><code>[1] TRUE</code></pre>
 </div>
-<div class="codewrapper sourceCode" id="cb17">
+<div class="codewrapper sourceCode" id="cb16">
 <h3 class="code-label">R<i aria-hidden="true" data-feather="chevron-left"></i><i aria-hidden="true" data-feather="chevron-right"></i>
 </h3>
 <pre class="downlit sourceCode r">
-<code class="sourceCode R"><span><span class="fu">all.equal</span><span class="op">(</span><span class="fu">rownames</span><span class="op">(</span><span class="va">counts</span><span class="op">)</span>, <span class="fu">rownames</span><span class="op">(</span><span class="va">rowranges</span><span class="op">)</span><span class="op">)</span></span></code></pre>
+<code class="sourceCode R"><span><span class="fu">all.equal</span><span class="op">(</span><span class="fu">rownames</span><span class="op">(</span><span class="va">counts</span><span class="op">)</span>, <span class="fu">rownames</span><span class="op">(</span><span class="va">rowranges</span><span class="op">)</span><span class="op">)</span> <span class="co"># genes</span></span></code></pre>
 </div>
 <div class="codewrapper">
 <h3 class="code-label">OUTPUT<i aria-hidden="true" data-feather="chevron-left"></i><i aria-hidden="true" data-feather="chevron-right"></i>
 </h3>
 <pre class="output" tabindex="0"><code>[1] TRUE</code></pre>
 </div>
-<div class="codewrapper sourceCode" id="cb19">
+<div class="codewrapper sourceCode" id="cb18">
 <h3 class="code-label">R<i aria-hidden="true" data-feather="chevron-left"></i><i aria-hidden="true" data-feather="chevron-right"></i>
 </h3>
 <pre class="downlit sourceCode r">
@@ -1105,21 +1132,54 @@ same order. One way to check:</p>
 <span>  <span class="fu">print</span><span class="op">(</span><span class="st">"Warning: the number of samples are not the same in counts and coldata"</span><span class="op">)</span></span>
 <span><span class="op">}</span></span></code></pre>
 </div>
-<p>[or we could do a challenge to write the other if else statement
-]</p>
+<div id="challenge1" class="callout challenge">
+<div class="callout-square">
+<i class="callout-icon" data-feather="zap"></i>
+</div>
+<div class="callout-inner">
+<h3 class="callout-title">Challenge<a class="anchor" aria-label="anchor" href="#challenge1"></a>
+</h3>
+<div class="callout-content">
+<p>If the feature (i.e., genes) in the assay (e.g., <code>counts</code>)
+and the gene annotation table (e.g., <code>rowranges</code>) are
+different, how can we fix them? Write a code using <code>if-else</code>
+statement.</p>
+</div>
+</div>
+</div>
+<div id="accordionSolution1" class="accordion challenge-accordion accordion-flush">
+<div class="accordion-item">
+<button class="accordion-button solution-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapseSolution1" aria-expanded="false" aria-controls="collapseSolution1">
+  <h4 class="accordion-header" id="headingSolution1">
+  Show me the solution
+  </h4>
+</button>
+<div id="collapseSolution1" class="accordion-collapse collapse" aria-labelledby="headingSolution1" data-bs-parent="#accordionSolution1">
+<div class="accordion-body">
+<div class="codewrapper sourceCode" id="cb19">
+<h3 class="code-label">R<i aria-hidden="true" data-feather="chevron-left"></i><i aria-hidden="true" data-feather="chevron-right"></i>
+</h3>
+<pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="kw">if</span><span class="op">(</span><span class="fu">sum</span><span class="op">(</span><span class="fu">rownames</span><span class="op">(</span><span class="va">counts</span><span class="op">)</span> <span class="op">%in%</span>  <span class="fu">rownames</span><span class="op">(</span><span class="va">rowranges</span><span class="op">)</span><span class="op">)</span> <span class="op">==</span> <span class="fu">nrow</span><span class="op">(</span><span class="va">counts</span><span class="op">)</span><span class="op">)</span> <span class="op">{</span></span>
+<span>  <span class="va">tempindex</span> <span class="op">&lt;-</span> <span class="fu">match</span><span class="op">(</span><span class="fu">rownames</span><span class="op">(</span><span class="va">counts</span><span class="op">)</span>, <span class="fu">rownames</span><span class="op">(</span><span class="va">rowranges</span><span class="op">)</span><span class="op">)</span></span>
+<span>  <span class="va">coldata</span> <span class="op">&lt;-</span> <span class="va">coldata</span><span class="op">[</span><span class="va">tempindex</span>, <span class="op">]</span></span>
+<span><span class="op">}</span> <span class="kw">else</span> <span class="op">{</span></span>
+<span>  <span class="fu">print</span><span class="op">(</span><span class="st">"Warning: the number of features are not the same in counts and rowranges"</span><span class="op">)</span></span>
+<span><span class="op">}</span></span></code></pre>
+</div>
+</div>
+</div>
+</div>
+</div>
 <p>Once we have verified that samples and genes are in the same order,
-we can then create our object after loading the
-<code>SummarizedExperiment</code> package:</p>
+we can then create our <code>SummarizedExperiment</code> object.</p>
 <div class="codewrapper sourceCode" id="cb20">
 <h3 class="code-label">R<i aria-hidden="true" data-feather="chevron-left"></i><i aria-hidden="true" data-feather="chevron-right"></i>
 </h3>
 <pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="co"># One final check:</span></span>
-<span></span>
-<span><span class="fu">stopifnot</span><span class="op">(</span><span class="fu">rownames</span><span class="op">(</span><span class="va">rowranges</span><span class="op">)</span> <span class="op">==</span> <span class="fu">rownames</span><span class="op">(</span><span class="va">counts</span><span class="op">)</span>,</span>
-<span>          <span class="fu">rownames</span><span class="op">(</span><span class="va">coldata</span><span class="op">)</span> <span class="op">==</span> <span class="fu">colnames</span><span class="op">(</span><span class="va">counts</span><span class="op">)</span><span class="op">)</span></span>
-<span></span>
-<span><span class="kw">library</span><span class="op">(</span><span class="st">"SummarizedExperiment"</span><span class="op">)</span></span>
+<span><span class="fu">stopifnot</span><span class="op">(</span><span class="fu">rownames</span><span class="op">(</span><span class="va">rowranges</span><span class="op">)</span> <span class="op">==</span> <span class="fu">rownames</span><span class="op">(</span><span class="va">counts</span><span class="op">)</span>, <span class="co"># features</span></span>
+<span>          <span class="fu">rownames</span><span class="op">(</span><span class="va">coldata</span><span class="op">)</span> <span class="op">==</span> <span class="fu">colnames</span><span class="op">(</span><span class="va">counts</span><span class="op">)</span><span class="op">)</span> <span class="co"># samples</span></span>
 <span></span>
 <span><span class="va">se</span> <span class="op">&lt;-</span> <span class="fu">SummarizedExperiment</span><span class="op">(</span></span>
 <span>    assays <span class="op">=</span> <span class="fu">list</span><span class="op">(</span>counts <span class="op">=</span> <span class="fu">as.matrix</span><span class="op">(</span><span class="va">counts</span><span class="op">)</span><span class="op">)</span>,</span>
@@ -1134,7 +1194,6 @@ we can then create our object after loading the
 </h3>
 <pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="co"># Access the counts</span></span>
-<span></span>
 <span><span class="fu">head</span><span class="op">(</span><span class="fu">assay</span><span class="op">(</span><span class="va">se</span><span class="op">)</span><span class="op">)</span></span></code></pre>
 </div>
 <div class="codewrapper">
@@ -1185,7 +1244,6 @@ Sox17               273        197        310        246</code></pre>
 </h3>
 <pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="co"># Access the sample annotations</span></span>
-<span></span>
 <span><span class="fu">colData</span><span class="op">(</span><span class="va">se</span><span class="op">)</span></span></code></pre>
 </div>
 <div class="codewrapper">
@@ -1235,7 +1293,6 @@ GSM2545380  InfluenzaA     C57BL/6        Day8  Cerebellum        19</code></pre
 </h3>
 <pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="co"># Access the gene annotations</span></span>
-<span></span>
 <span><span class="fu">head</span><span class="op">(</span><span class="fu">rowData</span><span class="op">(</span><span class="va">se</span><span class="op">)</span><span class="op">)</span></span></code></pre>
 </div>
 <div class="codewrapper">
@@ -1280,6 +1337,126 @@ to shut down RStudio. To save an R-specific file we can use the
 <span><span class="fu">rm</span><span class="op">(</span><span class="va">se</span><span class="op">)</span> <span class="co"># remove the object!</span></span>
 <span><span class="va">se</span> <span class="op">&lt;-</span> <span class="fu">readRDS</span><span class="op">(</span><span class="st">"data/GSE96870_se.rds"</span><span class="op">)</span></span></code></pre>
 </div>
+</section><section id="annotations"><h2 class="section-heading">Annotations<a class="anchor" aria-label="anchor" href="#annotations"></a>
+</h2>
+<hr class="half-width">
+<p>Depending on who generates your count data, you might not have a nice
+file of additional gene annotations. There may only be the count row
+names, which could be gene symbols or ENTREZIDs or another database’s
+ID. Characteristics of gene annotations differ based on their annotation
+strategies and information sources. For example, RefSeq human gene
+models (i.e., Entrez from NCBI) are well supported and broadly used in
+various studies. The UCSC Known Genes dataset is based on protein data
+from Swiss-Prot/TrEMBL (UniProt) and the associated mRNA data from
+GenBank, and serves as a foundation for the UCSC Genome Browser. Ensembl
+genes contain both automated genome annotation and manual curation.</p>
+<p>You can find more information in Bioconductor <a href="https://jmacdon.github.io/Bioc2022Anno/articles/AnnotationWorkshop.html" class="external-link">Annotation
+Workshop</a> material.</p>
+<p>Bioconductor has many packages and functions that can help you to get
+additional annotation information for your genes. The available
+resources are covered in more detail in <a href="https://carpentries-incubator.github.io/bioc-rnaseq/06-gene-set-analysis.html#gene-set-resources" class="external-link">Episode
+6 Gene set enrichment analysis</a>.</p>
+<p>Here, we will introduce one of the gene ID mapping functions,
+<code>mapIds</code>:</p>
+<pre><code><span><span class="fu">mapIds</span><span class="op">(</span><span class="va">annopkg</span>, <span class="va">keys</span>, <span class="va">column</span>, <span class="va">keytype</span>, <span class="va">...</span>, <span class="va">multiVals</span><span class="op">)</span></span></code></pre>
+<p>Where - <em>annopkg</em> is the annotation package<br>
+- <em>keys</em> are the IDs that we <strong>know</strong><br>
+- <em>column</em> is the value we <strong>want</strong><br>
+- <em>keytype</em> is the type of key used</p>
+<div class="codewrapper sourceCode" id="cb35">
+<h3 class="code-label">R<i aria-hidden="true" data-feather="chevron-left"></i><i aria-hidden="true" data-feather="chevron-right"></i>
+</h3>
+<pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="fu">mapIds</span><span class="op">(</span><span class="va">org.Mm.eg.db</span>, keys <span class="op">=</span> <span class="st">"497097"</span>, column <span class="op">=</span> <span class="st">"SYMBOL"</span>, keytype <span class="op">=</span> <span class="st">"ENTREZID"</span><span class="op">)</span></span></code></pre>
+</div>
+<div class="codewrapper">
+<h3 class="code-label">OUTPUT<i aria-hidden="true" data-feather="chevron-left"></i><i aria-hidden="true" data-feather="chevron-right"></i>
+</h3>
+<pre class="output" tabindex="0"><code>'select()' returned 1:1 mapping between keys and columns</code></pre>
+</div>
+<div class="codewrapper">
+<h3 class="code-label">OUTPUT<i aria-hidden="true" data-feather="chevron-left"></i><i aria-hidden="true" data-feather="chevron-right"></i>
+</h3>
+<pre class="output" tabindex="0"><code><span><span class="fl">497097</span> </span>
+<span><span class="st">"Xkr4"</span> </span></code></pre>
+</div>
+<p>Different from the <code>select()</code> function,
+<code>mapIds()</code> function handles 1:many mapping between keys and
+columns through an additional argument, <code>multiVals</code>. The
+below example demonstrate this functionality using the
+<code>hgu95av2.db</code> package, an Affymetrix Human Genome U95 Set
+annotation data.</p>
+<div class="codewrapper sourceCode" id="cb38">
+<h3 class="code-label">R<i aria-hidden="true" data-feather="chevron-left"></i><i aria-hidden="true" data-feather="chevron-right"></i>
+</h3>
+<pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="va">keys</span> <span class="op">&lt;-</span> <span class="fu">head</span><span class="op">(</span><span class="fu">keys</span><span class="op">(</span><span class="va">hgu95av2.db</span>, <span class="st">"ENTREZID"</span><span class="op">)</span><span class="op">)</span></span>
+<span><span class="va">last</span> <span class="op">&lt;-</span> <span class="kw">function</span><span class="op">(</span><span class="va">x</span><span class="op">)</span><span class="op">{</span><span class="va">x</span><span class="op">[[</span><span class="fu">length</span><span class="op">(</span><span class="va">x</span><span class="op">)</span><span class="op">]</span><span class="op">]</span><span class="op">}</span></span>
+<span></span>
+<span><span class="fu">mapIds</span><span class="op">(</span><span class="va">hgu95av2.db</span>, keys <span class="op">=</span> <span class="va">keys</span>, column <span class="op">=</span> <span class="st">"ALIAS"</span>, keytype <span class="op">=</span> <span class="st">"ENTREZID"</span><span class="op">)</span></span></code></pre>
+</div>
+<div class="codewrapper">
+<h3 class="code-label">OUTPUT<i aria-hidden="true" data-feather="chevron-left"></i><i aria-hidden="true" data-feather="chevron-right"></i>
+</h3>
+<pre class="output" tabindex="0"><code>'select()' returned 1:many mapping between keys and columns</code></pre>
+</div>
+<div class="codewrapper">
+<h3 class="code-label">OUTPUT<i aria-hidden="true" data-feather="chevron-left"></i><i aria-hidden="true" data-feather="chevron-right"></i>
+</h3>
+<pre class="output" tabindex="0"><code>       10       100      1000     10000 100008586     10001 
+   "AAC2"    "ADA1"   "ACOGS"    "MPPH"     "AL4"   "ARC33" </code></pre>
+</div>
+<div class="codewrapper sourceCode" id="cb41">
+<h3 class="code-label">R<i aria-hidden="true" data-feather="chevron-left"></i><i aria-hidden="true" data-feather="chevron-right"></i>
+</h3>
+<pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="fu">mapIds</span><span class="op">(</span><span class="va">hgu95av2.db</span>, keys <span class="op">=</span> <span class="va">keys</span>, column <span class="op">=</span> <span class="st">"ALIAS"</span>, keytype <span class="op">=</span> <span class="st">"ENTREZID"</span>, multiVals <span class="op">=</span> <span class="va">last</span><span class="op">)</span></span></code></pre>
+</div>
+<div class="codewrapper">
+<h3 class="code-label">OUTPUT<i aria-hidden="true" data-feather="chevron-left"></i><i aria-hidden="true" data-feather="chevron-right"></i>
+</h3>
+<pre class="output" tabindex="0"><code>'select()' returned 1:many mapping between keys and columns</code></pre>
+</div>
+<div class="codewrapper">
+<h3 class="code-label">OUTPUT<i aria-hidden="true" data-feather="chevron-left"></i><i aria-hidden="true" data-feather="chevron-right"></i>
+</h3>
+<pre class="output" tabindex="0"><code>       10       100      1000     10000 100008586     10001 
+   "NAT2"     "ADA"    "CDH2"    "AKT3" "GAGE12F"    "MED6" </code></pre>
+</div>
+<div class="codewrapper sourceCode" id="cb44">
+<h3 class="code-label">R<i aria-hidden="true" data-feather="chevron-left"></i><i aria-hidden="true" data-feather="chevron-right"></i>
+</h3>
+<pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="fu">mapIds</span><span class="op">(</span><span class="va">hgu95av2.db</span>, keys <span class="op">=</span> <span class="va">keys</span>, column <span class="op">=</span> <span class="st">"ALIAS"</span>, keytype <span class="op">=</span> <span class="st">"ENTREZID"</span>, multiVals <span class="op">=</span> <span class="st">"list"</span><span class="op">)</span></span></code></pre>
+</div>
+<div class="codewrapper">
+<h3 class="code-label">OUTPUT<i aria-hidden="true" data-feather="chevron-left"></i><i aria-hidden="true" data-feather="chevron-right"></i>
+</h3>
+<pre class="output" tabindex="0"><code>'select()' returned 1:many mapping between keys and columns</code></pre>
+</div>
+<div class="codewrapper">
+<h3 class="code-label">OUTPUT<i aria-hidden="true" data-feather="chevron-left"></i><i aria-hidden="true" data-feather="chevron-right"></i>
+</h3>
+<pre class="output" tabindex="0"><code>$`10`
+[1] "AAC2"  "NAT-2" "PNAT"  "NAT2" 
+
+$`100`
+[1] "ADA1" "ADA" 
+
+$`1000`
+[1] "ACOGS"  "ADHD8"  "ARVD14" "CD325"  "CDHN"   "CDw325" "NCAD"   "CDH2"  
+
+$`10000`
+[1] "MPPH"         "MPPH2"        "PKB-GAMMA"    "PKBG"         "PRKBG"       
+[6] "RAC-PK-gamma" "RAC-gamma"    "STK-2"        "AKT3"        
+
+$`100008586`
+[1] "AL4"     "CT4.7"   "GAGE-7"  "GAGE-7B" "GAGE-8"  "GAGE7"   "GAGE7B" 
+[8] "GAGE12F"
+
+$`10001`
+[1] "ARC33"     "NY-REN-28" "MED6"     </code></pre>
+</div>
 <div id="important" class="callout callout">
 <div class="callout-square">
 <i class="callout-icon" data-feather="bell"></i>
@@ -1302,7 +1479,7 @@ file.</p>
 </section><section id="session-info"><h2 class="section-heading">Session info<a class="anchor" aria-label="anchor" href="#session-info"></a>
 </h2>
 <hr class="half-width">
-<div class="codewrapper sourceCode" id="cb34">
+<div class="codewrapper sourceCode" id="cb47">
 <h3 class="code-label">R<i aria-hidden="true" data-feather="chevron-left"></i><i aria-hidden="true" data-feather="chevron-right"></i>
 </h3>
 <pre class="downlit sourceCode r">
@@ -1333,26 +1510,28 @@ attached base packages:
 [8] base     
 
 other attached packages:
- [1] org.Mm.eg.db_3.17.0         AnnotationDbi_1.62.2       
- [3] SummarizedExperiment_1.30.2 Biobase_2.60.0             
- [5] MatrixGenerics_1.12.2       matrixStats_1.0.0          
- [7] GenomicRanges_1.52.0        GenomeInfoDb_1.36.1        
- [9] IRanges_2.34.1              S4Vectors_0.38.1           
-[11] BiocGenerics_0.46.0        
+ [1] hgu95av2.db_3.13.0          org.Hs.eg.db_3.17.0        
+ [3] org.Mm.eg.db_3.17.0         AnnotationDbi_1.62.2       
+ [5] SummarizedExperiment_1.30.2 Biobase_2.60.0             
+ [7] MatrixGenerics_1.12.2       matrixStats_1.0.0          
+ [9] GenomicRanges_1.52.0        GenomeInfoDb_1.36.1        
+[11] IRanges_2.34.1              S4Vectors_0.38.1           
+[13] BiocGenerics_0.46.0        
 
 loaded via a namespace (and not attached):
- [1] Matrix_1.5-4.1          bit_4.0.5               compiler_4.3.1         
- [4] BiocManager_1.30.21.1   renv_1.0.0              crayon_1.5.2           
- [7] blob_1.2.4              Biostrings_2.68.1       bitops_1.0-7           
-[10] png_0.1-8               fastmap_1.1.1           lattice_0.21-8         
-[13] R6_2.5.1                XVector_0.40.0          S4Arrays_1.0.4         
-[16] knitr_1.43              DelayedArray_0.26.6     GenomeInfoDbData_1.2.10
-[19] DBI_1.1.3               rlang_1.1.1             KEGGREST_1.40.0        
-[22] cachem_1.0.8            xfun_0.39               bit64_4.0.5            
-[25] RSQLite_2.3.1           memoise_2.0.1           cli_3.6.1              
-[28] zlibbioc_1.46.0         grid_4.3.1              vctrs_0.6.3            
-[31] evaluate_0.21           RCurl_1.98-1.12         httr_1.4.6             
-[34] pkgconfig_2.0.3         tools_4.3.1            </code></pre>
+ [1] Matrix_1.5-4.1          bit_4.0.5               highr_0.10             
+ [4] compiler_4.3.1          BiocManager_1.30.21.1   renv_1.0.0             
+ [7] crayon_1.5.2            blob_1.2.4              Biostrings_2.68.1      
+[10] bitops_1.0-7            png_0.1-8               fastmap_1.1.1          
+[13] lattice_0.21-8          R6_2.5.1                XVector_0.40.0         
+[16] S4Arrays_1.0.5          knitr_1.43              DelayedArray_0.26.6    
+[19] GenomeInfoDbData_1.2.10 DBI_1.1.3               rlang_1.1.1            
+[22] KEGGREST_1.40.0         cachem_1.0.8            xfun_0.39              
+[25] bit64_4.0.5             RSQLite_2.3.1           memoise_2.0.1          
+[28] cli_3.6.1               zlibbioc_1.46.0         grid_4.3.1             
+[31] vctrs_0.6.3             evaluate_0.21           abind_1.4-5            
+[34] RCurl_1.98-1.12         httr_1.4.6              pkgconfig_2.0.3        
+[37] tools_4.3.1            </code></pre>
 </div>
 <div id="keypoints1" class="callout keypoints">
 <div class="callout-square">
@@ -1365,8 +1544,8 @@ loaded via a namespace (and not attached):
 <ul>
 <li>Depending on the gene expression quantification tool used, there are
 different ways (often distributed in Bioconductor packages) to read the
-output into a SummarizedExperiment or DGEList object for further
-processing in R.</li>
+output into a <code>SummarizedExperiment</code> or <code>DGEList</code>
+object for further processing in R.</li>
 <li>Stable gene identifiers such as Ensembl or Entrez IDs should
 preferably be used as the main identifiers throughout an RNA-seq
 analysis, with gene symbols added for easier interpretation.</li>
@@ -2001,7 +2180,7 @@ object.</em></p>
   Show me the solution
   </h4>
 </button>
-<div id="collapseSolution1" class="accordion-collapse collapse" aria-labelledby="headingSolution1" data-bs-parent="#accordionSolution1">
+<div id="collapseSolution1" class="accordion-collapse collapse" data-bs-parent="#accordionSolution1" aria-labelledby="headingSolution1">
 <div class="accordion-body">
 <p>In the lesson example the last variable of the design formular is
 <code>time</code>. The <strong>reference level</strong> (first in
@@ -2107,7 +2286,7 @@ time.</p>
   Show me the solution
   </h4>
 </button>
-<div id="collapseSolution2" class="accordion-collapse collapse" aria-labelledby="headingSolution2" data-bs-parent="#accordionSolution2">
+<div id="collapseSolution2" class="accordion-collapse collapse" data-bs-parent="#accordionSolution2" aria-labelledby="headingSolution2">
 <div class="accordion-body">
 <div class="codewrapper sourceCode" id="cb22">
 <h3 class="code-label">R<i aria-hidden="true" data-feather="chevron-left"></i><i aria-hidden="true" data-feather="chevron-right"></i>
@@ -2251,7 +2430,7 @@ results then?</p>
   Show me the solution
   </h4>
 </button>
-<div id="collapseSolution3" class="accordion-collapse collapse" aria-labelledby="headingSolution3" data-bs-parent="#accordionSolution3">
+<div id="collapseSolution3" class="accordion-collapse collapse" data-bs-parent="#accordionSolution3" aria-labelledby="headingSolution3">
 <div class="accordion-body">
 <div class="codewrapper sourceCode" id="cb30">
 <h3 class="code-label">R<i aria-hidden="true" data-feather="chevron-left"></i><i aria-hidden="true" data-feather="chevron-right"></i>
@@ -3138,7 +3317,7 @@ convert a list to a two-column data frame?</p>
   Show me the solution
   </h4>
 </button>
-<div id="collapseSolution1" class="accordion-collapse collapse" data-bs-parent="#accordionSolution1" aria-labelledby="headingSolution1">
+<div id="collapseSolution1" class="accordion-collapse collapse" aria-labelledby="headingSolution1" data-bs-parent="#accordionSolution1">
 <div class="accordion-body">
 <div class="codewrapper sourceCode" id="cb38">
 <h3 class="code-label">R<i aria-hidden="true" data-feather="chevron-left"></i><i aria-hidden="true" data-feather="chevron-right"></i>
@@ -5270,7 +5449,7 @@ mean expression of a gene between male and female mice?</p>
   Show me the solution
   </h4>
 </button>
-<div id="collapseSolution1" class="accordion-collapse collapse" aria-labelledby="headingSolution1" data-bs-parent="#accordionSolution1">
+<div id="collapseSolution1" class="accordion-collapse collapse" data-bs-parent="#accordionSolution1" aria-labelledby="headingSolution1">
 <div class="accordion-body">
 <div class="codewrapper sourceCode" id="cb20">
 <h3 class="code-label">R<i aria-hidden="true" data-feather="chevron-left"></i><i aria-hidden="true" data-feather="chevron-right"></i>
@@ -5360,7 +5539,7 @@ Day4, Day8) in the male spinal cord samples, and visualize it using
   Show me the solution
   </h4>
 </button>
-<div id="collapseSolution2" class="accordion-collapse collapse" aria-labelledby="headingSolution2" data-bs-parent="#accordionSolution2">
+<div id="collapseSolution2" class="accordion-collapse collapse" data-bs-parent="#accordionSolution2" aria-labelledby="headingSolution2">
 <div class="accordion-body">
 <div class="codewrapper sourceCode" id="cb26">
 <h3 class="code-label">R<i aria-hidden="true" data-feather="chevron-left"></i><i aria-hidden="true" data-feather="chevron-right"></i>
