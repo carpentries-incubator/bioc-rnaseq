@@ -217,7 +217,7 @@ bad2 <- SummarizedExperiment(
 
 
 
-A brief recap of how to access the various data slots in a `SummarizedExperiment`:
+A brief recap of how to access the various data slots in a `SummarizedExperiment` and how to make some manipulations:
 
 ```{r}
 # Access the counts
@@ -231,6 +231,31 @@ dim(colData(se))
 # Access the gene annotations
 head(rowData(se))
 dim(rowData(se))
+
+# Make better sample IDs that show sex, time and mouse ID:
+
+se$Label <- paste(se$sex, se$time, se$mouse, sep = "_")
+se$Label
+colnames(se) <- se$Label
+
+# Our samples are not in order based on sex and time
+se$Group <- paste(se$sex, se$time, sep = "_")
+se$Group
+
+# change this to factor data with the levels in order 
+# that we want, then rearrange the se object:
+
+se$Group <- factor(se$Group, levels = c("Female_Day0","Male_Day0", 
+                                        "Female_Day4","Male_Day4",
+                                        "Female_Day8","Male_Day8"))
+se <- se[, order(se$Group)]
+colData(se)
+
+# Finally, also factor the Label column to keep in order in plots:
+
+se$Label <- factor(se$Label, levels = se$Label)
+
+
 ```
 
 
