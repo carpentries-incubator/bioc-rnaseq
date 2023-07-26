@@ -95,13 +95,6 @@ table(rowranges$gbkey)
 
 ## Challenge: Discuss the following points with your neighbor
 
-- Have you used spreadsheets, in your research, courses,
-  or at home?
-- What kind of operations do you do in spreadsheets?
-- Which ones do you think spreadsheets are good for?
-- Have you accidentally done something in a spreadsheet program that made you
-  frustrated or sad?
-  
 1. How are the 3 objects `counts`, `coldata` and `rowranges` related to each other in terms of their rows and columns?
 2. If you only wanted to analyse the mRNA genes, what would you have to do keep just those (generally speaking, not exact codes)?
 3. If you decided the first two samples were outliers, what would you have to do to remove those (generally speaking, not exact codes)?
@@ -163,7 +156,7 @@ Write the codes.
 
 ```{r eval=FALSE}
 tempindex <- match(rownames(counts), rownames(rowranges))
-coldata <- coldata[tempindex, ]
+rowranges <- rowranges[tempindex, ]
 
 all.equal(rownames(counts), rownames(rowranges)) 
 
