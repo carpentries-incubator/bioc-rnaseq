@@ -116,17 +116,14 @@ table(rowranges$gbkey)
 
 :::::::::::::::::::::::::::::::::::
 
-Suppose we decide we only want to analyze mRNA genes and not any of the others. We could remove these genes from the `rowranges` object, but we also have to remember to remove them correctly from the `counts` object. Likewise, we may decide one or more samples are outliers and we would have to remove them from both the `counts` columns and the `coldata` rows. You can see how this could easily lead to mis-matches between our counts and our annotations.
-
-Instead, Bioconductor has created a specialized S4 class called a `SummarizedExperiment`. The details of a `SummarizedExperiment` were covered extensively at the end of the [Introduction to data analysis with R and Bioconductor](https://carpentries-incubator.github.io/bioc-intro/60-next-steps.html#next-steps) workshop. 
+You can see how keeping related information in separate objects could easily lead to mis-matches between our counts, gene annotations and sample annotations. This is why Bioconductor has created a specialized S4 class called a `SummarizedExperiment`. The details of a `SummarizedExperiment` were covered extensively at the end of the [Introduction to data analysis with R and Bioconductor](https://carpentries-incubator.github.io/bioc-intro/60-next-steps.html#next-steps) workshop. 
 As a reminder, let's take a look at the figure below representing the anatomy of the `SummarizedExperiment` class:
 
 ```{r SE, echo=FALSE, out.width="80%"}
 knitr::include_graphics("https://uclouvain-cbio.github.io/WSBIM1322/figs/SE.svg")
 ```
 
-It is designed to hold any type of quantitative 'omics data (`assays`) along with linked sample annotations (`colData`) and feature annotations with (`rowRanges`) or without (`rowData`) chromosome, start and stop positions. Once these three tables are (correctly!) linked, subsetting either samples and/or features will correctly subset the `assay`, `colData` and `rowRanges`. Additionally, most Bioconductor packages are built around the same core data infrastructure so they will recognize and be able to manipulate `SummarizedExperiment` objects. Two of the most popular RNA-seq statistical analysis packages have their own extended S4 classes similar to a `SummarizedExperiment` with the additional slots for statistical results: [DESeq2](http://bioconductor.org/packages/devel/bioc/vignettes/DESeq2/inst/doc/DESeq2.html#the-deseqdataset)
-s `DESeqDataSet` and [edgeR](https://www.rdocumentation.org/packages/edgeR/versions/3.14.0/topics/DGEList-class)'s `DGEList`. No matter which one you end up using for statistical analysis, you can start by putting your data in a `SummarizedExperiment`. 
+It is designed to hold any type of quantitative 'omics data (`assays`) along with linked sample annotations (`colData`) and feature annotations with (`rowRanges`) or without (`rowData`) chromosome, start and stop positions. Once these three tables are (correctly!) linked, subsetting either samples and/or features will correctly subset the `assay`, `colData` and `rowRanges`. Additionally, most Bioconductor packages are built around the same core data infrastructure so they will recognize and be able to manipulate `SummarizedExperiment` objects. Two of the most popular RNA-seq statistical analysis packages have their own extended S4 classes similar to a `SummarizedExperiment` with the additional slots for statistical results: [DESeq2](http://bioconductor.org/packages/devel/bioc/vignettes/DESeq2/inst/doc/DESeq2.html#the-deseqdataset)'s `DESeqDataSet` and [edgeR](https://www.rdocumentation.org/packages/edgeR/versions/3.14.0/topics/DGEList-class)'s `DGEList`. No matter which one you end up using for statistical analysis, you can start by putting your data in a `SummarizedExperiment`. 
 
 ## Assemble SummarizedExperiment
 We will create a `SummarizedExperiment` from these objects:
@@ -135,44 +132,47 @@ We will create a `SummarizedExperiment` from these objects:
 - The `coldata` object with sample information will be stored in `colData` slot (_**sample metadata**_)    
 - The `rowranges` object describing the genes will be stored in `rowRanges` slot (_**features metadata**_)     
 
-Before we put them together, you ABSOLUTELY MUST MAKE SURE THE SAMPLES AND GENES ARE IN THE SAME ORDER! Even though we saw that `count` and `coldata` had the same number of samples and `count` and `rowranges` had the same number of genes, we never explicitly checked to see if they were in the same order. One way to check:
+Before we put them together, you ABSOLUTELY MUST MAKE SURE THE SAMPLES AND GENES ARE IN THE SAME ORDER! Even though we saw that `count` and `coldata` had the same number of samples and `count` and `rowranges` had the same number of genes, we never explicitly checked to see if they were in the same order. One quick way to check:
 
 
 ```{r}
 all.equal(colnames(counts), rownames(coldata)) # samples
 all.equal(rownames(counts), rownames(rowranges)) # genes
 
-# If both not TRUE, you could do something like:
+# If the first is not TRUE, you match up the samples/columns in counts
+# with the samples/rows in coldata like this (which is fine to run
+# even if the first was TRUE):
 
-if(sum(colnames(counts) %in%  rownames(coldata)) == ncol(counts)) {
-  tempindex <- match(colnames(counts), rownames(coldata))
-  coldata <- coldata[tempindex, ]
-} else {
-  print("Warning: the number of samples are not the same in counts and coldata")
-}
+tempindex <- match(colnames(counts), rownames(coldata))
+coldata <- coldata[tempindex, ]
+
+all.equal(colnames(counts), rownames(coldata)) 
+# Should now be TRUE
+
 ```
 
 :::::::::::::::::::::::::::::::::::::::  challenge
 
-If the feature (i.e., genes) in the assay (e.g., `counts`) and the gene
+If the features (i.e., genes) in the assay (e.g., `counts`) and the gene
 annotation table (e.g., `rowranges`) are different, how can we fix them? 
-Write a code using `if-else` statement. 
+Write the codes. 
+
+:::::::::::::::::::::::::::::::::::::::
 
 ::::::::::::::::::::::::::::::::::: solution
 
 ```{r eval=FALSE}
-if(sum(rownames(counts) %in%  rownames(rowranges)) == nrow(counts)) {
-  tempindex <- match(rownames(counts), rownames(rowranges))
-  coldata <- coldata[tempindex, ]
-} else {
-  print("Warning: the number of features are not the same in counts and rowranges")
-}
+tempindex <- match(rownames(counts), rownames(rowranges))
+coldata <- coldata[tempindex, ]
+
+all.equal(rownames(counts), rownames(rowranges)) 
+
+
 ```
 
 
 :::::::::::::::::::::::::::::::::::
 
-:::::::::::::::::::::::::::::::::::::::
 
 
 
