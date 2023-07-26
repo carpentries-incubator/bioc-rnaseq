@@ -321,7 +321,7 @@ the most commonly used Bioconductor packages for statistical analysis of
 RNA-seq data?<br>What are the typical steps in an RNA-seq analysis?
 </td>
 </tr><tr><td>
-<span class="visually-hidden">Duration: </span>00h 10m
+<span class="visually-hidden">Duration: </span>00h 15m
 </td>
 <td>
  2. <a href="02-setup.html">RStudio Project and Experimental Data</a>
@@ -333,7 +333,7 @@ project?<br>How to download a dataset from the internet and save it as
 a file.
 </td>
 </tr><tr><td>
-<span class="visually-hidden">Duration: </span>00h 20m
+<span class="visually-hidden">Duration: </span>00h 55m
 </td>
 <td>
  3. <a href="03-import-annotate.html">Importing and annotating
@@ -346,7 +346,7 @@ gene identifiers are typically used, and how are mappings between them
 done?<br>::::::::::::::::::::::::::::::::::::::::::::::::::
 </td>
 </tr><tr><td>
-<span class="visually-hidden">Duration: </span>00h 30m
+<span class="visually-hidden">Duration: </span>02h 40m
 </td>
 <td>
  4. <a href="04-exploratory-qc.html">Exploratory analysis and quality
@@ -359,7 +359,7 @@ exploratory analysis?<br>Are two dimensions sufficient to represent
 your data?
 </td>
 </tr><tr><td>
-<span class="visually-hidden">Duration: </span>00h 40m
+<span class="visually-hidden">Duration: </span>02h 50m
 </td>
 <td>
  5. <a href="05-differential-expression.html">Differential expression
@@ -370,7 +370,7 @@ What are the steps performed in a typical differential expression
 analysis?<br>How does one interpret the output of DESeq2?
 </td>
 </tr><tr><td>
-<span class="visually-hidden">Duration: </span>00h 50m
+<span class="visually-hidden">Duration: </span>03h 00m
 </td>
 <td>
  6. <a href="06-gene-set-analysis.html">Gene set enrichment analysis</a>
@@ -381,7 +381,7 @@ the method of over-representation analysis?<br>What are the
 commonly-used gene set databases?
 </td>
 </tr><tr><td>
-<span class="visually-hidden">Duration: </span>01h 00m
+<span class="visually-hidden">Duration: </span>03h 10m
 </td>
 <td>
  7. <a href="07-next-steps.html">Next steps</a>
@@ -391,7 +391,7 @@ How to go further from here?<br>What other types of analyses can be
 done with RNA-seq data?
 </td>
 </tr><tr><td>
-<span class="visually-hidden">Duration: </span>01h 20m
+<span class="visually-hidden">Duration: </span>03h 30m
 </td>
 <td>
  8. <a href="08-extra-design.html">Extra exploration of design
@@ -402,7 +402,7 @@ How can one translate biological questions and comparisons to
 statistical terms suitable for use with RNA-seq analysis packages?
 </td>
 </tr><tr><td>
-<span class="visually-hidden">Duration: </span>02h 20m
+<span class="visually-hidden">Duration: </span>04h 30m
 </td>
 <td>
 Finish
@@ -427,7 +427,7 @@ that will be used throughout the lesson.</p>
 <code class="sourceCode R"><span><span class="fu">install.packages</span><span class="op">(</span><span class="st">"BiocManager"</span><span class="op">)</span></span>
 <span><span class="fu">BiocManager</span><span class="fu">::</span><span class="fu">install</span><span class="op">(</span><span class="fu">c</span><span class="op">(</span><span class="st">"tidyverse"</span>, <span class="st">"SummarizedExperiment"</span>,</span>
 <span>                       <span class="st">"ExploreModelMatrix"</span>, <span class="st">"org.Hs.eg.db"</span>, <span class="st">"org.Mm.eg.db"</span>,</span>
-<span>                       <span class="st">"DESeq2"</span>, <span class="st">"vsn"</span>, <span class="st">"ComplexHeatmap"</span>,</span>
+<span>                       <span class="st">"DESeq2"</span>, <span class="st">"vsn"</span>, <span class="st">"ComplexHeatmap"</span>, <span class="st">"hgu95av2.db"</span>,</span>
 <span>                       <span class="st">"RColorBrewer"</span>, <span class="st">"hexbin"</span>, <span class="st">"cowplot"</span>,</span>
 <span>                       <span class="st">"clusterProfiler"</span>, <span class="st">"enrichplot"</span>, <span class="st">"kableExtra"</span>,</span>
 <span>                       <span class="st">"msigdbr"</span>, <span class="st">"gplots"</span>, <span class="st">"ggplot2"</span>, <span class="st">"simplifyEnrichment"</span>,<span class="st">"apeglm"</span><span class="op">)</span><span class="op">)</span></span></code></pre>
@@ -487,8 +487,8 @@ available 30 minutes before the workshop commences to assist.</em></p>
   "url": "https://carpentries-incubator.github.io/bioc-rnaseq/instructor/index.html",
   "identifier": "https://carpentries-incubator.github.io/bioc-rnaseq/instructor/index.html",
   "dateCreated": "2020-09-15",
-  "dateModified": "2023-07-25",
-  "datePublished": "2023-07-25"
+  "dateModified": "2023-07-26",
+  "datePublished": "2023-07-26"
 }
 
   </script><script>

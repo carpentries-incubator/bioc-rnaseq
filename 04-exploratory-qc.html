@@ -92,11 +92,11 @@
   RNA-seq analysis with Bioconductor
 </div>
 
-<aside class="col-md-12 lesson-progress"><div style="width: 21%" class="percentage">
-    21%
+<aside class="col-md-12 lesson-progress"><div style="width: 59%" class="percentage">
+    59%
   </div>
   <div class="progress incubator">
-    <div class="progress-bar incubator" role="progressbar" style="width: 21%" aria-valuenow="21" aria-label="Lesson Progress" aria-valuemin="0" aria-valuemax="100">
+    <div class="progress-bar incubator" role="progressbar" style="width: 59%" aria-valuenow="59" aria-label="Lesson Progress" aria-valuemin="0" aria-valuemax="100">
     </div>
   </div>
 </aside><div class="container">
@@ -188,7 +188,8 @@
         
     <div id="flush-collapsecurrent" class="accordion-collapse collapse show" aria-labelledby="flush-headingcurrent" data-bs-parent="#accordionFlushcurrent">
       <div class="accordion-body">
-        <ul><li><a href="#library-size-differences">Library size differences</a></li>
+        <ul><li><a href="#load-libraries">Load libraries</a></li>
+<li><a href="#library-size-differences">Library size differences</a></li>
 <li><a href="#transform-data">Transform data</a></li>
 <li><a href="#heatmaps-and-clustering">Heatmaps and clustering</a></li>
 <li><a href="#pca">PCA</a></li>
@@ -286,7 +287,7 @@
       </div>
       <hr></nav><main id="main-content" class="main-content"><div class="container lesson-content">
         <h1>Exploratory analysis and quality control</h1>
-        <p> Last updated on 2023-07-17 | 
+        <p> Last updated on 2023-07-26 | 
         
         <a href="https://github.com/carpentries-incubator/bioc-rnaseq/edit/main/episodes/04-exploratory-qc.Rmd" class="external-link">Edit this page <i aria-hidden="true" data-feather="edit"></i></a></p>
         
@@ -346,6 +347,11 @@ done.</p>
 </div>
 </div>
 </div>
+<section id="load-libraries"><h2 class="section-heading">Load libraries<a class="anchor" aria-label="anchor" href="#load-libraries"></a>
+</h2>
+<hr class="half-width"><p>Assuming you just started RStudio again, load some packages we will
+use in this lesson along with the <code>SummarizedExperiment</code>
+object we created in the last lesson.</p>
 <div class="codewrapper sourceCode" id="cb2">
 <h3 class="code-label">R<i aria-hidden="true" data-feather="chevron-left"></i><i aria-hidden="true" data-feather="chevron-right"></i>
 </h3>
@@ -374,55 +380,82 @@ ways of performing exploratory analysis for RNA-seq data; namely
 clustering and principal component analysis (PCA). These tools are in no
 way limited to (or developed for) analysis of RNA-seq data. However,
 there are certain characteristics of count assays that need to be taken
-into account when they are applied to this type of data.</p>
+into account when they are applied to this type of data. First of all,
+not all mouse genes in the genome will be expressed in our Cerebellum
+samples. There are many different threshold you could use to say whether
+a gene’s expression was detectable or not; here we are going to use a
+very minimal one that if a gene does not have more than 5 counts total
+across all samples, there is simply not enough data to be able to do
+anything with it anyway.</p>
 <div class="codewrapper sourceCode" id="cb4">
 <h3 class="code-label">R<i aria-hidden="true" data-feather="chevron-left"></i><i aria-hidden="true" data-feather="chevron-right"></i>
 </h3>
 <pre class="downlit sourceCode r">
-<code class="sourceCode R"><span><span class="va">se</span> <span class="op">&lt;-</span> <span class="va">se</span><span class="op">[</span><span class="fu">rowSums</span><span class="op">(</span><span class="fu">assay</span><span class="op">(</span><span class="va">se</span>, <span class="st">"counts"</span><span class="op">)</span><span class="op">)</span> <span class="op">&gt;</span> <span class="fl">5</span>, <span class="op">]</span></span>
-<span><span class="va">dds</span> <span class="op">&lt;-</span> <span class="fu">DESeq2</span><span class="fu">::</span><span class="fu">DESeqDataSet</span><span class="op">(</span><span class="va">se</span><span class="op">[</span>, <span class="va">se</span><span class="op">$</span><span class="va">tissue</span> <span class="op">==</span> <span class="st">"Cerebellum"</span><span class="op">]</span>,</span>
-<span>                            design <span class="op">=</span> <span class="op">~</span> <span class="va">sex</span> <span class="op">+</span> <span class="va">time</span><span class="op">)</span></span></code></pre>
+<code class="sourceCode R"><span><span class="fu">nrow</span><span class="op">(</span><span class="va">se</span><span class="op">)</span></span></code></pre>
 </div>
 <div class="codewrapper">
-<h3 class="code-label">WARNING<i aria-hidden="true" data-feather="chevron-left"></i><i aria-hidden="true" data-feather="chevron-right"></i>
+<h3 class="code-label">OUTPUT<i aria-hidden="true" data-feather="chevron-left"></i><i aria-hidden="true" data-feather="chevron-right"></i>
 </h3>
-<pre class="warning" tabindex="0"><code>Warning in DESeq2::DESeqDataSet(se[, se$tissue == "Cerebellum"], design = ~sex
-+ : some variables in design formula are characters, converting to factors</code></pre>
+<pre class="output" tabindex="0"><code>[1] 41786</code></pre>
 </div>
-<section id="library-size-differences"><h2 class="section-heading">Library size differences<a class="anchor" aria-label="anchor" href="#library-size-differences"></a>
-</h2>
-<hr class="half-width"><div class="codewrapper sourceCode" id="cb6">
+<div class="codewrapper sourceCode" id="cb6">
 <h3 class="code-label">R<i aria-hidden="true" data-feather="chevron-left"></i><i aria-hidden="true" data-feather="chevron-right"></i>
 </h3>
 <pre class="downlit sourceCode r">
-<code class="sourceCode R"><span><span class="fu">ggplot</span><span class="op">(</span><span class="fu">data.frame</span><span class="op">(</span>sample <span class="op">=</span> <span class="fu">colnames</span><span class="op">(</span><span class="va">dds</span><span class="op">)</span>, </span>
-<span>                  libSize <span class="op">=</span> <span class="fu">colSums</span><span class="op">(</span><span class="fu">assay</span><span class="op">(</span><span class="va">dds</span>, <span class="st">"counts"</span><span class="op">)</span><span class="op">)</span><span class="op">)</span>,</span>
-<span>       <span class="fu">aes</span><span class="op">(</span>x <span class="op">=</span> <span class="va">sample</span>, y <span class="op">=</span> <span class="va">libSize</span><span class="op">)</span><span class="op">)</span> <span class="op">+</span> </span>
-<span>    <span class="fu">geom_bar</span><span class="op">(</span>stat <span class="op">=</span> <span class="st">"identity"</span><span class="op">)</span> <span class="op">+</span> <span class="fu">theme_bw</span><span class="op">(</span><span class="op">)</span> <span class="op">+</span> </span>
-<span>    <span class="fu">labs</span><span class="op">(</span>x <span class="op">=</span> <span class="st">"Sample"</span>, y <span class="op">=</span> <span class="st">"Total count"</span><span class="op">)</span> <span class="op">+</span> </span>
-<span>    <span class="fu">theme</span><span class="op">(</span>axis.text.x <span class="op">=</span> <span class="fu">element_text</span><span class="op">(</span>angle <span class="op">=</span> <span class="fl">90</span>, hjust <span class="op">=</span> <span class="fl">1</span>, vjust <span class="op">=</span> <span class="fl">0.5</span><span class="op">)</span><span class="op">)</span></span></code></pre>
+<code class="sourceCode R"><span><span class="co"># Remove genes/rows that do not have &gt; 5 total counts </span></span>
+<span><span class="va">se</span> <span class="op">&lt;-</span> <span class="va">se</span><span class="op">[</span><span class="fu">rowSums</span><span class="op">(</span><span class="fu">assay</span><span class="op">(</span><span class="va">se</span>, <span class="st">"counts"</span><span class="op">)</span><span class="op">)</span> <span class="op">&gt;</span> <span class="fl">5</span>, <span class="op">]</span></span>
+<span><span class="fu">nrow</span><span class="op">(</span><span class="va">se</span><span class="op">)</span></span></code></pre>
 </div>
-<figure><img src="fig/04-exploratory-qc-rendered-unnamed-chunk-5-1.png" style="display: block; margin: auto;" class="figure mx-auto d-block"></figure><p>Differences in the total number of reads assigned to genes between
+<div class="codewrapper">
+<h3 class="code-label">OUTPUT<i aria-hidden="true" data-feather="chevron-left"></i><i aria-hidden="true" data-feather="chevron-right"></i>
+</h3>
+<pre class="output" tabindex="0"><code>[1] 27430</code></pre>
+</div>
+</section><section id="library-size-differences"><h2 class="section-heading">Library size differences<a class="anchor" aria-label="anchor" href="#library-size-differences"></a>
+</h2>
+<hr class="half-width"><p>Differences in the total number of reads assigned to genes between
 samples typically occur for technical reasons. In practice, it means
-that we can not simply compare the raw read count directly between
+that we can not simply compare a gene’s raw read count directly between
 samples and conclude that a sample with a higher read count also
 expresses the gene more strongly - the higher count may be caused by an
 overall higher number of reads in that sample. In the rest of this
 section, we will use the term <em>library size</em> to refer to the
-total number of reads assigned to genes for a sample. We need to adjust
-for the differences in library size between samples, to avoid drawing
-incorrect conclusions. The way this is typically done for RNA-seq data
-can be described as a two-step procedure. First, we estimate <em>size
-factors</em> - sample-specific correction factors such that if the raw
-counts were to be divided by these factors, the resulting values would
-be more comparable across samples. Next, these size factors are
-incorporated into the statistical analysis of the data. It is important
-to pay close attention to how this is done in practice for a given
-analysis method. Sometimes the division of the counts by the size
-factors needs to be done explicitly by the analyst. Other times (as we
-will see for the differential expression analysis) it is important that
-they are provided separately to the analysis tool, which will then use
-them appropriately in the statistical model.</p>
+total number of reads assigned to genes for a sample. First we should
+examine of each sample, or the total number of mapped reads across all
+genes for a sample.</p>
+<div class="codewrapper sourceCode" id="cb8">
+<h3 class="code-label">R<i aria-hidden="true" data-feather="chevron-left"></i><i aria-hidden="true" data-feather="chevron-right"></i>
+</h3>
+<pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="co"># Add in the sum of all counts</span></span>
+<span></span>
+<span><span class="va">se</span><span class="op">$</span><span class="va">libSize</span> <span class="op">&lt;-</span>  <span class="fu">colSums</span><span class="op">(</span><span class="fu">assay</span><span class="op">(</span><span class="va">se</span><span class="op">)</span><span class="op">)</span></span>
+<span></span>
+<span><span class="co"># Plot the libSize by using R's native pipe |&gt;</span></span>
+<span><span class="co"># to extract the colData, turn it into a regular</span></span>
+<span><span class="co"># data frame then send to ggplot:</span></span>
+<span></span>
+<span><span class="fu">colData</span><span class="op">(</span><span class="va">se</span><span class="op">)</span> <span class="op">|&gt;</span></span>
+<span>  <span class="fu">as.data.frame</span><span class="op">(</span><span class="op">)</span> <span class="op">|&gt;</span></span>
+<span>  <span class="fu">ggplot</span><span class="op">(</span><span class="fu">aes</span><span class="op">(</span>x <span class="op">=</span> <span class="va">Label</span>, y <span class="op">=</span> <span class="va">libSize</span> <span class="op">/</span> <span class="fl">1e6</span>, fill <span class="op">=</span> <span class="va">Group</span><span class="op">)</span><span class="op">)</span> <span class="op">+</span> </span>
+<span>         <span class="fu">geom_bar</span><span class="op">(</span>stat <span class="op">=</span> <span class="st">"identity"</span><span class="op">)</span> <span class="op">+</span> <span class="fu">theme_bw</span><span class="op">(</span><span class="op">)</span> <span class="op">+</span> </span>
+<span>         <span class="fu">labs</span><span class="op">(</span>x <span class="op">=</span> <span class="st">"Sample"</span>, y <span class="op">=</span> <span class="st">"Total count in millions"</span><span class="op">)</span> <span class="op">+</span> </span>
+<span>         <span class="fu">theme</span><span class="op">(</span>axis.text.x <span class="op">=</span> <span class="fu">element_text</span><span class="op">(</span>angle <span class="op">=</span> <span class="fl">45</span>, hjust <span class="op">=</span> <span class="fl">1</span>, vjust <span class="op">=</span> <span class="fl">1</span><span class="op">)</span><span class="op">)</span></span></code></pre>
+</div>
+<figure><img src="fig/04-exploratory-qc-rendered-unnamed-chunk-5-1.png" style="display: block; margin: auto;" class="figure mx-auto d-block"></figure><p>We need to adjust for the differences in library size between
+samples, to avoid drawing incorrect conclusions. The way this is
+typically done for RNA-seq data can be described as a two-step
+procedure. First, we estimate <em>size factors</em> - sample-specific
+correction factors such that if the raw counts were to be divided by
+these factors, the resulting values would be more comparable across
+samples. Next, these size factors are incorporated into the statistical
+analysis of the data. It is important to pay close attention to how this
+is done in practice for a given analysis method. Sometimes the division
+of the counts by the size factors needs to be done explicitly by the
+analyst. Other times (as we will see for the differential expression
+analysis) it is important that they are provided separately to the
+analysis tool, which will then use them appropriately in the statistical
+model.</p>
 <p>With <code>DESeq2</code>, size factors are calculated using the
 <code>estimateSizeFactors()</code> function. The size factors estimated
 by this function combines an adjustment for differences in library sizes
@@ -431,15 +464,31 @@ samples. The latter is important due to the compositional nature of
 RNA-seq data. There is a fixed number of reads to distribute between the
 genes, and if a single (or a few) very highly expressed gene consume a
 large part of the reads, all other genes will consequently receive very
-low counts.</p>
-<div class="codewrapper sourceCode" id="cb7">
+low counts. We now switch our <code>SummarizedExperiment</code> object
+over to a <code>DESeqDataSet</code> as it has the internal structure to
+store these size factors. We also need to tell it our main experiment
+design, which is sex and time:</p>
+<div class="codewrapper sourceCode" id="cb9">
+<h3 class="code-label">R<i aria-hidden="true" data-feather="chevron-left"></i><i aria-hidden="true" data-feather="chevron-right"></i>
+</h3>
+<pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="va">dds</span> <span class="op">&lt;-</span> <span class="fu">DESeq2</span><span class="fu">::</span><span class="fu">DESeqDataSet</span><span class="op">(</span><span class="va">se</span>, design <span class="op">=</span> <span class="op">~</span> <span class="va">sex</span> <span class="op">+</span> <span class="va">time</span><span class="op">)</span></span></code></pre>
+</div>
+<div class="codewrapper">
+<h3 class="code-label">WARNING<i aria-hidden="true" data-feather="chevron-left"></i><i aria-hidden="true" data-feather="chevron-right"></i>
+</h3>
+<pre class="warning" tabindex="0"><code>Warning in DESeq2::DESeqDataSet(se, design = ~sex + time): some variables in
+design formula are characters, converting to factors</code></pre>
+</div>
+<div class="codewrapper sourceCode" id="cb11">
 <h3 class="code-label">R<i aria-hidden="true" data-feather="chevron-left"></i><i aria-hidden="true" data-feather="chevron-right"></i>
 </h3>
 <pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">dds</span> <span class="op">&lt;-</span> <span class="fu">estimateSizeFactors</span><span class="op">(</span><span class="va">dds</span><span class="op">)</span></span>
-<span><span class="fu">ggplot</span><span class="op">(</span><span class="fu">data.frame</span><span class="op">(</span>libSize <span class="op">=</span> <span class="fu">colSums</span><span class="op">(</span><span class="fu">assay</span><span class="op">(</span><span class="va">dds</span>, <span class="st">"counts"</span><span class="op">)</span><span class="op">)</span>,</span>
-<span>                  sizeFactor <span class="op">=</span> <span class="fu">sizeFactors</span><span class="op">(</span><span class="va">dds</span><span class="op">)</span><span class="op">)</span>,</span>
-<span>       <span class="fu">aes</span><span class="op">(</span>x <span class="op">=</span> <span class="va">libSize</span>, y <span class="op">=</span> <span class="va">sizeFactor</span><span class="op">)</span><span class="op">)</span> <span class="op">+</span> </span>
+<span><span class="fu">ggplot</span><span class="op">(</span><span class="fu">data.frame</span><span class="op">(</span>libSize <span class="op">=</span> <span class="fu">colSums</span><span class="op">(</span><span class="fu">assay</span><span class="op">(</span><span class="va">dds</span><span class="op">)</span><span class="op">)</span>,</span>
+<span>                  sizeFactor <span class="op">=</span> <span class="fu">sizeFactors</span><span class="op">(</span><span class="va">dds</span><span class="op">)</span>,</span>
+<span>                  Group <span class="op">=</span> <span class="va">dds</span><span class="op">$</span><span class="va">Group</span><span class="op">)</span>,</span>
+<span>       <span class="fu">aes</span><span class="op">(</span>x <span class="op">=</span> <span class="va">libSize</span>, y <span class="op">=</span> <span class="va">sizeFactor</span>, col <span class="op">=</span> <span class="va">Group</span><span class="op">)</span><span class="op">)</span> <span class="op">+</span> </span>
 <span>    <span class="fu">geom_point</span><span class="op">(</span>size <span class="op">=</span> <span class="fl">5</span><span class="op">)</span> <span class="op">+</span> <span class="fu">theme_bw</span><span class="op">(</span><span class="op">)</span> <span class="op">+</span> </span>
 <span>    <span class="fu">labs</span><span class="op">(</span>x <span class="op">=</span> <span class="st">"Library size"</span>, y <span class="op">=</span> <span class="st">"Size factor"</span><span class="op">)</span></span></code></pre>
 </div>
@@ -450,7 +499,7 @@ of these work best in situations where the variance of the input data
 (here, each gene) is relatively independent of the average value. For
 read count data such as RNA-seq, this is not the case. In fact, the
 variance increases with the average read count.</p>
-<div class="codewrapper sourceCode" id="cb8">
+<div class="codewrapper sourceCode" id="cb12">
 <h3 class="code-label">R<i aria-hidden="true" data-feather="chevron-left"></i><i aria-hidden="true" data-feather="chevron-right"></i>
 </h3>
 <pre class="downlit sourceCode r">
@@ -461,7 +510,7 @@ specifically adapted to count data, or we adapt (transform) the count
 data so that the existing methods are applicable. Both ways have been
 explored; however, at the moment the second approach is arguably more
 widely applied in practice.</p>
-<div class="codewrapper sourceCode" id="cb9">
+<div class="codewrapper sourceCode" id="cb13">
 <h3 class="code-label">R<i aria-hidden="true" data-feather="chevron-left"></i><i aria-hidden="true" data-feather="chevron-right"></i>
 </h3>
 <pre class="downlit sourceCode r">
@@ -470,7 +519,7 @@ widely applied in practice.</p>
 </div>
 <figure><img src="fig/04-exploratory-qc-rendered-unnamed-chunk-8-1.png" style="display: block; margin: auto;" class="figure mx-auto d-block"></figure></section><section id="heatmaps-and-clustering"><h2 class="section-heading">Heatmaps and clustering<a class="anchor" aria-label="anchor" href="#heatmaps-and-clustering"></a>
 </h2>
-<hr class="half-width"><div class="codewrapper sourceCode" id="cb10">
+<hr class="half-width"><div class="codewrapper sourceCode" id="cb14">
 <h3 class="code-label">R<i aria-hidden="true" data-feather="chevron-left"></i><i aria-hidden="true" data-feather="chevron-right"></i>
 </h3>
 <pre class="downlit sourceCode r">
@@ -508,7 +557,7 @@ ones. The fraction of explained variance is a measure of how much of the
 ‘signal’ in the data that is retained when we project the samples from
 the original, high-dimensional space to the low-dimensional space for
 visualization.</p>
-<div class="codewrapper sourceCode" id="cb11">
+<div class="codewrapper sourceCode" id="cb15">
 <h3 class="code-label">R<i aria-hidden="true" data-feather="chevron-left"></i><i aria-hidden="true" data-feather="chevron-right"></i>
 </h3>
 <pre class="downlit sourceCode r">
@@ -525,7 +574,7 @@ visualization.</p>
 </div>
 <figure><img src="fig/04-exploratory-qc-rendered-unnamed-chunk-10-1.png" style="display: block; margin: auto;" class="figure mx-auto d-block"></figure></section><section id="session-info"><h2 class="section-heading">Session info<a class="anchor" aria-label="anchor" href="#session-info"></a>
 </h2>
-<hr class="half-width"><div class="codewrapper sourceCode" id="cb12">
+<hr class="half-width"><div class="codewrapper sourceCode" id="cb16">
 <h3 class="code-label">R<i aria-hidden="true" data-feather="chevron-left"></i><i aria-hidden="true" data-feather="chevron-right"></i>
 </h3>
 <pre class="downlit sourceCode r">
@@ -534,7 +583,7 @@ visualization.</p>
 <div class="codewrapper">
 <h3 class="code-label">OUTPUT<i aria-hidden="true" data-feather="chevron-left"></i><i aria-hidden="true" data-feather="chevron-right"></i>
 </h3>
-<pre class="output" tabindex="0"><code>R version 4.3.0 (2023-04-21)
+<pre class="output" tabindex="0"><code>R version 4.3.1 (2023-06-16)
 Platform: x86_64-pc-linux-gnu (64-bit)
 Running under: Ubuntu 22.04.2 LTS
 
@@ -568,25 +617,25 @@ other attached packages:
 loaded via a namespace (and not attached):
  [1] shape_1.4.6             circlize_0.4.15         gtable_0.3.3           
  [4] rjson_0.2.21            xfun_0.39               GlobalOptions_0.1.2    
- [7] lattice_0.21-8          vctrs_0.6.3             tools_4.3.0            
-[10] bitops_1.0-7            generics_0.1.3          parallel_4.3.0         
+ [7] lattice_0.21-8          vctrs_0.6.3             tools_4.3.1            
+[10] bitops_1.0-7            generics_0.1.3          parallel_4.3.1         
 [13] tibble_3.2.1            fansi_1.0.4             highr_0.10             
-[16] cluster_2.1.4           pkgconfig_2.0.3         Matrix_1.5-1           
+[16] cluster_2.1.4           pkgconfig_2.0.3         Matrix_1.6-0           
 [19] lifecycle_1.0.3         GenomeInfoDbData_1.2.10 farver_2.1.1           
-[22] compiler_4.3.0          munsell_0.5.0           codetools_0.2-19       
-[25] clue_0.3-64             RCurl_1.98-1.12         yaml_2.3.7             
-[28] preprocessCore_1.62.1   pillar_1.9.0            crayon_1.5.2           
-[31] BiocParallel_1.34.2     affy_1.78.1             DelayedArray_0.26.6    
-[34] limma_3.56.2            iterators_1.0.14        foreach_1.5.2          
+[22] compiler_4.3.1          munsell_0.5.0           codetools_0.2-19       
+[25] clue_0.3-64             RCurl_1.98-1.12         preprocessCore_1.62.1  
+[28] pillar_1.9.0            crayon_1.5.2            BiocParallel_1.34.2    
+[31] affy_1.78.2             DelayedArray_0.26.6     limma_3.56.2           
+[34] iterators_1.0.14        abind_1.4-5             foreach_1.5.2          
 [37] tidyselect_1.2.0        locfit_1.5-9.8          digest_0.6.33          
 [40] dplyr_1.1.2             labeling_0.4.2          colorspace_2.1-0       
-[43] cli_3.6.1               magrittr_2.0.3          S4Arrays_1.0.4         
+[43] cli_3.6.1               magrittr_2.0.3          S4Arrays_1.0.5         
 [46] utf8_1.2.3              withr_2.5.0             scales_1.2.1           
 [49] XVector_0.40.0          affyio_1.70.0           GetoptLong_1.0.5       
 [52] png_0.1-8               evaluate_0.21           knitr_1.43             
 [55] doParallel_1.0.17       rlang_1.1.1             Rcpp_1.0.11            
-[58] glue_1.6.2              BiocManager_1.30.21     renv_1.0.0             
-[61] rstudioapi_0.15.0       R6_2.5.1                zlibbioc_1.46.0        </code></pre>
+[58] glue_1.6.2              BiocManager_1.30.21.1   renv_1.0.0             
+[61] R6_2.5.1                zlibbioc_1.46.0        </code></pre>
 </div>
 <div id="keypoints1" class="callout keypoints">
 <div class="callout-square">
@@ -659,8 +708,8 @@ work directly on the raw counts.</li>
   "url": "https://carpentries-incubator.github.io/bioc-rnaseq/04-exploratory-qc.html",
   "identifier": "https://carpentries-incubator.github.io/bioc-rnaseq/04-exploratory-qc.html",
   "dateCreated": "2020-09-15",
-  "dateModified": "2023-07-17",
-  "datePublished": "2023-07-25"
+  "dateModified": "2023-07-26",
+  "datePublished": "2023-07-26"
 }
 
   </script><script>
