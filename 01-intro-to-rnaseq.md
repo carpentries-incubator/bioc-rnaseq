@@ -1,8 +1,8 @@
 ---
 source: Rmd
 title: Introduction to RNA-seq
-teaching: XX
-exercises: XX
+teaching: 15
+exercises: 0
 ---
 
 
@@ -63,7 +63,9 @@ Other tools used in RNA-seq quantification include: TopHat2, bowtie2, kallisto, 
 
 Choosing the appropriate RNA-seq quantification would depend on the quality of the transcriptome annotation,
 the quality of the RNA-seq library preparation, the presence of contaminating sequences, among many factors.
-Often time, it would be important to compare the quantification results of multiple approaches.
+Often time, it would be important to compare the quantification results of multiple approaches. 
+
+Because the best quantification method is species and experiment-dependent, and often requires large amounts of computing resources, this workshop will not cover any specifics of how to generate the counts. Instead, we recommend checking out the references above and consulting with a local bioinformatics expert if you need help.
 
 
 :::::::::::::::::::::::::::::::::::::::: keypoints

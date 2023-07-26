@@ -1,11 +1,11 @@
 ---
 title: "Importing and annotating quantified data into R"
 source: Rmd
-teaching: XX
+teaching: 75
 output:
   html_document:
     df_print: paged
-exercises: XX
+exercises: 30
 ---
 
 
@@ -26,6 +26,9 @@ Warning: replacing previous import 'S4Arrays::makeNindexFromArrayViewport' by
 
 ## Load libraries
 
+In this episode we will use some functions from add-on R packages. In order to use them, we need to load them from our `library`:
+
+
 ```r
 suppressPackageStartupMessages({
     library(AnnotationDbi)
@@ -35,10 +38,12 @@ suppressPackageStartupMessages({
 })
 ```
 
+If you get any error messages about `there is no package called 'XXXX'` it means you have not installed the package/s yet for this version of R. See the bottom of the [Summary and Setup](https://carpentries-incubator.github.io/bioc-rnaseq/index.html) to install all the necessary packages for this workshop. If you have to install, remember to re-run the `library` commands above to load them. 
+
 ## Load data
 
 In the last episode, we used R to download 4 files from the internet and saved them on our computer. But we do not have these files loaded into R yet so that we can work with them. The original experimental design in [Blackmore et al. 2017](https://pubmed.ncbi.nlm.nih.gov/28696309/) was fairly complex: 8-12 weeks old male and female mice, with two different genetic backgrounds (wild-type and D2D), were collected at Day 0 (before influenza infection), Day 4 and Day 8 after influenza infection. From each mouse, cerebellum and spinal cord tissues were taken for RNA-seq. There were originally 4 mice per 'Sex X Day x Genotype' group, but a few were lost along the way resulting in a total of 45 samples. For this workshop, we are going to simplify the analysis by only using the 22 cerebellum samples. Expression quantification was done using STAR to align to the mouse genome and then counting reads that map to genes. In addition to the counts per gene per sample, we also need information on which sample belongs to which Sex/Time point/Replicate. And for the genes, it is helpful to have extra information called annotation.
-Let's read in the data files that we downloaded in the last episode:
+Let's read in the data files that we downloaded in the last episode and start to explore them:
 
 
 ### Counts
@@ -128,24 +133,26 @@ table(rowranges$gbkey)
 
 ## Challenge: Discuss the following points with your neighbor
 
-- Have you used spreadsheets, in your research, courses,
-  or at home?
-- What kind of operations do you do in spreadsheets?
-- Which ones do you think spreadsheets are good for?
-- Have you accidentally done something in a spreadsheet program that made you
-  frustrated or sad?
+1. How are the 3 objects `counts`, `coldata` and `rowranges` related to each other in terms of their rows and columns?
+2. If you only wanted to analyse the mRNA genes, what would you have to do keep just those (generally speaking, not exact codes)?
+3. If you decided the first two samples were outliers, what would you have to do to remove those (generally speaking, not exact codes)?
   
 ::::::::::::::::::::::::::::::::::::::::::::::::::
 
-Suppose we decide we only want to analyze mRNA genes and not any of the others. We could remove these genes from the `rowranges` object, but we also have to remember to remove them correctly from the `counts` object. Likewise, we may decide one or more samples are outliers and we would have to remove them from both the `counts` columns and the `coldata` rows. You can see how this could easily lead to mis-matches between our counts and our annotations.
+::::::::::::::::::::::::::::::::::: solution
 
-Instead, Bioconductor has created a specialized S4 class called a `SummarizedExperiment`. The details of a `SummarizedExperiment` were covered extensively at the end of the [Introduction to data analysis with R and Bioconductor](https://carpentries-incubator.github.io/bioc-intro/60-next-steps.html#next-steps) workshop. 
+1. In `counts`, the rows are genes just like the rows in `rowranges`. The columns in `counts` are the samples, but this corresponds to the rows in `coldata`. 
+2. I would have to remember subset both the rows of `counts` and the rows of `rowranges` to just the mRNA genes.
+3. I would have to remember to subset both the columns of `counts` but the rows of `coldata` to exclude the first two samples.
+
+:::::::::::::::::::::::::::::::::::
+
+You can see how keeping related information in separate objects could easily lead to mis-matches between our counts, gene annotations and sample annotations. This is why Bioconductor has created a specialized S4 class called a `SummarizedExperiment`. The details of a `SummarizedExperiment` were covered extensively at the end of the [Introduction to data analysis with R and Bioconductor](https://carpentries-incubator.github.io/bioc-intro/60-next-steps.html#next-steps) workshop. 
 As a reminder, let's take a look at the figure below representing the anatomy of the `SummarizedExperiment` class:
 
 <img src="https://uclouvain-cbio.github.io/WSBIM1322/figs/SE.svg" width="80%" style="display: block; margin: auto;" />
 
-It is designed to hold any type of quantitative 'omics data (`assays`) along with linked sample annotations (`colData`) and feature annotations with (`rowRanges`) or without (`rowData`) chromosome, start and stop positions. Once these three tables are (correctly!) linked, subsetting either samples and/or features will correctly subset the `assay`, `colData` and `rowRanges`. Additionally, most Bioconductor packages are built around the same core data infrastructure so they will recognize and be able to manipulate `SummarizedExperiment` objects. Two of the most popular RNA-seq statistical analysis packages have their own extended S4 classes similar to a `SummarizedExperiment` with the additional slots for statistical results: [DESeq2](http://bioconductor.org/packages/devel/bioc/vignettes/DESeq2/inst/doc/DESeq2.html#the-deseqdataset)
-s `DESeqDataSet` and [edgeR](https://www.rdocumentation.org/packages/edgeR/versions/3.14.0/topics/DGEList-class)'s `DGEList`. No matter which one you end up using for statistical analysis, you can start by putting your data in a `SummarizedExperiment`. 
+It is designed to hold any type of quantitative 'omics data (`assays`) along with linked sample annotations (`colData`) and feature annotations with (`rowRanges`) or without (`rowData`) chromosome, start and stop positions. Once these three tables are (correctly!) linked, subsetting either samples and/or features will correctly subset the `assay`, `colData` and `rowRanges`. Additionally, most Bioconductor packages are built around the same core data infrastructure so they will recognize and be able to manipulate `SummarizedExperiment` objects. Two of the most popular RNA-seq statistical analysis packages have their own extended S4 classes similar to a `SummarizedExperiment` with the additional slots for statistical results: [DESeq2](http://bioconductor.org/packages/devel/bioc/vignettes/DESeq2/inst/doc/DESeq2.html#the-deseqdataset)'s `DESeqDataSet` and [edgeR](https://www.rdocumentation.org/packages/edgeR/versions/3.14.0/topics/DGEList-class)'s `DGEList`. No matter which one you end up using for statistical analysis, you can start by putting your data in a `SummarizedExperiment`. 
 
 ## Assemble SummarizedExperiment
 We will create a `SummarizedExperiment` from these objects:
@@ -154,7 +161,7 @@ We will create a `SummarizedExperiment` from these objects:
 - The `coldata` object with sample information will be stored in `colData` slot (_**sample metadata**_)    
 - The `rowranges` object describing the genes will be stored in `rowRanges` slot (_**features metadata**_)     
 
-Before we put them together, you ABSOLUTELY MUST MAKE SURE THE SAMPLES AND GENES ARE IN THE SAME ORDER! Even though we saw that `count` and `coldata` had the same number of samples and `count` and `rowranges` had the same number of genes, we never explicitly checked to see if they were in the same order. One way to check:
+Before we put them together, you ABSOLUTELY MUST MAKE SURE THE SAMPLES AND GENES ARE IN THE SAME ORDER! Even though we saw that `count` and `coldata` had the same number of samples and `count` and `rowranges` had the same number of genes, we never explicitly checked to see if they were in the same order. One quick way to check:
 
 
 
@@ -175,39 +182,41 @@ all.equal(rownames(counts), rownames(rowranges)) # genes
 ```
 
 ```r
-# If both not TRUE, you could do something like:
+# If the first is not TRUE, you can match up the samples/columns in
+# counts with the samples/rows in coldata like this (which is fine
+# to run even if the first was TRUE):
 
-if(sum(colnames(counts) %in%  rownames(coldata)) == ncol(counts)) {
-  tempindex <- match(colnames(counts), rownames(coldata))
-  coldata <- coldata[tempindex, ]
-} else {
-  print("Warning: the number of samples are not the same in counts and coldata")
-}
+tempindex <- match(colnames(counts), rownames(coldata))
+coldata <- coldata[tempindex, ]
+
+# Check again:
+all.equal(colnames(counts), rownames(coldata)) 
+```
+
+```{.output}
+[1] TRUE
 ```
 
 :::::::::::::::::::::::::::::::::::::::  challenge
 
-If the feature (i.e., genes) in the assay (e.g., `counts`) and the gene
+If the features (i.e., genes) in the assay (e.g., `counts`) and the gene
 annotation table (e.g., `rowranges`) are different, how can we fix them? 
-Write a code using `if-else` statement. 
+Write the codes. 
+
+:::::::::::::::::::::::::::::::::::::::
 
 ::::::::::::::::::::::::::::::::::: solution
 
 
 ```r
-if(sum(rownames(counts) %in%  rownames(rowranges)) == nrow(counts)) {
-  tempindex <- match(rownames(counts), rownames(rowranges))
-  coldata <- coldata[tempindex, ]
-} else {
-  print("Warning: the number of features are not the same in counts and rowranges")
-}
+tempindex <- match(rownames(counts), rownames(rowranges))
+rowranges <- rowranges[tempindex, ]
+
+all.equal(rownames(counts), rownames(rowranges)) 
 ```
 
 
 :::::::::::::::::::::::::::::::::::
-
-:::::::::::::::::::::::::::::::::::::::
-
 
 
 Once we have verified that samples and genes are in the same order, we can 
@@ -227,7 +236,46 @@ se <- SummarizedExperiment(
 ```
 
 
-A brief recap of how to access the various data slots in a `SummarizedExperiment`:
+Because matching the genes and samples is so important, the `SummarizedExperiment()` constructor does some internal check to make sure they contain the same number of 
+genes/samples and the sample/row names match. If not, you will get some error messages:
+
+
+```r
+# wrong number of samples:
+
+bad1 <- SummarizedExperiment(
+    assays = list(counts = as.matrix(counts)),
+    rowRanges = as(rowranges, "GRanges"),
+    colData = coldata[1:3,]
+)
+```
+
+```{.error}
+Error in validObject(.Object): invalid class "SummarizedExperiment" object: 
+    nb of cols in 'assay' (22) must equal nb of rows in 'colData' (3)
+```
+
+
+
+```r
+# same number of genes but in different order:
+
+bad2 <- SummarizedExperiment(
+  assays = list(counts = as.matrix(counts)),
+  rowRanges = as(rowranges[c(2:nrow(rowranges), 1),], "GRanges"),
+  colData = coldata
+)
+```
+
+```{.error}
+Error in SummarizedExperiment(assays = list(counts = as.matrix(counts)), : the rownames and colnames of the supplied assay(s) must be NULL or
+  identical to those of the RangedSummarizedExperiment object (or
+  derivative) to construct
+```
+
+
+
+A brief recap of how to access the various data slots in a `SummarizedExperiment` and how to make some manipulations:
 
 
 ```r
@@ -342,6 +390,98 @@ dim(rowData(se))
 [1] 41786     3
 ```
 
+```r
+# Make better sample IDs that show sex, time and mouse ID:
+
+se$Label <- paste(se$sex, se$time, se$mouse, sep = "_")
+se$Label
+```
+
+```{.output}
+ [1] "Female_Day8_14" "Female_Day0_9"  "Female_Day0_10" "Female_Day4_15"
+ [5] "Male_Day4_18"   "Male_Day8_6"    "Female_Day8_5"  "Male_Day0_11"  
+ [9] "Female_Day4_22" "Male_Day4_13"   "Male_Day8_23"   "Male_Day8_24"  
+[13] "Female_Day0_8"  "Male_Day0_7"    "Male_Day4_1"    "Female_Day8_16"
+[17] "Female_Day4_21" "Female_Day0_4"  "Male_Day0_2"    "Female_Day4_20"
+[21] "Male_Day4_12"   "Female_Day8_19"
+```
+
+```r
+colnames(se) <- se$Label
+
+# Our samples are not in order based on sex and time
+se$Group <- paste(se$sex, se$time, sep = "_")
+se$Group
+```
+
+```{.output}
+ [1] "Female_Day8" "Female_Day0" "Female_Day0" "Female_Day4" "Male_Day4"  
+ [6] "Male_Day8"   "Female_Day8" "Male_Day0"   "Female_Day4" "Male_Day4"  
+[11] "Male_Day8"   "Male_Day8"   "Female_Day0" "Male_Day0"   "Male_Day4"  
+[16] "Female_Day8" "Female_Day4" "Female_Day0" "Male_Day0"   "Female_Day4"
+[21] "Male_Day4"   "Female_Day8"
+```
+
+```r
+# change this to factor data with the levels in order 
+# that we want, then rearrange the se object:
+
+se$Group <- factor(se$Group, levels = c("Female_Day0","Male_Day0", 
+                                        "Female_Day4","Male_Day4",
+                                        "Female_Day8","Male_Day8"))
+se <- se[, order(se$Group)]
+colData(se)
+```
+
+```{.output}
+DataFrame with 22 rows and 12 columns
+                         title geo_accession     organism         age
+                   <character>   <character>  <character> <character>
+Female_Day0_9  CNS_RNA-seq_11C    GSM2545337 Mus musculus     8 weeks
+Female_Day0_10 CNS_RNA-seq_12C    GSM2545338 Mus musculus     8 weeks
+Female_Day0_8  CNS_RNA-seq_27C    GSM2545348 Mus musculus     8 weeks
+Female_Day0_4   CNS_RNA-seq_3C    GSM2545353 Mus musculus     8 weeks
+Male_Day0_11   CNS_RNA-seq_20C    GSM2545343 Mus musculus     8 weeks
+...                        ...           ...          ...         ...
+Female_Day8_16  CNS_RNA-seq_2C    GSM2545351 Mus musculus     8 weeks
+Female_Day8_19  CNS_RNA-seq_9C    GSM2545380 Mus musculus     8 weeks
+Male_Day8_6    CNS_RNA-seq_17C    GSM2545341 Mus musculus     8 weeks
+Male_Day8_23   CNS_RNA-seq_25C    GSM2545346 Mus musculus     8 weeks
+Male_Day8_24   CNS_RNA-seq_26C    GSM2545347 Mus musculus     8 weeks
+                       sex   infection      strain        time      tissue
+               <character> <character> <character> <character> <character>
+Female_Day0_9       Female NonInfected     C57BL/6        Day0  Cerebellum
+Female_Day0_10      Female NonInfected     C57BL/6        Day0  Cerebellum
+Female_Day0_8       Female NonInfected     C57BL/6        Day0  Cerebellum
+Female_Day0_4       Female NonInfected     C57BL/6        Day0  Cerebellum
+Male_Day0_11          Male NonInfected     C57BL/6        Day0  Cerebellum
+...                    ...         ...         ...         ...         ...
+Female_Day8_16      Female  InfluenzaA     C57BL/6        Day8  Cerebellum
+Female_Day8_19      Female  InfluenzaA     C57BL/6        Day8  Cerebellum
+Male_Day8_6           Male  InfluenzaA     C57BL/6        Day8  Cerebellum
+Male_Day8_23          Male  InfluenzaA     C57BL/6        Day8  Cerebellum
+Male_Day8_24          Male  InfluenzaA     C57BL/6        Day8  Cerebellum
+                   mouse          Label       Group
+               <integer>    <character>    <factor>
+Female_Day0_9          9  Female_Day0_9 Female_Day0
+Female_Day0_10        10 Female_Day0_10 Female_Day0
+Female_Day0_8          8  Female_Day0_8 Female_Day0
+Female_Day0_4          4  Female_Day0_4 Female_Day0
+Male_Day0_11          11   Male_Day0_11 Male_Day0  
+...                  ...            ...         ...
+Female_Day8_16        16 Female_Day8_16 Female_Day8
+Female_Day8_19        19 Female_Day8_19 Female_Day8
+Male_Day8_6            6    Male_Day8_6 Male_Day8  
+Male_Day8_23          23   Male_Day8_23 Male_Day8  
+Male_Day8_24          24   Male_Day8_24 Male_Day8  
+```
+
+```r
+# Finally, also factor the Label column to keep in order in plots:
+
+se$Label <- factor(se$Label, levels = se$Label)
+```
+
 
 
 ## Save SummarizedExperiment
@@ -356,7 +496,14 @@ se <- readRDS("data/GSE96870_se.rds")
 ```
 
 
-## Annotations
+## Data provenance and reproducibility
+
+We have now created an external .rds file that represents our RNA-Seq data in a format that can be read into R and used by various packages for our analyses. But we should still keep a record of the codes that created the .rds file from the 3 files we downloaded from the internet. But what is the provenance of those files - i.e, where did they come from and how were they made? The original counts and gene information were deposited in the GEO public database, accession number [GSE96870](https://www.ncbi.nlm.nih.gov/geo/query/acc.cgi?acc=GSE96870). But these counts were generated by running alignment/quantification programs on the also-deposited fastq files that hold the sequence base calls and quality scores, which in turn were generated by a specific sequencing machine using some library preparation method on RNA extracted from samples collected in a particular experiment. Whew! 
+
+If you conducted the original experiment ideally you would have the complete record of where and how the data were generated. But you might use publicly-available data sets so the best you can do is to keep track of what original files you got from where and what manipulations you have done to them. Using R codes to keep track of everything is an excellent way to be able to reproduce the entire analysis from the original input files. The exact results you get can differ depending on the R version, add-on package versions and even what operating system you use, so make sure to keep track of all this information as well by running `sessionInfo()` and recording the output (see example at end of lesson). 
+
+
+## Gene Annotations
 Depending on who generates your count data, you might not have a nice file of 
 additional gene annotations. There may only be the count row names, which 
 could be gene symbols or ENTREZIDs or another database's ID. Characteristics 
@@ -421,6 +568,10 @@ mapIds(hgu95av2.db, keys = keys, column = "ALIAS", keytype = "ENTREZID")
 ```
 
 ```r
+# When there is 1:many mapping, the default behavior was 
+# to output the first match. This can be changed to a function,
+# which we defined above to give us the last match:
+
 mapIds(hgu95av2.db, keys = keys, column = "ALIAS", keytype = "ENTREZID", multiVals = last)
 ```
 
@@ -434,6 +585,8 @@ mapIds(hgu95av2.db, keys = keys, column = "ALIAS", keytype = "ENTREZID", multiVa
 ```
 
 ```r
+# Or we can get back all the many mappings:
+
 mapIds(hgu95av2.db, keys = keys, column = "ALIAS", keytype = "ENTREZID", multiVals = "list")
 ```
 
@@ -464,13 +617,7 @@ $`10001`
 ```
 
 
-:::::::::::::::::::::::::::::::::::::::::  callout
 
-## Important!
-
-Saving an object as an .rds file and reading it back in can be a convenient time saver for an extended analysis. However, there is no record in the object or .rds file of how it was made or manipulated. Your code to make the .rds file can become lost or corrupted, such that you cannot create the same object again from input data files. If this happens you should consider the .rds file as lost/corrupted as well. For reproducibility, the codes are more important than the actual .rds file.
-
-::::::::::::::::::::::::::::::::::::::::::::::::::
 
 
 ## Session info
@@ -512,7 +659,7 @@ other attached packages:
 [13] BiocGenerics_0.46.0        
 
 loaded via a namespace (and not attached):
- [1] Matrix_1.5-4.1          bit_4.0.5               highr_0.10             
+ [1] Matrix_1.6-0            bit_4.0.5               highr_0.10             
  [4] compiler_4.3.1          BiocManager_1.30.21.1   renv_1.0.0             
  [7] crayon_1.5.2            blob_1.2.4              Biostrings_2.68.1      
 [10] bitops_1.0-7            png_0.1-8               fastmap_1.1.1          
