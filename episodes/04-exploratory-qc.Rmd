@@ -36,6 +36,12 @@ and QC steps taken before a formal statistical analysis is done.
 
 ::::::::::::::::::::::::::::::::::::::::::::::::::
 
+
+## Load libraries
+
+Assuming you just started RStudio again, load some packages we will use in this lesson along with the `SummarizedExperiment` object we created in the last lesson.
+
+
 ```{r}
 suppressPackageStartupMessages({
     library(SummarizedExperiment)
@@ -56,30 +62,44 @@ Exploratory analysis is crucial for quality control and to get to know our data.
 It can help us detect quality problems, sample swaps and contamination, as well as give us a sense of the most salient patterns present in the data.
 In this episode, we will learn about two common ways of performing exploratory analysis for RNA-seq data; namely clustering and principal component analysis (PCA).
 These tools are in no way limited to (or developed for) analysis of RNA-seq data.
-However, there are certain characteristics of count assays that need to be taken into account when they are applied to this type of data.
+However, there are certain characteristics of count assays that need to be taken into account when they are applied to this type of data. First of all, not all mouse genes in the genome will be expressed in our Cerebellum samples. There are many different threshold you could use to say whether a gene's expression was detectable or not; here we are going to use a very minimal one that if a gene does not have more than 5 counts total across all samples, there is simply not enough data to be able to do anything with it anyway. 
 
 ```{r}
+nrow(se)
+
+# Remove genes/rows that do not have > 5 total counts 
 se <- se[rowSums(assay(se, "counts")) > 5, ]
-dds <- DESeq2::DESeqDataSet(se[, se$tissue == "Cerebellum"],
-                            design = ~ sex + time)
+nrow(se)
+
+
 ```
 
 ## Library size differences
 
+Differences in the total number of reads assigned to genes between samples typically occur for technical reasons. In practice, it means that we can not simply compare a gene's raw read count directly between samples and conclude that a sample with a higher read count also expresses the gene more strongly - the higher count may be caused by an overall higher number of reads in that sample.
+In the rest of this section, we will use the term *library size* to refer to the total number of reads assigned to genes for a sample. First we should examine of each sample, or the total number of mapped reads across all genes for a sample. 
+
 ```{r}
-ggplot(data.frame(sample = colnames(dds), 
-                  libSize = colSums(assay(dds, "counts"))),
-       aes(x = sample, y = libSize)) + 
-    geom_bar(stat = "identity") + theme_bw() + 
-    labs(x = "Sample", y = "Total count") + 
-    theme(axis.text.x = element_text(angle = 90, hjust = 1, vjust = 0.5))
+
+# Add in the sum of all counts
+
+se$libSize <-  colSums(assay(se))
+
+# Plot the libSize by using R's native pipe |>
+# to extract the colData, turn it into a regular
+# data frame then send to ggplot:
+
+colData(se) |>
+  as.data.frame() |>
+  ggplot(aes(x = Label, y = libSize / 1e6, fill = Group)) + 
+         geom_bar(stat = "identity") + theme_bw() + 
+         labs(x = "Sample", y = "Total count in millions") + 
+         theme(axis.text.x = element_text(angle = 45, hjust = 1, vjust = 1))
+
 ```
 
-Differences in the total number of reads assigned to genes between samples typically occur for technical reasons.
-In practice, it means that we can not simply compare the raw read count directly between samples and conclude that a sample with a higher read count also expresses the gene more strongly - the higher count may be caused by an overall higher number of reads in that sample.
-In the rest of this section, we will use the term *library size* to refer to the total number of reads assigned to genes for a sample.
-We need to adjust for the differences in library size between samples, to avoid drawing incorrect conclusions.
-The way this is typically done for RNA-seq data can be described as a two-step procedure.
+
+We need to adjust for the differences in library size between samples, to avoid drawing incorrect conclusions. The way this is typically done for RNA-seq data can be described as a two-step procedure.
 First, we estimate *size factors* - sample-specific correction factors such that if the raw counts were to be divided by these factors, the resulting values would be more comparable across samples.
 Next, these size factors are incorporated into the statistical analysis of the data.
 It is important to pay close attention to how this is done in practice for a given analysis method.
@@ -89,13 +109,16 @@ Other times (as we will see for the differential expression analysis) it is impo
 With `DESeq2`, size factors are calculated using the `estimateSizeFactors()` function.
 The size factors estimated by this function combines an adjustment for differences in library sizes with an adjustment for differences in the RNA composition of the samples.
 The latter is important due to the compositional nature of RNA-seq data.
-There is a fixed number of reads to distribute between the genes, and if a single (or a few) very highly expressed gene consume a large part of the reads, all other genes will consequently receive very low counts.
+There is a fixed number of reads to distribute between the genes, and if a single (or a few) very highly expressed gene consume a large part of the reads, all other genes will consequently receive very low counts. We now switch our `SummarizedExperiment` object over to a `DESeqDataSet` as it has the internal structure to store these size factors. We also need to tell it our main experiment design, which is sex and time: 
 
 ```{r}
+
+dds <- DESeq2::DESeqDataSet(se, design = ~ sex + time)
 dds <- estimateSizeFactors(dds)
-ggplot(data.frame(libSize = colSums(assay(dds, "counts")),
-                  sizeFactor = sizeFactors(dds)),
-       aes(x = libSize, y = sizeFactor)) + 
+ggplot(data.frame(libSize = colSums(assay(dds)),
+                  sizeFactor = sizeFactors(dds),
+                  Group = dds$Group),
+       aes(x = libSize, y = sizeFactor, col = Group)) + 
     geom_point(size = 5) + theme_bw() + 
     labs(x = "Library size", y = "Size factor")
 ```
