@@ -23,6 +23,9 @@ source("download_data.R")
 ::::::::::::::::::::::::::::::::::::::::::::::::::
 
 ## Load libraries
+
+In this episode we will use some functions from add-on R packages. In order to use them, we need to load them from our `library`:
+
 ```{r}
 suppressPackageStartupMessages({
     library(AnnotationDbi)
@@ -31,6 +34,8 @@ suppressPackageStartupMessages({
     library(SummarizedExperiment)
 })
 ```
+
+If you get any error messages about `there is no package called 'XXXX'` it means you have not installed the package/s yet for this version of R. See the bottom of the [Summary and Setup](https://carpentries-incubator.github.io/bioc-rnaseq/index.html) to install all the necessary packages for this workshop.
 
 ## Load data
 
