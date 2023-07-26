@@ -1,8 +1,8 @@
 ---
 source: Rmd
 title: RStudio Project and Experimental Data
-teaching: XX
-exercises: XX
+teaching: 20
+exercises: 20
 ---
 
 :::::::::::::::::::::::::::::::::::::: questions 
@@ -97,8 +97,8 @@ of your working directory.
 
 ## Create the directories for subsequent episodes
 
-Select a directory on your computer to serve as the working directory for the rest 
-of this episode and lesson. 
+Create a directory on your computer to serve as the working directory for the rest 
+of this episode and lesson (the workshop example uses a directory called `bio_rnaseq`). 
 Then, within this chosen directory, create the four fundamental directories previously discussed
 (`data`, `scripts`, `documents`, and `output`).
 
@@ -149,7 +149,7 @@ From this point forward, any R code that you execute that involves reading data 
 data in a file will, by default, be directed to a path relative to your project's working directory.
 
 If you wish to close the project, perhaps to open another project, create a new one, or take a break
-from the project, you can do so by using to `File` > `Close Project` option located in the menu bar.
+from the project, you can do so by using to `File` > `Close Project` option located in the menu bar. To open the project back up, either double-click on the .Rproj file in the working directory, or open up RStudio and using the `File` > `Open Project` option in the menu bar.
 
 ## Download the RNA-seq data for subsequent episodes
 
