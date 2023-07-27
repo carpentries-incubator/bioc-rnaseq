@@ -284,6 +284,27 @@ We have now created an external .rds file that represents our RNA-Seq data in a 
 If you conducted the original experiment ideally you would have the complete record of where and how the data were generated. But you might use publicly-available data sets so the best you can do is to keep track of what original files you got from where and what manipulations you have done to them. Using R codes to keep track of everything is an excellent way to be able to reproduce the entire analysis from the original input files. The exact results you get can differ depending on the R version, add-on package versions and even what operating system you use, so make sure to keep track of all this information as well by running `sessionInfo()` and recording the output (see example at end of lesson). 
 
 
+:::::::::::::::::::::::::::::::::::::::  challenge
+
+## Challenge: How to subset to mRNA genes
+
+Before, we conceptually discussed subsetting to only the mRNA genes. Now that we have our `SummarizedExperiment` object, it becomes much easier to write the codes to subset `se` to a new object called `se_mRNA` that contains only the genes/rows where the `rowData(se)$gbkey` is equal to mRNA. Write the codes and then check you correctly got the 16,859 mRNA genes:
+  
+::::::::::::::::::::::::::::::::::::::::::::::::::
+
+::::::::::::::::::::::::::::::::::: solution
+
+```{r eval=FALSE}
+se_mRNA <- se[rowData(se)$gbkey == "mRNA" , ]
+dim(se_mRNA)
+
+
+```
+
+:::::::::::::::::::::::::::::::::::
+
+
+
 ## Gene Annotations
 Depending on who generates your count data, you might not have a nice file of 
 additional gene annotations. There may only be the count row names, which 
