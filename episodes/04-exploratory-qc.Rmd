@@ -55,7 +55,7 @@ suppressPackageStartupMessages({
 ```
 
 ```{r}
-se <- readRDS("data/GSE96870_se.rds")
+se <- readRDS("data/GSE96870_se2.rds")
 ```
 
 
