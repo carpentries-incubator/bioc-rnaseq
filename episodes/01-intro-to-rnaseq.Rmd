@@ -2,7 +2,7 @@
 source: Rmd
 title: Introduction to RNA-seq
 teaching: 15
-exercises: 0
+exercises: 15
 ---
 
 ```{r, echo=FALSE, purl=FALSE, message=FALSE, warning = FALSE}
@@ -41,11 +41,11 @@ This episode is intended to introduce important concepts in RNA-seq, such as the
 
 # RNA-seq quantification: from reads to count matrix
 
-There is a plethroa of RNA quantification pipelines, and the most common approaches can be categorized into three main types:
+There is a plethora of RNA quantification pipelines, and the most common approaches can be categorized into three main types:
 
 1. Align reads to the genome, and count the number of reads that map to each gene.
    This is the one of simplest methods. For species for which the transcriptome is poorly annotated, this would be the preferred approach.
-   Example: `STAR` alignment to GRCz11 + `Rsubread` [featureCounts](https://doi.org/10.1093%2Fnar%2Fgkz114)
+   Example: `STAR` alignment to GRCm39 + `Rsubread` [featureCounts](https://doi.org/10.1093%2Fnar%2Fgkz114)
 
 2. Align reads to the transcriptome, quantify transcript expression, and summarize transcript expression into gene expression.
    This approach can produce accurate quantification results based [independent benchmarking](https://doi.org/10.1186/s13059-016-0940-1), 
@@ -68,6 +68,16 @@ the quality of the RNA-seq library preparation, the presence of contaminating se
 Often time, it would be important to compare the quantification results of multiple approaches. 
 
 Because the best quantification method is species and experiment-dependent, and often requires large amounts of computing resources, this workshop will not cover any specifics of how to generate the counts. Instead, we recommend checking out the references above and consulting with a local bioinformatics expert if you need help.
+
+:::::::::::::::::::::::::::::::::::::::  challenge
+
+## Challenge: Discuss the following points with your neighbor
+
+1. Which of the mentioned RNA-Seq quantification tools have you heard about? Do you know other pros and cons of the methods?
+2. Have you done your own RNA-Seq experiment? If so, what quantification tool did you use and why did you choose it?
+3. Do you have access to specific tools / local bioinformatics expert / computational resources for quantification? If you don't, how might you gain access?
+  
+::::::::::::::::::::::::::::::::::::::::::::::::::
 
 
 :::::::::::::::::::::::::::::::::::::::: keypoints
