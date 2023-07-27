@@ -55,7 +55,7 @@ suppressPackageStartupMessages({
 ```
 
 ```{r}
-se <- readRDS("data/GSE96870_se2.rds")
+se <- readRDS("data/GSE96870_se.rds")
 ```
 
 
@@ -171,7 +171,7 @@ meanSdPlot(assay(vsd), ranks = FALSE)
 
 ## Heatmaps and clustering
 
-There are many ways to cluster samples based on their similar of expression patterns. One simple way is to calculate Euclidean distances between all pairs of samples (longer distance = more different) and then display the results with both a branching dendrogram and a heatmap 
+There are many ways to cluster samples based on their similarity of expression patterns. One simple way is to calculate Euclidean distances between all pairs of samples (longer distance = more different) and then display the results with both a branching dendrogram and a heatmap to visualize the distances in color. From this, we infer that the Day 8 samples are more similar to each other than the rest of the samples, although Day 4 and Day 0 do not separate distinctly. Instead, males and females reliably separate.
 
 ```{r}
 dst <- dist(t(assay(vsd)))

@@ -62,6 +62,6 @@ if (!file.exists("data/GSE96870_se2.rds")) {
     se <- se[, order(se$Group)]
     se$Label <- factor(se$Label, levels = se$Label)
     
-    saveRDS(se, file = "data/GSE96870_se2.rds")
+    saveRDS(se, file = "data/GSE96870_se.rds")
 }
 
