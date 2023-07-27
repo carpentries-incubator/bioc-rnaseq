@@ -36,7 +36,7 @@ if (!file.exists("data/GSE96870_rowranges.tsv")) {
 }
 
 
-if (!file.exists("data/GSE96870_se.rds")) {
+if (!file.exists("data/GSE96870_se2.rds")) {
     counts_cerebellum <- read.csv("data/GSE96870_counts_cerebellum.csv",
                                   row.names = 1)
     coldata_cerebellum <- read.csv("data/GSE96870_coldata_cerebellum.csv",
@@ -62,6 +62,6 @@ if (!file.exists("data/GSE96870_se.rds")) {
     se <- se[, order(se$Group)]
     se$Label <- factor(se$Label, levels = se$Label)
     
-    saveRDS(se, file = "data/GSE96870_se.rds")
+    saveRDS(se, file = "data/GSE96870_se2.rds")
 }
 
