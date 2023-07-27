@@ -7,8 +7,8 @@ editor_options:
   chunk_output_type: console
 ---
 
-```{r, echo=FALSE, purl=FALSE, message=FALSE}
-source("download_data.R")
+```{r, echo=FALSE, purl=FALSE, message=FALSE, warning = FALSE}
+#source("download_data.R")
 ```
 
 ::::::::::::::::::::::::::::::::::::::: objectives
@@ -95,6 +95,8 @@ table(rowData(se)$gbkey)
 ```
 
 :::::::::::::::::::::::::::::::::::
+
+
 ## Library size differences
 
 Differences in the total number of reads assigned to genes between samples typically occur for technical reasons. In practice, it means that we can not simply compare a gene's raw read count directly between samples and conclude that a sample with a higher read count also expresses the gene more strongly - the higher count may be caused by an overall higher number of reads in that sample.
