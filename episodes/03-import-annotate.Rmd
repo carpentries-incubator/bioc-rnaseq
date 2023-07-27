@@ -224,6 +224,12 @@ A brief recap of how to access the various data slots in a `SummarizedExperiment
 head(assay(se))
 dim(assay(se))
 
+# The above works now because we only have one assay, "counts"
+# But if there were more than one assay, we would have to specify
+# which one like so:
+
+head(assay(se, "counts"))
+
 # Access the sample annotations
 colData(se)
 dim(colData(se))
