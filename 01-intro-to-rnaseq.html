@@ -275,7 +275,7 @@
       </div>
       <hr></nav><main id="main-content" class="main-content"><div class="container lesson-content">
         <h1>Introduction to RNA-seq</h1>
-        <p> Last updated on 2023-07-26 | 
+        <p> Last updated on 2023-07-27 | 
         
         <a href="https://github.com/carpentries-incubator/bioc-rnaseq/edit/main/episodes/01-intro-to-rnaseq.Rmd" class="external-link">Edit this page <i aria-hidden="true" data-feather="edit"></i></a></p>
         
@@ -341,12 +341,12 @@ on how to contribute</p>
 </div>
 <div class="section level1">
 <h1 id="rna-seq-quantification-from-reads-to-count-matrix">RNA-seq quantification: from reads to count matrix<a class="anchor" aria-label="anchor" href="#rna-seq-quantification-from-reads-to-count-matrix"></a></h1>
-<p>There is a plethroa of RNA quantification pipelines, and the most
+<p>There is a plethora of RNA quantification pipelines, and the most
 common approaches can be categorized into three main types:</p>
 <ol style="list-style-type: decimal"><li><p>Align reads to the genome, and count the number of reads that map
 to each gene. This is the one of simplest methods. For species for which
 the transcriptome is poorly annotated, this would be the preferred
-approach. Example: <code>STAR</code> alignment to GRCz11 +
+approach. Example: <code>STAR</code> alignment to GRCm39 +
 <code>Rsubread</code> <a href="https://doi.org/10.1093%2Fnar%2Fgkz114" class="external-link">featureCounts</a></p></li>
 <li><p>Align reads to the transcriptome, quantify transcript expression,
 and summarize transcript expression into gene expression. This approach
@@ -379,6 +379,25 @@ experiment-dependent, and often requires large amounts of computing
 resources, this workshop will not cover any specifics of how to generate
 the counts. Instead, we recommend checking out the references above and
 consulting with a local bioinformatics expert if you need help.</p>
+<div id="challenge-discuss-the-following-points-with-your-neighbor" class="callout discussion">
+<div class="callout-square">
+<i class="callout-icon" data-feather="message-circle"></i>
+</div>
+<div id="challenge-discuss-the-following-points-with-your-neighbor" class="callout-inner">
+<h3 class="callout-title">Challenge: Discuss the following points with
+your neighbor<a class="anchor" aria-label="anchor" href="#challenge-discuss-the-following-points-with-your-neighbor"></a>
+</h3>
+<div class="callout-content">
+<ol style="list-style-type: decimal"><li>Which of the mentioned RNA-Seq quantification tools have you heard
+about? Do you know other pros and cons of the methods?</li>
+<li>Have you done your own RNA-Seq experiment? If so, what
+quantification tool did you use and why did you choose it?</li>
+<li>Do you have access to specific tools / local bioinformatics expert /
+computational resources for quantification? If you don’t, how might you
+gain access?</li>
+</ol></div>
+</div>
+</div>
 <div id="keypoints1" class="callout keypoints">
 <div class="callout-square">
 <i class="callout-icon" data-feather="key"></i>
@@ -465,8 +484,8 @@ analysis of RNA-seq data are <code>DESeq2</code>, <code>edgeR</code> and
   "url": "https://carpentries-incubator.github.io/bioc-rnaseq/01-intro-to-rnaseq.html",
   "identifier": "https://carpentries-incubator.github.io/bioc-rnaseq/01-intro-to-rnaseq.html",
   "dateCreated": "2020-09-15",
-  "dateModified": "2023-07-26",
-  "datePublished": "2023-07-26"
+  "dateModified": "2023-07-27",
+  "datePublished": "2023-07-27"
 }
 
   </script><script>

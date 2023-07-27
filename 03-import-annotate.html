@@ -92,11 +92,11 @@
   RNA-seq analysis with Bioconductor
 </div>
 
-<aside class="col-md-12 lesson-progress"><div style="width: 20%" class="percentage">
-    20%
+<aside class="col-md-12 lesson-progress"><div style="width: 25%" class="percentage">
+    25%
   </div>
   <div class="progress incubator">
-    <div class="progress-bar incubator" role="progressbar" style="width: 20%" aria-valuenow="20" aria-label="Lesson Progress" aria-valuemin="0" aria-valuemax="100">
+    <div class="progress-bar incubator" role="progressbar" style="width: 25%" aria-valuenow="25" aria-label="Lesson Progress" aria-valuemin="0" aria-valuemax="100">
     </div>
   </div>
 </aside><div class="container">
@@ -288,7 +288,7 @@
       </div>
       <hr></nav><main id="main-content" class="main-content"><div class="container lesson-content">
         <h1>Importing and annotating quantified data into R</h1>
-        <p> Last updated on 2023-07-26 | 
+        <p> Last updated on 2023-07-27 | 
         
         <a href="https://github.com/carpentries-incubator/bioc-rnaseq/edit/main/episodes/03-import-annotate.Rmd" class="external-link">Edit this page <i aria-hidden="true" data-feather="edit"></i></a></p>
         
@@ -300,12 +300,6 @@
 
         
 
-<div class="codewrapper">
-<h3 class="code-label">WARNING<i aria-hidden="true" data-feather="chevron-left"></i><i aria-hidden="true" data-feather="chevron-right"></i>
-</h3>
-<pre class="warning" tabindex="0"><code>Warning: replacing previous import 'S4Arrays::makeNindexFromArrayViewport' by
-'DelayedArray::makeNindexFromArrayViewport' when loading 'SummarizedExperiment'</code></pre>
-</div>
 <div class="overview card">
 <h2 class="card-header">Overview</h2>
 <div class="row g-0">
@@ -337,7 +331,7 @@ object.</li>
 <hr class="half-width"><p>In this episode we will use some functions from add-on R packages. In
 order to use them, we need to load them from our
 <code>library</code>:</p>
-<div class="codewrapper sourceCode" id="cb2">
+<div class="codewrapper sourceCode" id="cb1">
 <h3 class="code-label">R<i aria-hidden="true" data-feather="chevron-left"></i><i aria-hidden="true" data-feather="chevron-right"></i>
 </h3>
 <pre class="downlit sourceCode r">
@@ -377,7 +371,7 @@ information called annotation. Let’s read in the data files that we
 downloaded in the last episode and start to explore them:</p>
 <div class="section level3">
 <h3 id="counts">Counts<a class="anchor" aria-label="anchor" href="#counts"></a></h3>
-<div class="codewrapper sourceCode" id="cb3">
+<div class="codewrapper sourceCode" id="cb2">
 <h3 class="code-label">R<i aria-hidden="true" data-feather="chevron-left"></i><i aria-hidden="true" data-feather="chevron-right"></i>
 </h3>
 <pre class="downlit sourceCode r">
@@ -390,7 +384,7 @@ downloaded in the last episode and start to explore them:</p>
 </h3>
 <pre class="output" tabindex="0"><code>[1] 41786    22</code></pre>
 </div>
-<div class="codewrapper sourceCode" id="cb5">
+<div class="codewrapper sourceCode" id="cb4">
 <h3 class="code-label">R<i aria-hidden="true" data-feather="chevron-left"></i><i aria-hidden="true" data-feather="chevron-right"></i>
 </h3>
 <pre class="downlit sourceCode r">
@@ -411,7 +405,7 @@ sample is what.</p>
 <h3 id="sample-annotations">Sample annotations<a class="anchor" aria-label="anchor" href="#sample-annotations"></a></h3>
 <p>Next read in the sample annotations. Because samples are in columns
 in the count matrix, we will name the object <code>coldata</code>:</p>
-<div class="codewrapper sourceCode" id="cb6">
+<div class="codewrapper sourceCode" id="cb5">
 <h3 class="code-label">R<i aria-hidden="true" data-feather="chevron-left"></i><i aria-hidden="true" data-feather="chevron-right"></i>
 </h3>
 <pre class="downlit sourceCode r">
@@ -424,7 +418,7 @@ in the count matrix, we will name the object <code>coldata</code>:</p>
 </h3>
 <pre class="output" tabindex="0"><code>[1] 22 10</code></pre>
 </div>
-<div class="codewrapper sourceCode" id="cb8">
+<div class="codewrapper sourceCode" id="cb7">
 <h3 class="code-label">R<i aria-hidden="true" data-feather="chevron-left"></i><i aria-hidden="true" data-feather="chevron-right"></i>
 </h3>
 <pre class="downlit sourceCode r">
@@ -459,7 +453,7 @@ should be our <code>row.names</code> are in the 5th column
 look like numbers (<code>colClasses</code> argument). You can look up
 this details on available arguments by simply entering the function name
 starting with question mark. (e.g., <code>?read.delim</code>)</p>
-<div class="codewrapper sourceCode" id="cb9">
+<div class="codewrapper sourceCode" id="cb8">
 <h3 class="code-label">R<i aria-hidden="true" data-feather="chevron-left"></i><i aria-hidden="true" data-feather="chevron-right"></i>
 </h3>
 <pre class="downlit sourceCode r">
@@ -476,7 +470,7 @@ starting with question mark. (e.g., <code>?read.delim</code>)</p>
 </h3>
 <pre class="output" tabindex="0"><code>[1] 41786     7</code></pre>
 </div>
-<div class="codewrapper sourceCode" id="cb11">
+<div class="codewrapper sourceCode" id="cb10">
 <h3 class="code-label">R<i aria-hidden="true" data-feather="chevron-left"></i><i aria-hidden="true" data-feather="chevron-right"></i>
 </h3>
 <pre class="downlit sourceCode r">
@@ -490,7 +484,7 @@ description (<code>product</code>) and the feature type
 downstream analysis. For example, from the <code>gbkey</code> column, we
 can check what types of genes and how many of them are in our
 dataset:</p>
-<div class="codewrapper sourceCode" id="cb12">
+<div class="codewrapper sourceCode" id="cb11">
 <h3 class="code-label">R<i aria-hidden="true" data-feather="chevron-left"></i><i aria-hidden="true" data-feather="chevron-right"></i>
 </h3>
 <pre class="downlit sourceCode r">
@@ -533,7 +527,7 @@ have to do to remove those (generally speaking, not exact codes)?</li>
   Show me the solution
   </h4>
 </button>
-<div id="collapseSolution1" class="accordion-collapse collapse" data-bs-parent="#accordionSolution1" aria-labelledby="headingSolution1">
+<div id="collapseSolution1" class="accordion-collapse collapse" aria-labelledby="headingSolution1" data-bs-parent="#accordionSolution1">
 <div class="accordion-body">
 <ol style="list-style-type: decimal"><li>In <code>counts</code>, the rows are genes just like the rows in
 <code>rowranges</code>. The columns in <code>counts</code> are the
@@ -592,7 +586,7 @@ SAMPLES AND GENES ARE IN THE SAME ORDER! Even though we saw that
 samples and <code>count</code> and <code>rowranges</code> had the same
 number of genes, we never explicitly checked to see if they were in the
 same order. One quick way to check:</p>
-<div class="codewrapper sourceCode" id="cb14">
+<div class="codewrapper sourceCode" id="cb13">
 <h3 class="code-label">R<i aria-hidden="true" data-feather="chevron-left"></i><i aria-hidden="true" data-feather="chevron-right"></i>
 </h3>
 <pre class="downlit sourceCode r">
@@ -603,7 +597,7 @@ same order. One quick way to check:</p>
 </h3>
 <pre class="output" tabindex="0"><code>[1] TRUE</code></pre>
 </div>
-<div class="codewrapper sourceCode" id="cb16">
+<div class="codewrapper sourceCode" id="cb15">
 <h3 class="code-label">R<i aria-hidden="true" data-feather="chevron-left"></i><i aria-hidden="true" data-feather="chevron-right"></i>
 </h3>
 <pre class="downlit sourceCode r">
@@ -614,7 +608,7 @@ same order. One quick way to check:</p>
 </h3>
 <pre class="output" tabindex="0"><code>[1] TRUE</code></pre>
 </div>
-<div class="codewrapper sourceCode" id="cb18">
+<div class="codewrapper sourceCode" id="cb17">
 <h3 class="code-label">R<i aria-hidden="true" data-feather="chevron-left"></i><i aria-hidden="true" data-feather="chevron-right"></i>
 </h3>
 <pre class="downlit sourceCode r">
@@ -655,9 +649,9 @@ codes.</p>
   Show me the solution
   </h4>
 </button>
-<div id="collapseSolution2" class="accordion-collapse collapse" data-bs-parent="#accordionSolution2" aria-labelledby="headingSolution2">
+<div id="collapseSolution2" class="accordion-collapse collapse" aria-labelledby="headingSolution2" data-bs-parent="#accordionSolution2">
 <div class="accordion-body">
-<div class="codewrapper sourceCode" id="cb20">
+<div class="codewrapper sourceCode" id="cb19">
 <h3 class="code-label">R<i aria-hidden="true" data-feather="chevron-left"></i><i aria-hidden="true" data-feather="chevron-right"></i>
 </h3>
 <pre class="downlit sourceCode r">
@@ -672,7 +666,7 @@ codes.</p>
 </div>
 <p>Once we have verified that samples and genes are in the same order,
 we can then create our <code>SummarizedExperiment</code> object.</p>
-<div class="codewrapper sourceCode" id="cb21">
+<div class="codewrapper sourceCode" id="cb20">
 <h3 class="code-label">R<i aria-hidden="true" data-feather="chevron-left"></i><i aria-hidden="true" data-feather="chevron-right"></i>
 </h3>
 <pre class="downlit sourceCode r">
@@ -690,7 +684,7 @@ we can then create our <code>SummarizedExperiment</code> object.</p>
 <code>SummarizedExperiment()</code> constructor does some internal check
 to make sure they contain the same number of genes/samples and the
 sample/row names match. If not, you will get some error messages:</p>
-<div class="codewrapper sourceCode" id="cb22">
+<div class="codewrapper sourceCode" id="cb21">
 <h3 class="code-label">R<i aria-hidden="true" data-feather="chevron-left"></i><i aria-hidden="true" data-feather="chevron-right"></i>
 </h3>
 <pre class="downlit sourceCode r">
@@ -708,7 +702,7 @@ sample/row names match. If not, you will get some error messages:</p>
 <pre class="error" tabindex="0"><code>Error in validObject(.Object): invalid class "SummarizedExperiment" object: 
     nb of cols in 'assay' (22) must equal nb of rows in 'colData' (3)</code></pre>
 </div>
-<div class="codewrapper sourceCode" id="cb24">
+<div class="codewrapper sourceCode" id="cb23">
 <h3 class="code-label">R<i aria-hidden="true" data-feather="chevron-left"></i><i aria-hidden="true" data-feather="chevron-right"></i>
 </h3>
 <pre class="downlit sourceCode r">
@@ -730,7 +724,7 @@ sample/row names match. If not, you will get some error messages:</p>
 <p>A brief recap of how to access the various data slots in a
 <code>SummarizedExperiment</code> and how to make some
 manipulations:</p>
-<div class="codewrapper sourceCode" id="cb26">
+<div class="codewrapper sourceCode" id="cb25">
 <h3 class="code-label">R<i aria-hidden="true" data-feather="chevron-left"></i><i aria-hidden="true" data-feather="chevron-right"></i>
 </h3>
 <pre class="downlit sourceCode r">
@@ -769,7 +763,7 @@ LOC105242467          4          2          1          4
 Rp1                   3          3          1          0
 Sox17               273        197        310        246</code></pre>
 </div>
-<div class="codewrapper sourceCode" id="cb28">
+<div class="codewrapper sourceCode" id="cb27">
 <h3 class="code-label">R<i aria-hidden="true" data-feather="chevron-left"></i><i aria-hidden="true" data-feather="chevron-right"></i>
 </h3>
 <pre class="downlit sourceCode r">
@@ -780,7 +774,49 @@ Sox17               273        197        310        246</code></pre>
 </h3>
 <pre class="output" tabindex="0"><code>[1] 41786    22</code></pre>
 </div>
-<div class="codewrapper sourceCode" id="cb30">
+<div class="codewrapper sourceCode" id="cb29">
+<h3 class="code-label">R<i aria-hidden="true" data-feather="chevron-left"></i><i aria-hidden="true" data-feather="chevron-right"></i>
+</h3>
+<pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="co"># The above works now because we only have one assay, "counts"</span></span>
+<span><span class="co"># But if there were more than one assay, we would have to specify</span></span>
+<span><span class="co"># which one like so:</span></span>
+<span></span>
+<span><span class="fu">head</span><span class="op">(</span><span class="fu">assay</span><span class="op">(</span><span class="va">se</span>, <span class="st">"counts"</span><span class="op">)</span><span class="op">)</span></span></code></pre>
+</div>
+<div class="codewrapper">
+<h3 class="code-label">OUTPUT<i aria-hidden="true" data-feather="chevron-left"></i><i aria-hidden="true" data-feather="chevron-right"></i>
+</h3>
+<pre class="output" tabindex="0"><code>             GSM2545336 GSM2545337 GSM2545338 GSM2545339 GSM2545340 GSM2545341
+Xkr4               1891       2410       2159       1980       1977       1945
+LOC105243853          0          0          1          4          0          0
+LOC105242387        204        121        110        120        172        173
+LOC105242467         12          5          5          5          2          6
+Rp1                   2          2          0          3          2          1
+Sox17               251        239        218        220        261        232
+             GSM2545342 GSM2545343 GSM2545344 GSM2545345 GSM2545346 GSM2545347
+Xkr4               1757       2235       1779       1528       1644       1585
+LOC105243853          1          3          3          0          1          3
+LOC105242387        177        130        131        160        180        176
+LOC105242467          3          2          2          2          1          2
+Rp1                   3          1          1          2          2          2
+Sox17               179        296        233        271        205        230
+             GSM2545348 GSM2545349 GSM2545350 GSM2545351 GSM2545352 GSM2545353
+Xkr4               2275       1881       2584       1837       1890       1910
+LOC105243853          1          0          0          1          1          0
+LOC105242387        161        154        124        221        272        214
+LOC105242467          2          4          7          1          3          1
+Rp1                   3          6          5          3          5          1
+Sox17               302        286        325        201        267        322
+             GSM2545354 GSM2545362 GSM2545363 GSM2545380
+Xkr4               1771       2315       1645       1723
+LOC105243853          0          1          0          1
+LOC105242387        124        189        223        251
+LOC105242467          4          2          1          4
+Rp1                   3          3          1          0
+Sox17               273        197        310        246</code></pre>
+</div>
+<div class="codewrapper sourceCode" id="cb31">
 <h3 class="code-label">R<i aria-hidden="true" data-feather="chevron-left"></i><i aria-hidden="true" data-feather="chevron-right"></i>
 </h3>
 <pre class="downlit sourceCode r">
@@ -818,7 +854,7 @@ GSM2545362  InfluenzaA     C57BL/6        Day4  Cerebellum        20
 GSM2545363  InfluenzaA     C57BL/6        Day4  Cerebellum        12
 GSM2545380  InfluenzaA     C57BL/6        Day8  Cerebellum        19</code></pre>
 </div>
-<div class="codewrapper sourceCode" id="cb32">
+<div class="codewrapper sourceCode" id="cb33">
 <h3 class="code-label">R<i aria-hidden="true" data-feather="chevron-left"></i><i aria-hidden="true" data-feather="chevron-right"></i>
 </h3>
 <pre class="downlit sourceCode r">
@@ -829,7 +865,7 @@ GSM2545380  InfluenzaA     C57BL/6        Day8  Cerebellum        19</code></pre
 </h3>
 <pre class="output" tabindex="0"><code>[1] 22 10</code></pre>
 </div>
-<div class="codewrapper sourceCode" id="cb34">
+<div class="codewrapper sourceCode" id="cb35">
 <h3 class="code-label">R<i aria-hidden="true" data-feather="chevron-left"></i><i aria-hidden="true" data-feather="chevron-right"></i>
 </h3>
 <pre class="downlit sourceCode r">
@@ -849,7 +885,7 @@ LOC105242467   105242467 lipoxygenase homolog..        mRNA
 Rp1                19888 retinitis pigmentosa..        mRNA
 Sox17              20671 SRY (sex determining..        mRNA</code></pre>
 </div>
-<div class="codewrapper sourceCode" id="cb36">
+<div class="codewrapper sourceCode" id="cb37">
 <h3 class="code-label">R<i aria-hidden="true" data-feather="chevron-left"></i><i aria-hidden="true" data-feather="chevron-right"></i>
 </h3>
 <pre class="downlit sourceCode r">
@@ -860,7 +896,7 @@ Sox17              20671 SRY (sex determining..        mRNA</code></pre>
 </h3>
 <pre class="output" tabindex="0"><code>[1] 41786     3</code></pre>
 </div>
-<div class="codewrapper sourceCode" id="cb38">
+<div class="codewrapper sourceCode" id="cb39">
 <h3 class="code-label">R<i aria-hidden="true" data-feather="chevron-left"></i><i aria-hidden="true" data-feather="chevron-right"></i>
 </h3>
 <pre class="downlit sourceCode r">
@@ -879,7 +915,7 @@ Sox17              20671 SRY (sex determining..        mRNA</code></pre>
 [17] "Female_Day4_21" "Female_Day0_4"  "Male_Day0_2"    "Female_Day4_20"
 [21] "Male_Day4_12"   "Female_Day8_19"</code></pre>
 </div>
-<div class="codewrapper sourceCode" id="cb40">
+<div class="codewrapper sourceCode" id="cb41">
 <h3 class="code-label">R<i aria-hidden="true" data-feather="chevron-left"></i><i aria-hidden="true" data-feather="chevron-right"></i>
 </h3>
 <pre class="downlit sourceCode r">
@@ -898,7 +934,7 @@ Sox17              20671 SRY (sex determining..        mRNA</code></pre>
 [16] "Female_Day8" "Female_Day4" "Female_Day0" "Male_Day0"   "Female_Day4"
 [21] "Male_Day4"   "Female_Day8"</code></pre>
 </div>
-<div class="codewrapper sourceCode" id="cb42">
+<div class="codewrapper sourceCode" id="cb43">
 <h3 class="code-label">R<i aria-hidden="true" data-feather="chevron-left"></i><i aria-hidden="true" data-feather="chevron-right"></i>
 </h3>
 <pre class="downlit sourceCode r">
@@ -955,7 +991,7 @@ Male_Day8_6            6    Male_Day8_6 Male_Day8
 Male_Day8_23          23   Male_Day8_23 Male_Day8  
 Male_Day8_24          24   Male_Day8_24 Male_Day8  </code></pre>
 </div>
-<div class="codewrapper sourceCode" id="cb44">
+<div class="codewrapper sourceCode" id="cb45">
 <h3 class="code-label">R<i aria-hidden="true" data-feather="chevron-left"></i><i aria-hidden="true" data-feather="chevron-right"></i>
 </h3>
 <pre class="downlit sourceCode r">
@@ -972,7 +1008,7 @@ single file on our computer to read it back in to R’s memory if we have
 to shut down RStudio. To save an R-specific file we can use the
 <code>saveRDS()</code> function and later read it back into R using the
 <code>readRDS()</code> function.</p>
-<div class="codewrapper sourceCode" id="cb45">
+<div class="codewrapper sourceCode" id="cb46">
 <h3 class="code-label">R<i aria-hidden="true" data-feather="chevron-left"></i><i aria-hidden="true" data-feather="chevron-right"></i>
 </h3>
 <pre class="downlit sourceCode r">
@@ -1005,6 +1041,48 @@ the R version, add-on package versions and even what operating system
 you use, so make sure to keep track of all this information as well by
 running <code>sessionInfo()</code> and recording the output (see example
 at end of lesson).</p>
+<div id="challenge-how-to-subset-to-mrna-genes" class="callout discussion">
+<div class="callout-square">
+<i class="callout-icon" data-feather="message-circle"></i>
+</div>
+<div id="challenge-how-to-subset-to-mrna-genes" class="callout-inner">
+<h3 class="callout-title">Challenge: How to subset to mRNA genes<a class="anchor" aria-label="anchor" href="#challenge-how-to-subset-to-mrna-genes"></a>
+</h3>
+<div class="callout-content">
+<p>Before, we conceptually discussed subsetting to only the mRNA genes.
+Now that we have our <code>SummarizedExperiment</code> object, it
+becomes much easier to write the codes to subset <code>se</code> to a
+new object called <code>se_mRNA</code> that contains only the genes/rows
+where the <code>rowData(se)$gbkey</code> is equal to mRNA. Write the
+codes and then check you correctly got the 16,859 mRNA genes:</p>
+</div>
+</div>
+</div>
+<div id="accordionSolution3" class="accordion challenge-accordion accordion-flush">
+<div class="accordion-item">
+<button class="accordion-button solution-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapseSolution3" aria-expanded="false" aria-controls="collapseSolution3">
+  <h4 class="accordion-header" id="headingSolution3">
+  Show me the solution
+  </h4>
+</button>
+<div id="collapseSolution3" class="accordion-collapse collapse" aria-labelledby="headingSolution3" data-bs-parent="#accordionSolution3">
+<div class="accordion-body">
+<div class="codewrapper sourceCode" id="cb47">
+<h3 class="code-label">R<i aria-hidden="true" data-feather="chevron-left"></i><i aria-hidden="true" data-feather="chevron-right"></i>
+</h3>
+<pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="va">se_mRNA</span> <span class="op">&lt;-</span> <span class="va">se</span><span class="op">[</span><span class="fu">rowData</span><span class="op">(</span><span class="va">se</span><span class="op">)</span><span class="op">$</span><span class="va">gbkey</span> <span class="op">==</span> <span class="st">"mRNA"</span> , <span class="op">]</span></span>
+<span><span class="fu">dim</span><span class="op">(</span><span class="va">se_mRNA</span><span class="op">)</span></span></code></pre>
+</div>
+<div class="codewrapper">
+<h3 class="code-label">OUTPUT<i aria-hidden="true" data-feather="chevron-left"></i><i aria-hidden="true" data-feather="chevron-right"></i>
+</h3>
+<pre class="output" tabindex="0"><code>[1] 21198    22</code></pre>
+</div>
+</div>
+</div>
+</div>
+</div>
 </section><section id="gene-annotations-1"><h2 class="section-heading">Gene Annotations<a class="anchor" aria-label="anchor" href="#gene-annotations-1"></a>
 </h2>
 <hr class="half-width"><p>Depending on who generates your count data, you might not have a nice
@@ -1030,7 +1108,7 @@ resources are covered in more detail in <a href="https://carpentries-incubator.g
 - <em>keys</em> are the IDs that we <strong>know</strong><br>
 - <em>column</em> is the value we <strong>want</strong><br>
 - <em>keytype</em> is the type of key used</p>
-<div class="codewrapper sourceCode" id="cb47">
+<div class="codewrapper sourceCode" id="cb50">
 <h3 class="code-label">R<i aria-hidden="true" data-feather="chevron-left"></i><i aria-hidden="true" data-feather="chevron-right"></i>
 </h3>
 <pre class="downlit sourceCode r">
@@ -1053,7 +1131,7 @@ columns through an additional argument, <code>multiVals</code>. The
 below example demonstrate this functionality using the
 <code>hgu95av2.db</code> package, an Affymetrix Human Genome U95 Set
 annotation data.</p>
-<div class="codewrapper sourceCode" id="cb50">
+<div class="codewrapper sourceCode" id="cb53">
 <h3 class="code-label">R<i aria-hidden="true" data-feather="chevron-left"></i><i aria-hidden="true" data-feather="chevron-right"></i>
 </h3>
 <pre class="downlit sourceCode r">
@@ -1073,7 +1151,7 @@ annotation data.</p>
 <pre class="output" tabindex="0"><code>       10       100      1000     10000 100008586     10001 
    "AAC2"    "ADA1"   "ACOGS"    "MPPH"     "AL4"   "ARC33" </code></pre>
 </div>
-<div class="codewrapper sourceCode" id="cb53">
+<div class="codewrapper sourceCode" id="cb56">
 <h3 class="code-label">R<i aria-hidden="true" data-feather="chevron-left"></i><i aria-hidden="true" data-feather="chevron-right"></i>
 </h3>
 <pre class="downlit sourceCode r">
@@ -1094,7 +1172,7 @@ annotation data.</p>
 <pre class="output" tabindex="0"><code>       10       100      1000     10000 100008586     10001 
    "NAT2"     "ADA"    "CDH2"    "AKT3" "GAGE12F"    "MED6" </code></pre>
 </div>
-<div class="codewrapper sourceCode" id="cb56">
+<div class="codewrapper sourceCode" id="cb59">
 <h3 class="code-label">R<i aria-hidden="true" data-feather="chevron-left"></i><i aria-hidden="true" data-feather="chevron-right"></i>
 </h3>
 <pre class="downlit sourceCode r">
@@ -1132,7 +1210,7 @@ $`10001`
 </div>
 </section><section id="session-info"><h2 class="section-heading">Session info<a class="anchor" aria-label="anchor" href="#session-info"></a>
 </h2>
-<hr class="half-width"><div class="codewrapper sourceCode" id="cb59">
+<hr class="half-width"><div class="codewrapper sourceCode" id="cb62">
 <h3 class="code-label">R<i aria-hidden="true" data-feather="chevron-left"></i><i aria-hidden="true" data-feather="chevron-right"></i>
 </h3>
 <pre class="downlit sourceCode r">
@@ -1169,7 +1247,7 @@ other attached packages:
  [7] MatrixGenerics_1.12.2       matrixStats_1.0.0          
  [9] GenomicRanges_1.52.0        GenomeInfoDb_1.36.1        
 [11] IRanges_2.34.1              S4Vectors_0.38.1           
-[13] BiocGenerics_0.46.0        
+[13] BiocGenerics_0.46.0         knitr_1.43                 
 
 loaded via a namespace (and not attached):
  [1] Matrix_1.6-0            bit_4.0.5               highr_0.10             
@@ -1177,14 +1255,13 @@ loaded via a namespace (and not attached):
  [7] crayon_1.5.2            blob_1.2.4              Biostrings_2.68.1      
 [10] bitops_1.0-7            png_0.1-8               fastmap_1.1.1          
 [13] lattice_0.21-8          R6_2.5.1                XVector_0.40.0         
-[16] S4Arrays_1.0.5          knitr_1.43              DelayedArray_0.26.6    
-[19] GenomeInfoDbData_1.2.10 DBI_1.1.3               rlang_1.1.1            
-[22] KEGGREST_1.40.0         cachem_1.0.8            xfun_0.39              
-[25] bit64_4.0.5             RSQLite_2.3.1           memoise_2.0.1          
-[28] cli_3.6.1               zlibbioc_1.46.0         grid_4.3.1             
-[31] vctrs_0.6.3             evaluate_0.21           abind_1.4-5            
-[34] RCurl_1.98-1.12         httr_1.4.6              pkgconfig_2.0.3        
-[37] tools_4.3.1            </code></pre>
+[16] S4Arrays_1.0.5          DelayedArray_0.26.6     GenomeInfoDbData_1.2.10
+[19] DBI_1.1.3               rlang_1.1.1             KEGGREST_1.40.0        
+[22] cachem_1.0.8            xfun_0.39               bit64_4.0.5            
+[25] RSQLite_2.3.1           memoise_2.0.1           cli_3.6.1              
+[28] zlibbioc_1.46.0         grid_4.3.1              vctrs_0.6.3            
+[31] evaluate_0.21           abind_1.4-5             RCurl_1.98-1.12        
+[34] httr_1.4.6              pkgconfig_2.0.3         tools_4.3.1            </code></pre>
 </div>
 <div id="keypoints1" class="callout keypoints">
 <div class="callout-square">
@@ -1257,8 +1334,8 @@ analysis, with gene symbols added for easier interpretation.</li>
   "url": "https://carpentries-incubator.github.io/bioc-rnaseq/03-import-annotate.html",
   "identifier": "https://carpentries-incubator.github.io/bioc-rnaseq/03-import-annotate.html",
   "dateCreated": "2020-09-15",
-  "dateModified": "2023-07-26",
-  "datePublished": "2023-07-26"
+  "dateModified": "2023-07-27",
+  "datePublished": "2023-07-27"
 }
 
   </script><script>

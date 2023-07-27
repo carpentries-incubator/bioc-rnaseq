@@ -92,11 +92,11 @@
   RNA-seq analysis with Bioconductor
 </div>
 
-<aside class="col-md-12 lesson-progress"><div style="width: 59%" class="percentage">
-    59%
+<aside class="col-md-12 lesson-progress"><div style="width: 61%" class="percentage">
+    61%
   </div>
   <div class="progress incubator">
-    <div class="progress-bar incubator" role="progressbar" style="width: 59%" aria-valuenow="59" aria-label="Lesson Progress" aria-valuemin="0" aria-valuemax="100">
+    <div class="progress-bar incubator" role="progressbar" style="width: 61%" aria-valuenow="61" aria-label="Lesson Progress" aria-valuemin="0" aria-valuemax="100">
     </div>
   </div>
 </aside><div class="container">
@@ -189,6 +189,7 @@
     <div id="flush-collapsecurrent" class="accordion-collapse collapse show" aria-labelledby="flush-headingcurrent" data-bs-parent="#accordionFlushcurrent">
       <div class="accordion-body">
         <ul><li><a href="#load-libraries">Load libraries</a></li>
+<li><a href="#remove-unexpressed-genes">Remove unexpressed genes</a></li>
 <li><a href="#library-size-differences">Library size differences</a></li>
 <li><a href="#transform-data">Transform data</a></li>
 <li><a href="#heatmaps-and-clustering">Heatmaps and clustering</a></li>
@@ -287,7 +288,7 @@
       </div>
       <hr></nav><main id="main-content" class="main-content"><div class="container lesson-content">
         <h1>Exploratory analysis and quality control</h1>
-        <p> Last updated on 2023-07-26 | 
+        <p> Last updated on 2023-07-27 | 
         
         <a href="https://github.com/carpentries-incubator/bioc-rnaseq/edit/main/episodes/04-exploratory-qc.Rmd" class="external-link">Edit this page <i aria-hidden="true" data-feather="edit"></i></a></p>
         
@@ -299,12 +300,6 @@
 
         
 
-<div class="codewrapper">
-<h3 class="code-label">WARNING<i aria-hidden="true" data-feather="chevron-left"></i><i aria-hidden="true" data-feather="chevron-right"></i>
-</h3>
-<pre class="warning" tabindex="0"><code>Warning: replacing previous import 'S4Arrays::makeNindexFromArrayViewport' by
-'DelayedArray::makeNindexFromArrayViewport' when loading 'SummarizedExperiment'</code></pre>
-</div>
 <div class="overview card">
 <h2 class="card-header">Overview</h2>
 <div class="row g-0">
@@ -352,7 +347,7 @@ done.</p>
 <hr class="half-width"><p>Assuming you just started RStudio again, load some packages we will
 use in this lesson along with the <code>SummarizedExperiment</code>
 object we created in the last lesson.</p>
-<div class="codewrapper sourceCode" id="cb2">
+<div class="codewrapper sourceCode" id="cb1">
 <h3 class="code-label">R<i aria-hidden="true" data-feather="chevron-left"></i><i aria-hidden="true" data-feather="chevron-right"></i>
 </h3>
 <pre class="downlit sourceCode r">
@@ -366,13 +361,15 @@ object we created in the last lesson.</p>
 <span>    <span class="kw">library</span><span class="op">(</span><span class="va">hexbin</span><span class="op">)</span></span>
 <span><span class="op">}</span><span class="op">)</span></span></code></pre>
 </div>
-<div class="codewrapper sourceCode" id="cb3">
+<div class="codewrapper sourceCode" id="cb2">
 <h3 class="code-label">R<i aria-hidden="true" data-feather="chevron-left"></i><i aria-hidden="true" data-feather="chevron-right"></i>
 </h3>
 <pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">se</span> <span class="op">&lt;-</span> <span class="fu">readRDS</span><span class="op">(</span><span class="st">"data/GSE96870_se.rds"</span><span class="op">)</span></span></code></pre>
 </div>
-<p>Exploratory analysis is crucial for quality control and to get to
+</section><section id="remove-unexpressed-genes"><h2 class="section-heading">Remove unexpressed genes<a class="anchor" aria-label="anchor" href="#remove-unexpressed-genes"></a>
+</h2>
+<hr class="half-width"><p>Exploratory analysis is crucial for quality control and to get to
 know our data. It can help us detect quality problems, sample swaps and
 contamination, as well as give us a sense of the most salient patterns
 present in the data. In this episode, we will learn about two common
@@ -387,7 +384,7 @@ a gene’s expression was detectable or not; here we are going to use a
 very minimal one that if a gene does not have more than 5 counts total
 across all samples, there is simply not enough data to be able to do
 anything with it anyway.</p>
-<div class="codewrapper sourceCode" id="cb4">
+<div class="codewrapper sourceCode" id="cb3">
 <h3 class="code-label">R<i aria-hidden="true" data-feather="chevron-left"></i><i aria-hidden="true" data-feather="chevron-right"></i>
 </h3>
 <pre class="downlit sourceCode r">
@@ -398,7 +395,7 @@ anything with it anyway.</p>
 </h3>
 <pre class="output" tabindex="0"><code>[1] 41786</code></pre>
 </div>
-<div class="codewrapper sourceCode" id="cb6">
+<div class="codewrapper sourceCode" id="cb5">
 <h3 class="code-label">R<i aria-hidden="true" data-feather="chevron-left"></i><i aria-hidden="true" data-feather="chevron-right"></i>
 </h3>
 <pre class="downlit sourceCode r">
@@ -411,6 +408,49 @@ anything with it anyway.</p>
 </h3>
 <pre class="output" tabindex="0"><code>[1] 27430</code></pre>
 </div>
+<div id="challenge-what-kind-of-genes-survived-this-filtering" class="callout discussion">
+<div class="callout-square">
+<i class="callout-icon" data-feather="message-circle"></i>
+</div>
+<div id="challenge-what-kind-of-genes-survived-this-filtering" class="callout-inner">
+<h3 class="callout-title">Challenge: What kind of genes survived this
+filtering?<a class="anchor" aria-label="anchor" href="#challenge-what-kind-of-genes-survived-this-filtering"></a>
+</h3>
+<div class="callout-content">
+<p>Last episode we discussed subsetting down to only mRNA genes. Here we
+subsetted based on a minimal expression level. How many of each type of
+gene survived the filtering?</p>
+</div>
+</div>
+</div>
+<div id="accordionSolution1" class="accordion challenge-accordion accordion-flush">
+<div class="accordion-item">
+<button class="accordion-button solution-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapseSolution1" aria-expanded="false" aria-controls="collapseSolution1">
+  <h4 class="accordion-header" id="headingSolution1">
+  Show me the solution
+  </h4>
+</button>
+<div id="collapseSolution1" class="accordion-collapse collapse" data-bs-parent="#accordionSolution1" aria-labelledby="headingSolution1">
+<div class="accordion-body">
+<div class="codewrapper sourceCode" id="cb7">
+<h3 class="code-label">R<i aria-hidden="true" data-feather="chevron-left"></i><i aria-hidden="true" data-feather="chevron-right"></i>
+</h3>
+<pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="fu">table</span><span class="op">(</span><span class="fu">rowData</span><span class="op">(</span><span class="va">se</span><span class="op">)</span><span class="op">$</span><span class="va">gbkey</span><span class="op">)</span></span></code></pre>
+</div>
+<div class="codewrapper">
+<h3 class="code-label">OUTPUT<i aria-hidden="true" data-feather="chevron-left"></i><i aria-hidden="true" data-feather="chevron-right"></i>
+</h3>
+<pre class="output" tabindex="0"><code>
+     C_region          exon     J_segment      misc_RNA          mRNA 
+           14          1765            14          1539         16859 
+        ncRNA precursor_RNA          rRNA          tRNA     V_segment 
+         6789           362             2            64            22 </code></pre>
+</div>
+</div>
+</div>
+</div>
+</div>
 </section><section id="library-size-differences"><h2 class="section-heading">Library size differences<a class="anchor" aria-label="anchor" href="#library-size-differences"></a>
 </h2>
 <hr class="half-width"><p>Differences in the total number of reads assigned to genes between
@@ -421,9 +461,8 @@ expresses the gene more strongly - the higher count may be caused by an
 overall higher number of reads in that sample. In the rest of this
 section, we will use the term <em>library size</em> to refer to the
 total number of reads assigned to genes for a sample. First we should
-examine of each sample, or the total number of mapped reads across all
-genes for a sample.</p>
-<div class="codewrapper sourceCode" id="cb8">
+compare the library sizes of all samples.</p>
+<div class="codewrapper sourceCode" id="cb9">
 <h3 class="code-label">R<i aria-hidden="true" data-feather="chevron-left"></i><i aria-hidden="true" data-feather="chevron-right"></i>
 </h3>
 <pre class="downlit sourceCode r">
@@ -442,7 +481,7 @@ genes for a sample.</p>
 <span>         <span class="fu">labs</span><span class="op">(</span>x <span class="op">=</span> <span class="st">"Sample"</span>, y <span class="op">=</span> <span class="st">"Total count in millions"</span><span class="op">)</span> <span class="op">+</span> </span>
 <span>         <span class="fu">theme</span><span class="op">(</span>axis.text.x <span class="op">=</span> <span class="fu">element_text</span><span class="op">(</span>angle <span class="op">=</span> <span class="fl">45</span>, hjust <span class="op">=</span> <span class="fl">1</span>, vjust <span class="op">=</span> <span class="fl">1</span><span class="op">)</span><span class="op">)</span></span></code></pre>
 </div>
-<figure><img src="fig/04-exploratory-qc-rendered-unnamed-chunk-5-1.png" style="display: block; margin: auto;" class="figure mx-auto d-block"></figure><p>We need to adjust for the differences in library size between
+<figure><img src="fig/04-exploratory-qc-rendered-unnamed-chunk-6-1.png" style="display: block; margin: auto;" class="figure mx-auto d-block"></figure><p>We need to adjust for the differences in library size between
 samples, to avoid drawing incorrect conclusions. The way this is
 typically done for RNA-seq data can be described as a two-step
 procedure. First, we estimate <em>size factors</em> - sample-specific
@@ -468,7 +507,7 @@ low counts. We now switch our <code>SummarizedExperiment</code> object
 over to a <code>DESeqDataSet</code> as it has the internal structure to
 store these size factors. We also need to tell it our main experiment
 design, which is sex and time:</p>
-<div class="codewrapper sourceCode" id="cb9">
+<div class="codewrapper sourceCode" id="cb10">
 <h3 class="code-label">R<i aria-hidden="true" data-feather="chevron-left"></i><i aria-hidden="true" data-feather="chevron-right"></i>
 </h3>
 <pre class="downlit sourceCode r">
@@ -480,11 +519,15 @@ design, which is sex and time:</p>
 <pre class="warning" tabindex="0"><code>Warning in DESeq2::DESeqDataSet(se, design = ~sex + time): some variables in
 design formula are characters, converting to factors</code></pre>
 </div>
-<div class="codewrapper sourceCode" id="cb11">
+<div class="codewrapper sourceCode" id="cb12">
 <h3 class="code-label">R<i aria-hidden="true" data-feather="chevron-left"></i><i aria-hidden="true" data-feather="chevron-right"></i>
 </h3>
 <pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">dds</span> <span class="op">&lt;-</span> <span class="fu">estimateSizeFactors</span><span class="op">(</span><span class="va">dds</span><span class="op">)</span></span>
+<span></span>
+<span><span class="co"># Plot the size factors against library size</span></span>
+<span><span class="co"># and look for any patterns by group:</span></span>
+<span></span>
 <span><span class="fu">ggplot</span><span class="op">(</span><span class="fu">data.frame</span><span class="op">(</span>libSize <span class="op">=</span> <span class="fu">colSums</span><span class="op">(</span><span class="fu">assay</span><span class="op">(</span><span class="va">dds</span><span class="op">)</span><span class="op">)</span>,</span>
 <span>                  sizeFactor <span class="op">=</span> <span class="fu">sizeFactors</span><span class="op">(</span><span class="va">dds</span><span class="op">)</span>,</span>
 <span>                  Group <span class="op">=</span> <span class="va">dds</span><span class="op">$</span><span class="va">Group</span><span class="op">)</span>,</span>
@@ -492,34 +535,44 @@ design formula are characters, converting to factors</code></pre>
 <span>    <span class="fu">geom_point</span><span class="op">(</span>size <span class="op">=</span> <span class="fl">5</span><span class="op">)</span> <span class="op">+</span> <span class="fu">theme_bw</span><span class="op">(</span><span class="op">)</span> <span class="op">+</span> </span>
 <span>    <span class="fu">labs</span><span class="op">(</span>x <span class="op">=</span> <span class="st">"Library size"</span>, y <span class="op">=</span> <span class="st">"Size factor"</span><span class="op">)</span></span></code></pre>
 </div>
-<figure><img src="fig/04-exploratory-qc-rendered-unnamed-chunk-6-1.png" style="display: block; margin: auto;" class="figure mx-auto d-block"></figure></section><section id="transform-data"><h2 class="section-heading">Transform data<a class="anchor" aria-label="anchor" href="#transform-data"></a>
+<figure><img src="fig/04-exploratory-qc-rendered-unnamed-chunk-7-1.png" style="display: block; margin: auto;" class="figure mx-auto d-block"></figure></section><section id="transform-data"><h2 class="section-heading">Transform data<a class="anchor" aria-label="anchor" href="#transform-data"></a>
 </h2>
 <hr class="half-width"><p>There is a rich literature on methods for exploratory analysis. Most
 of these work best in situations where the variance of the input data
 (here, each gene) is relatively independent of the average value. For
 read count data such as RNA-seq, this is not the case. In fact, the
 variance increases with the average read count.</p>
-<div class="codewrapper sourceCode" id="cb12">
+<div class="codewrapper sourceCode" id="cb13">
 <h3 class="code-label">R<i aria-hidden="true" data-feather="chevron-left"></i><i aria-hidden="true" data-feather="chevron-right"></i>
 </h3>
 <pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="fu">meanSdPlot</span><span class="op">(</span><span class="fu">assay</span><span class="op">(</span><span class="va">dds</span><span class="op">)</span>, ranks <span class="op">=</span> <span class="cn">FALSE</span><span class="op">)</span></span></code></pre>
 </div>
-<figure><img src="fig/04-exploratory-qc-rendered-unnamed-chunk-7-1.png" style="display: block; margin: auto;" class="figure mx-auto d-block"></figure><p>There are two ways around this: either we develop methods
+<figure><img src="fig/04-exploratory-qc-rendered-unnamed-chunk-8-1.png" style="display: block; margin: auto;" class="figure mx-auto d-block"></figure><p>There are two ways around this: either we develop methods
 specifically adapted to count data, or we adapt (transform) the count
 data so that the existing methods are applicable. Both ways have been
 explored; however, at the moment the second approach is arguably more
-widely applied in practice.</p>
-<div class="codewrapper sourceCode" id="cb13">
+widely applied in practice. We can transform our data using DESeq2’s
+variance stablizing transformation and then verify that is had removed
+the correlation between average read count and variance.</p>
+<div class="codewrapper sourceCode" id="cb14">
 <h3 class="code-label">R<i aria-hidden="true" data-feather="chevron-left"></i><i aria-hidden="true" data-feather="chevron-right"></i>
 </h3>
 <pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">vsd</span> <span class="op">&lt;-</span> <span class="fu">DESeq2</span><span class="fu">::</span><span class="fu">vst</span><span class="op">(</span><span class="va">dds</span>, blind <span class="op">=</span> <span class="cn">TRUE</span><span class="op">)</span></span>
 <span><span class="fu">meanSdPlot</span><span class="op">(</span><span class="fu">assay</span><span class="op">(</span><span class="va">vsd</span><span class="op">)</span>, ranks <span class="op">=</span> <span class="cn">FALSE</span><span class="op">)</span></span></code></pre>
 </div>
-<figure><img src="fig/04-exploratory-qc-rendered-unnamed-chunk-8-1.png" style="display: block; margin: auto;" class="figure mx-auto d-block"></figure></section><section id="heatmaps-and-clustering"><h2 class="section-heading">Heatmaps and clustering<a class="anchor" aria-label="anchor" href="#heatmaps-and-clustering"></a>
+<figure><img src="fig/04-exploratory-qc-rendered-unnamed-chunk-9-1.png" style="display: block; margin: auto;" class="figure mx-auto d-block"></figure></section><section id="heatmaps-and-clustering"><h2 class="section-heading">Heatmaps and clustering<a class="anchor" aria-label="anchor" href="#heatmaps-and-clustering"></a>
 </h2>
-<hr class="half-width"><div class="codewrapper sourceCode" id="cb14">
+<hr class="half-width"><p>There are many ways to cluster samples based on their similarity of
+expression patterns. One simple way is to calculate Euclidean distances
+between all pairs of samples (longer distance = more different) and then
+display the results with both a branching dendrogram and a heatmap to
+visualize the distances in color. From this, we infer that the Day 8
+samples are more similar to each other than the rest of the samples,
+although Day 4 and Day 0 do not separate distinctly. Instead, males and
+females reliably separate.</p>
+<div class="codewrapper sourceCode" id="cb15">
 <h3 class="code-label">R<i aria-hidden="true" data-feather="chevron-left"></i><i aria-hidden="true" data-feather="chevron-right"></i>
 </h3>
 <pre class="downlit sourceCode r">
@@ -538,7 +591,7 @@ widely applied in practice.</p>
 <span>                   time <span class="op">=</span> <span class="fu">c</span><span class="op">(</span>Day0 <span class="op">=</span> <span class="st">"yellow"</span>, Day4 <span class="op">=</span> <span class="st">"forestgreen"</span>, Day8 <span class="op">=</span> <span class="st">"purple"</span><span class="op">)</span><span class="op">)</span><span class="op">)</span></span>
 <span><span class="op">)</span></span></code></pre>
 </div>
-<figure><img src="fig/04-exploratory-qc-rendered-unnamed-chunk-9-1.png" style="display: block; margin: auto;" class="figure mx-auto d-block"></figure></section><section id="pca"><h2 class="section-heading">PCA<a class="anchor" aria-label="anchor" href="#pca"></a>
+<figure><img src="fig/04-exploratory-qc-rendered-unnamed-chunk-10-1.png" style="display: block; margin: auto;" class="figure mx-auto d-block"></figure></section><section id="pca"><h2 class="section-heading">PCA<a class="anchor" aria-label="anchor" href="#pca"></a>
 </h2>
 <hr class="half-width"><p>Principal component analysis is a dimensionality reduction method,
 which projects the samples into a lower-dimensional space. This
@@ -557,7 +610,7 @@ ones. The fraction of explained variance is a measure of how much of the
 ‘signal’ in the data that is retained when we project the samples from
 the original, high-dimensional space to the low-dimensional space for
 visualization.</p>
-<div class="codewrapper sourceCode" id="cb15">
+<div class="codewrapper sourceCode" id="cb16">
 <h3 class="code-label">R<i aria-hidden="true" data-feather="chevron-left"></i><i aria-hidden="true" data-feather="chevron-right"></i>
 </h3>
 <pre class="downlit sourceCode r">
@@ -572,9 +625,9 @@ visualization.</p>
 <span>    <span class="fu">coord_fixed</span><span class="op">(</span><span class="op">)</span> <span class="op">+</span> </span>
 <span>    <span class="fu">scale_color_manual</span><span class="op">(</span>values <span class="op">=</span> <span class="fu">c</span><span class="op">(</span>Male <span class="op">=</span> <span class="st">"blue"</span>, Female <span class="op">=</span> <span class="st">"red"</span><span class="op">)</span><span class="op">)</span></span></code></pre>
 </div>
-<figure><img src="fig/04-exploratory-qc-rendered-unnamed-chunk-10-1.png" style="display: block; margin: auto;" class="figure mx-auto d-block"></figure></section><section id="session-info"><h2 class="section-heading">Session info<a class="anchor" aria-label="anchor" href="#session-info"></a>
+<figure><img src="fig/04-exploratory-qc-rendered-unnamed-chunk-11-1.png" style="display: block; margin: auto;" class="figure mx-auto d-block"></figure></section><section id="session-info"><h2 class="section-heading">Session info<a class="anchor" aria-label="anchor" href="#session-info"></a>
 </h2>
-<hr class="half-width"><div class="codewrapper sourceCode" id="cb16">
+<hr class="half-width"><div class="codewrapper sourceCode" id="cb17">
 <h3 class="code-label">R<i aria-hidden="true" data-feather="chevron-left"></i><i aria-hidden="true" data-feather="chevron-right"></i>
 </h3>
 <pre class="downlit sourceCode r">
@@ -708,8 +761,8 @@ work directly on the raw counts.</li>
   "url": "https://carpentries-incubator.github.io/bioc-rnaseq/04-exploratory-qc.html",
   "identifier": "https://carpentries-incubator.github.io/bioc-rnaseq/04-exploratory-qc.html",
   "dateCreated": "2020-09-15",
-  "dateModified": "2023-07-26",
-  "datePublished": "2023-07-26"
+  "dateModified": "2023-07-27",
+  "datePublished": "2023-07-27"
 }
 
   </script><script>
