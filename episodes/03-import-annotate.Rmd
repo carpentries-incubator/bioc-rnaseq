@@ -294,7 +294,7 @@ Before, we conceptually discussed subsetting to only the mRNA genes. Now that we
 
 ::::::::::::::::::::::::::::::::::: solution
 
-```{r eval=FALSE}
+```{r }
 se_mRNA <- se[rowData(se)$gbkey == "mRNA" , ]
 dim(se_mRNA)
 
