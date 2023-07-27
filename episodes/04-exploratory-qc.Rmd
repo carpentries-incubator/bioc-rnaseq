@@ -89,7 +89,7 @@ Last episode we discussed subsetting down to only mRNA genes. Here we subsetted 
 ::::::::::::::::::::::::::::::::::: solution
 
 ```{r }
-table(rowData(se)$gbkey == "mRNA")
+table(rowData(se)$gbkey)
 
 
 ```
