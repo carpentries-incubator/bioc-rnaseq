@@ -5,9 +5,6 @@ teaching: 15
 exercises: 15
 ---
 
-```{r, echo=FALSE, purl=FALSE, message=FALSE, warning = FALSE}
-source("download_data.R")
-```
 
 ::::::::::::::::::::::::::::::::::::::: objectives
 
