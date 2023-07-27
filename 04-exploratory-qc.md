@@ -8,10 +8,6 @@ editor_options:
 ---
 
 
-```{.warning}
-Warning: replacing previous import 'S4Arrays::makeNindexFromArrayViewport' by
-'DelayedArray::makeNindexFromArrayViewport' when loading 'SummarizedExperiment'
-```
 
 ::::::::::::::::::::::::::::::::::::::: objectives
 
@@ -62,6 +58,9 @@ suppressPackageStartupMessages({
 se <- readRDS("data/GSE96870_se.rds")
 ```
 
+
+## Remove unexpressed genes
+
 Exploratory analysis is crucial for quality control and to get to know our data.
 It can help us detect quality problems, sample swaps and contamination, as well as give us a sense of the most salient patterns present in the data.
 In this episode, we will learn about two common ways of performing exploratory analysis for RNA-seq data; namely clustering and principal component analysis (PCA).
@@ -87,10 +86,37 @@ nrow(se)
 [1] 27430
 ```
 
+
+:::::::::::::::::::::::::::::::::::::::  challenge
+
+## Challenge: What kind of genes survived this filtering?
+
+Last episode we discussed subsetting down to only mRNA genes. Here we subsetted based on a minimal expression level. How many of each type of gene survived the filtering?
+  
+::::::::::::::::::::::::::::::::::::::::::::::::::
+
+::::::::::::::::::::::::::::::::::: solution
+
+
+```r
+table(rowData(se)$gbkey)
+```
+
+```{.output}
+
+     C_region          exon     J_segment      misc_RNA          mRNA 
+           14          1765            14          1539         16859 
+        ncRNA precursor_RNA          rRNA          tRNA     V_segment 
+         6789           362             2            64            22 
+```
+
+:::::::::::::::::::::::::::::::::::
+
+
 ## Library size differences
 
 Differences in the total number of reads assigned to genes between samples typically occur for technical reasons. In practice, it means that we can not simply compare a gene's raw read count directly between samples and conclude that a sample with a higher read count also expresses the gene more strongly - the higher count may be caused by an overall higher number of reads in that sample.
-In the rest of this section, we will use the term *library size* to refer to the total number of reads assigned to genes for a sample. First we should examine of each sample, or the total number of mapped reads across all genes for a sample. 
+In the rest of this section, we will use the term *library size* to refer to the total number of reads assigned to genes for a sample. First we should compare the library sizes of all samples. 
 
 
 ```r
@@ -110,7 +136,7 @@ colData(se) |>
          theme(axis.text.x = element_text(angle = 45, hjust = 1, vjust = 1))
 ```
 
-<img src="fig/04-exploratory-qc-rendered-unnamed-chunk-5-1.png" style="display: block; margin: auto;" />
+<img src="fig/04-exploratory-qc-rendered-unnamed-chunk-6-1.png" style="display: block; margin: auto;" />
 
 
 We need to adjust for the differences in library size between samples, to avoid drawing incorrect conclusions. The way this is typically done for RNA-seq data can be described as a two-step procedure.
@@ -137,6 +163,10 @@ design formula are characters, converting to factors
 
 ```r
 dds <- estimateSizeFactors(dds)
+
+# Plot the size factors against library size
+# and look for any patterns by group:
+
 ggplot(data.frame(libSize = colSums(assay(dds)),
                   sizeFactor = sizeFactors(dds),
                   Group = dds$Group),
@@ -145,7 +175,7 @@ ggplot(data.frame(libSize = colSums(assay(dds)),
     labs(x = "Library size", y = "Size factor")
 ```
 
-<img src="fig/04-exploratory-qc-rendered-unnamed-chunk-6-1.png" style="display: block; margin: auto;" />
+<img src="fig/04-exploratory-qc-rendered-unnamed-chunk-7-1.png" style="display: block; margin: auto;" />
 
 ## Transform data
 
@@ -159,10 +189,10 @@ In fact, the variance increases with the average read count.
 meanSdPlot(assay(dds), ranks = FALSE)
 ```
 
-<img src="fig/04-exploratory-qc-rendered-unnamed-chunk-7-1.png" style="display: block; margin: auto;" />
+<img src="fig/04-exploratory-qc-rendered-unnamed-chunk-8-1.png" style="display: block; margin: auto;" />
 
 There are two ways around this: either we develop methods specifically adapted to count data, or we adapt (transform) the count data so that the existing methods are applicable.
-Both ways have been explored; however, at the moment the second approach is arguably more widely applied in practice.
+Both ways have been explored; however, at the moment the second approach is arguably more widely applied in practice. We can transform our data using DESeq2's variance stablizing transformation and then verify that is had removed the correlation between average read count and variance.
 
 
 ```r
@@ -170,9 +200,11 @@ vsd <- DESeq2::vst(dds, blind = TRUE)
 meanSdPlot(assay(vsd), ranks = FALSE)
 ```
 
-<img src="fig/04-exploratory-qc-rendered-unnamed-chunk-8-1.png" style="display: block; margin: auto;" />
+<img src="fig/04-exploratory-qc-rendered-unnamed-chunk-9-1.png" style="display: block; margin: auto;" />
 
 ## Heatmaps and clustering
+
+There are many ways to cluster samples based on their similarity of expression patterns. One simple way is to calculate Euclidean distances between all pairs of samples (longer distance = more different) and then display the results with both a branching dendrogram and a heatmap to visualize the distances in color. From this, we infer that the Day 8 samples are more similar to each other than the rest of the samples, although Day 4 and Day 0 do not separate distinctly. Instead, males and females reliably separate.
 
 
 ```r
@@ -192,7 +224,7 @@ ComplexHeatmap::Heatmap(
 )
 ```
 
-<img src="fig/04-exploratory-qc-rendered-unnamed-chunk-9-1.png" style="display: block; margin: auto;" />
+<img src="fig/04-exploratory-qc-rendered-unnamed-chunk-10-1.png" style="display: block; margin: auto;" />
 
 ## PCA
 
@@ -219,7 +251,7 @@ ggplot(pcaData, aes(x = PC1, y = PC2)) +
     scale_color_manual(values = c(Male = "blue", Female = "red"))
 ```
 
-<img src="fig/04-exploratory-qc-rendered-unnamed-chunk-10-1.png" style="display: block; margin: auto;" />
+<img src="fig/04-exploratory-qc-rendered-unnamed-chunk-11-1.png" style="display: block; margin: auto;" />
 
 ## Session info
 

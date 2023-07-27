@@ -9,10 +9,8 @@ exercises: 30
 ---
 
 
-```{.warning}
-Warning: replacing previous import 'S4Arrays::makeNindexFromArrayViewport' by
-'DelayedArray::makeNindexFromArrayViewport' when loading 'SummarizedExperiment'
-```
+
+
 
 ::::::::::::::::::::::::::::::::::::::: objectives
 -   Learn how to import the quantifications into a SummarizedExperiment object.
@@ -323,6 +321,45 @@ dim(assay(se))
 ```
 
 ```r
+# The above works now because we only have one assay, "counts"
+# But if there were more than one assay, we would have to specify
+# which one like so:
+
+head(assay(se, "counts"))
+```
+
+```{.output}
+             GSM2545336 GSM2545337 GSM2545338 GSM2545339 GSM2545340 GSM2545341
+Xkr4               1891       2410       2159       1980       1977       1945
+LOC105243853          0          0          1          4          0          0
+LOC105242387        204        121        110        120        172        173
+LOC105242467         12          5          5          5          2          6
+Rp1                   2          2          0          3          2          1
+Sox17               251        239        218        220        261        232
+             GSM2545342 GSM2545343 GSM2545344 GSM2545345 GSM2545346 GSM2545347
+Xkr4               1757       2235       1779       1528       1644       1585
+LOC105243853          1          3          3          0          1          3
+LOC105242387        177        130        131        160        180        176
+LOC105242467          3          2          2          2          1          2
+Rp1                   3          1          1          2          2          2
+Sox17               179        296        233        271        205        230
+             GSM2545348 GSM2545349 GSM2545350 GSM2545351 GSM2545352 GSM2545353
+Xkr4               2275       1881       2584       1837       1890       1910
+LOC105243853          1          0          0          1          1          0
+LOC105242387        161        154        124        221        272        214
+LOC105242467          2          4          7          1          3          1
+Rp1                   3          6          5          3          5          1
+Sox17               302        286        325        201        267        322
+             GSM2545354 GSM2545362 GSM2545363 GSM2545380
+Xkr4               1771       2315       1645       1723
+LOC105243853          0          1          0          1
+LOC105242387        124        189        223        251
+LOC105242467          4          2          1          4
+Rp1                   3          3          1          0
+Sox17               273        197        310        246
+```
+
+```r
 # Access the sample annotations
 colData(se)
 ```
@@ -503,6 +540,30 @@ We have now created an external .rds file that represents our RNA-Seq data in a 
 If you conducted the original experiment ideally you would have the complete record of where and how the data were generated. But you might use publicly-available data sets so the best you can do is to keep track of what original files you got from where and what manipulations you have done to them. Using R codes to keep track of everything is an excellent way to be able to reproduce the entire analysis from the original input files. The exact results you get can differ depending on the R version, add-on package versions and even what operating system you use, so make sure to keep track of all this information as well by running `sessionInfo()` and recording the output (see example at end of lesson). 
 
 
+:::::::::::::::::::::::::::::::::::::::  challenge
+
+## Challenge: How to subset to mRNA genes
+
+Before, we conceptually discussed subsetting to only the mRNA genes. Now that we have our `SummarizedExperiment` object, it becomes much easier to write the codes to subset `se` to a new object called `se_mRNA` that contains only the genes/rows where the `rowData(se)$gbkey` is equal to mRNA. Write the codes and then check you correctly got the 16,859 mRNA genes:
+  
+::::::::::::::::::::::::::::::::::::::::::::::::::
+
+::::::::::::::::::::::::::::::::::: solution
+
+
+```r
+se_mRNA <- se[rowData(se)$gbkey == "mRNA" , ]
+dim(se_mRNA)
+```
+
+```{.output}
+[1] 21198    22
+```
+
+:::::::::::::::::::::::::::::::::::
+
+
+
 ## Gene Annotations
 Depending on who generates your count data, you might not have a nice file of 
 additional gene annotations. There may only be the count row names, which 
@@ -656,7 +717,7 @@ other attached packages:
  [7] MatrixGenerics_1.12.2       matrixStats_1.0.0          
  [9] GenomicRanges_1.52.0        GenomeInfoDb_1.36.1        
 [11] IRanges_2.34.1              S4Vectors_0.38.1           
-[13] BiocGenerics_0.46.0        
+[13] BiocGenerics_0.46.0         knitr_1.43                 
 
 loaded via a namespace (and not attached):
  [1] Matrix_1.6-0            bit_4.0.5               highr_0.10             
@@ -664,14 +725,13 @@ loaded via a namespace (and not attached):
  [7] crayon_1.5.2            blob_1.2.4              Biostrings_2.68.1      
 [10] bitops_1.0-7            png_0.1-8               fastmap_1.1.1          
 [13] lattice_0.21-8          R6_2.5.1                XVector_0.40.0         
-[16] S4Arrays_1.0.5          knitr_1.43              DelayedArray_0.26.6    
-[19] GenomeInfoDbData_1.2.10 DBI_1.1.3               rlang_1.1.1            
-[22] KEGGREST_1.40.0         cachem_1.0.8            xfun_0.39              
-[25] bit64_4.0.5             RSQLite_2.3.1           memoise_2.0.1          
-[28] cli_3.6.1               zlibbioc_1.46.0         grid_4.3.1             
-[31] vctrs_0.6.3             evaluate_0.21           abind_1.4-5            
-[34] RCurl_1.98-1.12         httr_1.4.6              pkgconfig_2.0.3        
-[37] tools_4.3.1            
+[16] S4Arrays_1.0.5          DelayedArray_0.26.6     GenomeInfoDbData_1.2.10
+[19] DBI_1.1.3               rlang_1.1.1             KEGGREST_1.40.0        
+[22] cachem_1.0.8            xfun_0.39               bit64_4.0.5            
+[25] RSQLite_2.3.1           memoise_2.0.1           cli_3.6.1              
+[28] zlibbioc_1.46.0         grid_4.3.1              vctrs_0.6.3            
+[31] evaluate_0.21           abind_1.4-5             RCurl_1.98-1.12        
+[34] httr_1.4.6              pkgconfig_2.0.3         tools_4.3.1            
 ```
 
 ::: keypoints
