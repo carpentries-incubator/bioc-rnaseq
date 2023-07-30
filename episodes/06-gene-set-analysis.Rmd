@@ -5,6 +5,11 @@ teaching: XX
 exercises: XX
 ---
 
+```{r, echo=FALSE, purl=FALSE, message=FALSE, warning = FALSE}
+source("download_data.R")
+```
+
+
 ```{r, echo = FALSE, message = FALSE}
 library(knitr)
 knitr::opts_chunk$set(
@@ -117,8 +122,6 @@ In the following code, there are also comments that explain every step of the
 analysis.
 
 ```{r, warning = FALSE}
-# download example datasets and generate `GSE96870_se.rds`
-source("download_data.R")
 
 library(SummarizedExperiment)
 library(DESeq2)
