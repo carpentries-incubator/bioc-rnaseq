@@ -115,8 +115,7 @@ between genders. The following code performs **DESeq2** analysis which you
 should have already learnt in the previous episode. In the end, we have a list
 of DE genes filtered by FDR < 0.05, and save it in the object `sexDEgenes`.
 
-The file `data/GSE96870_se.rds` contains a `RangedSummarizedExperiment` and it
-is downloaded and constructed in the script
+The file `data/GSE96870_se.rds` contains a `RangedSummarizedExperiment` contains RNA-Seq counts that were downloaded in Episode 2 and constructed in Episode 3 (minimal codes for downloading and constructing in the script
 [`download_data.R`](https://github.com/carpentries-incubator/bioc-rnaseq/blob/main/episodes/download_data.R).
 In the following code, there are also comments that explain every step of the
 analysis.
