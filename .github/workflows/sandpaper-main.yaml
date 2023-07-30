@@ -57,5 +57,6 @@ jobs:
         run: |
           reset <- "${{ github.event.inputs.reset }}" == "true"
           sandpaper::package_cache_trigger(TRUE)
+          options(sandpaper.handout = TRUE)
           sandpaper:::ci_deploy(reset = reset)
         shell: Rscript {0}
