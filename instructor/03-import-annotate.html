@@ -91,11 +91,11 @@
   RNA-seq analysis with Bioconductor
 </div>
 
-<aside class="col-md-12 lesson-progress"><div style="width: 25%" class="percentage">
-    25%
+<aside class="col-md-12 lesson-progress"><div style="width: 12%" class="percentage">
+    12%
   </div>
   <div class="progress incubator">
-    <div class="progress-bar incubator" role="progressbar" style="width: 25%" aria-valuenow="25" aria-label="Lesson Progress" aria-valuemin="0" aria-valuemax="100">
+    <div class="progress-bar incubator" role="progressbar" style="width: 12%" aria-valuenow="12" aria-label="Lesson Progress" aria-valuemin="0" aria-valuemax="100">
     </div>
   </div>
 </aside><div class="container">
@@ -267,6 +267,12 @@
 
             <hr class="d-none d-sm-block d-md-none"><div class="d-grid gap-1">
             
+              <form method="get" action="../files/code-handout.R">
+                <button action="submit" class="btn btn-primary-outline">Download Lesson Handout</button>
+              </form>
+              <!-- TODO: Generate Slides -->
+              <!-- <button class="btn btn-primary-outline">Export All Slides</button> -->
+            
             </div>
           </div><!-- /div.accordion -->
         </div><!-- /div.sidebar-inner -->
@@ -287,7 +293,7 @@
       </div>
       <hr></nav><main id="main-content" class="main-content"><div class="container lesson-content">
         <h1>Importing and annotating quantified data into R</h1>
-        <p> Last updated on 2023-07-27 | 
+        <p> Last updated on 2023-07-31 | 
         
         <a href="https://github.com/carpentries-incubator/bioc-rnaseq/edit/main/episodes/03-import-annotate.Rmd" class="external-link">Edit this page <i aria-hidden="true" data-feather="edit"></i></a></p>
         
@@ -528,7 +534,7 @@ have to do to remove those (generally speaking, not exact codes)?</li>
   Show me the solution
   </h4>
 </button>
-<div id="collapseSolution1" class="accordion-collapse collapse" data-bs-parent="#accordionSolution1" aria-labelledby="headingSolution1">
+<div id="collapseSolution1" class="accordion-collapse collapse" aria-labelledby="headingSolution1" data-bs-parent="#accordionSolution1">
 <div class="accordion-body">
 <ol style="list-style-type: decimal"><li>In <code>counts</code>, the rows are genes just like the rows in
 <code>rowranges</code>. The columns in <code>counts</code> are the
@@ -650,7 +656,7 @@ codes.</p>
   Show me the solution
   </h4>
 </button>
-<div id="collapseSolution2" class="accordion-collapse collapse" data-bs-parent="#accordionSolution2" aria-labelledby="headingSolution2">
+<div id="collapseSolution2" class="accordion-collapse collapse" aria-labelledby="headingSolution2" data-bs-parent="#accordionSolution2">
 <div class="accordion-body">
 <div class="codewrapper sourceCode" id="cb19">
 <h3 class="code-label">R<i aria-hidden="true" data-feather="chevron-left"></i><i aria-hidden="true" data-feather="chevron-right"></i>
@@ -1066,7 +1072,7 @@ codes and then check you correctly got the 16,859 mRNA genes:</p>
   Show me the solution
   </h4>
 </button>
-<div id="collapseSolution3" class="accordion-collapse collapse" data-bs-parent="#accordionSolution3" aria-labelledby="headingSolution3">
+<div id="collapseSolution3" class="accordion-collapse collapse" aria-labelledby="headingSolution3" data-bs-parent="#accordionSolution3">
 <div class="accordion-body">
 <div class="codewrapper sourceCode" id="cb47">
 <h3 class="code-label">R<i aria-hidden="true" data-feather="chevron-left"></i><i aria-hidden="true" data-feather="chevron-right"></i>
@@ -1256,7 +1262,7 @@ loaded via a namespace (and not attached):
  [7] crayon_1.5.2            blob_1.2.4              Biostrings_2.68.1      
 [10] bitops_1.0-7            png_0.1-8               fastmap_1.1.1          
 [13] lattice_0.21-8          R6_2.5.1                XVector_0.40.0         
-[16] S4Arrays_1.0.5          DelayedArray_0.26.6     GenomeInfoDbData_1.2.10
+[16] S4Arrays_1.0.5          DelayedArray_0.26.7     GenomeInfoDbData_1.2.10
 [19] DBI_1.1.3               rlang_1.1.1             KEGGREST_1.40.0        
 [22] cachem_1.0.8            xfun_0.39               bit64_4.0.5            
 [25] RSQLite_2.3.1           memoise_2.0.1           cli_3.6.1              
@@ -1335,8 +1341,8 @@ analysis, with gene symbols added for easier interpretation.</li>
   "url": "https://carpentries-incubator.github.io/bioc-rnaseq/instructor/03-import-annotate.html",
   "identifier": "https://carpentries-incubator.github.io/bioc-rnaseq/instructor/03-import-annotate.html",
   "dateCreated": "2020-09-15",
-  "dateModified": "2023-07-27",
-  "datePublished": "2023-07-30"
+  "dateModified": "2023-07-31",
+  "datePublished": "2023-07-31"
 }
 
   </script><script>

@@ -312,6 +312,12 @@
             <hr class="d-none d-sm-block d-md-none">
 <div class="d-grid gap-1">
             
+              <form method="get" action="../files/code-handout.R">
+                <button action="submit" class="btn btn-primary-outline">Download Lesson Handout</button>
+              </form>
+              <!-- TODO: Generate Slides -->
+              <!-- <button class="btn btn-primary-outline">Export All Slides</button> -->
+            
             </div>
           </div>
 <!-- /div.accordion -->
@@ -644,7 +650,7 @@ directory, create the four fundamental directories previously discussed
   Show me the solution
   </h4>
 </button>
-<div id="collapseSolution1" class="accordion-collapse collapse" aria-labelledby="headingSolution1" data-bs-parent="#accordionSolution1">
+<div id="collapseSolution1" class="accordion-collapse collapse" data-bs-parent="#accordionSolution1" aria-labelledby="headingSolution1">
 <div class="accordion-body">
 <figure style="text-align: center"><img src="../fig/02_setup/folders_working_dir.png" alt="Your working directory should look like this" width="1221" class="figure mx-auto d-block"><figcaption>
 Your working directory should look like this
@@ -790,7 +796,7 @@ into the <code>data</code> folder in your working directory.</p>
   Show me the solution
   </h4>
 </button>
-<div id="collapseSolution2" class="accordion-collapse collapse" aria-labelledby="headingSolution2" data-bs-parent="#accordionSolution2">
+<div id="collapseSolution2" class="accordion-collapse collapse" data-bs-parent="#accordionSolution2" aria-labelledby="headingSolution2">
 <div class="accordion-body">
 <div class="codewrapper sourceCode" id="cb2">
 <h3 class="code-label">R<i aria-hidden="true" data-feather="chevron-left"></i><i aria-hidden="true" data-feather="chevron-right"></i>
@@ -837,7 +843,7 @@ downloading datasets from the internet.</li>
 </div>
 </section></section><section id="aio-03-import-annotate"><p>Content from <a href="03-import-annotate.html">Importing and annotating quantified data into R</a></p>
 <hr>
-<p> Last updated on 2023-07-27 | 
+<p> Last updated on 2023-07-31 | 
         
         <a href="https://github.com/carpentries-incubator/bioc-rnaseq/edit/main/episodes/03-import-annotate.Rmd" class="external-link">Edit this page <i aria-hidden="true" data-feather="edit"></i></a></p>
 <p>Estimated time <i aria-hidden="true" data-feather="clock"></i> 105 minutes </p>
@@ -1082,7 +1088,7 @@ have to do to remove those (generally speaking, not exact codes)?</li>
   Show me the solution
   </h4>
 </button>
-<div id="collapseSolution1" class="accordion-collapse collapse" data-bs-parent="#accordionSolution1" aria-labelledby="headingSolution1">
+<div id="collapseSolution1" class="accordion-collapse collapse" aria-labelledby="headingSolution1" data-bs-parent="#accordionSolution1">
 <div class="accordion-body">
 <ol style="list-style-type: decimal">
 <li>In <code>counts</code>, the rows are genes just like the rows in
@@ -1211,7 +1217,7 @@ codes.</p>
   Show me the solution
   </h4>
 </button>
-<div id="collapseSolution2" class="accordion-collapse collapse" data-bs-parent="#accordionSolution2" aria-labelledby="headingSolution2">
+<div id="collapseSolution2" class="accordion-collapse collapse" aria-labelledby="headingSolution2" data-bs-parent="#accordionSolution2">
 <div class="accordion-body">
 <div class="codewrapper sourceCode" id="cb19">
 <h3 class="code-label">R<i aria-hidden="true" data-feather="chevron-left"></i><i aria-hidden="true" data-feather="chevron-right"></i>
@@ -1629,7 +1635,7 @@ codes and then check you correctly got the 16,859 mRNA genes:</p>
   Show me the solution
   </h4>
 </button>
-<div id="collapseSolution3" class="accordion-collapse collapse" data-bs-parent="#accordionSolution3" aria-labelledby="headingSolution3">
+<div id="collapseSolution3" class="accordion-collapse collapse" aria-labelledby="headingSolution3" data-bs-parent="#accordionSolution3">
 <div class="accordion-body">
 <div class="codewrapper sourceCode" id="cb47">
 <h3 class="code-label">R<i aria-hidden="true" data-feather="chevron-left"></i><i aria-hidden="true" data-feather="chevron-right"></i>
@@ -1821,7 +1827,7 @@ loaded via a namespace (and not attached):
  [7] crayon_1.5.2            blob_1.2.4              Biostrings_2.68.1      
 [10] bitops_1.0-7            png_0.1-8               fastmap_1.1.1          
 [13] lattice_0.21-8          R6_2.5.1                XVector_0.40.0         
-[16] S4Arrays_1.0.5          DelayedArray_0.26.6     GenomeInfoDbData_1.2.10
+[16] S4Arrays_1.0.5          DelayedArray_0.26.7     GenomeInfoDbData_1.2.10
 [19] DBI_1.1.3               rlang_1.1.1             KEGGREST_1.40.0        
 [22] cachem_1.0.8            xfun_0.39               bit64_4.0.5            
 [25] RSQLite_2.3.1           memoise_2.0.1           cli_3.6.1              
@@ -1851,10 +1857,10 @@ analysis, with gene symbols added for easier interpretation.</li>
 </div>
 </section></section><section id="aio-04-exploratory-qc"><p>Content from <a href="04-exploratory-qc.html">Exploratory analysis and quality control</a></p>
 <hr>
-<p> Last updated on 2023-07-27 | 
+<p> Last updated on 2023-07-31 | 
         
         <a href="https://github.com/carpentries-incubator/bioc-rnaseq/edit/main/episodes/04-exploratory-qc.Rmd" class="external-link">Edit this page <i aria-hidden="true" data-feather="edit"></i></a></p>
-<p>Estimated time <i aria-hidden="true" data-feather="clock"></i> NA minutes </p>
+<p>Estimated time <i aria-hidden="true" data-feather="clock"></i> 105 minutes </p>
 <div class="text-end">
           <button role="button" aria-pressed="false" tabindex="0" id="expand-code" class="pull-right"> Expand All Solutions <i aria-hidden="true" data-feather="plus"></i></button>
         </div>
@@ -1995,7 +2001,7 @@ gene survived the filtering?</p>
   Show me the solution
   </h4>
 </button>
-<div id="collapseSolution1" class="accordion-collapse collapse" aria-labelledby="headingSolution1" data-bs-parent="#accordionSolution1">
+<div id="collapseSolution1" class="accordion-collapse collapse" data-bs-parent="#accordionSolution1" aria-labelledby="headingSolution1">
 <div class="accordion-body">
 <div class="codewrapper sourceCode" id="cb7">
 <h3 class="code-label">R<i aria-hidden="true" data-feather="chevron-left"></i><i aria-hidden="true" data-feather="chevron-right"></i>
@@ -2248,7 +2254,7 @@ loaded via a namespace (and not attached):
 [22] compiler_4.3.1          munsell_0.5.0           codetools_0.2-19       
 [25] clue_0.3-64             RCurl_1.98-1.12         preprocessCore_1.62.1  
 [28] pillar_1.9.0            crayon_1.5.2            BiocParallel_1.34.2    
-[31] affy_1.78.2             DelayedArray_0.26.6     limma_3.56.2           
+[31] affy_1.78.2             DelayedArray_0.26.7     limma_3.56.2           
 [34] iterators_1.0.14        abind_1.4-5             foreach_1.5.2          
 [37] tidyselect_1.2.0        locfit_1.5-9.8          digest_0.6.33          
 [40] dplyr_1.1.2             labeling_0.4.2          colorspace_2.1-0       
@@ -2282,10 +2288,10 @@ work directly on the raw counts.</li>
 </div>
 </section></section><section id="aio-05-differential-expression"><p>Content from <a href="05-differential-expression.html">Differential expression analysis</a></p>
 <hr>
-<p> Last updated on 2023-07-27 | 
+<p> Last updated on 2023-07-31 | 
         
         <a href="https://github.com/carpentries-incubator/bioc-rnaseq/edit/main/episodes/05-differential-expression.Rmd" class="external-link">Edit this page <i aria-hidden="true" data-feather="edit"></i></a></p>
-<p>Estimated time <i aria-hidden="true" data-feather="clock"></i> NA minutes </p>
+<p>Estimated time <i aria-hidden="true" data-feather="clock"></i> 105 minutes </p>
 <div class="text-end">
           <button role="button" aria-pressed="false" tabindex="0" id="expand-code" class="pull-right"> Expand All Solutions <i aria-hidden="true" data-feather="plus"></i></button>
         </div>
@@ -3027,10 +3033,10 @@ beneficial.</li>
 </div>
 </section></section><section id="aio-06-gene-set-analysis"><p>Content from <a href="06-gene-set-analysis.html">Gene set enrichment analysis</a></p>
 <hr>
-<p> Last updated on 2023-07-20 | 
+<p> Last updated on 2023-07-31 | 
         
         <a href="https://github.com/carpentries-incubator/bioc-rnaseq/edit/main/episodes/06-gene-set-analysis.Rmd" class="external-link">Edit this page <i aria-hidden="true" data-feather="edit"></i></a></p>
-<p>Estimated time <i aria-hidden="true" data-feather="clock"></i> NA minutes </p>
+<p>Estimated time <i aria-hidden="true" data-feather="clock"></i> 105 minutes </p>
 <div class="text-end">
           <button role="button" aria-pressed="false" tabindex="0" id="expand-code" class="pull-right"> Expand All Solutions <i aria-hidden="true" data-feather="plus"></i></button>
         </div>
@@ -3127,18 +3133,17 @@ comparison between genders. The following code performs
 the previous episode. In the end, we have a list of DE genes filtered by
 FDR &lt; 0.05, and save it in the object <code>sexDEgenes</code>.</p>
 <p>The file <code>data/GSE96870_se.rds</code> contains a
-<code>RangedSummarizedExperiment</code> and it is downloaded and
-constructed in the script <a href="https://github.com/carpentries-incubator/bioc-rnaseq/blob/main/episodes/download_data.R" class="external-link"><code>download_data.R</code></a>.
+<code>RangedSummarizedExperiment</code> contains RNA-Seq counts that
+were downloaded in <a href="02-setup.html">Episode 2</a> and constructed
+in <a href="03-import-annotate.html">Episode 3</a> (minimal codes for
+downloading and constructing in the script <a href="https://github.com/carpentries-incubator/bioc-rnaseq/blob/main/episodes/download_data.R" class="external-link"><code>download_data.R</code></a>.
 In the following code, there are also comments that explain every step
 of the analysis.</p>
 <div class="codewrapper sourceCode" id="cb2">
 <h3 class="code-label">R<i aria-hidden="true" data-feather="chevron-left"></i><i aria-hidden="true" data-feather="chevron-right"></i>
 </h3>
 <pre class="downlit sourceCode r">
-<code class="sourceCode R"><span><span class="co"># download example datasets and generate `GSE96870_se.rds`</span></span>
-<span><span class="kw">source</span><span class="op">(</span><span class="st">"download_data.R"</span><span class="op">)</span></span>
-<span></span>
-<span><span class="kw">library</span><span class="op">(</span><span class="va">SummarizedExperiment</span><span class="op">)</span></span>
+<code class="sourceCode R"><span><span class="kw">library</span><span class="op">(</span><span class="va">SummarizedExperiment</span><span class="op">)</span></span>
 <span><span class="kw">library</span><span class="op">(</span><span class="va">DESeq2</span><span class="op">)</span></span>
 <span></span>
 <span><span class="co"># read the example dataset which is a `RangedSummarizedExperiment` object</span></span>
@@ -3243,7 +3248,7 @@ diagram.</p>
 <span>               <span class="st">"XY gene set"</span> <span class="op">=</span> <span class="va">XYGeneSet</span><span class="op">)</span><span class="op">)</span><span class="op">)</span></span>
 <span><span class="fu">title</span><span class="op">(</span><span class="fu">paste0</span><span class="op">(</span><span class="st">"|universe| = "</span>, <span class="fu">length</span><span class="op">(</span><span class="va">totalGenes</span><span class="op">)</span><span class="op">)</span><span class="op">)</span></span></code></pre>
 </div>
-<figure><img src="../fig/06-gene-set-analysis-rendered-unnamed-chunk-7-1.png" style="display: block; margin: auto;" class="figure mx-auto d-block"></figure><p>In the Venn diagram, we can observe that around 1.1% (13/1134) of
+<figure><img src="../fig/06-gene-set-analysis-rendered-unnamed-chunk-8-1.png" style="display: block; margin: auto;" class="figure mx-auto d-block"></figure><p>In the Venn diagram, we can observe that around 1.1% (13/1134) of
 genes in the <em>XY gene set</em> are DE. Compared to the global
 fraction of DE genes (54/21198 = 0.25%), it seems there is a strong
 relations between DE genes and the gene set. We can also compare the
@@ -3497,7 +3502,7 @@ grab <span class="math inline">\(n_{+1}\)</span> genes (the size of the
 gene set) from the box and we want to ask <strong>what is the
 probability of having <span class="math inline">\(n_{11}\)</span> DE
 genes in our hand?</strong></p>
-<figure><img src="../fig/06-gene-set-analysis-rendered-unnamed-chunk-14-1.png" width="80%" style="display: block; margin: auto;" class="figure mx-auto d-block"></figure><p>We first calculate the total number of ways of picking <span class="math inline">\(n_{+1}\)</span> genes from total <span class="math inline">\(n\)</span> genes, without distinguishing whether
+<figure><img src="../fig/06-gene-set-analysis-rendered-unnamed-chunk-15-1.png" width="80%" style="display: block; margin: auto;" class="figure mx-auto d-block"></figure><p>We first calculate the total number of ways of picking <span class="math inline">\(n_{+1}\)</span> genes from total <span class="math inline">\(n\)</span> genes, without distinguishing whether
 they are DE or not: <span class="math inline">\(\binom{n}{n_{+1}}\)</span>.</p>
 <p>Next, in the <span class="math inline">\(n_{+1}\)</span> genes that
 have been picked, there are <span class="math inline">\(n_{11}\)</span>
@@ -3625,9 +3630,9 @@ distribution of its statistic.</p>
 <h3 class="code-label">OUTPUT<i aria-hidden="true" data-feather="chevron-left"></i><i aria-hidden="true" data-feather="chevron-right"></i>
 </h3>
 <pre class="output" tabindex="0"><code>Unit: microseconds
-   expr   min     lq    mean median    uq    max neval
- fisher 400.7 444.45 499.793 471.75 515.6 1055.5   100
-  hyper   1.8   2.55   5.059   4.85   5.5   25.0   100</code></pre>
+   expr   min    lq    mean median    uq    max neval
+ fisher 464.9 517.1 588.803 556.15 620.2 1218.1   100
+  hyper   2.0   3.0   5.274   5.60   6.6   26.2   100</code></pre>
 </div>
 <p>It is very astonishing that <code>phyper()</code> is hundreds of
 times faster than <code>fisher.test()</code>. Main reason is in
@@ -4447,7 +4452,7 @@ sets are automatically retrieved and processed from
 <div class="codewrapper">
 <h3 class="code-label">OUTPUT<i aria-hidden="true" data-feather="chevron-left"></i><i aria-hidden="true" data-feather="chevron-right"></i>
 </h3>
-<pre class="output" tabindex="0"><code>--&gt; Expected input gene ID: 21821,18430,16532,16410,106389,22042</code></pre>
+<pre class="output" tabindex="0"><code>--&gt; Expected input gene ID: 64383,27084,69286,66722,73677,215387</code></pre>
 </div>
 <div class="codewrapper">
 <h3 class="code-label">OUTPUT<i aria-hidden="true" data-feather="chevron-left"></i><i aria-hidden="true" data-feather="chevron-right"></i>
@@ -5041,7 +5046,7 @@ universe settings.</p>
 <span><span class="fu">legend</span><span class="op">(</span><span class="st">"topleft"</span>, legend <span class="op">=</span> <span class="fu">c</span><span class="op">(</span><span class="st">"all protein-coding genes as universe"</span>, <span class="st">"all genes as universe"</span><span class="op">)</span>, </span>
 <span>    pch <span class="op">=</span> <span class="fl">16</span>, col <span class="op">=</span> <span class="fu">c</span><span class="op">(</span><span class="fl">2</span>, <span class="fl">4</span><span class="op">)</span><span class="op">)</span></span></code></pre>
 </div>
-<figure><img src="../fig/06-gene-set-analysis-rendered-unnamed-chunk-47-1.png" style="display: block; margin: auto;" class="figure mx-auto d-block"></figure><p>It is very straightforward to see, with a larger universe, there are
+<figure><img src="../fig/06-gene-set-analysis-rendered-unnamed-chunk-48-1.png" style="display: block; margin: auto;" class="figure mx-auto d-block"></figure><p>It is very straightforward to see, with a larger universe, there are
 more significant gene sets, which may produce potentially more false
 positives. This is definitely worse when using all genes in the genome
 as universe.</p>
@@ -5124,13 +5129,13 @@ directly applied on <code>resTimeGO</code> returned by
 <pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="fu">barplot</span><span class="op">(</span><span class="va">resTimeGO</span>, showCategory <span class="op">=</span> <span class="fl">20</span><span class="op">)</span></span></code></pre>
 </div>
-<figure><img src="../fig/06-gene-set-analysis-rendered-unnamed-chunk-49-1.png" style="display: block; margin: auto;" class="figure mx-auto d-block"></figure><div class="codewrapper sourceCode" id="cb99">
+<figure><img src="../fig/06-gene-set-analysis-rendered-unnamed-chunk-50-1.png" style="display: block; margin: auto;" class="figure mx-auto d-block"></figure><div class="codewrapper sourceCode" id="cb99">
 <h3 class="code-label">R<i aria-hidden="true" data-feather="chevron-left"></i><i aria-hidden="true" data-feather="chevron-right"></i>
 </h3>
 <pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="fu">dotplot</span><span class="op">(</span><span class="va">resTimeGO</span>, showCategory <span class="op">=</span> <span class="fl">20</span><span class="op">)</span></span></code></pre>
 </div>
-<figure><img src="../fig/06-gene-set-analysis-rendered-unnamed-chunk-49-2.png" style="display: block; margin: auto;" class="figure mx-auto d-block"></figure><p>Barplots can map two variables to the plot, one to the height of bars
+<figure><img src="../fig/06-gene-set-analysis-rendered-unnamed-chunk-50-2.png" style="display: block; margin: auto;" class="figure mx-auto d-block"></figure><p>Barplots can map two variables to the plot, one to the height of bars
 and the other to the colors of bars; while for dotplot, sizes of dots
 can be mapped to a third variable. The variable names are in the colum
 names of the result table. Both plots include the top 20 most
@@ -5241,7 +5246,7 @@ significant gene sets.</p>
 <span>        label <span class="op">=</span> <span class="fu">sprintf</span><span class="op">(</span><span class="st">"%.2e"</span>, <span class="va">p.adjust</span><span class="op">)</span><span class="op">)</span>, hjust <span class="op">=</span> <span class="fl">1</span>, col <span class="op">=</span> <span class="st">"white"</span><span class="op">)</span> <span class="op">+</span></span>
 <span>    <span class="fu">ylab</span><span class="op">(</span><span class="st">""</span><span class="op">)</span></span></code></pre>
 </div>
-<figure><img src="../fig/06-gene-set-analysis-rendered-unnamed-chunk-54-1.png" style="display: block; margin: auto;" class="figure mx-auto d-block"></figure><p>In the next example, we use <em>z</em>-score as the primary variable
+<figure><img src="../fig/06-gene-set-analysis-rendered-unnamed-chunk-55-1.png" style="display: block; margin: auto;" class="figure mx-auto d-block"></figure><p>In the next example, we use <em>z</em>-score as the primary variable
 to map to the offset to origin, <code>DE_Ratio</code> and
 <code>Count</code> to map to dot colors and sizes.</p>
 <div class="codewrapper sourceCode" id="cb105">
@@ -5254,7 +5259,7 @@ to map to the offset to origin, <code>DE_Ratio</code> and
 <span>    <span class="fu">geom_point</span><span class="op">(</span><span class="op">)</span> <span class="op">+</span></span>
 <span>    <span class="fu">ylab</span><span class="op">(</span><span class="st">""</span><span class="op">)</span></span></code></pre>
 </div>
-<figure><img src="../fig/06-gene-set-analysis-rendered-unnamed-chunk-55-1.png" style="display: block; margin: auto;" class="figure mx-auto d-block"></figure><p>Both plots can highlight the gene set “leukocyte migration involved
+<figure><img src="../fig/06-gene-set-analysis-rendered-unnamed-chunk-56-1.png" style="display: block; margin: auto;" class="figure mx-auto d-block"></figure><p>Both plots can highlight the gene set “leukocyte migration involved
 in inflammatory response” is relatively small but highly enriched.</p>
 <p>Another useful visualization is the volcano plot. You may be aware of
 in differential expression analysis, in the volcano plot, x-axis
@@ -5277,7 +5282,7 @@ biologically sensible.</p>
 <span>    <span class="fu">geom_hline</span><span class="op">(</span>yintercept <span class="op">=</span> <span class="op">-</span><span class="fu">log10</span><span class="op">(</span><span class="fl">0.01</span><span class="op">)</span>, lty <span class="op">=</span> <span class="fl">2</span>, col <span class="op">=</span> <span class="st">"#444444"</span><span class="op">)</span> <span class="op">+</span></span>
 <span>    <span class="fu">geom_vline</span><span class="op">(</span>xintercept <span class="op">=</span> <span class="fl">1.5</span>, lty <span class="op">=</span> <span class="fl">2</span>, col <span class="op">=</span> <span class="st">"#444444"</span><span class="op">)</span></span></code></pre>
 </div>
-<figure><img src="../fig/06-gene-set-analysis-rendered-unnamed-chunk-56-1.png" style="display: block; margin: auto;" class="figure mx-auto d-block"></figure><p>In the “volcano plot”, we can observe the plot is composed by a list
+<figure><img src="../fig/06-gene-set-analysis-rendered-unnamed-chunk-57-1.png" style="display: block; margin: auto;" class="figure mx-auto d-block"></figure><p>In the “volcano plot”, we can observe the plot is composed by a list
 of curves. The trends are especially clear in the right bottom of the
 plot. Actually each “curve” corresponds to a same <code>"Count"</code>
 value (number of DE genes in a gene set). The volcano plot shows very
@@ -5352,7 +5357,7 @@ be easy to read.</p>
 <span>        label <span class="op">=</span> <span class="fu">sprintf</span><span class="op">(</span><span class="st">"%.2e"</span>, <span class="va">p.adjust</span><span class="op">)</span><span class="op">)</span>, hjust <span class="op">=</span> <span class="fl">1</span>, col <span class="op">=</span> <span class="st">"white"</span><span class="op">)</span> <span class="op">+</span></span>
 <span>    <span class="fu">ylab</span><span class="op">(</span><span class="st">""</span><span class="op">)</span></span></code></pre>
 </div>
-<figure><img src="../fig/06-gene-set-analysis-rendered-unnamed-chunk-58-1.png" style="display: block; margin: auto;" class="figure mx-auto d-block"></figure><p>Specifically for GO enrichment, it is often that GO enrichment
+<figure><img src="../fig/06-gene-set-analysis-rendered-unnamed-chunk-59-1.png" style="display: block; margin: auto;" class="figure mx-auto d-block"></figure><p>Specifically for GO enrichment, it is often that GO enrichment
 returns a long list of significant GO terms (e.g. several hundreds).
 This makes it difficult to summarize the common functions from the long
 list. The last package we will introduce is the
@@ -5923,7 +5928,7 @@ mean expression of a gene between male and female mice?</p>
   Show me the solution
   </h4>
 </button>
-<div id="collapseSolution1" class="accordion-collapse collapse" data-bs-parent="#accordionSolution1" aria-labelledby="headingSolution1">
+<div id="collapseSolution1" class="accordion-collapse collapse" aria-labelledby="headingSolution1" data-bs-parent="#accordionSolution1">
 <div class="accordion-body">
 <div class="codewrapper sourceCode" id="cb20">
 <h3 class="code-label">R<i aria-hidden="true" data-feather="chevron-left"></i><i aria-hidden="true" data-feather="chevron-right"></i>
@@ -6013,7 +6018,7 @@ Day4, Day8) in the male spinal cord samples, and visualize it using
   Show me the solution
   </h4>
 </button>
-<div id="collapseSolution2" class="accordion-collapse collapse" data-bs-parent="#accordionSolution2" aria-labelledby="headingSolution2">
+<div id="collapseSolution2" class="accordion-collapse collapse" aria-labelledby="headingSolution2" data-bs-parent="#accordionSolution2">
 <div class="accordion-body">
 <div class="codewrapper sourceCode" id="cb26">
 <h3 class="code-label">R<i aria-hidden="true" data-feather="chevron-left"></i><i aria-hidden="true" data-feather="chevron-right"></i>
@@ -6598,8 +6603,8 @@ linear combinations of the model coefficients.</li>
   "url": "https://carpentries-incubator.github.io/bioc-rnaseq/instructor/aio.html",
   "identifier": "https://carpentries-incubator.github.io/bioc-rnaseq/instructor/aio.html",
   "dateCreated": "2020-09-15",
-  "dateModified": "2023-07-30",
-  "datePublished": "2023-07-30"
+  "dateModified": "2023-07-31",
+  "datePublished": "2023-07-31"
 }
 
   </script><script>
