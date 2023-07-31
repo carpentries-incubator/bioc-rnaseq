@@ -1,8 +1,8 @@
 ---
 source: Rmd
 title: Differential expression analysis
-teaching: XX
-exercises: XX
+teaching: 60
+exercises: 45
 ---
 
 

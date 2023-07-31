@@ -1,8 +1,8 @@
 ---
 source: Rmd
 title: Exploratory analysis and quality control
-teaching: XX
-exercises: XX
+teaching: 60
+exercises: 45
 editor_options:
   chunk_output_type: console
 ---
@@ -303,7 +303,7 @@ loaded via a namespace (and not attached):
 [22] compiler_4.3.1          munsell_0.5.0           codetools_0.2-19       
 [25] clue_0.3-64             RCurl_1.98-1.12         preprocessCore_1.62.1  
 [28] pillar_1.9.0            crayon_1.5.2            BiocParallel_1.34.2    
-[31] affy_1.78.2             DelayedArray_0.26.6     limma_3.56.2           
+[31] affy_1.78.2             DelayedArray_0.26.7     limma_3.56.2           
 [34] iterators_1.0.14        abind_1.4-5             foreach_1.5.2          
 [37] tidyselect_1.2.0        locfit_1.5-9.8          digest_0.6.33          
 [40] dplyr_1.1.2             labeling_0.4.2          colorspace_2.1-0       

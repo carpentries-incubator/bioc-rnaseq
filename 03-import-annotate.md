@@ -725,7 +725,7 @@ loaded via a namespace (and not attached):
  [7] crayon_1.5.2            blob_1.2.4              Biostrings_2.68.1      
 [10] bitops_1.0-7            png_0.1-8               fastmap_1.1.1          
 [13] lattice_0.21-8          R6_2.5.1                XVector_0.40.0         
-[16] S4Arrays_1.0.5          DelayedArray_0.26.6     GenomeInfoDbData_1.2.10
+[16] S4Arrays_1.0.5          DelayedArray_0.26.7     GenomeInfoDbData_1.2.10
 [19] DBI_1.1.3               rlang_1.1.1             KEGGREST_1.40.0        
 [22] cachem_1.0.8            xfun_0.39               bit64_4.0.5            
 [25] RSQLite_2.3.1           memoise_2.0.1           cli_3.6.1              
