@@ -57,14 +57,19 @@ suppressPackageStartupMessages({
 
 ### Load data
 
+Let's load in our `SummarizedExperiment` object again. In the last episode for quality control exploration, we removed ~35% genes that had 5 or fewer counts because they had too little information in them. For DESeq2 statistical analysis, we do not technically have to remove these genes because by default it will do some independent filtering, but it can reduce the memory size of the `DESeqDataSet` object resulting in faster computation. Plus, we do not want these genes cluttering up some of the visualizations. 
+
 ```{r}
 se <- readRDS("data/GSE96870_se.rds")
+se <- se[rowSums(assay(se, "counts")) > 5, ]
 ```
 
 ### Create DESeqDataSet
 
+The design matrix we will use in this example is `~ sex + time`. This will allow us test the difference between males and females (averaged over time point) and the difference between day 0, 4 and 8 (averaged over males and females). If we wanted to test other comparisons (e.g., Female.Day8 vs. Female.Day0 and also Male.Day8 vs. Male.Day0) we could use a different design matrix to more easily extract those pairwise comparisons. 
+
 ```{r}
-dds <- DESeq2::DESeqDataSet(se[, se$tissue == "Cerebellum"],
+dds <- DESeq2::DESeqDataSet(se,
                             design = ~ sex + time)
 ```
 
