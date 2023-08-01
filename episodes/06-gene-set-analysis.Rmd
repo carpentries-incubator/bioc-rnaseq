@@ -132,8 +132,7 @@ se <- readRDS("data/GSE96870_se.rds")
 se <- se[rowData(se)$gbkey == "mRNA"]
 
 # construct a `DESeqDataSet` object where we also specify the experimental design
-dds <- DESeqDataSet(se[, se$tissue == "Cerebellum"],
-                            design = ~ sex + time)
+dds <- DESeqDataSet(se, design = ~ sex + time)
 # perform DESeq2 analysis
 dds <- DESeq(dds)
 # obtain DESeq2 results, here we only want Male vs Female in the "sex" variable

@@ -288,7 +288,7 @@ If you conducted the original experiment ideally you would have the complete rec
 
 ## Challenge: How to subset to mRNA genes
 
-Before, we conceptually discussed subsetting to only the mRNA genes. Now that we have our `SummarizedExperiment` object, it becomes much easier to write the codes to subset `se` to a new object called `se_mRNA` that contains only the genes/rows where the `rowData(se)$gbkey` is equal to mRNA. Write the codes and then check you correctly got the 16,859 mRNA genes:
+Before, we conceptually discussed subsetting to only the mRNA genes. Now that we have our `SummarizedExperiment` object, it becomes much easier to write the codes to subset `se` to a new object called `se_mRNA` that contains only the genes/rows where the `rowData(se)$gbkey` is equal to mRNA. Write the codes and then check you correctly got the 21,198 mRNA genes:
   
 ::::::::::::::::::::::::::::::::::::::::::::::::::
 
