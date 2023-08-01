@@ -180,7 +180,7 @@ se <- readRDS("data/GSE96870_se.rds")
 #' 
 #' ## Challenge: How to subset to mRNA genes
 #' 
-#' Before, we conceptually discussed subsetting to only the mRNA genes. Now that we have our `SummarizedExperiment` object, it becomes much easier to write the codes to subset `se` to a new object called `se_mRNA` that contains only the genes/rows where the `rowData(se)$gbkey` is equal to mRNA. Write the codes and then check you correctly got the 16,859 mRNA genes:
+#' Before, we conceptually discussed subsetting to only the mRNA genes. Now that we have our `SummarizedExperiment` object, it becomes much easier to write the codes to subset `se` to a new object called `se_mRNA` that contains only the genes/rows where the `rowData(se)$gbkey` is equal to mRNA. Write the codes and then check you correctly got the 21,198 mRNA genes:
 #' 
 ## ---- purl=TRUE---------------------------------------------------------------
 mapIds(org.Mm.eg.db, keys = "497097", column = "SYMBOL", keytype = "ENTREZID")
@@ -223,7 +223,7 @@ sessionInfo()
 #' 
 #' By default `independentFiltering` is set to `TRUE`. What happens without filtering lowly expressed genes? Use the `summary()` function to compare the results. Most of the lowly expressed genes are not significantly differential expressed (blue in the above MA plots). What could cause the difference in the results then?
 #' 
-#' Check the heatmap and top DE genes. Do you find something expected/unexpected?
+#' Check the heatmap and top DE genes. Do you find something expected/unexpected in terms of change across all 3 time points?
 #' 
 #' ## Gene set enrichment analysis
 #' 

@@ -650,7 +650,7 @@ directory, create the four fundamental directories previously discussed
   Show me the solution
   </h4>
 </button>
-<div id="collapseSolution1" class="accordion-collapse collapse" data-bs-parent="#accordionSolution1" aria-labelledby="headingSolution1">
+<div id="collapseSolution1" class="accordion-collapse collapse" aria-labelledby="headingSolution1" data-bs-parent="#accordionSolution1">
 <div class="accordion-body">
 <figure style="text-align: center"><img src="../fig/02_setup/folders_working_dir.png" alt="Your working directory should look like this" width="1221" class="figure mx-auto d-block"><figcaption>
 Your working directory should look like this
@@ -796,7 +796,7 @@ into the <code>data</code> folder in your working directory.</p>
   Show me the solution
   </h4>
 </button>
-<div id="collapseSolution2" class="accordion-collapse collapse" data-bs-parent="#accordionSolution2" aria-labelledby="headingSolution2">
+<div id="collapseSolution2" class="accordion-collapse collapse" aria-labelledby="headingSolution2" data-bs-parent="#accordionSolution2">
 <div class="accordion-body">
 <div class="codewrapper sourceCode" id="cb2">
 <h3 class="code-label">R<i aria-hidden="true" data-feather="chevron-left"></i><i aria-hidden="true" data-feather="chevron-right"></i>
@@ -843,7 +843,7 @@ downloading datasets from the internet.</li>
 </div>
 </section></section><section id="aio-03-import-annotate"><p>Content from <a href="03-import-annotate.html">Importing and annotating quantified data into R</a></p>
 <hr>
-<p> Last updated on 2023-07-31 | 
+<p> Last updated on 2023-08-01 | 
         
         <a href="https://github.com/carpentries-incubator/bioc-rnaseq/edit/main/episodes/03-import-annotate.Rmd" class="external-link">Edit this page <i aria-hidden="true" data-feather="edit"></i></a></p>
 <p>Estimated time <i aria-hidden="true" data-feather="clock"></i> 105 minutes </p>
@@ -1624,7 +1624,7 @@ Now that we have our <code>SummarizedExperiment</code> object, it
 becomes much easier to write the codes to subset <code>se</code> to a
 new object called <code>se_mRNA</code> that contains only the genes/rows
 where the <code>rowData(se)$gbkey</code> is equal to mRNA. Write the
-codes and then check you correctly got the 16,859 mRNA genes:</p>
+codes and then check you correctly got the 21,198 mRNA genes:</p>
 </div>
 </div>
 </div>
@@ -1816,7 +1816,7 @@ other attached packages:
  [1] hgu95av2.db_3.13.0          org.Hs.eg.db_3.17.0        
  [3] org.Mm.eg.db_3.17.0         AnnotationDbi_1.62.2       
  [5] SummarizedExperiment_1.30.2 Biobase_2.60.0             
- [7] MatrixGenerics_1.12.2       matrixStats_1.0.0          
+ [7] MatrixGenerics_1.12.3       matrixStats_1.0.0          
  [9] GenomicRanges_1.52.0        GenomeInfoDb_1.36.1        
 [11] IRanges_2.34.1              S4Vectors_0.38.1           
 [13] BiocGenerics_0.46.0         knitr_1.43                 
@@ -2001,7 +2001,7 @@ gene survived the filtering?</p>
   Show me the solution
   </h4>
 </button>
-<div id="collapseSolution1" class="accordion-collapse collapse" aria-labelledby="headingSolution1" data-bs-parent="#accordionSolution1">
+<div id="collapseSolution1" class="accordion-collapse collapse" data-bs-parent="#accordionSolution1" aria-labelledby="headingSolution1">
 <div class="accordion-body">
 <div class="codewrapper sourceCode" id="cb7">
 <h3 class="code-label">R<i aria-hidden="true" data-feather="chevron-left"></i><i aria-hidden="true" data-feather="chevron-right"></i>
@@ -2288,7 +2288,7 @@ work directly on the raw counts.</li>
 </div>
 </section></section><section id="aio-05-differential-expression"><p>Content from <a href="05-differential-expression.html">Differential expression analysis</a></p>
 <hr>
-<p> Last updated on 2023-07-31 | 
+<p> Last updated on 2023-08-01 | 
         
         <a href="https://github.com/carpentries-incubator/bioc-rnaseq/edit/main/episodes/05-differential-expression.Rmd" class="external-link">Edit this page <i aria-hidden="true" data-feather="edit"></i></a></p>
 <p>Estimated time <i aria-hidden="true" data-feather="clock"></i> 105 minutes </p>
@@ -2383,28 +2383,44 @@ count files</a>.</p>
 <div class="section level3">
 <h3 id="load-data">Load data<a class="anchor" aria-label="anchor" href="#load-data"></a>
 </h3>
+<p>Let’s load in our <code>SummarizedExperiment</code> object again. In
+the last episode for quality control exploration, we removed ~35% genes
+that had 5 or fewer counts because they had too little information in
+them. For DESeq2 statistical analysis, we do not technically have to
+remove these genes because by default it will do some independent
+filtering, but it can reduce the memory size of the
+<code>DESeqDataSet</code> object resulting in faster computation. Plus,
+we do not want these genes cluttering up some of the visualizations.</p>
 <div class="codewrapper sourceCode" id="cb2">
 <h3 class="code-label">R<i aria-hidden="true" data-feather="chevron-left"></i><i aria-hidden="true" data-feather="chevron-right"></i>
 </h3>
 <pre class="downlit sourceCode r">
-<code class="sourceCode R"><span><span class="va">se</span> <span class="op">&lt;-</span> <span class="fu">readRDS</span><span class="op">(</span><span class="st">"data/GSE96870_se.rds"</span><span class="op">)</span></span></code></pre>
+<code class="sourceCode R"><span><span class="va">se</span> <span class="op">&lt;-</span> <span class="fu">readRDS</span><span class="op">(</span><span class="st">"data/GSE96870_se.rds"</span><span class="op">)</span></span>
+<span><span class="va">se</span> <span class="op">&lt;-</span> <span class="va">se</span><span class="op">[</span><span class="fu">rowSums</span><span class="op">(</span><span class="fu">assay</span><span class="op">(</span><span class="va">se</span>, <span class="st">"counts"</span><span class="op">)</span><span class="op">)</span> <span class="op">&gt;</span> <span class="fl">5</span>, <span class="op">]</span></span></code></pre>
 </div>
 </div>
 <div class="section level3">
 <h3 id="create-deseqdataset">Create DESeqDataSet<a class="anchor" aria-label="anchor" href="#create-deseqdataset"></a>
 </h3>
+<p>The design matrix we will use in this example is
+<code>~ sex + time</code>. This will allow us test the difference
+between males and females (averaged over time point) and the difference
+between day 0, 4 and 8 (averaged over males and females). If we wanted
+to test other comparisons (e.g., Female.Day8 vs. Female.Day0 and also
+Male.Day8 vs. Male.Day0) we could use a different design matrix to more
+easily extract those pairwise comparisons.</p>
 <div class="codewrapper sourceCode" id="cb3">
 <h3 class="code-label">R<i aria-hidden="true" data-feather="chevron-left"></i><i aria-hidden="true" data-feather="chevron-right"></i>
 </h3>
 <pre class="downlit sourceCode r">
-<code class="sourceCode R"><span><span class="va">dds</span> <span class="op">&lt;-</span> <span class="fu">DESeq2</span><span class="fu">::</span><span class="fu">DESeqDataSet</span><span class="op">(</span><span class="va">se</span><span class="op">[</span>, <span class="va">se</span><span class="op">$</span><span class="va">tissue</span> <span class="op">==</span> <span class="st">"Cerebellum"</span><span class="op">]</span>,</span>
+<code class="sourceCode R"><span><span class="va">dds</span> <span class="op">&lt;-</span> <span class="fu">DESeq2</span><span class="fu">::</span><span class="fu">DESeqDataSet</span><span class="op">(</span><span class="va">se</span>,</span>
 <span>                            design <span class="op">=</span> <span class="op">~</span> <span class="va">sex</span> <span class="op">+</span> <span class="va">time</span><span class="op">)</span></span></code></pre>
 </div>
 <div class="codewrapper">
 <h3 class="code-label">WARNING<i aria-hidden="true" data-feather="chevron-left"></i><i aria-hidden="true" data-feather="chevron-right"></i>
 </h3>
-<pre class="warning" tabindex="0"><code>Warning in DESeq2::DESeqDataSet(se[, se$tissue == "Cerebellum"], design = ~sex
-+ : some variables in design formula are characters, converting to factors</code></pre>
+<pre class="warning" tabindex="0"><code>Warning in DESeq2::DESeqDataSet(se, design = ~sex + time): some variables in
+design formula are characters, converting to factors</code></pre>
 </div>
 <div id="accordionInstructor1" class="accordion instructor-note accordion-flush">
 <div class="accordion-item">
@@ -2542,7 +2558,7 @@ compute <em>log2 fold changes</em> (synonymous with “GLM coefficients”,
 “beta coefficients” or “effect size”) corresponding to the variables of
 the <em>design matrix</em>. The <em>design matrix</em> is directly
 related to the <em>design formular</em> and automatically derived from
-it. Assume a design fromular with one variable
+it. Assume a design formular with one variable
 (<code>~ treatment</code>) and two factor level (treatment and control).
 The mean expression <span class="math inline">\(\mu_{j}\)</span> of a
 specific gene in sample <span class="math inline">\(j\)</span> will be
@@ -2678,12 +2694,12 @@ will be “corrected” for sex-related differences.</p>
 <h3 class="code-label">OUTPUT<i aria-hidden="true" data-feather="chevron-left"></i><i aria-hidden="true" data-feather="chevron-right"></i>
 </h3>
 <pre class="output" tabindex="0"><code>
-out of 32652 with nonzero total read count
+out of 27430 with nonzero total read count
 adjusted p-value &lt; 0.1
-LFC &gt; 0 (up)       : 4472, 14%
-LFC &lt; 0 (down)     : 4276, 13%
-outliers [1]       : 10, 0.031%
-low counts [2]     : 8732, 27%
+LFC &gt; 0 (up)       : 4472, 16%
+LFC &lt; 0 (down)     : 4282, 16%
+outliers [1]       : 10, 0.036%
+low counts [2]     : 3723, 14%
 (mean count &lt; 1)
 [1] see 'cooksCutoff' argument of ?results
 [2] see 'independentFiltering' argument of ?results</code></pre>
@@ -2692,7 +2708,8 @@ low counts [2]     : 8732, 27%
 <h3 class="code-label">R<i aria-hidden="true" data-feather="chevron-left"></i><i aria-hidden="true" data-feather="chevron-right"></i>
 </h3>
 <pre class="downlit sourceCode r">
-<code class="sourceCode R"><span><span class="fu">head</span><span class="op">(</span><span class="va">resTime</span><span class="op">[</span><span class="fu">order</span><span class="op">(</span><span class="va">resTime</span><span class="op">$</span><span class="va">pvalue</span><span class="op">)</span>, <span class="op">]</span><span class="op">)</span></span></code></pre>
+<code class="sourceCode R"><span><span class="co"># View(resTime)</span></span>
+<span><span class="fu">head</span><span class="op">(</span><span class="va">resTime</span><span class="op">[</span><span class="fu">order</span><span class="op">(</span><span class="va">resTime</span><span class="op">$</span><span class="va">pvalue</span><span class="op">)</span>, <span class="op">]</span><span class="op">)</span></span></code></pre>
 </div>
 <div class="codewrapper">
 <h3 class="code-label">OUTPUT<i aria-hidden="true" data-feather="chevron-left"></i><i aria-hidden="true" data-feather="chevron-right"></i>
@@ -2702,20 +2719,20 @@ Wald test p-value: time Day8 vs Day0
 DataFrame with 6 rows and 6 columns
                baseMean log2FoldChange     lfcSE      stat      pvalue
               &lt;numeric&gt;      &lt;numeric&gt; &lt;numeric&gt; &lt;numeric&gt;   &lt;numeric&gt;
-Asl             701.343        1.11733 0.0592541   18.8565 2.59885e-79
-Apod          18765.146        1.44698 0.0805186   17.9708 3.30147e-72
-Cyp2d22        2550.480        0.91020 0.0554756   16.4072 1.69794e-60
-Klk6            546.503       -1.67190 0.1058989  -15.7877 3.78228e-56
-Fcrls           184.235       -1.94701 0.1279847  -15.2128 2.90708e-52
-A330076C08Rik   107.250       -1.74995 0.1154279  -15.1606 6.45112e-52
+Asl             701.343       1.117332 0.0594128   18.8062 6.71212e-79
+Apod          18765.146       1.446981 0.0805056   17.9737 3.13229e-72
+Cyp2d22        2550.480       0.910202 0.0556002   16.3705 3.10712e-60
+Klk6            546.503      -1.671897 0.1057395  -15.8115 2.59339e-56
+Fcrls           184.235      -1.947016 0.1277235  -15.2440 1.80488e-52
+A330076C08Rik   107.250      -1.749957 0.1155125  -15.1495 7.63434e-52
                      padj
                 &lt;numeric&gt;
-Asl           6.21386e-75
-Apod          3.94690e-68
-Cyp2d22       1.35326e-56
-Klk6          2.26086e-52
-Fcrls         1.39017e-48
-A330076C08Rik 2.57077e-48</code></pre>
+Asl           1.59057e-74
+Apod          3.71130e-68
+Cyp2d22       2.45431e-56
+Klk6          1.53639e-52
+Fcrls         8.55406e-49
+A330076C08Rik 3.01518e-48</code></pre>
 </div>
 <div id="accordionInstructor3" class="accordion instructor-note accordion-flush">
 <div class="accordion-item">
@@ -2777,12 +2794,12 @@ time.</p>
 <h3 class="code-label">OUTPUT<i aria-hidden="true" data-feather="chevron-left"></i><i aria-hidden="true" data-feather="chevron-right"></i>
 </h3>
 <pre class="output" tabindex="0"><code>
-out of 32652 with nonzero total read count
+out of 27430 with nonzero total read count
 adjusted p-value &lt; 0.1
-LFC &gt; 0 (up)       : 53, 0.16%
-LFC &lt; 0 (down)     : 71, 0.22%
-outliers [1]       : 10, 0.031%
-low counts [2]     : 13717, 42%
+LFC &gt; 0 (up)       : 51, 0.19%
+LFC &lt; 0 (down)     : 70, 0.26%
+outliers [1]       : 10, 0.036%
+low counts [2]     : 8504, 31%
 (mean count &lt; 6)
 [1] see 'cooksCutoff' argument of ?results
 [2] see 'independentFiltering' argument of ?results</code></pre>
@@ -2803,18 +2820,18 @@ DataFrame with 6 rows and 6 columns
               &lt;numeric&gt;      &lt;numeric&gt; &lt;numeric&gt; &lt;numeric&gt;    &lt;numeric&gt;
 Xist         22603.0359      -11.60429  0.336282  -34.5076 6.16852e-261
 Ddx3y         2072.9436       11.87241  0.397493   29.8683 5.08722e-196
-Eif2s3y       1410.8750       12.62514  0.565216   22.3369 1.62066e-110
-Kdm5d          692.1672       12.55386  0.593627   21.1477  2.89566e-99
-Uty            667.4375       12.01728  0.593591   20.2451  3.92780e-91
-LOC105243748    52.9669        9.08325  0.597624   15.1989  3.59432e-52
+Eif2s3y       1410.8750       12.62513  0.565194   22.3377 1.58997e-110
+Kdm5d          692.1672       12.55386  0.593607   21.1484  2.85293e-99
+Uty            667.4375       12.01728  0.593573   20.2457  3.87772e-91
+LOC105243748    52.9669        9.08325  0.597575   15.2002  3.52699e-52
                      padj
                 &lt;numeric&gt;
-Xist         1.16739e-256
-Ddx3y        4.81378e-192
-Eif2s3y      1.02237e-106
-Kdm5d         1.37001e-95
-Uty           1.48667e-87
-LOC105243748  1.13371e-48</code></pre>
+Xist         1.16684e-256
+Ddx3y        4.81149e-192
+Eif2s3y      1.00253e-106
+Kdm5d         1.34915e-95
+Uty           1.46702e-87
+LOC105243748  1.11194e-48</code></pre>
 </div>
 </div>
 </div>
@@ -2922,12 +2939,12 @@ results then?</p>
 <h3 class="code-label">OUTPUT<i aria-hidden="true" data-feather="chevron-left"></i><i aria-hidden="true" data-feather="chevron-right"></i>
 </h3>
 <pre class="output" tabindex="0"><code>
-out of 32652 with nonzero total read count
+out of 27430 with nonzero total read count
 adjusted p-value &lt; 0.1
-LFC &gt; 0 (up)       : 4472, 14%
-LFC &lt; 0 (down)     : 4276, 13%
-outliers [1]       : 10, 0.031%
-low counts [2]     : 8732, 27%
+LFC &gt; 0 (up)       : 4472, 16%
+LFC &lt; 0 (down)     : 4282, 16%
+outliers [1]       : 10, 0.036%
+low counts [2]     : 3723, 14%
 (mean count &lt; 1)
 [1] see 'cooksCutoff' argument of ?results
 [2] see 'independentFiltering' argument of ?results</code></pre>
@@ -2942,11 +2959,11 @@ low counts [2]     : 8732, 27%
 <h3 class="code-label">OUTPUT<i aria-hidden="true" data-feather="chevron-left"></i><i aria-hidden="true" data-feather="chevron-right"></i>
 </h3>
 <pre class="output" tabindex="0"><code>
-out of 32652 with nonzero total read count
+out of 27430 with nonzero total read count
 adjusted p-value &lt; 0.1
-LFC &gt; 0 (up)       : 4130, 13%
-LFC &lt; 0 (down)     : 3962, 12%
-outliers [1]       : 10, 0.031%
+LFC &gt; 0 (up)       : 4324, 16%
+LFC &lt; 0 (down)     : 4129, 15%
+outliers [1]       : 10, 0.036%
 low counts [2]     : 0, 0%
 (mean count &lt; 0)
 [1] see 'cooksCutoff' argument of ?results
@@ -2982,7 +2999,9 @@ orders genes (rows) according to their similarity.</p>
 <span><span class="va">vsd</span> <span class="op">&lt;-</span> <span class="fu">vst</span><span class="op">(</span><span class="va">dds</span>, blind <span class="op">=</span> <span class="cn">TRUE</span><span class="op">)</span></span>
 <span></span>
 <span><span class="co"># Get top DE genes</span></span>
-<span><span class="va">genes</span> <span class="op">&lt;-</span> <span class="fu">rownames</span><span class="op">(</span><span class="fu">head</span><span class="op">(</span><span class="va">resTime</span><span class="op">[</span><span class="fu">order</span><span class="op">(</span><span class="va">resTime</span><span class="op">$</span><span class="va">pvalue</span><span class="op">)</span>, <span class="op">]</span>, <span class="fl">10</span><span class="op">)</span><span class="op">)</span></span>
+<span><span class="va">genes</span> <span class="op">&lt;-</span> <span class="va">resTime</span><span class="op">[</span><span class="fu">order</span><span class="op">(</span><span class="va">resTime</span><span class="op">$</span><span class="va">pvalue</span><span class="op">)</span>, <span class="op">]</span> <span class="op">|&gt;</span></span>
+<span>         <span class="fu">head</span><span class="op">(</span><span class="fl">10</span><span class="op">)</span> <span class="op">|&gt;</span></span>
+<span>         <span class="fu">rownames</span><span class="op">(</span><span class="op">)</span></span>
 <span><span class="va">heatmapData</span> <span class="op">&lt;-</span> <span class="fu">assay</span><span class="op">(</span><span class="va">vsd</span><span class="op">)</span><span class="op">[</span><span class="va">genes</span>, <span class="op">]</span></span>
 <span></span>
 <span><span class="co"># Scale counts for visualization</span></span>
@@ -2990,9 +3009,8 @@ orders genes (rows) according to their similarity.</p>
 <span></span>
 <span><span class="co"># Add annotation</span></span>
 <span><span class="va">heatmapColAnnot</span> <span class="op">&lt;-</span> <span class="fu">data.frame</span><span class="op">(</span><span class="fu">colData</span><span class="op">(</span><span class="va">vsd</span><span class="op">)</span><span class="op">[</span>, <span class="fu">c</span><span class="op">(</span><span class="st">"time"</span>, <span class="st">"sex"</span><span class="op">)</span><span class="op">]</span><span class="op">)</span></span>
-<span><span class="va">idx</span> <span class="op">&lt;-</span> <span class="fu">order</span><span class="op">(</span><span class="va">vsd</span><span class="op">$</span><span class="va">time</span><span class="op">)</span></span>
-<span><span class="va">heatmapData</span> <span class="op">&lt;-</span> <span class="va">heatmapData</span><span class="op">[</span>, <span class="va">idx</span><span class="op">]</span></span>
-<span><span class="va">heatmapColAnnot</span> <span class="op">&lt;-</span> <span class="fu">HeatmapAnnotation</span><span class="op">(</span>df <span class="op">=</span> <span class="va">heatmapColAnnot</span><span class="op">[</span><span class="va">idx</span>, <span class="op">]</span><span class="op">)</span></span>
+<span><span class="va">heatmapColAnnot</span> <span class="op">&lt;-</span> <span class="fu">HeatmapAnnotation</span><span class="op">(</span>df <span class="op">=</span> <span class="va">heatmapColAnnot</span><span class="op">)</span></span>
+<span></span>
 <span></span>
 <span><span class="co"># Plot as heatmap</span></span>
 <span><span class="fu">ComplexHeatmap</span><span class="fu">::</span><span class="fu">Heatmap</span><span class="op">(</span><span class="va">heatmapData</span>,</span>
@@ -3008,10 +3026,91 @@ orders genes (rows) according to their similarity.</p>
 </h3>
 <div class="callout-content">
 <p>Check the heatmap and top DE genes. Do you find something
-expected/unexpected?</p>
-<p><em>Hint: Check gene names, if you don’t know them.</em></p>
+expected/unexpected in terms of change across all 3 time points?</p>
 </div>
 </div>
+</div>
+</section><section id="output-results"><h2 class="section-heading">Output results<a class="anchor" aria-label="anchor" href="#output-results"></a>
+</h2>
+<hr class="half-width">
+<p>We may want to to output our results out of R to have a stand-alone
+file. The format of <code>resTime</code> only has the gene symbols as
+rownames, so let us join the gene annotation information, and then write
+out as .csv file:</p>
+<div class="codewrapper sourceCode" id="cb35">
+<h3 class="code-label">R<i aria-hidden="true" data-feather="chevron-left"></i><i aria-hidden="true" data-feather="chevron-right"></i>
+</h3>
+<pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="fu">head</span><span class="op">(</span><span class="fu">as.data.frame</span><span class="op">(</span><span class="va">resTime</span><span class="op">)</span><span class="op">)</span></span></code></pre>
+</div>
+<div class="codewrapper">
+<h3 class="code-label">OUTPUT<i aria-hidden="true" data-feather="chevron-left"></i><i aria-hidden="true" data-feather="chevron-right"></i>
+</h3>
+<pre class="output" tabindex="0"><code>                 baseMean log2FoldChange      lfcSE       stat       pvalue
+Xkr4         1937.7555653     -0.2357302 0.10803980 -2.1818832 0.0291181539
+LOC105243853    0.9625883      0.5255058 1.18970791  0.4417099 0.6586991283
+LOC105242387  169.9134003      0.4560421 0.13852747  3.2920702 0.0009945278
+LOC105242467    3.4350732      0.2731728 0.58356846  0.4681075 0.6397077096
+Rp1             2.2734558     -0.2592924 0.68213996 -0.3801161 0.7038592599
+Sox17         251.0059632     -0.3197312 0.08312448 -3.8464143 0.0001198590
+                     padj
+Xkr4         0.0827056088
+LOC105243853           NA
+LOC105242387 0.0048763349
+LOC105242467 0.7801530335
+Rp1          0.8244991509
+Sox17        0.0007933796</code></pre>
+</div>
+<div class="codewrapper sourceCode" id="cb37">
+<h3 class="code-label">R<i aria-hidden="true" data-feather="chevron-left"></i><i aria-hidden="true" data-feather="chevron-right"></i>
+</h3>
+<pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="fu">head</span><span class="op">(</span><span class="fu">as.data.frame</span><span class="op">(</span><span class="fu">rowRanges</span><span class="op">(</span><span class="va">se</span><span class="op">)</span><span class="op">)</span><span class="op">)</span></span></code></pre>
+</div>
+<div class="codewrapper">
+<h3 class="code-label">OUTPUT<i aria-hidden="true" data-feather="chevron-left"></i><i aria-hidden="true" data-feather="chevron-right"></i>
+</h3>
+<pre class="output" tabindex="0"><code>             seqnames   start     end width strand  ENTREZID
+Xkr4                1 3670552 3671742  1191      -    497097
+LOC105243853        1 3357323 3366505  9183      + 105243853
+LOC105242387        1 3658847 3670456 11610      - 105242387
+LOC105242467        1 4233436 4233728   293      - 105242467
+Rp1                 1 4409170 4409241    72      -     19888
+Sox17               1 4496291 4497354  1064      -     20671
+                                                                                 product
+Xkr4         X Kell blood group precursor related family member 4, transcript variant X1
+LOC105243853                         uncharacterized LOC105243853, transcript variant X2
+LOC105242387                                                uncharacterized LOC105242387
+LOC105242467    lipoxygenase homology domain-containing protein 1, transcript variant X2
+Rp1                                 retinitis pigmentosa 1 (human), transcript variant 2
+Sox17                        SRY (sex determining region Y)-box 17, transcript variant 5
+             gbkey
+Xkr4          mRNA
+LOC105243853 ncRNA
+LOC105242387 ncRNA
+LOC105242467  mRNA
+Rp1           mRNA
+Sox17         mRNA</code></pre>
+</div>
+<div class="codewrapper sourceCode" id="cb39">
+<h3 class="code-label">R<i aria-hidden="true" data-feather="chevron-left"></i><i aria-hidden="true" data-feather="chevron-right"></i>
+</h3>
+<pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="va">temp</span> <span class="op">&lt;-</span> <span class="fu">cbind</span><span class="op">(</span><span class="fu">as.data.frame</span><span class="op">(</span><span class="fu">rowRanges</span><span class="op">(</span><span class="va">se</span><span class="op">)</span><span class="op">)</span>,</span>
+<span>              <span class="fu">as.data.frame</span><span class="op">(</span><span class="va">resTime</span><span class="op">)</span><span class="op">)</span></span>
+<span></span>
+<span><span class="fu">write.csv</span><span class="op">(</span><span class="va">temp</span>, file <span class="op">=</span> <span class="st">"output/Day8vsDay0.csv"</span><span class="op">)</span></span></code></pre>
+</div>
+<div class="codewrapper">
+<h3 class="code-label">WARNING<i aria-hidden="true" data-feather="chevron-left"></i><i aria-hidden="true" data-feather="chevron-right"></i>
+</h3>
+<pre class="warning" tabindex="0"><code>Warning in file(file, ifelse(append, "a", "w")): cannot open file
+'output/Day8vsDay0.csv': No such file or directory</code></pre>
+</div>
+<div class="codewrapper">
+<h3 class="code-label">ERROR<i aria-hidden="true" data-feather="chevron-left"></i><i aria-hidden="true" data-feather="chevron-right"></i>
+</h3>
+<pre class="error" tabindex="0"><code>Error in file(file, ifelse(append, "a", "w")): cannot open the connection</code></pre>
 </div>
 <div id="keypoints1" class="callout keypoints">
 <div class="callout-square">
@@ -3033,7 +3132,7 @@ beneficial.</li>
 </div>
 </section></section><section id="aio-06-gene-set-analysis"><p>Content from <a href="06-gene-set-analysis.html">Gene set enrichment analysis</a></p>
 <hr>
-<p> Last updated on 2023-07-31 | 
+<p> Last updated on 2023-08-01 | 
         
         <a href="https://github.com/carpentries-incubator/bioc-rnaseq/edit/main/episodes/06-gene-set-analysis.Rmd" class="external-link">Edit this page <i aria-hidden="true" data-feather="edit"></i></a></p>
 <p>Estimated time <i aria-hidden="true" data-feather="clock"></i> 105 minutes </p>
@@ -3153,8 +3252,7 @@ of the analysis.</p>
 <span><span class="va">se</span> <span class="op">&lt;-</span> <span class="va">se</span><span class="op">[</span><span class="fu">rowData</span><span class="op">(</span><span class="va">se</span><span class="op">)</span><span class="op">$</span><span class="va">gbkey</span> <span class="op">==</span> <span class="st">"mRNA"</span><span class="op">]</span></span>
 <span></span>
 <span><span class="co"># construct a `DESeqDataSet` object where we also specify the experimental design</span></span>
-<span><span class="va">dds</span> <span class="op">&lt;-</span> <span class="fu">DESeqDataSet</span><span class="op">(</span><span class="va">se</span><span class="op">[</span>, <span class="va">se</span><span class="op">$</span><span class="va">tissue</span> <span class="op">==</span> <span class="st">"Cerebellum"</span><span class="op">]</span>,</span>
-<span>                            design <span class="op">=</span> <span class="op">~</span> <span class="va">sex</span> <span class="op">+</span> <span class="va">time</span><span class="op">)</span></span>
+<span><span class="va">dds</span> <span class="op">&lt;-</span> <span class="fu">DESeqDataSet</span><span class="op">(</span><span class="va">se</span>, design <span class="op">=</span> <span class="op">~</span> <span class="va">sex</span> <span class="op">+</span> <span class="va">time</span><span class="op">)</span></span>
 <span><span class="co"># perform DESeq2 analysis</span></span>
 <span><span class="va">dds</span> <span class="op">&lt;-</span> <span class="fu">DESeq</span><span class="op">(</span><span class="va">dds</span><span class="op">)</span></span>
 <span><span class="co"># obtain DESeq2 results, here we only want Male vs Female in the "sex" variable</span></span>
@@ -3630,9 +3728,9 @@ distribution of its statistic.</p>
 <h3 class="code-label">OUTPUT<i aria-hidden="true" data-feather="chevron-left"></i><i aria-hidden="true" data-feather="chevron-right"></i>
 </h3>
 <pre class="output" tabindex="0"><code>Unit: microseconds
-   expr   min    lq    mean median    uq    max neval
- fisher 464.9 517.1 588.803 556.15 620.2 1218.1   100
-  hyper   2.0   3.0   5.274   5.60   6.6   26.2   100</code></pre>
+   expr   min     lq    mean median     uq   max neval
+ fisher 316.3 323.90 335.807 326.95 335.75 680.3   100
+  hyper   1.6   2.05   3.068   2.50   4.00   7.9   100</code></pre>
 </div>
 <p>It is very astonishing that <code>phyper()</code> is hundreds of
 times faster than <code>fisher.test()</code>. Main reason is in
@@ -4452,7 +4550,7 @@ sets are automatically retrieved and processed from
 <div class="codewrapper">
 <h3 class="code-label">OUTPUT<i aria-hidden="true" data-feather="chevron-left"></i><i aria-hidden="true" data-feather="chevron-right"></i>
 </h3>
-<pre class="output" tabindex="0"><code>--&gt; Expected input gene ID: 64383,27084,69286,66722,73677,215387</code></pre>
+<pre class="output" tabindex="0"><code>--&gt; Expected input gene ID: 69707,102633564,57749,74041,12640,21749</code></pre>
 </div>
 <div class="codewrapper">
 <h3 class="code-label">OUTPUT<i aria-hidden="true" data-feather="chevron-left"></i><i aria-hidden="true" data-feather="chevron-right"></i>
@@ -5557,19 +5655,13 @@ quantified.</li>
 </div>
 </section></section><section id="aio-08-extra-design"><p>Content from <a href="08-extra-design.html">Extra exploration of design matrices</a></p>
 <hr>
-<p> Last updated on 2023-07-17 | 
+<p> Last updated on 2023-08-01 | 
         
         <a href="https://github.com/carpentries-incubator/bioc-rnaseq/edit/main/episodes/08-extra-design.Rmd" class="external-link">Edit this page <i aria-hidden="true" data-feather="edit"></i></a></p>
 <p>Estimated time <i aria-hidden="true" data-feather="clock"></i> 60 minutes </p>
 <div class="text-end">
           <button role="button" aria-pressed="false" tabindex="0" id="expand-code" class="pull-right"> Expand All Solutions <i aria-hidden="true" data-feather="plus"></i></button>
         </div>
-<div class="codewrapper">
-<h3 class="code-label">WARNING<i aria-hidden="true" data-feather="chevron-left"></i><i aria-hidden="true" data-feather="chevron-right"></i>
-</h3>
-<pre class="warning" tabindex="0"><code>Warning: replacing previous import 'S4Arrays::makeNindexFromArrayViewport' by
-'DelayedArray::makeNindexFromArrayViewport' when loading 'SummarizedExperiment'</code></pre>
-</div>
 <div class="overview card">
 <h2 class="card-header">Overview</h2>
 <div class="row g-0">
@@ -5605,7 +5697,7 @@ coefficients.</li>
 episode. In particular, the <a href="https://bioconductor.org/packages/ExploreModelMatrix/" class="external-link">ExploreModelMatrix</a>
 package provides resources for exploring design matrices in a graphical
 fashion, for easier interpretation.</p>
-<div class="codewrapper sourceCode" id="cb2">
+<div class="codewrapper sourceCode" id="cb1">
 <h3 class="code-label">R<i aria-hidden="true" data-feather="chevron-left"></i><i aria-hidden="true" data-feather="chevron-right"></i>
 </h3>
 <pre class="downlit sourceCode r">
@@ -5615,14 +5707,17 @@ fashion, for easier interpretation.</p>
 <span>    <span class="kw">library</span><span class="op">(</span><span class="va">dplyr</span><span class="op">)</span></span>
 <span><span class="op">}</span><span class="op">)</span></span></code></pre>
 </div>
-<p>Next, we read the metadata table for our data set. As seen in
-previous episodes, the metadata contains information about the age, sex,
-infection status, time of measurement and tissue of the collected
-samples. Note that Day0 always corresponds to non-infected samples, and
-that infected samples are collected on days 4 and 8. Moreover, all mice
-have the same age (8 weeks). Hence, in the first part of this episode we
-consider only the sex, tissue and time variables further.</p>
-<div class="codewrapper sourceCode" id="cb3">
+<p>Next, we read the metadata table for our data set. Because we want to
+explore many different design matrices, we will read in the 4th file we
+downloaded but haven’t used yet: that for both Cerebellum and Spinal
+Cord samples (45 samples total). As seen in previous episodes, the
+metadata contains information about the age, sex, infection status, time
+of measurement and tissue of the collected samples. Note that Day0
+always corresponds to non-infected samples, and that infected samples
+are collected on days 4 and 8. Moreover, all mice have the same age (8
+weeks). Hence, in the first part of this episode we consider only the
+sex, tissue and time variables further.</p>
+<div class="codewrapper sourceCode" id="cb2">
 <h3 class="code-label">R<i aria-hidden="true" data-feather="chevron-left"></i><i aria-hidden="true" data-feather="chevron-right"></i>
 </h3>
 <pre class="downlit sourceCode r">
@@ -5725,7 +5820,7 @@ GSM2545378  InfluenzaA C57BL/6 Day8 Spinalcord    23
 GSM2545379  InfluenzaA C57BL/6 Day8 Spinalcord    24
 GSM2545380  InfluenzaA C57BL/6 Day8 Cerebellum    19</code></pre>
 </div>
-<div class="codewrapper sourceCode" id="cb5">
+<div class="codewrapper sourceCode" id="cb4">
 <h3 class="code-label">R<i aria-hidden="true" data-feather="chevron-left"></i><i aria-hidden="true" data-feather="chevron-right"></i>
 </h3>
 <pre class="downlit sourceCode r">
@@ -5740,7 +5835,7 @@ GSM2545380  InfluenzaA C57BL/6 Day8 Cerebellum    19</code></pre>
   Day4         16           0
   Day8         14           0</code></pre>
 </div>
-<div class="codewrapper sourceCode" id="cb7">
+<div class="codewrapper sourceCode" id="cb6">
 <h3 class="code-label">R<i aria-hidden="true" data-feather="chevron-left"></i><i aria-hidden="true" data-feather="chevron-right"></i>
 </h3>
 <pre class="downlit sourceCode r">
@@ -5755,7 +5850,7 @@ GSM2545380  InfluenzaA C57BL/6 Day8 Cerebellum    19</code></pre>
 </div>
 <p>We can start by visualizing the number of observations for each
 combination of the three predictor variables.</p>
-<div class="codewrapper sourceCode" id="cb9">
+<div class="codewrapper sourceCode" id="cb8">
 <h3 class="code-label">R<i aria-hidden="true" data-feather="chevron-left"></i><i aria-hidden="true" data-feather="chevron-right"></i>
 </h3>
 <pre class="downlit sourceCode r">
@@ -5768,13 +5863,13 @@ combination of the three predictor variables.</p>
 </h3>
 <pre class="output" tabindex="0"><code>$`tissue = Cerebellum`</code></pre>
 </div>
-<figure><img src="../fig/08-extra-design-rendered-unnamed-chunk-5-1.png" style="display: block; margin: auto;" class="figure mx-auto d-block"></figure><div class="codewrapper">
+<figure><img src="../fig/08-extra-design-rendered-unnamed-chunk-6-1.png" style="display: block; margin: auto;" class="figure mx-auto d-block"></figure><div class="codewrapper">
 <h3 class="code-label">OUTPUT<i aria-hidden="true" data-feather="chevron-left"></i><i aria-hidden="true" data-feather="chevron-right"></i>
 </h3>
 <pre class="output" tabindex="0"><code>
 $`tissue = Spinalcord`</code></pre>
 </div>
-<figure><img src="../fig/08-extra-design-rendered-unnamed-chunk-5-2.png" style="display: block; margin: auto;" class="figure mx-auto d-block"></figure><div id="challenge" class="callout discussion">
+<figure><img src="../fig/08-extra-design-rendered-unnamed-chunk-6-2.png" style="display: block; margin: auto;" class="figure mx-auto d-block"></figure><div id="challenge" class="callout discussion">
 <div class="callout-square">
 <i class="callout-icon" data-feather="message-circle"></i>
 </div>
@@ -5802,7 +5897,7 @@ variable, which in this case is selected to be the Female mice. If not
 explicitly specified, R will order the values of the predictor in
 alphabetical order and select the first one as the reference or baseline
 level.</p>
-<div class="codewrapper sourceCode" id="cb12">
+<div class="codewrapper sourceCode" id="cb11">
 <h3 class="code-label">R<i aria-hidden="true" data-feather="chevron-left"></i><i aria-hidden="true" data-feather="chevron-right"></i>
 </h3>
 <pre class="downlit sourceCode r">
@@ -5833,7 +5928,7 @@ GSM2545365 NonInfected C57BL/6 Day0 Spinalcord     9
 GSM2545366 NonInfected C57BL/6 Day0 Spinalcord    10
 GSM2545367 NonInfected C57BL/6 Day0 Spinalcord    11</code></pre>
 </div>
-<div class="codewrapper sourceCode" id="cb14">
+<div class="codewrapper sourceCode" id="cb13">
 <h3 class="code-label">R<i aria-hidden="true" data-feather="chevron-left"></i><i aria-hidden="true" data-feather="chevron-right"></i>
 </h3>
 <pre class="downlit sourceCode r">
@@ -5856,7 +5951,7 @@ GSM2545365           1       0
 GSM2545366           1       0
 GSM2545367           1       1</code></pre>
 </div>
-<div class="codewrapper sourceCode" id="cb16">
+<div class="codewrapper sourceCode" id="cb15">
 <h3 class="code-label">R<i aria-hidden="true" data-feather="chevron-left"></i><i aria-hidden="true" data-feather="chevron-right"></i>
 </h3>
 <pre class="downlit sourceCode r">
@@ -5867,7 +5962,7 @@ GSM2545367           1       1</code></pre>
 </h3>
 <pre class="output" tabindex="0"><code>[[1]]</code></pre>
 </div>
-<figure><img src="../fig/08-extra-design-rendered-unnamed-chunk-6-1.png" style="display: block; margin: auto;" class="figure mx-auto d-block"></figure><div class="codewrapper sourceCode" id="cb18">
+<figure><img src="../fig/08-extra-design-rendered-unnamed-chunk-7-1.png" style="display: block; margin: auto;" class="figure mx-auto d-block"></figure><div class="codewrapper sourceCode" id="cb17">
 <h3 class="code-label">R<i aria-hidden="true" data-feather="chevron-left"></i><i aria-hidden="true" data-feather="chevron-right"></i>
 </h3>
 <pre class="downlit sourceCode r">
@@ -5928,9 +6023,9 @@ mean expression of a gene between male and female mice?</p>
   Show me the solution
   </h4>
 </button>
-<div id="collapseSolution1" class="accordion-collapse collapse" aria-labelledby="headingSolution1" data-bs-parent="#accordionSolution1">
+<div id="collapseSolution1" class="accordion-collapse collapse" data-bs-parent="#accordionSolution1" aria-labelledby="headingSolution1">
 <div class="accordion-body">
-<div class="codewrapper sourceCode" id="cb20">
+<div class="codewrapper sourceCode" id="cb19">
 <h3 class="code-label">R<i aria-hidden="true" data-feather="chevron-left"></i><i aria-hidden="true" data-feather="chevron-right"></i>
 </h3>
 <pre class="downlit sourceCode r">
@@ -5960,7 +6055,7 @@ GSM2545365 NonInfected C57BL/6 Day0 Spinalcord     9
 GSM2545366 NonInfected C57BL/6 Day0 Spinalcord    10
 GSM2545367 NonInfected C57BL/6 Day0 Spinalcord    11</code></pre>
 </div>
-<div class="codewrapper sourceCode" id="cb22">
+<div class="codewrapper sourceCode" id="cb21">
 <h3 class="code-label">R<i aria-hidden="true" data-feather="chevron-left"></i><i aria-hidden="true" data-feather="chevron-right"></i>
 </h3>
 <pre class="downlit sourceCode r">
@@ -5981,7 +6076,7 @@ GSM2545365         1       0
 GSM2545366         1       0
 GSM2545367         0       1</code></pre>
 </div>
-<div class="codewrapper sourceCode" id="cb24">
+<div class="codewrapper sourceCode" id="cb23">
 <h3 class="code-label">R<i aria-hidden="true" data-feather="chevron-left"></i><i aria-hidden="true" data-feather="chevron-right"></i>
 </h3>
 <pre class="downlit sourceCode r">
@@ -5992,7 +6087,7 @@ GSM2545367         0       1</code></pre>
 </h3>
 <pre class="output" tabindex="0"><code>[[1]]</code></pre>
 </div>
-<figure><img src="../fig/08-extra-design-rendered-unnamed-chunk-7-1.png" style="display: block; margin: auto;" class="figure mx-auto d-block"></figure>
+<figure><img src="../fig/08-extra-design-rendered-unnamed-chunk-8-1.png" style="display: block; margin: auto;" class="figure mx-auto d-block"></figure>
 </div>
 </div>
 </div>
@@ -6018,9 +6113,9 @@ Day4, Day8) in the male spinal cord samples, and visualize it using
   Show me the solution
   </h4>
 </button>
-<div id="collapseSolution2" class="accordion-collapse collapse" aria-labelledby="headingSolution2" data-bs-parent="#accordionSolution2">
+<div id="collapseSolution2" class="accordion-collapse collapse" data-bs-parent="#accordionSolution2" aria-labelledby="headingSolution2">
 <div class="accordion-body">
-<div class="codewrapper sourceCode" id="cb26">
+<div class="codewrapper sourceCode" id="cb25">
 <h3 class="code-label">R<i aria-hidden="true" data-feather="chevron-left"></i><i aria-hidden="true" data-feather="chevron-right"></i>
 </h3>
 <pre class="downlit sourceCode r">
@@ -6057,7 +6152,7 @@ GSM2545373 C57BL/6 Day4 Spinalcord    18
 GSM2545378 C57BL/6 Day8 Spinalcord    23
 GSM2545379 C57BL/6 Day8 Spinalcord    24</code></pre>
 </div>
-<div class="codewrapper sourceCode" id="cb28">
+<div class="codewrapper sourceCode" id="cb27">
 <h3 class="code-label">R<i aria-hidden="true" data-feather="chevron-left"></i><i aria-hidden="true" data-feather="chevron-right"></i>
 </h3>
 <pre class="downlit sourceCode r">
@@ -6081,7 +6176,7 @@ GSM2545373           1        1        0
 GSM2545378           1        0        1
 GSM2545379           1        0        1</code></pre>
 </div>
-<div class="codewrapper sourceCode" id="cb30">
+<div class="codewrapper sourceCode" id="cb29">
 <h3 class="code-label">R<i aria-hidden="true" data-feather="chevron-left"></i><i aria-hidden="true" data-feather="chevron-right"></i>
 </h3>
 <pre class="downlit sourceCode r">
@@ -6092,7 +6187,7 @@ GSM2545379           1        0        1</code></pre>
 </h3>
 <pre class="output" tabindex="0"><code>[[1]]</code></pre>
 </div>
-<figure><img src="../fig/08-extra-design-rendered-unnamed-chunk-8-1.png" style="display: block; margin: auto;" class="figure mx-auto d-block"></figure>
+<figure><img src="../fig/08-extra-design-rendered-unnamed-chunk-9-1.png" style="display: block; margin: auto;" class="figure mx-auto d-block"></figure>
 </div>
 </div>
 </div>
@@ -6104,7 +6199,7 @@ GSM2545379           1        0        1</code></pre>
 incorporating both sex and tissue as predictors. We assume that the
 tissue differences are the same for both male and female mice, and
 consequently fit an additive model, without interaction terms.</p>
-<div class="codewrapper sourceCode" id="cb32">
+<div class="codewrapper sourceCode" id="cb31">
 <h3 class="code-label">R<i aria-hidden="true" data-feather="chevron-left"></i><i aria-hidden="true" data-feather="chevron-right"></i>
 </h3>
 <pre class="downlit sourceCode r">
@@ -6147,7 +6242,7 @@ GSM2545365 NonInfected C57BL/6 Day0 Spinalcord     9
 GSM2545366 NonInfected C57BL/6 Day0 Spinalcord    10
 GSM2545367 NonInfected C57BL/6 Day0 Spinalcord    11</code></pre>
 </div>
-<div class="codewrapper sourceCode" id="cb34">
+<div class="codewrapper sourceCode" id="cb33">
 <h3 class="code-label">R<i aria-hidden="true" data-feather="chevron-left"></i><i aria-hidden="true" data-feather="chevron-right"></i>
 </h3>
 <pre class="downlit sourceCode r">
@@ -6175,7 +6270,7 @@ GSM2545365           1       0                1
 GSM2545366           1       0                1
 GSM2545367           1       1                1</code></pre>
 </div>
-<div class="codewrapper sourceCode" id="cb36">
+<div class="codewrapper sourceCode" id="cb35">
 <h3 class="code-label">R<i aria-hidden="true" data-feather="chevron-left"></i><i aria-hidden="true" data-feather="chevron-right"></i>
 </h3>
 <pre class="downlit sourceCode r">
@@ -6186,7 +6281,7 @@ GSM2545367           1       1                1</code></pre>
 </h3>
 <pre class="output" tabindex="0"><code>[[1]]</code></pre>
 </div>
-<figure><img src="../fig/08-extra-design-rendered-unnamed-chunk-9-1.png" style="display: block; margin: auto;" class="figure mx-auto d-block"></figure></section><section id="factorial-design-with-interactions"><h2 class="section-heading">Factorial design with interactions<a class="anchor" aria-label="anchor" href="#factorial-design-with-interactions"></a>
+<figure><img src="../fig/08-extra-design-rendered-unnamed-chunk-10-1.png" style="display: block; margin: auto;" class="figure mx-auto d-block"></figure></section><section id="factorial-design-with-interactions"><h2 class="section-heading">Factorial design with interactions<a class="anchor" aria-label="anchor" href="#factorial-design-with-interactions"></a>
 </h2>
 <hr class="half-width">
 <p>In the previous model, we assumed that the tissue differences were
@@ -6194,7 +6289,7 @@ the same for both male and female mice. To allow for the estimation of
 sex-specific tissue differences (at the expense of having one additional
 coefficient to estimate from the data), we can include an interaction
 term in the model.</p>
-<div class="codewrapper sourceCode" id="cb38">
+<div class="codewrapper sourceCode" id="cb37">
 <h3 class="code-label">R<i aria-hidden="true" data-feather="chevron-left"></i><i aria-hidden="true" data-feather="chevron-right"></i>
 </h3>
 <pre class="downlit sourceCode r">
@@ -6237,7 +6332,7 @@ GSM2545365 NonInfected C57BL/6 Day0 Spinalcord     9
 GSM2545366 NonInfected C57BL/6 Day0 Spinalcord    10
 GSM2545367 NonInfected C57BL/6 Day0 Spinalcord    11</code></pre>
 </div>
-<div class="codewrapper sourceCode" id="cb40">
+<div class="codewrapper sourceCode" id="cb39">
 <h3 class="code-label">R<i aria-hidden="true" data-feather="chevron-left"></i><i aria-hidden="true" data-feather="chevron-right"></i>
 </h3>
 <pre class="downlit sourceCode r">
@@ -6268,7 +6363,7 @@ GSM2545365           1       0                1                        0
 GSM2545366           1       0                1                        0
 GSM2545367           1       1                1                        1</code></pre>
 </div>
-<div class="codewrapper sourceCode" id="cb42">
+<div class="codewrapper sourceCode" id="cb41">
 <h3 class="code-label">R<i aria-hidden="true" data-feather="chevron-left"></i><i aria-hidden="true" data-feather="chevron-right"></i>
 </h3>
 <pre class="downlit sourceCode r">
@@ -6279,7 +6374,7 @@ GSM2545367           1       1                1                        1</code><
 </h3>
 <pre class="output" tabindex="0"><code>[[1]]</code></pre>
 </div>
-<figure><img src="../fig/08-extra-design-rendered-unnamed-chunk-10-1.png" style="display: block; margin: auto;" class="figure mx-auto d-block"></figure></section><section id="paired-design"><h2 class="section-heading">Paired design<a class="anchor" aria-label="anchor" href="#paired-design"></a>
+<figure><img src="../fig/08-extra-design-rendered-unnamed-chunk-11-1.png" style="display: block; margin: auto;" class="figure mx-auto d-block"></figure></section><section id="paired-design"><h2 class="section-heading">Paired design<a class="anchor" aria-label="anchor" href="#paired-design"></a>
 </h2>
 <hr class="half-width">
 <p>In this particular data set the samples are paired - the same mice
@@ -6290,7 +6385,7 @@ variability in baseline expression levels between mice. Here, we define
 a paired design for the female non-infected mice, aimed at testing for
 differences between tissues after accounting for baseline differences
 between mice.</p>
-<div class="codewrapper sourceCode" id="cb44">
+<div class="codewrapper sourceCode" id="cb43">
 <h3 class="code-label">R<i aria-hidden="true" data-feather="chevron-left"></i><i aria-hidden="true" data-feather="chevron-right"></i>
 </h3>
 <pre class="downlit sourceCode r">
@@ -6324,7 +6419,7 @@ GSM2545364 NonInfected C57BL/6 Day0 Spinalcord     8
 GSM2545365 NonInfected C57BL/6 Day0 Spinalcord     9
 GSM2545366 NonInfected C57BL/6 Day0 Spinalcord    10</code></pre>
 </div>
-<div class="codewrapper sourceCode" id="cb46">
+<div class="codewrapper sourceCode" id="cb45">
 <h3 class="code-label">R<i aria-hidden="true" data-feather="chevron-left"></i><i aria-hidden="true" data-feather="chevron-right"></i>
 </h3>
 <pre class="downlit sourceCode r">
@@ -6345,7 +6440,7 @@ GSM2545364           1      1      0       0                1
 GSM2545365           1      0      1       0                1
 GSM2545366           1      0      0       1                1</code></pre>
 </div>
-<div class="codewrapper sourceCode" id="cb48">
+<div class="codewrapper sourceCode" id="cb47">
 <h3 class="code-label">R<i aria-hidden="true" data-feather="chevron-left"></i><i aria-hidden="true" data-feather="chevron-right"></i>
 </h3>
 <pre class="downlit sourceCode r">
@@ -6356,7 +6451,7 @@ GSM2545366           1      0      0       1                1</code></pre>
 </h3>
 <pre class="output" tabindex="0"><code>[[1]]</code></pre>
 </div>
-<figure><img src="../fig/08-extra-design-rendered-unnamed-chunk-11-1.png" style="display: block; margin: auto;" class="figure mx-auto d-block"></figure></section><section id="within--and-between-subject-comparisons"><h2 class="section-heading">Within- and between-subject comparisons<a class="anchor" aria-label="anchor" href="#within--and-between-subject-comparisons"></a>
+<figure><img src="../fig/08-extra-design-rendered-unnamed-chunk-12-1.png" style="display: block; margin: auto;" class="figure mx-auto d-block"></figure></section><section id="within--and-between-subject-comparisons"><h2 class="section-heading">Within- and between-subject comparisons<a class="anchor" aria-label="anchor" href="#within--and-between-subject-comparisons"></a>
 </h2>
 <hr class="half-width">
 <p>In some situations, we need to combine the types of models considered
@@ -6369,7 +6464,7 @@ is as two paired experiments, one for each infection group (see the <a href="htt
 user guide section 3.5</a>). We can then easily compare the two tissues
 in each infection group, and contrast the tissue differences between the
 infection groups.</p>
-<div class="codewrapper sourceCode" id="cb50">
+<div class="codewrapper sourceCode" id="cb49">
 <h3 class="code-label">R<i aria-hidden="true" data-feather="chevron-left"></i><i aria-hidden="true" data-feather="chevron-right"></i>
 </h3>
 <pre class="downlit sourceCode r">
@@ -6420,7 +6515,7 @@ GSM2545375  InfluenzaA C57BL/6 Day4 Spinalcord    20
 GSM2545376  InfluenzaA C57BL/6 Day4 Spinalcord    21
 GSM2545377  InfluenzaA C57BL/6 Day4 Spinalcord    22</code></pre>
 </div>
-<div class="codewrapper sourceCode" id="cb52">
+<div class="codewrapper sourceCode" id="cb51">
 <h3 class="code-label">R<i aria-hidden="true" data-feather="chevron-left"></i><i aria-hidden="true" data-feather="chevron-right"></i>
 </h3>
 <pre class="downlit sourceCode r">
@@ -6471,7 +6566,7 @@ GSM2545375        0        1
 GSM2545376        0        1
 GSM2545377        0        1</code></pre>
 </div>
-<div class="codewrapper sourceCode" id="cb54">
+<div class="codewrapper sourceCode" id="cb53">
 <h3 class="code-label">R<i aria-hidden="true" data-feather="chevron-left"></i><i aria-hidden="true" data-feather="chevron-right"></i>
 </h3>
 <pre class="downlit sourceCode r">
@@ -6519,7 +6614,7 @@ GSM2545375        0        1
 GSM2545376        0        1
 GSM2545377        0        1</code></pre>
 </div>
-<div class="codewrapper sourceCode" id="cb56">
+<div class="codewrapper sourceCode" id="cb55">
 <h3 class="code-label">R<i aria-hidden="true" data-feather="chevron-left"></i><i aria-hidden="true" data-feather="chevron-right"></i>
 </h3>
 <pre class="downlit sourceCode r">
@@ -6530,13 +6625,13 @@ GSM2545377        0        1</code></pre>
 </h3>
 <pre class="output" tabindex="0"><code>$`time = Day0`</code></pre>
 </div>
-<figure><img src="../fig/08-extra-design-rendered-unnamed-chunk-12-1.png" style="display: block; margin: auto;" class="figure mx-auto d-block"></figure><div class="codewrapper">
+<figure><img src="../fig/08-extra-design-rendered-unnamed-chunk-13-1.png" style="display: block; margin: auto;" class="figure mx-auto d-block"></figure><div class="codewrapper">
 <h3 class="code-label">OUTPUT<i aria-hidden="true" data-feather="chevron-left"></i><i aria-hidden="true" data-feather="chevron-right"></i>
 </h3>
 <pre class="output" tabindex="0"><code>
 $`time = Day4`</code></pre>
 </div>
-<figure><img src="../fig/08-extra-design-rendered-unnamed-chunk-12-2.png" style="display: block; margin: auto;" class="figure mx-auto d-block"></figure><div id="keypoints1" class="callout keypoints">
+<figure><img src="../fig/08-extra-design-rendered-unnamed-chunk-13-2.png" style="display: block; margin: auto;" class="figure mx-auto d-block"></figure><div id="keypoints1" class="callout keypoints">
 <div class="callout-square">
 <i class="callout-icon" data-feather="key"></i>
 </div>
