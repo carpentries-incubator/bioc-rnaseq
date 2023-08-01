@@ -132,7 +132,7 @@ plotDispEsts(dds)
 
 ### Testing
 
-We can use the `nbinomWaldTest()`function of `DESeq2` to fit a *generalized linear model (GLM)* and compute *log2 fold changes* (synonymous with "GLM coefficients", "beta coefficients" or "effect size") corresponding to the variables of the *design matrix*. The *design matrix* is directly related to the *design formular* and automatically derived from it. Assume a design fromular with one variable (`~ treatment`) and two factor level (treatment and control). The mean expression $\mu_{j}$ of a specific gene in sample $j$ will be modeled as following:
+We can use the `nbinomWaldTest()`function of `DESeq2` to fit a *generalized linear model (GLM)* and compute *log2 fold changes* (synonymous with "GLM coefficients", "beta coefficients" or "effect size") corresponding to the variables of the *design matrix*. The *design matrix* is directly related to the *design formular* and automatically derived from it. Assume a design formular with one variable (`~ treatment`) and two factor level (treatment and control). The mean expression $\mu_{j}$ of a specific gene in sample $j$ will be modeled as following:
 
 $log(μ_j) = β_0 + x_j β_T$,
 
@@ -197,6 +197,7 @@ To explore the output of the `results()` function we can use the `summary()` fun
 ## Day 8 vs Day 0
 resTime <- results(dds, contrast = c("time", "Day8", "Day0"))
 summary(resTime)
+# View(resTime)
 head(resTime[order(resTime$pvalue), ])
 ```
 
@@ -295,7 +296,9 @@ We will use transformed data (see [exploratory data analysis](../episodes/04-exp
 vsd <- vst(dds, blind = TRUE)
 
 # Get top DE genes
-genes <- rownames(head(resTime[order(resTime$pvalue), ], 10))
+genes <- resTime[order(resTime$pvalue), ] |>
+         head(10) |>
+         rownames()
 heatmapData <- assay(vsd)[genes, ]
 
 # Scale counts for visualization
@@ -303,9 +306,8 @@ heatmapData <- t(scale(t(heatmapData)))
 
 # Add annotation
 heatmapColAnnot <- data.frame(colData(vsd)[, c("time", "sex")])
-idx <- order(vsd$time)
-heatmapData <- heatmapData[, idx]
-heatmapColAnnot <- HeatmapAnnotation(df = heatmapColAnnot[idx, ])
+heatmapColAnnot <- HeatmapAnnotation(df = heatmapColAnnot)
+
 
 # Plot as heatmap
 ComplexHeatmap::Heatmap(heatmapData,
@@ -315,10 +317,26 @@ ComplexHeatmap::Heatmap(heatmapData,
 
 ::::::::::::::::::::::::::::::::::::: challenge 
 
-Check the heatmap and top DE genes. Do you find something expected/unexpected?
+Check the heatmap and top DE genes. Do you find something expected/unexpected in terms of change across all 3 time points?
 
-*Hint: Check gene names, if you don't know them.*
+
 ::::::::::::::::::::::::::::::::::::::::::::::::
+
+## Output results
+
+We may want to to output our results out of R to have a stand-alone file. The format of `resTime` only has the gene symbols as rownames, so let us join the gene annotation information, and then write out as .csv file:
+
+```{r}
+head(as.data.frame(resTime))
+head(as.data.frame(rowRanges(se)))
+
+temp <- cbind(as.data.frame(rowRanges(se)),
+              as.data.frame(resTime))
+
+write.csv(temp, file = "output/Day8vsDay0.csv")
+
+```
+
 
 
 :::::::::::::::::::::::::::::::::::::::: keypoints
