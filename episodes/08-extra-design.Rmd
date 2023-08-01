@@ -48,8 +48,7 @@ suppressPackageStartupMessages({
 })
 ```
 
-Next, we read the metadata table for our data set. 
-As seen in previous episodes, the metadata contains information about the age, sex, infection status, time of measurement and tissue of the collected samples. 
+Next, we read the metadata table for our data set. Because we want to explore many different design matrices, we will read in the 4th file we downloaded but haven't used yet: that for both Cerebellum and Spinal Cord samples (45 samples total). As seen in previous episodes, the metadata contains information about the age, sex, infection status, time of measurement and tissue of the collected samples. 
 Note that Day0 always corresponds to non-infected samples, and that infected samples are collected on days 4 and 8.
 Moreover, all mice have the same age (8 weeks). 
 Hence, in the first part of this episode we consider only the sex, tissue and time variables further. 
