@@ -544,7 +544,7 @@ If you conducted the original experiment ideally you would have the complete rec
 
 ## Challenge: How to subset to mRNA genes
 
-Before, we conceptually discussed subsetting to only the mRNA genes. Now that we have our `SummarizedExperiment` object, it becomes much easier to write the codes to subset `se` to a new object called `se_mRNA` that contains only the genes/rows where the `rowData(se)$gbkey` is equal to mRNA. Write the codes and then check you correctly got the 16,859 mRNA genes:
+Before, we conceptually discussed subsetting to only the mRNA genes. Now that we have our `SummarizedExperiment` object, it becomes much easier to write the codes to subset `se` to a new object called `se_mRNA` that contains only the genes/rows where the `rowData(se)$gbkey` is equal to mRNA. Write the codes and then check you correctly got the 21,198 mRNA genes:
   
 ::::::::::::::::::::::::::::::::::::::::::::::::::
 
@@ -714,7 +714,7 @@ other attached packages:
  [1] hgu95av2.db_3.13.0          org.Hs.eg.db_3.17.0        
  [3] org.Mm.eg.db_3.17.0         AnnotationDbi_1.62.2       
  [5] SummarizedExperiment_1.30.2 Biobase_2.60.0             
- [7] MatrixGenerics_1.12.2       matrixStats_1.0.0          
+ [7] MatrixGenerics_1.12.3       matrixStats_1.0.0          
  [9] GenomicRanges_1.52.0        GenomeInfoDb_1.36.1        
 [11] IRanges_2.34.1              S4Vectors_0.38.1           
 [13] BiocGenerics_0.46.0         knitr_1.43                 

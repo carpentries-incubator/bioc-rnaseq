@@ -110,8 +110,7 @@ se <- readRDS("data/GSE96870_se.rds")
 se <- se[rowData(se)$gbkey == "mRNA"]
 
 # construct a `DESeqDataSet` object where we also specify the experimental design
-dds <- DESeqDataSet(se[, se$tissue == "Cerebellum"],
-                            design = ~ sex + time)
+dds <- DESeqDataSet(se, design = ~ sex + time)
 # perform DESeq2 analysis
 dds <- DESeq(dds)
 # obtain DESeq2 results, here we only want Male vs Female in the "sex" variable
@@ -502,9 +501,9 @@ microbenchmark(
 
 ```{.output}
 Unit: microseconds
-   expr   min    lq    mean median    uq    max neval
- fisher 464.9 517.1 588.803 556.15 620.2 1218.1   100
-  hyper   2.0   3.0   5.274   5.60   6.6   26.2   100
+   expr   min     lq    mean median     uq   max neval
+ fisher 316.3 323.90 335.807 326.95 335.75 680.3   100
+  hyper   1.6   2.05   3.068   2.50   4.00   7.9   100
 ```
 
 It is very astonishing that `phyper()` is hundreds of times faster than
@@ -1232,7 +1231,7 @@ resTimeGO = enrichGO(gene = timeDEgenes,
 ```
 
 ```{.output}
---> Expected input gene ID: 64383,27084,69286,66722,73677,215387
+--> Expected input gene ID: 69707,102633564,57749,74041,12640,21749
 ```
 
 ```{.output}

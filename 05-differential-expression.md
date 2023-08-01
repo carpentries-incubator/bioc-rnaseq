@@ -55,22 +55,27 @@ suppressPackageStartupMessages({
 
 ### Load data
 
+Let's load in our `SummarizedExperiment` object again. In the last episode for quality control exploration, we removed ~35% genes that had 5 or fewer counts because they had too little information in them. For DESeq2 statistical analysis, we do not technically have to remove these genes because by default it will do some independent filtering, but it can reduce the memory size of the `DESeqDataSet` object resulting in faster computation. Plus, we do not want these genes cluttering up some of the visualizations. 
+
 
 ```r
 se <- readRDS("data/GSE96870_se.rds")
+se <- se[rowSums(assay(se, "counts")) > 5, ]
 ```
 
 ### Create DESeqDataSet
 
+The design matrix we will use in this example is `~ sex + time`. This will allow us test the difference between males and females (averaged over time point) and the difference between day 0, 4 and 8 (averaged over males and females). If we wanted to test other comparisons (e.g., Female.Day8 vs. Female.Day0 and also Male.Day8 vs. Male.Day0) we could use a different design matrix to more easily extract those pairwise comparisons. 
+
 
 ```r
-dds <- DESeq2::DESeqDataSet(se[, se$tissue == "Cerebellum"],
+dds <- DESeq2::DESeqDataSet(se,
                             design = ~ sex + time)
 ```
 
 ```{.warning}
-Warning in DESeq2::DESeqDataSet(se[, se$tissue == "Cerebellum"], design = ~sex
-+ : some variables in design formula are characters, converting to factors
+Warning in DESeq2::DESeqDataSet(se, design = ~sex + time): some variables in
+design formula are characters, converting to factors
 ```
 
 
@@ -152,7 +157,7 @@ plotDispEsts(dds)
 
 ### Testing
 
-We can use the `nbinomWaldTest()`function of `DESeq2` to fit a *generalized linear model (GLM)* and compute *log2 fold changes* (synonymous with "GLM coefficients", "beta coefficients" or "effect size") corresponding to the variables of the *design matrix*. The *design matrix* is directly related to the *design formular* and automatically derived from it. Assume a design fromular with one variable (`~ treatment`) and two factor level (treatment and control). The mean expression $\mu_{j}$ of a specific gene in sample $j$ will be modeled as following:
+We can use the `nbinomWaldTest()`function of `DESeq2` to fit a *generalized linear model (GLM)* and compute *log2 fold changes* (synonymous with "GLM coefficients", "beta coefficients" or "effect size") corresponding to the variables of the *design matrix*. The *design matrix* is directly related to the *design formular* and automatically derived from it. Assume a design formular with one variable (`~ treatment`) and two factor level (treatment and control). The mean expression $\mu_{j}$ of a specific gene in sample $j$ will be modeled as following:
 
 $log(μ_j) = β_0 + x_j β_T$,
 
@@ -230,18 +235,19 @@ summary(resTime)
 
 ```{.output}
 
-out of 32652 with nonzero total read count
+out of 27430 with nonzero total read count
 adjusted p-value < 0.1
-LFC > 0 (up)       : 4472, 14%
-LFC < 0 (down)     : 4276, 13%
-outliers [1]       : 10, 0.031%
-low counts [2]     : 8732, 27%
+LFC > 0 (up)       : 4472, 16%
+LFC < 0 (down)     : 4282, 16%
+outliers [1]       : 10, 0.036%
+low counts [2]     : 3723, 14%
 (mean count < 1)
 [1] see 'cooksCutoff' argument of ?results
 [2] see 'independentFiltering' argument of ?results
 ```
 
 ```r
+# View(resTime)
 head(resTime[order(resTime$pvalue), ])
 ```
 
@@ -251,20 +257,20 @@ Wald test p-value: time Day8 vs Day0
 DataFrame with 6 rows and 6 columns
                baseMean log2FoldChange     lfcSE      stat      pvalue
               <numeric>      <numeric> <numeric> <numeric>   <numeric>
-Asl             701.343        1.11733 0.0592541   18.8565 2.59885e-79
-Apod          18765.146        1.44698 0.0805186   17.9708 3.30147e-72
-Cyp2d22        2550.480        0.91020 0.0554756   16.4072 1.69794e-60
-Klk6            546.503       -1.67190 0.1058989  -15.7877 3.78228e-56
-Fcrls           184.235       -1.94701 0.1279847  -15.2128 2.90708e-52
-A330076C08Rik   107.250       -1.74995 0.1154279  -15.1606 6.45112e-52
+Asl             701.343       1.117332 0.0594128   18.8062 6.71212e-79
+Apod          18765.146       1.446981 0.0805056   17.9737 3.13229e-72
+Cyp2d22        2550.480       0.910202 0.0556002   16.3705 3.10712e-60
+Klk6            546.503      -1.671897 0.1057395  -15.8115 2.59339e-56
+Fcrls           184.235      -1.947016 0.1277235  -15.2440 1.80488e-52
+A330076C08Rik   107.250      -1.749957 0.1155125  -15.1495 7.63434e-52
                      padj
                 <numeric>
-Asl           6.21386e-75
-Apod          3.94690e-68
-Cyp2d22       1.35326e-56
-Klk6          2.26086e-52
-Fcrls         1.39017e-48
-A330076C08Rik 2.57077e-48
+Asl           1.59057e-74
+Apod          3.71130e-68
+Cyp2d22       2.45431e-56
+Klk6          1.53639e-52
+Fcrls         8.55406e-49
+A330076C08Rik 3.01518e-48
 ```
 
 ::::::::::::::::::::::::::::::::::::: instructor
@@ -298,12 +304,12 @@ summary(resSex)
 
 ```{.output}
 
-out of 32652 with nonzero total read count
+out of 27430 with nonzero total read count
 adjusted p-value < 0.1
-LFC > 0 (up)       : 53, 0.16%
-LFC < 0 (down)     : 71, 0.22%
-outliers [1]       : 10, 0.031%
-low counts [2]     : 13717, 42%
+LFC > 0 (up)       : 51, 0.19%
+LFC < 0 (down)     : 70, 0.26%
+outliers [1]       : 10, 0.036%
+low counts [2]     : 8504, 31%
 (mean count < 6)
 [1] see 'cooksCutoff' argument of ?results
 [2] see 'independentFiltering' argument of ?results
@@ -321,18 +327,18 @@ DataFrame with 6 rows and 6 columns
               <numeric>      <numeric> <numeric> <numeric>    <numeric>
 Xist         22603.0359      -11.60429  0.336282  -34.5076 6.16852e-261
 Ddx3y         2072.9436       11.87241  0.397493   29.8683 5.08722e-196
-Eif2s3y       1410.8750       12.62514  0.565216   22.3369 1.62066e-110
-Kdm5d          692.1672       12.55386  0.593627   21.1477  2.89566e-99
-Uty            667.4375       12.01728  0.593591   20.2451  3.92780e-91
-LOC105243748    52.9669        9.08325  0.597624   15.1989  3.59432e-52
+Eif2s3y       1410.8750       12.62513  0.565194   22.3377 1.58997e-110
+Kdm5d          692.1672       12.55386  0.593607   21.1484  2.85293e-99
+Uty            667.4375       12.01728  0.593573   20.2457  3.87772e-91
+LOC105243748    52.9669        9.08325  0.597575   15.2002  3.52699e-52
                      padj
                 <numeric>
-Xist         1.16739e-256
-Ddx3y        4.81378e-192
-Eif2s3y      1.02237e-106
-Kdm5d         1.37001e-95
-Uty           1.48667e-87
-LOC105243748  1.13371e-48
+Xist         1.16684e-256
+Ddx3y        4.81149e-192
+Eif2s3y      1.00253e-106
+Kdm5d         1.34915e-95
+Uty           1.46702e-87
+LOC105243748  1.11194e-48
 ```
 
 
@@ -402,12 +408,12 @@ summary(resTime)
 
 ```{.output}
 
-out of 32652 with nonzero total read count
+out of 27430 with nonzero total read count
 adjusted p-value < 0.1
-LFC > 0 (up)       : 4472, 14%
-LFC < 0 (down)     : 4276, 13%
-outliers [1]       : 10, 0.031%
-low counts [2]     : 8732, 27%
+LFC > 0 (up)       : 4472, 16%
+LFC < 0 (down)     : 4282, 16%
+outliers [1]       : 10, 0.036%
+low counts [2]     : 3723, 14%
 (mean count < 1)
 [1] see 'cooksCutoff' argument of ?results
 [2] see 'independentFiltering' argument of ?results
@@ -419,11 +425,11 @@ summary(resTimeNotFiltered)
 
 ```{.output}
 
-out of 32652 with nonzero total read count
+out of 27430 with nonzero total read count
 adjusted p-value < 0.1
-LFC > 0 (up)       : 4130, 13%
-LFC < 0 (down)     : 3962, 12%
-outliers [1]       : 10, 0.031%
+LFC > 0 (up)       : 4324, 16%
+LFC < 0 (down)     : 4129, 15%
+outliers [1]       : 10, 0.036%
 low counts [2]     : 0, 0%
 (mean count < 0)
 [1] see 'cooksCutoff' argument of ?results
@@ -449,7 +455,9 @@ We will use transformed data (see [exploratory data analysis](../episodes/04-exp
 vsd <- vst(dds, blind = TRUE)
 
 # Get top DE genes
-genes <- rownames(head(resTime[order(resTime$pvalue), ], 10))
+genes <- resTime[order(resTime$pvalue), ] |>
+         head(10) |>
+         rownames()
 heatmapData <- assay(vsd)[genes, ]
 
 # Scale counts for visualization
@@ -457,9 +465,8 @@ heatmapData <- t(scale(t(heatmapData)))
 
 # Add annotation
 heatmapColAnnot <- data.frame(colData(vsd)[, c("time", "sex")])
-idx <- order(vsd$time)
-heatmapData <- heatmapData[, idx]
-heatmapColAnnot <- HeatmapAnnotation(df = heatmapColAnnot[idx, ])
+heatmapColAnnot <- HeatmapAnnotation(df = heatmapColAnnot)
+
 
 # Plot as heatmap
 ComplexHeatmap::Heatmap(heatmapData,
@@ -471,10 +478,81 @@ ComplexHeatmap::Heatmap(heatmapData,
 
 ::::::::::::::::::::::::::::::::::::: challenge 
 
-Check the heatmap and top DE genes. Do you find something expected/unexpected?
+Check the heatmap and top DE genes. Do you find something expected/unexpected in terms of change across all 3 time points?
 
-*Hint: Check gene names, if you don't know them.*
+
 ::::::::::::::::::::::::::::::::::::::::::::::::
+
+## Output results
+
+We may want to to output our results out of R to have a stand-alone file. The format of `resTime` only has the gene symbols as rownames, so let us join the gene annotation information, and then write out as .csv file:
+
+
+```r
+head(as.data.frame(resTime))
+```
+
+```{.output}
+                 baseMean log2FoldChange      lfcSE       stat       pvalue
+Xkr4         1937.7555653     -0.2357302 0.10803980 -2.1818832 0.0291181539
+LOC105243853    0.9625883      0.5255058 1.18970791  0.4417099 0.6586991283
+LOC105242387  169.9134003      0.4560421 0.13852747  3.2920702 0.0009945278
+LOC105242467    3.4350732      0.2731728 0.58356846  0.4681075 0.6397077096
+Rp1             2.2734558     -0.2592924 0.68213996 -0.3801161 0.7038592599
+Sox17         251.0059632     -0.3197312 0.08312448 -3.8464143 0.0001198590
+                     padj
+Xkr4         0.0827056088
+LOC105243853           NA
+LOC105242387 0.0048763349
+LOC105242467 0.7801530335
+Rp1          0.8244991509
+Sox17        0.0007933796
+```
+
+```r
+head(as.data.frame(rowRanges(se)))
+```
+
+```{.output}
+             seqnames   start     end width strand  ENTREZID
+Xkr4                1 3670552 3671742  1191      -    497097
+LOC105243853        1 3357323 3366505  9183      + 105243853
+LOC105242387        1 3658847 3670456 11610      - 105242387
+LOC105242467        1 4233436 4233728   293      - 105242467
+Rp1                 1 4409170 4409241    72      -     19888
+Sox17               1 4496291 4497354  1064      -     20671
+                                                                                 product
+Xkr4         X Kell blood group precursor related family member 4, transcript variant X1
+LOC105243853                         uncharacterized LOC105243853, transcript variant X2
+LOC105242387                                                uncharacterized LOC105242387
+LOC105242467    lipoxygenase homology domain-containing protein 1, transcript variant X2
+Rp1                                 retinitis pigmentosa 1 (human), transcript variant 2
+Sox17                        SRY (sex determining region Y)-box 17, transcript variant 5
+             gbkey
+Xkr4          mRNA
+LOC105243853 ncRNA
+LOC105242387 ncRNA
+LOC105242467  mRNA
+Rp1           mRNA
+Sox17         mRNA
+```
+
+```r
+temp <- cbind(as.data.frame(rowRanges(se)),
+              as.data.frame(resTime))
+
+write.csv(temp, file = "output/Day8vsDay0.csv")
+```
+
+```{.warning}
+Warning in file(file, ifelse(append, "a", "w")): cannot open file
+'output/Day8vsDay0.csv': No such file or directory
+```
+
+```{.error}
+Error in file(file, ifelse(append, "a", "w")): cannot open the connection
+```
+
 
 
 :::::::::::::::::::::::::::::::::::::::: keypoints

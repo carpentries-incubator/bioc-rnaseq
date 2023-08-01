@@ -8,10 +8,9 @@ editor_options:
 ---
 
 
-```{.warning}
-Warning: replacing previous import 'S4Arrays::makeNindexFromArrayViewport' by
-'DelayedArray::makeNindexFromArrayViewport' when loading 'SummarizedExperiment'
-```
+
+
+
 
 ::::::::::::::::::::::::::::::::::::::: objectives
 
@@ -42,8 +41,7 @@ suppressPackageStartupMessages({
 })
 ```
 
-Next, we read the metadata table for our data set. 
-As seen in previous episodes, the metadata contains information about the age, sex, infection status, time of measurement and tissue of the collected samples. 
+Next, we read the metadata table for our data set. Because we want to explore many different design matrices, we will read in the 4th file we downloaded but haven't used yet: that for both Cerebellum and Spinal Cord samples (45 samples total). As seen in previous episodes, the metadata contains information about the age, sex, infection status, time of measurement and tissue of the collected samples. 
 Note that Day0 always corresponds to non-infected samples, and that infected samples are collected on days 4 and 8.
 Moreover, all mice have the same age (8 weeks). 
 Hence, in the first part of this episode we consider only the sex, tissue and time variables further. 
@@ -184,14 +182,14 @@ vd$cooccurrenceplots
 $`tissue = Cerebellum`
 ```
 
-<img src="fig/08-extra-design-rendered-unnamed-chunk-5-1.png" style="display: block; margin: auto;" />
+<img src="fig/08-extra-design-rendered-unnamed-chunk-6-1.png" style="display: block; margin: auto;" />
 
 ```{.output}
 
 $`tissue = Spinalcord`
 ```
 
-<img src="fig/08-extra-design-rendered-unnamed-chunk-5-2.png" style="display: block; margin: auto;" />
+<img src="fig/08-extra-design-rendered-unnamed-chunk-6-2.png" style="display: block; margin: auto;" />
 
 :::::::::::::::::::::::::::::::::::::::  challenge
 
@@ -268,7 +266,7 @@ vd$plotlist
 [[1]]
 ```
 
-<img src="fig/08-extra-design-rendered-unnamed-chunk-6-1.png" style="display: block; margin: auto;" />
+<img src="fig/08-extra-design-rendered-unnamed-chunk-7-1.png" style="display: block; margin: auto;" />
 
 ```r
 ## Note that we can also generate the design matrix like this
@@ -364,7 +362,7 @@ vd$plotlist
 [[1]]
 ```
 
-<img src="fig/08-extra-design-rendered-unnamed-chunk-7-1.png" style="display: block; margin: auto;" />
+<img src="fig/08-extra-design-rendered-unnamed-chunk-8-1.png" style="display: block; margin: auto;" />
 
 :::::::::::::::::::::::::
 
@@ -444,7 +442,7 @@ vd$plotlist
 [[1]]
 ```
 
-<img src="fig/08-extra-design-rendered-unnamed-chunk-8-1.png" style="display: block; margin: auto;" />
+<img src="fig/08-extra-design-rendered-unnamed-chunk-9-1.png" style="display: block; margin: auto;" />
 
 :::::::::::::::::::::::::
 
@@ -529,7 +527,7 @@ vd$plotlist
 [[1]]
 ```
 
-<img src="fig/08-extra-design-rendered-unnamed-chunk-9-1.png" style="display: block; margin: auto;" />
+<img src="fig/08-extra-design-rendered-unnamed-chunk-10-1.png" style="display: block; margin: auto;" />
 
 ## Factorial design with interactions
 
@@ -613,7 +611,7 @@ vd$plotlist
 [[1]]
 ```
 
-<img src="fig/08-extra-design-rendered-unnamed-chunk-10-1.png" style="display: block; margin: auto;" />
+<img src="fig/08-extra-design-rendered-unnamed-chunk-11-1.png" style="display: block; margin: auto;" />
 
 ## Paired design
 
@@ -680,7 +678,7 @@ vd$plotlist
 [[1]]
 ```
 
-<img src="fig/08-extra-design-rendered-unnamed-chunk-11-1.png" style="display: block; margin: auto;" />
+<img src="fig/08-extra-design-rendered-unnamed-chunk-12-1.png" style="display: block; margin: auto;" />
 
 ## Within- and between-subject comparisons
 
@@ -840,14 +838,14 @@ vd$plotlist
 $`time = Day0`
 ```
 
-<img src="fig/08-extra-design-rendered-unnamed-chunk-12-1.png" style="display: block; margin: auto;" />
+<img src="fig/08-extra-design-rendered-unnamed-chunk-13-1.png" style="display: block; margin: auto;" />
 
 ```{.output}
 
 $`time = Day4`
 ```
 
-<img src="fig/08-extra-design-rendered-unnamed-chunk-12-2.png" style="display: block; margin: auto;" />
+<img src="fig/08-extra-design-rendered-unnamed-chunk-13-2.png" style="display: block; margin: auto;" />
 
 :::::::::::::::::::::::::::::::::::::::: keypoints
 
