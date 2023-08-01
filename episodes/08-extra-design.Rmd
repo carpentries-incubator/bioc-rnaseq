@@ -7,6 +7,14 @@ editor_options:
   chunk_output_type: console
 ---
 
+```{r, echo = FALSE, message = FALSE}
+library(knitr)
+knitr::opts_chunk$set(
+    warning = FALSE
+)
+```
+
+
 ```{r, echo=FALSE, purl=FALSE, message=FALSE}
 source("download_data.R")
 ```
