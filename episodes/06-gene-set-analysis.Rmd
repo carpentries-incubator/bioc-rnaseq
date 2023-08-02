@@ -1010,7 +1010,7 @@ object is highly unrecommended.]. This function design might not be proper
 because a function should return all the results no matter they are
 significant or not. Later users may need to use the complete enrichment table
 for downstream anlaysis. Second, the meaning of `pvalueCutoff` is not precise
-and there is redundancy between `pvalueCutoff` and `pvalueCutoff` (adjusted
+and there is redundancy between `pvalueCutoff` and `qvalueCutoff` (adjusted
 _p_-values and _q_-values are always non-smaller than raw _p_-values). Thus it
 is suggested to set both `pvalueCutoff` and `qvalueCutoff` to 1 in
 `enrichGO()`.
