@@ -1,11 +1,11 @@
 ---
 source: Rmd
 title: Differential expression analysis
-teaching: XX
-exercises: XX
+teaching: 60
+exercises: 45
 ---
 
-```{r, echo=FALSE, purl=FALSE, message=FALSE}
+```{r, echo=FALSE, purl=FALSE, message=FALSE, warning = FALSE}
 source("download_data.R")
 ```
 
@@ -39,7 +39,7 @@ software package. The [edgeR](https://bioconductor.org/packages/release/bioc/htm
 
 To run `DESeq2` we need to represent our count data as object of the `DESeqDataSet` class.
 The `DESeqDataSet` is an extension of the `SummarizedExperiment` class (see section [Importing and annotating quantified data into R](../episodes/03-import-annotate.Rmd) ) that stores a *design formula* in addition to the count assay(s) and feature (here gene) and sample metadata.
-The *design formula* expresses the variables which will be used in modeling. These are typically the variable of interest (group variable) and other variables you want to account for (e.g., batch effect variables). Objects of the `DESeqDataSet` class can be build from [count matrices](https://bioconductor.org/packages/release/bioc/vignettes/DESeq2/inst/doc/DESeq2.html#countmat), [SummarizedExperiment objects](https://bioconductor.org/packages/release/bioc/vignettes/DESeq2/inst/doc/DESeq2.html#se), [transcript abundance files](https://bioconductor.org/packages/release/bioc/vignettes/DESeq2/inst/doc/DESeq2.html#tximport) or [htseq count files](https://bioconductor.org/packages/release/bioc/vignettes/DESeq2/inst/doc/DESeq2.html#htseq).
+The *design formula* expresses the variables which will be used in modeling. These are typically the variable of interest (group variable) and other variables you want to account for (e.g., batch effect variables). A detailed explanation of *design formulas* and related *design matrices* will follow in the section about [extra exploration of design matrices](../episodes/08-extra-design.Rmd). Objects of the `DESeqDataSet` class can be build from [count matrices](https://bioconductor.org/packages/release/bioc/vignettes/DESeq2/inst/doc/DESeq2.html#countmat), [SummarizedExperiment objects](https://bioconductor.org/packages/release/bioc/vignettes/DESeq2/inst/doc/DESeq2.html#se), [transcript abundance files](https://bioconductor.org/packages/release/bioc/vignettes/DESeq2/inst/doc/DESeq2.html#tximport) or [htseq count files](https://bioconductor.org/packages/release/bioc/vignettes/DESeq2/inst/doc/DESeq2.html#htseq).
 
 ### Load libraries
 
@@ -51,19 +51,25 @@ suppressPackageStartupMessages({
     library(ExploreModelMatrix)
     library(cowplot)
     library(ComplexHeatmap)
+    library(apeglm)
 })
 ```
 
 ### Load data
 
+Let's load in our `SummarizedExperiment` object again. In the last episode for quality control exploration, we removed ~35% genes that had 5 or fewer counts because they had too little information in them. For DESeq2 statistical analysis, we do not technically have to remove these genes because by default it will do some independent filtering, but it can reduce the memory size of the `DESeqDataSet` object resulting in faster computation. Plus, we do not want these genes cluttering up some of the visualizations. 
+
 ```{r}
 se <- readRDS("data/GSE96870_se.rds")
+se <- se[rowSums(assay(se, "counts")) > 5, ]
 ```
 
 ### Create DESeqDataSet
 
+The design matrix we will use in this example is `~ sex + time`. This will allow us test the difference between males and females (averaged over time point) and the difference between day 0, 4 and 8 (averaged over males and females). If we wanted to test other comparisons (e.g., Female.Day8 vs. Female.Day0 and also Male.Day8 vs. Male.Day0) we could use a different design matrix to more easily extract those pairwise comparisons. 
+
 ```{r}
-dds <- DESeq2::DESeqDataSet(se[, se$tissue == "Cerebellum"],
+dds <- DESeq2::DESeqDataSet(se,
                             design = ~ sex + time)
 ```
 
@@ -71,14 +77,14 @@ dds <- DESeq2::DESeqDataSet(se[, se$tissue == "Cerebellum"],
 ::::::::::::::::::::::::::::::::::::: instructor
 The function to generate a `DESeqDataSet` needs to be adapted depending on the input type, e.g, 
 
-```{r}
+```{r, eval=FALSE}
 #From SummarizedExperiment object
-ddsSE <- DESeqDataSet(se, design = ~ cell + dex)
+ddsSE <- DESeqDataSet(se, design = ~ sex + time)
 
 #From count matrix
 dds <- DESeqDataSetFromMatrix(countData = assays(se)$counts,
                               colData = colData(se),
-                              design = ~ condition)
+                              design = ~ sex + time)
 ```
 
 :::::::::::::::::::::::::::::::::::::::::::::::::
@@ -126,7 +132,13 @@ plotDispEsts(dds)
 
 ### Testing
 
-Finally, we can use the `nbinomWaldTest()`function of `DESeq2` to fit a *generalized linear model (GLM)* and compute *log2 fold changes* (synonymous with "GLM coefficients", "beta coefficients" or "effect size"). Log2 fold changes are scaled by their standard error and compared to a standard Normal distribution to calculate *Wald test* p-values. 
+We can use the `nbinomWaldTest()`function of `DESeq2` to fit a *generalized linear model (GLM)* and compute *log2 fold changes* (synonymous with "GLM coefficients", "beta coefficients" or "effect size") corresponding to the variables of the *design matrix*. The *design matrix* is directly related to the *design formular* and automatically derived from it. Assume a design formular with one variable (`~ treatment`) and two factor level (treatment and control). The mean expression $\mu_{j}$ of a specific gene in sample $j$ will be modeled as following:
+
+$log(μ_j) = β_0 + x_j β_T$,
+
+ with $β_T$ corresponding to the log2 fold change of the treatment group, $x_j$ = 1, if $j$ belongs to the treatment group and $x_j$ = 0, if $j$ belongs to the control group. 
+
+Finally, the estimated log2 fold changes are scaled by their standard error and tested for being significantly different from 0 using the *Wald test*. 
 
 
 ```{r}
@@ -135,6 +147,7 @@ dds <- nbinomWaldTest(dds)
 
 
 ::::::::::::::::::::::::::::::::::::: callout
+### Note
 
 Standard differential expression analysis as performed above is wrapped into a single function, `DESeq()`. Running the first code chunk is equivalent to running the second one:
 
@@ -154,20 +167,18 @@ dds <- nbinomWaldTest(dds)
 
 ## Explore results for specific contrasts
 
-The `results()` function can be used to extract gene-wise statistics, such as log2 fold changes and (adjusted) p-values. By default these statistics will be based on the __last variable__ (reference variable) of the design formular. For comparisons `DESeq2` defines so called contrasts, which refer to the factor levels of the reference variable. By default the first factor level in alphabetical order will be used as *reference level* and the *last level* will be used for comparison. You can explicitly specify the contrast by using the `contrast` or `name` argument of the `results()` function. Names of all available contrasts can be accessed using `resultsNames()`.
+The `results()` function can be used to extract gene-wise test statistics, such as log2 fold changes and (adjusted) p-values. The comparison of interest can be defined using contrasts, which are linear combinations of the model coefficients (equivalent to combinations of columns within the *design matrix*) and thus directly related to the design formular. A detailed explanation of design matrices and how to use them to specify different contrasts of interest can be found in the section on the [exploration of design matrices](../episodes/08-extra-design.Rmd). In the `results()` function a contrast can be represented by the variable of interest (reference variable) and the related level to compare using the `contrast` argument. By default the reference variable will be the __last variable__ of the design formular, the *reference level* will be the first factor level and the *last level* will be used for comparison. You can also explicitly specify a contrast by the `name` argument of the `results()` function. Names of all available contrasts can be accessed using `resultsNames()`.
 
 
 ::::::::::::::::::::::::::::::::::::: challenge 
 
-How can the terms __reference level__ and __last level__ be interpreted? What will be the default __contrast__, __reference level__ and __last level__ when running `results(dds)` for the above example?
+What will be the default __contrast__, __reference level__ and __"last level"__ for comparisons when running `results(dds)` for the example used in this lesson?
 
 *Hint: Check the design formular used to build the object.*
 
 :::::::::::::::::::::::: solution 
 
-The __reference level__ can be interpreted as your experiments __"control group"__ and the __last level__ as __treatment or intervention group__. 
-
-In the above example the last variable of the design formular is `time`. 
+In the lesson example the last variable of the design formular is `time`. 
 The __reference level__ (first in alphabetical order) is `Day0` and the __last level__ is `Day8` 
 
 ```{r}
@@ -179,13 +190,14 @@ No worries, if you had difficulties to identify the default contrast the output 
 :::::::::::::::::::::::::::::::::
 ::::::::::::::::::::::::::::::::::::::::::::::::
 
-To explore the output of the `results()` function we can use the `summary()` function and order results by significance (p-value).
+To explore the output of the `results()` function we can use the `summary()` function and order results by significance (p-value). Here we assume that we are interested in changes over `time` ("variable of interest"), more specifically genes with differential expression between `Day0` ("reference level") and `Day8` ("level to compare"). The model we used included the `sex` variable (see above). Thus our results will be "corrected" for sex-related differences.
 
 
 ```{r}
 ## Day 8 vs Day 0
 resTime <- results(dds, contrast = c("time", "Day8", "Day0"))
 summary(resTime)
+# View(resTime)
 head(resTime[order(resTime$pvalue), ])
 ```
 
@@ -203,9 +215,9 @@ resTime <- results(dds, name = "time_Day8_vs_Day0")
 
 ::::::::::::::::::::::::::::::::::::: challenge 
 
-Explore the DE genes between males and females.
+Explore the DE genes between males and females independent of time.
 
-*Hint: Use `resultsNames()` to get the correct contrast.*
+*Hint: You don't need to fit the GLM again. Use `resultsNames()` to get the correct contrast.*
 
 :::::::::::::::::::::::: solution 
 
@@ -235,7 +247,7 @@ to calculate __adjusted p-values__ (padj) for DE results.
 
 ## Independent Filtering and log-fold shrinkage
 
-We can visualize the results in many ways. A good check is to explore the relationship between log2fold changes, significant results and the genes mean count.
+We can visualize the results in many ways. A good check is to explore the relationship between *log2fold changes*, *significant DE genes* and the *genes mean count*.
 `DESeq2` provides a useful function to do so, `plotMA()`.
 
 ```{r}
@@ -250,11 +262,11 @@ We can *shrink* the log fold changes of these genes with low mean and high dispe
 resTimeLfc <- lfcShrink(dds, coef = "time_Day8_vs_Day0", res = resTime)
 plotMA(resTimeLfc)
 ```
-Shrinkage of log fold changes is useful for visualization and ranking of genes, but for result exploration typically the `indepent_filtering` argument is used to remove lowly expressed genes.
+Shrinkage of log fold changes is useful for visualization and ranking of genes, but for result exploration typically the `independentFiltering` argument is used to remove lowly expressed genes.
 
 ::::::::::::::::::::::::::::::::::::: challenge 
 
-By default `indepent_filtering` is set to `TRUE`. What happens without filtering lowly expressed genes? Use the `summary()` function to compare the results. Most of the lowly expressed genes are not significantly differential expressed (blue in the above MA plots). What could cause the difference in the results then?
+By default `independentFiltering` is set to `TRUE`. What happens without filtering lowly expressed genes? Use the `summary()` function to compare the results. Most of the lowly expressed genes are not significantly differential expressed (blue in the above MA plots). What could cause the difference in the results then?
 
 :::::::::::::::::::::::: solution 
 
@@ -284,7 +296,9 @@ We will use transformed data (see [exploratory data analysis](../episodes/04-exp
 vsd <- vst(dds, blind = TRUE)
 
 # Get top DE genes
-genes <- rownames(head(resTime[order(resTime$pvalue), ], 10))
+genes <- resTime[order(resTime$pvalue), ] |>
+         head(10) |>
+         rownames()
 heatmapData <- assay(vsd)[genes, ]
 
 # Scale counts for visualization
@@ -292,9 +306,8 @@ heatmapData <- t(scale(t(heatmapData)))
 
 # Add annotation
 heatmapColAnnot <- data.frame(colData(vsd)[, c("time", "sex")])
-idx <- order(vsd$time)
-heatmapData <- heatmapData[, idx]
-heatmapColAnnot <- HeatmapAnnotation(df = heatmapColAnnot[idx, ])
+heatmapColAnnot <- HeatmapAnnotation(df = heatmapColAnnot)
+
 
 # Plot as heatmap
 ComplexHeatmap::Heatmap(heatmapData,
@@ -304,10 +317,26 @@ ComplexHeatmap::Heatmap(heatmapData,
 
 ::::::::::::::::::::::::::::::::::::: challenge 
 
-Check the heatmap and top DE genes. Do you find something expected/unexpected?
+Check the heatmap and top DE genes. Do you find something expected/unexpected in terms of change across all 3 time points?
 
-*Hint: Google gene names, if you don't know them.*
+
 ::::::::::::::::::::::::::::::::::::::::::::::::
+
+## Output results
+
+We may want to to output our results out of R to have a stand-alone file. The format of `resTime` only has the gene symbols as rownames, so let us join the gene annotation information, and then write out as .csv file:
+
+```{r}
+head(as.data.frame(resTime))
+head(as.data.frame(rowRanges(se)))
+
+temp <- cbind(as.data.frame(rowRanges(se)),
+              as.data.frame(resTime))
+
+write.csv(temp, file = "output/Day8vsDay0.csv")
+
+```
+
 
 
 :::::::::::::::::::::::::::::::::::::::: keypoints

@@ -1,21 +1,21 @@
 ---
 source: Rmd
 title: RStudio Project and Experimental Data
-teaching: XX
-exercises: XX
+teaching: 20
+exercises: 20
 ---
 
 :::::::::::::::::::::::::::::::::::::: questions 
 
 - How do you use RStudio project to manage your analysis project?
-- What is the most effective way for organising directories for an analysis project?
-- How to download a dataset from the internet and save as a file.
+- What is the most effective way to organize directories for an analysis project?
+- How to download a dataset from the internet and save it as a file.
 
 ::::::::::::::::::::::::::::::::::::::::::::::::
 
 ::::::::::::::::::::::::::::::::::::: objectives
 
-- Create an RStudio project and the the directories required for storing the files pertinent to an analysis project.
+- Create an RStudio project and the directories required for storing the files pertinent to an analysis project.
 - Download the data set that will be used for the subsequent episodes.
 
 ::::::::::::::::::::::::::::::::::::::::::::::::
@@ -30,8 +30,8 @@ The complexity is further amplified when dealing with multiple versions of scrip
 necessitating efficient organisation.
 If these are not well-managed from the beginning, resuming the project after a 
 break, or sharing the project with someone else becomes challenging and time-consuming, 
-as we struggle to recall the project's status and to navigate the directory tree.
-Additionally without proper organisation, the project's complexity could lead to frequent 
+as we struggle to recall the project's status and navigate the directory tree.
+Additionally, without proper organisation, the project's complexity could lead to frequent 
 use of the `setwd` function to switch between different working directories, 
 resulting in a disorganised workspace.
 
@@ -65,7 +65,7 @@ lesson.
 
 :::::::::::::::::::::::::::::::::::::::
 
-Finally, in this lesson, we will also learn to use the R function `download.files` 
+Finally, in this lesson, we will also learn to use the R function `download.file` 
 to download the data for the subsequent episodes.
 
 ## Structuring your working directory
@@ -97,8 +97,8 @@ of your working directory.
 
 ## Create the directories for subsequent episodes
 
-Select a directory on your computer to serve as the working directory for the rest 
-of this episode and lesson. 
+Create a directory on your computer to serve as the working directory for the rest 
+of this episode and lesson (the workshop example uses a directory called `bio_rnaseq`). 
 Then, within this chosen directory, create the four fundamental directories previously discussed
 (`data`, `scripts`, `documents`, and `output`).
 
@@ -145,11 +145,11 @@ this directory as your working directory in R.
 knitr::include_graphics("fig/02_setup/rstudio_console.png")
 ```
 
-From this point forward, any R code that you execute that involves reading in data from a file, or saving
-some data into a file will, by default, be directe to a path relative to your project's working directory.
+From this point forward, any R code that you execute that involves reading data from a file or saving
+data in a file will, by default, be directed to a path relative to your project's working directory.
 
 If you wish to close the project, perhaps to open another project, create a new one, or take a break
-from the project, you can do so by using to `File` > `Close Project` option located in the menu bar.
+from the project, you can do so by using to `File` > `Close Project` option located in the menu bar. To open the project back up, either double-click on the .Rproj file in the working directory, or open up RStudio and using the `File` > `Open Project` option in the menu bar.
 
 ## Download the RNA-seq data for subsequent episodes
 
@@ -166,7 +166,7 @@ This dataset was produced as part of the following study:
 The dataset is available at [Gene Expression Omnibus (GEO)](https://www.ncbi.nlm.nih.gov/geo/), 
 under the accession number [GSE96870](https://www.ncbi.nlm.nih.gov/geo/query/acc.cgi?acc=GSE96870). 
 Downloading data from GEO is not straightforward (and won't be covered in this lesson). 
-Hence, we have made the data available on our Github repository for easier access.
+Hence, we have made the data available on our GitHub repository for easier access.
 
 To download the files, we will use the R function `download.file`, which necessitates at least 
 two parameters: `url` and `destfile`.
@@ -238,7 +238,7 @@ download.file(
 maintaining order and ensuring easy access in the future.
 - RStudio project serves as a valuable tool for managing your project's working directory and 
 facilitating analysis.
-- The `download.files` function in R can be used for downloading datasets from the internet.
+- The `download.file` function in R can be used for downloading datasets from the internet.
 
 ::::::::::::::::::::::::::::::::::::::::::::::::
 
