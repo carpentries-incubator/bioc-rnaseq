@@ -501,9 +501,9 @@ microbenchmark(
 
 ```{.output}
 Unit: microseconds
-   expr   min     lq    mean median     uq   max neval
- fisher 316.3 323.90 335.807 326.95 335.75 680.3   100
-  hyper   1.6   2.05   3.068   2.50   4.00   7.9   100
+   expr   min     lq    mean median    uq   max neval
+ fisher 483.0 500.05 531.983 523.75 545.9 936.2   100
+  hyper   1.9   3.15   4.996   5.05   6.7  11.8   100
 ```
 
 It is very astonishing that `phyper()` is hundreds of times faster than
@@ -1231,7 +1231,7 @@ resTimeGO = enrichGO(gene = timeDEgenes,
 ```
 
 ```{.output}
---> Expected input gene ID: 69707,102633564,57749,74041,12640,21749
+--> Expected input gene ID: 333307,20869,14165,245884,17390,11517
 ```
 
 ```{.output}
@@ -1339,7 +1339,7 @@ object is highly unrecommended.]. This function design might not be proper
 because a function should return all the results no matter they are
 significant or not. Later users may need to use the complete enrichment table
 for downstream anlaysis. Second, the meaning of `pvalueCutoff` is not precise
-and there is redundancy between `pvalueCutoff` and `pvalueCutoff` (adjusted
+and there is redundancy between `pvalueCutoff` and `qvalueCutoff` (adjusted
 _p_-values and _q_-values are always non-smaller than raw _p_-values). Thus it
 is suggested to set both `pvalueCutoff` and `qvalueCutoff` to 1 in
 `enrichGO()`.
