@@ -501,9 +501,9 @@ microbenchmark(
 
 ```{.output}
 Unit: microseconds
-   expr   min     lq    mean median    uq   max neval
- fisher 483.0 500.05 531.983 523.75 545.9 936.2   100
-  hyper   1.9   3.15   4.996   5.05   6.7  11.8   100
+   expr   min     lq    mean median     uq    max neval
+ fisher 316.1 324.70 352.097  328.9 345.10 1997.5   100
+  hyper   1.6   1.95   2.994    2.4   3.95    9.6   100
 ```
 
 It is very astonishing that `phyper()` is hundreds of times faster than
@@ -1231,7 +1231,7 @@ resTimeGO = enrichGO(gene = timeDEgenes,
 ```
 
 ```{.output}
---> Expected input gene ID: 333307,20869,14165,245884,17390,11517
+--> Expected input gene ID: 17535,21887,434438,56228,382562,12215
 ```
 
 ```{.output}
@@ -1472,12 +1472,12 @@ mmu00591                                      Linoleic acid metabolism - Mus mus
 mmu04913                                       Ovarian steroidogenesis - Mus musculus (house mouse)
 mmu04061 Viral protein interaction with cytokine and cytokine receptor - Mus musculus (house mouse)
          GeneRatio BgRatio       pvalue     p.adjust       qvalue
-mmu00590    16/452 85/9325 2.543404e-06 0.0007782817 0.0006880578
-mmu00565    11/452 48/9325 1.361090e-05 0.0015223475 0.0013458662
-mmu00592     8/452 25/9325 1.492498e-05 0.0015223475 0.0013458662
-mmu00591    11/452 50/9325 2.060848e-05 0.0015765483 0.0013937837
-mmu04913    12/452 63/9325 4.061474e-05 0.0024856223 0.0021974714
-mmu04061    14/452 95/9325 1.789780e-04 0.0082005770 0.0072499081
+mmu00590    16/452 85/9327 2.536407e-06 0.0007761404 0.0006861647
+mmu00565    11/452 48/9327 1.358365e-05 0.0015199802 0.0013437733
+mmu00592     8/452 25/9327 1.490177e-05 0.0015199802 0.0013437733
+mmu00591    11/452 50/9327 2.056762e-05 0.0015734230 0.0013910207
+mmu04913    12/452 63/9327 4.053030e-05 0.0024804542 0.0021929024
+mmu04061    14/452 95/9327 1.785817e-04 0.0081798521 0.0072315858
                                                                                                        geneID
 mmu00590 18783/19215/211429/329502/78390/19223/67103/242546/13118/18781/18784/11689/232889/15446/237625/11687
 mmu00565                               18783/211429/329502/78390/22239/18781/18784/232889/320981/237625/53897

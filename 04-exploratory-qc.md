@@ -263,7 +263,7 @@ sessionInfo()
 ```{.output}
 R version 4.3.1 (2023-06-16)
 Platform: x86_64-pc-linux-gnu (64-bit)
-Running under: Ubuntu 22.04.2 LTS
+Running under: Ubuntu 22.04.3 LTS
 
 Matrix products: default
 BLAS:   /usr/lib/x86_64-linux-gnu/blas/libblas.so.3.10.0 
@@ -298,22 +298,22 @@ loaded via a namespace (and not attached):
  [7] lattice_0.21-8          vctrs_0.6.3             tools_4.3.1            
 [10] bitops_1.0-7            generics_0.1.3          parallel_4.3.1         
 [13] tibble_3.2.1            fansi_1.0.4             highr_0.10             
-[16] cluster_2.1.4           pkgconfig_2.0.3         Matrix_1.6-0           
+[16] cluster_2.1.4           pkgconfig_2.0.3         Matrix_1.5-4.1         
 [19] lifecycle_1.0.3         GenomeInfoDbData_1.2.10 farver_2.1.1           
 [22] compiler_4.3.1          munsell_0.5.0           codetools_0.2-19       
-[25] clue_0.3-64             RCurl_1.98-1.12         preprocessCore_1.62.1  
-[28] pillar_1.9.0            crayon_1.5.2            BiocParallel_1.34.2    
-[31] affy_1.78.2             DelayedArray_0.26.7     limma_3.56.2           
-[34] iterators_1.0.14        abind_1.4-5             foreach_1.5.2          
+[25] clue_0.3-64             RCurl_1.98-1.12         yaml_2.3.7             
+[28] preprocessCore_1.62.1   pillar_1.9.0            crayon_1.5.2           
+[31] BiocParallel_1.34.2     affy_1.78.0             DelayedArray_0.26.6    
+[34] limma_3.56.2            iterators_1.0.14        foreach_1.5.2          
 [37] tidyselect_1.2.0        locfit_1.5-9.8          digest_0.6.33          
 [40] dplyr_1.1.2             labeling_0.4.2          colorspace_2.1-0       
-[43] cli_3.6.1               magrittr_2.0.3          S4Arrays_1.0.5         
+[43] cli_3.6.1               magrittr_2.0.3          S4Arrays_1.0.4         
 [46] utf8_1.2.3              withr_2.5.0             scales_1.2.1           
 [49] XVector_0.40.0          affyio_1.70.0           GetoptLong_1.0.5       
 [52] png_0.1-8               evaluate_0.21           knitr_1.43             
 [55] doParallel_1.0.17       rlang_1.1.1             Rcpp_1.0.11            
-[58] glue_1.6.2              BiocManager_1.30.21.1   renv_1.0.0             
-[61] R6_2.5.1                zlibbioc_1.46.0        
+[58] glue_1.6.2              BiocManager_1.30.21     renv_1.0.1             
+[61] rstudioapi_0.14         R6_2.5.1                zlibbioc_1.46.0        
 ```
 
 :::::::::::::::::::::::::::::::::::::::: keypoints

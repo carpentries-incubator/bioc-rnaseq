@@ -691,7 +691,7 @@ sessionInfo()
 ```{.output}
 R version 4.3.1 (2023-06-16)
 Platform: x86_64-pc-linux-gnu (64-bit)
-Running under: Ubuntu 22.04.2 LTS
+Running under: Ubuntu 22.04.3 LTS
 
 Matrix products: default
 BLAS:   /usr/lib/x86_64-linux-gnu/blas/libblas.so.3.10.0 
@@ -714,24 +714,25 @@ other attached packages:
  [1] hgu95av2.db_3.13.0          org.Hs.eg.db_3.17.0        
  [3] org.Mm.eg.db_3.17.0         AnnotationDbi_1.62.2       
  [5] SummarizedExperiment_1.30.2 Biobase_2.60.0             
- [7] MatrixGenerics_1.12.3       matrixStats_1.0.0          
+ [7] MatrixGenerics_1.12.2       matrixStats_1.0.0          
  [9] GenomicRanges_1.52.0        GenomeInfoDb_1.36.1        
 [11] IRanges_2.34.1              S4Vectors_0.38.1           
 [13] BiocGenerics_0.46.0         knitr_1.43                 
 
 loaded via a namespace (and not attached):
- [1] Matrix_1.6-0            bit_4.0.5               highr_0.10             
- [4] compiler_4.3.1          BiocManager_1.30.21.1   renv_1.0.0             
+ [1] Matrix_1.5-4.1          bit_4.0.5               highr_0.10             
+ [4] compiler_4.3.1          BiocManager_1.30.21     renv_1.0.1             
  [7] crayon_1.5.2            blob_1.2.4              Biostrings_2.68.1      
 [10] bitops_1.0-7            png_0.1-8               fastmap_1.1.1          
-[13] lattice_0.21-8          R6_2.5.1                XVector_0.40.0         
-[16] S4Arrays_1.0.5          DelayedArray_0.26.7     GenomeInfoDbData_1.2.10
-[19] DBI_1.1.3               rlang_1.1.1             KEGGREST_1.40.0        
-[22] cachem_1.0.8            xfun_0.39               bit64_4.0.5            
-[25] RSQLite_2.3.1           memoise_2.0.1           cli_3.6.1              
-[28] zlibbioc_1.46.0         grid_4.3.1              vctrs_0.6.3            
-[31] evaluate_0.21           abind_1.4-5             RCurl_1.98-1.12        
-[34] httr_1.4.6              pkgconfig_2.0.3         tools_4.3.1            
+[13] yaml_2.3.7              lattice_0.21-8          R6_2.5.1               
+[16] XVector_0.40.0          S4Arrays_1.0.4          DelayedArray_0.26.6    
+[19] GenomeInfoDbData_1.2.10 DBI_1.1.3               rlang_1.1.1            
+[22] KEGGREST_1.40.0         cachem_1.0.8            xfun_0.39              
+[25] bit64_4.0.5             RSQLite_2.3.1           memoise_2.0.1          
+[28] cli_3.6.1               zlibbioc_1.46.0         grid_4.3.1             
+[31] rstudioapi_0.14         vctrs_0.6.3             evaluate_0.21          
+[34] RCurl_1.98-1.12         httr_1.4.6              pkgconfig_2.0.3        
+[37] tools_4.3.1            
 ```
 
 ::: keypoints
