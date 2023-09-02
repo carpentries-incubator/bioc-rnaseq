@@ -200,7 +200,7 @@
 <div class="accordion accordion-flush" id="accordionFlush7">
   <div class="accordion-item">
     <div class="accordion-header" id="flush-heading7">
-        <a href="06-gene-set-analysis.html">6. Gene set enrichment analysis</a>
+        <a href="06-extra-design.html">6. Extra exploration of design matrices</a>
     </div><!--/div.accordion-header-->
         
   </div><!--/div.accordion-item-->
@@ -209,7 +209,7 @@
 <div class="accordion accordion-flush" id="accordionFlush8">
   <div class="accordion-item">
     <div class="accordion-header" id="flush-heading8">
-        <a href="07-next-steps.html">7. Next steps</a>
+        <a href="07-gene-set-analysis.html">7. Gene set enrichment analysis</a>
     </div><!--/div.accordion-header-->
         
   </div><!--/div.accordion-item-->
@@ -218,7 +218,7 @@
 <div class="accordion accordion-flush" id="accordionFlush9">
   <div class="accordion-item">
     <div class="accordion-header" id="flush-heading9">
-        <a href="08-extra-design.html">8. Extra exploration of design matrices</a>
+        <a href="08-next-steps.html">8. Next steps</a>
     </div><!--/div.accordion-header-->
         
   </div><!--/div.accordion-item-->
@@ -388,6 +388,34 @@ properly, to make it possible to disentangle different types of (primary
 and secondary) effects.</p>
 <figure><img src="fig/factors-affecting-measurements.png" class="figure mx-auto d-block"></figure><p>(figure from <a href="https://www.amazon.com/Experimental-Design-Laboratory-Biologists-Reproducibility/dp/1107424887" class="external-link">Lazic
 (2017)</a>).</p>
+<div id="challenge-discuss-with-your-neighbor" class="callout discussion">
+<div class="callout-square">
+<i class="callout-icon" data-feather="message-circle"></i>
+</div>
+<div id="challenge-discuss-with-your-neighbor" class="callout-inner">
+<h3 class="callout-title">Challenge: Discuss with your neighbor<a class="anchor" aria-label="anchor" href="#challenge-discuss-with-your-neighbor"></a>
+</h3>
+<div class="callout-content">
+<ol style="list-style-type: decimal"><li>Why is it essential to have replicates?</li>
+</ol></div>
+</div>
+</div>
+<p>Importantly, not all replicates are equally useful, from a
+statistical point of view. One common way to classify the different
+types of replicates is as ‘biological’ and ‘technical’, where the latter
+are typically used to test the reproducibility of the measurement
+device, while biological replicates inform about the variability between
+different samples from a population of interest. Another scheme
+classifies replicates (or units) into ‘biological’, ‘experimental’ and
+‘observational’. Here, biological units are entities we want to make
+inferences about (e.g., animals, persons). Replication of biological
+units is required to make a general statement of the effect of a
+treatment - we can not draw a conclusion about the effect of drug on a
+population of mice by studying a single mouse only. Experimental units
+are the smallest entities that can be <em>independently assigned to a
+treatment</em> (e.g., animal, litter, cage, well). Only replication of
+experimental units constitute true replication. Observational units,
+finally, are entities at which measurements are made.</p>
 <p>To explore the impact of experimental design on the ability to answer
 questions of interest, we are going to use an interactive application,
 provided in the <a href="https://csoneson.github.io/ConfoundingExplorer/" class="external-link">ConfoundingExplorer</a>

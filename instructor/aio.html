@@ -243,7 +243,7 @@
 <div class="accordion accordion-flush" id="accordionFlush7">
   <div class="accordion-item">
     <div class="accordion-header" id="flush-heading7">
-        <a href="06-gene-set-analysis.html">6. Gene set enrichment analysis</a>
+        <a href="06-extra-design.html">6. Extra exploration of design matrices</a>
     </div>
 <!--/div.accordion-header-->
         
@@ -255,7 +255,7 @@
 <div class="accordion accordion-flush" id="accordionFlush8">
   <div class="accordion-item">
     <div class="accordion-header" id="flush-heading8">
-        <a href="07-next-steps.html">7. Next steps</a>
+        <a href="07-gene-set-analysis.html">7. Gene set enrichment analysis</a>
     </div>
 <!--/div.accordion-header-->
         
@@ -267,7 +267,7 @@
 <div class="accordion accordion-flush" id="accordionFlush9">
   <div class="accordion-item">
     <div class="accordion-header" id="flush-heading9">
-        <a href="08-extra-design.html">8. Extra exploration of design matrices</a>
+        <a href="08-next-steps.html">8. Next steps</a>
     </div>
 <!--/div.accordion-header-->
         
@@ -447,6 +447,36 @@ properly, to make it possible to disentangle different types of (primary
 and secondary) effects.</p>
 <figure><img src="../fig/factors-affecting-measurements.png" class="figure mx-auto d-block"></figure><p>(figure from <a href="https://www.amazon.com/Experimental-Design-Laboratory-Biologists-Reproducibility/dp/1107424887" class="external-link">Lazic
 (2017)</a>).</p>
+<div id="challenge-discuss-with-your-neighbor" class="callout discussion">
+<div class="callout-square">
+<i class="callout-icon" data-feather="message-circle"></i>
+</div>
+<div id="challenge-discuss-with-your-neighbor" class="callout-inner">
+<h3 class="callout-title">Challenge: Discuss with your neighbor<a class="anchor" aria-label="anchor" href="#challenge-discuss-with-your-neighbor"></a>
+</h3>
+<div class="callout-content">
+<ol style="list-style-type: decimal">
+<li>Why is it essential to have replicates?</li>
+</ol>
+</div>
+</div>
+</div>
+<p>Importantly, not all replicates are equally useful, from a
+statistical point of view. One common way to classify the different
+types of replicates is as ‘biological’ and ‘technical’, where the latter
+are typically used to test the reproducibility of the measurement
+device, while biological replicates inform about the variability between
+different samples from a population of interest. Another scheme
+classifies replicates (or units) into ‘biological’, ‘experimental’ and
+‘observational’. Here, biological units are entities we want to make
+inferences about (e.g., animals, persons). Replication of biological
+units is required to make a general statement of the effect of a
+treatment - we can not draw a conclusion about the effect of drug on a
+population of mice by studying a single mouse only. Experimental units
+are the smallest entities that can be <em>independently assigned to a
+treatment</em> (e.g., animal, litter, cage, well). Only replication of
+experimental units constitute true replication. Observational units,
+finally, are entities at which measurements are made.</p>
 <p>To explore the impact of experimental design on the ability to answer
 questions of interest, we are going to use an interactive application,
 provided in the <a href="https://csoneson.github.io/ConfoundingExplorer/" class="external-link">ConfoundingExplorer</a>
@@ -801,7 +831,7 @@ directory, create the four fundamental directories previously discussed
   Show me the solution
   </h4>
 </button>
-<div id="collapseSolution1" class="accordion-collapse collapse" aria-labelledby="headingSolution1" data-bs-parent="#accordionSolution1">
+<div id="collapseSolution1" class="accordion-collapse collapse" data-bs-parent="#accordionSolution1" aria-labelledby="headingSolution1">
 <div class="accordion-body">
 <figure style="text-align: center"><img src="../fig/02_setup/folders_working_dir.png" alt="Your working directory should look like this" width="1221" class="figure mx-auto d-block"><figcaption>
 Your working directory should look like this
@@ -947,7 +977,7 @@ into the <code>data</code> folder in your working directory.</p>
   Show me the solution
   </h4>
 </button>
-<div id="collapseSolution2" class="accordion-collapse collapse" aria-labelledby="headingSolution2" data-bs-parent="#accordionSolution2">
+<div id="collapseSolution2" class="accordion-collapse collapse" data-bs-parent="#accordionSolution2" aria-labelledby="headingSolution2">
 <div class="accordion-body">
 <div class="codewrapper sourceCode" id="cb2">
 <h3 class="code-label">R<i aria-hidden="true" data-feather="chevron-left"></i><i aria-hidden="true" data-feather="chevron-right"></i>
@@ -1239,7 +1269,7 @@ have to do to remove those (generally speaking, not exact codes)?</li>
   Show me the solution
   </h4>
 </button>
-<div id="collapseSolution1" class="accordion-collapse collapse" data-bs-parent="#accordionSolution1" aria-labelledby="headingSolution1">
+<div id="collapseSolution1" class="accordion-collapse collapse" aria-labelledby="headingSolution1" data-bs-parent="#accordionSolution1">
 <div class="accordion-body">
 <ol style="list-style-type: decimal">
 <li>In <code>counts</code>, the rows are genes just like the rows in
@@ -1368,7 +1398,7 @@ codes.</p>
   Show me the solution
   </h4>
 </button>
-<div id="collapseSolution2" class="accordion-collapse collapse" data-bs-parent="#accordionSolution2" aria-labelledby="headingSolution2">
+<div id="collapseSolution2" class="accordion-collapse collapse" aria-labelledby="headingSolution2" data-bs-parent="#accordionSolution2">
 <div class="accordion-body">
 <div class="codewrapper sourceCode" id="cb19">
 <h3 class="code-label">R<i aria-hidden="true" data-feather="chevron-left"></i><i aria-hidden="true" data-feather="chevron-right"></i>
@@ -1786,7 +1816,7 @@ codes and then check you correctly got the 21,198 mRNA genes:</p>
   Show me the solution
   </h4>
 </button>
-<div id="collapseSolution3" class="accordion-collapse collapse" data-bs-parent="#accordionSolution3" aria-labelledby="headingSolution3">
+<div id="collapseSolution3" class="accordion-collapse collapse" aria-labelledby="headingSolution3" data-bs-parent="#accordionSolution3">
 <div class="accordion-body">
 <div class="codewrapper sourceCode" id="cb47">
 <h3 class="code-label">R<i aria-hidden="true" data-feather="chevron-left"></i><i aria-hidden="true" data-feather="chevron-right"></i>
@@ -2152,7 +2182,7 @@ gene survived the filtering?</p>
   Show me the solution
   </h4>
 </button>
-<div id="collapseSolution1" class="accordion-collapse collapse" aria-labelledby="headingSolution1" data-bs-parent="#accordionSolution1">
+<div id="collapseSolution1" class="accordion-collapse collapse" data-bs-parent="#accordionSolution1" aria-labelledby="headingSolution1">
 <div class="accordion-body">
 <div class="codewrapper sourceCode" id="cb7">
 <h3 class="code-label">R<i aria-hidden="true" data-feather="chevron-left"></i><i aria-hidden="true" data-feather="chevron-right"></i>
@@ -2581,7 +2611,7 @@ design formula are characters, converting to factors</code></pre>
   Instructor Note
   </h3>
 </button>
-<div id="collapseInstructor1" class="accordion-collapse collapse" data-bs-parent="#accordionInstructor1" aria-labelledby="headingInstructor1">
+<div id="collapseInstructor1" class="accordion-collapse collapse" aria-labelledby="headingInstructor1" data-bs-parent="#accordionInstructor1">
 <div class="accordion-body">
 <p>The function to generate a <code>DESeqDataSet</code> needs to be
 adapted depending on the input type, e.g,</p>
@@ -2633,7 +2663,7 @@ function from the previous section:</p>
   Instructor Note
   </h3>
 </button>
-<div id="collapseInstructor2" class="accordion-collapse collapse" data-bs-parent="#accordionInstructor2" aria-labelledby="headingInstructor2">
+<div id="collapseInstructor2" class="accordion-collapse collapse" aria-labelledby="headingInstructor2" data-bs-parent="#accordionInstructor2">
 <div class="accordion-body">
 <p><em>DESeq2</em> uses the <strong>“Relative Log Expression”
 (RLE)</strong> method to calculate sample-wise <em>size factors</em>
@@ -2801,7 +2831,7 @@ object.</em></p>
   Show me the solution
   </h4>
 </button>
-<div id="collapseSolution1" class="accordion-collapse collapse" data-bs-parent="#accordionSolution1" aria-labelledby="headingSolution1">
+<div id="collapseSolution1" class="accordion-collapse collapse" aria-labelledby="headingSolution1" data-bs-parent="#accordionSolution1">
 <div class="accordion-body">
 <p>In the lesson example the last variable of the design formular is
 <code>time</code>. The <strong>reference level</strong> (first in
@@ -2893,7 +2923,7 @@ A330076C08Rik 3.01518e-48</code></pre>
   Instructor Note
   </h3>
 </button>
-<div id="collapseInstructor3" class="accordion-collapse collapse" data-bs-parent="#accordionInstructor3" aria-labelledby="headingInstructor3">
+<div id="collapseInstructor3" class="accordion-collapse collapse" aria-labelledby="headingInstructor3" data-bs-parent="#accordionInstructor3">
 <div class="accordion-body">
 <p>Both of the below ways of specifying the contrast are essentially
 equivalent. The <code>name</code> parameter can be accessed using
@@ -2931,7 +2961,7 @@ time.</p>
   Show me the solution
   </h4>
 </button>
-<div id="collapseSolution2" class="accordion-collapse collapse" data-bs-parent="#accordionSolution2" aria-labelledby="headingSolution2">
+<div id="collapseSolution2" class="accordion-collapse collapse" aria-labelledby="headingSolution2" data-bs-parent="#accordionSolution2">
 <div class="accordion-body">
 <div class="codewrapper sourceCode" id="cb22">
 <h3 class="code-label">R<i aria-hidden="true" data-feather="chevron-left"></i><i aria-hidden="true" data-feather="chevron-right"></i>
@@ -3075,7 +3105,7 @@ results then?</p>
   Show me the solution
   </h4>
 </button>
-<div id="collapseSolution3" class="accordion-collapse collapse" data-bs-parent="#accordionSolution3" aria-labelledby="headingSolution3">
+<div id="collapseSolution3" class="accordion-collapse collapse" aria-labelledby="headingSolution3" data-bs-parent="#accordionSolution3">
 <div class="accordion-body">
 <div class="codewrapper sourceCode" id="cb30">
 <h3 class="code-label">R<i aria-hidden="true" data-feather="chevron-left"></i><i aria-hidden="true" data-feather="chevron-right"></i>
@@ -3281,11 +3311,1007 @@ beneficial.</li>
 </div>
 </div>
 </div>
-</section></section><section id="aio-06-gene-set-analysis"><p>Content from <a href="06-gene-set-analysis.html">Gene set enrichment analysis</a></p>
+</section></section><section id="aio-06-extra-design"><p>Content from <a href="06-extra-design.html">Extra exploration of design matrices</a></p>
 <hr>
 <p> Last updated on 2023-09-02 | 
         
-        <a href="https://github.com/carpentries-incubator/bioc-rnaseq/edit/main/episodes/06-gene-set-analysis.Rmd" class="external-link">Edit this page <i aria-hidden="true" data-feather="edit"></i></a></p>
+        <a href="https://github.com/carpentries-incubator/bioc-rnaseq/edit/main/episodes/06-extra-design.Rmd" class="external-link">Edit this page <i aria-hidden="true" data-feather="edit"></i></a></p>
+<p>Estimated time <i aria-hidden="true" data-feather="clock"></i> 60 minutes </p>
+<div class="text-end">
+          <button role="button" aria-pressed="false" tabindex="0" id="expand-code" class="pull-right"> Expand All Solutions <i aria-hidden="true" data-feather="plus"></i></button>
+        </div>
+<div class="overview card">
+<h2 class="card-header">Overview</h2>
+<div class="row g-0">
+<div class="col-md-4">
+<div class="card-body">
+<div class="inner">
+<h3 class="card-title">Questions</h3>
+<ul>
+<li>How can one translate biological questions and comparisons to
+statistical terms suitable for use with RNA-seq analysis packages?</li>
+</ul>
+</div>
+</div>
+</div>
+<div class="col-md-8">
+<div class="card-body">
+<div class="inner bordered">
+<h3 class="card-title">Objectives</h3>
+<ul>
+<li>Explain the formula notation and design matrices.</li>
+<li>Explore different designs and learn how to interpret
+coefficients.</li>
+</ul>
+</div>
+</div>
+</div>
+</div>
+</div>
+<section id="loading-required-packages-and-reading-data"><h2 class="section-heading">Loading required packages and reading data<a class="anchor" aria-label="anchor" href="#loading-required-packages-and-reading-data"></a>
+</h2>
+<hr class="half-width">
+<p>We start by loading a few packages that will be needed in this
+episode. In particular, the <a href="https://bioconductor.org/packages/ExploreModelMatrix/" class="external-link">ExploreModelMatrix</a>
+package provides resources for exploring design matrices in a graphical
+fashion, for easier interpretation.</p>
+<div class="codewrapper sourceCode" id="cb1">
+<h3 class="code-label">R<i aria-hidden="true" data-feather="chevron-left"></i><i aria-hidden="true" data-feather="chevron-right"></i>
+</h3>
+<pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="fu">suppressPackageStartupMessages</span><span class="op">(</span><span class="op">{</span></span>
+<span>    <span class="kw">library</span><span class="op">(</span><span class="va">SummarizedExperiment</span><span class="op">)</span></span>
+<span>    <span class="kw">library</span><span class="op">(</span><span class="va">ExploreModelMatrix</span><span class="op">)</span></span>
+<span>    <span class="kw">library</span><span class="op">(</span><span class="va">dplyr</span><span class="op">)</span></span>
+<span><span class="op">}</span><span class="op">)</span></span></code></pre>
+</div>
+<p>Next, we read the metadata table for our data set. Because we want to
+explore many different design matrices, we will read in the 4th file we
+downloaded but haven’t used yet: that for both Cerebellum and Spinal
+Cord samples (45 samples total). As seen in previous episodes, the
+metadata contains information about the age, sex, infection status, time
+of measurement and tissue of the collected samples. Note that Day0
+always corresponds to non-infected samples, and that infected samples
+are collected on days 4 and 8. Moreover, all mice have the same age (8
+weeks). Hence, in the first part of this episode we consider only the
+sex, tissue and time variables further.</p>
+<div class="codewrapper sourceCode" id="cb2">
+<h3 class="code-label">R<i aria-hidden="true" data-feather="chevron-left"></i><i aria-hidden="true" data-feather="chevron-right"></i>
+</h3>
+<pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="va">meta</span> <span class="op">&lt;-</span> <span class="fu">read.csv</span><span class="op">(</span><span class="st">"data/GSE96870_coldata_all.csv"</span>, row.names <span class="op">=</span> <span class="fl">1</span><span class="op">)</span></span>
+<span><span class="va">meta</span></span></code></pre>
+</div>
+<div class="codewrapper">
+<h3 class="code-label">OUTPUT<i aria-hidden="true" data-feather="chevron-left"></i><i aria-hidden="true" data-feather="chevron-right"></i>
+</h3>
+<pre class="output" tabindex="0"><code>                     title geo_accession     organism     age    sex
+GSM2545336 CNS_RNA-seq_10C    GSM2545336 Mus musculus 8 weeks Female
+GSM2545337 CNS_RNA-seq_11C    GSM2545337 Mus musculus 8 weeks Female
+GSM2545338 CNS_RNA-seq_12C    GSM2545338 Mus musculus 8 weeks Female
+GSM2545339 CNS_RNA-seq_13C    GSM2545339 Mus musculus 8 weeks Female
+GSM2545340 CNS_RNA-seq_14C    GSM2545340 Mus musculus 8 weeks   Male
+GSM2545341 CNS_RNA-seq_17C    GSM2545341 Mus musculus 8 weeks   Male
+GSM2545342  CNS_RNA-seq_1C    GSM2545342 Mus musculus 8 weeks Female
+GSM2545343 CNS_RNA-seq_20C    GSM2545343 Mus musculus 8 weeks   Male
+GSM2545344 CNS_RNA-seq_21C    GSM2545344 Mus musculus 8 weeks Female
+GSM2545345 CNS_RNA-seq_22C    GSM2545345 Mus musculus 8 weeks   Male
+GSM2545346 CNS_RNA-seq_25C    GSM2545346 Mus musculus 8 weeks   Male
+GSM2545347 CNS_RNA-seq_26C    GSM2545347 Mus musculus 8 weeks   Male
+GSM2545348 CNS_RNA-seq_27C    GSM2545348 Mus musculus 8 weeks Female
+GSM2545349 CNS_RNA-seq_28C    GSM2545349 Mus musculus 8 weeks   Male
+GSM2545350 CNS_RNA-seq_29C    GSM2545350 Mus musculus 8 weeks   Male
+GSM2545351  CNS_RNA-seq_2C    GSM2545351 Mus musculus 8 weeks Female
+GSM2545352 CNS_RNA-seq_30C    GSM2545352 Mus musculus 8 weeks Female
+GSM2545353  CNS_RNA-seq_3C    GSM2545353 Mus musculus 8 weeks Female
+GSM2545354  CNS_RNA-seq_4C    GSM2545354 Mus musculus 8 weeks   Male
+GSM2545355 CNS_RNA-seq_571    GSM2545355 Mus musculus 8 weeks   Male
+GSM2545356 CNS_RNA-seq_574    GSM2545356 Mus musculus 8 weeks   Male
+GSM2545357 CNS_RNA-seq_575    GSM2545357 Mus musculus 8 weeks   Male
+GSM2545358 CNS_RNA-seq_583    GSM2545358 Mus musculus 8 weeks Female
+GSM2545359 CNS_RNA-seq_585    GSM2545359 Mus musculus 8 weeks Female
+GSM2545360 CNS_RNA-seq_589    GSM2545360 Mus musculus 8 weeks   Male
+GSM2545361 CNS_RNA-seq_590    GSM2545361 Mus musculus 8 weeks   Male
+GSM2545362  CNS_RNA-seq_5C    GSM2545362 Mus musculus 8 weeks Female
+GSM2545363  CNS_RNA-seq_6C    GSM2545363 Mus musculus 8 weeks   Male
+GSM2545364 CNS_RNA-seq_709    GSM2545364 Mus musculus 8 weeks Female
+GSM2545365 CNS_RNA-seq_710    GSM2545365 Mus musculus 8 weeks Female
+GSM2545366 CNS_RNA-seq_711    GSM2545366 Mus musculus 8 weeks Female
+GSM2545367 CNS_RNA-seq_713    GSM2545367 Mus musculus 8 weeks   Male
+GSM2545368 CNS_RNA-seq_728    GSM2545368 Mus musculus 8 weeks   Male
+GSM2545369 CNS_RNA-seq_729    GSM2545369 Mus musculus 8 weeks   Male
+GSM2545370 CNS_RNA-seq_730    GSM2545370 Mus musculus 8 weeks Female
+GSM2545371 CNS_RNA-seq_731    GSM2545371 Mus musculus 8 weeks Female
+GSM2545372 CNS_RNA-seq_733    GSM2545372 Mus musculus 8 weeks   Male
+GSM2545373 CNS_RNA-seq_735    GSM2545373 Mus musculus 8 weeks   Male
+GSM2545374 CNS_RNA-seq_736    GSM2545374 Mus musculus 8 weeks Female
+GSM2545375 CNS_RNA-seq_738    GSM2545375 Mus musculus 8 weeks Female
+GSM2545376 CNS_RNA-seq_740    GSM2545376 Mus musculus 8 weeks Female
+GSM2545377 CNS_RNA-seq_741    GSM2545377 Mus musculus 8 weeks Female
+GSM2545378 CNS_RNA-seq_742    GSM2545378 Mus musculus 8 weeks   Male
+GSM2545379 CNS_RNA-seq_743    GSM2545379 Mus musculus 8 weeks   Male
+GSM2545380  CNS_RNA-seq_9C    GSM2545380 Mus musculus 8 weeks Female
+             infection  strain time     tissue mouse
+GSM2545336  InfluenzaA C57BL/6 Day8 Cerebellum    14
+GSM2545337 NonInfected C57BL/6 Day0 Cerebellum     9
+GSM2545338 NonInfected C57BL/6 Day0 Cerebellum    10
+GSM2545339  InfluenzaA C57BL/6 Day4 Cerebellum    15
+GSM2545340  InfluenzaA C57BL/6 Day4 Cerebellum    18
+GSM2545341  InfluenzaA C57BL/6 Day8 Cerebellum     6
+GSM2545342  InfluenzaA C57BL/6 Day8 Cerebellum     5
+GSM2545343 NonInfected C57BL/6 Day0 Cerebellum    11
+GSM2545344  InfluenzaA C57BL/6 Day4 Cerebellum    22
+GSM2545345  InfluenzaA C57BL/6 Day4 Cerebellum    13
+GSM2545346  InfluenzaA C57BL/6 Day8 Cerebellum    23
+GSM2545347  InfluenzaA C57BL/6 Day8 Cerebellum    24
+GSM2545348 NonInfected C57BL/6 Day0 Cerebellum     8
+GSM2545349 NonInfected C57BL/6 Day0 Cerebellum     7
+GSM2545350  InfluenzaA C57BL/6 Day4 Cerebellum     1
+GSM2545351  InfluenzaA C57BL/6 Day8 Cerebellum    16
+GSM2545352  InfluenzaA C57BL/6 Day4 Cerebellum    21
+GSM2545353 NonInfected C57BL/6 Day0 Cerebellum     4
+GSM2545354 NonInfected C57BL/6 Day0 Cerebellum     2
+GSM2545355  InfluenzaA C57BL/6 Day4 Spinalcord     1
+GSM2545356 NonInfected C57BL/6 Day0 Spinalcord     2
+GSM2545357 NonInfected C57BL/6 Day0 Spinalcord     3
+GSM2545358 NonInfected C57BL/6 Day0 Spinalcord     4
+GSM2545359  InfluenzaA C57BL/6 Day8 Spinalcord     5
+GSM2545360  InfluenzaA C57BL/6 Day8 Spinalcord     6
+GSM2545361 NonInfected C57BL/6 Day0 Spinalcord     7
+GSM2545362  InfluenzaA C57BL/6 Day4 Cerebellum    20
+GSM2545363  InfluenzaA C57BL/6 Day4 Cerebellum    12
+GSM2545364 NonInfected C57BL/6 Day0 Spinalcord     8
+GSM2545365 NonInfected C57BL/6 Day0 Spinalcord     9
+GSM2545366 NonInfected C57BL/6 Day0 Spinalcord    10
+GSM2545367 NonInfected C57BL/6 Day0 Spinalcord    11
+GSM2545368  InfluenzaA C57BL/6 Day4 Spinalcord    12
+GSM2545369  InfluenzaA C57BL/6 Day4 Spinalcord    13
+GSM2545370  InfluenzaA C57BL/6 Day8 Spinalcord    14
+GSM2545371  InfluenzaA C57BL/6 Day4 Spinalcord    15
+GSM2545372  InfluenzaA C57BL/6 Day8 Spinalcord    17
+GSM2545373  InfluenzaA C57BL/6 Day4 Spinalcord    18
+GSM2545374  InfluenzaA C57BL/6 Day8 Spinalcord    19
+GSM2545375  InfluenzaA C57BL/6 Day4 Spinalcord    20
+GSM2545376  InfluenzaA C57BL/6 Day4 Spinalcord    21
+GSM2545377  InfluenzaA C57BL/6 Day4 Spinalcord    22
+GSM2545378  InfluenzaA C57BL/6 Day8 Spinalcord    23
+GSM2545379  InfluenzaA C57BL/6 Day8 Spinalcord    24
+GSM2545380  InfluenzaA C57BL/6 Day8 Cerebellum    19</code></pre>
+</div>
+<div class="codewrapper sourceCode" id="cb4">
+<h3 class="code-label">R<i aria-hidden="true" data-feather="chevron-left"></i><i aria-hidden="true" data-feather="chevron-right"></i>
+</h3>
+<pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="fu">table</span><span class="op">(</span><span class="va">meta</span><span class="op">$</span><span class="va">time</span>, <span class="va">meta</span><span class="op">$</span><span class="va">infection</span><span class="op">)</span></span></code></pre>
+</div>
+<div class="codewrapper">
+<h3 class="code-label">OUTPUT<i aria-hidden="true" data-feather="chevron-left"></i><i aria-hidden="true" data-feather="chevron-right"></i>
+</h3>
+<pre class="output" tabindex="0"><code>      
+       InfluenzaA NonInfected
+  Day0          0          15
+  Day4         16           0
+  Day8         14           0</code></pre>
+</div>
+<div class="codewrapper sourceCode" id="cb6">
+<h3 class="code-label">R<i aria-hidden="true" data-feather="chevron-left"></i><i aria-hidden="true" data-feather="chevron-right"></i>
+</h3>
+<pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="fu">table</span><span class="op">(</span><span class="va">meta</span><span class="op">$</span><span class="va">age</span><span class="op">)</span></span></code></pre>
+</div>
+<div class="codewrapper">
+<h3 class="code-label">OUTPUT<i aria-hidden="true" data-feather="chevron-left"></i><i aria-hidden="true" data-feather="chevron-right"></i>
+</h3>
+<pre class="output" tabindex="0"><code>
+8 weeks 
+     45 </code></pre>
+</div>
+<p>We can start by visualizing the number of observations for each
+combination of the three predictor variables.</p>
+<div class="codewrapper sourceCode" id="cb8">
+<h3 class="code-label">R<i aria-hidden="true" data-feather="chevron-left"></i><i aria-hidden="true" data-feather="chevron-right"></i>
+</h3>
+<pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="va">vd</span> <span class="op">&lt;-</span> <span class="fu">VisualizeDesign</span><span class="op">(</span>sampleData <span class="op">=</span> <span class="va">meta</span>, </span>
+<span>                      designFormula <span class="op">=</span> <span class="op">~</span> <span class="va">tissue</span> <span class="op">+</span> <span class="va">time</span> <span class="op">+</span> <span class="va">sex</span><span class="op">)</span></span>
+<span><span class="va">vd</span><span class="op">$</span><span class="va">cooccurrenceplots</span></span></code></pre>
+</div>
+<div class="codewrapper">
+<h3 class="code-label">OUTPUT<i aria-hidden="true" data-feather="chevron-left"></i><i aria-hidden="true" data-feather="chevron-right"></i>
+</h3>
+<pre class="output" tabindex="0"><code>$`tissue = Cerebellum`</code></pre>
+</div>
+<figure><img src="../fig/06-extra-design-rendered-unnamed-chunk-6-1.png" style="display: block; margin: auto;" class="figure mx-auto d-block"></figure><div class="codewrapper">
+<h3 class="code-label">OUTPUT<i aria-hidden="true" data-feather="chevron-left"></i><i aria-hidden="true" data-feather="chevron-right"></i>
+</h3>
+<pre class="output" tabindex="0"><code>
+$`tissue = Spinalcord`</code></pre>
+</div>
+<figure><img src="../fig/06-extra-design-rendered-unnamed-chunk-6-2.png" style="display: block; margin: auto;" class="figure mx-auto d-block"></figure><div id="challenge" class="callout discussion">
+<div class="callout-square">
+<i class="callout-icon" data-feather="message-circle"></i>
+</div>
+<div id="challenge" class="callout-inner">
+<h3 class="callout-title">Challenge<a class="anchor" aria-label="anchor" href="#challenge"></a>
+</h3>
+<div class="callout-content">
+<p>Based on this visualization, would you say that the data set is
+balanced, or are there combinations of predictor variables that are
+severely over- or underrepresented?</p>
+</div>
+</div>
+</div>
+</section><section id="compare-males-and-females-non-infected-spinal-cord"><h2 class="section-heading">Compare males and females, non-infected spinal cord<a class="anchor" aria-label="anchor" href="#compare-males-and-females-non-infected-spinal-cord"></a>
+</h2>
+<hr class="half-width">
+<p>Next, we will set up our first design matrix. Here, we will focus on
+the uninfected (Day0) spinal cord samples, and our aim is to compare the
+male and female mice. Thus, we first subset the metadata to only the
+samples of interest, and next set up and visualize the design matrix
+with a single predictor variable (sex). By defining the design formula
+as <code>~ sex</code>, we tell R to include an intercept in the design.
+This intercept will represent the ‘baseline’ level of the predictor
+variable, which in this case is selected to be the Female mice. If not
+explicitly specified, R will order the values of the predictor in
+alphabetical order and select the first one as the reference or baseline
+level.</p>
+<div class="codewrapper sourceCode" id="cb11">
+<h3 class="code-label">R<i aria-hidden="true" data-feather="chevron-left"></i><i aria-hidden="true" data-feather="chevron-right"></i>
+</h3>
+<pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="co">## Subset metadata</span></span>
+<span><span class="va">meta_noninf_spc</span> <span class="op">&lt;-</span> <span class="va">meta</span> <span class="op">%&gt;%</span> <span class="fu">filter</span><span class="op">(</span><span class="va">time</span> <span class="op">==</span> <span class="st">"Day0"</span> <span class="op">&amp;</span> </span>
+<span>                                       <span class="va">tissue</span> <span class="op">==</span> <span class="st">"Spinalcord"</span><span class="op">)</span></span>
+<span><span class="va">meta_noninf_spc</span></span></code></pre>
+</div>
+<div class="codewrapper">
+<h3 class="code-label">OUTPUT<i aria-hidden="true" data-feather="chevron-left"></i><i aria-hidden="true" data-feather="chevron-right"></i>
+</h3>
+<pre class="output" tabindex="0"><code>                     title geo_accession     organism     age    sex
+GSM2545356 CNS_RNA-seq_574    GSM2545356 Mus musculus 8 weeks   Male
+GSM2545357 CNS_RNA-seq_575    GSM2545357 Mus musculus 8 weeks   Male
+GSM2545358 CNS_RNA-seq_583    GSM2545358 Mus musculus 8 weeks Female
+GSM2545361 CNS_RNA-seq_590    GSM2545361 Mus musculus 8 weeks   Male
+GSM2545364 CNS_RNA-seq_709    GSM2545364 Mus musculus 8 weeks Female
+GSM2545365 CNS_RNA-seq_710    GSM2545365 Mus musculus 8 weeks Female
+GSM2545366 CNS_RNA-seq_711    GSM2545366 Mus musculus 8 weeks Female
+GSM2545367 CNS_RNA-seq_713    GSM2545367 Mus musculus 8 weeks   Male
+             infection  strain time     tissue mouse
+GSM2545356 NonInfected C57BL/6 Day0 Spinalcord     2
+GSM2545357 NonInfected C57BL/6 Day0 Spinalcord     3
+GSM2545358 NonInfected C57BL/6 Day0 Spinalcord     4
+GSM2545361 NonInfected C57BL/6 Day0 Spinalcord     7
+GSM2545364 NonInfected C57BL/6 Day0 Spinalcord     8
+GSM2545365 NonInfected C57BL/6 Day0 Spinalcord     9
+GSM2545366 NonInfected C57BL/6 Day0 Spinalcord    10
+GSM2545367 NonInfected C57BL/6 Day0 Spinalcord    11</code></pre>
+</div>
+<div class="codewrapper sourceCode" id="cb13">
+<h3 class="code-label">R<i aria-hidden="true" data-feather="chevron-left"></i><i aria-hidden="true" data-feather="chevron-right"></i>
+</h3>
+<pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="co">## Use ExploreModelMatrix to create a design matrix and visualizations, given </span></span>
+<span><span class="co">## the desired design formula. </span></span>
+<span><span class="va">vd</span> <span class="op">&lt;-</span> <span class="fu">VisualizeDesign</span><span class="op">(</span>sampleData <span class="op">=</span> <span class="va">meta_noninf_spc</span>, </span>
+<span>                      designFormula <span class="op">=</span> <span class="op">~</span> <span class="va">sex</span><span class="op">)</span></span>
+<span><span class="va">vd</span><span class="op">$</span><span class="va">designmatrix</span></span></code></pre>
+</div>
+<div class="codewrapper">
+<h3 class="code-label">OUTPUT<i aria-hidden="true" data-feather="chevron-left"></i><i aria-hidden="true" data-feather="chevron-right"></i>
+</h3>
+<pre class="output" tabindex="0"><code>           (Intercept) sexMale
+GSM2545356           1       1
+GSM2545357           1       1
+GSM2545358           1       0
+GSM2545361           1       1
+GSM2545364           1       0
+GSM2545365           1       0
+GSM2545366           1       0
+GSM2545367           1       1</code></pre>
+</div>
+<div class="codewrapper sourceCode" id="cb15">
+<h3 class="code-label">R<i aria-hidden="true" data-feather="chevron-left"></i><i aria-hidden="true" data-feather="chevron-right"></i>
+</h3>
+<pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="va">vd</span><span class="op">$</span><span class="va">plotlist</span></span></code></pre>
+</div>
+<div class="codewrapper">
+<h3 class="code-label">OUTPUT<i aria-hidden="true" data-feather="chevron-left"></i><i aria-hidden="true" data-feather="chevron-right"></i>
+</h3>
+<pre class="output" tabindex="0"><code>[[1]]</code></pre>
+</div>
+<figure><img src="../fig/06-extra-design-rendered-unnamed-chunk-7-1.png" style="display: block; margin: auto;" class="figure mx-auto d-block"></figure><div class="codewrapper sourceCode" id="cb17">
+<h3 class="code-label">R<i aria-hidden="true" data-feather="chevron-left"></i><i aria-hidden="true" data-feather="chevron-right"></i>
+</h3>
+<pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="co">## Note that we can also generate the design matrix like this</span></span>
+<span><span class="fu">model.matrix</span><span class="op">(</span><span class="op">~</span> <span class="va">sex</span>, data <span class="op">=</span> <span class="va">meta_noninf_spc</span><span class="op">)</span></span></code></pre>
+</div>
+<div class="codewrapper">
+<h3 class="code-label">OUTPUT<i aria-hidden="true" data-feather="chevron-left"></i><i aria-hidden="true" data-feather="chevron-right"></i>
+</h3>
+<pre class="output" tabindex="0"><code>           (Intercept) sexMale
+GSM2545356           1       1
+GSM2545357           1       1
+GSM2545358           1       0
+GSM2545361           1       1
+GSM2545364           1       0
+GSM2545365           1       0
+GSM2545366           1       0
+GSM2545367           1       1
+attr(,"assign")
+[1] 0 1
+attr(,"contrasts")
+attr(,"contrasts")$sex
+[1] "contr.treatment"</code></pre>
+</div>
+<div id="challenge-1" class="callout discussion">
+<div class="callout-square">
+<i class="callout-icon" data-feather="message-circle"></i>
+</div>
+<div id="challenge-1" class="callout-inner">
+<h3 class="callout-title">Challenge<a class="anchor" aria-label="anchor" href="#challenge-1"></a>
+</h3>
+<div class="callout-content">
+<p>With this design, what is the interpretation of the
+<code>sexMale</code> coefficient?</p>
+</div>
+</div>
+</div>
+<div id="challenge-2" class="callout challenge">
+<div class="callout-square">
+<i class="callout-icon" data-feather="zap"></i>
+</div>
+<div id="challenge-2" class="callout-inner">
+<h3 class="callout-title">Challenge<a class="anchor" aria-label="anchor" href="#challenge-2"></a>
+</h3>
+<div class="callout-content">
+<p>Set up the design formula to compare male and female spinal cord
+samples from Day0 as above, but instruct R to not include an intercept
+in the model. How does this change the interpretation of the
+coefficients? What contrast would have to be specified to compare the
+mean expression of a gene between male and female mice?</p>
+</div>
+</div>
+</div>
+<div id="accordionSolution1" class="accordion challenge-accordion accordion-flush">
+<div class="accordion-item">
+<button class="accordion-button solution-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapseSolution1" aria-expanded="false" aria-controls="collapseSolution1">
+  <h4 class="accordion-header" id="headingSolution1">
+  Show me the solution
+  </h4>
+</button>
+<div id="collapseSolution1" class="accordion-collapse collapse" data-bs-parent="#accordionSolution1" aria-labelledby="headingSolution1">
+<div class="accordion-body">
+<div class="codewrapper sourceCode" id="cb19">
+<h3 class="code-label">R<i aria-hidden="true" data-feather="chevron-left"></i><i aria-hidden="true" data-feather="chevron-right"></i>
+</h3>
+<pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="va">meta_noninf_spc</span> <span class="op">&lt;-</span> <span class="va">meta</span> <span class="op">%&gt;%</span> <span class="fu">filter</span><span class="op">(</span><span class="va">time</span> <span class="op">==</span> <span class="st">"Day0"</span> <span class="op">&amp;</span> </span>
+<span>                                       <span class="va">tissue</span> <span class="op">==</span> <span class="st">"Spinalcord"</span><span class="op">)</span></span>
+<span><span class="va">meta_noninf_spc</span></span></code></pre>
+</div>
+<div class="codewrapper">
+<h3 class="code-label">OUTPUT<i aria-hidden="true" data-feather="chevron-left"></i><i aria-hidden="true" data-feather="chevron-right"></i>
+</h3>
+<pre class="output" tabindex="0"><code>                     title geo_accession     organism     age    sex
+GSM2545356 CNS_RNA-seq_574    GSM2545356 Mus musculus 8 weeks   Male
+GSM2545357 CNS_RNA-seq_575    GSM2545357 Mus musculus 8 weeks   Male
+GSM2545358 CNS_RNA-seq_583    GSM2545358 Mus musculus 8 weeks Female
+GSM2545361 CNS_RNA-seq_590    GSM2545361 Mus musculus 8 weeks   Male
+GSM2545364 CNS_RNA-seq_709    GSM2545364 Mus musculus 8 weeks Female
+GSM2545365 CNS_RNA-seq_710    GSM2545365 Mus musculus 8 weeks Female
+GSM2545366 CNS_RNA-seq_711    GSM2545366 Mus musculus 8 weeks Female
+GSM2545367 CNS_RNA-seq_713    GSM2545367 Mus musculus 8 weeks   Male
+             infection  strain time     tissue mouse
+GSM2545356 NonInfected C57BL/6 Day0 Spinalcord     2
+GSM2545357 NonInfected C57BL/6 Day0 Spinalcord     3
+GSM2545358 NonInfected C57BL/6 Day0 Spinalcord     4
+GSM2545361 NonInfected C57BL/6 Day0 Spinalcord     7
+GSM2545364 NonInfected C57BL/6 Day0 Spinalcord     8
+GSM2545365 NonInfected C57BL/6 Day0 Spinalcord     9
+GSM2545366 NonInfected C57BL/6 Day0 Spinalcord    10
+GSM2545367 NonInfected C57BL/6 Day0 Spinalcord    11</code></pre>
+</div>
+<div class="codewrapper sourceCode" id="cb21">
+<h3 class="code-label">R<i aria-hidden="true" data-feather="chevron-left"></i><i aria-hidden="true" data-feather="chevron-right"></i>
+</h3>
+<pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="va">vd</span> <span class="op">&lt;-</span> <span class="fu">VisualizeDesign</span><span class="op">(</span>sampleData <span class="op">=</span> <span class="va">meta_noninf_spc</span>, </span>
+<span>                      designFormula <span class="op">=</span> <span class="op">~</span> <span class="fl">0</span> <span class="op">+</span> <span class="va">sex</span><span class="op">)</span></span>
+<span><span class="va">vd</span><span class="op">$</span><span class="va">designmatrix</span></span></code></pre>
+</div>
+<div class="codewrapper">
+<h3 class="code-label">OUTPUT<i aria-hidden="true" data-feather="chevron-left"></i><i aria-hidden="true" data-feather="chevron-right"></i>
+</h3>
+<pre class="output" tabindex="0"><code>           sexFemale sexMale
+GSM2545356         0       1
+GSM2545357         0       1
+GSM2545358         1       0
+GSM2545361         0       1
+GSM2545364         1       0
+GSM2545365         1       0
+GSM2545366         1       0
+GSM2545367         0       1</code></pre>
+</div>
+<div class="codewrapper sourceCode" id="cb23">
+<h3 class="code-label">R<i aria-hidden="true" data-feather="chevron-left"></i><i aria-hidden="true" data-feather="chevron-right"></i>
+</h3>
+<pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="va">vd</span><span class="op">$</span><span class="va">plotlist</span></span></code></pre>
+</div>
+<div class="codewrapper">
+<h3 class="code-label">OUTPUT<i aria-hidden="true" data-feather="chevron-left"></i><i aria-hidden="true" data-feather="chevron-right"></i>
+</h3>
+<pre class="output" tabindex="0"><code>[[1]]</code></pre>
+</div>
+<figure><img src="../fig/06-extra-design-rendered-unnamed-chunk-8-1.png" style="display: block; margin: auto;" class="figure mx-auto d-block"></figure>
+</div>
+</div>
+</div>
+</div>
+<div id="challenge-3" class="callout challenge">
+<div class="callout-square">
+<i class="callout-icon" data-feather="zap"></i>
+</div>
+<div id="challenge-3" class="callout-inner">
+<h3 class="callout-title">Challenge<a class="anchor" aria-label="anchor" href="#challenge-3"></a>
+</h3>
+<div class="callout-content">
+<p>Set up the design formula to compare the three time points (Day0,
+Day4, Day8) in the male spinal cord samples, and visualize it using
+<code>ExploreModelMatrix</code>.</p>
+</div>
+</div>
+</div>
+<div id="accordionSolution2" class="accordion challenge-accordion accordion-flush">
+<div class="accordion-item">
+<button class="accordion-button solution-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapseSolution2" aria-expanded="false" aria-controls="collapseSolution2">
+  <h4 class="accordion-header" id="headingSolution2">
+  Show me the solution
+  </h4>
+</button>
+<div id="collapseSolution2" class="accordion-collapse collapse" data-bs-parent="#accordionSolution2" aria-labelledby="headingSolution2">
+<div class="accordion-body">
+<div class="codewrapper sourceCode" id="cb25">
+<h3 class="code-label">R<i aria-hidden="true" data-feather="chevron-left"></i><i aria-hidden="true" data-feather="chevron-right"></i>
+</h3>
+<pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="va">meta_male_spc</span> <span class="op">&lt;-</span> <span class="va">meta</span> <span class="op">%&gt;%</span> <span class="fu">filter</span><span class="op">(</span><span class="va">sex</span> <span class="op">==</span> <span class="st">"Male"</span> <span class="op">&amp;</span> <span class="va">tissue</span> <span class="op">==</span> <span class="st">"Spinalcord"</span><span class="op">)</span></span>
+<span><span class="va">meta_male_spc</span></span></code></pre>
+</div>
+<div class="codewrapper">
+<h3 class="code-label">OUTPUT<i aria-hidden="true" data-feather="chevron-left"></i><i aria-hidden="true" data-feather="chevron-right"></i>
+</h3>
+<pre class="output" tabindex="0"><code>                     title geo_accession     organism     age  sex   infection
+GSM2545355 CNS_RNA-seq_571    GSM2545355 Mus musculus 8 weeks Male  InfluenzaA
+GSM2545356 CNS_RNA-seq_574    GSM2545356 Mus musculus 8 weeks Male NonInfected
+GSM2545357 CNS_RNA-seq_575    GSM2545357 Mus musculus 8 weeks Male NonInfected
+GSM2545360 CNS_RNA-seq_589    GSM2545360 Mus musculus 8 weeks Male  InfluenzaA
+GSM2545361 CNS_RNA-seq_590    GSM2545361 Mus musculus 8 weeks Male NonInfected
+GSM2545367 CNS_RNA-seq_713    GSM2545367 Mus musculus 8 weeks Male NonInfected
+GSM2545368 CNS_RNA-seq_728    GSM2545368 Mus musculus 8 weeks Male  InfluenzaA
+GSM2545369 CNS_RNA-seq_729    GSM2545369 Mus musculus 8 weeks Male  InfluenzaA
+GSM2545372 CNS_RNA-seq_733    GSM2545372 Mus musculus 8 weeks Male  InfluenzaA
+GSM2545373 CNS_RNA-seq_735    GSM2545373 Mus musculus 8 weeks Male  InfluenzaA
+GSM2545378 CNS_RNA-seq_742    GSM2545378 Mus musculus 8 weeks Male  InfluenzaA
+GSM2545379 CNS_RNA-seq_743    GSM2545379 Mus musculus 8 weeks Male  InfluenzaA
+            strain time     tissue mouse
+GSM2545355 C57BL/6 Day4 Spinalcord     1
+GSM2545356 C57BL/6 Day0 Spinalcord     2
+GSM2545357 C57BL/6 Day0 Spinalcord     3
+GSM2545360 C57BL/6 Day8 Spinalcord     6
+GSM2545361 C57BL/6 Day0 Spinalcord     7
+GSM2545367 C57BL/6 Day0 Spinalcord    11
+GSM2545368 C57BL/6 Day4 Spinalcord    12
+GSM2545369 C57BL/6 Day4 Spinalcord    13
+GSM2545372 C57BL/6 Day8 Spinalcord    17
+GSM2545373 C57BL/6 Day4 Spinalcord    18
+GSM2545378 C57BL/6 Day8 Spinalcord    23
+GSM2545379 C57BL/6 Day8 Spinalcord    24</code></pre>
+</div>
+<div class="codewrapper sourceCode" id="cb27">
+<h3 class="code-label">R<i aria-hidden="true" data-feather="chevron-left"></i><i aria-hidden="true" data-feather="chevron-right"></i>
+</h3>
+<pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="va">vd</span> <span class="op">&lt;-</span> <span class="fu">VisualizeDesign</span><span class="op">(</span>sampleData <span class="op">=</span> <span class="va">meta_male_spc</span>, designFormula <span class="op">=</span> <span class="op">~</span> <span class="va">time</span><span class="op">)</span></span>
+<span><span class="va">vd</span><span class="op">$</span><span class="va">designmatrix</span></span></code></pre>
+</div>
+<div class="codewrapper">
+<h3 class="code-label">OUTPUT<i aria-hidden="true" data-feather="chevron-left"></i><i aria-hidden="true" data-feather="chevron-right"></i>
+</h3>
+<pre class="output" tabindex="0"><code>           (Intercept) timeDay4 timeDay8
+GSM2545355           1        1        0
+GSM2545356           1        0        0
+GSM2545357           1        0        0
+GSM2545360           1        0        1
+GSM2545361           1        0        0
+GSM2545367           1        0        0
+GSM2545368           1        1        0
+GSM2545369           1        1        0
+GSM2545372           1        0        1
+GSM2545373           1        1        0
+GSM2545378           1        0        1
+GSM2545379           1        0        1</code></pre>
+</div>
+<div class="codewrapper sourceCode" id="cb29">
+<h3 class="code-label">R<i aria-hidden="true" data-feather="chevron-left"></i><i aria-hidden="true" data-feather="chevron-right"></i>
+</h3>
+<pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="va">vd</span><span class="op">$</span><span class="va">plotlist</span></span></code></pre>
+</div>
+<div class="codewrapper">
+<h3 class="code-label">OUTPUT<i aria-hidden="true" data-feather="chevron-left"></i><i aria-hidden="true" data-feather="chevron-right"></i>
+</h3>
+<pre class="output" tabindex="0"><code>[[1]]</code></pre>
+</div>
+<figure><img src="../fig/06-extra-design-rendered-unnamed-chunk-9-1.png" style="display: block; margin: auto;" class="figure mx-auto d-block"></figure>
+</div>
+</div>
+</div>
+</div>
+</section><section id="factorial-design-without-interactions"><h2 class="section-heading">Factorial design without interactions<a class="anchor" aria-label="anchor" href="#factorial-design-without-interactions"></a>
+</h2>
+<hr class="half-width">
+<p>Next, we again consider only non-infected mice, but fit a model
+incorporating both sex and tissue as predictors. We assume that the
+tissue differences are the same for both male and female mice, and
+consequently fit an additive model, without interaction terms.</p>
+<div class="codewrapper sourceCode" id="cb31">
+<h3 class="code-label">R<i aria-hidden="true" data-feather="chevron-left"></i><i aria-hidden="true" data-feather="chevron-right"></i>
+</h3>
+<pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="va">meta_noninf</span> <span class="op">&lt;-</span> <span class="va">meta</span> <span class="op">%&gt;%</span> <span class="fu">filter</span><span class="op">(</span><span class="va">time</span> <span class="op">==</span> <span class="st">"Day0"</span><span class="op">)</span></span>
+<span><span class="va">meta_noninf</span></span></code></pre>
+</div>
+<div class="codewrapper">
+<h3 class="code-label">OUTPUT<i aria-hidden="true" data-feather="chevron-left"></i><i aria-hidden="true" data-feather="chevron-right"></i>
+</h3>
+<pre class="output" tabindex="0"><code>                     title geo_accession     organism     age    sex
+GSM2545337 CNS_RNA-seq_11C    GSM2545337 Mus musculus 8 weeks Female
+GSM2545338 CNS_RNA-seq_12C    GSM2545338 Mus musculus 8 weeks Female
+GSM2545343 CNS_RNA-seq_20C    GSM2545343 Mus musculus 8 weeks   Male
+GSM2545348 CNS_RNA-seq_27C    GSM2545348 Mus musculus 8 weeks Female
+GSM2545349 CNS_RNA-seq_28C    GSM2545349 Mus musculus 8 weeks   Male
+GSM2545353  CNS_RNA-seq_3C    GSM2545353 Mus musculus 8 weeks Female
+GSM2545354  CNS_RNA-seq_4C    GSM2545354 Mus musculus 8 weeks   Male
+GSM2545356 CNS_RNA-seq_574    GSM2545356 Mus musculus 8 weeks   Male
+GSM2545357 CNS_RNA-seq_575    GSM2545357 Mus musculus 8 weeks   Male
+GSM2545358 CNS_RNA-seq_583    GSM2545358 Mus musculus 8 weeks Female
+GSM2545361 CNS_RNA-seq_590    GSM2545361 Mus musculus 8 weeks   Male
+GSM2545364 CNS_RNA-seq_709    GSM2545364 Mus musculus 8 weeks Female
+GSM2545365 CNS_RNA-seq_710    GSM2545365 Mus musculus 8 weeks Female
+GSM2545366 CNS_RNA-seq_711    GSM2545366 Mus musculus 8 weeks Female
+GSM2545367 CNS_RNA-seq_713    GSM2545367 Mus musculus 8 weeks   Male
+             infection  strain time     tissue mouse
+GSM2545337 NonInfected C57BL/6 Day0 Cerebellum     9
+GSM2545338 NonInfected C57BL/6 Day0 Cerebellum    10
+GSM2545343 NonInfected C57BL/6 Day0 Cerebellum    11
+GSM2545348 NonInfected C57BL/6 Day0 Cerebellum     8
+GSM2545349 NonInfected C57BL/6 Day0 Cerebellum     7
+GSM2545353 NonInfected C57BL/6 Day0 Cerebellum     4
+GSM2545354 NonInfected C57BL/6 Day0 Cerebellum     2
+GSM2545356 NonInfected C57BL/6 Day0 Spinalcord     2
+GSM2545357 NonInfected C57BL/6 Day0 Spinalcord     3
+GSM2545358 NonInfected C57BL/6 Day0 Spinalcord     4
+GSM2545361 NonInfected C57BL/6 Day0 Spinalcord     7
+GSM2545364 NonInfected C57BL/6 Day0 Spinalcord     8
+GSM2545365 NonInfected C57BL/6 Day0 Spinalcord     9
+GSM2545366 NonInfected C57BL/6 Day0 Spinalcord    10
+GSM2545367 NonInfected C57BL/6 Day0 Spinalcord    11</code></pre>
+</div>
+<div class="codewrapper sourceCode" id="cb33">
+<h3 class="code-label">R<i aria-hidden="true" data-feather="chevron-left"></i><i aria-hidden="true" data-feather="chevron-right"></i>
+</h3>
+<pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="va">vd</span> <span class="op">&lt;-</span> <span class="fu">VisualizeDesign</span><span class="op">(</span>sampleData <span class="op">=</span> <span class="va">meta_noninf</span>, </span>
+<span>                      designFormula <span class="op">=</span> <span class="op">~</span> <span class="va">sex</span> <span class="op">+</span> <span class="va">tissue</span><span class="op">)</span></span>
+<span><span class="va">vd</span><span class="op">$</span><span class="va">designmatrix</span></span></code></pre>
+</div>
+<div class="codewrapper">
+<h3 class="code-label">OUTPUT<i aria-hidden="true" data-feather="chevron-left"></i><i aria-hidden="true" data-feather="chevron-right"></i>
+</h3>
+<pre class="output" tabindex="0"><code>           (Intercept) sexMale tissueSpinalcord
+GSM2545337           1       0                0
+GSM2545338           1       0                0
+GSM2545343           1       1                0
+GSM2545348           1       0                0
+GSM2545349           1       1                0
+GSM2545353           1       0                0
+GSM2545354           1       1                0
+GSM2545356           1       1                1
+GSM2545357           1       1                1
+GSM2545358           1       0                1
+GSM2545361           1       1                1
+GSM2545364           1       0                1
+GSM2545365           1       0                1
+GSM2545366           1       0                1
+GSM2545367           1       1                1</code></pre>
+</div>
+<div class="codewrapper sourceCode" id="cb35">
+<h3 class="code-label">R<i aria-hidden="true" data-feather="chevron-left"></i><i aria-hidden="true" data-feather="chevron-right"></i>
+</h3>
+<pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="va">vd</span><span class="op">$</span><span class="va">plotlist</span></span></code></pre>
+</div>
+<div class="codewrapper">
+<h3 class="code-label">OUTPUT<i aria-hidden="true" data-feather="chevron-left"></i><i aria-hidden="true" data-feather="chevron-right"></i>
+</h3>
+<pre class="output" tabindex="0"><code>[[1]]</code></pre>
+</div>
+<figure><img src="../fig/06-extra-design-rendered-unnamed-chunk-10-1.png" style="display: block; margin: auto;" class="figure mx-auto d-block"></figure></section><section id="factorial-design-with-interactions"><h2 class="section-heading">Factorial design with interactions<a class="anchor" aria-label="anchor" href="#factorial-design-with-interactions"></a>
+</h2>
+<hr class="half-width">
+<p>In the previous model, we assumed that the tissue differences were
+the same for both male and female mice. To allow for the estimation of
+sex-specific tissue differences (at the expense of having one additional
+coefficient to estimate from the data), we can include an interaction
+term in the model.</p>
+<div class="codewrapper sourceCode" id="cb37">
+<h3 class="code-label">R<i aria-hidden="true" data-feather="chevron-left"></i><i aria-hidden="true" data-feather="chevron-right"></i>
+</h3>
+<pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="va">meta_noninf</span> <span class="op">&lt;-</span> <span class="va">meta</span> <span class="op">%&gt;%</span> <span class="fu">filter</span><span class="op">(</span><span class="va">time</span> <span class="op">==</span> <span class="st">"Day0"</span><span class="op">)</span></span>
+<span><span class="va">meta_noninf</span></span></code></pre>
+</div>
+<div class="codewrapper">
+<h3 class="code-label">OUTPUT<i aria-hidden="true" data-feather="chevron-left"></i><i aria-hidden="true" data-feather="chevron-right"></i>
+</h3>
+<pre class="output" tabindex="0"><code>                     title geo_accession     organism     age    sex
+GSM2545337 CNS_RNA-seq_11C    GSM2545337 Mus musculus 8 weeks Female
+GSM2545338 CNS_RNA-seq_12C    GSM2545338 Mus musculus 8 weeks Female
+GSM2545343 CNS_RNA-seq_20C    GSM2545343 Mus musculus 8 weeks   Male
+GSM2545348 CNS_RNA-seq_27C    GSM2545348 Mus musculus 8 weeks Female
+GSM2545349 CNS_RNA-seq_28C    GSM2545349 Mus musculus 8 weeks   Male
+GSM2545353  CNS_RNA-seq_3C    GSM2545353 Mus musculus 8 weeks Female
+GSM2545354  CNS_RNA-seq_4C    GSM2545354 Mus musculus 8 weeks   Male
+GSM2545356 CNS_RNA-seq_574    GSM2545356 Mus musculus 8 weeks   Male
+GSM2545357 CNS_RNA-seq_575    GSM2545357 Mus musculus 8 weeks   Male
+GSM2545358 CNS_RNA-seq_583    GSM2545358 Mus musculus 8 weeks Female
+GSM2545361 CNS_RNA-seq_590    GSM2545361 Mus musculus 8 weeks   Male
+GSM2545364 CNS_RNA-seq_709    GSM2545364 Mus musculus 8 weeks Female
+GSM2545365 CNS_RNA-seq_710    GSM2545365 Mus musculus 8 weeks Female
+GSM2545366 CNS_RNA-seq_711    GSM2545366 Mus musculus 8 weeks Female
+GSM2545367 CNS_RNA-seq_713    GSM2545367 Mus musculus 8 weeks   Male
+             infection  strain time     tissue mouse
+GSM2545337 NonInfected C57BL/6 Day0 Cerebellum     9
+GSM2545338 NonInfected C57BL/6 Day0 Cerebellum    10
+GSM2545343 NonInfected C57BL/6 Day0 Cerebellum    11
+GSM2545348 NonInfected C57BL/6 Day0 Cerebellum     8
+GSM2545349 NonInfected C57BL/6 Day0 Cerebellum     7
+GSM2545353 NonInfected C57BL/6 Day0 Cerebellum     4
+GSM2545354 NonInfected C57BL/6 Day0 Cerebellum     2
+GSM2545356 NonInfected C57BL/6 Day0 Spinalcord     2
+GSM2545357 NonInfected C57BL/6 Day0 Spinalcord     3
+GSM2545358 NonInfected C57BL/6 Day0 Spinalcord     4
+GSM2545361 NonInfected C57BL/6 Day0 Spinalcord     7
+GSM2545364 NonInfected C57BL/6 Day0 Spinalcord     8
+GSM2545365 NonInfected C57BL/6 Day0 Spinalcord     9
+GSM2545366 NonInfected C57BL/6 Day0 Spinalcord    10
+GSM2545367 NonInfected C57BL/6 Day0 Spinalcord    11</code></pre>
+</div>
+<div class="codewrapper sourceCode" id="cb39">
+<h3 class="code-label">R<i aria-hidden="true" data-feather="chevron-left"></i><i aria-hidden="true" data-feather="chevron-right"></i>
+</h3>
+<pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="co">## Define a design including an interaction term</span></span>
+<span><span class="co">## Note that ~ sex * tissue is equivalent to </span></span>
+<span><span class="co">## ~ sex + tissue + sex:tissue</span></span>
+<span><span class="va">vd</span> <span class="op">&lt;-</span> <span class="fu">VisualizeDesign</span><span class="op">(</span>sampleData <span class="op">=</span> <span class="va">meta_noninf</span>, </span>
+<span>                      designFormula <span class="op">=</span> <span class="op">~</span> <span class="va">sex</span> <span class="op">*</span> <span class="va">tissue</span><span class="op">)</span></span>
+<span><span class="va">vd</span><span class="op">$</span><span class="va">designmatrix</span></span></code></pre>
+</div>
+<div class="codewrapper">
+<h3 class="code-label">OUTPUT<i aria-hidden="true" data-feather="chevron-left"></i><i aria-hidden="true" data-feather="chevron-right"></i>
+</h3>
+<pre class="output" tabindex="0"><code>           (Intercept) sexMale tissueSpinalcord sexMale:tissueSpinalcord
+GSM2545337           1       0                0                        0
+GSM2545338           1       0                0                        0
+GSM2545343           1       1                0                        0
+GSM2545348           1       0                0                        0
+GSM2545349           1       1                0                        0
+GSM2545353           1       0                0                        0
+GSM2545354           1       1                0                        0
+GSM2545356           1       1                1                        1
+GSM2545357           1       1                1                        1
+GSM2545358           1       0                1                        0
+GSM2545361           1       1                1                        1
+GSM2545364           1       0                1                        0
+GSM2545365           1       0                1                        0
+GSM2545366           1       0                1                        0
+GSM2545367           1       1                1                        1</code></pre>
+</div>
+<div class="codewrapper sourceCode" id="cb41">
+<h3 class="code-label">R<i aria-hidden="true" data-feather="chevron-left"></i><i aria-hidden="true" data-feather="chevron-right"></i>
+</h3>
+<pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="va">vd</span><span class="op">$</span><span class="va">plotlist</span></span></code></pre>
+</div>
+<div class="codewrapper">
+<h3 class="code-label">OUTPUT<i aria-hidden="true" data-feather="chevron-left"></i><i aria-hidden="true" data-feather="chevron-right"></i>
+</h3>
+<pre class="output" tabindex="0"><code>[[1]]</code></pre>
+</div>
+<figure><img src="../fig/06-extra-design-rendered-unnamed-chunk-11-1.png" style="display: block; margin: auto;" class="figure mx-auto d-block"></figure></section><section id="paired-design"><h2 class="section-heading">Paired design<a class="anchor" aria-label="anchor" href="#paired-design"></a>
+</h2>
+<hr class="half-width">
+<p>In this particular data set the samples are paired - the same mice
+have contributed both the cerebellum and spinal cord samples. This
+information was not included in the previous models. However, accounting
+for it can increase power to detect tissue differences by eliminating
+variability in baseline expression levels between mice. Here, we define
+a paired design for the female non-infected mice, aimed at testing for
+differences between tissues after accounting for baseline differences
+between mice.</p>
+<div class="codewrapper sourceCode" id="cb43">
+<h3 class="code-label">R<i aria-hidden="true" data-feather="chevron-left"></i><i aria-hidden="true" data-feather="chevron-right"></i>
+</h3>
+<pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="va">meta_fem_day0</span> <span class="op">&lt;-</span> <span class="va">meta</span> <span class="op">%&gt;%</span> <span class="fu">filter</span><span class="op">(</span><span class="va">sex</span> <span class="op">==</span> <span class="st">"Female"</span> <span class="op">&amp;</span> </span>
+<span>                                     <span class="va">time</span> <span class="op">==</span> <span class="st">"Day0"</span><span class="op">)</span></span>
+<span></span>
+<span><span class="co"># ensure that mouse is treated as a categorical variable</span></span>
+<span><span class="va">meta_fem_day0</span><span class="op">$</span><span class="va">mouse</span> <span class="op">&lt;-</span> <span class="fu">factor</span><span class="op">(</span><span class="va">meta_fem_day0</span><span class="op">$</span><span class="va">mouse</span><span class="op">)</span></span>
+<span></span>
+<span><span class="va">meta_fem_day0</span></span></code></pre>
+</div>
+<div class="codewrapper">
+<h3 class="code-label">OUTPUT<i aria-hidden="true" data-feather="chevron-left"></i><i aria-hidden="true" data-feather="chevron-right"></i>
+</h3>
+<pre class="output" tabindex="0"><code>                     title geo_accession     organism     age    sex
+GSM2545337 CNS_RNA-seq_11C    GSM2545337 Mus musculus 8 weeks Female
+GSM2545338 CNS_RNA-seq_12C    GSM2545338 Mus musculus 8 weeks Female
+GSM2545348 CNS_RNA-seq_27C    GSM2545348 Mus musculus 8 weeks Female
+GSM2545353  CNS_RNA-seq_3C    GSM2545353 Mus musculus 8 weeks Female
+GSM2545358 CNS_RNA-seq_583    GSM2545358 Mus musculus 8 weeks Female
+GSM2545364 CNS_RNA-seq_709    GSM2545364 Mus musculus 8 weeks Female
+GSM2545365 CNS_RNA-seq_710    GSM2545365 Mus musculus 8 weeks Female
+GSM2545366 CNS_RNA-seq_711    GSM2545366 Mus musculus 8 weeks Female
+             infection  strain time     tissue mouse
+GSM2545337 NonInfected C57BL/6 Day0 Cerebellum     9
+GSM2545338 NonInfected C57BL/6 Day0 Cerebellum    10
+GSM2545348 NonInfected C57BL/6 Day0 Cerebellum     8
+GSM2545353 NonInfected C57BL/6 Day0 Cerebellum     4
+GSM2545358 NonInfected C57BL/6 Day0 Spinalcord     4
+GSM2545364 NonInfected C57BL/6 Day0 Spinalcord     8
+GSM2545365 NonInfected C57BL/6 Day0 Spinalcord     9
+GSM2545366 NonInfected C57BL/6 Day0 Spinalcord    10</code></pre>
+</div>
+<div class="codewrapper sourceCode" id="cb45">
+<h3 class="code-label">R<i aria-hidden="true" data-feather="chevron-left"></i><i aria-hidden="true" data-feather="chevron-right"></i>
+</h3>
+<pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="va">vd</span> <span class="op">&lt;-</span> <span class="fu">VisualizeDesign</span><span class="op">(</span>sampleData <span class="op">=</span> <span class="va">meta_fem_day0</span>,</span>
+<span>                      designFormula <span class="op">=</span> <span class="op">~</span> <span class="va">mouse</span> <span class="op">+</span> <span class="va">tissue</span><span class="op">)</span></span>
+<span><span class="va">vd</span><span class="op">$</span><span class="va">designmatrix</span></span></code></pre>
+</div>
+<div class="codewrapper">
+<h3 class="code-label">OUTPUT<i aria-hidden="true" data-feather="chevron-left"></i><i aria-hidden="true" data-feather="chevron-right"></i>
+</h3>
+<pre class="output" tabindex="0"><code>           (Intercept) mouse8 mouse9 mouse10 tissueSpinalcord
+GSM2545337           1      0      1       0                0
+GSM2545338           1      0      0       1                0
+GSM2545348           1      1      0       0                0
+GSM2545353           1      0      0       0                0
+GSM2545358           1      0      0       0                1
+GSM2545364           1      1      0       0                1
+GSM2545365           1      0      1       0                1
+GSM2545366           1      0      0       1                1</code></pre>
+</div>
+<div class="codewrapper sourceCode" id="cb47">
+<h3 class="code-label">R<i aria-hidden="true" data-feather="chevron-left"></i><i aria-hidden="true" data-feather="chevron-right"></i>
+</h3>
+<pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="va">vd</span><span class="op">$</span><span class="va">plotlist</span></span></code></pre>
+</div>
+<div class="codewrapper">
+<h3 class="code-label">OUTPUT<i aria-hidden="true" data-feather="chevron-left"></i><i aria-hidden="true" data-feather="chevron-right"></i>
+</h3>
+<pre class="output" tabindex="0"><code>[[1]]</code></pre>
+</div>
+<figure><img src="../fig/06-extra-design-rendered-unnamed-chunk-12-1.png" style="display: block; margin: auto;" class="figure mx-auto d-block"></figure></section><section id="within--and-between-subject-comparisons"><h2 class="section-heading">Within- and between-subject comparisons<a class="anchor" aria-label="anchor" href="#within--and-between-subject-comparisons"></a>
+</h2>
+<hr class="half-width">
+<p>In some situations, we need to combine the types of models considered
+above. For example, let’s say that we want to investigate if the tissue
+differences are different for infected and non-infected female mice. In
+this case, each mice only contributes to one of the infection groups
+(each mice is either infected or non-infected), but contributes both a
+cerebellum and a spinal cord sample. One way to view this type of design
+is as two paired experiments, one for each infection group (see the <a href="https://www.bioconductor.org/packages/release/bioc/vignettes/edgeR/inst/doc/edgeRUsersGuide.pdf" class="external-link">edgeR
+user guide section 3.5</a>). We can then easily compare the two tissues
+in each infection group, and contrast the tissue differences between the
+infection groups.</p>
+<div class="codewrapper sourceCode" id="cb49">
+<h3 class="code-label">R<i aria-hidden="true" data-feather="chevron-left"></i><i aria-hidden="true" data-feather="chevron-right"></i>
+</h3>
+<pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="va">meta_fem_day04</span> <span class="op">&lt;-</span> <span class="va">meta</span> <span class="op">%&gt;%</span> </span>
+<span>    <span class="fu">filter</span><span class="op">(</span><span class="va">sex</span> <span class="op">==</span> <span class="st">"Female"</span> <span class="op">&amp;</span> </span>
+<span>               <span class="va">time</span> <span class="op">%in%</span> <span class="fu">c</span><span class="op">(</span><span class="st">"Day0"</span>, <span class="st">"Day4"</span><span class="op">)</span><span class="op">)</span> <span class="op">%&gt;%</span></span>
+<span>    <span class="fu">droplevels</span><span class="op">(</span><span class="op">)</span></span>
+<span><span class="co"># ensure that mouse is treated as a categorical variable</span></span>
+<span><span class="va">meta_fem_day04</span><span class="op">$</span><span class="va">mouse</span> <span class="op">&lt;-</span> <span class="fu">factor</span><span class="op">(</span><span class="va">meta_fem_day04</span><span class="op">$</span><span class="va">mouse</span><span class="op">)</span></span>
+<span></span>
+<span><span class="va">meta_fem_day04</span></span></code></pre>
+</div>
+<div class="codewrapper">
+<h3 class="code-label">OUTPUT<i aria-hidden="true" data-feather="chevron-left"></i><i aria-hidden="true" data-feather="chevron-right"></i>
+</h3>
+<pre class="output" tabindex="0"><code>                     title geo_accession     organism     age    sex
+GSM2545337 CNS_RNA-seq_11C    GSM2545337 Mus musculus 8 weeks Female
+GSM2545338 CNS_RNA-seq_12C    GSM2545338 Mus musculus 8 weeks Female
+GSM2545339 CNS_RNA-seq_13C    GSM2545339 Mus musculus 8 weeks Female
+GSM2545344 CNS_RNA-seq_21C    GSM2545344 Mus musculus 8 weeks Female
+GSM2545348 CNS_RNA-seq_27C    GSM2545348 Mus musculus 8 weeks Female
+GSM2545352 CNS_RNA-seq_30C    GSM2545352 Mus musculus 8 weeks Female
+GSM2545353  CNS_RNA-seq_3C    GSM2545353 Mus musculus 8 weeks Female
+GSM2545358 CNS_RNA-seq_583    GSM2545358 Mus musculus 8 weeks Female
+GSM2545362  CNS_RNA-seq_5C    GSM2545362 Mus musculus 8 weeks Female
+GSM2545364 CNS_RNA-seq_709    GSM2545364 Mus musculus 8 weeks Female
+GSM2545365 CNS_RNA-seq_710    GSM2545365 Mus musculus 8 weeks Female
+GSM2545366 CNS_RNA-seq_711    GSM2545366 Mus musculus 8 weeks Female
+GSM2545371 CNS_RNA-seq_731    GSM2545371 Mus musculus 8 weeks Female
+GSM2545375 CNS_RNA-seq_738    GSM2545375 Mus musculus 8 weeks Female
+GSM2545376 CNS_RNA-seq_740    GSM2545376 Mus musculus 8 weeks Female
+GSM2545377 CNS_RNA-seq_741    GSM2545377 Mus musculus 8 weeks Female
+             infection  strain time     tissue mouse
+GSM2545337 NonInfected C57BL/6 Day0 Cerebellum     9
+GSM2545338 NonInfected C57BL/6 Day0 Cerebellum    10
+GSM2545339  InfluenzaA C57BL/6 Day4 Cerebellum    15
+GSM2545344  InfluenzaA C57BL/6 Day4 Cerebellum    22
+GSM2545348 NonInfected C57BL/6 Day0 Cerebellum     8
+GSM2545352  InfluenzaA C57BL/6 Day4 Cerebellum    21
+GSM2545353 NonInfected C57BL/6 Day0 Cerebellum     4
+GSM2545358 NonInfected C57BL/6 Day0 Spinalcord     4
+GSM2545362  InfluenzaA C57BL/6 Day4 Cerebellum    20
+GSM2545364 NonInfected C57BL/6 Day0 Spinalcord     8
+GSM2545365 NonInfected C57BL/6 Day0 Spinalcord     9
+GSM2545366 NonInfected C57BL/6 Day0 Spinalcord    10
+GSM2545371  InfluenzaA C57BL/6 Day4 Spinalcord    15
+GSM2545375  InfluenzaA C57BL/6 Day4 Spinalcord    20
+GSM2545376  InfluenzaA C57BL/6 Day4 Spinalcord    21
+GSM2545377  InfluenzaA C57BL/6 Day4 Spinalcord    22</code></pre>
+</div>
+<div class="codewrapper sourceCode" id="cb51">
+<h3 class="code-label">R<i aria-hidden="true" data-feather="chevron-left"></i><i aria-hidden="true" data-feather="chevron-right"></i>
+</h3>
+<pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="va">design</span> <span class="op">&lt;-</span> <span class="fu">model.matrix</span><span class="op">(</span><span class="op">~</span> <span class="va">mouse</span>, data <span class="op">=</span> <span class="va">meta_fem_day04</span><span class="op">)</span></span>
+<span><span class="va">design</span> <span class="op">&lt;-</span> <span class="fu">cbind</span><span class="op">(</span><span class="va">design</span>, </span>
+<span>                Spc.Day0 <span class="op">=</span> <span class="va">meta_fem_day04</span><span class="op">$</span><span class="va">tissue</span> <span class="op">==</span> <span class="st">"Spinalcord"</span> <span class="op">&amp;</span> </span>
+<span>                    <span class="va">meta_fem_day04</span><span class="op">$</span><span class="va">time</span> <span class="op">==</span> <span class="st">"Day0"</span>,</span>
+<span>                Spc.Day4 <span class="op">=</span> <span class="va">meta_fem_day04</span><span class="op">$</span><span class="va">tissue</span> <span class="op">==</span> <span class="st">"Spinalcord"</span> <span class="op">&amp;</span> </span>
+<span>                    <span class="va">meta_fem_day04</span><span class="op">$</span><span class="va">time</span> <span class="op">==</span> <span class="st">"Day4"</span><span class="op">)</span></span>
+<span><span class="fu">rownames</span><span class="op">(</span><span class="va">design</span><span class="op">)</span> <span class="op">&lt;-</span> <span class="fu">rownames</span><span class="op">(</span><span class="va">meta_fem_day04</span><span class="op">)</span></span>
+<span><span class="va">design</span></span></code></pre>
+</div>
+<div class="codewrapper">
+<h3 class="code-label">OUTPUT<i aria-hidden="true" data-feather="chevron-left"></i><i aria-hidden="true" data-feather="chevron-right"></i>
+</h3>
+<pre class="output" tabindex="0"><code>           (Intercept) mouse8 mouse9 mouse10 mouse15 mouse20 mouse21 mouse22
+GSM2545337           1      0      1       0       0       0       0       0
+GSM2545338           1      0      0       1       0       0       0       0
+GSM2545339           1      0      0       0       1       0       0       0
+GSM2545344           1      0      0       0       0       0       0       1
+GSM2545348           1      1      0       0       0       0       0       0
+GSM2545352           1      0      0       0       0       0       1       0
+GSM2545353           1      0      0       0       0       0       0       0
+GSM2545358           1      0      0       0       0       0       0       0
+GSM2545362           1      0      0       0       0       1       0       0
+GSM2545364           1      1      0       0       0       0       0       0
+GSM2545365           1      0      1       0       0       0       0       0
+GSM2545366           1      0      0       1       0       0       0       0
+GSM2545371           1      0      0       0       1       0       0       0
+GSM2545375           1      0      0       0       0       1       0       0
+GSM2545376           1      0      0       0       0       0       1       0
+GSM2545377           1      0      0       0       0       0       0       1
+           Spc.Day0 Spc.Day4
+GSM2545337        0        0
+GSM2545338        0        0
+GSM2545339        0        0
+GSM2545344        0        0
+GSM2545348        0        0
+GSM2545352        0        0
+GSM2545353        0        0
+GSM2545358        1        0
+GSM2545362        0        0
+GSM2545364        1        0
+GSM2545365        1        0
+GSM2545366        1        0
+GSM2545371        0        1
+GSM2545375        0        1
+GSM2545376        0        1
+GSM2545377        0        1</code></pre>
+</div>
+<div class="codewrapper sourceCode" id="cb53">
+<h3 class="code-label">R<i aria-hidden="true" data-feather="chevron-left"></i><i aria-hidden="true" data-feather="chevron-right"></i>
+</h3>
+<pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="va">vd</span> <span class="op">&lt;-</span> <span class="fu">VisualizeDesign</span><span class="op">(</span>sampleData <span class="op">=</span> <span class="va">meta_fem_day04</span> <span class="op">%&gt;%</span></span>
+<span>                          <span class="fu">select</span><span class="op">(</span><span class="va">time</span>, <span class="va">tissue</span>, <span class="va">mouse</span><span class="op">)</span>,</span>
+<span>                      designFormula <span class="op">=</span> <span class="cn">NULL</span>, </span>
+<span>                      designMatrix <span class="op">=</span> <span class="va">design</span>, flipCoordFitted <span class="op">=</span> <span class="cn">FALSE</span><span class="op">)</span></span>
+<span><span class="va">vd</span><span class="op">$</span><span class="va">designmatrix</span></span></code></pre>
+</div>
+<div class="codewrapper">
+<h3 class="code-label">OUTPUT<i aria-hidden="true" data-feather="chevron-left"></i><i aria-hidden="true" data-feather="chevron-right"></i>
+</h3>
+<pre class="output" tabindex="0"><code>           (Intercept) mouse8 mouse9 mouse10 mouse15 mouse20 mouse21 mouse22
+GSM2545337           1      0      1       0       0       0       0       0
+GSM2545338           1      0      0       1       0       0       0       0
+GSM2545339           1      0      0       0       1       0       0       0
+GSM2545344           1      0      0       0       0       0       0       1
+GSM2545348           1      1      0       0       0       0       0       0
+GSM2545352           1      0      0       0       0       0       1       0
+GSM2545353           1      0      0       0       0       0       0       0
+GSM2545358           1      0      0       0       0       0       0       0
+GSM2545362           1      0      0       0       0       1       0       0
+GSM2545364           1      1      0       0       0       0       0       0
+GSM2545365           1      0      1       0       0       0       0       0
+GSM2545366           1      0      0       1       0       0       0       0
+GSM2545371           1      0      0       0       1       0       0       0
+GSM2545375           1      0      0       0       0       1       0       0
+GSM2545376           1      0      0       0       0       0       1       0
+GSM2545377           1      0      0       0       0       0       0       1
+           Spc.Day0 Spc.Day4
+GSM2545337        0        0
+GSM2545338        0        0
+GSM2545339        0        0
+GSM2545344        0        0
+GSM2545348        0        0
+GSM2545352        0        0
+GSM2545353        0        0
+GSM2545358        1        0
+GSM2545362        0        0
+GSM2545364        1        0
+GSM2545365        1        0
+GSM2545366        1        0
+GSM2545371        0        1
+GSM2545375        0        1
+GSM2545376        0        1
+GSM2545377        0        1</code></pre>
+</div>
+<div class="codewrapper sourceCode" id="cb55">
+<h3 class="code-label">R<i aria-hidden="true" data-feather="chevron-left"></i><i aria-hidden="true" data-feather="chevron-right"></i>
+</h3>
+<pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="va">vd</span><span class="op">$</span><span class="va">plotlist</span></span></code></pre>
+</div>
+<div class="codewrapper">
+<h3 class="code-label">OUTPUT<i aria-hidden="true" data-feather="chevron-left"></i><i aria-hidden="true" data-feather="chevron-right"></i>
+</h3>
+<pre class="output" tabindex="0"><code>$`time = Day0`</code></pre>
+</div>
+<figure><img src="../fig/06-extra-design-rendered-unnamed-chunk-13-1.png" style="display: block; margin: auto;" class="figure mx-auto d-block"></figure><div class="codewrapper">
+<h3 class="code-label">OUTPUT<i aria-hidden="true" data-feather="chevron-left"></i><i aria-hidden="true" data-feather="chevron-right"></i>
+</h3>
+<pre class="output" tabindex="0"><code>
+$`time = Day4`</code></pre>
+</div>
+<figure><img src="../fig/06-extra-design-rendered-unnamed-chunk-13-2.png" style="display: block; margin: auto;" class="figure mx-auto d-block"></figure><div id="keypoints1" class="callout keypoints">
+<div class="callout-square">
+<i class="callout-icon" data-feather="key"></i>
+</div>
+<div class="callout-inner">
+<h3 class="callout-title">Keypoints<a class="anchor" aria-label="anchor" href="#keypoints1"></a>
+</h3>
+<div class="callout-content">
+<ul>
+<li>The formula framework in R allows creation of design matrices, which
+details the variables expected to be associated with systematic
+differences in gene expression levels.</li>
+<li>Comparisons of interest can be defined using contrasts, which are
+linear combinations of the model coefficients.</li>
+</ul>
+</div>
+</div>
+</div>
+</section></section><section id="aio-07-gene-set-analysis"><p>Content from <a href="07-gene-set-analysis.html">Gene set enrichment analysis</a></p>
+<hr>
+<p> Last updated on 2023-09-02 | 
+        
+        <a href="https://github.com/carpentries-incubator/bioc-rnaseq/edit/main/episodes/07-gene-set-analysis.Rmd" class="external-link">Edit this page <i aria-hidden="true" data-feather="edit"></i></a></p>
 <p>Estimated time <i aria-hidden="true" data-feather="clock"></i> 105 minutes </p>
 <div class="text-end">
           <button role="button" aria-pressed="false" tabindex="0" id="expand-code" class="pull-right"> Expand All Solutions <i aria-hidden="true" data-feather="plus"></i></button>
@@ -3497,7 +4523,7 @@ diagram.</p>
 <span>               <span class="st">"XY gene set"</span> <span class="op">=</span> <span class="va">XYGeneSet</span><span class="op">)</span><span class="op">)</span><span class="op">)</span></span>
 <span><span class="fu">title</span><span class="op">(</span><span class="fu">paste0</span><span class="op">(</span><span class="st">"|universe| = "</span>, <span class="fu">length</span><span class="op">(</span><span class="va">totalGenes</span><span class="op">)</span><span class="op">)</span><span class="op">)</span></span></code></pre>
 </div>
-<figure><img src="../fig/06-gene-set-analysis-rendered-unnamed-chunk-8-1.png" style="display: block; margin: auto;" class="figure mx-auto d-block"></figure><p>In the Venn diagram, we can observe that around 1.1% (13/1134) of
+<figure><img src="../fig/07-gene-set-analysis-rendered-unnamed-chunk-8-1.png" style="display: block; margin: auto;" class="figure mx-auto d-block"></figure><p>In the Venn diagram, we can observe that around 1.1% (13/1134) of
 genes in the <em>XY gene set</em> are DE. Compared to the global
 fraction of DE genes (54/21198 = 0.25%), it seems there is a strong
 relations between DE genes and the gene set. We can also compare the
@@ -3751,7 +4777,7 @@ grab <span class="math inline">\(n_{+1}\)</span> genes (the size of the
 gene set) from the box and we want to ask <strong>what is the
 probability of having <span class="math inline">\(n_{11}\)</span> DE
 genes in our hand?</strong></p>
-<figure><img src="../fig/06-gene-set-analysis-rendered-unnamed-chunk-15-1.png" width="80%" style="display: block; margin: auto;" class="figure mx-auto d-block"></figure><p>We first calculate the total number of ways of picking <span class="math inline">\(n_{+1}\)</span> genes from total <span class="math inline">\(n\)</span> genes, without distinguishing whether
+<figure><img src="../fig/07-gene-set-analysis-rendered-unnamed-chunk-15-1.png" width="80%" style="display: block; margin: auto;" class="figure mx-auto d-block"></figure><p>We first calculate the total number of ways of picking <span class="math inline">\(n_{+1}\)</span> genes from total <span class="math inline">\(n\)</span> genes, without distinguishing whether
 they are DE or not: <span class="math inline">\(\binom{n}{n_{+1}}\)</span>.</p>
 <p>Next, in the <span class="math inline">\(n_{+1}\)</span> genes that
 have been picked, there are <span class="math inline">\(n_{11}\)</span>
@@ -3879,9 +4905,9 @@ distribution of its statistic.</p>
 <h3 class="code-label">OUTPUT<i aria-hidden="true" data-feather="chevron-left"></i><i aria-hidden="true" data-feather="chevron-right"></i>
 </h3>
 <pre class="output" tabindex="0"><code>Unit: microseconds
-   expr   min     lq    mean median     uq   max neval
- fisher 319.6 325.10 353.715 331.95 379.20 594.2   100
-  hyper   1.7   2.25   3.485   3.50   4.35  21.9   100</code></pre>
+   expr   min     lq    mean median    uq   max neval
+ fisher 281.3 286.50 298.429  291.2 303.3 530.4   100
+  hyper   1.6   1.85   2.576    2.3   2.6  18.5   100</code></pre>
 </div>
 <p>It is very astonishing that <code>phyper()</code> is hundreds of
 times faster than <code>fisher.test()</code>. Main reason is in
@@ -4043,7 +5069,7 @@ convert a list to a two-column data frame?</p>
   Show me the solution
   </h4>
 </button>
-<div id="collapseSolution1" class="accordion-collapse collapse" data-bs-parent="#accordionSolution1" aria-labelledby="headingSolution1">
+<div id="collapseSolution1" class="accordion-collapse collapse" aria-labelledby="headingSolution1" data-bs-parent="#accordionSolution1">
 <div class="accordion-body">
 <div class="codewrapper sourceCode" id="cb38">
 <h3 class="code-label">R<i aria-hidden="true" data-feather="chevron-left"></i><i aria-hidden="true" data-feather="chevron-right"></i>
@@ -4701,7 +5727,7 @@ sets are automatically retrieved and processed from
 <div class="codewrapper">
 <h3 class="code-label">OUTPUT<i aria-hidden="true" data-feather="chevron-left"></i><i aria-hidden="true" data-feather="chevron-right"></i>
 </h3>
-<pre class="output" tabindex="0"><code>--&gt; Expected input gene ID: 12050,78656,93757,723965,13411,11498</code></pre>
+<pre class="output" tabindex="0"><code>--&gt; Expected input gene ID: 19725,67042,103733,56484,23967,380709</code></pre>
 </div>
 <div class="codewrapper">
 <h3 class="code-label">OUTPUT<i aria-hidden="true" data-feather="chevron-left"></i><i aria-hidden="true" data-feather="chevron-right"></i>
@@ -5295,7 +6321,7 @@ universe settings.</p>
 <span><span class="fu">legend</span><span class="op">(</span><span class="st">"topleft"</span>, legend <span class="op">=</span> <span class="fu">c</span><span class="op">(</span><span class="st">"all protein-coding genes as universe"</span>, <span class="st">"all genes as universe"</span><span class="op">)</span>, </span>
 <span>    pch <span class="op">=</span> <span class="fl">16</span>, col <span class="op">=</span> <span class="fu">c</span><span class="op">(</span><span class="fl">2</span>, <span class="fl">4</span><span class="op">)</span><span class="op">)</span></span></code></pre>
 </div>
-<figure><img src="../fig/06-gene-set-analysis-rendered-unnamed-chunk-48-1.png" style="display: block; margin: auto;" class="figure mx-auto d-block"></figure><p>It is very straightforward to see, with a larger universe, there are
+<figure><img src="../fig/07-gene-set-analysis-rendered-unnamed-chunk-48-1.png" style="display: block; margin: auto;" class="figure mx-auto d-block"></figure><p>It is very straightforward to see, with a larger universe, there are
 more significant gene sets, which may produce potentially more false
 positives. This is definitely worse when using all genes in the genome
 as universe.</p>
@@ -5378,13 +6404,13 @@ directly applied on <code>resTimeGO</code> returned by
 <pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="fu">barplot</span><span class="op">(</span><span class="va">resTimeGO</span>, showCategory <span class="op">=</span> <span class="fl">20</span><span class="op">)</span></span></code></pre>
 </div>
-<figure><img src="../fig/06-gene-set-analysis-rendered-unnamed-chunk-50-1.png" style="display: block; margin: auto;" class="figure mx-auto d-block"></figure><div class="codewrapper sourceCode" id="cb99">
+<figure><img src="../fig/07-gene-set-analysis-rendered-unnamed-chunk-50-1.png" style="display: block; margin: auto;" class="figure mx-auto d-block"></figure><div class="codewrapper sourceCode" id="cb99">
 <h3 class="code-label">R<i aria-hidden="true" data-feather="chevron-left"></i><i aria-hidden="true" data-feather="chevron-right"></i>
 </h3>
 <pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="fu">dotplot</span><span class="op">(</span><span class="va">resTimeGO</span>, showCategory <span class="op">=</span> <span class="fl">20</span><span class="op">)</span></span></code></pre>
 </div>
-<figure><img src="../fig/06-gene-set-analysis-rendered-unnamed-chunk-50-2.png" style="display: block; margin: auto;" class="figure mx-auto d-block"></figure><p>Barplots can map two variables to the plot, one to the height of bars
+<figure><img src="../fig/07-gene-set-analysis-rendered-unnamed-chunk-50-2.png" style="display: block; margin: auto;" class="figure mx-auto d-block"></figure><p>Barplots can map two variables to the plot, one to the height of bars
 and the other to the colors of bars; while for dotplot, sizes of dots
 can be mapped to a third variable. The variable names are in the colum
 names of the result table. Both plots include the top 20 most
@@ -5495,7 +6521,7 @@ significant gene sets.</p>
 <span>        label <span class="op">=</span> <span class="fu">sprintf</span><span class="op">(</span><span class="st">"%.2e"</span>, <span class="va">p.adjust</span><span class="op">)</span><span class="op">)</span>, hjust <span class="op">=</span> <span class="fl">1</span>, col <span class="op">=</span> <span class="st">"white"</span><span class="op">)</span> <span class="op">+</span></span>
 <span>    <span class="fu">ylab</span><span class="op">(</span><span class="st">""</span><span class="op">)</span></span></code></pre>
 </div>
-<figure><img src="../fig/06-gene-set-analysis-rendered-unnamed-chunk-55-1.png" style="display: block; margin: auto;" class="figure mx-auto d-block"></figure><p>In the next example, we use <em>z</em>-score as the primary variable
+<figure><img src="../fig/07-gene-set-analysis-rendered-unnamed-chunk-55-1.png" style="display: block; margin: auto;" class="figure mx-auto d-block"></figure><p>In the next example, we use <em>z</em>-score as the primary variable
 to map to the offset to origin, <code>DE_Ratio</code> and
 <code>Count</code> to map to dot colors and sizes.</p>
 <div class="codewrapper sourceCode" id="cb105">
@@ -5508,7 +6534,7 @@ to map to the offset to origin, <code>DE_Ratio</code> and
 <span>    <span class="fu">geom_point</span><span class="op">(</span><span class="op">)</span> <span class="op">+</span></span>
 <span>    <span class="fu">ylab</span><span class="op">(</span><span class="st">""</span><span class="op">)</span></span></code></pre>
 </div>
-<figure><img src="../fig/06-gene-set-analysis-rendered-unnamed-chunk-56-1.png" style="display: block; margin: auto;" class="figure mx-auto d-block"></figure><p>Both plots can highlight the gene set “leukocyte migration involved
+<figure><img src="../fig/07-gene-set-analysis-rendered-unnamed-chunk-56-1.png" style="display: block; margin: auto;" class="figure mx-auto d-block"></figure><p>Both plots can highlight the gene set “leukocyte migration involved
 in inflammatory response” is relatively small but highly enriched.</p>
 <p>Another useful visualization is the volcano plot. You may be aware of
 in differential expression analysis, in the volcano plot, x-axis
@@ -5531,7 +6557,7 @@ biologically sensible.</p>
 <span>    <span class="fu">geom_hline</span><span class="op">(</span>yintercept <span class="op">=</span> <span class="op">-</span><span class="fu">log10</span><span class="op">(</span><span class="fl">0.01</span><span class="op">)</span>, lty <span class="op">=</span> <span class="fl">2</span>, col <span class="op">=</span> <span class="st">"#444444"</span><span class="op">)</span> <span class="op">+</span></span>
 <span>    <span class="fu">geom_vline</span><span class="op">(</span>xintercept <span class="op">=</span> <span class="fl">1.5</span>, lty <span class="op">=</span> <span class="fl">2</span>, col <span class="op">=</span> <span class="st">"#444444"</span><span class="op">)</span></span></code></pre>
 </div>
-<figure><img src="../fig/06-gene-set-analysis-rendered-unnamed-chunk-57-1.png" style="display: block; margin: auto;" class="figure mx-auto d-block"></figure><p>In the “volcano plot”, we can observe the plot is composed by a list
+<figure><img src="../fig/07-gene-set-analysis-rendered-unnamed-chunk-57-1.png" style="display: block; margin: auto;" class="figure mx-auto d-block"></figure><p>In the “volcano plot”, we can observe the plot is composed by a list
 of curves. The trends are especially clear in the right bottom of the
 plot. Actually each “curve” corresponds to a same <code>"Count"</code>
 value (number of DE genes in a gene set). The volcano plot shows very
@@ -5606,7 +6632,7 @@ be easy to read.</p>
 <span>        label <span class="op">=</span> <span class="fu">sprintf</span><span class="op">(</span><span class="st">"%.2e"</span>, <span class="va">p.adjust</span><span class="op">)</span><span class="op">)</span>, hjust <span class="op">=</span> <span class="fl">1</span>, col <span class="op">=</span> <span class="st">"white"</span><span class="op">)</span> <span class="op">+</span></span>
 <span>    <span class="fu">ylab</span><span class="op">(</span><span class="st">""</span><span class="op">)</span></span></code></pre>
 </div>
-<figure><img src="../fig/06-gene-set-analysis-rendered-unnamed-chunk-59-1.png" style="display: block; margin: auto;" class="figure mx-auto d-block"></figure><p>Specifically for GO enrichment, it is often that GO enrichment
+<figure><img src="../fig/07-gene-set-analysis-rendered-unnamed-chunk-59-1.png" style="display: block; margin: auto;" class="figure mx-auto d-block"></figure><p>Specifically for GO enrichment, it is often that GO enrichment
 returns a long list of significant GO terms (e.g. several hundreds).
 This makes it difficult to summarize the common functions from the long
 list. The last package we will introduce is the
@@ -5703,11 +6729,11 @@ an S4 object is highly unrecommended.<a href="#fnref4" class="footnote-back">↩
 <li id="fn7"><p>The semantic similarity between GO terms considers the
 topological relations in the GO hierarchy.<a href="#fnref7" class="footnote-back">↩︎</a></p></li>
 </ol>
-</div></section><section id="aio-07-next-steps"><p>Content from <a href="07-next-steps.html">Next steps</a></p>
+</div></section><section id="aio-08-next-steps"><p>Content from <a href="08-next-steps.html">Next steps</a></p>
 <hr>
 <p> Last updated on 2023-09-02 | 
         
-        <a href="https://github.com/carpentries-incubator/bioc-rnaseq/edit/main/episodes/07-next-steps.Rmd" class="external-link">Edit this page <i aria-hidden="true" data-feather="edit"></i></a></p>
+        <a href="https://github.com/carpentries-incubator/bioc-rnaseq/edit/main/episodes/08-next-steps.Rmd" class="external-link">Edit this page <i aria-hidden="true" data-feather="edit"></i></a></p>
 <p>Estimated time <i aria-hidden="true" data-feather="clock"></i> 20 minutes </p>
 <div class="text-end">
           <button role="button" aria-pressed="false" tabindex="0" id="expand-code" class="pull-right"> Expand All Solutions <i aria-hidden="true" data-feather="plus"></i></button>
@@ -5800,1002 +6826,6 @@ different purposes. It is important, however, to carefully plan one’s
 analyses, to make sure that enough data is available and that abundances
 for appropriate features (e.g., genes, transcripts, or exons) are
 quantified.</li>
-</ul>
-</div>
-</div>
-</div>
-</section></section><section id="aio-08-extra-design"><p>Content from <a href="08-extra-design.html">Extra exploration of design matrices</a></p>
-<hr>
-<p> Last updated on 2023-09-02 | 
-        
-        <a href="https://github.com/carpentries-incubator/bioc-rnaseq/edit/main/episodes/08-extra-design.Rmd" class="external-link">Edit this page <i aria-hidden="true" data-feather="edit"></i></a></p>
-<p>Estimated time <i aria-hidden="true" data-feather="clock"></i> 60 minutes </p>
-<div class="text-end">
-          <button role="button" aria-pressed="false" tabindex="0" id="expand-code" class="pull-right"> Expand All Solutions <i aria-hidden="true" data-feather="plus"></i></button>
-        </div>
-<div class="overview card">
-<h2 class="card-header">Overview</h2>
-<div class="row g-0">
-<div class="col-md-4">
-<div class="card-body">
-<div class="inner">
-<h3 class="card-title">Questions</h3>
-<ul>
-<li>How can one translate biological questions and comparisons to
-statistical terms suitable for use with RNA-seq analysis packages?</li>
-</ul>
-</div>
-</div>
-</div>
-<div class="col-md-8">
-<div class="card-body">
-<div class="inner bordered">
-<h3 class="card-title">Objectives</h3>
-<ul>
-<li>Explain the formula notation and design matrices.</li>
-<li>Explore different designs and learn how to interpret
-coefficients.</li>
-</ul>
-</div>
-</div>
-</div>
-</div>
-</div>
-<section id="loading-required-packages-and-reading-data"><h2 class="section-heading">Loading required packages and reading data<a class="anchor" aria-label="anchor" href="#loading-required-packages-and-reading-data"></a>
-</h2>
-<hr class="half-width">
-<p>We start by loading a few packages that will be needed in this
-episode. In particular, the <a href="https://bioconductor.org/packages/ExploreModelMatrix/" class="external-link">ExploreModelMatrix</a>
-package provides resources for exploring design matrices in a graphical
-fashion, for easier interpretation.</p>
-<div class="codewrapper sourceCode" id="cb1">
-<h3 class="code-label">R<i aria-hidden="true" data-feather="chevron-left"></i><i aria-hidden="true" data-feather="chevron-right"></i>
-</h3>
-<pre class="downlit sourceCode r">
-<code class="sourceCode R"><span><span class="fu">suppressPackageStartupMessages</span><span class="op">(</span><span class="op">{</span></span>
-<span>    <span class="kw">library</span><span class="op">(</span><span class="va">SummarizedExperiment</span><span class="op">)</span></span>
-<span>    <span class="kw">library</span><span class="op">(</span><span class="va">ExploreModelMatrix</span><span class="op">)</span></span>
-<span>    <span class="kw">library</span><span class="op">(</span><span class="va">dplyr</span><span class="op">)</span></span>
-<span><span class="op">}</span><span class="op">)</span></span></code></pre>
-</div>
-<p>Next, we read the metadata table for our data set. Because we want to
-explore many different design matrices, we will read in the 4th file we
-downloaded but haven’t used yet: that for both Cerebellum and Spinal
-Cord samples (45 samples total). As seen in previous episodes, the
-metadata contains information about the age, sex, infection status, time
-of measurement and tissue of the collected samples. Note that Day0
-always corresponds to non-infected samples, and that infected samples
-are collected on days 4 and 8. Moreover, all mice have the same age (8
-weeks). Hence, in the first part of this episode we consider only the
-sex, tissue and time variables further.</p>
-<div class="codewrapper sourceCode" id="cb2">
-<h3 class="code-label">R<i aria-hidden="true" data-feather="chevron-left"></i><i aria-hidden="true" data-feather="chevron-right"></i>
-</h3>
-<pre class="downlit sourceCode r">
-<code class="sourceCode R"><span><span class="va">meta</span> <span class="op">&lt;-</span> <span class="fu">read.csv</span><span class="op">(</span><span class="st">"data/GSE96870_coldata_all.csv"</span>, row.names <span class="op">=</span> <span class="fl">1</span><span class="op">)</span></span>
-<span><span class="va">meta</span></span></code></pre>
-</div>
-<div class="codewrapper">
-<h3 class="code-label">OUTPUT<i aria-hidden="true" data-feather="chevron-left"></i><i aria-hidden="true" data-feather="chevron-right"></i>
-</h3>
-<pre class="output" tabindex="0"><code>                     title geo_accession     organism     age    sex
-GSM2545336 CNS_RNA-seq_10C    GSM2545336 Mus musculus 8 weeks Female
-GSM2545337 CNS_RNA-seq_11C    GSM2545337 Mus musculus 8 weeks Female
-GSM2545338 CNS_RNA-seq_12C    GSM2545338 Mus musculus 8 weeks Female
-GSM2545339 CNS_RNA-seq_13C    GSM2545339 Mus musculus 8 weeks Female
-GSM2545340 CNS_RNA-seq_14C    GSM2545340 Mus musculus 8 weeks   Male
-GSM2545341 CNS_RNA-seq_17C    GSM2545341 Mus musculus 8 weeks   Male
-GSM2545342  CNS_RNA-seq_1C    GSM2545342 Mus musculus 8 weeks Female
-GSM2545343 CNS_RNA-seq_20C    GSM2545343 Mus musculus 8 weeks   Male
-GSM2545344 CNS_RNA-seq_21C    GSM2545344 Mus musculus 8 weeks Female
-GSM2545345 CNS_RNA-seq_22C    GSM2545345 Mus musculus 8 weeks   Male
-GSM2545346 CNS_RNA-seq_25C    GSM2545346 Mus musculus 8 weeks   Male
-GSM2545347 CNS_RNA-seq_26C    GSM2545347 Mus musculus 8 weeks   Male
-GSM2545348 CNS_RNA-seq_27C    GSM2545348 Mus musculus 8 weeks Female
-GSM2545349 CNS_RNA-seq_28C    GSM2545349 Mus musculus 8 weeks   Male
-GSM2545350 CNS_RNA-seq_29C    GSM2545350 Mus musculus 8 weeks   Male
-GSM2545351  CNS_RNA-seq_2C    GSM2545351 Mus musculus 8 weeks Female
-GSM2545352 CNS_RNA-seq_30C    GSM2545352 Mus musculus 8 weeks Female
-GSM2545353  CNS_RNA-seq_3C    GSM2545353 Mus musculus 8 weeks Female
-GSM2545354  CNS_RNA-seq_4C    GSM2545354 Mus musculus 8 weeks   Male
-GSM2545355 CNS_RNA-seq_571    GSM2545355 Mus musculus 8 weeks   Male
-GSM2545356 CNS_RNA-seq_574    GSM2545356 Mus musculus 8 weeks   Male
-GSM2545357 CNS_RNA-seq_575    GSM2545357 Mus musculus 8 weeks   Male
-GSM2545358 CNS_RNA-seq_583    GSM2545358 Mus musculus 8 weeks Female
-GSM2545359 CNS_RNA-seq_585    GSM2545359 Mus musculus 8 weeks Female
-GSM2545360 CNS_RNA-seq_589    GSM2545360 Mus musculus 8 weeks   Male
-GSM2545361 CNS_RNA-seq_590    GSM2545361 Mus musculus 8 weeks   Male
-GSM2545362  CNS_RNA-seq_5C    GSM2545362 Mus musculus 8 weeks Female
-GSM2545363  CNS_RNA-seq_6C    GSM2545363 Mus musculus 8 weeks   Male
-GSM2545364 CNS_RNA-seq_709    GSM2545364 Mus musculus 8 weeks Female
-GSM2545365 CNS_RNA-seq_710    GSM2545365 Mus musculus 8 weeks Female
-GSM2545366 CNS_RNA-seq_711    GSM2545366 Mus musculus 8 weeks Female
-GSM2545367 CNS_RNA-seq_713    GSM2545367 Mus musculus 8 weeks   Male
-GSM2545368 CNS_RNA-seq_728    GSM2545368 Mus musculus 8 weeks   Male
-GSM2545369 CNS_RNA-seq_729    GSM2545369 Mus musculus 8 weeks   Male
-GSM2545370 CNS_RNA-seq_730    GSM2545370 Mus musculus 8 weeks Female
-GSM2545371 CNS_RNA-seq_731    GSM2545371 Mus musculus 8 weeks Female
-GSM2545372 CNS_RNA-seq_733    GSM2545372 Mus musculus 8 weeks   Male
-GSM2545373 CNS_RNA-seq_735    GSM2545373 Mus musculus 8 weeks   Male
-GSM2545374 CNS_RNA-seq_736    GSM2545374 Mus musculus 8 weeks Female
-GSM2545375 CNS_RNA-seq_738    GSM2545375 Mus musculus 8 weeks Female
-GSM2545376 CNS_RNA-seq_740    GSM2545376 Mus musculus 8 weeks Female
-GSM2545377 CNS_RNA-seq_741    GSM2545377 Mus musculus 8 weeks Female
-GSM2545378 CNS_RNA-seq_742    GSM2545378 Mus musculus 8 weeks   Male
-GSM2545379 CNS_RNA-seq_743    GSM2545379 Mus musculus 8 weeks   Male
-GSM2545380  CNS_RNA-seq_9C    GSM2545380 Mus musculus 8 weeks Female
-             infection  strain time     tissue mouse
-GSM2545336  InfluenzaA C57BL/6 Day8 Cerebellum    14
-GSM2545337 NonInfected C57BL/6 Day0 Cerebellum     9
-GSM2545338 NonInfected C57BL/6 Day0 Cerebellum    10
-GSM2545339  InfluenzaA C57BL/6 Day4 Cerebellum    15
-GSM2545340  InfluenzaA C57BL/6 Day4 Cerebellum    18
-GSM2545341  InfluenzaA C57BL/6 Day8 Cerebellum     6
-GSM2545342  InfluenzaA C57BL/6 Day8 Cerebellum     5
-GSM2545343 NonInfected C57BL/6 Day0 Cerebellum    11
-GSM2545344  InfluenzaA C57BL/6 Day4 Cerebellum    22
-GSM2545345  InfluenzaA C57BL/6 Day4 Cerebellum    13
-GSM2545346  InfluenzaA C57BL/6 Day8 Cerebellum    23
-GSM2545347  InfluenzaA C57BL/6 Day8 Cerebellum    24
-GSM2545348 NonInfected C57BL/6 Day0 Cerebellum     8
-GSM2545349 NonInfected C57BL/6 Day0 Cerebellum     7
-GSM2545350  InfluenzaA C57BL/6 Day4 Cerebellum     1
-GSM2545351  InfluenzaA C57BL/6 Day8 Cerebellum    16
-GSM2545352  InfluenzaA C57BL/6 Day4 Cerebellum    21
-GSM2545353 NonInfected C57BL/6 Day0 Cerebellum     4
-GSM2545354 NonInfected C57BL/6 Day0 Cerebellum     2
-GSM2545355  InfluenzaA C57BL/6 Day4 Spinalcord     1
-GSM2545356 NonInfected C57BL/6 Day0 Spinalcord     2
-GSM2545357 NonInfected C57BL/6 Day0 Spinalcord     3
-GSM2545358 NonInfected C57BL/6 Day0 Spinalcord     4
-GSM2545359  InfluenzaA C57BL/6 Day8 Spinalcord     5
-GSM2545360  InfluenzaA C57BL/6 Day8 Spinalcord     6
-GSM2545361 NonInfected C57BL/6 Day0 Spinalcord     7
-GSM2545362  InfluenzaA C57BL/6 Day4 Cerebellum    20
-GSM2545363  InfluenzaA C57BL/6 Day4 Cerebellum    12
-GSM2545364 NonInfected C57BL/6 Day0 Spinalcord     8
-GSM2545365 NonInfected C57BL/6 Day0 Spinalcord     9
-GSM2545366 NonInfected C57BL/6 Day0 Spinalcord    10
-GSM2545367 NonInfected C57BL/6 Day0 Spinalcord    11
-GSM2545368  InfluenzaA C57BL/6 Day4 Spinalcord    12
-GSM2545369  InfluenzaA C57BL/6 Day4 Spinalcord    13
-GSM2545370  InfluenzaA C57BL/6 Day8 Spinalcord    14
-GSM2545371  InfluenzaA C57BL/6 Day4 Spinalcord    15
-GSM2545372  InfluenzaA C57BL/6 Day8 Spinalcord    17
-GSM2545373  InfluenzaA C57BL/6 Day4 Spinalcord    18
-GSM2545374  InfluenzaA C57BL/6 Day8 Spinalcord    19
-GSM2545375  InfluenzaA C57BL/6 Day4 Spinalcord    20
-GSM2545376  InfluenzaA C57BL/6 Day4 Spinalcord    21
-GSM2545377  InfluenzaA C57BL/6 Day4 Spinalcord    22
-GSM2545378  InfluenzaA C57BL/6 Day8 Spinalcord    23
-GSM2545379  InfluenzaA C57BL/6 Day8 Spinalcord    24
-GSM2545380  InfluenzaA C57BL/6 Day8 Cerebellum    19</code></pre>
-</div>
-<div class="codewrapper sourceCode" id="cb4">
-<h3 class="code-label">R<i aria-hidden="true" data-feather="chevron-left"></i><i aria-hidden="true" data-feather="chevron-right"></i>
-</h3>
-<pre class="downlit sourceCode r">
-<code class="sourceCode R"><span><span class="fu">table</span><span class="op">(</span><span class="va">meta</span><span class="op">$</span><span class="va">time</span>, <span class="va">meta</span><span class="op">$</span><span class="va">infection</span><span class="op">)</span></span></code></pre>
-</div>
-<div class="codewrapper">
-<h3 class="code-label">OUTPUT<i aria-hidden="true" data-feather="chevron-left"></i><i aria-hidden="true" data-feather="chevron-right"></i>
-</h3>
-<pre class="output" tabindex="0"><code>      
-       InfluenzaA NonInfected
-  Day0          0          15
-  Day4         16           0
-  Day8         14           0</code></pre>
-</div>
-<div class="codewrapper sourceCode" id="cb6">
-<h3 class="code-label">R<i aria-hidden="true" data-feather="chevron-left"></i><i aria-hidden="true" data-feather="chevron-right"></i>
-</h3>
-<pre class="downlit sourceCode r">
-<code class="sourceCode R"><span><span class="fu">table</span><span class="op">(</span><span class="va">meta</span><span class="op">$</span><span class="va">age</span><span class="op">)</span></span></code></pre>
-</div>
-<div class="codewrapper">
-<h3 class="code-label">OUTPUT<i aria-hidden="true" data-feather="chevron-left"></i><i aria-hidden="true" data-feather="chevron-right"></i>
-</h3>
-<pre class="output" tabindex="0"><code>
-8 weeks 
-     45 </code></pre>
-</div>
-<p>We can start by visualizing the number of observations for each
-combination of the three predictor variables.</p>
-<div class="codewrapper sourceCode" id="cb8">
-<h3 class="code-label">R<i aria-hidden="true" data-feather="chevron-left"></i><i aria-hidden="true" data-feather="chevron-right"></i>
-</h3>
-<pre class="downlit sourceCode r">
-<code class="sourceCode R"><span><span class="va">vd</span> <span class="op">&lt;-</span> <span class="fu">VisualizeDesign</span><span class="op">(</span>sampleData <span class="op">=</span> <span class="va">meta</span>, </span>
-<span>                      designFormula <span class="op">=</span> <span class="op">~</span> <span class="va">tissue</span> <span class="op">+</span> <span class="va">time</span> <span class="op">+</span> <span class="va">sex</span><span class="op">)</span></span>
-<span><span class="va">vd</span><span class="op">$</span><span class="va">cooccurrenceplots</span></span></code></pre>
-</div>
-<div class="codewrapper">
-<h3 class="code-label">OUTPUT<i aria-hidden="true" data-feather="chevron-left"></i><i aria-hidden="true" data-feather="chevron-right"></i>
-</h3>
-<pre class="output" tabindex="0"><code>$`tissue = Cerebellum`</code></pre>
-</div>
-<figure><img src="../fig/08-extra-design-rendered-unnamed-chunk-6-1.png" style="display: block; margin: auto;" class="figure mx-auto d-block"></figure><div class="codewrapper">
-<h3 class="code-label">OUTPUT<i aria-hidden="true" data-feather="chevron-left"></i><i aria-hidden="true" data-feather="chevron-right"></i>
-</h3>
-<pre class="output" tabindex="0"><code>
-$`tissue = Spinalcord`</code></pre>
-</div>
-<figure><img src="../fig/08-extra-design-rendered-unnamed-chunk-6-2.png" style="display: block; margin: auto;" class="figure mx-auto d-block"></figure><div id="challenge" class="callout discussion">
-<div class="callout-square">
-<i class="callout-icon" data-feather="message-circle"></i>
-</div>
-<div id="challenge" class="callout-inner">
-<h3 class="callout-title">Challenge<a class="anchor" aria-label="anchor" href="#challenge"></a>
-</h3>
-<div class="callout-content">
-<p>Based on this visualization, would you say that the data set is
-balanced, or are there combinations of predictor variables that are
-severely over- or underrepresented?</p>
-</div>
-</div>
-</div>
-</section><section id="compare-males-and-females-non-infected-spinal-cord"><h2 class="section-heading">Compare males and females, non-infected spinal cord<a class="anchor" aria-label="anchor" href="#compare-males-and-females-non-infected-spinal-cord"></a>
-</h2>
-<hr class="half-width">
-<p>Next, we will set up our first design matrix. Here, we will focus on
-the uninfected (Day0) spinal cord samples, and our aim is to compare the
-male and female mice. Thus, we first subset the metadata to only the
-samples of interest, and next set up and visualize the design matrix
-with a single predictor variable (sex). By defining the design formula
-as <code>~ sex</code>, we tell R to include an intercept in the design.
-This intercept will represent the ‘baseline’ level of the predictor
-variable, which in this case is selected to be the Female mice. If not
-explicitly specified, R will order the values of the predictor in
-alphabetical order and select the first one as the reference or baseline
-level.</p>
-<div class="codewrapper sourceCode" id="cb11">
-<h3 class="code-label">R<i aria-hidden="true" data-feather="chevron-left"></i><i aria-hidden="true" data-feather="chevron-right"></i>
-</h3>
-<pre class="downlit sourceCode r">
-<code class="sourceCode R"><span><span class="co">## Subset metadata</span></span>
-<span><span class="va">meta_noninf_spc</span> <span class="op">&lt;-</span> <span class="va">meta</span> <span class="op">%&gt;%</span> <span class="fu">filter</span><span class="op">(</span><span class="va">time</span> <span class="op">==</span> <span class="st">"Day0"</span> <span class="op">&amp;</span> </span>
-<span>                                       <span class="va">tissue</span> <span class="op">==</span> <span class="st">"Spinalcord"</span><span class="op">)</span></span>
-<span><span class="va">meta_noninf_spc</span></span></code></pre>
-</div>
-<div class="codewrapper">
-<h3 class="code-label">OUTPUT<i aria-hidden="true" data-feather="chevron-left"></i><i aria-hidden="true" data-feather="chevron-right"></i>
-</h3>
-<pre class="output" tabindex="0"><code>                     title geo_accession     organism     age    sex
-GSM2545356 CNS_RNA-seq_574    GSM2545356 Mus musculus 8 weeks   Male
-GSM2545357 CNS_RNA-seq_575    GSM2545357 Mus musculus 8 weeks   Male
-GSM2545358 CNS_RNA-seq_583    GSM2545358 Mus musculus 8 weeks Female
-GSM2545361 CNS_RNA-seq_590    GSM2545361 Mus musculus 8 weeks   Male
-GSM2545364 CNS_RNA-seq_709    GSM2545364 Mus musculus 8 weeks Female
-GSM2545365 CNS_RNA-seq_710    GSM2545365 Mus musculus 8 weeks Female
-GSM2545366 CNS_RNA-seq_711    GSM2545366 Mus musculus 8 weeks Female
-GSM2545367 CNS_RNA-seq_713    GSM2545367 Mus musculus 8 weeks   Male
-             infection  strain time     tissue mouse
-GSM2545356 NonInfected C57BL/6 Day0 Spinalcord     2
-GSM2545357 NonInfected C57BL/6 Day0 Spinalcord     3
-GSM2545358 NonInfected C57BL/6 Day0 Spinalcord     4
-GSM2545361 NonInfected C57BL/6 Day0 Spinalcord     7
-GSM2545364 NonInfected C57BL/6 Day0 Spinalcord     8
-GSM2545365 NonInfected C57BL/6 Day0 Spinalcord     9
-GSM2545366 NonInfected C57BL/6 Day0 Spinalcord    10
-GSM2545367 NonInfected C57BL/6 Day0 Spinalcord    11</code></pre>
-</div>
-<div class="codewrapper sourceCode" id="cb13">
-<h3 class="code-label">R<i aria-hidden="true" data-feather="chevron-left"></i><i aria-hidden="true" data-feather="chevron-right"></i>
-</h3>
-<pre class="downlit sourceCode r">
-<code class="sourceCode R"><span><span class="co">## Use ExploreModelMatrix to create a design matrix and visualizations, given </span></span>
-<span><span class="co">## the desired design formula. </span></span>
-<span><span class="va">vd</span> <span class="op">&lt;-</span> <span class="fu">VisualizeDesign</span><span class="op">(</span>sampleData <span class="op">=</span> <span class="va">meta_noninf_spc</span>, </span>
-<span>                      designFormula <span class="op">=</span> <span class="op">~</span> <span class="va">sex</span><span class="op">)</span></span>
-<span><span class="va">vd</span><span class="op">$</span><span class="va">designmatrix</span></span></code></pre>
-</div>
-<div class="codewrapper">
-<h3 class="code-label">OUTPUT<i aria-hidden="true" data-feather="chevron-left"></i><i aria-hidden="true" data-feather="chevron-right"></i>
-</h3>
-<pre class="output" tabindex="0"><code>           (Intercept) sexMale
-GSM2545356           1       1
-GSM2545357           1       1
-GSM2545358           1       0
-GSM2545361           1       1
-GSM2545364           1       0
-GSM2545365           1       0
-GSM2545366           1       0
-GSM2545367           1       1</code></pre>
-</div>
-<div class="codewrapper sourceCode" id="cb15">
-<h3 class="code-label">R<i aria-hidden="true" data-feather="chevron-left"></i><i aria-hidden="true" data-feather="chevron-right"></i>
-</h3>
-<pre class="downlit sourceCode r">
-<code class="sourceCode R"><span><span class="va">vd</span><span class="op">$</span><span class="va">plotlist</span></span></code></pre>
-</div>
-<div class="codewrapper">
-<h3 class="code-label">OUTPUT<i aria-hidden="true" data-feather="chevron-left"></i><i aria-hidden="true" data-feather="chevron-right"></i>
-</h3>
-<pre class="output" tabindex="0"><code>[[1]]</code></pre>
-</div>
-<figure><img src="../fig/08-extra-design-rendered-unnamed-chunk-7-1.png" style="display: block; margin: auto;" class="figure mx-auto d-block"></figure><div class="codewrapper sourceCode" id="cb17">
-<h3 class="code-label">R<i aria-hidden="true" data-feather="chevron-left"></i><i aria-hidden="true" data-feather="chevron-right"></i>
-</h3>
-<pre class="downlit sourceCode r">
-<code class="sourceCode R"><span><span class="co">## Note that we can also generate the design matrix like this</span></span>
-<span><span class="fu">model.matrix</span><span class="op">(</span><span class="op">~</span> <span class="va">sex</span>, data <span class="op">=</span> <span class="va">meta_noninf_spc</span><span class="op">)</span></span></code></pre>
-</div>
-<div class="codewrapper">
-<h3 class="code-label">OUTPUT<i aria-hidden="true" data-feather="chevron-left"></i><i aria-hidden="true" data-feather="chevron-right"></i>
-</h3>
-<pre class="output" tabindex="0"><code>           (Intercept) sexMale
-GSM2545356           1       1
-GSM2545357           1       1
-GSM2545358           1       0
-GSM2545361           1       1
-GSM2545364           1       0
-GSM2545365           1       0
-GSM2545366           1       0
-GSM2545367           1       1
-attr(,"assign")
-[1] 0 1
-attr(,"contrasts")
-attr(,"contrasts")$sex
-[1] "contr.treatment"</code></pre>
-</div>
-<div id="challenge-1" class="callout discussion">
-<div class="callout-square">
-<i class="callout-icon" data-feather="message-circle"></i>
-</div>
-<div id="challenge-1" class="callout-inner">
-<h3 class="callout-title">Challenge<a class="anchor" aria-label="anchor" href="#challenge-1"></a>
-</h3>
-<div class="callout-content">
-<p>With this design, what is the interpretation of the
-<code>sexMale</code> coefficient?</p>
-</div>
-</div>
-</div>
-<div id="challenge-2" class="callout challenge">
-<div class="callout-square">
-<i class="callout-icon" data-feather="zap"></i>
-</div>
-<div id="challenge-2" class="callout-inner">
-<h3 class="callout-title">Challenge<a class="anchor" aria-label="anchor" href="#challenge-2"></a>
-</h3>
-<div class="callout-content">
-<p>Set up the design formula to compare male and female spinal cord
-samples from Day0 as above, but instruct R to not include an intercept
-in the model. How does this change the interpretation of the
-coefficients? What contrast would have to be specified to compare the
-mean expression of a gene between male and female mice?</p>
-</div>
-</div>
-</div>
-<div id="accordionSolution1" class="accordion challenge-accordion accordion-flush">
-<div class="accordion-item">
-<button class="accordion-button solution-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapseSolution1" aria-expanded="false" aria-controls="collapseSolution1">
-  <h4 class="accordion-header" id="headingSolution1">
-  Show me the solution
-  </h4>
-</button>
-<div id="collapseSolution1" class="accordion-collapse collapse" data-bs-parent="#accordionSolution1" aria-labelledby="headingSolution1">
-<div class="accordion-body">
-<div class="codewrapper sourceCode" id="cb19">
-<h3 class="code-label">R<i aria-hidden="true" data-feather="chevron-left"></i><i aria-hidden="true" data-feather="chevron-right"></i>
-</h3>
-<pre class="downlit sourceCode r">
-<code class="sourceCode R"><span><span class="va">meta_noninf_spc</span> <span class="op">&lt;-</span> <span class="va">meta</span> <span class="op">%&gt;%</span> <span class="fu">filter</span><span class="op">(</span><span class="va">time</span> <span class="op">==</span> <span class="st">"Day0"</span> <span class="op">&amp;</span> </span>
-<span>                                       <span class="va">tissue</span> <span class="op">==</span> <span class="st">"Spinalcord"</span><span class="op">)</span></span>
-<span><span class="va">meta_noninf_spc</span></span></code></pre>
-</div>
-<div class="codewrapper">
-<h3 class="code-label">OUTPUT<i aria-hidden="true" data-feather="chevron-left"></i><i aria-hidden="true" data-feather="chevron-right"></i>
-</h3>
-<pre class="output" tabindex="0"><code>                     title geo_accession     organism     age    sex
-GSM2545356 CNS_RNA-seq_574    GSM2545356 Mus musculus 8 weeks   Male
-GSM2545357 CNS_RNA-seq_575    GSM2545357 Mus musculus 8 weeks   Male
-GSM2545358 CNS_RNA-seq_583    GSM2545358 Mus musculus 8 weeks Female
-GSM2545361 CNS_RNA-seq_590    GSM2545361 Mus musculus 8 weeks   Male
-GSM2545364 CNS_RNA-seq_709    GSM2545364 Mus musculus 8 weeks Female
-GSM2545365 CNS_RNA-seq_710    GSM2545365 Mus musculus 8 weeks Female
-GSM2545366 CNS_RNA-seq_711    GSM2545366 Mus musculus 8 weeks Female
-GSM2545367 CNS_RNA-seq_713    GSM2545367 Mus musculus 8 weeks   Male
-             infection  strain time     tissue mouse
-GSM2545356 NonInfected C57BL/6 Day0 Spinalcord     2
-GSM2545357 NonInfected C57BL/6 Day0 Spinalcord     3
-GSM2545358 NonInfected C57BL/6 Day0 Spinalcord     4
-GSM2545361 NonInfected C57BL/6 Day0 Spinalcord     7
-GSM2545364 NonInfected C57BL/6 Day0 Spinalcord     8
-GSM2545365 NonInfected C57BL/6 Day0 Spinalcord     9
-GSM2545366 NonInfected C57BL/6 Day0 Spinalcord    10
-GSM2545367 NonInfected C57BL/6 Day0 Spinalcord    11</code></pre>
-</div>
-<div class="codewrapper sourceCode" id="cb21">
-<h3 class="code-label">R<i aria-hidden="true" data-feather="chevron-left"></i><i aria-hidden="true" data-feather="chevron-right"></i>
-</h3>
-<pre class="downlit sourceCode r">
-<code class="sourceCode R"><span><span class="va">vd</span> <span class="op">&lt;-</span> <span class="fu">VisualizeDesign</span><span class="op">(</span>sampleData <span class="op">=</span> <span class="va">meta_noninf_spc</span>, </span>
-<span>                      designFormula <span class="op">=</span> <span class="op">~</span> <span class="fl">0</span> <span class="op">+</span> <span class="va">sex</span><span class="op">)</span></span>
-<span><span class="va">vd</span><span class="op">$</span><span class="va">designmatrix</span></span></code></pre>
-</div>
-<div class="codewrapper">
-<h3 class="code-label">OUTPUT<i aria-hidden="true" data-feather="chevron-left"></i><i aria-hidden="true" data-feather="chevron-right"></i>
-</h3>
-<pre class="output" tabindex="0"><code>           sexFemale sexMale
-GSM2545356         0       1
-GSM2545357         0       1
-GSM2545358         1       0
-GSM2545361         0       1
-GSM2545364         1       0
-GSM2545365         1       0
-GSM2545366         1       0
-GSM2545367         0       1</code></pre>
-</div>
-<div class="codewrapper sourceCode" id="cb23">
-<h3 class="code-label">R<i aria-hidden="true" data-feather="chevron-left"></i><i aria-hidden="true" data-feather="chevron-right"></i>
-</h3>
-<pre class="downlit sourceCode r">
-<code class="sourceCode R"><span><span class="va">vd</span><span class="op">$</span><span class="va">plotlist</span></span></code></pre>
-</div>
-<div class="codewrapper">
-<h3 class="code-label">OUTPUT<i aria-hidden="true" data-feather="chevron-left"></i><i aria-hidden="true" data-feather="chevron-right"></i>
-</h3>
-<pre class="output" tabindex="0"><code>[[1]]</code></pre>
-</div>
-<figure><img src="../fig/08-extra-design-rendered-unnamed-chunk-8-1.png" style="display: block; margin: auto;" class="figure mx-auto d-block"></figure>
-</div>
-</div>
-</div>
-</div>
-<div id="challenge-3" class="callout challenge">
-<div class="callout-square">
-<i class="callout-icon" data-feather="zap"></i>
-</div>
-<div id="challenge-3" class="callout-inner">
-<h3 class="callout-title">Challenge<a class="anchor" aria-label="anchor" href="#challenge-3"></a>
-</h3>
-<div class="callout-content">
-<p>Set up the design formula to compare the three time points (Day0,
-Day4, Day8) in the male spinal cord samples, and visualize it using
-<code>ExploreModelMatrix</code>.</p>
-</div>
-</div>
-</div>
-<div id="accordionSolution2" class="accordion challenge-accordion accordion-flush">
-<div class="accordion-item">
-<button class="accordion-button solution-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapseSolution2" aria-expanded="false" aria-controls="collapseSolution2">
-  <h4 class="accordion-header" id="headingSolution2">
-  Show me the solution
-  </h4>
-</button>
-<div id="collapseSolution2" class="accordion-collapse collapse" data-bs-parent="#accordionSolution2" aria-labelledby="headingSolution2">
-<div class="accordion-body">
-<div class="codewrapper sourceCode" id="cb25">
-<h3 class="code-label">R<i aria-hidden="true" data-feather="chevron-left"></i><i aria-hidden="true" data-feather="chevron-right"></i>
-</h3>
-<pre class="downlit sourceCode r">
-<code class="sourceCode R"><span><span class="va">meta_male_spc</span> <span class="op">&lt;-</span> <span class="va">meta</span> <span class="op">%&gt;%</span> <span class="fu">filter</span><span class="op">(</span><span class="va">sex</span> <span class="op">==</span> <span class="st">"Male"</span> <span class="op">&amp;</span> <span class="va">tissue</span> <span class="op">==</span> <span class="st">"Spinalcord"</span><span class="op">)</span></span>
-<span><span class="va">meta_male_spc</span></span></code></pre>
-</div>
-<div class="codewrapper">
-<h3 class="code-label">OUTPUT<i aria-hidden="true" data-feather="chevron-left"></i><i aria-hidden="true" data-feather="chevron-right"></i>
-</h3>
-<pre class="output" tabindex="0"><code>                     title geo_accession     organism     age  sex   infection
-GSM2545355 CNS_RNA-seq_571    GSM2545355 Mus musculus 8 weeks Male  InfluenzaA
-GSM2545356 CNS_RNA-seq_574    GSM2545356 Mus musculus 8 weeks Male NonInfected
-GSM2545357 CNS_RNA-seq_575    GSM2545357 Mus musculus 8 weeks Male NonInfected
-GSM2545360 CNS_RNA-seq_589    GSM2545360 Mus musculus 8 weeks Male  InfluenzaA
-GSM2545361 CNS_RNA-seq_590    GSM2545361 Mus musculus 8 weeks Male NonInfected
-GSM2545367 CNS_RNA-seq_713    GSM2545367 Mus musculus 8 weeks Male NonInfected
-GSM2545368 CNS_RNA-seq_728    GSM2545368 Mus musculus 8 weeks Male  InfluenzaA
-GSM2545369 CNS_RNA-seq_729    GSM2545369 Mus musculus 8 weeks Male  InfluenzaA
-GSM2545372 CNS_RNA-seq_733    GSM2545372 Mus musculus 8 weeks Male  InfluenzaA
-GSM2545373 CNS_RNA-seq_735    GSM2545373 Mus musculus 8 weeks Male  InfluenzaA
-GSM2545378 CNS_RNA-seq_742    GSM2545378 Mus musculus 8 weeks Male  InfluenzaA
-GSM2545379 CNS_RNA-seq_743    GSM2545379 Mus musculus 8 weeks Male  InfluenzaA
-            strain time     tissue mouse
-GSM2545355 C57BL/6 Day4 Spinalcord     1
-GSM2545356 C57BL/6 Day0 Spinalcord     2
-GSM2545357 C57BL/6 Day0 Spinalcord     3
-GSM2545360 C57BL/6 Day8 Spinalcord     6
-GSM2545361 C57BL/6 Day0 Spinalcord     7
-GSM2545367 C57BL/6 Day0 Spinalcord    11
-GSM2545368 C57BL/6 Day4 Spinalcord    12
-GSM2545369 C57BL/6 Day4 Spinalcord    13
-GSM2545372 C57BL/6 Day8 Spinalcord    17
-GSM2545373 C57BL/6 Day4 Spinalcord    18
-GSM2545378 C57BL/6 Day8 Spinalcord    23
-GSM2545379 C57BL/6 Day8 Spinalcord    24</code></pre>
-</div>
-<div class="codewrapper sourceCode" id="cb27">
-<h3 class="code-label">R<i aria-hidden="true" data-feather="chevron-left"></i><i aria-hidden="true" data-feather="chevron-right"></i>
-</h3>
-<pre class="downlit sourceCode r">
-<code class="sourceCode R"><span><span class="va">vd</span> <span class="op">&lt;-</span> <span class="fu">VisualizeDesign</span><span class="op">(</span>sampleData <span class="op">=</span> <span class="va">meta_male_spc</span>, designFormula <span class="op">=</span> <span class="op">~</span> <span class="va">time</span><span class="op">)</span></span>
-<span><span class="va">vd</span><span class="op">$</span><span class="va">designmatrix</span></span></code></pre>
-</div>
-<div class="codewrapper">
-<h3 class="code-label">OUTPUT<i aria-hidden="true" data-feather="chevron-left"></i><i aria-hidden="true" data-feather="chevron-right"></i>
-</h3>
-<pre class="output" tabindex="0"><code>           (Intercept) timeDay4 timeDay8
-GSM2545355           1        1        0
-GSM2545356           1        0        0
-GSM2545357           1        0        0
-GSM2545360           1        0        1
-GSM2545361           1        0        0
-GSM2545367           1        0        0
-GSM2545368           1        1        0
-GSM2545369           1        1        0
-GSM2545372           1        0        1
-GSM2545373           1        1        0
-GSM2545378           1        0        1
-GSM2545379           1        0        1</code></pre>
-</div>
-<div class="codewrapper sourceCode" id="cb29">
-<h3 class="code-label">R<i aria-hidden="true" data-feather="chevron-left"></i><i aria-hidden="true" data-feather="chevron-right"></i>
-</h3>
-<pre class="downlit sourceCode r">
-<code class="sourceCode R"><span><span class="va">vd</span><span class="op">$</span><span class="va">plotlist</span></span></code></pre>
-</div>
-<div class="codewrapper">
-<h3 class="code-label">OUTPUT<i aria-hidden="true" data-feather="chevron-left"></i><i aria-hidden="true" data-feather="chevron-right"></i>
-</h3>
-<pre class="output" tabindex="0"><code>[[1]]</code></pre>
-</div>
-<figure><img src="../fig/08-extra-design-rendered-unnamed-chunk-9-1.png" style="display: block; margin: auto;" class="figure mx-auto d-block"></figure>
-</div>
-</div>
-</div>
-</div>
-</section><section id="factorial-design-without-interactions"><h2 class="section-heading">Factorial design without interactions<a class="anchor" aria-label="anchor" href="#factorial-design-without-interactions"></a>
-</h2>
-<hr class="half-width">
-<p>Next, we again consider only non-infected mice, but fit a model
-incorporating both sex and tissue as predictors. We assume that the
-tissue differences are the same for both male and female mice, and
-consequently fit an additive model, without interaction terms.</p>
-<div class="codewrapper sourceCode" id="cb31">
-<h3 class="code-label">R<i aria-hidden="true" data-feather="chevron-left"></i><i aria-hidden="true" data-feather="chevron-right"></i>
-</h3>
-<pre class="downlit sourceCode r">
-<code class="sourceCode R"><span><span class="va">meta_noninf</span> <span class="op">&lt;-</span> <span class="va">meta</span> <span class="op">%&gt;%</span> <span class="fu">filter</span><span class="op">(</span><span class="va">time</span> <span class="op">==</span> <span class="st">"Day0"</span><span class="op">)</span></span>
-<span><span class="va">meta_noninf</span></span></code></pre>
-</div>
-<div class="codewrapper">
-<h3 class="code-label">OUTPUT<i aria-hidden="true" data-feather="chevron-left"></i><i aria-hidden="true" data-feather="chevron-right"></i>
-</h3>
-<pre class="output" tabindex="0"><code>                     title geo_accession     organism     age    sex
-GSM2545337 CNS_RNA-seq_11C    GSM2545337 Mus musculus 8 weeks Female
-GSM2545338 CNS_RNA-seq_12C    GSM2545338 Mus musculus 8 weeks Female
-GSM2545343 CNS_RNA-seq_20C    GSM2545343 Mus musculus 8 weeks   Male
-GSM2545348 CNS_RNA-seq_27C    GSM2545348 Mus musculus 8 weeks Female
-GSM2545349 CNS_RNA-seq_28C    GSM2545349 Mus musculus 8 weeks   Male
-GSM2545353  CNS_RNA-seq_3C    GSM2545353 Mus musculus 8 weeks Female
-GSM2545354  CNS_RNA-seq_4C    GSM2545354 Mus musculus 8 weeks   Male
-GSM2545356 CNS_RNA-seq_574    GSM2545356 Mus musculus 8 weeks   Male
-GSM2545357 CNS_RNA-seq_575    GSM2545357 Mus musculus 8 weeks   Male
-GSM2545358 CNS_RNA-seq_583    GSM2545358 Mus musculus 8 weeks Female
-GSM2545361 CNS_RNA-seq_590    GSM2545361 Mus musculus 8 weeks   Male
-GSM2545364 CNS_RNA-seq_709    GSM2545364 Mus musculus 8 weeks Female
-GSM2545365 CNS_RNA-seq_710    GSM2545365 Mus musculus 8 weeks Female
-GSM2545366 CNS_RNA-seq_711    GSM2545366 Mus musculus 8 weeks Female
-GSM2545367 CNS_RNA-seq_713    GSM2545367 Mus musculus 8 weeks   Male
-             infection  strain time     tissue mouse
-GSM2545337 NonInfected C57BL/6 Day0 Cerebellum     9
-GSM2545338 NonInfected C57BL/6 Day0 Cerebellum    10
-GSM2545343 NonInfected C57BL/6 Day0 Cerebellum    11
-GSM2545348 NonInfected C57BL/6 Day0 Cerebellum     8
-GSM2545349 NonInfected C57BL/6 Day0 Cerebellum     7
-GSM2545353 NonInfected C57BL/6 Day0 Cerebellum     4
-GSM2545354 NonInfected C57BL/6 Day0 Cerebellum     2
-GSM2545356 NonInfected C57BL/6 Day0 Spinalcord     2
-GSM2545357 NonInfected C57BL/6 Day0 Spinalcord     3
-GSM2545358 NonInfected C57BL/6 Day0 Spinalcord     4
-GSM2545361 NonInfected C57BL/6 Day0 Spinalcord     7
-GSM2545364 NonInfected C57BL/6 Day0 Spinalcord     8
-GSM2545365 NonInfected C57BL/6 Day0 Spinalcord     9
-GSM2545366 NonInfected C57BL/6 Day0 Spinalcord    10
-GSM2545367 NonInfected C57BL/6 Day0 Spinalcord    11</code></pre>
-</div>
-<div class="codewrapper sourceCode" id="cb33">
-<h3 class="code-label">R<i aria-hidden="true" data-feather="chevron-left"></i><i aria-hidden="true" data-feather="chevron-right"></i>
-</h3>
-<pre class="downlit sourceCode r">
-<code class="sourceCode R"><span><span class="va">vd</span> <span class="op">&lt;-</span> <span class="fu">VisualizeDesign</span><span class="op">(</span>sampleData <span class="op">=</span> <span class="va">meta_noninf</span>, </span>
-<span>                      designFormula <span class="op">=</span> <span class="op">~</span> <span class="va">sex</span> <span class="op">+</span> <span class="va">tissue</span><span class="op">)</span></span>
-<span><span class="va">vd</span><span class="op">$</span><span class="va">designmatrix</span></span></code></pre>
-</div>
-<div class="codewrapper">
-<h3 class="code-label">OUTPUT<i aria-hidden="true" data-feather="chevron-left"></i><i aria-hidden="true" data-feather="chevron-right"></i>
-</h3>
-<pre class="output" tabindex="0"><code>           (Intercept) sexMale tissueSpinalcord
-GSM2545337           1       0                0
-GSM2545338           1       0                0
-GSM2545343           1       1                0
-GSM2545348           1       0                0
-GSM2545349           1       1                0
-GSM2545353           1       0                0
-GSM2545354           1       1                0
-GSM2545356           1       1                1
-GSM2545357           1       1                1
-GSM2545358           1       0                1
-GSM2545361           1       1                1
-GSM2545364           1       0                1
-GSM2545365           1       0                1
-GSM2545366           1       0                1
-GSM2545367           1       1                1</code></pre>
-</div>
-<div class="codewrapper sourceCode" id="cb35">
-<h3 class="code-label">R<i aria-hidden="true" data-feather="chevron-left"></i><i aria-hidden="true" data-feather="chevron-right"></i>
-</h3>
-<pre class="downlit sourceCode r">
-<code class="sourceCode R"><span><span class="va">vd</span><span class="op">$</span><span class="va">plotlist</span></span></code></pre>
-</div>
-<div class="codewrapper">
-<h3 class="code-label">OUTPUT<i aria-hidden="true" data-feather="chevron-left"></i><i aria-hidden="true" data-feather="chevron-right"></i>
-</h3>
-<pre class="output" tabindex="0"><code>[[1]]</code></pre>
-</div>
-<figure><img src="../fig/08-extra-design-rendered-unnamed-chunk-10-1.png" style="display: block; margin: auto;" class="figure mx-auto d-block"></figure></section><section id="factorial-design-with-interactions"><h2 class="section-heading">Factorial design with interactions<a class="anchor" aria-label="anchor" href="#factorial-design-with-interactions"></a>
-</h2>
-<hr class="half-width">
-<p>In the previous model, we assumed that the tissue differences were
-the same for both male and female mice. To allow for the estimation of
-sex-specific tissue differences (at the expense of having one additional
-coefficient to estimate from the data), we can include an interaction
-term in the model.</p>
-<div class="codewrapper sourceCode" id="cb37">
-<h3 class="code-label">R<i aria-hidden="true" data-feather="chevron-left"></i><i aria-hidden="true" data-feather="chevron-right"></i>
-</h3>
-<pre class="downlit sourceCode r">
-<code class="sourceCode R"><span><span class="va">meta_noninf</span> <span class="op">&lt;-</span> <span class="va">meta</span> <span class="op">%&gt;%</span> <span class="fu">filter</span><span class="op">(</span><span class="va">time</span> <span class="op">==</span> <span class="st">"Day0"</span><span class="op">)</span></span>
-<span><span class="va">meta_noninf</span></span></code></pre>
-</div>
-<div class="codewrapper">
-<h3 class="code-label">OUTPUT<i aria-hidden="true" data-feather="chevron-left"></i><i aria-hidden="true" data-feather="chevron-right"></i>
-</h3>
-<pre class="output" tabindex="0"><code>                     title geo_accession     organism     age    sex
-GSM2545337 CNS_RNA-seq_11C    GSM2545337 Mus musculus 8 weeks Female
-GSM2545338 CNS_RNA-seq_12C    GSM2545338 Mus musculus 8 weeks Female
-GSM2545343 CNS_RNA-seq_20C    GSM2545343 Mus musculus 8 weeks   Male
-GSM2545348 CNS_RNA-seq_27C    GSM2545348 Mus musculus 8 weeks Female
-GSM2545349 CNS_RNA-seq_28C    GSM2545349 Mus musculus 8 weeks   Male
-GSM2545353  CNS_RNA-seq_3C    GSM2545353 Mus musculus 8 weeks Female
-GSM2545354  CNS_RNA-seq_4C    GSM2545354 Mus musculus 8 weeks   Male
-GSM2545356 CNS_RNA-seq_574    GSM2545356 Mus musculus 8 weeks   Male
-GSM2545357 CNS_RNA-seq_575    GSM2545357 Mus musculus 8 weeks   Male
-GSM2545358 CNS_RNA-seq_583    GSM2545358 Mus musculus 8 weeks Female
-GSM2545361 CNS_RNA-seq_590    GSM2545361 Mus musculus 8 weeks   Male
-GSM2545364 CNS_RNA-seq_709    GSM2545364 Mus musculus 8 weeks Female
-GSM2545365 CNS_RNA-seq_710    GSM2545365 Mus musculus 8 weeks Female
-GSM2545366 CNS_RNA-seq_711    GSM2545366 Mus musculus 8 weeks Female
-GSM2545367 CNS_RNA-seq_713    GSM2545367 Mus musculus 8 weeks   Male
-             infection  strain time     tissue mouse
-GSM2545337 NonInfected C57BL/6 Day0 Cerebellum     9
-GSM2545338 NonInfected C57BL/6 Day0 Cerebellum    10
-GSM2545343 NonInfected C57BL/6 Day0 Cerebellum    11
-GSM2545348 NonInfected C57BL/6 Day0 Cerebellum     8
-GSM2545349 NonInfected C57BL/6 Day0 Cerebellum     7
-GSM2545353 NonInfected C57BL/6 Day0 Cerebellum     4
-GSM2545354 NonInfected C57BL/6 Day0 Cerebellum     2
-GSM2545356 NonInfected C57BL/6 Day0 Spinalcord     2
-GSM2545357 NonInfected C57BL/6 Day0 Spinalcord     3
-GSM2545358 NonInfected C57BL/6 Day0 Spinalcord     4
-GSM2545361 NonInfected C57BL/6 Day0 Spinalcord     7
-GSM2545364 NonInfected C57BL/6 Day0 Spinalcord     8
-GSM2545365 NonInfected C57BL/6 Day0 Spinalcord     9
-GSM2545366 NonInfected C57BL/6 Day0 Spinalcord    10
-GSM2545367 NonInfected C57BL/6 Day0 Spinalcord    11</code></pre>
-</div>
-<div class="codewrapper sourceCode" id="cb39">
-<h3 class="code-label">R<i aria-hidden="true" data-feather="chevron-left"></i><i aria-hidden="true" data-feather="chevron-right"></i>
-</h3>
-<pre class="downlit sourceCode r">
-<code class="sourceCode R"><span><span class="co">## Define a design including an interaction term</span></span>
-<span><span class="co">## Note that ~ sex * tissue is equivalent to </span></span>
-<span><span class="co">## ~ sex + tissue + sex:tissue</span></span>
-<span><span class="va">vd</span> <span class="op">&lt;-</span> <span class="fu">VisualizeDesign</span><span class="op">(</span>sampleData <span class="op">=</span> <span class="va">meta_noninf</span>, </span>
-<span>                      designFormula <span class="op">=</span> <span class="op">~</span> <span class="va">sex</span> <span class="op">*</span> <span class="va">tissue</span><span class="op">)</span></span>
-<span><span class="va">vd</span><span class="op">$</span><span class="va">designmatrix</span></span></code></pre>
-</div>
-<div class="codewrapper">
-<h3 class="code-label">OUTPUT<i aria-hidden="true" data-feather="chevron-left"></i><i aria-hidden="true" data-feather="chevron-right"></i>
-</h3>
-<pre class="output" tabindex="0"><code>           (Intercept) sexMale tissueSpinalcord sexMale:tissueSpinalcord
-GSM2545337           1       0                0                        0
-GSM2545338           1       0                0                        0
-GSM2545343           1       1                0                        0
-GSM2545348           1       0                0                        0
-GSM2545349           1       1                0                        0
-GSM2545353           1       0                0                        0
-GSM2545354           1       1                0                        0
-GSM2545356           1       1                1                        1
-GSM2545357           1       1                1                        1
-GSM2545358           1       0                1                        0
-GSM2545361           1       1                1                        1
-GSM2545364           1       0                1                        0
-GSM2545365           1       0                1                        0
-GSM2545366           1       0                1                        0
-GSM2545367           1       1                1                        1</code></pre>
-</div>
-<div class="codewrapper sourceCode" id="cb41">
-<h3 class="code-label">R<i aria-hidden="true" data-feather="chevron-left"></i><i aria-hidden="true" data-feather="chevron-right"></i>
-</h3>
-<pre class="downlit sourceCode r">
-<code class="sourceCode R"><span><span class="va">vd</span><span class="op">$</span><span class="va">plotlist</span></span></code></pre>
-</div>
-<div class="codewrapper">
-<h3 class="code-label">OUTPUT<i aria-hidden="true" data-feather="chevron-left"></i><i aria-hidden="true" data-feather="chevron-right"></i>
-</h3>
-<pre class="output" tabindex="0"><code>[[1]]</code></pre>
-</div>
-<figure><img src="../fig/08-extra-design-rendered-unnamed-chunk-11-1.png" style="display: block; margin: auto;" class="figure mx-auto d-block"></figure></section><section id="paired-design"><h2 class="section-heading">Paired design<a class="anchor" aria-label="anchor" href="#paired-design"></a>
-</h2>
-<hr class="half-width">
-<p>In this particular data set the samples are paired - the same mice
-have contributed both the cerebellum and spinal cord samples. This
-information was not included in the previous models. However, accounting
-for it can increase power to detect tissue differences by eliminating
-variability in baseline expression levels between mice. Here, we define
-a paired design for the female non-infected mice, aimed at testing for
-differences between tissues after accounting for baseline differences
-between mice.</p>
-<div class="codewrapper sourceCode" id="cb43">
-<h3 class="code-label">R<i aria-hidden="true" data-feather="chevron-left"></i><i aria-hidden="true" data-feather="chevron-right"></i>
-</h3>
-<pre class="downlit sourceCode r">
-<code class="sourceCode R"><span><span class="va">meta_fem_day0</span> <span class="op">&lt;-</span> <span class="va">meta</span> <span class="op">%&gt;%</span> <span class="fu">filter</span><span class="op">(</span><span class="va">sex</span> <span class="op">==</span> <span class="st">"Female"</span> <span class="op">&amp;</span> </span>
-<span>                                     <span class="va">time</span> <span class="op">==</span> <span class="st">"Day0"</span><span class="op">)</span></span>
-<span></span>
-<span><span class="co"># ensure that mouse is treated as a categorical variable</span></span>
-<span><span class="va">meta_fem_day0</span><span class="op">$</span><span class="va">mouse</span> <span class="op">&lt;-</span> <span class="fu">factor</span><span class="op">(</span><span class="va">meta_fem_day0</span><span class="op">$</span><span class="va">mouse</span><span class="op">)</span></span>
-<span></span>
-<span><span class="va">meta_fem_day0</span></span></code></pre>
-</div>
-<div class="codewrapper">
-<h3 class="code-label">OUTPUT<i aria-hidden="true" data-feather="chevron-left"></i><i aria-hidden="true" data-feather="chevron-right"></i>
-</h3>
-<pre class="output" tabindex="0"><code>                     title geo_accession     organism     age    sex
-GSM2545337 CNS_RNA-seq_11C    GSM2545337 Mus musculus 8 weeks Female
-GSM2545338 CNS_RNA-seq_12C    GSM2545338 Mus musculus 8 weeks Female
-GSM2545348 CNS_RNA-seq_27C    GSM2545348 Mus musculus 8 weeks Female
-GSM2545353  CNS_RNA-seq_3C    GSM2545353 Mus musculus 8 weeks Female
-GSM2545358 CNS_RNA-seq_583    GSM2545358 Mus musculus 8 weeks Female
-GSM2545364 CNS_RNA-seq_709    GSM2545364 Mus musculus 8 weeks Female
-GSM2545365 CNS_RNA-seq_710    GSM2545365 Mus musculus 8 weeks Female
-GSM2545366 CNS_RNA-seq_711    GSM2545366 Mus musculus 8 weeks Female
-             infection  strain time     tissue mouse
-GSM2545337 NonInfected C57BL/6 Day0 Cerebellum     9
-GSM2545338 NonInfected C57BL/6 Day0 Cerebellum    10
-GSM2545348 NonInfected C57BL/6 Day0 Cerebellum     8
-GSM2545353 NonInfected C57BL/6 Day0 Cerebellum     4
-GSM2545358 NonInfected C57BL/6 Day0 Spinalcord     4
-GSM2545364 NonInfected C57BL/6 Day0 Spinalcord     8
-GSM2545365 NonInfected C57BL/6 Day0 Spinalcord     9
-GSM2545366 NonInfected C57BL/6 Day0 Spinalcord    10</code></pre>
-</div>
-<div class="codewrapper sourceCode" id="cb45">
-<h3 class="code-label">R<i aria-hidden="true" data-feather="chevron-left"></i><i aria-hidden="true" data-feather="chevron-right"></i>
-</h3>
-<pre class="downlit sourceCode r">
-<code class="sourceCode R"><span><span class="va">vd</span> <span class="op">&lt;-</span> <span class="fu">VisualizeDesign</span><span class="op">(</span>sampleData <span class="op">=</span> <span class="va">meta_fem_day0</span>,</span>
-<span>                      designFormula <span class="op">=</span> <span class="op">~</span> <span class="va">mouse</span> <span class="op">+</span> <span class="va">tissue</span><span class="op">)</span></span>
-<span><span class="va">vd</span><span class="op">$</span><span class="va">designmatrix</span></span></code></pre>
-</div>
-<div class="codewrapper">
-<h3 class="code-label">OUTPUT<i aria-hidden="true" data-feather="chevron-left"></i><i aria-hidden="true" data-feather="chevron-right"></i>
-</h3>
-<pre class="output" tabindex="0"><code>           (Intercept) mouse8 mouse9 mouse10 tissueSpinalcord
-GSM2545337           1      0      1       0                0
-GSM2545338           1      0      0       1                0
-GSM2545348           1      1      0       0                0
-GSM2545353           1      0      0       0                0
-GSM2545358           1      0      0       0                1
-GSM2545364           1      1      0       0                1
-GSM2545365           1      0      1       0                1
-GSM2545366           1      0      0       1                1</code></pre>
-</div>
-<div class="codewrapper sourceCode" id="cb47">
-<h3 class="code-label">R<i aria-hidden="true" data-feather="chevron-left"></i><i aria-hidden="true" data-feather="chevron-right"></i>
-</h3>
-<pre class="downlit sourceCode r">
-<code class="sourceCode R"><span><span class="va">vd</span><span class="op">$</span><span class="va">plotlist</span></span></code></pre>
-</div>
-<div class="codewrapper">
-<h3 class="code-label">OUTPUT<i aria-hidden="true" data-feather="chevron-left"></i><i aria-hidden="true" data-feather="chevron-right"></i>
-</h3>
-<pre class="output" tabindex="0"><code>[[1]]</code></pre>
-</div>
-<figure><img src="../fig/08-extra-design-rendered-unnamed-chunk-12-1.png" style="display: block; margin: auto;" class="figure mx-auto d-block"></figure></section><section id="within--and-between-subject-comparisons"><h2 class="section-heading">Within- and between-subject comparisons<a class="anchor" aria-label="anchor" href="#within--and-between-subject-comparisons"></a>
-</h2>
-<hr class="half-width">
-<p>In some situations, we need to combine the types of models considered
-above. For example, let’s say that we want to investigate if the tissue
-differences are different for infected and non-infected female mice. In
-this case, each mice only contributes to one of the infection groups
-(each mice is either infected or non-infected), but contributes both a
-cerebellum and a spinal cord sample. One way to view this type of design
-is as two paired experiments, one for each infection group (see the <a href="https://www.bioconductor.org/packages/release/bioc/vignettes/edgeR/inst/doc/edgeRUsersGuide.pdf" class="external-link">edgeR
-user guide section 3.5</a>). We can then easily compare the two tissues
-in each infection group, and contrast the tissue differences between the
-infection groups.</p>
-<div class="codewrapper sourceCode" id="cb49">
-<h3 class="code-label">R<i aria-hidden="true" data-feather="chevron-left"></i><i aria-hidden="true" data-feather="chevron-right"></i>
-</h3>
-<pre class="downlit sourceCode r">
-<code class="sourceCode R"><span><span class="va">meta_fem_day04</span> <span class="op">&lt;-</span> <span class="va">meta</span> <span class="op">%&gt;%</span> </span>
-<span>    <span class="fu">filter</span><span class="op">(</span><span class="va">sex</span> <span class="op">==</span> <span class="st">"Female"</span> <span class="op">&amp;</span> </span>
-<span>               <span class="va">time</span> <span class="op">%in%</span> <span class="fu">c</span><span class="op">(</span><span class="st">"Day0"</span>, <span class="st">"Day4"</span><span class="op">)</span><span class="op">)</span> <span class="op">%&gt;%</span></span>
-<span>    <span class="fu">droplevels</span><span class="op">(</span><span class="op">)</span></span>
-<span><span class="co"># ensure that mouse is treated as a categorical variable</span></span>
-<span><span class="va">meta_fem_day04</span><span class="op">$</span><span class="va">mouse</span> <span class="op">&lt;-</span> <span class="fu">factor</span><span class="op">(</span><span class="va">meta_fem_day04</span><span class="op">$</span><span class="va">mouse</span><span class="op">)</span></span>
-<span></span>
-<span><span class="va">meta_fem_day04</span></span></code></pre>
-</div>
-<div class="codewrapper">
-<h3 class="code-label">OUTPUT<i aria-hidden="true" data-feather="chevron-left"></i><i aria-hidden="true" data-feather="chevron-right"></i>
-</h3>
-<pre class="output" tabindex="0"><code>                     title geo_accession     organism     age    sex
-GSM2545337 CNS_RNA-seq_11C    GSM2545337 Mus musculus 8 weeks Female
-GSM2545338 CNS_RNA-seq_12C    GSM2545338 Mus musculus 8 weeks Female
-GSM2545339 CNS_RNA-seq_13C    GSM2545339 Mus musculus 8 weeks Female
-GSM2545344 CNS_RNA-seq_21C    GSM2545344 Mus musculus 8 weeks Female
-GSM2545348 CNS_RNA-seq_27C    GSM2545348 Mus musculus 8 weeks Female
-GSM2545352 CNS_RNA-seq_30C    GSM2545352 Mus musculus 8 weeks Female
-GSM2545353  CNS_RNA-seq_3C    GSM2545353 Mus musculus 8 weeks Female
-GSM2545358 CNS_RNA-seq_583    GSM2545358 Mus musculus 8 weeks Female
-GSM2545362  CNS_RNA-seq_5C    GSM2545362 Mus musculus 8 weeks Female
-GSM2545364 CNS_RNA-seq_709    GSM2545364 Mus musculus 8 weeks Female
-GSM2545365 CNS_RNA-seq_710    GSM2545365 Mus musculus 8 weeks Female
-GSM2545366 CNS_RNA-seq_711    GSM2545366 Mus musculus 8 weeks Female
-GSM2545371 CNS_RNA-seq_731    GSM2545371 Mus musculus 8 weeks Female
-GSM2545375 CNS_RNA-seq_738    GSM2545375 Mus musculus 8 weeks Female
-GSM2545376 CNS_RNA-seq_740    GSM2545376 Mus musculus 8 weeks Female
-GSM2545377 CNS_RNA-seq_741    GSM2545377 Mus musculus 8 weeks Female
-             infection  strain time     tissue mouse
-GSM2545337 NonInfected C57BL/6 Day0 Cerebellum     9
-GSM2545338 NonInfected C57BL/6 Day0 Cerebellum    10
-GSM2545339  InfluenzaA C57BL/6 Day4 Cerebellum    15
-GSM2545344  InfluenzaA C57BL/6 Day4 Cerebellum    22
-GSM2545348 NonInfected C57BL/6 Day0 Cerebellum     8
-GSM2545352  InfluenzaA C57BL/6 Day4 Cerebellum    21
-GSM2545353 NonInfected C57BL/6 Day0 Cerebellum     4
-GSM2545358 NonInfected C57BL/6 Day0 Spinalcord     4
-GSM2545362  InfluenzaA C57BL/6 Day4 Cerebellum    20
-GSM2545364 NonInfected C57BL/6 Day0 Spinalcord     8
-GSM2545365 NonInfected C57BL/6 Day0 Spinalcord     9
-GSM2545366 NonInfected C57BL/6 Day0 Spinalcord    10
-GSM2545371  InfluenzaA C57BL/6 Day4 Spinalcord    15
-GSM2545375  InfluenzaA C57BL/6 Day4 Spinalcord    20
-GSM2545376  InfluenzaA C57BL/6 Day4 Spinalcord    21
-GSM2545377  InfluenzaA C57BL/6 Day4 Spinalcord    22</code></pre>
-</div>
-<div class="codewrapper sourceCode" id="cb51">
-<h3 class="code-label">R<i aria-hidden="true" data-feather="chevron-left"></i><i aria-hidden="true" data-feather="chevron-right"></i>
-</h3>
-<pre class="downlit sourceCode r">
-<code class="sourceCode R"><span><span class="va">design</span> <span class="op">&lt;-</span> <span class="fu">model.matrix</span><span class="op">(</span><span class="op">~</span> <span class="va">mouse</span>, data <span class="op">=</span> <span class="va">meta_fem_day04</span><span class="op">)</span></span>
-<span><span class="va">design</span> <span class="op">&lt;-</span> <span class="fu">cbind</span><span class="op">(</span><span class="va">design</span>, </span>
-<span>                Spc.Day0 <span class="op">=</span> <span class="va">meta_fem_day04</span><span class="op">$</span><span class="va">tissue</span> <span class="op">==</span> <span class="st">"Spinalcord"</span> <span class="op">&amp;</span> </span>
-<span>                    <span class="va">meta_fem_day04</span><span class="op">$</span><span class="va">time</span> <span class="op">==</span> <span class="st">"Day0"</span>,</span>
-<span>                Spc.Day4 <span class="op">=</span> <span class="va">meta_fem_day04</span><span class="op">$</span><span class="va">tissue</span> <span class="op">==</span> <span class="st">"Spinalcord"</span> <span class="op">&amp;</span> </span>
-<span>                    <span class="va">meta_fem_day04</span><span class="op">$</span><span class="va">time</span> <span class="op">==</span> <span class="st">"Day4"</span><span class="op">)</span></span>
-<span><span class="fu">rownames</span><span class="op">(</span><span class="va">design</span><span class="op">)</span> <span class="op">&lt;-</span> <span class="fu">rownames</span><span class="op">(</span><span class="va">meta_fem_day04</span><span class="op">)</span></span>
-<span><span class="va">design</span></span></code></pre>
-</div>
-<div class="codewrapper">
-<h3 class="code-label">OUTPUT<i aria-hidden="true" data-feather="chevron-left"></i><i aria-hidden="true" data-feather="chevron-right"></i>
-</h3>
-<pre class="output" tabindex="0"><code>           (Intercept) mouse8 mouse9 mouse10 mouse15 mouse20 mouse21 mouse22
-GSM2545337           1      0      1       0       0       0       0       0
-GSM2545338           1      0      0       1       0       0       0       0
-GSM2545339           1      0      0       0       1       0       0       0
-GSM2545344           1      0      0       0       0       0       0       1
-GSM2545348           1      1      0       0       0       0       0       0
-GSM2545352           1      0      0       0       0       0       1       0
-GSM2545353           1      0      0       0       0       0       0       0
-GSM2545358           1      0      0       0       0       0       0       0
-GSM2545362           1      0      0       0       0       1       0       0
-GSM2545364           1      1      0       0       0       0       0       0
-GSM2545365           1      0      1       0       0       0       0       0
-GSM2545366           1      0      0       1       0       0       0       0
-GSM2545371           1      0      0       0       1       0       0       0
-GSM2545375           1      0      0       0       0       1       0       0
-GSM2545376           1      0      0       0       0       0       1       0
-GSM2545377           1      0      0       0       0       0       0       1
-           Spc.Day0 Spc.Day4
-GSM2545337        0        0
-GSM2545338        0        0
-GSM2545339        0        0
-GSM2545344        0        0
-GSM2545348        0        0
-GSM2545352        0        0
-GSM2545353        0        0
-GSM2545358        1        0
-GSM2545362        0        0
-GSM2545364        1        0
-GSM2545365        1        0
-GSM2545366        1        0
-GSM2545371        0        1
-GSM2545375        0        1
-GSM2545376        0        1
-GSM2545377        0        1</code></pre>
-</div>
-<div class="codewrapper sourceCode" id="cb53">
-<h3 class="code-label">R<i aria-hidden="true" data-feather="chevron-left"></i><i aria-hidden="true" data-feather="chevron-right"></i>
-</h3>
-<pre class="downlit sourceCode r">
-<code class="sourceCode R"><span><span class="va">vd</span> <span class="op">&lt;-</span> <span class="fu">VisualizeDesign</span><span class="op">(</span>sampleData <span class="op">=</span> <span class="va">meta_fem_day04</span> <span class="op">%&gt;%</span></span>
-<span>                          <span class="fu">select</span><span class="op">(</span><span class="va">time</span>, <span class="va">tissue</span>, <span class="va">mouse</span><span class="op">)</span>,</span>
-<span>                      designFormula <span class="op">=</span> <span class="cn">NULL</span>, </span>
-<span>                      designMatrix <span class="op">=</span> <span class="va">design</span>, flipCoordFitted <span class="op">=</span> <span class="cn">FALSE</span><span class="op">)</span></span>
-<span><span class="va">vd</span><span class="op">$</span><span class="va">designmatrix</span></span></code></pre>
-</div>
-<div class="codewrapper">
-<h3 class="code-label">OUTPUT<i aria-hidden="true" data-feather="chevron-left"></i><i aria-hidden="true" data-feather="chevron-right"></i>
-</h3>
-<pre class="output" tabindex="0"><code>           (Intercept) mouse8 mouse9 mouse10 mouse15 mouse20 mouse21 mouse22
-GSM2545337           1      0      1       0       0       0       0       0
-GSM2545338           1      0      0       1       0       0       0       0
-GSM2545339           1      0      0       0       1       0       0       0
-GSM2545344           1      0      0       0       0       0       0       1
-GSM2545348           1      1      0       0       0       0       0       0
-GSM2545352           1      0      0       0       0       0       1       0
-GSM2545353           1      0      0       0       0       0       0       0
-GSM2545358           1      0      0       0       0       0       0       0
-GSM2545362           1      0      0       0       0       1       0       0
-GSM2545364           1      1      0       0       0       0       0       0
-GSM2545365           1      0      1       0       0       0       0       0
-GSM2545366           1      0      0       1       0       0       0       0
-GSM2545371           1      0      0       0       1       0       0       0
-GSM2545375           1      0      0       0       0       1       0       0
-GSM2545376           1      0      0       0       0       0       1       0
-GSM2545377           1      0      0       0       0       0       0       1
-           Spc.Day0 Spc.Day4
-GSM2545337        0        0
-GSM2545338        0        0
-GSM2545339        0        0
-GSM2545344        0        0
-GSM2545348        0        0
-GSM2545352        0        0
-GSM2545353        0        0
-GSM2545358        1        0
-GSM2545362        0        0
-GSM2545364        1        0
-GSM2545365        1        0
-GSM2545366        1        0
-GSM2545371        0        1
-GSM2545375        0        1
-GSM2545376        0        1
-GSM2545377        0        1</code></pre>
-</div>
-<div class="codewrapper sourceCode" id="cb55">
-<h3 class="code-label">R<i aria-hidden="true" data-feather="chevron-left"></i><i aria-hidden="true" data-feather="chevron-right"></i>
-</h3>
-<pre class="downlit sourceCode r">
-<code class="sourceCode R"><span><span class="va">vd</span><span class="op">$</span><span class="va">plotlist</span></span></code></pre>
-</div>
-<div class="codewrapper">
-<h3 class="code-label">OUTPUT<i aria-hidden="true" data-feather="chevron-left"></i><i aria-hidden="true" data-feather="chevron-right"></i>
-</h3>
-<pre class="output" tabindex="0"><code>$`time = Day0`</code></pre>
-</div>
-<figure><img src="../fig/08-extra-design-rendered-unnamed-chunk-13-1.png" style="display: block; margin: auto;" class="figure mx-auto d-block"></figure><div class="codewrapper">
-<h3 class="code-label">OUTPUT<i aria-hidden="true" data-feather="chevron-left"></i><i aria-hidden="true" data-feather="chevron-right"></i>
-</h3>
-<pre class="output" tabindex="0"><code>
-$`time = Day4`</code></pre>
-</div>
-<figure><img src="../fig/08-extra-design-rendered-unnamed-chunk-13-2.png" style="display: block; margin: auto;" class="figure mx-auto d-block"></figure><div id="keypoints1" class="callout keypoints">
-<div class="callout-square">
-<i class="callout-icon" data-feather="key"></i>
-</div>
-<div class="callout-inner">
-<h3 class="callout-title">Keypoints<a class="anchor" aria-label="anchor" href="#keypoints1"></a>
-</h3>
-<div class="callout-content">
-<ul>
-<li>The formula framework in R allows creation of design matrices, which
-details the variables expected to be associated with systematic
-differences in gene expression levels.</li>
-<li>Comparisons of interest can be defined using contrasts, which are
-linear combinations of the model coefficients.</li>
 </ul>
 </div>
 </div>
