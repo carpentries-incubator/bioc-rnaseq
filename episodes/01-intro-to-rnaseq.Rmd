@@ -111,6 +111,7 @@ Launch the ConfoundingExplorer application and familiarize yourself with the int
 
 # RNA-seq quantification: from reads to count matrix
 
+<img src="fig/rna-quant.jpeg" />
 
 The read sequences contained in the FASTQ files from the sequencer are typically not directly useful as they are, since we do not have the information about which gene or transcript they originate from. 
 Thus, the first processing step is to attempt to identify the location of origin for each read, and use this to obtain an estimate of the number of reads originating from a gene (or another features, such as an individual transcript).
