@@ -92,11 +92,11 @@
   RNA-seq analysis with Bioconductor
 </div>
 
-<aside class="col-md-12 lesson-progress"><div style="width: 68%" class="percentage">
-    68%
+<aside class="col-md-12 lesson-progress"><div style="width: 70%" class="percentage">
+    70%
   </div>
   <div class="progress incubator">
-    <div class="progress-bar incubator" role="progressbar" style="width: 68%" aria-valuenow="68" aria-label="Lesson Progress" aria-valuemin="0" aria-valuemax="100">
+    <div class="progress-bar incubator" role="progressbar" style="width: 70%" aria-valuenow="70" aria-label="Lesson Progress" aria-valuemin="0" aria-valuemax="100">
     </div>
   </div>
 </aside><div class="container">
@@ -285,7 +285,7 @@
       </div>
       <hr></nav><main id="main-content" class="main-content"><div class="container lesson-content">
         <h1>Gene set enrichment analysis</h1>
-        <p> Last updated on 2023-08-29 | 
+        <p> Last updated on 2023-09-02 | 
         
         <a href="https://github.com/carpentries-incubator/bioc-rnaseq/edit/main/episodes/06-gene-set-analysis.Rmd" class="external-link">Edit this page <i aria-hidden="true" data-feather="edit"></i></a></p>
         
@@ -840,9 +840,9 @@ distribution of its statistic.</p>
 <h3 class="code-label">OUTPUT<i aria-hidden="true" data-feather="chevron-left"></i><i aria-hidden="true" data-feather="chevron-right"></i>
 </h3>
 <pre class="output" tabindex="0"><code>Unit: microseconds
-   expr   min    lq    mean median    uq    max neval
- fisher 417.8 460.2 532.317 492.95 555.2 2304.5   100
-  hyper   1.9   2.9   5.123   5.45   5.8   28.6   100</code></pre>
+   expr   min     lq    mean median     uq   max neval
+ fisher 319.6 325.10 353.715 331.95 379.20 594.2   100
+  hyper   1.7   2.25   3.485   3.50   4.35  21.9   100</code></pre>
 </div>
 <p>It is very astonishing that <code>phyper()</code> is hundreds of
 times faster than <code>fisher.test()</code>. Main reason is in
@@ -1001,7 +1001,7 @@ convert a list to a two-column data frame?</p>
   Show me the solution
   </h4>
 </button>
-<div id="collapseSolution1" class="accordion-collapse collapse" aria-labelledby="headingSolution1" data-bs-parent="#accordionSolution1">
+<div id="collapseSolution1" class="accordion-collapse collapse" data-bs-parent="#accordionSolution1" aria-labelledby="headingSolution1">
 <div class="accordion-body">
 <div class="codewrapper sourceCode" id="cb38">
 <h3 class="code-label">R<i aria-hidden="true" data-feather="chevron-left"></i><i aria-hidden="true" data-feather="chevron-right"></i>
@@ -1624,7 +1624,7 @@ sets are automatically retrieved and processed from
 <div class="codewrapper">
 <h3 class="code-label">OUTPUT<i aria-hidden="true" data-feather="chevron-left"></i><i aria-hidden="true" data-feather="chevron-right"></i>
 </h3>
-<pre class="output" tabindex="0"><code>--&gt; Expected input gene ID: 70862,18551,12461,280667,70069,210529</code></pre>
+<pre class="output" tabindex="0"><code>--&gt; Expected input gene ID: 12050,78656,93757,723965,13411,11498</code></pre>
 </div>
 <div class="codewrapper">
 <h3 class="code-label">OUTPUT<i aria-hidden="true" data-feather="chevron-left"></i><i aria-hidden="true" data-feather="chevron-right"></i>
@@ -1895,12 +1895,12 @@ mmu00591                                      Linoleic acid metabolism - Mus mus
 mmu04913                                       Ovarian steroidogenesis - Mus musculus (house mouse)
 mmu04061 Viral protein interaction with cytokine and cytokine receptor - Mus musculus (house mouse)
          GeneRatio BgRatio       pvalue     p.adjust       qvalue
-mmu00590    16/452 85/9328 2.532915e-06 0.0007750721 0.0006852203
-mmu00565    11/452 48/9328 1.357006e-05 0.0015187981 0.0013427283
-mmu00592     8/452 25/9328 1.489018e-05 0.0015187981 0.0013427283
-mmu00591    11/452 50/9328 2.054723e-05 0.0015718629 0.0013896415
-mmu04913    12/452 63/9328 4.048814e-05 0.0024778744 0.0021906217
-mmu04061    14/452 95/9328 1.783840e-04 0.0081695102 0.0072224428
+mmu00590    16/452 85/9334 2.512075e-06 0.0007686949 0.0006795824
+mmu00565    11/452 48/9334 1.348878e-05 0.0015117273 0.0013364772
+mmu00592     8/452 25/9334 1.482086e-05 0.0015117273 0.0013364772
+mmu00591    11/452 50/9334 2.042533e-05 0.0015625374 0.0013813971
+mmu04913    12/452 63/9334 4.023622e-05 0.0024624567 0.0021769913
+mmu04061    14/452 95/9334 1.772022e-04 0.0081077454 0.0071678382
                                                                                                        geneID
 mmu00590 18783/19215/211429/329502/78390/19223/67103/242546/13118/18781/18784/11689/232889/15446/237625/11687
 mmu00565                               18783/211429/329502/78390/22239/18781/18784/232889/320981/237625/53897
@@ -2622,8 +2622,8 @@ topological relations in the GO hierarchy.<a href="#fnref7" class="footnote-back
         <p>Materials licensed under <a href="LICENSE.html">CC-BY 4.0</a> by the authors</p>
         
         <p><a href="https://creativecommons.org/licenses/by-sa/4.0/" class="external-link">Template licensed under CC-BY 4.0</a> by <a href="https://carpentries.org" class="external-link">The Carpentries</a></p>
-        <p>Built with <a href="https://github.com/carpentries/sandpaper" class="external-link">sandpaper (0.12.5)</a>,
-        <a href="https://github.com/carpentries/pegboard" class="external-link">pegboard (0.6.0)</a>,
+        <p>Built with <a href="https://github.com/carpentries/sandpaper/tree/0.12.4" class="external-link">sandpaper (0.12.4)</a>,
+        <a href="https://github.com/carpentries/pegboard/tree/0.6.0" class="external-link">pegboard (0.6.0)</a>,
       and <a href="https://github.com/mblue9/varnish/tree/3403ad0dd37f7641c6442330fcc182937e7964c5" class="external-link">varnish (0.2.16)</a>.</p>
 			</div>
 		</footer></div> <!-- / div.container -->
@@ -2645,8 +2645,8 @@ topological relations in the GO hierarchy.<a href="#fnref7" class="footnote-back
   "url": "https://carpentries-incubator.github.io/bioc-rnaseq/06-gene-set-analysis.html",
   "identifier": "https://carpentries-incubator.github.io/bioc-rnaseq/06-gene-set-analysis.html",
   "dateCreated": "2020-09-15",
-  "dateModified": "2023-08-29",
-  "datePublished": "2023-08-29"
+  "dateModified": "2023-09-02",
+  "datePublished": "2023-09-02"
 }
 
   </script><script>

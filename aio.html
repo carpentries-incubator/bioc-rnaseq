@@ -335,7 +335,7 @@
         
 <section id="aio-01-intro-to-rnaseq"><p>Content from <a href="01-intro-to-rnaseq.html">Introduction to RNA-seq</a></p>
 <hr>
-<p> Last updated on 2023-08-29 | 
+<p> Last updated on 2023-09-02 | 
         
         <a href="https://github.com/carpentries-incubator/bioc-rnaseq/edit/main/episodes/01-intro-to-rnaseq.Rmd" class="external-link">Edit this page <i aria-hidden="true" data-feather="edit"></i></a></p>
 <div class="text-end">
@@ -355,8 +355,6 @@ experiment?</li>
 read counts per gene and sample?</li>
 <li>Where does one find information about annotated genes for a given
 organism?</li>
-<li>Which are the most commonly used Bioconductor packages for
-statistical analysis of RNA-seq data?</li>
 <li>What are the typical steps in an RNA-seq analysis?</li>
 </ul>
 </div>
@@ -380,38 +378,140 @@ RNA-seq analyses.</li>
 </div>
 </div>
 </div>
-<div id="contribute" class="callout callout">
+<div class="section level1">
+<h1 id="what-are-we-measuring-in-an-rna-seq-experiment">What are we measuring in an RNA-seq experiment?<a class="anchor" aria-label="anchor" href="#what-are-we-measuring-in-an-rna-seq-experiment"></a>
+</h1>
+<figure><img src="fig/alternative_splicing_sub.png" class="figure mx-auto d-block"></figure><p>In order to produce an RNA molecule, a stretch of DNA is first
+transcribed into mRNA. Subsequently, intronic regions are spliced out,
+and exonic regions are combined into different <em>isoforms</em> of a
+gene.</p>
+<figure><img src="fig/rnaseq_martin_wang.png" class="figure mx-auto d-block"></figure><p>(figure adapted from <a href="https://www.nature.com/articles/nrg3068" class="external-link">Martin &amp; Wang
+(2011)</a>).</p>
+<p>In a typical RNA-seq experiment, RNA molecules are first collected
+from a sample of interest. After a potential enrichment for molecules
+with polyA tails (predominantly mRNA), or depletion of otherwise highly
+abundant ribosomal RNA, the remaining molecules are fragmented into
+smaller pieces (there are also long-read protocols where entire
+molecules are considered, but those are not the focus of this lesson).
+It is important to keep in mind that because of the splicing excluding
+intronic sequences, an RNA molecule (and hence a generated fragment) may
+not correspond to an uninterrupted region of the genome. The RNA
+fragments are then reverse transcribed into cDNA, whereafter sequencing
+adapters are added to each end. These adapters allow the fragments to
+attach to the flow cell. Once attached, each fragment will be heavily
+amplified to generate a cluster of identical sequences on the flow cell.
+The sequencer then determines the sequence of the first 50-200
+nucleotides of the cDNA fragments in each such cluster, starting from
+one end, which corresponds to a <em>read</em>. Many data sets are
+generated with so called paired-end protocols, in which the fragments
+are read from both ends. Millions of such reads (or pairs of reads) will
+be generated in an experiment, and these will be represented in a (pair
+of) FASTQ files. Each read is represented by four consecutive lines in
+such a file: first a line with a unique read identifier, next the
+inferred sequence of the read, then another identifier line, and finally
+a line containing the base quality for each inferred nucleotide,
+representing the probability that the nucleotide in the corresponding
+position has been correctly identified.</p>
+<div id="challenge-discuss-the-following-points-with-your-neighbor" class="callout discussion">
 <div class="callout-square">
-<i class="callout-icon" data-feather="bell"></i>
+<i class="callout-icon" data-feather="message-circle"></i>
 </div>
-<div id="contribute" class="callout-inner">
-<h3 class="callout-title">Contribute!<a class="anchor" aria-label="anchor" href="#contribute"></a>
+<div id="challenge-discuss-the-following-points-with-your-neighbor" class="callout-inner">
+<h3 class="callout-title">Challenge: Discuss the following points with
+your neighbor<a class="anchor" aria-label="anchor" href="#challenge-discuss-the-following-points-with-your-neighbor"></a>
 </h3>
 <div class="callout-content">
-<p>This episode is intended to introduce important concepts in RNA-seq,
-such as the biology of RNA-seq, typical research questions, experimental
-design, data processing, QC issues and ways around them, functional
-analysis of the expressed genes and use of Bioconductor for RNA-seq
-analysis pipelines to bring everyone up to speed. See this <a href="https://docs.google.com/document/d/12hUqVo2MhgYH9IT8ShJKSZgeMLzjeUh2EKdxM_siWwM" class="external-link">link</a>
-on how to contribute</p>
+<ol style="list-style-type: decimal">
+<li>What are potential advantages and disadvantages of paired-end
+protocols compared to only sequencing one end of a fragment?</li>
+<li>What quality assessment can you think of that would be useful to
+perform on the FASTQ files with read sequences?</li>
+</ol>
+</div>
+</div>
+</div>
+</div>
+<div class="section level1">
+<h1 id="experimental-design-considerations">Experimental design considerations<a class="anchor" aria-label="anchor" href="#experimental-design-considerations"></a>
+</h1>
+<p>Before starting to collect data, it is essential to take some time to
+think about the design of the experiment. Experimental design concerns
+the organization of experiments with the purpose of making sure that the
+right type of data, and enough of it, is available to answer the
+questions of interest as efficiently as possible. Aspects such as which
+conditions or sample groups to consider, how many replicates to collect,
+and how to plan the data collection in practice are important questions
+to consider. Many high-throughput biological experiments (including
+RNA-seq) are sensitive to ambient conditions, and it is often difficult
+to directly compare measurements that have been done on different days,
+by different analysts, in different centers, or using different batches
+of reagents. For this reason, it is very important to design experiments
+properly, to make it possible to disentangle different types of (primary
+and secondary) effects.</p>
+<figure><img src="fig/factors-affecting-measurements.png" class="figure mx-auto d-block"></figure><p>(figure from <a href="https://www.amazon.com/Experimental-Design-Laboratory-Biologists-Reproducibility/dp/1107424887" class="external-link">Lazic
+(2017)</a>).</p>
+<p>To explore the impact of experimental design on the ability to answer
+questions of interest, we are going to use an interactive application,
+provided in the <a href="https://csoneson.github.io/ConfoundingExplorer/" class="external-link">ConfoundingExplorer</a>
+package.</p>
+<div id="challenge" class="callout discussion">
+<div class="callout-square">
+<i class="callout-icon" data-feather="message-circle"></i>
+</div>
+<div id="challenge" class="callout-inner">
+<h3 class="callout-title">Challenge<a class="anchor" aria-label="anchor" href="#challenge"></a>
+</h3>
+<div class="callout-content">
+<p>Launch the ConfoundingExplorer application and familiarize yourself
+with the interface.</p>
+</div>
+</div>
+</div>
+<div id="challenge-1" class="callout discussion">
+<div class="callout-square">
+<i class="callout-icon" data-feather="message-circle"></i>
+</div>
+<div id="challenge-1" class="callout-inner">
+<h3 class="callout-title">Challenge<a class="anchor" aria-label="anchor" href="#challenge-1"></a>
+</h3>
+<div class="callout-content">
+<ol style="list-style-type: decimal">
+<li>For a balanced design (equal distribution of replicates between the
+two groups in each batch), what is the effect of increasing the strength
+of the batch effect? Does it matter whether one adjusts for the batch
+effect or not?</li>
+<li>For an increasingly unbalanced design (most or all replicates of one
+group coming from one batch), what is the effect of increasing the
+strength of the batch effect? Does it matter whether one adjusts for the
+batch effect or not?</li>
+</ol>
+</div>
 </div>
 </div>
 </div>
 <div class="section level1">
 <h1 id="rna-seq-quantification-from-reads-to-count-matrix">RNA-seq quantification: from reads to count matrix<a class="anchor" aria-label="anchor" href="#rna-seq-quantification-from-reads-to-count-matrix"></a>
 </h1>
-<p>There is a plethora of RNA quantification pipelines, and the most
-common approaches can be categorized into three main types:</p>
+<p>The read sequences contained in the FASTQ files from the sequencer
+are typically not directly useful as they are, since we do not have the
+information about which gene or transcript they originate from. Thus,
+the first processing step is to attempt to identify the location of
+origin for each read, and use this to obtain an estimate of the number
+of reads originating from a gene (or another features, such as an
+individual transcript). This can then be used as a proxy for the
+abundance, or expression level, of the gene. There is a plethora of RNA
+quantification pipelines, and the most common approaches can be
+categorized into three main types:</p>
 <ol style="list-style-type: decimal">
 <li><p>Align reads to the genome, and count the number of reads that map
-to each gene. This is the one of simplest methods. For species for which
-the transcriptome is poorly annotated, this would be the preferred
-approach. Example: <code>STAR</code> alignment to GRCm39 +
+within the exons of each gene. This is the one of simplest methods. For
+species for which the transcriptome is poorly annotated, this would be
+the preferred approach. Example: <code>STAR</code> alignment to GRCm39 +
 <code>Rsubread</code> <a href="https://doi.org/10.1093%2Fnar%2Fgkz114" class="external-link">featureCounts</a></p></li>
 <li><p>Align reads to the transcriptome, quantify transcript expression,
 and summarize transcript expression into gene expression. This approach
-can produce accurate quantification results based <a href="https://doi.org/10.1186/s13059-016-0940-1" class="external-link">independent
-benchmarking</a>, particularly for high-quality samples without DNA
+can produce accurate quantification results (<a href="https://doi.org/10.1186/s13059-016-0940-1" class="external-link">independent
+benchmarking</a>), particularly for high-quality samples without DNA
 contamination. Example: RSEM quantification using
 <code>rsem-calculate-expression --star</code> on the GENCODE GRCh38
 transcriptome + <code>tximport</code></p></li>
@@ -425,28 +525,27 @@ and GC bias correction. Example: <code>salmon quant --gcBias</code> +
 </ol>
 <p>At typical sequencing read depth, gene expression quantification is
 often more accurate than transcript expression quantification. However,
-gene expression quantification can be <a href="https://doi.org/10.12688/f1000research.7563.1" class="external-link">improved</a> by
-first quantifying transcript expression and then summarizing it to gene
-expression.</p>
+differential gene expression analyses can be <a href="https://doi.org/10.12688/f1000research.7563.1" class="external-link">improved</a> by
+having access also to transcript-level quantifications.</p>
 <p>Other tools used in RNA-seq quantification include: TopHat2, bowtie2,
 kallisto, HTseq, among many others.</p>
-<p>Choosing the appropriate RNA-seq quantification would depend on the
+<p>The choice of an appropriate RNA-seq quantification depends on the
 quality of the transcriptome annotation, the quality of the RNA-seq
 library preparation, the presence of contaminating sequences, among many
-factors. Often time, it would be important to compare the quantification
+factors. Often, it can be informative to compare the quantification
 results of multiple approaches.</p>
-<p>Because the best quantification method is species and
+<p>Because the best quantification method is species- and
 experiment-dependent, and often requires large amounts of computing
 resources, this workshop will not cover any specifics of how to generate
 the counts. Instead, we recommend checking out the references above and
 consulting with a local bioinformatics expert if you need help.</p>
-<div id="challenge-discuss-the-following-points-with-your-neighbor" class="callout discussion">
+<div id="challenge-discuss-the-following-points-with-your-neighbor-1" class="callout discussion">
 <div class="callout-square">
 <i class="callout-icon" data-feather="message-circle"></i>
 </div>
-<div id="challenge-discuss-the-following-points-with-your-neighbor" class="callout-inner">
+<div id="challenge-discuss-the-following-points-with-your-neighbor-1" class="callout-inner">
 <h3 class="callout-title">Challenge: Discuss the following points with
-your neighbor<a class="anchor" aria-label="anchor" href="#challenge-discuss-the-following-points-with-your-neighbor"></a>
+your neighbor<a class="anchor" aria-label="anchor" href="#challenge-discuss-the-following-points-with-your-neighbor-1"></a>
 </h3>
 <div class="callout-content">
 <ol style="list-style-type: decimal">
@@ -461,6 +560,67 @@ gain access?</li>
 </div>
 </div>
 </div>
+</div>
+<div class="section level1">
+<h1 id="finding-the-reference-sequences">Finding the reference sequences<a class="anchor" aria-label="anchor" href="#finding-the-reference-sequences"></a>
+</h1>
+<p>In order to quantify abundances of known genes or transcripts from
+RNA-seq data, we need a reference database informing us of the sequence
+of these features, to which we can then compare our reads. This
+information can be obtained from different online repositories. It is
+highly recommended to choose one of these for a particular project, and
+not mix information from different sources. Depending on the
+quantification tool you have chosen, you will need different types of
+reference information. If you are aligning your reads to the genome and
+investigating the overlap with known annotated features, you will need
+the full genome sequence (provided in a fasta file) and a file that
+tells you the genomic location of each annotated feature (typically
+provided in a gtf file). If you are mapping your reads to the
+transcriptome, you will instead need a file with the sequence of each
+transcript (again, a fasta file).</p>
+<ul>
+<li>If you are working with mouse or human samples, the <a href="https://www.gencodegenes.org/" class="external-link">GENCODE project</a> provides
+well-curated reference files.</li>
+<li>
+<a href="https://www.ensembl.org/info/data/ftp/index.html" class="external-link">Ensembl</a>
+provides reference files for a large set of organisms, including <a href="https://plants.ensembl.org/info/data/ftp/index.html" class="external-link">plants</a>
+and <a href="https://fungi.ensembl.org/info/data/ftp/index.html" class="external-link">fungi</a>.</li>
+<li>
+<a href="https://hgdownload.soe.ucsc.edu/downloads.html" class="external-link">UCSC</a>
+also provides reference files for many organisms.</li>
+</ul>
+<div id="challenge-2" class="callout discussion">
+<div class="callout-square">
+<i class="callout-icon" data-feather="message-circle"></i>
+</div>
+<div id="challenge-2" class="callout-inner">
+<h3 class="callout-title">Challenge<a class="anchor" aria-label="anchor" href="#challenge-2"></a>
+</h3>
+<div class="callout-content">
+<p>Download the latest mouse transcriptome fasta file from GENCODE and
+uncompress it. What do the entries look like? Tip: to read the file into
+R, consider the <code>Biostrings</code> package.</p>
+</div>
+</div>
+</div>
+</div>
+<div class="section level1">
+<h1 id="where-are-we-heading-towards-in-this-workshop">Where are we heading towards in this workshop?<a class="anchor" aria-label="anchor" href="#where-are-we-heading-towards-in-this-workshop"></a>
+</h1>
+<p>During the coming two days, we will discuss and practice how to
+perform differential expression analysis with Bioconductor, and how to
+interpret the results. We will start from a count matrix, and thus
+assume that the initial quality assessment and quantification of gene
+expression have already been done. The outcome of a differential
+expression analysis is often represented using graphical
+representations, such as MA plots and heatmaps (see below for
+examples).</p>
+<p><img src="fig/maPlot-example.png" class="figure"><img src="fig/heatmap-example.png" class="figure"></p>
+<p>In the following episodes we will learn, among other things, how to
+generate and interpret these plots. It is also common to perform
+follow-up analyses to investigate whether there is a functional
+relationship among the top-ranked genes, so called gene set (enrichment)
+analysis, which will also be covered in a later episode.</p>
 <div id="keypoints1" class="callout keypoints">
 <div class="callout-square">
 <i class="callout-icon" data-feather="key"></i>
@@ -485,16 +645,13 @@ use a probabilistic approach to estimate the abundance of each gene or
 transcript.</li>
 <li>Information about annotated genes can be accessed via several
 sources, including Ensembl, UCSC and GENCODE.</li>
-<li>The most commonly used Bioconductor packages for statistical
-analysis of RNA-seq data are <code>DESeq2</code>, <code>edgeR</code> and
-<code>limma</code>.</li>
 </ul>
 </div>
 </div>
 </div>
 </div></section><section id="aio-02-setup"><p>Content from <a href="02-setup.html">RStudio Project and Experimental Data</a></p>
 <hr>
-<p> Last updated on 2023-08-29 | 
+<p> Last updated on 2023-09-02 | 
         
         <a href="https://github.com/carpentries-incubator/bioc-rnaseq/edit/main/episodes/02-setup.Rmd" class="external-link">Edit this page <i aria-hidden="true" data-feather="edit"></i></a></p>
 <div class="text-end">
@@ -839,7 +996,7 @@ downloading datasets from the internet.</li>
 </div>
 </section></section><section id="aio-03-import-annotate"><p>Content from <a href="03-import-annotate.html">Importing and annotating quantified data into R</a></p>
 <hr>
-<p> Last updated on 2023-08-29 | 
+<p> Last updated on 2023-09-02 | 
         
         <a href="https://github.com/carpentries-incubator/bioc-rnaseq/edit/main/episodes/03-import-annotate.Rmd" class="external-link">Edit this page <i aria-hidden="true" data-feather="edit"></i></a></p>
 <div class="text-end">
@@ -1827,9 +1984,8 @@ loaded via a namespace (and not attached):
 [22] KEGGREST_1.40.0         cachem_1.0.8            xfun_0.39              
 [25] bit64_4.0.5             RSQLite_2.3.1           memoise_2.0.1          
 [28] cli_3.6.1               zlibbioc_1.46.0         grid_4.3.1             
-[31] rstudioapi_0.14         vctrs_0.6.3             evaluate_0.21          
-[34] RCurl_1.98-1.12         httr_1.4.6              pkgconfig_2.0.3        
-[37] tools_4.3.1            </code></pre>
+[31] vctrs_0.6.3             evaluate_0.21           RCurl_1.98-1.12        
+[34] httr_1.4.6              pkgconfig_2.0.3         tools_4.3.1            </code></pre>
 </div>
 <div id="keypoints1" class="callout keypoints">
 <div class="callout-square">
@@ -1853,7 +2009,7 @@ analysis, with gene symbols added for easier interpretation.</li>
 </div>
 </section></section><section id="aio-04-exploratory-qc"><p>Content from <a href="04-exploratory-qc.html">Exploratory analysis and quality control</a></p>
 <hr>
-<p> Last updated on 2023-08-29 | 
+<p> Last updated on 2023-09-02 | 
         
         <a href="https://github.com/carpentries-incubator/bioc-rnaseq/edit/main/episodes/04-exploratory-qc.Rmd" class="external-link">Edit this page <i aria-hidden="true" data-feather="edit"></i></a></p>
 <div class="text-end">
@@ -2259,7 +2415,7 @@ loaded via a namespace (and not attached):
 [52] png_0.1-8               evaluate_0.21           knitr_1.43             
 [55] doParallel_1.0.17       rlang_1.1.1             Rcpp_1.0.11            
 [58] glue_1.6.2              BiocManager_1.30.21     renv_1.0.2             
-[61] rstudioapi_0.14         R6_2.5.1                zlibbioc_1.46.0        </code></pre>
+[61] R6_2.5.1                zlibbioc_1.46.0        </code></pre>
 </div>
 <div id="keypoints1" class="callout keypoints">
 <div class="callout-square">
@@ -2283,7 +2439,7 @@ work directly on the raw counts.</li>
 </div>
 </section></section><section id="aio-05-differential-expression"><p>Content from <a href="05-differential-expression.html">Differential expression analysis</a></p>
 <hr>
-<p> Last updated on 2023-08-29 | 
+<p> Last updated on 2023-09-02 | 
         
         <a href="https://github.com/carpentries-incubator/bioc-rnaseq/edit/main/episodes/05-differential-expression.Rmd" class="external-link">Edit this page <i aria-hidden="true" data-feather="edit"></i></a></p>
 <div class="text-end">
@@ -3055,7 +3211,7 @@ beneficial.</li>
 </div>
 </section></section><section id="aio-06-gene-set-analysis"><p>Content from <a href="06-gene-set-analysis.html">Gene set enrichment analysis</a></p>
 <hr>
-<p> Last updated on 2023-08-29 | 
+<p> Last updated on 2023-09-02 | 
         
         <a href="https://github.com/carpentries-incubator/bioc-rnaseq/edit/main/episodes/06-gene-set-analysis.Rmd" class="external-link">Edit this page <i aria-hidden="true" data-feather="edit"></i></a></p>
 <div class="text-end">
@@ -3650,9 +3806,9 @@ distribution of its statistic.</p>
 <h3 class="code-label">OUTPUT<i aria-hidden="true" data-feather="chevron-left"></i><i aria-hidden="true" data-feather="chevron-right"></i>
 </h3>
 <pre class="output" tabindex="0"><code>Unit: microseconds
-   expr   min    lq    mean median    uq    max neval
- fisher 417.8 460.2 532.317 492.95 555.2 2304.5   100
-  hyper   1.9   2.9   5.123   5.45   5.8   28.6   100</code></pre>
+   expr   min     lq    mean median     uq   max neval
+ fisher 319.6 325.10 353.715 331.95 379.20 594.2   100
+  hyper   1.7   2.25   3.485   3.50   4.35  21.9   100</code></pre>
 </div>
 <p>It is very astonishing that <code>phyper()</code> is hundreds of
 times faster than <code>fisher.test()</code>. Main reason is in
@@ -3814,7 +3970,7 @@ convert a list to a two-column data frame?</p>
   Show me the solution
   </h4>
 </button>
-<div id="collapseSolution1" class="accordion-collapse collapse" aria-labelledby="headingSolution1" data-bs-parent="#accordionSolution1">
+<div id="collapseSolution1" class="accordion-collapse collapse" data-bs-parent="#accordionSolution1" aria-labelledby="headingSolution1">
 <div class="accordion-body">
 <div class="codewrapper sourceCode" id="cb38">
 <h3 class="code-label">R<i aria-hidden="true" data-feather="chevron-left"></i><i aria-hidden="true" data-feather="chevron-right"></i>
@@ -4472,7 +4628,7 @@ sets are automatically retrieved and processed from
 <div class="codewrapper">
 <h3 class="code-label">OUTPUT<i aria-hidden="true" data-feather="chevron-left"></i><i aria-hidden="true" data-feather="chevron-right"></i>
 </h3>
-<pre class="output" tabindex="0"><code>--&gt; Expected input gene ID: 70862,18551,12461,280667,70069,210529</code></pre>
+<pre class="output" tabindex="0"><code>--&gt; Expected input gene ID: 12050,78656,93757,723965,13411,11498</code></pre>
 </div>
 <div class="codewrapper">
 <h3 class="code-label">OUTPUT<i aria-hidden="true" data-feather="chevron-left"></i><i aria-hidden="true" data-feather="chevron-right"></i>
@@ -4750,12 +4906,12 @@ mmu00591                                      Linoleic acid metabolism - Mus mus
 mmu04913                                       Ovarian steroidogenesis - Mus musculus (house mouse)
 mmu04061 Viral protein interaction with cytokine and cytokine receptor - Mus musculus (house mouse)
          GeneRatio BgRatio       pvalue     p.adjust       qvalue
-mmu00590    16/452 85/9328 2.532915e-06 0.0007750721 0.0006852203
-mmu00565    11/452 48/9328 1.357006e-05 0.0015187981 0.0013427283
-mmu00592     8/452 25/9328 1.489018e-05 0.0015187981 0.0013427283
-mmu00591    11/452 50/9328 2.054723e-05 0.0015718629 0.0013896415
-mmu04913    12/452 63/9328 4.048814e-05 0.0024778744 0.0021906217
-mmu04061    14/452 95/9328 1.783840e-04 0.0081695102 0.0072224428
+mmu00590    16/452 85/9334 2.512075e-06 0.0007686949 0.0006795824
+mmu00565    11/452 48/9334 1.348878e-05 0.0015117273 0.0013364772
+mmu00592     8/452 25/9334 1.482086e-05 0.0015117273 0.0013364772
+mmu00591    11/452 50/9334 2.042533e-05 0.0015625374 0.0013813971
+mmu04913    12/452 63/9334 4.023622e-05 0.0024624567 0.0021769913
+mmu04061    14/452 95/9334 1.772022e-04 0.0081077454 0.0071678382
                                                                                                        geneID
 mmu00590 18783/19215/211429/329502/78390/19223/67103/242546/13118/18781/18784/11689/232889/15446/237625/11687
 mmu00565                               18783/211429/329502/78390/22239/18781/18784/232889/320981/237625/53897
@@ -5476,7 +5632,7 @@ topological relations in the GO hierarchy.<a href="#fnref7" class="footnote-back
 </ol>
 </div></section><section id="aio-07-next-steps"><p>Content from <a href="07-next-steps.html">Next steps</a></p>
 <hr>
-<p> Last updated on 2023-08-29 | 
+<p> Last updated on 2023-09-02 | 
         
         <a href="https://github.com/carpentries-incubator/bioc-rnaseq/edit/main/episodes/07-next-steps.Rmd" class="external-link">Edit this page <i aria-hidden="true" data-feather="edit"></i></a></p>
 <div class="text-end">
@@ -5576,7 +5732,7 @@ quantified.</li>
 </div>
 </section></section><section id="aio-08-extra-design"><p>Content from <a href="08-extra-design.html">Extra exploration of design matrices</a></p>
 <hr>
-<p> Last updated on 2023-08-29 | 
+<p> Last updated on 2023-09-02 | 
         
         <a href="https://github.com/carpentries-incubator/bioc-rnaseq/edit/main/episodes/08-extra-design.Rmd" class="external-link">Edit this page <i aria-hidden="true" data-feather="edit"></i></a></p>
 <div class="text-end">
@@ -5943,7 +6099,7 @@ mean expression of a gene between male and female mice?</p>
   Show me the solution
   </h4>
 </button>
-<div id="collapseSolution1" class="accordion-collapse collapse" aria-labelledby="headingSolution1" data-bs-parent="#accordionSolution1">
+<div id="collapseSolution1" class="accordion-collapse collapse" data-bs-parent="#accordionSolution1" aria-labelledby="headingSolution1">
 <div class="accordion-body">
 <div class="codewrapper sourceCode" id="cb19">
 <h3 class="code-label">R<i aria-hidden="true" data-feather="chevron-left"></i><i aria-hidden="true" data-feather="chevron-right"></i>
@@ -6033,7 +6189,7 @@ Day4, Day8) in the male spinal cord samples, and visualize it using
   Show me the solution
   </h4>
 </button>
-<div id="collapseSolution2" class="accordion-collapse collapse" aria-labelledby="headingSolution2" data-bs-parent="#accordionSolution2">
+<div id="collapseSolution2" class="accordion-collapse collapse" data-bs-parent="#accordionSolution2" aria-labelledby="headingSolution2">
 <div class="accordion-body">
 <div class="codewrapper sourceCode" id="cb25">
 <h3 class="code-label">R<i aria-hidden="true" data-feather="chevron-left"></i><i aria-hidden="true" data-feather="chevron-right"></i>
@@ -6594,8 +6750,8 @@ linear combinations of the model coefficients.</li>
         <p>Materials licensed under <a href="LICENSE.html">CC-BY 4.0</a> by the authors</p>
         
         <p><a href="https://creativecommons.org/licenses/by-sa/4.0/" class="external-link">Template licensed under CC-BY 4.0</a> by <a href="https://carpentries.org" class="external-link">The Carpentries</a></p>
-        <p>Built with <a href="https://github.com/carpentries/sandpaper" class="external-link">sandpaper (0.12.5)</a>,
-        <a href="https://github.com/carpentries/pegboard" class="external-link">pegboard (0.6.0)</a>,
+        <p>Built with <a href="https://github.com/carpentries/sandpaper/tree/0.12.4" class="external-link">sandpaper (0.12.4)</a>,
+        <a href="https://github.com/carpentries/pegboard/tree/0.6.0" class="external-link">pegboard (0.6.0)</a>,
       and <a href="https://github.com/mblue9/varnish/tree/3403ad0dd37f7641c6442330fcc182937e7964c5" class="external-link">varnish (0.2.16)</a>.</p>
 			</div>
 		</footer>
@@ -6618,8 +6774,8 @@ linear combinations of the model coefficients.</li>
   "url": "https://carpentries-incubator.github.io/bioc-rnaseq/aio.html",
   "identifier": "https://carpentries-incubator.github.io/bioc-rnaseq/aio.html",
   "dateCreated": "2020-09-15",
-  "dateModified": "2023-08-29",
-  "datePublished": "2023-08-29"
+  "dateModified": "2023-09-02",
+  "datePublished": "2023-09-02"
 }
 
   </script><script>
