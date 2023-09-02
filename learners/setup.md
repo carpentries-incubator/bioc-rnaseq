@@ -12,11 +12,13 @@ Additionally, you will also need to install the following packages that will be 
 ```r
 install.packages("BiocManager")
 BiocManager::install(c("tidyverse", "SummarizedExperiment",
-                       "ExploreModelMatrix", "AnnotationDbi", "org.Hs.eg.db", "org.Mm.eg.db",
+                       "ExploreModelMatrix", "AnnotationDbi", "org.Hs.eg.db", 
+                       "org.Mm.eg.db", "csoneson/ConfoundingExplorer",
                        "DESeq2", "vsn", "ComplexHeatmap", "hgu95av2.db",
-                       "RColorBrewer", "hexbin", "cowplot",
+                       "RColorBrewer", "hexbin", "cowplot", "iSEE",
                        "clusterProfiler", "enrichplot", "kableExtra",
-                       "msigdbr", "gplots", "ggplot2", "simplifyEnrichment","apeglm", "microbenchmark"))
+                       "msigdbr", "gplots", "ggplot2", "simplifyEnrichment",
+                       "apeglm", "microbenchmark", "Biostrings"))
 
 ```
 
