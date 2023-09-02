@@ -313,7 +313,7 @@ loaded via a namespace (and not attached):
 [52] png_0.1-8               evaluate_0.21           knitr_1.43             
 [55] doParallel_1.0.17       rlang_1.1.1             Rcpp_1.0.11            
 [58] glue_1.6.2              BiocManager_1.30.21     renv_1.0.2             
-[61] rstudioapi_0.14         R6_2.5.1                zlibbioc_1.46.0        
+[61] R6_2.5.1                zlibbioc_1.46.0        
 ```
 
 :::::::::::::::::::::::::::::::::::::::: keypoints

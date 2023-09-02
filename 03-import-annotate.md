@@ -730,9 +730,8 @@ loaded via a namespace (and not attached):
 [22] KEGGREST_1.40.0         cachem_1.0.8            xfun_0.39              
 [25] bit64_4.0.5             RSQLite_2.3.1           memoise_2.0.1          
 [28] cli_3.6.1               zlibbioc_1.46.0         grid_4.3.1             
-[31] rstudioapi_0.14         vctrs_0.6.3             evaluate_0.21          
-[34] RCurl_1.98-1.12         httr_1.4.6              pkgconfig_2.0.3        
-[37] tools_4.3.1            
+[31] vctrs_0.6.3             evaluate_0.21           RCurl_1.98-1.12        
+[34] httr_1.4.6              pkgconfig_2.0.3         tools_4.3.1            
 ```
 
 ::: keypoints
