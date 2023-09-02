@@ -70,6 +70,23 @@ For this reason, it is very important to design experiments properly, to make it
 
 (figure from [Lazic (2017)](https://www.amazon.com/Experimental-Design-Laboratory-Biologists-Reproducibility/dp/1107424887)).
 
+:::::::::::::::::::::::::::::::::::::::  challenge
+
+## Challenge: Discuss with your neighbor
+
+1. Why is it essential to have replicates? 
+
+::::::::::::::::::::::::::::::::::::::::::::::::::
+
+Importantly, not all replicates are equally useful, from a statistical point of view. 
+One common way to classify the different types of replicates is as 'biological' and 'technical', where the latter are typically used to test the reproducibility of the measurement device, while biological replicates inform about the variability between different samples from a population of interest.
+Another scheme classifies replicates (or units) into 'biological', 'experimental' and 'observational'. 
+Here, biological units are entities we want to make inferences about (e.g., animals, persons).
+Replication of biological units is required to make a general statement of the effect of a treatment - we can not draw a conclusion about the effect of drug on a population of mice by studying a single mouse only.
+Experimental units are the smallest entities that can be _independently assigned to a treatment_ (e.g., animal, litter, cage, well). 
+Only replication of experimental units constitute true replication.
+Observational units, finally, are entities at which measurements are made.
+
 
 To explore the impact of experimental design on the ability to answer questions of interest, we are going to use an interactive application, provided in the [ConfoundingExplorer](https://csoneson.github.io/ConfoundingExplorer/) package. 
 

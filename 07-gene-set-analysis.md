@@ -196,7 +196,7 @@ plot(venn(list("sexDEgenes"  = sexDEgenes,
 title(paste0("|universe| = ", length(totalGenes)))
 ```
 
-<img src="fig/06-gene-set-analysis-rendered-unnamed-chunk-8-1.png" style="display: block; margin: auto;" />
+<img src="fig/07-gene-set-analysis-rendered-unnamed-chunk-8-1.png" style="display: block; margin: auto;" />
 
 In the Venn diagram, we can observe that around 1.1% (13/1134) of genes in the
 _XY gene set_ are DE. Compared to the global fraction of DE genes (54/21198 =
@@ -380,7 +380,7 @@ genes are marked as non-DE genes (in blue). We grab $n_{+1}$ genes (the size
 of the gene set) from the box and we want to ask **what is the probability of
 having $n_{11}$ DE genes in our hand?**
 
-<img src="fig/06-gene-set-analysis-rendered-unnamed-chunk-15-1.png" width="80%" style="display: block; margin: auto;" />
+<img src="fig/07-gene-set-analysis-rendered-unnamed-chunk-15-1.png" width="80%" style="display: block; margin: auto;" />
 
 We first calculate the total number of ways of picking $n_{+1}$ genes from
 total $n$ genes, without distinguishing whether they are DE or not:
@@ -501,9 +501,9 @@ microbenchmark(
 
 ```{.output}
 Unit: microseconds
-   expr   min     lq    mean median     uq   max neval
- fisher 319.6 325.10 353.715 331.95 379.20 594.2   100
-  hyper   1.7   2.25   3.485   3.50   4.35  21.9   100
+   expr   min     lq    mean median    uq   max neval
+ fisher 281.3 286.50 298.429  291.2 303.3 530.4   100
+  hyper   1.6   1.85   2.576    2.3   2.6  18.5   100
 ```
 
 It is very astonishing that `phyper()` is hundreds of times faster than
@@ -1231,7 +1231,7 @@ resTimeGO = enrichGO(gene = timeDEgenes,
 ```
 
 ```{.output}
---> Expected input gene ID: 12050,78656,93757,723965,13411,11498
+--> Expected input gene ID: 19725,67042,103733,56484,23967,380709
 ```
 
 ```{.output}
@@ -1744,7 +1744,7 @@ legend("topleft", legend = c("all protein-coding genes as universe", "all genes 
     pch = 16, col = c(2, 4))
 ```
 
-<img src="fig/06-gene-set-analysis-rendered-unnamed-chunk-48-1.png" style="display: block; margin: auto;" />
+<img src="fig/07-gene-set-analysis-rendered-unnamed-chunk-48-1.png" style="display: block; margin: auto;" />
 
 It is very straightforward to see, with a larger universe, there are more
 significant gene sets, which may produce potentially more false positives.
@@ -1822,13 +1822,13 @@ Note the two functions are directly applied on `resTimeGO` returned by `enrichGO
 barplot(resTimeGO, showCategory = 20)
 ```
 
-<img src="fig/06-gene-set-analysis-rendered-unnamed-chunk-50-1.png" style="display: block; margin: auto;" />
+<img src="fig/07-gene-set-analysis-rendered-unnamed-chunk-50-1.png" style="display: block; margin: auto;" />
 
 ```r
 dotplot(resTimeGO, showCategory = 20)
 ```
 
-<img src="fig/06-gene-set-analysis-rendered-unnamed-chunk-50-2.png" style="display: block; margin: auto;" />
+<img src="fig/07-gene-set-analysis-rendered-unnamed-chunk-50-2.png" style="display: block; margin: auto;" />
 
 Barplots can map two variables to the plot, one to the height of bars and the
 other to the colors of bars; while for dotplot, sizes of dots can be mapped to
@@ -1941,7 +1941,7 @@ ggplot(resTimeGOTable[1:10, ],
     ylab("")
 ```
 
-<img src="fig/06-gene-set-analysis-rendered-unnamed-chunk-55-1.png" style="display: block; margin: auto;" />
+<img src="fig/07-gene-set-analysis-rendered-unnamed-chunk-55-1.png" style="display: block; margin: auto;" />
 
 In the next example, we use _z_-score as the primary variable to map to the
 offset to origin, `DE_Ratio` and `Count` to map to dot colors and sizes.
@@ -1955,7 +1955,7 @@ ggplot(resTimeGOTable[1:10, ],
     ylab("")
 ```
 
-<img src="fig/06-gene-set-analysis-rendered-unnamed-chunk-56-1.png" style="display: block; margin: auto;" />
+<img src="fig/07-gene-set-analysis-rendered-unnamed-chunk-56-1.png" style="display: block; margin: auto;" />
 
 Both plots can highlight the gene set "leukocyte migration involved in
 inflammatory response" is relatively small but highly enriched.
@@ -1981,7 +1981,7 @@ ggplot(resTimeGOTable,
     geom_vline(xintercept = 1.5, lty = 2, col = "#444444")
 ```
 
-<img src="fig/06-gene-set-analysis-rendered-unnamed-chunk-57-1.png" style="display: block; margin: auto;" />
+<img src="fig/07-gene-set-analysis-rendered-unnamed-chunk-57-1.png" style="display: block; margin: auto;" />
 
 In the "volcano plot", we can observe the plot is composed by a list of
 curves. The trends are especially clear in the right bottom of the plot.
@@ -2058,7 +2058,7 @@ ggplot(rbind(resTimeGOupTable[1:5, ],
     ylab("")
 ```
 
-<img src="fig/06-gene-set-analysis-rendered-unnamed-chunk-59-1.png" style="display: block; margin: auto;" />
+<img src="fig/07-gene-set-analysis-rendered-unnamed-chunk-59-1.png" style="display: block; margin: auto;" />
 
 
 Specifically for GO enrichment, it is often that GO enrichment returns a long
