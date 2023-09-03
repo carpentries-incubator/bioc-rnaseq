@@ -38,6 +38,7 @@ suppressPackageStartupMessages({
     library(SummarizedExperiment)
     library(ExploreModelMatrix)
     library(dplyr)
+    library(DESeq2)
 })
 ```
 
@@ -959,8 +960,28 @@ dds <- DESeq2::DESeqDataSet(se, design = ~ sex + time)
 dds <- DESeq(dds)
 ```
 
-```{.error}
-Error in DESeq(dds): could not find function "DESeq"
+```{.output}
+estimating size factors
+```
+
+```{.output}
+estimating dispersions
+```
+
+```{.output}
+gene-wise dispersion estimates
+```
+
+```{.output}
+mean-dispersion relationship
+```
+
+```{.output}
+final dispersion estimates
+```
+
+```{.output}
+fitting model and testing
 ```
 
 `DESeq2` stores the design matrix in the object: 
@@ -971,7 +992,37 @@ attr(dds, "modelMatrix")
 ```
 
 ```{.output}
-NULL
+               Intercept sex_Male_vs_Female time_Day4_vs_Day0 time_Day8_vs_Day0
+Female_Day0_9          1                  0                 0                 0
+Female_Day0_10         1                  0                 0                 0
+Female_Day0_8          1                  0                 0                 0
+Female_Day0_4          1                  0                 0                 0
+Male_Day0_11           1                  1                 0                 0
+Male_Day0_7            1                  1                 0                 0
+Male_Day0_2            1                  1                 0                 0
+Female_Day4_15         1                  0                 1                 0
+Female_Day4_22         1                  0                 1                 0
+Female_Day4_21         1                  0                 1                 0
+Female_Day4_20         1                  0                 1                 0
+Male_Day4_18           1                  1                 1                 0
+Male_Day4_13           1                  1                 1                 0
+Male_Day4_1            1                  1                 1                 0
+Male_Day4_12           1                  1                 1                 0
+Female_Day8_14         1                  0                 0                 1
+Female_Day8_5          1                  0                 0                 1
+Female_Day8_16         1                  0                 0                 1
+Female_Day8_19         1                  0                 0                 1
+Male_Day8_6            1                  1                 0                 1
+Male_Day8_23           1                  1                 0                 1
+Male_Day8_24           1                  1                 0                 1
+attr(,"assign")
+[1] 0 1 2 2
+attr(,"contrasts")
+attr(,"contrasts")$sex
+[1] "contr.treatment"
+
+attr(,"contrasts")$time
+[1] "contr.treatment"
 ```
 
 The column names can be obtained via the `resultsNames` function:
@@ -981,8 +1032,9 @@ The column names can be obtained via the `resultsNames` function:
 resultsNames(dds)
 ```
 
-```{.error}
-Error in resultsNames(dds): could not find function "resultsNames"
+```{.output}
+[1] "Intercept"          "sex_Male_vs_Female" "time_Day4_vs_Day0" 
+[4] "time_Day8_vs_Day0" 
 ```
 
 Let's visualize this design: 
@@ -992,38 +1044,20 @@ Let's visualize this design:
 vd <- VisualizeDesign(sampleData = colData(dds)[, c("sex", "time")], 
                       designMatrix = attr(dds, "modelMatrix"), 
                       flipCoordFitted = TRUE)
-```
-
-```{.error}
-Error in VisualizeDesign(sampleData = colData(dds)[, c("sex", "time")], : Either 'designFormula' or 'designMatrix' must be provided
-```
-
-```r
 vd$plotlist
 ```
 
 ```{.output}
-$`time = Day0`
+[[1]]
 ```
 
 <img src="fig/06-extra-design-rendered-unnamed-chunk-18-1.png" style="display: block; margin: auto;" />
-
-```{.output}
-
-$`time = Day4`
-```
-
-<img src="fig/06-extra-design-rendered-unnamed-chunk-18-2.png" style="display: block; margin: auto;" />
 
 In the previous episode, we performed a test comparing Day8 samples to Day0 samples:
 
 
 ```r
 resTime <- results(dds, contrast = c("time", "Day8", "Day0"))
-```
-
-```{.error}
-Error in results(dds, contrast = c("time", "Day8", "Day0")): could not find function "results"
 ```
 
 From the figure above, we see that this comparison is represented by the `time_Day8_vs_Day0` coefficient, which corresponds to the fourth column in the design matrix. 
@@ -1034,10 +1068,6 @@ Thus, an alternative way of specifying the contrast for the test would be:
 resTimeNum <- results(dds, contrast = c(0, 0, 0, 1))
 ```
 
-```{.error}
-Error in results(dds, contrast = c(0, 0, 0, 1)): could not find function "results"
-```
-
 Let's check if the results are comparable: 
 
 
@@ -1045,51 +1075,51 @@ Let's check if the results are comparable:
 summary(resTime)
 ```
 
-```{.error}
-Error in h(simpleError(msg, call)): error in evaluating the argument 'object' in selecting a method for function 'summary': object 'resTime' not found
+```{.output}
+
+out of 27430 with nonzero total read count
+adjusted p-value < 0.1
+LFC > 0 (up)       : 4472, 16%
+LFC < 0 (down)     : 4282, 16%
+outliers [1]       : 10, 0.036%
+low counts [2]     : 3723, 14%
+(mean count < 1)
+[1] see 'cooksCutoff' argument of ?results
+[2] see 'independentFiltering' argument of ?results
 ```
 
 ```r
 summary(resTimeNum)
 ```
 
-```{.error}
-Error in h(simpleError(msg, call)): error in evaluating the argument 'object' in selecting a method for function 'summary': object 'resTimeNum' not found
+```{.output}
+
+out of 27430 with nonzero total read count
+adjusted p-value < 0.1
+LFC > 0 (up)       : 4472, 16%
+LFC < 0 (down)     : 4282, 16%
+outliers [1]       : 10, 0.036%
+low counts [2]     : 3723, 14%
+(mean count < 1)
+[1] see 'cooksCutoff' argument of ?results
+[2] see 'independentFiltering' argument of ?results
 ```
 
 ```r
 ## logFC
 plot(resTime$log2FoldChange, resTimeNum$log2FoldChange)
-```
-
-```{.error}
-Error in h(simpleError(msg, call)): error in evaluating the argument 'x' in selecting a method for function 'plot': object 'resTime' not found
-```
-
-```r
 abline(0, 1)
 ```
 
-```{.error}
-Error in int_abline(a = a, b = b, h = h, v = v, untf = untf, ...): plot.new has not been called yet
-```
+<img src="fig/06-extra-design-rendered-unnamed-chunk-21-1.png" style="display: block; margin: auto;" />
 
 ```r
 ## -log10(p-value)
 plot(-log10(resTime$pvalue), -log10(resTimeNum$pvalue))
-```
-
-```{.error}
-Error in h(simpleError(msg, call)): error in evaluating the argument 'x' in selecting a method for function 'plot': object 'resTime' not found
-```
-
-```r
 abline(0, 1)
 ```
 
-```{.error}
-Error in int_abline(a = a, b = b, h = h, v = v, untf = untf, ...): plot.new has not been called yet
-```
+<img src="fig/06-extra-design-rendered-unnamed-chunk-21-2.png" style="display: block; margin: auto;" />
 
 ## Redo DESeq2 analysis with interaction
 
@@ -1105,8 +1135,28 @@ dds <- DESeq2::DESeqDataSet(se, design = ~ sex * time)
 dds <- DESeq(dds)
 ```
 
-```{.error}
-Error in DESeq(dds): could not find function "DESeq"
+```{.output}
+estimating size factors
+```
+
+```{.output}
+estimating dispersions
+```
+
+```{.output}
+gene-wise dispersion estimates
+```
+
+```{.output}
+mean-dispersion relationship
+```
+
+```{.output}
+final dispersion estimates
+```
+
+```{.output}
+fitting model and testing
 ```
 
 ```r
@@ -1114,7 +1164,60 @@ attr(dds, "modelMatrix")
 ```
 
 ```{.output}
-NULL
+               Intercept sex_Male_vs_Female time_Day4_vs_Day0 time_Day8_vs_Day0
+Female_Day0_9          1                  0                 0                 0
+Female_Day0_10         1                  0                 0                 0
+Female_Day0_8          1                  0                 0                 0
+Female_Day0_4          1                  0                 0                 0
+Male_Day0_11           1                  1                 0                 0
+Male_Day0_7            1                  1                 0                 0
+Male_Day0_2            1                  1                 0                 0
+Female_Day4_15         1                  0                 1                 0
+Female_Day4_22         1                  0                 1                 0
+Female_Day4_21         1                  0                 1                 0
+Female_Day4_20         1                  0                 1                 0
+Male_Day4_18           1                  1                 1                 0
+Male_Day4_13           1                  1                 1                 0
+Male_Day4_1            1                  1                 1                 0
+Male_Day4_12           1                  1                 1                 0
+Female_Day8_14         1                  0                 0                 1
+Female_Day8_5          1                  0                 0                 1
+Female_Day8_16         1                  0                 0                 1
+Female_Day8_19         1                  0                 0                 1
+Male_Day8_6            1                  1                 0                 1
+Male_Day8_23           1                  1                 0                 1
+Male_Day8_24           1                  1                 0                 1
+               sexMale.timeDay4 sexMale.timeDay8
+Female_Day0_9                 0                0
+Female_Day0_10                0                0
+Female_Day0_8                 0                0
+Female_Day0_4                 0                0
+Male_Day0_11                  0                0
+Male_Day0_7                   0                0
+Male_Day0_2                   0                0
+Female_Day4_15                0                0
+Female_Day4_22                0                0
+Female_Day4_21                0                0
+Female_Day4_20                0                0
+Male_Day4_18                  1                0
+Male_Day4_13                  1                0
+Male_Day4_1                   1                0
+Male_Day4_12                  1                0
+Female_Day8_14                0                0
+Female_Day8_5                 0                0
+Female_Day8_16                0                0
+Female_Day8_19                0                0
+Male_Day8_6                   0                1
+Male_Day8_23                  0                1
+Male_Day8_24                  0                1
+attr(,"assign")
+[1] 0 1 2 2 3 3
+attr(,"contrasts")
+attr(,"contrasts")$sex
+[1] "contr.treatment"
+
+attr(,"contrasts")$time
+[1] "contr.treatment"
 ```
 
 Let's visualize this design: 
@@ -1124,28 +1227,14 @@ Let's visualize this design:
 vd <- VisualizeDesign(sampleData = colData(dds)[, c("sex", "time")], 
                       designMatrix = attr(dds, "modelMatrix"), 
                       flipCoordFitted = TRUE)
-```
-
-```{.error}
-Error in VisualizeDesign(sampleData = colData(dds)[, c("sex", "time")], : Either 'designFormula' or 'designMatrix' must be provided
-```
-
-```r
 vd$plotlist
 ```
 
 ```{.output}
-$`time = Day0`
+[[1]]
 ```
 
 <img src="fig/06-extra-design-rendered-unnamed-chunk-23-1.png" style="display: block; margin: auto;" />
-
-```{.output}
-
-$`time = Day4`
-```
-
-<img src="fig/06-extra-design-rendered-unnamed-chunk-23-2.png" style="display: block; margin: auto;" />
 
 Note that now, the `time_Day8_vs_Day0` coefficient represents the difference between Day8 and Day0 **for the Female samples**. 
 To get the corresponding difference for the male samples, we need to also add the interaction effect (`sexMale.timeDay8`). 
@@ -1154,19 +1243,9 @@ To get the corresponding difference for the male samples, we need to also add th
 ```r
 ## Day8 vs Day0, female
 resTimeFemale <- results(dds, contrast = c("time", "Day8", "Day0"))
-```
 
-```{.error}
-Error in results(dds, contrast = c("time", "Day8", "Day0")): could not find function "results"
-```
-
-```r
 ## Interaction effect (difference in Day8-Day0 effect between Male and Female)
 resTimeInt <- results(dds, name = "sexMale.timeDay8")
-```
-
-```{.error}
-Error in results(dds, name = "sexMale.timeDay8"): could not find function "results"
 ```
 
 Let's try to fit this model with the second approach mentioned above, namely to create a single factor.
@@ -1180,8 +1259,28 @@ dds <- DESeq2::DESeqDataSet(se, design = ~ 0 + sex_time)
 dds <- DESeq(dds)
 ```
 
-```{.error}
-Error in DESeq(dds): could not find function "DESeq"
+```{.output}
+estimating size factors
+```
+
+```{.output}
+estimating dispersions
+```
+
+```{.output}
+gene-wise dispersion estimates
+```
+
+```{.output}
+mean-dispersion relationship
+```
+
+```{.output}
+final dispersion estimates
+```
+
+```{.output}
+fitting model and testing
 ```
 
 ```r
@@ -1189,7 +1288,57 @@ attr(dds, "modelMatrix")
 ```
 
 ```{.output}
-NULL
+               sex_timeFemale_Day0 sex_timeFemale_Day4 sex_timeFemale_Day8
+Female_Day0_9                    1                   0                   0
+Female_Day0_10                   1                   0                   0
+Female_Day0_8                    1                   0                   0
+Female_Day0_4                    1                   0                   0
+Male_Day0_11                     0                   0                   0
+Male_Day0_7                      0                   0                   0
+Male_Day0_2                      0                   0                   0
+Female_Day4_15                   0                   1                   0
+Female_Day4_22                   0                   1                   0
+Female_Day4_21                   0                   1                   0
+Female_Day4_20                   0                   1                   0
+Male_Day4_18                     0                   0                   0
+Male_Day4_13                     0                   0                   0
+Male_Day4_1                      0                   0                   0
+Male_Day4_12                     0                   0                   0
+Female_Day8_14                   0                   0                   1
+Female_Day8_5                    0                   0                   1
+Female_Day8_16                   0                   0                   1
+Female_Day8_19                   0                   0                   1
+Male_Day8_6                      0                   0                   0
+Male_Day8_23                     0                   0                   0
+Male_Day8_24                     0                   0                   0
+               sex_timeMale_Day0 sex_timeMale_Day4 sex_timeMale_Day8
+Female_Day0_9                  0                 0                 0
+Female_Day0_10                 0                 0                 0
+Female_Day0_8                  0                 0                 0
+Female_Day0_4                  0                 0                 0
+Male_Day0_11                   1                 0                 0
+Male_Day0_7                    1                 0                 0
+Male_Day0_2                    1                 0                 0
+Female_Day4_15                 0                 0                 0
+Female_Day4_22                 0                 0                 0
+Female_Day4_21                 0                 0                 0
+Female_Day4_20                 0                 0                 0
+Male_Day4_18                   0                 1                 0
+Male_Day4_13                   0                 1                 0
+Male_Day4_1                    0                 1                 0
+Male_Day4_12                   0                 1                 0
+Female_Day8_14                 0                 0                 0
+Female_Day8_5                  0                 0                 0
+Female_Day8_16                 0                 0                 0
+Female_Day8_19                 0                 0                 0
+Male_Day8_6                    0                 0                 1
+Male_Day8_23                   0                 0                 1
+Male_Day8_24                   0                 0                 1
+attr(,"assign")
+[1] 1 1 1 1 1 1
+attr(,"contrasts")
+attr(,"contrasts")$sex_time
+[1] "contr.treatment"
 ```
 
 We again visualize this design: 
@@ -1199,28 +1348,14 @@ We again visualize this design:
 vd <- VisualizeDesign(sampleData = colData(dds)[, c("sex", "time")], 
                       designMatrix = attr(dds, "modelMatrix"), 
                       flipCoordFitted = TRUE)
-```
-
-```{.error}
-Error in VisualizeDesign(sampleData = colData(dds)[, c("sex", "time")], : Either 'designFormula' or 'designMatrix' must be provided
-```
-
-```r
 vd$plotlist
 ```
 
 ```{.output}
-$`time = Day0`
+[[1]]
 ```
 
 <img src="fig/06-extra-design-rendered-unnamed-chunk-26-1.png" style="display: block; margin: auto;" />
-
-```{.output}
-
-$`time = Day4`
-```
-
-<img src="fig/06-extra-design-rendered-unnamed-chunk-26-2.png" style="display: block; margin: auto;" />
 
 We then set up the same contrasts as above
 
@@ -1228,27 +1363,18 @@ We then set up the same contrasts as above
 ```r
 ## Day8 vs Day0, female
 resTimeFemaleSingle <- results(dds, contrast = c("sex_time", "Female_Day8", "Female_Day0"))
-```
 
-```{.error}
-Error in results(dds, contrast = c("sex_time", "Female_Day8", "Female_Day0")): could not find function "results"
-```
-
-```r
 ## Interaction effect (difference in Day8-Day0 effect between Male and Female)
 resultsNames(dds)
 ```
 
-```{.error}
-Error in resultsNames(dds): could not find function "resultsNames"
+```{.output}
+[1] "sex_timeFemale_Day0" "sex_timeFemale_Day4" "sex_timeFemale_Day8"
+[4] "sex_timeMale_Day0"   "sex_timeMale_Day4"   "sex_timeMale_Day8"  
 ```
 
 ```r
 resTimeIntSingle <- results(dds, contrast = c(1, 0, -1, -1, 0, 1))
-```
-
-```{.error}
-Error in results(dds, contrast = c(1, 0, -1, -1, 0, 1)): could not find function "results"
 ```
 
 Check that these results agree with the ones obtained by fitting the model with the two factors and the interaction term. 
@@ -1258,65 +1384,83 @@ Check that these results agree with the ones obtained by fitting the model with 
 summary(resTimeFemale)
 ```
 
-```{.error}
-Error in h(simpleError(msg, call)): error in evaluating the argument 'object' in selecting a method for function 'summary': object 'resTimeFemale' not found
+```{.output}
+
+out of 27430 with nonzero total read count
+adjusted p-value < 0.1
+LFC > 0 (up)       : 2969, 11%
+LFC < 0 (down)     : 3218, 12%
+outliers [1]       : 6, 0.022%
+low counts [2]     : 6382, 23%
+(mean count < 3)
+[1] see 'cooksCutoff' argument of ?results
+[2] see 'independentFiltering' argument of ?results
 ```
 
 ```r
 summary(resTimeFemaleSingle)
 ```
 
-```{.error}
-Error in h(simpleError(msg, call)): error in evaluating the argument 'object' in selecting a method for function 'summary': object 'resTimeFemaleSingle' not found
+```{.output}
+
+out of 27430 with nonzero total read count
+adjusted p-value < 0.1
+LFC > 0 (up)       : 2969, 11%
+LFC < 0 (down)     : 3218, 12%
+outliers [1]       : 6, 0.022%
+low counts [2]     : 6382, 23%
+(mean count < 3)
+[1] see 'cooksCutoff' argument of ?results
+[2] see 'independentFiltering' argument of ?results
 ```
 
 ```r
 plot(-log10(resTimeFemale$pvalue), -log10(resTimeFemaleSingle$pvalue))
-```
-
-```{.error}
-Error in h(simpleError(msg, call)): error in evaluating the argument 'x' in selecting a method for function 'plot': object 'resTimeFemale' not found
-```
-
-```r
 abline(0, 1)
 ```
 
-```{.error}
-Error in int_abline(a = a, b = b, h = h, v = v, untf = untf, ...): plot.new has not been called yet
-```
+<img src="fig/06-extra-design-rendered-unnamed-chunk-28-1.png" style="display: block; margin: auto;" />
 
 ```r
 summary(resTimeInt)
 ```
 
-```{.error}
-Error in h(simpleError(msg, call)): error in evaluating the argument 'object' in selecting a method for function 'summary': object 'resTimeInt' not found
+```{.output}
+
+out of 27430 with nonzero total read count
+adjusted p-value < 0.1
+LFC > 0 (up)       : 0, 0%
+LFC < 0 (down)     : 0, 0%
+outliers [1]       : 6, 0.022%
+low counts [2]     : 0, 0%
+(mean count < 0)
+[1] see 'cooksCutoff' argument of ?results
+[2] see 'independentFiltering' argument of ?results
 ```
 
 ```r
 summary(resTimeIntSingle)
 ```
 
-```{.error}
-Error in h(simpleError(msg, call)): error in evaluating the argument 'object' in selecting a method for function 'summary': object 'resTimeIntSingle' not found
+```{.output}
+
+out of 27430 with nonzero total read count
+adjusted p-value < 0.1
+LFC > 0 (up)       : 0, 0%
+LFC < 0 (down)     : 0, 0%
+outliers [1]       : 6, 0.022%
+low counts [2]     : 0, 0%
+(mean count < 0)
+[1] see 'cooksCutoff' argument of ?results
+[2] see 'independentFiltering' argument of ?results
 ```
 
 ```r
 plot(-log10(resTimeInt$pvalue), -log10(resTimeIntSingle$pvalue))
-```
-
-```{.error}
-Error in h(simpleError(msg, call)): error in evaluating the argument 'x' in selecting a method for function 'plot': object 'resTimeInt' not found
-```
-
-```r
 abline(0, 1)
 ```
 
-```{.error}
-Error in int_abline(a = a, b = b, h = h, v = v, untf = untf, ...): plot.new has not been called yet
-```
+<img src="fig/06-extra-design-rendered-unnamed-chunk-28-2.png" style="display: block; margin: auto;" />
 
 
 :::::::::::::::::::::::::::::::::::::::: keypoints
