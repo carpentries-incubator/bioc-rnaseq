@@ -2611,7 +2611,7 @@ design formula are characters, converting to factors</code></pre>
   Instructor Note
   </h3>
 </button>
-<div id="collapseInstructor1" class="accordion-collapse collapse" data-bs-parent="#accordionInstructor1" aria-labelledby="headingInstructor1">
+<div id="collapseInstructor1" class="accordion-collapse collapse" aria-labelledby="headingInstructor1" data-bs-parent="#accordionInstructor1">
 <div class="accordion-body">
 <p>The function to generate a <code>DESeqDataSet</code> needs to be
 adapted depending on the input type, e.g,</p>
@@ -2663,7 +2663,7 @@ function from the previous section:</p>
   Instructor Note
   </h3>
 </button>
-<div id="collapseInstructor2" class="accordion-collapse collapse" data-bs-parent="#accordionInstructor2" aria-labelledby="headingInstructor2">
+<div id="collapseInstructor2" class="accordion-collapse collapse" aria-labelledby="headingInstructor2" data-bs-parent="#accordionInstructor2">
 <div class="accordion-body">
 <p><em>DESeq2</em> uses the <strong>“Relative Log Expression”
 (RLE)</strong> method to calculate sample-wise <em>size factors</em>
@@ -2831,7 +2831,7 @@ object.</em></p>
   Show me the solution
   </h4>
 </button>
-<div id="collapseSolution1" class="accordion-collapse collapse" data-bs-parent="#accordionSolution1" aria-labelledby="headingSolution1">
+<div id="collapseSolution1" class="accordion-collapse collapse" aria-labelledby="headingSolution1" data-bs-parent="#accordionSolution1">
 <div class="accordion-body">
 <p>In the lesson example the last variable of the design formular is
 <code>time</code>. The <strong>reference level</strong> (first in
@@ -2923,7 +2923,7 @@ A330076C08Rik 3.01518e-48</code></pre>
   Instructor Note
   </h3>
 </button>
-<div id="collapseInstructor3" class="accordion-collapse collapse" data-bs-parent="#accordionInstructor3" aria-labelledby="headingInstructor3">
+<div id="collapseInstructor3" class="accordion-collapse collapse" aria-labelledby="headingInstructor3" data-bs-parent="#accordionInstructor3">
 <div class="accordion-body">
 <p>Both of the below ways of specifying the contrast are essentially
 equivalent. The <code>name</code> parameter can be accessed using
@@ -2961,7 +2961,7 @@ time.</p>
   Show me the solution
   </h4>
 </button>
-<div id="collapseSolution2" class="accordion-collapse collapse" data-bs-parent="#accordionSolution2" aria-labelledby="headingSolution2">
+<div id="collapseSolution2" class="accordion-collapse collapse" aria-labelledby="headingSolution2" data-bs-parent="#accordionSolution2">
 <div class="accordion-body">
 <div class="codewrapper sourceCode" id="cb22">
 <h3 class="code-label">R<i aria-hidden="true" data-feather="chevron-left"></i><i aria-hidden="true" data-feather="chevron-right"></i>
@@ -3105,7 +3105,7 @@ results then?</p>
   Show me the solution
   </h4>
 </button>
-<div id="collapseSolution3" class="accordion-collapse collapse" data-bs-parent="#accordionSolution3" aria-labelledby="headingSolution3">
+<div id="collapseSolution3" class="accordion-collapse collapse" aria-labelledby="headingSolution3" data-bs-parent="#accordionSolution3">
 <div class="accordion-body">
 <div class="codewrapper sourceCode" id="cb30">
 <h3 class="code-label">R<i aria-hidden="true" data-feather="chevron-left"></i><i aria-hidden="true" data-feather="chevron-right"></i>
@@ -3363,6 +3363,7 @@ fashion, for easier interpretation.</p>
 <span>    <span class="kw">library</span><span class="op">(</span><span class="va">SummarizedExperiment</span><span class="op">)</span></span>
 <span>    <span class="kw">library</span><span class="op">(</span><span class="va">ExploreModelMatrix</span><span class="op">)</span></span>
 <span>    <span class="kw">library</span><span class="op">(</span><span class="va">dplyr</span><span class="op">)</span></span>
+<span>    <span class="kw">library</span><span class="op">(</span><span class="va">DESeq2</span><span class="op">)</span></span>
 <span><span class="op">}</span><span class="op">)</span></span></code></pre>
 </div>
 <p>Next, we read the metadata table for our data set. Because we want to
@@ -3681,7 +3682,7 @@ mean expression of a gene between male and female mice?</p>
   Show me the solution
   </h4>
 </button>
-<div id="collapseSolution1" class="accordion-collapse collapse" data-bs-parent="#accordionSolution1" aria-labelledby="headingSolution1">
+<div id="collapseSolution1" class="accordion-collapse collapse" aria-labelledby="headingSolution1" data-bs-parent="#accordionSolution1">
 <div class="accordion-body">
 <div class="codewrapper sourceCode" id="cb19">
 <h3 class="code-label">R<i aria-hidden="true" data-feather="chevron-left"></i><i aria-hidden="true" data-feather="chevron-right"></i>
@@ -3771,7 +3772,7 @@ Day4, Day8) in the male spinal cord samples, and visualize it using
   Show me the solution
   </h4>
 </button>
-<div id="collapseSolution2" class="accordion-collapse collapse" data-bs-parent="#accordionSolution2" aria-labelledby="headingSolution2">
+<div id="collapseSolution2" class="accordion-collapse collapse" aria-labelledby="headingSolution2" data-bs-parent="#accordionSolution2">
 <div class="accordion-body">
 <div class="codewrapper sourceCode" id="cb25">
 <h3 class="code-label">R<i aria-hidden="true" data-feather="chevron-left"></i><i aria-hidden="true" data-feather="chevron-right"></i>
@@ -4412,12 +4413,37 @@ the previous episode. We will repeat the main lines of code here.</p>
 <span><span class="va">dds</span> <span class="op">&lt;-</span> <span class="fu">DESeq</span><span class="op">(</span><span class="va">dds</span><span class="op">)</span></span></code></pre>
 </div>
 <div class="codewrapper">
-<h3 class="code-label">ERROR<i aria-hidden="true" data-feather="chevron-left"></i><i aria-hidden="true" data-feather="chevron-right"></i>
+<h3 class="code-label">OUTPUT<i aria-hidden="true" data-feather="chevron-left"></i><i aria-hidden="true" data-feather="chevron-right"></i>
 </h3>
-<pre class="error" tabindex="0"><code>Error in DESeq(dds): could not find function "DESeq"</code></pre>
+<pre class="output" tabindex="0"><code>estimating size factors</code></pre>
+</div>
+<div class="codewrapper">
+<h3 class="code-label">OUTPUT<i aria-hidden="true" data-feather="chevron-left"></i><i aria-hidden="true" data-feather="chevron-right"></i>
+</h3>
+<pre class="output" tabindex="0"><code>estimating dispersions</code></pre>
+</div>
+<div class="codewrapper">
+<h3 class="code-label">OUTPUT<i aria-hidden="true" data-feather="chevron-left"></i><i aria-hidden="true" data-feather="chevron-right"></i>
+</h3>
+<pre class="output" tabindex="0"><code>gene-wise dispersion estimates</code></pre>
+</div>
+<div class="codewrapper">
+<h3 class="code-label">OUTPUT<i aria-hidden="true" data-feather="chevron-left"></i><i aria-hidden="true" data-feather="chevron-right"></i>
+</h3>
+<pre class="output" tabindex="0"><code>mean-dispersion relationship</code></pre>
+</div>
+<div class="codewrapper">
+<h3 class="code-label">OUTPUT<i aria-hidden="true" data-feather="chevron-left"></i><i aria-hidden="true" data-feather="chevron-right"></i>
+</h3>
+<pre class="output" tabindex="0"><code>final dispersion estimates</code></pre>
+</div>
+<div class="codewrapper">
+<h3 class="code-label">OUTPUT<i aria-hidden="true" data-feather="chevron-left"></i><i aria-hidden="true" data-feather="chevron-right"></i>
+</h3>
+<pre class="output" tabindex="0"><code>fitting model and testing</code></pre>
 </div>
 <p><code>DESeq2</code> stores the design matrix in the object:</p>
-<div class="codewrapper sourceCode" id="cb66">
+<div class="codewrapper sourceCode" id="cb71">
 <h3 class="code-label">R<i aria-hidden="true" data-feather="chevron-left"></i><i aria-hidden="true" data-feather="chevron-right"></i>
 </h3>
 <pre class="downlit sourceCode r">
@@ -4426,79 +4452,84 @@ the previous episode. We will repeat the main lines of code here.</p>
 <div class="codewrapper">
 <h3 class="code-label">OUTPUT<i aria-hidden="true" data-feather="chevron-left"></i><i aria-hidden="true" data-feather="chevron-right"></i>
 </h3>
-<pre class="output" tabindex="0"><code><span><span class="cn">NULL</span></span></code></pre>
+<pre class="output" tabindex="0"><code>               Intercept sex_Male_vs_Female time_Day4_vs_Day0 time_Day8_vs_Day0
+Female_Day0_9          1                  0                 0                 0
+Female_Day0_10         1                  0                 0                 0
+Female_Day0_8          1                  0                 0                 0
+Female_Day0_4          1                  0                 0                 0
+Male_Day0_11           1                  1                 0                 0
+Male_Day0_7            1                  1                 0                 0
+Male_Day0_2            1                  1                 0                 0
+Female_Day4_15         1                  0                 1                 0
+Female_Day4_22         1                  0                 1                 0
+Female_Day4_21         1                  0                 1                 0
+Female_Day4_20         1                  0                 1                 0
+Male_Day4_18           1                  1                 1                 0
+Male_Day4_13           1                  1                 1                 0
+Male_Day4_1            1                  1                 1                 0
+Male_Day4_12           1                  1                 1                 0
+Female_Day8_14         1                  0                 0                 1
+Female_Day8_5          1                  0                 0                 1
+Female_Day8_16         1                  0                 0                 1
+Female_Day8_19         1                  0                 0                 1
+Male_Day8_6            1                  1                 0                 1
+Male_Day8_23           1                  1                 0                 1
+Male_Day8_24           1                  1                 0                 1
+attr(,"assign")
+[1] 0 1 2 2
+attr(,"contrasts")
+attr(,"contrasts")$sex
+[1] "contr.treatment"
+
+attr(,"contrasts")$time
+[1] "contr.treatment"</code></pre>
 </div>
 <p>The column names can be obtained via the <code>resultsNames</code>
 function:</p>
-<div class="codewrapper sourceCode" id="cb68">
+<div class="codewrapper sourceCode" id="cb73">
 <h3 class="code-label">R<i aria-hidden="true" data-feather="chevron-left"></i><i aria-hidden="true" data-feather="chevron-right"></i>
 </h3>
 <pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="fu">resultsNames</span><span class="op">(</span><span class="va">dds</span><span class="op">)</span></span></code></pre>
 </div>
 <div class="codewrapper">
-<h3 class="code-label">ERROR<i aria-hidden="true" data-feather="chevron-left"></i><i aria-hidden="true" data-feather="chevron-right"></i>
+<h3 class="code-label">OUTPUT<i aria-hidden="true" data-feather="chevron-left"></i><i aria-hidden="true" data-feather="chevron-right"></i>
 </h3>
-<pre class="error" tabindex="0"><code>Error in resultsNames(dds): could not find function "resultsNames"</code></pre>
+<pre class="output" tabindex="0"><code>[1] "Intercept"          "sex_Male_vs_Female" "time_Day4_vs_Day0" 
+[4] "time_Day8_vs_Day0" </code></pre>
 </div>
 <p>Let’s visualize this design:</p>
-<div class="codewrapper sourceCode" id="cb70">
+<div class="codewrapper sourceCode" id="cb75">
 <h3 class="code-label">R<i aria-hidden="true" data-feather="chevron-left"></i><i aria-hidden="true" data-feather="chevron-right"></i>
 </h3>
 <pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">vd</span> <span class="op">&lt;-</span> <span class="fu">VisualizeDesign</span><span class="op">(</span>sampleData <span class="op">=</span> <span class="fu">colData</span><span class="op">(</span><span class="va">dds</span><span class="op">)</span><span class="op">[</span>, <span class="fu">c</span><span class="op">(</span><span class="st">"sex"</span>, <span class="st">"time"</span><span class="op">)</span><span class="op">]</span>, </span>
 <span>                      designMatrix <span class="op">=</span> <span class="fu">attr</span><span class="op">(</span><span class="va">dds</span>, <span class="st">"modelMatrix"</span><span class="op">)</span>, </span>
-<span>                      flipCoordFitted <span class="op">=</span> <span class="cn">TRUE</span><span class="op">)</span></span></code></pre>
-</div>
-<div class="codewrapper">
-<h3 class="code-label">ERROR<i aria-hidden="true" data-feather="chevron-left"></i><i aria-hidden="true" data-feather="chevron-right"></i>
-</h3>
-<pre class="error" tabindex="0"><code>Error in VisualizeDesign(sampleData = colData(dds)[, c("sex", "time")], : Either 'designFormula' or 'designMatrix' must be provided</code></pre>
-</div>
-<div class="codewrapper sourceCode" id="cb72">
-<h3 class="code-label">R<i aria-hidden="true" data-feather="chevron-left"></i><i aria-hidden="true" data-feather="chevron-right"></i>
-</h3>
-<pre class="downlit sourceCode r">
-<code class="sourceCode R"><span><span class="va">vd</span><span class="op">$</span><span class="va">plotlist</span></span></code></pre>
+<span>                      flipCoordFitted <span class="op">=</span> <span class="cn">TRUE</span><span class="op">)</span></span>
+<span><span class="va">vd</span><span class="op">$</span><span class="va">plotlist</span></span></code></pre>
 </div>
 <div class="codewrapper">
 <h3 class="code-label">OUTPUT<i aria-hidden="true" data-feather="chevron-left"></i><i aria-hidden="true" data-feather="chevron-right"></i>
 </h3>
-<pre class="output" tabindex="0"><code>$`time = Day0`</code></pre>
+<pre class="output" tabindex="0"><code>[[1]]</code></pre>
 </div>
-<figure><img src="../fig/06-extra-design-rendered-unnamed-chunk-18-1.png" style="display: block; margin: auto;" class="figure mx-auto d-block"></figure><div class="codewrapper">
-<h3 class="code-label">OUTPUT<i aria-hidden="true" data-feather="chevron-left"></i><i aria-hidden="true" data-feather="chevron-right"></i>
-</h3>
-<pre class="output" tabindex="0"><code>
-$`time = Day4`</code></pre>
-</div>
-<figure><img src="../fig/06-extra-design-rendered-unnamed-chunk-18-2.png" style="display: block; margin: auto;" class="figure mx-auto d-block"></figure><p>In the previous episode, we performed a test comparing Day8 samples
+<figure><img src="../fig/06-extra-design-rendered-unnamed-chunk-18-1.png" style="display: block; margin: auto;" class="figure mx-auto d-block"></figure><p>In the previous episode, we performed a test comparing Day8 samples
 to Day0 samples:</p>
-<div class="codewrapper sourceCode" id="cb75">
+<div class="codewrapper sourceCode" id="cb77">
 <h3 class="code-label">R<i aria-hidden="true" data-feather="chevron-left"></i><i aria-hidden="true" data-feather="chevron-right"></i>
 </h3>
 <pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">resTime</span> <span class="op">&lt;-</span> <span class="fu">results</span><span class="op">(</span><span class="va">dds</span>, contrast <span class="op">=</span> <span class="fu">c</span><span class="op">(</span><span class="st">"time"</span>, <span class="st">"Day8"</span>, <span class="st">"Day0"</span><span class="op">)</span><span class="op">)</span></span></code></pre>
 </div>
-<div class="codewrapper">
-<h3 class="code-label">ERROR<i aria-hidden="true" data-feather="chevron-left"></i><i aria-hidden="true" data-feather="chevron-right"></i>
-</h3>
-<pre class="error" tabindex="0"><code>Error in results(dds, contrast = c("time", "Day8", "Day0")): could not find function "results"</code></pre>
-</div>
 <p>From the figure above, we see that this comparison is represented by
 the <code>time_Day8_vs_Day0</code> coefficient, which corresponds to the
 fourth column in the design matrix. Thus, an alternative way of
 specifying the contrast for the test would be:</p>
-<div class="codewrapper sourceCode" id="cb77">
+<div class="codewrapper sourceCode" id="cb78">
 <h3 class="code-label">R<i aria-hidden="true" data-feather="chevron-left"></i><i aria-hidden="true" data-feather="chevron-right"></i>
 </h3>
 <pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">resTimeNum</span> <span class="op">&lt;-</span> <span class="fu">results</span><span class="op">(</span><span class="va">dds</span>, contrast <span class="op">=</span> <span class="fu">c</span><span class="op">(</span><span class="fl">0</span>, <span class="fl">0</span>, <span class="fl">0</span>, <span class="fl">1</span><span class="op">)</span><span class="op">)</span></span></code></pre>
-</div>
-<div class="codewrapper">
-<h3 class="code-label">ERROR<i aria-hidden="true" data-feather="chevron-left"></i><i aria-hidden="true" data-feather="chevron-right"></i>
-</h3>
-<pre class="error" tabindex="0"><code>Error in results(dds, contrast = c(0, 0, 0, 1)): could not find function "results"</code></pre>
 </div>
 <p>Let’s check if the results are comparable:</p>
 <div class="codewrapper sourceCode" id="cb79">
@@ -4508,9 +4539,18 @@ specifying the contrast for the test would be:</p>
 <code class="sourceCode R"><span><span class="fu">summary</span><span class="op">(</span><span class="va">resTime</span><span class="op">)</span></span></code></pre>
 </div>
 <div class="codewrapper">
-<h3 class="code-label">ERROR<i aria-hidden="true" data-feather="chevron-left"></i><i aria-hidden="true" data-feather="chevron-right"></i>
+<h3 class="code-label">OUTPUT<i aria-hidden="true" data-feather="chevron-left"></i><i aria-hidden="true" data-feather="chevron-right"></i>
 </h3>
-<pre class="error" tabindex="0"><code>Error in h(simpleError(msg, call)): error in evaluating the argument 'object' in selecting a method for function 'summary': object 'resTime' not found</code></pre>
+<pre class="output" tabindex="0"><code>
+out of 27430 with nonzero total read count
+adjusted p-value &lt; 0.1
+LFC &gt; 0 (up)       : 4472, 16%
+LFC &lt; 0 (down)     : 4282, 16%
+outliers [1]       : 10, 0.036%
+low counts [2]     : 3723, 14%
+(mean count &lt; 1)
+[1] see 'cooksCutoff' argument of ?results
+[2] see 'independentFiltering' argument of ?results</code></pre>
 </div>
 <div class="codewrapper sourceCode" id="cb81">
 <h3 class="code-label">R<i aria-hidden="true" data-feather="chevron-left"></i><i aria-hidden="true" data-feather="chevron-right"></i>
@@ -4519,64 +4559,43 @@ specifying the contrast for the test would be:</p>
 <code class="sourceCode R"><span><span class="fu">summary</span><span class="op">(</span><span class="va">resTimeNum</span><span class="op">)</span></span></code></pre>
 </div>
 <div class="codewrapper">
-<h3 class="code-label">ERROR<i aria-hidden="true" data-feather="chevron-left"></i><i aria-hidden="true" data-feather="chevron-right"></i>
+<h3 class="code-label">OUTPUT<i aria-hidden="true" data-feather="chevron-left"></i><i aria-hidden="true" data-feather="chevron-right"></i>
 </h3>
-<pre class="error" tabindex="0"><code>Error in h(simpleError(msg, call)): error in evaluating the argument 'object' in selecting a method for function 'summary': object 'resTimeNum' not found</code></pre>
+<pre class="output" tabindex="0"><code>
+out of 27430 with nonzero total read count
+adjusted p-value &lt; 0.1
+LFC &gt; 0 (up)       : 4472, 16%
+LFC &lt; 0 (down)     : 4282, 16%
+outliers [1]       : 10, 0.036%
+low counts [2]     : 3723, 14%
+(mean count &lt; 1)
+[1] see 'cooksCutoff' argument of ?results
+[2] see 'independentFiltering' argument of ?results</code></pre>
 </div>
 <div class="codewrapper sourceCode" id="cb83">
 <h3 class="code-label">R<i aria-hidden="true" data-feather="chevron-left"></i><i aria-hidden="true" data-feather="chevron-right"></i>
 </h3>
 <pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="co">## logFC</span></span>
-<span><span class="fu">plot</span><span class="op">(</span><span class="va">resTime</span><span class="op">$</span><span class="va">log2FoldChange</span>, <span class="va">resTimeNum</span><span class="op">$</span><span class="va">log2FoldChange</span><span class="op">)</span></span></code></pre>
+<span><span class="fu">plot</span><span class="op">(</span><span class="va">resTime</span><span class="op">$</span><span class="va">log2FoldChange</span>, <span class="va">resTimeNum</span><span class="op">$</span><span class="va">log2FoldChange</span><span class="op">)</span></span>
+<span><span class="fu">abline</span><span class="op">(</span><span class="fl">0</span>, <span class="fl">1</span><span class="op">)</span></span></code></pre>
 </div>
-<div class="codewrapper">
-<h3 class="code-label">ERROR<i aria-hidden="true" data-feather="chevron-left"></i><i aria-hidden="true" data-feather="chevron-right"></i>
-</h3>
-<pre class="error" tabindex="0"><code>Error in h(simpleError(msg, call)): error in evaluating the argument 'x' in selecting a method for function 'plot': object 'resTime' not found</code></pre>
-</div>
-<div class="codewrapper sourceCode" id="cb85">
-<h3 class="code-label">R<i aria-hidden="true" data-feather="chevron-left"></i><i aria-hidden="true" data-feather="chevron-right"></i>
-</h3>
-<pre class="downlit sourceCode r">
-<code class="sourceCode R"><span><span class="fu">abline</span><span class="op">(</span><span class="fl">0</span>, <span class="fl">1</span><span class="op">)</span></span></code></pre>
-</div>
-<div class="codewrapper">
-<h3 class="code-label">ERROR<i aria-hidden="true" data-feather="chevron-left"></i><i aria-hidden="true" data-feather="chevron-right"></i>
-</h3>
-<pre class="error" tabindex="0"><code>Error in int_abline(a = a, b = b, h = h, v = v, untf = untf, ...): plot.new has not been called yet</code></pre>
-</div>
-<div class="codewrapper sourceCode" id="cb87">
+<figure><img src="../fig/06-extra-design-rendered-unnamed-chunk-21-1.png" style="display: block; margin: auto;" class="figure mx-auto d-block"></figure><div class="codewrapper sourceCode" id="cb84">
 <h3 class="code-label">R<i aria-hidden="true" data-feather="chevron-left"></i><i aria-hidden="true" data-feather="chevron-right"></i>
 </h3>
 <pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="co">## -log10(p-value)</span></span>
-<span><span class="fu">plot</span><span class="op">(</span><span class="op">-</span><span class="fu">log10</span><span class="op">(</span><span class="va">resTime</span><span class="op">$</span><span class="va">pvalue</span><span class="op">)</span>, <span class="op">-</span><span class="fu">log10</span><span class="op">(</span><span class="va">resTimeNum</span><span class="op">$</span><span class="va">pvalue</span><span class="op">)</span><span class="op">)</span></span></code></pre>
+<span><span class="fu">plot</span><span class="op">(</span><span class="op">-</span><span class="fu">log10</span><span class="op">(</span><span class="va">resTime</span><span class="op">$</span><span class="va">pvalue</span><span class="op">)</span>, <span class="op">-</span><span class="fu">log10</span><span class="op">(</span><span class="va">resTimeNum</span><span class="op">$</span><span class="va">pvalue</span><span class="op">)</span><span class="op">)</span></span>
+<span><span class="fu">abline</span><span class="op">(</span><span class="fl">0</span>, <span class="fl">1</span><span class="op">)</span></span></code></pre>
 </div>
-<div class="codewrapper">
-<h3 class="code-label">ERROR<i aria-hidden="true" data-feather="chevron-left"></i><i aria-hidden="true" data-feather="chevron-right"></i>
-</h3>
-<pre class="error" tabindex="0"><code>Error in h(simpleError(msg, call)): error in evaluating the argument 'x' in selecting a method for function 'plot': object 'resTime' not found</code></pre>
-</div>
-<div class="codewrapper sourceCode" id="cb89">
-<h3 class="code-label">R<i aria-hidden="true" data-feather="chevron-left"></i><i aria-hidden="true" data-feather="chevron-right"></i>
-</h3>
-<pre class="downlit sourceCode r">
-<code class="sourceCode R"><span><span class="fu">abline</span><span class="op">(</span><span class="fl">0</span>, <span class="fl">1</span><span class="op">)</span></span></code></pre>
-</div>
-<div class="codewrapper">
-<h3 class="code-label">ERROR<i aria-hidden="true" data-feather="chevron-left"></i><i aria-hidden="true" data-feather="chevron-right"></i>
-</h3>
-<pre class="error" tabindex="0"><code>Error in int_abline(a = a, b = b, h = h, v = v, untf = untf, ...): plot.new has not been called yet</code></pre>
-</div>
-</section><section id="redo-deseq2-analysis-with-interaction"><h2 class="section-heading">Redo DESeq2 analysis with interaction<a class="anchor" aria-label="anchor" href="#redo-deseq2-analysis-with-interaction"></a>
+<figure><img src="../fig/06-extra-design-rendered-unnamed-chunk-21-2.png" style="display: block; margin: auto;" class="figure mx-auto d-block"></figure></section><section id="redo-deseq2-analysis-with-interaction"><h2 class="section-heading">Redo DESeq2 analysis with interaction<a class="anchor" aria-label="anchor" href="#redo-deseq2-analysis-with-interaction"></a>
 </h2>
 <hr class="half-width">
 <p>Next, let’s look at a different setup. We still consider the sex and
 time predictors, but now we allow an interaction between them. In other
 words, we allow the time effect to be different for males and
 females.</p>
-<div class="codewrapper sourceCode" id="cb91">
+<div class="codewrapper sourceCode" id="cb85">
 <h3 class="code-label">R<i aria-hidden="true" data-feather="chevron-left"></i><i aria-hidden="true" data-feather="chevron-right"></i>
 </h3>
 <pre class="downlit sourceCode r">
@@ -4586,11 +4605,36 @@ females.</p>
 <span><span class="va">dds</span> <span class="op">&lt;-</span> <span class="fu">DESeq</span><span class="op">(</span><span class="va">dds</span><span class="op">)</span></span></code></pre>
 </div>
 <div class="codewrapper">
-<h3 class="code-label">ERROR<i aria-hidden="true" data-feather="chevron-left"></i><i aria-hidden="true" data-feather="chevron-right"></i>
+<h3 class="code-label">OUTPUT<i aria-hidden="true" data-feather="chevron-left"></i><i aria-hidden="true" data-feather="chevron-right"></i>
 </h3>
-<pre class="error" tabindex="0"><code>Error in DESeq(dds): could not find function "DESeq"</code></pre>
+<pre class="output" tabindex="0"><code>estimating size factors</code></pre>
 </div>
-<div class="codewrapper sourceCode" id="cb93">
+<div class="codewrapper">
+<h3 class="code-label">OUTPUT<i aria-hidden="true" data-feather="chevron-left"></i><i aria-hidden="true" data-feather="chevron-right"></i>
+</h3>
+<pre class="output" tabindex="0"><code>estimating dispersions</code></pre>
+</div>
+<div class="codewrapper">
+<h3 class="code-label">OUTPUT<i aria-hidden="true" data-feather="chevron-left"></i><i aria-hidden="true" data-feather="chevron-right"></i>
+</h3>
+<pre class="output" tabindex="0"><code>gene-wise dispersion estimates</code></pre>
+</div>
+<div class="codewrapper">
+<h3 class="code-label">OUTPUT<i aria-hidden="true" data-feather="chevron-left"></i><i aria-hidden="true" data-feather="chevron-right"></i>
+</h3>
+<pre class="output" tabindex="0"><code>mean-dispersion relationship</code></pre>
+</div>
+<div class="codewrapper">
+<h3 class="code-label">OUTPUT<i aria-hidden="true" data-feather="chevron-left"></i><i aria-hidden="true" data-feather="chevron-right"></i>
+</h3>
+<pre class="output" tabindex="0"><code>final dispersion estimates</code></pre>
+</div>
+<div class="codewrapper">
+<h3 class="code-label">OUTPUT<i aria-hidden="true" data-feather="chevron-left"></i><i aria-hidden="true" data-feather="chevron-right"></i>
+</h3>
+<pre class="output" tabindex="0"><code>fitting model and testing</code></pre>
+</div>
+<div class="codewrapper sourceCode" id="cb92">
 <h3 class="code-label">R<i aria-hidden="true" data-feather="chevron-left"></i><i aria-hidden="true" data-feather="chevron-right"></i>
 </h3>
 <pre class="downlit sourceCode r">
@@ -4599,71 +4643,94 @@ females.</p>
 <div class="codewrapper">
 <h3 class="code-label">OUTPUT<i aria-hidden="true" data-feather="chevron-left"></i><i aria-hidden="true" data-feather="chevron-right"></i>
 </h3>
-<pre class="output" tabindex="0"><code><span><span class="cn">NULL</span></span></code></pre>
+<pre class="output" tabindex="0"><code>               Intercept sex_Male_vs_Female time_Day4_vs_Day0 time_Day8_vs_Day0
+Female_Day0_9          1                  0                 0                 0
+Female_Day0_10         1                  0                 0                 0
+Female_Day0_8          1                  0                 0                 0
+Female_Day0_4          1                  0                 0                 0
+Male_Day0_11           1                  1                 0                 0
+Male_Day0_7            1                  1                 0                 0
+Male_Day0_2            1                  1                 0                 0
+Female_Day4_15         1                  0                 1                 0
+Female_Day4_22         1                  0                 1                 0
+Female_Day4_21         1                  0                 1                 0
+Female_Day4_20         1                  0                 1                 0
+Male_Day4_18           1                  1                 1                 0
+Male_Day4_13           1                  1                 1                 0
+Male_Day4_1            1                  1                 1                 0
+Male_Day4_12           1                  1                 1                 0
+Female_Day8_14         1                  0                 0                 1
+Female_Day8_5          1                  0                 0                 1
+Female_Day8_16         1                  0                 0                 1
+Female_Day8_19         1                  0                 0                 1
+Male_Day8_6            1                  1                 0                 1
+Male_Day8_23           1                  1                 0                 1
+Male_Day8_24           1                  1                 0                 1
+               sexMale.timeDay4 sexMale.timeDay8
+Female_Day0_9                 0                0
+Female_Day0_10                0                0
+Female_Day0_8                 0                0
+Female_Day0_4                 0                0
+Male_Day0_11                  0                0
+Male_Day0_7                   0                0
+Male_Day0_2                   0                0
+Female_Day4_15                0                0
+Female_Day4_22                0                0
+Female_Day4_21                0                0
+Female_Day4_20                0                0
+Male_Day4_18                  1                0
+Male_Day4_13                  1                0
+Male_Day4_1                   1                0
+Male_Day4_12                  1                0
+Female_Day8_14                0                0
+Female_Day8_5                 0                0
+Female_Day8_16                0                0
+Female_Day8_19                0                0
+Male_Day8_6                   0                1
+Male_Day8_23                  0                1
+Male_Day8_24                  0                1
+attr(,"assign")
+[1] 0 1 2 2 3 3
+attr(,"contrasts")
+attr(,"contrasts")$sex
+[1] "contr.treatment"
+
+attr(,"contrasts")$time
+[1] "contr.treatment"</code></pre>
 </div>
 <p>Let’s visualize this design:</p>
-<div class="codewrapper sourceCode" id="cb95">
+<div class="codewrapper sourceCode" id="cb94">
 <h3 class="code-label">R<i aria-hidden="true" data-feather="chevron-left"></i><i aria-hidden="true" data-feather="chevron-right"></i>
 </h3>
 <pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">vd</span> <span class="op">&lt;-</span> <span class="fu">VisualizeDesign</span><span class="op">(</span>sampleData <span class="op">=</span> <span class="fu">colData</span><span class="op">(</span><span class="va">dds</span><span class="op">)</span><span class="op">[</span>, <span class="fu">c</span><span class="op">(</span><span class="st">"sex"</span>, <span class="st">"time"</span><span class="op">)</span><span class="op">]</span>, </span>
 <span>                      designMatrix <span class="op">=</span> <span class="fu">attr</span><span class="op">(</span><span class="va">dds</span>, <span class="st">"modelMatrix"</span><span class="op">)</span>, </span>
-<span>                      flipCoordFitted <span class="op">=</span> <span class="cn">TRUE</span><span class="op">)</span></span></code></pre>
-</div>
-<div class="codewrapper">
-<h3 class="code-label">ERROR<i aria-hidden="true" data-feather="chevron-left"></i><i aria-hidden="true" data-feather="chevron-right"></i>
-</h3>
-<pre class="error" tabindex="0"><code>Error in VisualizeDesign(sampleData = colData(dds)[, c("sex", "time")], : Either 'designFormula' or 'designMatrix' must be provided</code></pre>
-</div>
-<div class="codewrapper sourceCode" id="cb97">
-<h3 class="code-label">R<i aria-hidden="true" data-feather="chevron-left"></i><i aria-hidden="true" data-feather="chevron-right"></i>
-</h3>
-<pre class="downlit sourceCode r">
-<code class="sourceCode R"><span><span class="va">vd</span><span class="op">$</span><span class="va">plotlist</span></span></code></pre>
+<span>                      flipCoordFitted <span class="op">=</span> <span class="cn">TRUE</span><span class="op">)</span></span>
+<span><span class="va">vd</span><span class="op">$</span><span class="va">plotlist</span></span></code></pre>
 </div>
 <div class="codewrapper">
 <h3 class="code-label">OUTPUT<i aria-hidden="true" data-feather="chevron-left"></i><i aria-hidden="true" data-feather="chevron-right"></i>
 </h3>
-<pre class="output" tabindex="0"><code>$`time = Day0`</code></pre>
+<pre class="output" tabindex="0"><code>[[1]]</code></pre>
 </div>
-<figure><img src="../fig/06-extra-design-rendered-unnamed-chunk-23-1.png" style="display: block; margin: auto;" class="figure mx-auto d-block"></figure><div class="codewrapper">
-<h3 class="code-label">OUTPUT<i aria-hidden="true" data-feather="chevron-left"></i><i aria-hidden="true" data-feather="chevron-right"></i>
-</h3>
-<pre class="output" tabindex="0"><code>
-$`time = Day4`</code></pre>
-</div>
-<figure><img src="../fig/06-extra-design-rendered-unnamed-chunk-23-2.png" style="display: block; margin: auto;" class="figure mx-auto d-block"></figure><p>Note that now, the <code>time_Day8_vs_Day0</code> coefficient
+<figure><img src="../fig/06-extra-design-rendered-unnamed-chunk-23-1.png" style="display: block; margin: auto;" class="figure mx-auto d-block"></figure><p>Note that now, the <code>time_Day8_vs_Day0</code> coefficient
 represents the difference between Day8 and Day0 <strong>for the Female
 samples</strong>. To get the corresponding difference for the male
 samples, we need to also add the interaction effect
 (<code>sexMale.timeDay8</code>).</p>
-<div class="codewrapper sourceCode" id="cb100">
+<div class="codewrapper sourceCode" id="cb96">
 <h3 class="code-label">R<i aria-hidden="true" data-feather="chevron-left"></i><i aria-hidden="true" data-feather="chevron-right"></i>
 </h3>
 <pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="co">## Day8 vs Day0, female</span></span>
-<span><span class="va">resTimeFemale</span> <span class="op">&lt;-</span> <span class="fu">results</span><span class="op">(</span><span class="va">dds</span>, contrast <span class="op">=</span> <span class="fu">c</span><span class="op">(</span><span class="st">"time"</span>, <span class="st">"Day8"</span>, <span class="st">"Day0"</span><span class="op">)</span><span class="op">)</span></span></code></pre>
-</div>
-<div class="codewrapper">
-<h3 class="code-label">ERROR<i aria-hidden="true" data-feather="chevron-left"></i><i aria-hidden="true" data-feather="chevron-right"></i>
-</h3>
-<pre class="error" tabindex="0"><code>Error in results(dds, contrast = c("time", "Day8", "Day0")): could not find function "results"</code></pre>
-</div>
-<div class="codewrapper sourceCode" id="cb102">
-<h3 class="code-label">R<i aria-hidden="true" data-feather="chevron-left"></i><i aria-hidden="true" data-feather="chevron-right"></i>
-</h3>
-<pre class="downlit sourceCode r">
-<code class="sourceCode R"><span><span class="co">## Interaction effect (difference in Day8-Day0 effect between Male and Female)</span></span>
+<span><span class="va">resTimeFemale</span> <span class="op">&lt;-</span> <span class="fu">results</span><span class="op">(</span><span class="va">dds</span>, contrast <span class="op">=</span> <span class="fu">c</span><span class="op">(</span><span class="st">"time"</span>, <span class="st">"Day8"</span>, <span class="st">"Day0"</span><span class="op">)</span><span class="op">)</span></span>
+<span></span>
+<span><span class="co">## Interaction effect (difference in Day8-Day0 effect between Male and Female)</span></span>
 <span><span class="va">resTimeInt</span> <span class="op">&lt;-</span> <span class="fu">results</span><span class="op">(</span><span class="va">dds</span>, name <span class="op">=</span> <span class="st">"sexMale.timeDay8"</span><span class="op">)</span></span></code></pre>
-</div>
-<div class="codewrapper">
-<h3 class="code-label">ERROR<i aria-hidden="true" data-feather="chevron-left"></i><i aria-hidden="true" data-feather="chevron-right"></i>
-</h3>
-<pre class="error" tabindex="0"><code>Error in results(dds, name = "sexMale.timeDay8"): could not find function "results"</code></pre>
 </div>
 <p>Let’s try to fit this model with the second approach mentioned above,
 namely to create a single factor.</p>
-<div class="codewrapper sourceCode" id="cb104">
+<div class="codewrapper sourceCode" id="cb97">
 <h3 class="code-label">R<i aria-hidden="true" data-feather="chevron-left"></i><i aria-hidden="true" data-feather="chevron-right"></i>
 </h3>
 <pre class="downlit sourceCode r">
@@ -4674,11 +4741,36 @@ namely to create a single factor.</p>
 <span><span class="va">dds</span> <span class="op">&lt;-</span> <span class="fu">DESeq</span><span class="op">(</span><span class="va">dds</span><span class="op">)</span></span></code></pre>
 </div>
 <div class="codewrapper">
-<h3 class="code-label">ERROR<i aria-hidden="true" data-feather="chevron-left"></i><i aria-hidden="true" data-feather="chevron-right"></i>
+<h3 class="code-label">OUTPUT<i aria-hidden="true" data-feather="chevron-left"></i><i aria-hidden="true" data-feather="chevron-right"></i>
 </h3>
-<pre class="error" tabindex="0"><code>Error in DESeq(dds): could not find function "DESeq"</code></pre>
+<pre class="output" tabindex="0"><code>estimating size factors</code></pre>
 </div>
-<div class="codewrapper sourceCode" id="cb106">
+<div class="codewrapper">
+<h3 class="code-label">OUTPUT<i aria-hidden="true" data-feather="chevron-left"></i><i aria-hidden="true" data-feather="chevron-right"></i>
+</h3>
+<pre class="output" tabindex="0"><code>estimating dispersions</code></pre>
+</div>
+<div class="codewrapper">
+<h3 class="code-label">OUTPUT<i aria-hidden="true" data-feather="chevron-left"></i><i aria-hidden="true" data-feather="chevron-right"></i>
+</h3>
+<pre class="output" tabindex="0"><code>gene-wise dispersion estimates</code></pre>
+</div>
+<div class="codewrapper">
+<h3 class="code-label">OUTPUT<i aria-hidden="true" data-feather="chevron-left"></i><i aria-hidden="true" data-feather="chevron-right"></i>
+</h3>
+<pre class="output" tabindex="0"><code>mean-dispersion relationship</code></pre>
+</div>
+<div class="codewrapper">
+<h3 class="code-label">OUTPUT<i aria-hidden="true" data-feather="chevron-left"></i><i aria-hidden="true" data-feather="chevron-right"></i>
+</h3>
+<pre class="output" tabindex="0"><code>final dispersion estimates</code></pre>
+</div>
+<div class="codewrapper">
+<h3 class="code-label">OUTPUT<i aria-hidden="true" data-feather="chevron-left"></i><i aria-hidden="true" data-feather="chevron-right"></i>
+</h3>
+<pre class="output" tabindex="0"><code>fitting model and testing</code></pre>
+</div>
+<div class="codewrapper sourceCode" id="cb104">
 <h3 class="code-label">R<i aria-hidden="true" data-feather="chevron-left"></i><i aria-hidden="true" data-feather="chevron-right"></i>
 </h3>
 <pre class="downlit sourceCode r">
@@ -4687,166 +4779,193 @@ namely to create a single factor.</p>
 <div class="codewrapper">
 <h3 class="code-label">OUTPUT<i aria-hidden="true" data-feather="chevron-left"></i><i aria-hidden="true" data-feather="chevron-right"></i>
 </h3>
-<pre class="output" tabindex="0"><code><span><span class="cn">NULL</span></span></code></pre>
+<pre class="output" tabindex="0"><code>               sex_timeFemale_Day0 sex_timeFemale_Day4 sex_timeFemale_Day8
+Female_Day0_9                    1                   0                   0
+Female_Day0_10                   1                   0                   0
+Female_Day0_8                    1                   0                   0
+Female_Day0_4                    1                   0                   0
+Male_Day0_11                     0                   0                   0
+Male_Day0_7                      0                   0                   0
+Male_Day0_2                      0                   0                   0
+Female_Day4_15                   0                   1                   0
+Female_Day4_22                   0                   1                   0
+Female_Day4_21                   0                   1                   0
+Female_Day4_20                   0                   1                   0
+Male_Day4_18                     0                   0                   0
+Male_Day4_13                     0                   0                   0
+Male_Day4_1                      0                   0                   0
+Male_Day4_12                     0                   0                   0
+Female_Day8_14                   0                   0                   1
+Female_Day8_5                    0                   0                   1
+Female_Day8_16                   0                   0                   1
+Female_Day8_19                   0                   0                   1
+Male_Day8_6                      0                   0                   0
+Male_Day8_23                     0                   0                   0
+Male_Day8_24                     0                   0                   0
+               sex_timeMale_Day0 sex_timeMale_Day4 sex_timeMale_Day8
+Female_Day0_9                  0                 0                 0
+Female_Day0_10                 0                 0                 0
+Female_Day0_8                  0                 0                 0
+Female_Day0_4                  0                 0                 0
+Male_Day0_11                   1                 0                 0
+Male_Day0_7                    1                 0                 0
+Male_Day0_2                    1                 0                 0
+Female_Day4_15                 0                 0                 0
+Female_Day4_22                 0                 0                 0
+Female_Day4_21                 0                 0                 0
+Female_Day4_20                 0                 0                 0
+Male_Day4_18                   0                 1                 0
+Male_Day4_13                   0                 1                 0
+Male_Day4_1                    0                 1                 0
+Male_Day4_12                   0                 1                 0
+Female_Day8_14                 0                 0                 0
+Female_Day8_5                  0                 0                 0
+Female_Day8_16                 0                 0                 0
+Female_Day8_19                 0                 0                 0
+Male_Day8_6                    0                 0                 1
+Male_Day8_23                   0                 0                 1
+Male_Day8_24                   0                 0                 1
+attr(,"assign")
+[1] 1 1 1 1 1 1
+attr(,"contrasts")
+attr(,"contrasts")$sex_time
+[1] "contr.treatment"</code></pre>
 </div>
 <p>We again visualize this design:</p>
-<div class="codewrapper sourceCode" id="cb108">
+<div class="codewrapper sourceCode" id="cb106">
 <h3 class="code-label">R<i aria-hidden="true" data-feather="chevron-left"></i><i aria-hidden="true" data-feather="chevron-right"></i>
 </h3>
 <pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">vd</span> <span class="op">&lt;-</span> <span class="fu">VisualizeDesign</span><span class="op">(</span>sampleData <span class="op">=</span> <span class="fu">colData</span><span class="op">(</span><span class="va">dds</span><span class="op">)</span><span class="op">[</span>, <span class="fu">c</span><span class="op">(</span><span class="st">"sex"</span>, <span class="st">"time"</span><span class="op">)</span><span class="op">]</span>, </span>
 <span>                      designMatrix <span class="op">=</span> <span class="fu">attr</span><span class="op">(</span><span class="va">dds</span>, <span class="st">"modelMatrix"</span><span class="op">)</span>, </span>
-<span>                      flipCoordFitted <span class="op">=</span> <span class="cn">TRUE</span><span class="op">)</span></span></code></pre>
+<span>                      flipCoordFitted <span class="op">=</span> <span class="cn">TRUE</span><span class="op">)</span></span>
+<span><span class="va">vd</span><span class="op">$</span><span class="va">plotlist</span></span></code></pre>
 </div>
 <div class="codewrapper">
-<h3 class="code-label">ERROR<i aria-hidden="true" data-feather="chevron-left"></i><i aria-hidden="true" data-feather="chevron-right"></i>
+<h3 class="code-label">OUTPUT<i aria-hidden="true" data-feather="chevron-left"></i><i aria-hidden="true" data-feather="chevron-right"></i>
 </h3>
-<pre class="error" tabindex="0"><code>Error in VisualizeDesign(sampleData = colData(dds)[, c("sex", "time")], : Either 'designFormula' or 'designMatrix' must be provided</code></pre>
+<pre class="output" tabindex="0"><code>[[1]]</code></pre>
+</div>
+<figure><img src="../fig/06-extra-design-rendered-unnamed-chunk-26-1.png" style="display: block; margin: auto;" class="figure mx-auto d-block"></figure><p>We then set up the same contrasts as above</p>
+<div class="codewrapper sourceCode" id="cb108">
+<h3 class="code-label">R<i aria-hidden="true" data-feather="chevron-left"></i><i aria-hidden="true" data-feather="chevron-right"></i>
+</h3>
+<pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="co">## Day8 vs Day0, female</span></span>
+<span><span class="va">resTimeFemaleSingle</span> <span class="op">&lt;-</span> <span class="fu">results</span><span class="op">(</span><span class="va">dds</span>, contrast <span class="op">=</span> <span class="fu">c</span><span class="op">(</span><span class="st">"sex_time"</span>, <span class="st">"Female_Day8"</span>, <span class="st">"Female_Day0"</span><span class="op">)</span><span class="op">)</span></span>
+<span></span>
+<span><span class="co">## Interaction effect (difference in Day8-Day0 effect between Male and Female)</span></span>
+<span><span class="fu">resultsNames</span><span class="op">(</span><span class="va">dds</span><span class="op">)</span></span></code></pre>
+</div>
+<div class="codewrapper">
+<h3 class="code-label">OUTPUT<i aria-hidden="true" data-feather="chevron-left"></i><i aria-hidden="true" data-feather="chevron-right"></i>
+</h3>
+<pre class="output" tabindex="0"><code>[1] "sex_timeFemale_Day0" "sex_timeFemale_Day4" "sex_timeFemale_Day8"
+[4] "sex_timeMale_Day0"   "sex_timeMale_Day4"   "sex_timeMale_Day8"  </code></pre>
 </div>
 <div class="codewrapper sourceCode" id="cb110">
 <h3 class="code-label">R<i aria-hidden="true" data-feather="chevron-left"></i><i aria-hidden="true" data-feather="chevron-right"></i>
 </h3>
 <pre class="downlit sourceCode r">
-<code class="sourceCode R"><span><span class="va">vd</span><span class="op">$</span><span class="va">plotlist</span></span></code></pre>
-</div>
-<div class="codewrapper">
-<h3 class="code-label">OUTPUT<i aria-hidden="true" data-feather="chevron-left"></i><i aria-hidden="true" data-feather="chevron-right"></i>
-</h3>
-<pre class="output" tabindex="0"><code>$`time = Day0`</code></pre>
-</div>
-<figure><img src="../fig/06-extra-design-rendered-unnamed-chunk-26-1.png" style="display: block; margin: auto;" class="figure mx-auto d-block"></figure><div class="codewrapper">
-<h3 class="code-label">OUTPUT<i aria-hidden="true" data-feather="chevron-left"></i><i aria-hidden="true" data-feather="chevron-right"></i>
-</h3>
-<pre class="output" tabindex="0"><code>
-$`time = Day4`</code></pre>
-</div>
-<figure><img src="../fig/06-extra-design-rendered-unnamed-chunk-26-2.png" style="display: block; margin: auto;" class="figure mx-auto d-block"></figure><p>We then set up the same contrasts as above</p>
-<div class="codewrapper sourceCode" id="cb113">
-<h3 class="code-label">R<i aria-hidden="true" data-feather="chevron-left"></i><i aria-hidden="true" data-feather="chevron-right"></i>
-</h3>
-<pre class="downlit sourceCode r">
-<code class="sourceCode R"><span><span class="co">## Day8 vs Day0, female</span></span>
-<span><span class="va">resTimeFemaleSingle</span> <span class="op">&lt;-</span> <span class="fu">results</span><span class="op">(</span><span class="va">dds</span>, contrast <span class="op">=</span> <span class="fu">c</span><span class="op">(</span><span class="st">"sex_time"</span>, <span class="st">"Female_Day8"</span>, <span class="st">"Female_Day0"</span><span class="op">)</span><span class="op">)</span></span></code></pre>
-</div>
-<div class="codewrapper">
-<h3 class="code-label">ERROR<i aria-hidden="true" data-feather="chevron-left"></i><i aria-hidden="true" data-feather="chevron-right"></i>
-</h3>
-<pre class="error" tabindex="0"><code>Error in results(dds, contrast = c("sex_time", "Female_Day8", "Female_Day0")): could not find function "results"</code></pre>
-</div>
-<div class="codewrapper sourceCode" id="cb115">
-<h3 class="code-label">R<i aria-hidden="true" data-feather="chevron-left"></i><i aria-hidden="true" data-feather="chevron-right"></i>
-</h3>
-<pre class="downlit sourceCode r">
-<code class="sourceCode R"><span><span class="co">## Interaction effect (difference in Day8-Day0 effect between Male and Female)</span></span>
-<span><span class="fu">resultsNames</span><span class="op">(</span><span class="va">dds</span><span class="op">)</span></span></code></pre>
-</div>
-<div class="codewrapper">
-<h3 class="code-label">ERROR<i aria-hidden="true" data-feather="chevron-left"></i><i aria-hidden="true" data-feather="chevron-right"></i>
-</h3>
-<pre class="error" tabindex="0"><code>Error in resultsNames(dds): could not find function "resultsNames"</code></pre>
-</div>
-<div class="codewrapper sourceCode" id="cb117">
-<h3 class="code-label">R<i aria-hidden="true" data-feather="chevron-left"></i><i aria-hidden="true" data-feather="chevron-right"></i>
-</h3>
-<pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">resTimeIntSingle</span> <span class="op">&lt;-</span> <span class="fu">results</span><span class="op">(</span><span class="va">dds</span>, contrast <span class="op">=</span> <span class="fu">c</span><span class="op">(</span><span class="fl">1</span>, <span class="fl">0</span>, <span class="op">-</span><span class="fl">1</span>, <span class="op">-</span><span class="fl">1</span>, <span class="fl">0</span>, <span class="fl">1</span><span class="op">)</span><span class="op">)</span></span></code></pre>
-</div>
-<div class="codewrapper">
-<h3 class="code-label">ERROR<i aria-hidden="true" data-feather="chevron-left"></i><i aria-hidden="true" data-feather="chevron-right"></i>
-</h3>
-<pre class="error" tabindex="0"><code>Error in results(dds, contrast = c(1, 0, -1, -1, 0, 1)): could not find function "results"</code></pre>
 </div>
 <p>Check that these results agree with the ones obtained by fitting the
 model with the two factors and the interaction term.</p>
-<div class="codewrapper sourceCode" id="cb119">
+<div class="codewrapper sourceCode" id="cb111">
 <h3 class="code-label">R<i aria-hidden="true" data-feather="chevron-left"></i><i aria-hidden="true" data-feather="chevron-right"></i>
 </h3>
 <pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="fu">summary</span><span class="op">(</span><span class="va">resTimeFemale</span><span class="op">)</span></span></code></pre>
 </div>
 <div class="codewrapper">
-<h3 class="code-label">ERROR<i aria-hidden="true" data-feather="chevron-left"></i><i aria-hidden="true" data-feather="chevron-right"></i>
+<h3 class="code-label">OUTPUT<i aria-hidden="true" data-feather="chevron-left"></i><i aria-hidden="true" data-feather="chevron-right"></i>
 </h3>
-<pre class="error" tabindex="0"><code>Error in h(simpleError(msg, call)): error in evaluating the argument 'object' in selecting a method for function 'summary': object 'resTimeFemale' not found</code></pre>
+<pre class="output" tabindex="0"><code>
+out of 27430 with nonzero total read count
+adjusted p-value &lt; 0.1
+LFC &gt; 0 (up)       : 2969, 11%
+LFC &lt; 0 (down)     : 3218, 12%
+outliers [1]       : 6, 0.022%
+low counts [2]     : 6382, 23%
+(mean count &lt; 3)
+[1] see 'cooksCutoff' argument of ?results
+[2] see 'independentFiltering' argument of ?results</code></pre>
 </div>
-<div class="codewrapper sourceCode" id="cb121">
+<div class="codewrapper sourceCode" id="cb113">
 <h3 class="code-label">R<i aria-hidden="true" data-feather="chevron-left"></i><i aria-hidden="true" data-feather="chevron-right"></i>
 </h3>
 <pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="fu">summary</span><span class="op">(</span><span class="va">resTimeFemaleSingle</span><span class="op">)</span></span></code></pre>
 </div>
 <div class="codewrapper">
-<h3 class="code-label">ERROR<i aria-hidden="true" data-feather="chevron-left"></i><i aria-hidden="true" data-feather="chevron-right"></i>
+<h3 class="code-label">OUTPUT<i aria-hidden="true" data-feather="chevron-left"></i><i aria-hidden="true" data-feather="chevron-right"></i>
 </h3>
-<pre class="error" tabindex="0"><code>Error in h(simpleError(msg, call)): error in evaluating the argument 'object' in selecting a method for function 'summary': object 'resTimeFemaleSingle' not found</code></pre>
+<pre class="output" tabindex="0"><code>
+out of 27430 with nonzero total read count
+adjusted p-value &lt; 0.1
+LFC &gt; 0 (up)       : 2969, 11%
+LFC &lt; 0 (down)     : 3218, 12%
+outliers [1]       : 6, 0.022%
+low counts [2]     : 6382, 23%
+(mean count &lt; 3)
+[1] see 'cooksCutoff' argument of ?results
+[2] see 'independentFiltering' argument of ?results</code></pre>
 </div>
-<div class="codewrapper sourceCode" id="cb123">
+<div class="codewrapper sourceCode" id="cb115">
 <h3 class="code-label">R<i aria-hidden="true" data-feather="chevron-left"></i><i aria-hidden="true" data-feather="chevron-right"></i>
 </h3>
 <pre class="downlit sourceCode r">
-<code class="sourceCode R"><span><span class="fu">plot</span><span class="op">(</span><span class="op">-</span><span class="fu">log10</span><span class="op">(</span><span class="va">resTimeFemale</span><span class="op">$</span><span class="va">pvalue</span><span class="op">)</span>, <span class="op">-</span><span class="fu">log10</span><span class="op">(</span><span class="va">resTimeFemaleSingle</span><span class="op">$</span><span class="va">pvalue</span><span class="op">)</span><span class="op">)</span></span></code></pre>
+<code class="sourceCode R"><span><span class="fu">plot</span><span class="op">(</span><span class="op">-</span><span class="fu">log10</span><span class="op">(</span><span class="va">resTimeFemale</span><span class="op">$</span><span class="va">pvalue</span><span class="op">)</span>, <span class="op">-</span><span class="fu">log10</span><span class="op">(</span><span class="va">resTimeFemaleSingle</span><span class="op">$</span><span class="va">pvalue</span><span class="op">)</span><span class="op">)</span></span>
+<span><span class="fu">abline</span><span class="op">(</span><span class="fl">0</span>, <span class="fl">1</span><span class="op">)</span></span></code></pre>
 </div>
-<div class="codewrapper">
-<h3 class="code-label">ERROR<i aria-hidden="true" data-feather="chevron-left"></i><i aria-hidden="true" data-feather="chevron-right"></i>
-</h3>
-<pre class="error" tabindex="0"><code>Error in h(simpleError(msg, call)): error in evaluating the argument 'x' in selecting a method for function 'plot': object 'resTimeFemale' not found</code></pre>
-</div>
-<div class="codewrapper sourceCode" id="cb125">
-<h3 class="code-label">R<i aria-hidden="true" data-feather="chevron-left"></i><i aria-hidden="true" data-feather="chevron-right"></i>
-</h3>
-<pre class="downlit sourceCode r">
-<code class="sourceCode R"><span><span class="fu">abline</span><span class="op">(</span><span class="fl">0</span>, <span class="fl">1</span><span class="op">)</span></span></code></pre>
-</div>
-<div class="codewrapper">
-<h3 class="code-label">ERROR<i aria-hidden="true" data-feather="chevron-left"></i><i aria-hidden="true" data-feather="chevron-right"></i>
-</h3>
-<pre class="error" tabindex="0"><code>Error in int_abline(a = a, b = b, h = h, v = v, untf = untf, ...): plot.new has not been called yet</code></pre>
-</div>
-<div class="codewrapper sourceCode" id="cb127">
+<figure><img src="../fig/06-extra-design-rendered-unnamed-chunk-28-1.png" style="display: block; margin: auto;" class="figure mx-auto d-block"></figure><div class="codewrapper sourceCode" id="cb116">
 <h3 class="code-label">R<i aria-hidden="true" data-feather="chevron-left"></i><i aria-hidden="true" data-feather="chevron-right"></i>
 </h3>
 <pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="fu">summary</span><span class="op">(</span><span class="va">resTimeInt</span><span class="op">)</span></span></code></pre>
 </div>
 <div class="codewrapper">
-<h3 class="code-label">ERROR<i aria-hidden="true" data-feather="chevron-left"></i><i aria-hidden="true" data-feather="chevron-right"></i>
+<h3 class="code-label">OUTPUT<i aria-hidden="true" data-feather="chevron-left"></i><i aria-hidden="true" data-feather="chevron-right"></i>
 </h3>
-<pre class="error" tabindex="0"><code>Error in h(simpleError(msg, call)): error in evaluating the argument 'object' in selecting a method for function 'summary': object 'resTimeInt' not found</code></pre>
+<pre class="output" tabindex="0"><code>
+out of 27430 with nonzero total read count
+adjusted p-value &lt; 0.1
+LFC &gt; 0 (up)       : 0, 0%
+LFC &lt; 0 (down)     : 0, 0%
+outliers [1]       : 6, 0.022%
+low counts [2]     : 0, 0%
+(mean count &lt; 0)
+[1] see 'cooksCutoff' argument of ?results
+[2] see 'independentFiltering' argument of ?results</code></pre>
 </div>
-<div class="codewrapper sourceCode" id="cb129">
+<div class="codewrapper sourceCode" id="cb118">
 <h3 class="code-label">R<i aria-hidden="true" data-feather="chevron-left"></i><i aria-hidden="true" data-feather="chevron-right"></i>
 </h3>
 <pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="fu">summary</span><span class="op">(</span><span class="va">resTimeIntSingle</span><span class="op">)</span></span></code></pre>
 </div>
 <div class="codewrapper">
-<h3 class="code-label">ERROR<i aria-hidden="true" data-feather="chevron-left"></i><i aria-hidden="true" data-feather="chevron-right"></i>
+<h3 class="code-label">OUTPUT<i aria-hidden="true" data-feather="chevron-left"></i><i aria-hidden="true" data-feather="chevron-right"></i>
 </h3>
-<pre class="error" tabindex="0"><code>Error in h(simpleError(msg, call)): error in evaluating the argument 'object' in selecting a method for function 'summary': object 'resTimeIntSingle' not found</code></pre>
+<pre class="output" tabindex="0"><code>
+out of 27430 with nonzero total read count
+adjusted p-value &lt; 0.1
+LFC &gt; 0 (up)       : 0, 0%
+LFC &lt; 0 (down)     : 0, 0%
+outliers [1]       : 6, 0.022%
+low counts [2]     : 0, 0%
+(mean count &lt; 0)
+[1] see 'cooksCutoff' argument of ?results
+[2] see 'independentFiltering' argument of ?results</code></pre>
 </div>
-<div class="codewrapper sourceCode" id="cb131">
+<div class="codewrapper sourceCode" id="cb120">
 <h3 class="code-label">R<i aria-hidden="true" data-feather="chevron-left"></i><i aria-hidden="true" data-feather="chevron-right"></i>
 </h3>
 <pre class="downlit sourceCode r">
-<code class="sourceCode R"><span><span class="fu">plot</span><span class="op">(</span><span class="op">-</span><span class="fu">log10</span><span class="op">(</span><span class="va">resTimeInt</span><span class="op">$</span><span class="va">pvalue</span><span class="op">)</span>, <span class="op">-</span><span class="fu">log10</span><span class="op">(</span><span class="va">resTimeIntSingle</span><span class="op">$</span><span class="va">pvalue</span><span class="op">)</span><span class="op">)</span></span></code></pre>
+<code class="sourceCode R"><span><span class="fu">plot</span><span class="op">(</span><span class="op">-</span><span class="fu">log10</span><span class="op">(</span><span class="va">resTimeInt</span><span class="op">$</span><span class="va">pvalue</span><span class="op">)</span>, <span class="op">-</span><span class="fu">log10</span><span class="op">(</span><span class="va">resTimeIntSingle</span><span class="op">$</span><span class="va">pvalue</span><span class="op">)</span><span class="op">)</span></span>
+<span><span class="fu">abline</span><span class="op">(</span><span class="fl">0</span>, <span class="fl">1</span><span class="op">)</span></span></code></pre>
 </div>
-<div class="codewrapper">
-<h3 class="code-label">ERROR<i aria-hidden="true" data-feather="chevron-left"></i><i aria-hidden="true" data-feather="chevron-right"></i>
-</h3>
-<pre class="error" tabindex="0"><code>Error in h(simpleError(msg, call)): error in evaluating the argument 'x' in selecting a method for function 'plot': object 'resTimeInt' not found</code></pre>
-</div>
-<div class="codewrapper sourceCode" id="cb133">
-<h3 class="code-label">R<i aria-hidden="true" data-feather="chevron-left"></i><i aria-hidden="true" data-feather="chevron-right"></i>
-</h3>
-<pre class="downlit sourceCode r">
-<code class="sourceCode R"><span><span class="fu">abline</span><span class="op">(</span><span class="fl">0</span>, <span class="fl">1</span><span class="op">)</span></span></code></pre>
-</div>
-<div class="codewrapper">
-<h3 class="code-label">ERROR<i aria-hidden="true" data-feather="chevron-left"></i><i aria-hidden="true" data-feather="chevron-right"></i>
-</h3>
-<pre class="error" tabindex="0"><code>Error in int_abline(a = a, b = b, h = h, v = v, untf = untf, ...): plot.new has not been called yet</code></pre>
-</div>
-<div id="keypoints1" class="callout keypoints">
+<figure><img src="../fig/06-extra-design-rendered-unnamed-chunk-28-2.png" style="display: block; margin: auto;" class="figure mx-auto d-block"></figure><div id="keypoints1" class="callout keypoints">
 <div class="callout-square">
 <i class="callout-icon" data-feather="key"></i>
 </div>
