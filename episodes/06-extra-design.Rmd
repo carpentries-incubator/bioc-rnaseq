@@ -45,6 +45,7 @@ suppressPackageStartupMessages({
     library(SummarizedExperiment)
     library(ExploreModelMatrix)
     library(dplyr)
+    library(DESeq2)
 })
 ```
 
