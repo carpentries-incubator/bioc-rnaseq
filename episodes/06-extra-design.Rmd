@@ -189,6 +189,23 @@ vd$designmatrix
 vd$plotlist
 ```
 
+## Combining multiple factors into one
+
+Sometimes, for experiments with multiple factors, it is easier to interpret coefficients and set up contrasts of interest if the factors are combined into one. 
+Let's consider the previous example again, using this approach:
+
+```{r}
+meta_noninf <- meta %>% filter(time == "Day0")
+meta_noninf$sex_tissue <- paste0(meta_noninf$sex, "_", meta_noninf$tissue)
+meta_noninf
+
+vd <- VisualizeDesign(sampleData = meta_noninf, 
+                      designFormula = ~ 0 + sex_tissue)
+vd$designmatrix
+vd$plotlist
+```
+
+
 ## Paired design
 
 In this particular data set the samples are paired - the same mice have contributed both the cerebellum and spinal cord samples. 
@@ -243,6 +260,147 @@ vd <- VisualizeDesign(sampleData = meta_fem_day04 %>%
 vd$designmatrix
 vd$plotlist
 ```
+
+## How does this relate to the DESeq2 analysis we did in the previous episode? 
+
+Now that we have learnt more about interpreting design matrices, let's look back to the differential expression analysis we performed in the previous episode. 
+We will repeat the main lines of code here.
+
+```{r}
+se <- readRDS("data/GSE96870_se.rds")
+se <- se[rowSums(assay(se, "counts")) > 5, ]
+dds <- DESeq2::DESeqDataSet(se, design = ~ sex + time)
+dds <- DESeq(dds)
+```
+
+`DESeq2` stores the design matrix in the object: 
+
+```{r}
+attr(dds, "modelMatrix")
+```
+
+The column names can be obtained via the `resultsNames` function:
+
+```{r}
+resultsNames(dds)
+```
+
+Let's visualize this design: 
+
+```{r}
+vd <- VisualizeDesign(sampleData = colData(dds)[, c("sex", "time")], 
+                      designMatrix = attr(dds, "modelMatrix"), 
+                      flipCoordFitted = TRUE)
+vd$plotlist
+```
+
+In the previous episode, we performed a test comparing Day8 samples to Day0 samples:
+
+```{r}
+resTime <- results(dds, contrast = c("time", "Day8", "Day0"))
+```
+
+From the figure above, we see that this comparison is represented by the `time_Day8_vs_Day0` coefficient, which corresponds to the fourth column in the design matrix. 
+Thus, an alternative way of specifying the contrast for the test would be: 
+
+```{r}
+resTimeNum <- results(dds, contrast = c(0, 0, 0, 1))
+```
+
+Let's check if the results are comparable: 
+
+```{r}
+summary(resTime)
+summary(resTimeNum)
+
+## logFC
+plot(resTime$log2FoldChange, resTimeNum$log2FoldChange)
+abline(0, 1)
+
+## -log10(p-value)
+plot(-log10(resTime$pvalue), -log10(resTimeNum$pvalue))
+abline(0, 1)
+```
+
+## Redo DESeq2 analysis with interaction
+
+Next, let's look at a different setup. 
+We still consider the sex and time predictors, but now we allow an interaction between them. 
+In other words, we allow the time effect to be different for males and females. 
+
+```{r}
+se <- readRDS("data/GSE96870_se.rds")
+se <- se[rowSums(assay(se, "counts")) > 5, ]
+dds <- DESeq2::DESeqDataSet(se, design = ~ sex * time)
+dds <- DESeq(dds)
+attr(dds, "modelMatrix")
+```
+
+Let's visualize this design: 
+
+```{r}
+vd <- VisualizeDesign(sampleData = colData(dds)[, c("sex", "time")], 
+                      designMatrix = attr(dds, "modelMatrix"), 
+                      flipCoordFitted = TRUE)
+vd$plotlist
+```
+
+Note that now, the `time_Day8_vs_Day0` coefficient represents the difference between Day8 and Day0 **for the Female samples**. 
+To get the corresponding difference for the male samples, we need to also add the interaction effect (`sexMale.timeDay8`). 
+
+```{r}
+## Day8 vs Day0, female
+resTimeFemale <- results(dds, contrast = c("time", "Day8", "Day0"))
+
+## Interaction effect (difference in Day8-Day0 effect between Male and Female)
+resTimeInt <- results(dds, name = "sexMale.timeDay8")
+```
+
+Let's try to fit this model with the second approach mentioned above, namely to create a single factor.
+
+```{r}
+se <- readRDS("data/GSE96870_se.rds")
+se <- se[rowSums(assay(se, "counts")) > 5, ]
+se$sex_time <- paste0(se$sex, "_", se$time)
+dds <- DESeq2::DESeqDataSet(se, design = ~ 0 + sex_time)
+dds <- DESeq(dds)
+attr(dds, "modelMatrix")
+```
+
+We again visualize this design: 
+
+```{r}
+vd <- VisualizeDesign(sampleData = colData(dds)[, c("sex", "time")], 
+                      designMatrix = attr(dds, "modelMatrix"), 
+                      flipCoordFitted = TRUE)
+vd$plotlist
+```
+
+We then set up the same contrasts as above
+
+```{r}
+## Day8 vs Day0, female
+resTimeFemaleSingle <- results(dds, contrast = c("sex_time", "Female_Day8", "Female_Day0"))
+
+## Interaction effect (difference in Day8-Day0 effect between Male and Female)
+resultsNames(dds)
+resTimeIntSingle <- results(dds, contrast = c(1, 0, -1, -1, 0, 1))
+```
+
+Check that these results agree with the ones obtained by fitting the model with the two factors and the interaction term. 
+
+```{r}
+summary(resTimeFemale)
+summary(resTimeFemaleSingle)
+plot(-log10(resTimeFemale$pvalue), -log10(resTimeFemaleSingle$pvalue))
+abline(0, 1)
+
+summary(resTimeInt)
+summary(resTimeIntSingle)
+plot(-log10(resTimeInt$pvalue), -log10(resTimeIntSingle$pvalue))
+abline(0, 1)
+```
+
 
 :::::::::::::::::::::::::::::::::::::::: keypoints
 
