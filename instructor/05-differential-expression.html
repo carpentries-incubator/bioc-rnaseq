@@ -288,7 +288,7 @@
       </div>
       <hr></nav><main id="main-content" class="main-content"><div class="container lesson-content">
         <h1>Differential expression analysis</h1>
-        <p> Last updated on 2023-09-02 | 
+        <p> Last updated on 2023-09-03 | 
         
         <a href="https://github.com/carpentries-incubator/bioc-rnaseq/edit/main/episodes/05-differential-expression.Rmd" class="external-link">Edit this page <i aria-hidden="true" data-feather="edit"></i></a></p>
         
@@ -357,7 +357,7 @@ count assay(s) and feature (here gene) and sample metadata. The
 modeling. These are typically the variable of interest (group variable)
 and other variables you want to account for (e.g., batch effect
 variables). A detailed explanation of <em>design formulas</em> and
-related <em>design matrices</em> will follow in the section about <a href="08-extra-design.html">extra exploration of design matrices</a>.
+related <em>design matrices</em> will follow in the section about <a href="06-extra-design.html">extra exploration of design matrices</a>.
 Objects of the <code>DESeqDataSet</code> class can be build from <a href="https://bioconductor.org/packages/release/bioc/vignettes/DESeq2/inst/doc/DESeq2.html#countmat" class="external-link">count
 matrices</a>, <a href="https://bioconductor.org/packages/release/bioc/vignettes/DESeq2/inst/doc/DESeq2.html#se" class="external-link">SummarizedExperiment
 objects</a>, <a href="https://bioconductor.org/packages/release/bioc/vignettes/DESeq2/inst/doc/DESeq2.html#tximport" class="external-link">transcript
@@ -428,7 +428,7 @@ design formula are characters, converting to factors</code></pre>
   Instructor Note
   </h3>
 </button>
-<div id="collapseInstructor1" class="accordion-collapse collapse" aria-labelledby="headingInstructor1" data-bs-parent="#accordionInstructor1">
+<div id="collapseInstructor1" class="accordion-collapse collapse" data-bs-parent="#accordionInstructor1" aria-labelledby="headingInstructor1">
 <div class="accordion-body">
 <p>The function to generate a <code>DESeqDataSet</code> needs to be
 adapted depending on the input type, e.g,</p>
@@ -477,7 +477,7 @@ function from the previous section:</p>
   Instructor Note
   </h3>
 </button>
-<div id="collapseInstructor2" class="accordion-collapse collapse" aria-labelledby="headingInstructor2" data-bs-parent="#accordionInstructor2">
+<div id="collapseInstructor2" class="accordion-collapse collapse" data-bs-parent="#accordionInstructor2" aria-labelledby="headingInstructor2">
 <div class="accordion-body">
 <p><em>DESeq2</em> uses the <strong>“Relative Log Expression”
 (RLE)</strong> method to calculate sample-wise <em>size factors</em>
@@ -605,7 +605,7 @@ combinations of the model coefficients (equivalent to combinations of
 columns within the <em>design matrix</em>) and thus directly related to
 the design formular. A detailed explanation of design matrices and how
 to use them to specify different contrasts of interest can be found in
-the section on the <a href="08-extra-design.html">exploration of design
+the section on the <a href="06-extra-design.html">exploration of design
 matrices</a>. In the <code>results()</code> function a contrast can be
 represented by the variable of interest (reference variable) and the
 related level to compare using the <code>contrast</code> argument. By
@@ -640,7 +640,7 @@ object.</em></p>
   Show me the solution
   </h4>
 </button>
-<div id="collapseSolution1" class="accordion-collapse collapse" aria-labelledby="headingSolution1" data-bs-parent="#accordionSolution1">
+<div id="collapseSolution1" class="accordion-collapse collapse" data-bs-parent="#accordionSolution1" aria-labelledby="headingSolution1">
 <div class="accordion-body">
 <p>In the lesson example the last variable of the design formular is
 <code>time</code>. The <strong>reference level</strong> (first in
@@ -732,7 +732,7 @@ A330076C08Rik 3.01518e-48</code></pre>
   Instructor Note
   </h3>
 </button>
-<div id="collapseInstructor3" class="accordion-collapse collapse" aria-labelledby="headingInstructor3" data-bs-parent="#accordionInstructor3">
+<div id="collapseInstructor3" class="accordion-collapse collapse" data-bs-parent="#accordionInstructor3" aria-labelledby="headingInstructor3">
 <div class="accordion-body">
 <p>Both of the below ways of specifying the contrast are essentially
 equivalent. The <code>name</code> parameter can be accessed using
@@ -770,7 +770,7 @@ time.</p>
   Show me the solution
   </h4>
 </button>
-<div id="collapseSolution2" class="accordion-collapse collapse" aria-labelledby="headingSolution2" data-bs-parent="#accordionSolution2">
+<div id="collapseSolution2" class="accordion-collapse collapse" data-bs-parent="#accordionSolution2" aria-labelledby="headingSolution2">
 <div class="accordion-body">
 <div class="codewrapper sourceCode" id="cb22">
 <h3 class="code-label">R<i aria-hidden="true" data-feather="chevron-left"></i><i aria-hidden="true" data-feather="chevron-right"></i>
@@ -913,7 +913,7 @@ results then?</p>
   Show me the solution
   </h4>
 </button>
-<div id="collapseSolution3" class="accordion-collapse collapse" aria-labelledby="headingSolution3" data-bs-parent="#accordionSolution3">
+<div id="collapseSolution3" class="accordion-collapse collapse" data-bs-parent="#accordionSolution3" aria-labelledby="headingSolution3">
 <div class="accordion-body">
 <div class="codewrapper sourceCode" id="cb30">
 <h3 class="code-label">R<i aria-hidden="true" data-feather="chevron-left"></i><i aria-hidden="true" data-feather="chevron-right"></i>
@@ -972,7 +972,7 @@ experiment-wide false positive rate.</p>
 can still be hard to interpret with regards to an experimental question.
 Visualizing gene expression can help to detect expression pattern or
 group of genes with related functions. We will perform systematic
-detection of over represented groups of genes in the <a href="06-gene-set-analysis.html">next section</a>. Before this
+detection of over represented groups of genes in a <a href="07-gene-set-analysis.html">later section</a>. Before this
 visualization can already help us to get a good intuition about what to
 expect.</p>
 <p>We will use transformed data (see <a href="04-exploratory-qc.html">exploratory data analysis</a>) and the top
@@ -1168,8 +1168,8 @@ beneficial.</li>
   "url": "https://carpentries-incubator.github.io/bioc-rnaseq/instructor/05-differential-expression.html",
   "identifier": "https://carpentries-incubator.github.io/bioc-rnaseq/instructor/05-differential-expression.html",
   "dateCreated": "2020-09-15",
-  "dateModified": "2023-09-02",
-  "datePublished": "2023-09-02"
+  "dateModified": "2023-09-03",
+  "datePublished": "2023-09-03"
 }
 
   </script><script>
