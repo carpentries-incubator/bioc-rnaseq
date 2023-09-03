@@ -613,6 +613,105 @@ vd$plotlist
 
 <img src="fig/06-extra-design-rendered-unnamed-chunk-11-1.png" style="display: block; margin: auto;" />
 
+## Combining multiple factors into one
+
+Sometimes, for experiments with multiple factors, it is easier to interpret coefficients and set up contrasts of interest if the factors are combined into one. 
+Let's consider the previous example again, using this approach:
+
+
+```r
+meta_noninf <- meta %>% filter(time == "Day0")
+meta_noninf$sex_tissue <- paste0(meta_noninf$sex, "_", meta_noninf$tissue)
+meta_noninf
+```
+
+```{.output}
+                     title geo_accession     organism     age    sex
+GSM2545337 CNS_RNA-seq_11C    GSM2545337 Mus musculus 8 weeks Female
+GSM2545338 CNS_RNA-seq_12C    GSM2545338 Mus musculus 8 weeks Female
+GSM2545343 CNS_RNA-seq_20C    GSM2545343 Mus musculus 8 weeks   Male
+GSM2545348 CNS_RNA-seq_27C    GSM2545348 Mus musculus 8 weeks Female
+GSM2545349 CNS_RNA-seq_28C    GSM2545349 Mus musculus 8 weeks   Male
+GSM2545353  CNS_RNA-seq_3C    GSM2545353 Mus musculus 8 weeks Female
+GSM2545354  CNS_RNA-seq_4C    GSM2545354 Mus musculus 8 weeks   Male
+GSM2545356 CNS_RNA-seq_574    GSM2545356 Mus musculus 8 weeks   Male
+GSM2545357 CNS_RNA-seq_575    GSM2545357 Mus musculus 8 weeks   Male
+GSM2545358 CNS_RNA-seq_583    GSM2545358 Mus musculus 8 weeks Female
+GSM2545361 CNS_RNA-seq_590    GSM2545361 Mus musculus 8 weeks   Male
+GSM2545364 CNS_RNA-seq_709    GSM2545364 Mus musculus 8 weeks Female
+GSM2545365 CNS_RNA-seq_710    GSM2545365 Mus musculus 8 weeks Female
+GSM2545366 CNS_RNA-seq_711    GSM2545366 Mus musculus 8 weeks Female
+GSM2545367 CNS_RNA-seq_713    GSM2545367 Mus musculus 8 weeks   Male
+             infection  strain time     tissue mouse        sex_tissue
+GSM2545337 NonInfected C57BL/6 Day0 Cerebellum     9 Female_Cerebellum
+GSM2545338 NonInfected C57BL/6 Day0 Cerebellum    10 Female_Cerebellum
+GSM2545343 NonInfected C57BL/6 Day0 Cerebellum    11   Male_Cerebellum
+GSM2545348 NonInfected C57BL/6 Day0 Cerebellum     8 Female_Cerebellum
+GSM2545349 NonInfected C57BL/6 Day0 Cerebellum     7   Male_Cerebellum
+GSM2545353 NonInfected C57BL/6 Day0 Cerebellum     4 Female_Cerebellum
+GSM2545354 NonInfected C57BL/6 Day0 Cerebellum     2   Male_Cerebellum
+GSM2545356 NonInfected C57BL/6 Day0 Spinalcord     2   Male_Spinalcord
+GSM2545357 NonInfected C57BL/6 Day0 Spinalcord     3   Male_Spinalcord
+GSM2545358 NonInfected C57BL/6 Day0 Spinalcord     4 Female_Spinalcord
+GSM2545361 NonInfected C57BL/6 Day0 Spinalcord     7   Male_Spinalcord
+GSM2545364 NonInfected C57BL/6 Day0 Spinalcord     8 Female_Spinalcord
+GSM2545365 NonInfected C57BL/6 Day0 Spinalcord     9 Female_Spinalcord
+GSM2545366 NonInfected C57BL/6 Day0 Spinalcord    10 Female_Spinalcord
+GSM2545367 NonInfected C57BL/6 Day0 Spinalcord    11   Male_Spinalcord
+```
+
+```r
+vd <- VisualizeDesign(sampleData = meta_noninf, 
+                      designFormula = ~ 0 + sex_tissue)
+vd$designmatrix
+```
+
+```{.output}
+           sex_tissueFemale_Cerebellum sex_tissueFemale_Spinalcord
+GSM2545337                           1                           0
+GSM2545338                           1                           0
+GSM2545343                           0                           0
+GSM2545348                           1                           0
+GSM2545349                           0                           0
+GSM2545353                           1                           0
+GSM2545354                           0                           0
+GSM2545356                           0                           0
+GSM2545357                           0                           0
+GSM2545358                           0                           1
+GSM2545361                           0                           0
+GSM2545364                           0                           1
+GSM2545365                           0                           1
+GSM2545366                           0                           1
+GSM2545367                           0                           0
+           sex_tissueMale_Cerebellum sex_tissueMale_Spinalcord
+GSM2545337                         0                         0
+GSM2545338                         0                         0
+GSM2545343                         1                         0
+GSM2545348                         0                         0
+GSM2545349                         1                         0
+GSM2545353                         0                         0
+GSM2545354                         1                         0
+GSM2545356                         0                         1
+GSM2545357                         0                         1
+GSM2545358                         0                         0
+GSM2545361                         0                         1
+GSM2545364                         0                         0
+GSM2545365                         0                         0
+GSM2545366                         0                         0
+GSM2545367                         0                         1
+```
+
+```r
+vd$plotlist
+```
+
+```{.output}
+[[1]]
+```
+
+<img src="fig/06-extra-design-rendered-unnamed-chunk-12-1.png" style="display: block; margin: auto;" />
+
+
 ## Paired design
 
 In this particular data set the samples are paired - the same mice have contributed both the cerebellum and spinal cord samples. 
@@ -678,7 +777,7 @@ vd$plotlist
 [[1]]
 ```
 
-<img src="fig/06-extra-design-rendered-unnamed-chunk-12-1.png" style="display: block; margin: auto;" />
+<img src="fig/06-extra-design-rendered-unnamed-chunk-13-1.png" style="display: block; margin: auto;" />
 
 ## Within- and between-subject comparisons
 
@@ -838,14 +937,387 @@ vd$plotlist
 $`time = Day0`
 ```
 
-<img src="fig/06-extra-design-rendered-unnamed-chunk-13-1.png" style="display: block; margin: auto;" />
+<img src="fig/06-extra-design-rendered-unnamed-chunk-14-1.png" style="display: block; margin: auto;" />
 
 ```{.output}
 
 $`time = Day4`
 ```
 
-<img src="fig/06-extra-design-rendered-unnamed-chunk-13-2.png" style="display: block; margin: auto;" />
+<img src="fig/06-extra-design-rendered-unnamed-chunk-14-2.png" style="display: block; margin: auto;" />
+
+## How does this relate to the DESeq2 analysis we did in the previous episode? 
+
+Now that we have learnt more about interpreting design matrices, let's look back to the differential expression analysis we performed in the previous episode. 
+We will repeat the main lines of code here.
+
+
+```r
+se <- readRDS("data/GSE96870_se.rds")
+se <- se[rowSums(assay(se, "counts")) > 5, ]
+dds <- DESeq2::DESeqDataSet(se, design = ~ sex + time)
+dds <- DESeq(dds)
+```
+
+```{.error}
+Error in DESeq(dds): could not find function "DESeq"
+```
+
+`DESeq2` stores the design matrix in the object: 
+
+
+```r
+attr(dds, "modelMatrix")
+```
+
+```{.output}
+NULL
+```
+
+The column names can be obtained via the `resultsNames` function:
+
+
+```r
+resultsNames(dds)
+```
+
+```{.error}
+Error in resultsNames(dds): could not find function "resultsNames"
+```
+
+Let's visualize this design: 
+
+
+```r
+vd <- VisualizeDesign(sampleData = colData(dds)[, c("sex", "time")], 
+                      designMatrix = attr(dds, "modelMatrix"), 
+                      flipCoordFitted = TRUE)
+```
+
+```{.error}
+Error in VisualizeDesign(sampleData = colData(dds)[, c("sex", "time")], : Either 'designFormula' or 'designMatrix' must be provided
+```
+
+```r
+vd$plotlist
+```
+
+```{.output}
+$`time = Day0`
+```
+
+<img src="fig/06-extra-design-rendered-unnamed-chunk-18-1.png" style="display: block; margin: auto;" />
+
+```{.output}
+
+$`time = Day4`
+```
+
+<img src="fig/06-extra-design-rendered-unnamed-chunk-18-2.png" style="display: block; margin: auto;" />
+
+In the previous episode, we performed a test comparing Day8 samples to Day0 samples:
+
+
+```r
+resTime <- results(dds, contrast = c("time", "Day8", "Day0"))
+```
+
+```{.error}
+Error in results(dds, contrast = c("time", "Day8", "Day0")): could not find function "results"
+```
+
+From the figure above, we see that this comparison is represented by the `time_Day8_vs_Day0` coefficient, which corresponds to the fourth column in the design matrix. 
+Thus, an alternative way of specifying the contrast for the test would be: 
+
+
+```r
+resTimeNum <- results(dds, contrast = c(0, 0, 0, 1))
+```
+
+```{.error}
+Error in results(dds, contrast = c(0, 0, 0, 1)): could not find function "results"
+```
+
+Let's check if the results are comparable: 
+
+
+```r
+summary(resTime)
+```
+
+```{.error}
+Error in h(simpleError(msg, call)): error in evaluating the argument 'object' in selecting a method for function 'summary': object 'resTime' not found
+```
+
+```r
+summary(resTimeNum)
+```
+
+```{.error}
+Error in h(simpleError(msg, call)): error in evaluating the argument 'object' in selecting a method for function 'summary': object 'resTimeNum' not found
+```
+
+```r
+## logFC
+plot(resTime$log2FoldChange, resTimeNum$log2FoldChange)
+```
+
+```{.error}
+Error in h(simpleError(msg, call)): error in evaluating the argument 'x' in selecting a method for function 'plot': object 'resTime' not found
+```
+
+```r
+abline(0, 1)
+```
+
+```{.error}
+Error in int_abline(a = a, b = b, h = h, v = v, untf = untf, ...): plot.new has not been called yet
+```
+
+```r
+## -log10(p-value)
+plot(-log10(resTime$pvalue), -log10(resTimeNum$pvalue))
+```
+
+```{.error}
+Error in h(simpleError(msg, call)): error in evaluating the argument 'x' in selecting a method for function 'plot': object 'resTime' not found
+```
+
+```r
+abline(0, 1)
+```
+
+```{.error}
+Error in int_abline(a = a, b = b, h = h, v = v, untf = untf, ...): plot.new has not been called yet
+```
+
+## Redo DESeq2 analysis with interaction
+
+Next, let's look at a different setup. 
+We still consider the sex and time predictors, but now we allow an interaction between them. 
+In other words, we allow the time effect to be different for males and females. 
+
+
+```r
+se <- readRDS("data/GSE96870_se.rds")
+se <- se[rowSums(assay(se, "counts")) > 5, ]
+dds <- DESeq2::DESeqDataSet(se, design = ~ sex * time)
+dds <- DESeq(dds)
+```
+
+```{.error}
+Error in DESeq(dds): could not find function "DESeq"
+```
+
+```r
+attr(dds, "modelMatrix")
+```
+
+```{.output}
+NULL
+```
+
+Let's visualize this design: 
+
+
+```r
+vd <- VisualizeDesign(sampleData = colData(dds)[, c("sex", "time")], 
+                      designMatrix = attr(dds, "modelMatrix"), 
+                      flipCoordFitted = TRUE)
+```
+
+```{.error}
+Error in VisualizeDesign(sampleData = colData(dds)[, c("sex", "time")], : Either 'designFormula' or 'designMatrix' must be provided
+```
+
+```r
+vd$plotlist
+```
+
+```{.output}
+$`time = Day0`
+```
+
+<img src="fig/06-extra-design-rendered-unnamed-chunk-23-1.png" style="display: block; margin: auto;" />
+
+```{.output}
+
+$`time = Day4`
+```
+
+<img src="fig/06-extra-design-rendered-unnamed-chunk-23-2.png" style="display: block; margin: auto;" />
+
+Note that now, the `time_Day8_vs_Day0` coefficient represents the difference between Day8 and Day0 **for the Female samples**. 
+To get the corresponding difference for the male samples, we need to also add the interaction effect (`sexMale.timeDay8`). 
+
+
+```r
+## Day8 vs Day0, female
+resTimeFemale <- results(dds, contrast = c("time", "Day8", "Day0"))
+```
+
+```{.error}
+Error in results(dds, contrast = c("time", "Day8", "Day0")): could not find function "results"
+```
+
+```r
+## Interaction effect (difference in Day8-Day0 effect between Male and Female)
+resTimeInt <- results(dds, name = "sexMale.timeDay8")
+```
+
+```{.error}
+Error in results(dds, name = "sexMale.timeDay8"): could not find function "results"
+```
+
+Let's try to fit this model with the second approach mentioned above, namely to create a single factor.
+
+
+```r
+se <- readRDS("data/GSE96870_se.rds")
+se <- se[rowSums(assay(se, "counts")) > 5, ]
+se$sex_time <- paste0(se$sex, "_", se$time)
+dds <- DESeq2::DESeqDataSet(se, design = ~ 0 + sex_time)
+dds <- DESeq(dds)
+```
+
+```{.error}
+Error in DESeq(dds): could not find function "DESeq"
+```
+
+```r
+attr(dds, "modelMatrix")
+```
+
+```{.output}
+NULL
+```
+
+We again visualize this design: 
+
+
+```r
+vd <- VisualizeDesign(sampleData = colData(dds)[, c("sex", "time")], 
+                      designMatrix = attr(dds, "modelMatrix"), 
+                      flipCoordFitted = TRUE)
+```
+
+```{.error}
+Error in VisualizeDesign(sampleData = colData(dds)[, c("sex", "time")], : Either 'designFormula' or 'designMatrix' must be provided
+```
+
+```r
+vd$plotlist
+```
+
+```{.output}
+$`time = Day0`
+```
+
+<img src="fig/06-extra-design-rendered-unnamed-chunk-26-1.png" style="display: block; margin: auto;" />
+
+```{.output}
+
+$`time = Day4`
+```
+
+<img src="fig/06-extra-design-rendered-unnamed-chunk-26-2.png" style="display: block; margin: auto;" />
+
+We then set up the same contrasts as above
+
+
+```r
+## Day8 vs Day0, female
+resTimeFemaleSingle <- results(dds, contrast = c("sex_time", "Female_Day8", "Female_Day0"))
+```
+
+```{.error}
+Error in results(dds, contrast = c("sex_time", "Female_Day8", "Female_Day0")): could not find function "results"
+```
+
+```r
+## Interaction effect (difference in Day8-Day0 effect between Male and Female)
+resultsNames(dds)
+```
+
+```{.error}
+Error in resultsNames(dds): could not find function "resultsNames"
+```
+
+```r
+resTimeIntSingle <- results(dds, contrast = c(1, 0, -1, -1, 0, 1))
+```
+
+```{.error}
+Error in results(dds, contrast = c(1, 0, -1, -1, 0, 1)): could not find function "results"
+```
+
+Check that these results agree with the ones obtained by fitting the model with the two factors and the interaction term. 
+
+
+```r
+summary(resTimeFemale)
+```
+
+```{.error}
+Error in h(simpleError(msg, call)): error in evaluating the argument 'object' in selecting a method for function 'summary': object 'resTimeFemale' not found
+```
+
+```r
+summary(resTimeFemaleSingle)
+```
+
+```{.error}
+Error in h(simpleError(msg, call)): error in evaluating the argument 'object' in selecting a method for function 'summary': object 'resTimeFemaleSingle' not found
+```
+
+```r
+plot(-log10(resTimeFemale$pvalue), -log10(resTimeFemaleSingle$pvalue))
+```
+
+```{.error}
+Error in h(simpleError(msg, call)): error in evaluating the argument 'x' in selecting a method for function 'plot': object 'resTimeFemale' not found
+```
+
+```r
+abline(0, 1)
+```
+
+```{.error}
+Error in int_abline(a = a, b = b, h = h, v = v, untf = untf, ...): plot.new has not been called yet
+```
+
+```r
+summary(resTimeInt)
+```
+
+```{.error}
+Error in h(simpleError(msg, call)): error in evaluating the argument 'object' in selecting a method for function 'summary': object 'resTimeInt' not found
+```
+
+```r
+summary(resTimeIntSingle)
+```
+
+```{.error}
+Error in h(simpleError(msg, call)): error in evaluating the argument 'object' in selecting a method for function 'summary': object 'resTimeIntSingle' not found
+```
+
+```r
+plot(-log10(resTimeInt$pvalue), -log10(resTimeIntSingle$pvalue))
+```
+
+```{.error}
+Error in h(simpleError(msg, call)): error in evaluating the argument 'x' in selecting a method for function 'plot': object 'resTimeInt' not found
+```
+
+```r
+abline(0, 1)
+```
+
+```{.error}
+Error in int_abline(a = a, b = b, h = h, v = v, untf = untf, ...): plot.new has not been called yet
+```
+
 
 :::::::::::::::::::::::::::::::::::::::: keypoints
 
