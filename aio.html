@@ -335,7 +335,7 @@
         
 <section id="aio-01-intro-to-rnaseq"><p>Content from <a href="01-intro-to-rnaseq.html">Introduction to RNA-seq</a></p>
 <hr>
-<p> Last updated on 2023-09-03 | 
+<p> Last updated on 2023-09-05 | 
         
         <a href="https://github.com/carpentries-incubator/bioc-rnaseq/edit/main/episodes/01-intro-to-rnaseq.Rmd" class="external-link">Edit this page <i aria-hidden="true" data-feather="edit"></i></a></p>
 <div class="text-end">
@@ -681,7 +681,7 @@ sources, including Ensembl, UCSC and GENCODE.</li>
 </div>
 </div></section><section id="aio-02-setup"><p>Content from <a href="02-setup.html">RStudio Project and Experimental Data</a></p>
 <hr>
-<p> Last updated on 2023-09-02 | 
+<p> Last updated on 2023-09-05 | 
         
         <a href="https://github.com/carpentries-incubator/bioc-rnaseq/edit/main/episodes/02-setup.Rmd" class="external-link">Edit this page <i aria-hidden="true" data-feather="edit"></i></a></p>
 <div class="text-end">
@@ -833,7 +833,7 @@ directory, create the four fundamental directories previously discussed
   Show me the solution
   </h4>
 </button>
-<div id="collapseSolution1" class="accordion-collapse collapse" data-bs-parent="#accordionSolution1" aria-labelledby="headingSolution1">
+<div id="collapseSolution1" class="accordion-collapse collapse" aria-labelledby="headingSolution1" data-bs-parent="#accordionSolution1">
 <div class="accordion-body">
 <figure style="text-align: center"><img src="fig/02_setup/folders_working_dir.png" alt="Your working directory should look like this" width="1221" class="figure mx-auto d-block"><figcaption>
 Your working directory should look like this
@@ -979,7 +979,7 @@ into the <code>data</code> folder in your working directory.</p>
   Show me the solution
   </h4>
 </button>
-<div id="collapseSolution2" class="accordion-collapse collapse" data-bs-parent="#accordionSolution2" aria-labelledby="headingSolution2">
+<div id="collapseSolution2" class="accordion-collapse collapse" aria-labelledby="headingSolution2" data-bs-parent="#accordionSolution2">
 <div class="accordion-body">
 <div class="codewrapper sourceCode" id="cb2">
 <h3 class="code-label">R<i aria-hidden="true" data-feather="chevron-left"></i><i aria-hidden="true" data-feather="chevron-right"></i>
@@ -1026,7 +1026,7 @@ downloading datasets from the internet.</li>
 </div>
 </section></section><section id="aio-03-import-annotate"><p>Content from <a href="03-import-annotate.html">Importing and annotating quantified data into R</a></p>
 <hr>
-<p> Last updated on 2023-09-03 | 
+<p> Last updated on 2023-09-05 | 
         
         <a href="https://github.com/carpentries-incubator/bioc-rnaseq/edit/main/episodes/03-import-annotate.Rmd" class="external-link">Edit this page <i aria-hidden="true" data-feather="edit"></i></a></p>
 <div class="text-end">
@@ -1998,24 +1998,25 @@ other attached packages:
  [1] hgu95av2.db_3.13.0          org.Hs.eg.db_3.17.0        
  [3] org.Mm.eg.db_3.17.0         AnnotationDbi_1.62.2       
  [5] SummarizedExperiment_1.30.2 Biobase_2.60.0             
- [7] MatrixGenerics_1.12.2       matrixStats_1.0.0          
- [9] GenomicRanges_1.52.0        GenomeInfoDb_1.36.1        
+ [7] MatrixGenerics_1.12.3       matrixStats_1.0.0          
+ [9] GenomicRanges_1.52.0        GenomeInfoDb_1.36.2        
 [11] IRanges_2.34.1              S4Vectors_0.38.1           
 [13] BiocGenerics_0.46.0         knitr_1.43                 
 
 loaded via a namespace (and not attached):
- [1] Matrix_1.5-4.1          bit_4.0.5               highr_0.10             
- [4] compiler_4.3.1          BiocManager_1.30.21     renv_1.0.2             
+ [1] Matrix_1.6-1            bit_4.0.5               highr_0.10             
+ [4] compiler_4.3.1          BiocManager_1.30.22     renv_1.0.2             
  [7] crayon_1.5.2            blob_1.2.4              Biostrings_2.68.1      
 [10] bitops_1.0-7            png_0.1-8               fastmap_1.1.1          
 [13] yaml_2.3.7              lattice_0.21-8          R6_2.5.1               
-[16] XVector_0.40.0          S4Arrays_1.0.4          DelayedArray_0.26.6    
+[16] XVector_0.40.0          S4Arrays_1.0.6          DelayedArray_0.26.7    
 [19] GenomeInfoDbData_1.2.10 DBI_1.1.3               rlang_1.1.1            
-[22] KEGGREST_1.40.0         cachem_1.0.8            xfun_0.39              
+[22] KEGGREST_1.40.0         cachem_1.0.8            xfun_0.40              
 [25] bit64_4.0.5             RSQLite_2.3.1           memoise_2.0.1          
 [28] cli_3.6.1               zlibbioc_1.46.0         grid_4.3.1             
-[31] vctrs_0.6.3             evaluate_0.21           RCurl_1.98-1.12        
-[34] httr_1.4.6              pkgconfig_2.0.3         tools_4.3.1            </code></pre>
+[31] vctrs_0.6.3             evaluate_0.21           abind_1.4-5            
+[34] RCurl_1.98-1.12         httr_1.4.7              pkgconfig_2.0.3        
+[37] tools_4.3.1            </code></pre>
 </div>
 <div id="keypoints1" class="callout keypoints">
 <div class="callout-square">
@@ -2039,7 +2040,7 @@ analysis, with gene symbols added for easier interpretation.</li>
 </div>
 </section></section><section id="aio-04-exploratory-qc"><p>Content from <a href="04-exploratory-qc.html">Exploratory analysis and quality control</a></p>
 <hr>
-<p> Last updated on 2023-09-02 | 
+<p> Last updated on 2023-09-05 | 
         
         <a href="https://github.com/carpentries-incubator/bioc-rnaseq/edit/main/episodes/04-exploratory-qc.Rmd" class="external-link">Edit this page <i aria-hidden="true" data-feather="edit"></i></a></p>
 <div class="text-end">
@@ -2182,7 +2183,7 @@ gene survived the filtering?</p>
   Show me the solution
   </h4>
 </button>
-<div id="collapseSolution1" class="accordion-collapse collapse" data-bs-parent="#accordionSolution1" aria-labelledby="headingSolution1">
+<div id="collapseSolution1" class="accordion-collapse collapse" aria-labelledby="headingSolution1" data-bs-parent="#accordionSolution1">
 <div class="accordion-body">
 <div class="codewrapper sourceCode" id="cb7">
 <h3 class="code-label">R<i aria-hidden="true" data-feather="chevron-left"></i><i aria-hidden="true" data-feather="chevron-right"></i>
@@ -2416,36 +2417,36 @@ attached base packages:
 
 other attached packages:
  [1] hexbin_1.28.3               RColorBrewer_1.1-3         
- [3] ComplexHeatmap_2.16.0       ggplot2_3.4.2              
+ [3] ComplexHeatmap_2.16.0       ggplot2_3.4.3              
  [5] vsn_3.68.0                  DESeq2_1.40.2              
  [7] SummarizedExperiment_1.30.2 Biobase_2.60.0             
- [9] MatrixGenerics_1.12.2       matrixStats_1.0.0          
-[11] GenomicRanges_1.52.0        GenomeInfoDb_1.36.1        
+ [9] MatrixGenerics_1.12.3       matrixStats_1.0.0          
+[11] GenomicRanges_1.52.0        GenomeInfoDb_1.36.2        
 [13] IRanges_2.34.1              S4Vectors_0.38.1           
 [15] BiocGenerics_0.46.0        
 
 loaded via a namespace (and not attached):
- [1] shape_1.4.6             circlize_0.4.15         gtable_0.3.3           
- [4] rjson_0.2.21            xfun_0.39               GlobalOptions_0.1.2    
+ [1] shape_1.4.6             circlize_0.4.15         gtable_0.3.4           
+ [4] rjson_0.2.21            xfun_0.40               GlobalOptions_0.1.2    
  [7] lattice_0.21-8          vctrs_0.6.3             tools_4.3.1            
 [10] bitops_1.0-7            generics_0.1.3          parallel_4.3.1         
 [13] tibble_3.2.1            fansi_1.0.4             highr_0.10             
-[16] cluster_2.1.4           pkgconfig_2.0.3         Matrix_1.5-4.1         
+[16] cluster_2.1.4           pkgconfig_2.0.3         Matrix_1.6-1           
 [19] lifecycle_1.0.3         GenomeInfoDbData_1.2.10 farver_2.1.1           
 [22] compiler_4.3.1          munsell_0.5.0           codetools_0.2-19       
 [25] clue_0.3-64             RCurl_1.98-1.12         yaml_2.3.7             
 [28] preprocessCore_1.62.1   pillar_1.9.0            crayon_1.5.2           
-[31] BiocParallel_1.34.2     affy_1.78.0             DelayedArray_0.26.6    
-[34] limma_3.56.2            iterators_1.0.14        foreach_1.5.2          
-[37] tidyselect_1.2.0        locfit_1.5-9.8          digest_0.6.33          
-[40] dplyr_1.1.2             labeling_0.4.2          colorspace_2.1-0       
-[43] cli_3.6.1               magrittr_2.0.3          S4Arrays_1.0.4         
-[46] utf8_1.2.3              withr_2.5.0             scales_1.2.1           
-[49] XVector_0.40.0          affyio_1.70.0           GetoptLong_1.0.5       
-[52] png_0.1-8               evaluate_0.21           knitr_1.43             
-[55] doParallel_1.0.17       rlang_1.1.1             Rcpp_1.0.11            
-[58] glue_1.6.2              BiocManager_1.30.21     renv_1.0.2             
-[61] R6_2.5.1                zlibbioc_1.46.0        </code></pre>
+[31] BiocParallel_1.34.2     affy_1.78.2             DelayedArray_0.26.7    
+[34] limma_3.56.2            iterators_1.0.14        abind_1.4-5            
+[37] foreach_1.5.2           tidyselect_1.2.0        locfit_1.5-9.8         
+[40] digest_0.6.33           dplyr_1.1.3             labeling_0.4.3         
+[43] colorspace_2.1-0        cli_3.6.1               magrittr_2.0.3         
+[46] S4Arrays_1.0.6          utf8_1.2.3              withr_2.5.0            
+[49] scales_1.2.1            XVector_0.40.0          affyio_1.70.0          
+[52] GetoptLong_1.0.5        png_0.1-8               evaluate_0.21          
+[55] knitr_1.43              doParallel_1.0.17       rlang_1.1.1            
+[58] Rcpp_1.0.11             glue_1.6.2              BiocManager_1.30.22    
+[61] renv_1.0.2              R6_2.5.1                zlibbioc_1.46.0        </code></pre>
 </div>
 <div id="keypoints1" class="callout keypoints">
 <div class="callout-square">
@@ -2469,7 +2470,7 @@ work directly on the raw counts.</li>
 </div>
 </section></section><section id="aio-05-differential-expression"><p>Content from <a href="05-differential-expression.html">Differential expression analysis</a></p>
 <hr>
-<p> Last updated on 2023-09-03 | 
+<p> Last updated on 2023-09-05 | 
         
         <a href="https://github.com/carpentries-incubator/bioc-rnaseq/edit/main/episodes/05-differential-expression.Rmd" class="external-link">Edit this page <i aria-hidden="true" data-feather="edit"></i></a></p>
 <div class="text-end">
@@ -3241,7 +3242,7 @@ beneficial.</li>
 </div>
 </section></section><section id="aio-06-extra-design"><p>Content from <a href="06-extra-design.html">Extra exploration of design matrices</a></p>
 <hr>
-<p> Last updated on 2023-09-03 | 
+<p> Last updated on 2023-09-05 | 
         
         <a href="https://github.com/carpentries-incubator/bioc-rnaseq/edit/main/episodes/06-extra-design.Rmd" class="external-link">Edit this page <i aria-hidden="true" data-feather="edit"></i></a></p>
 <div class="text-end">
@@ -4912,7 +4913,7 @@ linear combinations of the model coefficients.</li>
 </div>
 </section></section><section id="aio-07-gene-set-analysis"><p>Content from <a href="07-gene-set-analysis.html">Gene set enrichment analysis</a></p>
 <hr>
-<p> Last updated on 2023-09-02 | 
+<p> Last updated on 2023-09-05 | 
         
         <a href="https://github.com/carpentries-incubator/bioc-rnaseq/edit/main/episodes/07-gene-set-analysis.Rmd" class="external-link">Edit this page <i aria-hidden="true" data-feather="edit"></i></a></p>
 <div class="text-end">
@@ -5507,9 +5508,9 @@ distribution of its statistic.</p>
 <h3 class="code-label">OUTPUT<i aria-hidden="true" data-feather="chevron-left"></i><i aria-hidden="true" data-feather="chevron-right"></i>
 </h3>
 <pre class="output" tabindex="0"><code>Unit: microseconds
-   expr   min     lq    mean median    uq   max neval
- fisher 281.3 286.50 298.429  291.2 303.3 530.4   100
-  hyper   1.6   1.85   2.576    2.3   2.6  18.5   100</code></pre>
+   expr   min    lq    mean median     uq   max neval
+ fisher 321.3 328.6 345.094 335.25 349.55 689.0   100
+  hyper   1.7   2.3   3.487   3.25   4.30  27.2   100</code></pre>
 </div>
 <p>It is very astonishing that <code>phyper()</code> is hundreds of
 times faster than <code>fisher.test()</code>. Main reason is in
@@ -6329,7 +6330,7 @@ sets are automatically retrieved and processed from
 <div class="codewrapper">
 <h3 class="code-label">OUTPUT<i aria-hidden="true" data-feather="chevron-left"></i><i aria-hidden="true" data-feather="chevron-right"></i>
 </h3>
-<pre class="output" tabindex="0"><code>--&gt; Expected input gene ID: 19725,67042,103733,56484,23967,380709</code></pre>
+<pre class="output" tabindex="0"><code>--&gt; Expected input gene ID: 20317,19156,226265,387218,15270,70235</code></pre>
 </div>
 <div class="codewrapper">
 <h3 class="code-label">OUTPUT<i aria-hidden="true" data-feather="chevron-left"></i><i aria-hidden="true" data-feather="chevron-right"></i>
@@ -7333,7 +7334,7 @@ topological relations in the GO hierarchy.<a href="#fnref7" class="footnote-back
 </ol>
 </div></section><section id="aio-08-next-steps"><p>Content from <a href="08-next-steps.html">Next steps</a></p>
 <hr>
-<p> Last updated on 2023-09-02 | 
+<p> Last updated on 2023-09-05 | 
         
         <a href="https://github.com/carpentries-incubator/bioc-rnaseq/edit/main/episodes/08-next-steps.Rmd" class="external-link">Edit this page <i aria-hidden="true" data-feather="edit"></i></a></p>
 <div class="text-end">
