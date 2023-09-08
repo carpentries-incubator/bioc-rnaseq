@@ -24,7 +24,6 @@ exercises: 45
 
 
 
-
 ## Differential expression inference
 
 A major goal of RNA-seq data analysis is the quantification and statistical inference of systematic changes between experimental groups or conditions (e.g., treatment vs. control, timepoints, tissues). This is typically performed by identifying genes with differential expression pattern using between- and within-condition variability and thus requires biological replicates (multiple sample of the same condition).
@@ -38,7 +37,7 @@ To run `DESeq2` we need to represent our count data as object of the `DESeqDataS
 The `DESeqDataSet` is an extension of the `SummarizedExperiment` class (see section [Importing and annotating quantified data into R](../episodes/03-import-annotate.Rmd) ) that stores a *design formula* in addition to the count assay(s) and feature (here gene) and sample metadata.
 The *design formula* expresses the variables which will be used in modeling. These are typically the variable of interest (group variable) and other variables you want to account for (e.g., batch effect variables). A detailed explanation of *design formulas* and related *design matrices* will follow in the section about [extra exploration of design matrices](../episodes/06-extra-design.Rmd). Objects of the `DESeqDataSet` class can be build from [count matrices](https://bioconductor.org/packages/release/bioc/vignettes/DESeq2/inst/doc/DESeq2.html#countmat), [SummarizedExperiment objects](https://bioconductor.org/packages/release/bioc/vignettes/DESeq2/inst/doc/DESeq2.html#se), [transcript abundance files](https://bioconductor.org/packages/release/bioc/vignettes/DESeq2/inst/doc/DESeq2.html#tximport) or [htseq count files](https://bioconductor.org/packages/release/bioc/vignettes/DESeq2/inst/doc/DESeq2.html#htseq).
 
-### Load libraries
+### Load packages
 
 
 ```r
@@ -153,7 +152,7 @@ final dispersion estimates
 plotDispEsts(dds)
 ```
 
-<img src="fig/05-differential-expression-rendered-unnamed-chunk-8-1.png" style="display: block; margin: auto;" />
+<img src="fig/05-differential-expression-rendered-estimate-dispersions-1.png" style="display: block; margin: auto;" />
 
 ### Testing
 
@@ -367,7 +366,7 @@ We can visualize the results in many ways. A good check is to explore the relati
 plotMA(resTime)
 ```
 
-<img src="fig/05-differential-expression-rendered-unnamed-chunk-16-1.png" style="display: block; margin: auto;" />
+<img src="fig/05-differential-expression-rendered-plot-ma-1.png" style="display: block; margin: auto;" />
 
 We can see that genes with a low mean count tend to have larger log fold changes.
 This is caused by counts from lowly expressed genes tending to be very noisy. 
@@ -389,7 +388,7 @@ using 'apeglm' for LFC shrinkage. If used in published research, please cite:
 plotMA(resTimeLfc)
 ```
 
-<img src="fig/05-differential-expression-rendered-unnamed-chunk-17-1.png" style="display: block; margin: auto;" />
+<img src="fig/05-differential-expression-rendered-res-time-lfc-1.png" style="display: block; margin: auto;" />
 Shrinkage of log fold changes is useful for visualization and ranking of genes, but for result exploration typically the `independentFiltering` argument is used to remove lowly expressed genes.
 
 ::::::::::::::::::::::::::::::::::::: challenge 
@@ -474,7 +473,7 @@ ComplexHeatmap::Heatmap(heatmapData,
                         cluster_rows = TRUE, cluster_columns = FALSE)
 ```
 
-<img src="fig/05-differential-expression-rendered-unnamed-chunk-19-1.png" style="display: block; margin: auto;" />
+<img src="fig/05-differential-expression-rendered-heatmap-time-1.png" style="display: block; margin: auto;" />
 
 ::::::::::::::::::::::::::::::::::::: challenge 
 

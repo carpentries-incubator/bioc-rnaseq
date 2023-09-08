@@ -35,7 +35,7 @@ and QC steps taken before a formal statistical analysis is done.
 ::::::::::::::::::::::::::::::::::::::::::::::::::
 
 
-## Load libraries
+## Load packages
 
 Assuming you just started RStudio again, load some packages we will use in this lesson along with the `SummarizedExperiment` object we created in the last lesson.
 
@@ -136,7 +136,7 @@ colData(se) |>
          theme(axis.text.x = element_text(angle = 45, hjust = 1, vjust = 1))
 ```
 
-<img src="fig/04-exploratory-qc-rendered-unnamed-chunk-6-1.png" style="display: block; margin: auto;" />
+<img src="fig/04-exploratory-qc-rendered-lib-size-1.png" style="display: block; margin: auto;" />
 
 
 We need to adjust for the differences in library size between samples, to avoid drawing incorrect conclusions. The way this is typically done for RNA-seq data can be described as a two-step procedure.
@@ -175,7 +175,7 @@ ggplot(data.frame(libSize = colSums(assay(dds)),
     labs(x = "Library size", y = "Size factor")
 ```
 
-<img src="fig/04-exploratory-qc-rendered-unnamed-chunk-7-1.png" style="display: block; margin: auto;" />
+<img src="fig/04-exploratory-qc-rendered-est-size-factors-1.png" style="display: block; margin: auto;" />
 
 ## Transform data
 
@@ -189,7 +189,7 @@ In fact, the variance increases with the average read count.
 meanSdPlot(assay(dds), ranks = FALSE)
 ```
 
-<img src="fig/04-exploratory-qc-rendered-unnamed-chunk-8-1.png" style="display: block; margin: auto;" />
+<img src="fig/04-exploratory-qc-rendered-mean-sd-plot-raw-1.png" style="display: block; margin: auto;" />
 
 There are two ways around this: either we develop methods specifically adapted to count data, or we adapt (transform) the count data so that the existing methods are applicable.
 Both ways have been explored; however, at the moment the second approach is arguably more widely applied in practice. We can transform our data using DESeq2's variance stablizing transformation and then verify that is had removed the correlation between average read count and variance.
@@ -200,7 +200,7 @@ vsd <- DESeq2::vst(dds, blind = TRUE)
 meanSdPlot(assay(vsd), ranks = FALSE)
 ```
 
-<img src="fig/04-exploratory-qc-rendered-unnamed-chunk-9-1.png" style="display: block; margin: auto;" />
+<img src="fig/04-exploratory-qc-rendered-mean-sd-plot-vst-1.png" style="display: block; margin: auto;" />
 
 ## Heatmaps and clustering
 
@@ -224,7 +224,7 @@ ComplexHeatmap::Heatmap(
 )
 ```
 
-<img src="fig/04-exploratory-qc-rendered-unnamed-chunk-10-1.png" style="display: block; margin: auto;" />
+<img src="fig/04-exploratory-qc-rendered-heatmap-1.png" style="display: block; margin: auto;" />
 
 ## PCA
 
@@ -251,7 +251,7 @@ ggplot(pcaData, aes(x = PC1, y = PC2)) +
     scale_color_manual(values = c(Male = "blue", Female = "red"))
 ```
 
-<img src="fig/04-exploratory-qc-rendered-unnamed-chunk-11-1.png" style="display: block; margin: auto;" />
+<img src="fig/04-exploratory-qc-rendered-pca-1.png" style="display: block; margin: auto;" />
 
 ## Session info
 

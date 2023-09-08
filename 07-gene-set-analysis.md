@@ -196,7 +196,7 @@ plot(venn(list("sexDEgenes"  = sexDEgenes,
 title(paste0("|universe| = ", length(totalGenes)))
 ```
 
-<img src="fig/07-gene-set-analysis-rendered-unnamed-chunk-8-1.png" style="display: block; margin: auto;" />
+<img src="fig/07-gene-set-analysis-rendered-venn-diagram-1.png" style="display: block; margin: auto;" />
 
 In the Venn diagram, we can observe that around 1.1% (13/1134) of genes in the
 _XY gene set_ are DE. Compared to the global fraction of DE genes (54/21198 =
@@ -380,7 +380,7 @@ genes are marked as non-DE genes (in blue). We grab $n_{+1}$ genes (the size
 of the gene set) from the box and we want to ask **what is the probability of
 having $n_{11}$ DE genes in our hand?**
 
-<img src="fig/07-gene-set-analysis-rendered-unnamed-chunk-15-1.png" width="80%" style="display: block; margin: auto;" />
+<img src="fig/07-gene-set-analysis-rendered-hypergeom-1.png" width="80%" style="display: block; margin: auto;" />
 
 We first calculate the total number of ways of picking $n_{+1}$ genes from
 total $n$ genes, without distinguishing whether they are DE or not:
@@ -449,7 +449,7 @@ Then, the correct use of `phyper()` is:
 1 - phyper(q - 1, m, n, k)
 ```
 
-Let's pluigin in our variables:
+Let's plugin our variables:
 
 
 ```r
@@ -501,9 +501,9 @@ microbenchmark(
 
 ```{.output}
 Unit: microseconds
-   expr   min    lq    mean median     uq   max neval
- fisher 321.3 328.6 345.094 335.25 349.55 689.0   100
-  hyper   1.7   2.3   3.487   3.25   4.30  27.2   100
+   expr   min    lq    mean median    uq   max neval
+ fisher 319.3 326.5 343.176  340.2 351.5 646.4   100
+  hyper   1.7   2.3   3.400    3.5   4.0  21.2   100
 ```
 
 It is very astonishing that `phyper()` is hundreds of times faster than
@@ -576,8 +576,8 @@ and 2 genes. Some genes exist in multiple gene sets.
 
 ```r
 lt <- list(gene_set_1 = c("gene_1", "gene_2", "gene_3"),
-     gene_set_2 = c("gene_1", "gene_3", "gene_4", "gene_5", "gene_6"),
-     gene_set_3 = c("gene_4", "gene_7")
+           gene_set_2 = c("gene_1", "gene_3", "gene_4", "gene_5", "gene_6"),
+           gene_set_3 = c("gene_4", "gene_7")
 )
 lt
 ```
@@ -661,8 +661,8 @@ list to a two-column data frame?
 
 ```r
 lt <- list(gene_set_1 = c("gene_1", "gene_2", "gene_3"),
-     gene_set_2 = c("gene_1", "gene_3", "gene_4", "gene_5", "gene_6"),
-     gene_set_3 = c("gene_4", "gene_7")
+           gene_set_2 = c("gene_1", "gene_3", "gene_4", "gene_5", "gene_6"),
+           gene_set_3 = c("gene_4", "gene_7")
 )
 ```
 
@@ -787,7 +787,7 @@ ONTOLOGY is BP_", which is translated into the following code:
 
 ```r
 BP_Id = mapIds(org.Hs.eg.db, keys = "BP", keytype = "ONTOLOGY", 
-    column = "GO", multiVals = "list")[[1]]
+               column = "GO", multiVals = "list")[[1]]
 head(BP_Id)
 ```
 
@@ -807,7 +807,7 @@ a vector of GO IDs, select ENTREZIDs which correspond to every one of them_".
 
 ```r
 BPGeneSets = mapIds(org.Hs.eg.db, keys = BP_Id, keytype = "GOALL", 
-    column = "ENTREZID", multiVals = "list")
+                    column = "ENTREZID", multiVals = "list")
 ```
 
 You may have noticed there is a "GO" key column as well a "GOALL" column in
@@ -1231,7 +1231,7 @@ resTimeGO = enrichGO(gene = timeDEgenes,
 ```
 
 ```{.output}
---> Expected input gene ID: 20317,19156,226265,387218,15270,70235
+--> Expected input gene ID: 241516,20779,330277,574438,240899,12043
 ```
 
 ```{.output}
@@ -1424,7 +1424,7 @@ use `select()` function: `select(org.Mm.eg.db, keys = timeDEgenes, keytype =
 
 ```r
 EntrezIDs = mapIds(org.Mm.eg.db, keys = timeDEgenes, 
-    keytype = "SYMBOL", column = "ENTREZID", multiVals = "first")
+                   keytype = "SYMBOL", column = "ENTREZID", multiVals = "first")
 ```
 
 ```{.output}
@@ -1635,8 +1635,8 @@ Test on the MSigDB hallmark gene sets:
 
 
 ```r
-HallmakrGeneSets = split(gene_sets$gene_symbol, gene_sets$gs_name)
-df = ora(timeDEgenes, HallmakrGeneSets, rownames(se))
+HallmarkGeneSets = split(gene_sets$gene_symbol, gene_sets$gs_name)
+df = ora(timeDEgenes, HallmarkGeneSets, rownames(se))
 head(df)
 ```
 
@@ -1725,11 +1725,11 @@ section and we compare three different universe settings.
 
 ```r
 # all genes in the gene sets collection ~ 4k genes
-df1 = ora(timeDEgenes, HallmakrGeneSets)
+df1 = ora(timeDEgenes, HallmarkGeneSets)
 # all protein-coding genes, ~ 20k genes
-df2 = ora(timeDEgenes, HallmakrGeneSets, rownames(se))
+df2 = ora(timeDEgenes, HallmarkGeneSets, rownames(se))
 # all genes in org.Mm.eg.db ~ 70k genes
-df3 = ora(timeDEgenes, HallmakrGeneSets, 
+df3 = ora(timeDEgenes, HallmarkGeneSets, 
     keys(org.Mm.eg.db, keytype = "SYMBOL"))
 
 # df1, df2, and df3 are in the same row order, 
@@ -1744,7 +1744,7 @@ legend("topleft", legend = c("all protein-coding genes as universe", "all genes 
     pch = 16, col = c(2, 4))
 ```
 
-<img src="fig/07-gene-set-analysis-rendered-unnamed-chunk-48-1.png" style="display: block; margin: auto;" />
+<img src="fig/07-gene-set-analysis-rendered-compare-universe-1.png" style="display: block; margin: auto;" />
 
 It is very straightforward to see, with a larger universe, there are more
 significant gene sets, which may produce potentially more false positives.
@@ -1822,13 +1822,13 @@ Note the two functions are directly applied on `resTimeGO` returned by `enrichGO
 barplot(resTimeGO, showCategory = 20)
 ```
 
-<img src="fig/07-gene-set-analysis-rendered-unnamed-chunk-50-1.png" style="display: block; margin: auto;" />
+<img src="fig/07-gene-set-analysis-rendered-more-enrichplots-1.png" style="display: block; margin: auto;" />
 
 ```r
 dotplot(resTimeGO, showCategory = 20)
 ```
 
-<img src="fig/07-gene-set-analysis-rendered-unnamed-chunk-50-2.png" style="display: block; margin: auto;" />
+<img src="fig/07-gene-set-analysis-rendered-more-enrichplots-2.png" style="display: block; margin: auto;" />
 
 Barplots can map two variables to the plot, one to the height of bars and the
 other to the colors of bars; while for dotplot, sizes of dots can be mapped to
@@ -1863,7 +1863,7 @@ Now let's try to make a more reasonable barplot and dotplot to show the
 enrichment of ORA.
 
 First, let's define some metrics which measure the "enrichment" of DE genes on
-gene sets. Recall the denotations in the 2x2 contigency table (we are too far
+gene sets. Recall the denotations in the 2x2 contingency table (we are too far
 from that!). Let's take these numbers from the enrichment table.
 
 
@@ -1941,7 +1941,7 @@ ggplot(resTimeGOTable[1:10, ],
     ylab("")
 ```
 
-<img src="fig/07-gene-set-analysis-rendered-unnamed-chunk-55-1.png" style="display: block; margin: auto;" />
+<img src="fig/07-gene-set-analysis-rendered-plot-enrichment-1.png" style="display: block; margin: auto;" />
 
 In the next example, we use _z_-score as the primary variable to map to the
 offset to origin, `DE_Ratio` and `Count` to map to dot colors and sizes.
@@ -1955,7 +1955,7 @@ ggplot(resTimeGOTable[1:10, ],
     ylab("")
 ```
 
-<img src="fig/07-gene-set-analysis-rendered-unnamed-chunk-56-1.png" style="display: block; margin: auto;" />
+<img src="fig/07-gene-set-analysis-rendered-plot-z-1.png" style="display: block; margin: auto;" />
 
 Both plots can highlight the gene set "leukocyte migration involved in
 inflammatory response" is relatively small but highly enriched.
@@ -1981,7 +1981,7 @@ ggplot(resTimeGOTable,
     geom_vline(xintercept = 1.5, lty = 2, col = "#444444")
 ```
 
-<img src="fig/07-gene-set-analysis-rendered-unnamed-chunk-57-1.png" style="display: block; margin: auto;" />
+<img src="fig/07-gene-set-analysis-rendered-plot-enrichment-padj-1.png" style="display: block; margin: auto;" />
 
 In the "volcano plot", we can observe the plot is composed by a list of
 curves. The trends are especially clear in the right bottom of the plot.
@@ -2058,7 +2058,7 @@ ggplot(rbind(resTimeGOupTable[1:5, ],
     ylab("")
 ```
 
-<img src="fig/07-gene-set-analysis-rendered-unnamed-chunk-59-1.png" style="display: block; margin: auto;" />
+<img src="fig/07-gene-set-analysis-rendered-plot-up-down-1.png" style="display: block; margin: auto;" />
 
 
 Specifically for GO enrichment, it is often that GO enrichment returns a long

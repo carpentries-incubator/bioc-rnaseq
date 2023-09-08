@@ -22,7 +22,7 @@ exercises: 30
 -   What types of gene identifiers are typically used, and how are mappings between them done?
 ::::::::::::::::::::::::::::::::::::::::::::::::::
 
-## Load libraries
+## Load packages
 
 In this episode we will use some functions from add-on R packages. In order to use them, we need to load them from our `library`:
 
