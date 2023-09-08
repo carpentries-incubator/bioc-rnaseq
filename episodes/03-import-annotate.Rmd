@@ -8,14 +8,14 @@ output:
 exercises: 30
 ---
 
-```{r, echo = FALSE, message = FALSE}
+```{r setup, echo = FALSE, message = FALSE}
 library(knitr)
 knitr::opts_chunk$set(
     warning = FALSE
 )
 ```
 
-```{r, echo=FALSE, purl=FALSE, message=FALSE, warning = FALSE}
+```{r source-download-data, echo=FALSE, purl=FALSE, message=FALSE, warning = FALSE}
 source("download_data.R")
 ```
 
@@ -29,11 +29,11 @@ source("download_data.R")
 -   What types of gene identifiers are typically used, and how are mappings between them done?
 ::::::::::::::::::::::::::::::::::::::::::::::::::
 
-## Load libraries
+## Load packages
 
 In this episode we will use some functions from add-on R packages. In order to use them, we need to load them from our `library`:
 
-```{r, purl=TRUE}
+```{r load-pkg, purl=TRUE}
 suppressPackageStartupMessages({
     library(AnnotationDbi)
     library(org.Mm.eg.db)
@@ -52,7 +52,7 @@ Let's read in the data files that we downloaded in the last episode and start to
 
 ### Counts
 
-```{r, purl=TRUE}
+```{r read-counts, purl=TRUE}
 counts <- read.csv("data/GSE96870_counts_cerebellum.csv", 
                    row.names = 1)
 dim(counts)
@@ -65,7 +65,7 @@ Genes are in rows and samples are in columns, so we have counts for 41,786 genes
 
 Next read in the sample annotations. Because samples are in columns in the count matrix, we will name the object `coldata`:
 
-```{r, purl=TRUE}
+```{r read-sample-data, purl=TRUE}
 coldata <- read.csv("data/GSE96870_coldata_cerebellum.csv",
                     row.names = 1)
 dim(coldata)
@@ -77,7 +77,7 @@ Now samples are in rows with the GEO sample IDs as the rownames, and we have 10 
 ### Gene annotations
 The counts only have gene symbols, which while short and somewhat recognizable to the human brain, are not always good absolute identifiers for exactly what gene was measured. For this we need additional gene annotations that were provided by the authors. The `count` and `coldata` files were in comma separated value (.csv) format, but we cannot use that for our gene annotation file because the descriptions can contain commas that would prevent a .csv file from being read in correctly. Instead the gene annotation file is in tab separated value (.tsv) format. Likewise, the descriptions can contain the single quote `'` (e.g., 5'), which by default R assumes indicates a character entry. So we have to use a more generic function `read.delim()` with extra arguments to specify that we have tab-separated data (`sep = "\t"`) with no quotes used (`quote = ""`). We also put in other arguments to specify that the first row contains our column names (`header = TRUE`), the gene symbols that should be our `row.names` are in the 5th column (`row.names = 5`), and that NCBI's species-specific gene ID (i.e., ENTREZID) should be read in as character data even though they look like numbers (`colClasses` argument). You can look up this details on available arguments by simply entering the function name starting with question mark. (e.g., `?read.delim`)
 
-```{r, purl=TRUE}
+```{r read-gene-annots, purl=TRUE}
 rowranges <- read.delim("data/GSE96870_rowranges.tsv", 
                         sep = "\t", 
                         colClasses = c(ENTREZID = "character"),
@@ -94,7 +94,7 @@ For each of the 41,786 genes, we have the `seqnames` (e.g., chromosome number),
 useful for the downstream analysis. For example, from the `gbkey` column, we
 can check what types of genes and how many of them are in our dataset:
 
-```{r, purl=TRUE}
+```{r table-gbkey, purl=TRUE}
 table(rowranges$gbkey)
 ```
 
@@ -135,7 +135,7 @@ We will create a `SummarizedExperiment` from these objects:
 Before we put them together, you ABSOLUTELY MUST MAKE SURE THE SAMPLES AND GENES ARE IN THE SAME ORDER! Even though we saw that `count` and `coldata` had the same number of samples and `count` and `rowranges` had the same number of genes, we never explicitly checked to see if they were in the same order. One quick way to check:
 
 
-```{r, purl=TRUE}
+```{r match-names, purl=TRUE}
 all.equal(colnames(counts), rownames(coldata)) # samples
 all.equal(rownames(counts), rownames(rowranges)) # genes
 
@@ -161,13 +161,11 @@ Write the codes.
 
 ::::::::::::::::::::::::::::::::::: solution
 
-```{r eval=FALSE}
+```{r check-names, eval=FALSE}
 tempindex <- match(rownames(counts), rownames(rowranges))
 rowranges <- rowranges[tempindex, ]
 
 all.equal(rownames(counts), rownames(rowranges)) 
-
-
 ```
 
 
@@ -177,7 +175,7 @@ all.equal(rownames(counts), rownames(rowranges))
 Once we have verified that samples and genes are in the same order, we can 
 then create our `SummarizedExperiment` object.
 
-```{r, purl=TRUE}
+```{r make-se, purl=TRUE}
 # One final check:
 stopifnot(rownames(rowranges) == rownames(counts), # features
           rownames(coldata) == colnames(counts)) # samples
@@ -193,7 +191,7 @@ se <- SummarizedExperiment(
 Because matching the genes and samples is so important, the `SummarizedExperiment()` constructor does some internal check to make sure they contain the same number of 
 genes/samples and the sample/row names match. If not, you will get some error messages:
 
-```{r, purl=TRUE}
+```{r wrong-nsamples, purl=TRUE}
 # wrong number of samples:
 
 bad1 <- SummarizedExperiment(
@@ -204,7 +202,7 @@ bad1 <- SummarizedExperiment(
 ```
 
 
-```{r, purl=TRUE}
+```{r wrong-geneorder, purl=TRUE}
 # same number of genes but in different order:
 
 bad2 <- SummarizedExperiment(
@@ -212,14 +210,13 @@ bad2 <- SummarizedExperiment(
   rowRanges = as(rowranges[c(2:nrow(rowranges), 1),], "GRanges"),
   colData = coldata
 )
-
 ```
 
 
 
 A brief recap of how to access the various data slots in a `SummarizedExperiment` and how to make some manipulations:
 
-```{r, purl=TRUE}
+```{r access-se, purl=TRUE}
 # Access the counts
 head(assay(se))
 dim(assay(se))
@@ -270,7 +267,7 @@ se$Label <- factor(se$Label, levels = se$Label)
 
 This was a bit of code and time to create our `SummarizedExperiment` object. We will need to keep using it throughout the workshop, so it can be useful to save it as an actual single file on our computer to read it back in to R's memory if we have to shut down RStudio. To save an R-specific file we can use the `saveRDS()` function and later read it back into R using the `readRDS()` function. 
 
-```{r, purl=TRUE}
+```{r save-se, purl=TRUE}
 saveRDS(se, "data/GSE96870_se.rds")
 rm(se) # remove the object!
 se <- readRDS("data/GSE96870_se.rds")
@@ -294,11 +291,9 @@ Before, we conceptually discussed subsetting to only the mRNA genes. Now that we
 
 ::::::::::::::::::::::::::::::::::: solution
 
-```{r }
+```{r subset-mrna}
 se_mRNA <- se[rowData(se)$gbkey == "mRNA" , ]
 dim(se_mRNA)
-
-
 ```
 
 :::::::::::::::::::::::::::::::::::
@@ -333,7 +328,7 @@ Where
 - *column* is the value we **want**    
 - *keytype* is the type of key used    
 
-```{r, purl=TRUE}
+```{r add-symbol, purl=TRUE}
 mapIds(org.Mm.eg.db, keys = "497097", column = "SYMBOL", keytype = "ENTREZID")
 ```
 
@@ -342,7 +337,7 @@ mapping between keys and columns through an additional argument, `multiVals`.
 The below example demonstrate this functionality using the `hgu95av2.db` 
 package, an Affymetrix Human Genome U95 Set annotation data.
 
-```{r, purl=TRUE}
+```{r add-alias, purl=TRUE}
 keys <- head(keys(hgu95av2.db, "ENTREZID"))
 last <- function(x){x[[length(x)]]}
 
@@ -365,7 +360,7 @@ mapIds(hgu95av2.db, keys = keys, column = "ALIAS", keytype = "ENTREZID", multiVa
 
 ## Session info
 
-```{r, purl=TRUE}
+```{r session-info, purl=TRUE}
 sessionInfo()
 ```
 
