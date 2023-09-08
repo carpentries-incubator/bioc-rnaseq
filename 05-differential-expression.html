@@ -289,7 +289,7 @@
       </div>
       <hr></nav><main id="main-content" class="main-content"><div class="container lesson-content">
         <h1>Differential expression analysis</h1>
-        <p> Last updated on 2023-09-05 | 
+        <p> Last updated on 2023-09-08 | 
         
         <a href="https://github.com/carpentries-incubator/bioc-rnaseq/edit/main/episodes/05-differential-expression.Rmd" class="external-link">Edit this page <i aria-hidden="true" data-feather="edit"></i></a></p>
         
@@ -363,7 +363,7 @@ objects</a>, <a href="https://bioconductor.org/packages/release/bioc/vignettes/D
 abundance files</a> or <a href="https://bioconductor.org/packages/release/bioc/vignettes/DESeq2/inst/doc/DESeq2.html#htseq" class="external-link">htseq
 count files</a>.</p>
 <div class="section level3">
-<h3 id="load-libraries">Load libraries<a class="anchor" aria-label="anchor" href="#load-libraries"></a></h3>
+<h3 id="load-packages">Load packages<a class="anchor" aria-label="anchor" href="#load-packages"></a></h3>
 <div class="codewrapper sourceCode" id="cb1">
 <h3 class="code-label">R<i aria-hidden="true" data-feather="chevron-left"></i><i aria-hidden="true" data-feather="chevron-right"></i>
 </h3>
@@ -491,7 +491,7 @@ the effect of <em>shrinkage</em> using <code>plotDispEsts()</code>:</p>
 <pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="fu">plotDispEsts</span><span class="op">(</span><span class="va">dds</span><span class="op">)</span></span></code></pre>
 </div>
-<figure><img src="fig/05-differential-expression-rendered-unnamed-chunk-8-1.png" style="display: block; margin: auto;" class="figure mx-auto d-block"></figure></div>
+<figure><img src="fig/05-differential-expression-rendered-estimate-dispersions-1.png" style="display: block; margin: auto;" class="figure mx-auto d-block"></figure></div>
 <div class="section level3">
 <h3 id="testing">Testing<a class="anchor" aria-label="anchor" href="#testing"></a></h3>
 <p>We can use the <code>nbinomWaldTest()</code>function of
@@ -591,7 +591,7 @@ object.</em></p>
   Show me the solution
   </h4>
 </button>
-<div id="collapseSolution1" class="accordion-collapse collapse" aria-labelledby="headingSolution1" data-bs-parent="#accordionSolution1">
+<div id="collapseSolution1" class="accordion-collapse collapse" data-bs-parent="#accordionSolution1" aria-labelledby="headingSolution1">
 <div class="accordion-body">
 <p>In the lesson example the last variable of the design formular is
 <code>time</code>. The <strong>reference level</strong> (first in
@@ -698,7 +698,7 @@ time.</p>
   Show me the solution
   </h4>
 </button>
-<div id="collapseSolution2" class="accordion-collapse collapse" aria-labelledby="headingSolution2" data-bs-parent="#accordionSolution2">
+<div id="collapseSolution2" class="accordion-collapse collapse" data-bs-parent="#accordionSolution2" aria-labelledby="headingSolution2">
 <div class="accordion-body">
 <div class="codewrapper sourceCode" id="cb22">
 <h3 class="code-label">R<i aria-hidden="true" data-feather="chevron-left"></i><i aria-hidden="true" data-feather="chevron-right"></i>
@@ -787,7 +787,7 @@ provides a useful function to do so, <code>plotMA()</code>.</p>
 <pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="fu">plotMA</span><span class="op">(</span><span class="va">resTime</span><span class="op">)</span></span></code></pre>
 </div>
-<figure><img src="fig/05-differential-expression-rendered-unnamed-chunk-16-1.png" style="display: block; margin: auto;" class="figure mx-auto d-block"></figure><p>We can see that genes with a low mean count tend to have larger log
+<figure><img src="fig/05-differential-expression-rendered-plot-ma-1.png" style="display: block; margin: auto;" class="figure mx-auto d-block"></figure><p>We can see that genes with a low mean count tend to have larger log
 fold changes. This is caused by counts from lowly expressed genes
 tending to be very noisy. We can <em>shrink</em> the log fold changes of
 these genes with low mean and high dispersion, as they contain little
@@ -812,7 +812,7 @@ information.</p>
 <pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="fu">plotMA</span><span class="op">(</span><span class="va">resTimeLfc</span><span class="op">)</span></span></code></pre>
 </div>
-<p><img src="fig/05-differential-expression-rendered-unnamed-chunk-17-1.png" style="display: block; margin: auto;" class="figure">
+<p><img src="fig/05-differential-expression-rendered-res-time-lfc-1.png" style="display: block; margin: auto;" class="figure">
 Shrinkage of log fold changes is useful for visualization and ranking of
 genes, but for result exploration typically the
 <code>independentFiltering</code> argument is used to remove lowly
@@ -841,7 +841,7 @@ results then?</p>
   Show me the solution
   </h4>
 </button>
-<div id="collapseSolution3" class="accordion-collapse collapse" aria-labelledby="headingSolution3" data-bs-parent="#accordionSolution3">
+<div id="collapseSolution3" class="accordion-collapse collapse" data-bs-parent="#accordionSolution3" aria-labelledby="headingSolution3">
 <div class="accordion-body">
 <div class="codewrapper sourceCode" id="cb30">
 <h3 class="code-label">R<i aria-hidden="true" data-feather="chevron-left"></i><i aria-hidden="true" data-feather="chevron-right"></i>
@@ -933,7 +933,7 @@ orders genes (rows) according to their similarity.</p>
 <span>                        top_annotation <span class="op">=</span> <span class="va">heatmapColAnnot</span>,</span>
 <span>                        cluster_rows <span class="op">=</span> <span class="cn">TRUE</span>, cluster_columns <span class="op">=</span> <span class="cn">FALSE</span><span class="op">)</span></span></code></pre>
 </div>
-<figure><img src="fig/05-differential-expression-rendered-unnamed-chunk-19-1.png" style="display: block; margin: auto;" class="figure mx-auto d-block"></figure><div id="discussion1" class="callout discussion">
+<figure><img src="fig/05-differential-expression-rendered-heatmap-time-1.png" style="display: block; margin: auto;" class="figure mx-auto d-block"></figure><div id="discussion1" class="callout discussion">
 <div class="callout-square">
 <i class="callout-icon" data-feather="message-circle"></i>
 </div>
@@ -1073,8 +1073,8 @@ beneficial.</li>
         <p>Materials licensed under <a href="LICENSE.html">CC-BY 4.0</a> by the authors</p>
         
         <p><a href="https://creativecommons.org/licenses/by-sa/4.0/" class="external-link">Template licensed under CC-BY 4.0</a> by <a href="https://carpentries.org" class="external-link">The Carpentries</a></p>
-        <p>Built with <a href="https://github.com/carpentries/sandpaper/tree/0.12.4" class="external-link">sandpaper (0.12.4)</a>,
-        <a href="https://github.com/carpentries/pegboard/tree/0.6.0" class="external-link">pegboard (0.6.0)</a>,
+        <p>Built with <a href="https://github.com/carpentries/sandpaper/tree/0.13.0" class="external-link">sandpaper (0.13.0)</a>,
+        <a href="https://github.com/carpentries/pegboard/tree/0.6.1" class="external-link">pegboard (0.6.1)</a>,
       and <a href="https://github.com/mblue9/varnish/tree/3403ad0dd37f7641c6442330fcc182937e7964c5" class="external-link">varnish (0.2.16)</a>.</p>
 			</div>
 		</footer></div> <!-- / div.container -->
@@ -1096,8 +1096,8 @@ beneficial.</li>
   "url": "https://carpentries-incubator.github.io/bioc-rnaseq/05-differential-expression.html",
   "identifier": "https://carpentries-incubator.github.io/bioc-rnaseq/05-differential-expression.html",
   "dateCreated": "2020-09-15",
-  "dateModified": "2023-09-05",
-  "datePublished": "2023-09-05"
+  "dateModified": "2023-09-08",
+  "datePublished": "2023-09-08"
 }
 
   </script><script>

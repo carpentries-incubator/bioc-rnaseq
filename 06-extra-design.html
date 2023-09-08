@@ -291,7 +291,7 @@ episode?</a></li>
       </div>
       <hr></nav><main id="main-content" class="main-content"><div class="container lesson-content">
         <h1>Extra exploration of design matrices</h1>
-        <p> Last updated on 2023-09-05 | 
+        <p> Last updated on 2023-09-08 | 
         
         <a href="https://github.com/carpentries-incubator/bioc-rnaseq/edit/main/episodes/06-extra-design.Rmd" class="external-link">Edit this page <i aria-hidden="true" data-feather="edit"></i></a></p>
         
@@ -500,13 +500,13 @@ combination of the three predictor variables.</p>
 </h3>
 <pre class="output" tabindex="0"><code>$`tissue = Cerebellum`</code></pre>
 </div>
-<figure><img src="fig/06-extra-design-rendered-unnamed-chunk-6-1.png" style="display: block; margin: auto;" class="figure mx-auto d-block"></figure><div class="codewrapper">
+<figure><img src="fig/06-extra-design-rendered-cooccplots-1.png" style="display: block; margin: auto;" class="figure mx-auto d-block"></figure><div class="codewrapper">
 <h3 class="code-label">OUTPUT<i aria-hidden="true" data-feather="chevron-left"></i><i aria-hidden="true" data-feather="chevron-right"></i>
 </h3>
 <pre class="output" tabindex="0"><code>
 $`tissue = Spinalcord`</code></pre>
 </div>
-<figure><img src="fig/06-extra-design-rendered-unnamed-chunk-6-2.png" style="display: block; margin: auto;" class="figure mx-auto d-block"></figure><div id="challenge" class="callout discussion">
+<figure><img src="fig/06-extra-design-rendered-cooccplots-2.png" style="display: block; margin: auto;" class="figure mx-auto d-block"></figure><div id="challenge" class="callout discussion">
 <div class="callout-square">
 <i class="callout-icon" data-feather="message-circle"></i>
 </div>
@@ -598,7 +598,7 @@ GSM2545367           1       1</code></pre>
 </h3>
 <pre class="output" tabindex="0"><code>[[1]]</code></pre>
 </div>
-<figure><img src="fig/06-extra-design-rendered-unnamed-chunk-7-1.png" style="display: block; margin: auto;" class="figure mx-auto d-block"></figure><div class="codewrapper sourceCode" id="cb17">
+<figure><img src="fig/06-extra-design-rendered-male-vs-female-1.png" style="display: block; margin: auto;" class="figure mx-auto d-block"></figure><div class="codewrapper sourceCode" id="cb17">
 <h3 class="code-label">R<i aria-hidden="true" data-feather="chevron-left"></i><i aria-hidden="true" data-feather="chevron-right"></i>
 </h3>
 <pre class="downlit sourceCode r">
@@ -659,7 +659,7 @@ mean expression of a gene between male and female mice?</p>
   Show me the solution
   </h4>
 </button>
-<div id="collapseSolution1" class="accordion-collapse collapse" data-bs-parent="#accordionSolution1" aria-labelledby="headingSolution1">
+<div id="collapseSolution1" class="accordion-collapse collapse" aria-labelledby="headingSolution1" data-bs-parent="#accordionSolution1">
 <div class="accordion-body">
 <div class="codewrapper sourceCode" id="cb19">
 <h3 class="code-label">R<i aria-hidden="true" data-feather="chevron-left"></i><i aria-hidden="true" data-feather="chevron-right"></i>
@@ -723,7 +723,7 @@ GSM2545367         0       1</code></pre>
 </h3>
 <pre class="output" tabindex="0"><code>[[1]]</code></pre>
 </div>
-<figure><img src="fig/06-extra-design-rendered-unnamed-chunk-8-1.png" style="display: block; margin: auto;" class="figure mx-auto d-block"></figure></div>
+<figure><img src="fig/06-extra-design-rendered-male-vs-female-noint-1.png" style="display: block; margin: auto;" class="figure mx-auto d-block"></figure></div>
 </div>
 </div>
 </div>
@@ -748,7 +748,7 @@ Day4, Day8) in the male spinal cord samples, and visualize it using
   Show me the solution
   </h4>
 </button>
-<div id="collapseSolution2" class="accordion-collapse collapse" data-bs-parent="#accordionSolution2" aria-labelledby="headingSolution2">
+<div id="collapseSolution2" class="accordion-collapse collapse" aria-labelledby="headingSolution2" data-bs-parent="#accordionSolution2">
 <div class="accordion-body">
 <div class="codewrapper sourceCode" id="cb25">
 <h3 class="code-label">R<i aria-hidden="true" data-feather="chevron-left"></i><i aria-hidden="true" data-feather="chevron-right"></i>
@@ -822,7 +822,7 @@ GSM2545379           1        0        1</code></pre>
 </h3>
 <pre class="output" tabindex="0"><code>[[1]]</code></pre>
 </div>
-<figure><img src="fig/06-extra-design-rendered-unnamed-chunk-9-1.png" style="display: block; margin: auto;" class="figure mx-auto d-block"></figure></div>
+<figure><img src="fig/06-extra-design-rendered-all-times-1.png" style="display: block; margin: auto;" class="figure mx-auto d-block"></figure></div>
 </div>
 </div>
 </div>
@@ -914,7 +914,7 @@ GSM2545367           1       1                1</code></pre>
 </h3>
 <pre class="output" tabindex="0"><code>[[1]]</code></pre>
 </div>
-<figure><img src="fig/06-extra-design-rendered-unnamed-chunk-10-1.png" style="display: block; margin: auto;" class="figure mx-auto d-block"></figure></section><section id="factorial-design-with-interactions"><h2 class="section-heading">Factorial design with interactions<a class="anchor" aria-label="anchor" href="#factorial-design-with-interactions"></a>
+<figure><img src="fig/06-extra-design-rendered-factorial-noint-1.png" style="display: block; margin: auto;" class="figure mx-auto d-block"></figure></section><section id="factorial-design-with-interactions"><h2 class="section-heading">Factorial design with interactions<a class="anchor" aria-label="anchor" href="#factorial-design-with-interactions"></a>
 </h2>
 <hr class="half-width"><p>In the previous model, we assumed that the tissue differences were
 the same for both male and female mice. To allow for the estimation of
@@ -1006,7 +1006,7 @@ GSM2545367           1       1                1                        1</code><
 </h3>
 <pre class="output" tabindex="0"><code>[[1]]</code></pre>
 </div>
-<figure><img src="fig/06-extra-design-rendered-unnamed-chunk-11-1.png" style="display: block; margin: auto;" class="figure mx-auto d-block"></figure></section><section id="combining-multiple-factors-into-one"><h2 class="section-heading">Combining multiple factors into one<a class="anchor" aria-label="anchor" href="#combining-multiple-factors-into-one"></a>
+<figure><img src="fig/06-extra-design-rendered-factorial-withint-1.png" style="display: block; margin: auto;" class="figure mx-auto d-block"></figure></section><section id="combining-multiple-factors-into-one"><h2 class="section-heading">Combining multiple factors into one<a class="anchor" aria-label="anchor" href="#combining-multiple-factors-into-one"></a>
 </h2>
 <hr class="half-width"><p>Sometimes, for experiments with multiple factors, it is easier to
 interpret coefficients and set up contrasts of interest if the factors
@@ -1111,7 +1111,7 @@ GSM2545367                         0                         1</code></pre>
 </h3>
 <pre class="output" tabindex="0"><code>[[1]]</code></pre>
 </div>
-<figure><img src="fig/06-extra-design-rendered-unnamed-chunk-12-1.png" style="display: block; margin: auto;" class="figure mx-auto d-block"></figure></section><section id="paired-design"><h2 class="section-heading">Paired design<a class="anchor" aria-label="anchor" href="#paired-design"></a>
+<figure><img src="fig/06-extra-design-rendered-factorial-combine-1.png" style="display: block; margin: auto;" class="figure mx-auto d-block"></figure></section><section id="paired-design"><h2 class="section-heading">Paired design<a class="anchor" aria-label="anchor" href="#paired-design"></a>
 </h2>
 <hr class="half-width"><p>In this particular data set the samples are paired - the same mice
 have contributed both the cerebellum and spinal cord samples. This
@@ -1187,7 +1187,7 @@ GSM2545366           1      0      0       1                1</code></pre>
 </h3>
 <pre class="output" tabindex="0"><code>[[1]]</code></pre>
 </div>
-<figure><img src="fig/06-extra-design-rendered-unnamed-chunk-13-1.png" style="display: block; margin: auto;" class="figure mx-auto d-block"></figure></section><section id="within--and-between-subject-comparisons"><h2 class="section-heading">Within- and between-subject comparisons<a class="anchor" aria-label="anchor" href="#within--and-between-subject-comparisons"></a>
+<figure><img src="fig/06-extra-design-rendered-paired-1.png" style="display: block; margin: auto;" class="figure mx-auto d-block"></figure></section><section id="within--and-between-subject-comparisons"><h2 class="section-heading">Within- and between-subject comparisons<a class="anchor" aria-label="anchor" href="#within--and-between-subject-comparisons"></a>
 </h2>
 <hr class="half-width"><p>In some situations, we need to combine the types of models considered
 above. For example, let’s say that we want to investigate if the tissue
@@ -1360,13 +1360,13 @@ GSM2545377        0        1</code></pre>
 </h3>
 <pre class="output" tabindex="0"><code>$`time = Day0`</code></pre>
 </div>
-<figure><img src="fig/06-extra-design-rendered-unnamed-chunk-14-1.png" style="display: block; margin: auto;" class="figure mx-auto d-block"></figure><div class="codewrapper">
+<figure><img src="fig/06-extra-design-rendered-within-and-between-1.png" style="display: block; margin: auto;" class="figure mx-auto d-block"></figure><div class="codewrapper">
 <h3 class="code-label">OUTPUT<i aria-hidden="true" data-feather="chevron-left"></i><i aria-hidden="true" data-feather="chevron-right"></i>
 </h3>
 <pre class="output" tabindex="0"><code>
 $`time = Day4`</code></pre>
 </div>
-<figure><img src="fig/06-extra-design-rendered-unnamed-chunk-14-2.png" style="display: block; margin: auto;" class="figure mx-auto d-block"></figure></section><section id="how-does-this-relate-to-the-deseq2-analysis-we-did-in-the-previous-episode"><h2 class="section-heading">How does this relate to the DESeq2 analysis we did in the previous
+<figure><img src="fig/06-extra-design-rendered-within-and-between-2.png" style="display: block; margin: auto;" class="figure mx-auto d-block"></figure></section><section id="how-does-this-relate-to-the-deseq2-analysis-we-did-in-the-previous-episode"><h2 class="section-heading">How does this relate to the DESeq2 analysis we did in the previous
 episode?<a class="anchor" aria-label="anchor" href="#how-does-this-relate-to-the-deseq2-analysis-we-did-in-the-previous-episode"></a>
 </h2>
 <hr class="half-width"><p>Now that we have learnt more about interpreting design matrices,
@@ -1482,7 +1482,7 @@ function:</p>
 </h3>
 <pre class="output" tabindex="0"><code>[[1]]</code></pre>
 </div>
-<figure><img src="fig/06-extra-design-rendered-unnamed-chunk-18-1.png" style="display: block; margin: auto;" class="figure mx-auto d-block"></figure><p>In the previous episode, we performed a test comparing Day8 samples
+<figure><img src="fig/06-extra-design-rendered-vis-sex-time-1.png" style="display: block; margin: auto;" class="figure mx-auto d-block"></figure><p>In the previous episode, we performed a test comparing Day8 samples
 to Day0 samples:</p>
 <div class="codewrapper sourceCode" id="cb77">
 <h3 class="code-label">R<i aria-hidden="true" data-feather="chevron-left"></i><i aria-hidden="true" data-feather="chevron-right"></i>
@@ -1549,7 +1549,7 @@ low counts [2]     : 3723, 14%
 <span><span class="fu">plot</span><span class="op">(</span><span class="va">resTime</span><span class="op">$</span><span class="va">log2FoldChange</span>, <span class="va">resTimeNum</span><span class="op">$</span><span class="va">log2FoldChange</span><span class="op">)</span></span>
 <span><span class="fu">abline</span><span class="op">(</span><span class="fl">0</span>, <span class="fl">1</span><span class="op">)</span></span></code></pre>
 </div>
-<figure><img src="fig/06-extra-design-rendered-unnamed-chunk-21-1.png" style="display: block; margin: auto;" class="figure mx-auto d-block"></figure><div class="codewrapper sourceCode" id="cb84">
+<figure><img src="fig/06-extra-design-rendered-compare-tests-sex-time-1.png" style="display: block; margin: auto;" class="figure mx-auto d-block"></figure><div class="codewrapper sourceCode" id="cb84">
 <h3 class="code-label">R<i aria-hidden="true" data-feather="chevron-left"></i><i aria-hidden="true" data-feather="chevron-right"></i>
 </h3>
 <pre class="downlit sourceCode r">
@@ -1557,7 +1557,7 @@ low counts [2]     : 3723, 14%
 <span><span class="fu">plot</span><span class="op">(</span><span class="op">-</span><span class="fu">log10</span><span class="op">(</span><span class="va">resTime</span><span class="op">$</span><span class="va">pvalue</span><span class="op">)</span>, <span class="op">-</span><span class="fu">log10</span><span class="op">(</span><span class="va">resTimeNum</span><span class="op">$</span><span class="va">pvalue</span><span class="op">)</span><span class="op">)</span></span>
 <span><span class="fu">abline</span><span class="op">(</span><span class="fl">0</span>, <span class="fl">1</span><span class="op">)</span></span></code></pre>
 </div>
-<figure><img src="fig/06-extra-design-rendered-unnamed-chunk-21-2.png" style="display: block; margin: auto;" class="figure mx-auto d-block"></figure></section><section id="redo-deseq2-analysis-with-interaction"><h2 class="section-heading">Redo DESeq2 analysis with interaction<a class="anchor" aria-label="anchor" href="#redo-deseq2-analysis-with-interaction"></a>
+<figure><img src="fig/06-extra-design-rendered-compare-tests-sex-time-2.png" style="display: block; margin: auto;" class="figure mx-auto d-block"></figure></section><section id="redo-deseq2-analysis-with-interaction"><h2 class="section-heading">Redo DESeq2 analysis with interaction<a class="anchor" aria-label="anchor" href="#redo-deseq2-analysis-with-interaction"></a>
 </h2>
 <hr class="half-width"><p>Next, let’s look at a different setup. We still consider the sex and
 time predictors, but now we allow an interaction between them. In other
@@ -1681,7 +1681,7 @@ attr(,"contrasts")$time
 </h3>
 <pre class="output" tabindex="0"><code>[[1]]</code></pre>
 </div>
-<figure><img src="fig/06-extra-design-rendered-unnamed-chunk-23-1.png" style="display: block; margin: auto;" class="figure mx-auto d-block"></figure><p>Note that now, the <code>time_Day8_vs_Day0</code> coefficient
+<figure><img src="fig/06-extra-design-rendered-vis-sex-time-int-1.png" style="display: block; margin: auto;" class="figure mx-auto d-block"></figure><p>Note that now, the <code>time_Day8_vs_Day0</code> coefficient
 represents the difference between Day8 and Day0 <strong>for the Female
 samples</strong>. To get the corresponding difference for the male
 samples, we need to also add the interaction effect
@@ -1814,7 +1814,7 @@ attr(,"contrasts")$sex_time
 </h3>
 <pre class="output" tabindex="0"><code>[[1]]</code></pre>
 </div>
-<figure><img src="fig/06-extra-design-rendered-unnamed-chunk-26-1.png" style="display: block; margin: auto;" class="figure mx-auto d-block"></figure><p>We then set up the same contrasts as above</p>
+<figure><img src="fig/06-extra-design-rendered-vis-sex-time-int-single-1.png" style="display: block; margin: auto;" class="figure mx-auto d-block"></figure><p>We then set up the same contrasts as above</p>
 <div class="codewrapper sourceCode" id="cb108">
 <h3 class="code-label">R<i aria-hidden="true" data-feather="chevron-left"></i><i aria-hidden="true" data-feather="chevron-right"></i>
 </h3>
@@ -1886,7 +1886,7 @@ low counts [2]     : 6382, 23%
 <code class="sourceCode R"><span><span class="fu">plot</span><span class="op">(</span><span class="op">-</span><span class="fu">log10</span><span class="op">(</span><span class="va">resTimeFemale</span><span class="op">$</span><span class="va">pvalue</span><span class="op">)</span>, <span class="op">-</span><span class="fu">log10</span><span class="op">(</span><span class="va">resTimeFemaleSingle</span><span class="op">$</span><span class="va">pvalue</span><span class="op">)</span><span class="op">)</span></span>
 <span><span class="fu">abline</span><span class="op">(</span><span class="fl">0</span>, <span class="fl">1</span><span class="op">)</span></span></code></pre>
 </div>
-<figure><img src="fig/06-extra-design-rendered-unnamed-chunk-28-1.png" style="display: block; margin: auto;" class="figure mx-auto d-block"></figure><div class="codewrapper sourceCode" id="cb116">
+<figure><img src="fig/06-extra-design-rendered-compare-sex-time-int-1.png" style="display: block; margin: auto;" class="figure mx-auto d-block"></figure><div class="codewrapper sourceCode" id="cb116">
 <h3 class="code-label">R<i aria-hidden="true" data-feather="chevron-left"></i><i aria-hidden="true" data-feather="chevron-right"></i>
 </h3>
 <pre class="downlit sourceCode r">
@@ -1933,7 +1933,7 @@ low counts [2]     : 0, 0%
 <code class="sourceCode R"><span><span class="fu">plot</span><span class="op">(</span><span class="op">-</span><span class="fu">log10</span><span class="op">(</span><span class="va">resTimeInt</span><span class="op">$</span><span class="va">pvalue</span><span class="op">)</span>, <span class="op">-</span><span class="fu">log10</span><span class="op">(</span><span class="va">resTimeIntSingle</span><span class="op">$</span><span class="va">pvalue</span><span class="op">)</span><span class="op">)</span></span>
 <span><span class="fu">abline</span><span class="op">(</span><span class="fl">0</span>, <span class="fl">1</span><span class="op">)</span></span></code></pre>
 </div>
-<figure><img src="fig/06-extra-design-rendered-unnamed-chunk-28-2.png" style="display: block; margin: auto;" class="figure mx-auto d-block"></figure><div id="keypoints1" class="callout keypoints">
+<figure><img src="fig/06-extra-design-rendered-compare-sex-time-int-2.png" style="display: block; margin: auto;" class="figure mx-auto d-block"></figure><div id="keypoints1" class="callout keypoints">
 <div class="callout-square">
 <i class="callout-icon" data-feather="key"></i>
 </div>
@@ -1979,8 +1979,8 @@ linear combinations of the model coefficients.</li>
         <p>Materials licensed under <a href="LICENSE.html">CC-BY 4.0</a> by the authors</p>
         
         <p><a href="https://creativecommons.org/licenses/by-sa/4.0/" class="external-link">Template licensed under CC-BY 4.0</a> by <a href="https://carpentries.org" class="external-link">The Carpentries</a></p>
-        <p>Built with <a href="https://github.com/carpentries/sandpaper/tree/0.12.4" class="external-link">sandpaper (0.12.4)</a>,
-        <a href="https://github.com/carpentries/pegboard/tree/0.6.0" class="external-link">pegboard (0.6.0)</a>,
+        <p>Built with <a href="https://github.com/carpentries/sandpaper/tree/0.13.0" class="external-link">sandpaper (0.13.0)</a>,
+        <a href="https://github.com/carpentries/pegboard/tree/0.6.1" class="external-link">pegboard (0.6.1)</a>,
       and <a href="https://github.com/mblue9/varnish/tree/3403ad0dd37f7641c6442330fcc182937e7964c5" class="external-link">varnish (0.2.16)</a>.</p>
 			</div>
 		</footer></div> <!-- / div.container -->
@@ -2002,8 +2002,8 @@ linear combinations of the model coefficients.</li>
   "url": "https://carpentries-incubator.github.io/bioc-rnaseq/06-extra-design.html",
   "identifier": "https://carpentries-incubator.github.io/bioc-rnaseq/06-extra-design.html",
   "dateCreated": "2020-09-15",
-  "dateModified": "2023-09-05",
-  "datePublished": "2023-09-05"
+  "dateModified": "2023-09-08",
+  "datePublished": "2023-09-08"
 }
 
   </script><script>
