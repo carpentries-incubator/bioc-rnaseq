@@ -5,12 +5,12 @@ teaching: 60
 exercises: 45
 ---
 
-```{r, echo=FALSE, purl=FALSE, message=FALSE, warning = FALSE}
+```{r source-download-data, echo=FALSE, purl=FALSE, message=FALSE, warning = FALSE}
 source("download_data.R")
 ```
 
 
-```{r, echo = FALSE, message = FALSE}
+```{r setup, echo = FALSE, message = FALSE}
 library(knitr)
 knitr::opts_chunk$set(
     error = FALSE,
@@ -80,7 +80,7 @@ end, we will learn several visualization methods on the GSEA results.
 Following is a list of packages that will be used in this episode:
 
 
-```{r, eval = FALSE}
+```{r load-pkg, eval = FALSE}
 library(SummarizedExperiment)
 library(DESeq2)
 library(gplots)
@@ -94,7 +94,7 @@ library(ggplot2)
 library(simplifyEnrichment)
 ```
 
-```{r, echo = FALSE}
+```{r load-pkg-2, echo = FALSE}
 library(SummarizedExperiment)
 library(DESeq2)
 library(gplots)
@@ -120,7 +120,7 @@ The file `data/GSE96870_se.rds` contains a `RangedSummarizedExperiment` contains
 In the following code, there are also comments that explain every step of the
 analysis.
 
-```{r, warning = FALSE}
+```{r read-data, warning = FALSE}
 
 library(SummarizedExperiment)
 library(DESeq2)
@@ -146,7 +146,7 @@ sexDEgenes <- rownames(sexDE)
 Let's check the number of DE genes and how they look like. It seems the number
 of DE genes is very small, but it is OK for this example.
 
-```{r}
+```{r check-de}
 length(sexDEgenes)
 head(sexDEgenes)
 ```
@@ -161,7 +161,7 @@ applied to extract chromosome names. `seqnames()` returns a special data
 format and we need to explicitly convert it to a normal vector by
 `as.vector()`.
 
-```{r}
+```{r xy-genes}
 geneGR <- rowRanges(se)
 totalGenes <- rownames(se)
 XYGeneSet <- totalGenes[as.vector(seqnames(geneGR)) %in% c("X", "Y")]
@@ -186,7 +186,7 @@ gene ID conversion in the ORA analysis.
 Since the DE genes and the gene set can be mathematically thought as two sets,
 a natural way is to first visualize them with a Venn diagram.
 
-```{r, fig.width = 5*2, fig.height = 5*2, dpi = 72*2}
+```{r venn-diagram, fig.width = 5*2, fig.height = 5*2, dpi = 72*2}
 library(gplots)
 plot(venn(list("sexDEgenes"  = sexDEgenes, 
                "XY gene set" = XYGeneSet)))
@@ -224,7 +224,7 @@ number of DE genes, $n$ is the number of total genes.
 These numbers can be obtained as in the following code^[Genes must be unique in each vector.]. Note we replace `+` with `0` in the
 R variable names.
 
-```{r}
+```{r fisher-1}
 n    <- nrow(se)
 n_01 <- length(XYGeneSet)
 n_10 <- length(sexDEgenes)
@@ -233,7 +233,7 @@ n_11 <- length(intersect(sexDEgenes, XYGeneSet))
 
 Other values can be obtained by:
 
-```{r}
+```{r fisher-2}
 n_12 <- n_10 - n_11
 n_21 <- n_01 - n_11
 n_20 <- n    - n_10
@@ -243,7 +243,7 @@ n_22 <- n_02 - n_12
 
 All the values are:
 
-```{r}
+```{r fisher-3}
 matrix(c(n_11, n_12, n_10, n_21, n_22, n_20, n_01, n_02, n),
     nrow = 3, byrow = TRUE)
 ```
@@ -267,7 +267,7 @@ the test. The input is the top-left 2x2 sub-matrix. We specify `alternative =
 "greater"` in the function because we are only interested in
 over-representation.
 
-```{r}
+```{r fisher-test}
 fisher.test(matrix(c(n_11, n_12, n_21, n_22), nrow = 2, byrow = TRUE),
     alternative = "greater")
 ```
@@ -278,7 +278,7 @@ can conclude DE genes have a very strong enrichment in the _XY gene set_.
 Results of the Fisher's Exact test can be saved into an object `t`, which is a
 simple list, and the _p_-value can be obtained by `t$p.value`.
 
-```{r}
+```{r fisher-test-save}
 t <- fisher.test(matrix(c(n_11, n_12, n_21, n_22), nrow = 2, byrow = TRUE),
     alternative = "greater")
 t$p.value
@@ -314,7 +314,7 @@ and put whether genes are DE on columns.
 
 And the corresponding `fisher.test()` is:
 
-```{r}
+```{r fisher-test-transposed}
 fisher.test(matrix(c(13, 1121, 41, 20023), nrow = 2, byrow = TRUE),
     alternative = "greater")
 ```
@@ -330,7 +330,7 @@ genes are marked as non-DE genes (in blue). We grab $n_{+1}$ genes (the size
 of the gene set) from the box and we want to ask **what is the probability of
 having $n_{11}$ DE genes in our hand?**
 
-```{r, echo = FALSE, fig.height = 9, fig.width = 12, out.width = "80%"}
+```{r hypergeom, echo = FALSE, fig.height = 9, fig.width = 12, out.width = "80%"}
 x = c(0.265558584415397, 0.4051800937805, 0.227998431474826, 0.655734561894273,
 0.499815452509004, 0.790203021620919, 0.190727806294193, 0.5948854361745,
 0.590348041335212, 0.701371267527627, 0.399560149854168, 0.370056348543549,
@@ -435,22 +435,22 @@ Then, the correct use of `phyper()` is:
 1 - phyper(q - 1, m, n, k)
 ```
 
-Let's pluigin in our variables:
+Let's plugin our variables:
 
-```{r}
+```{r phyper-plugin}
 1 - phyper(n_11 - 1, n_10, n_20, n_01)
 ```
 
 Optionally, `lower.tail` argument can be specified which directly calculates
 _p_-values from the upper tail of the distribution.
 
-```{r}
+```{r phyper-lowertail}
 phyper(n_11 - 1, n_10, n_20, n_01, lower.tail = FALSE)
 ```
 
 If we switch `n_01` and `n_10`, the _p_-values are identical:
 
-```{r}
+```{r phyper-transpose}
 1 - phyper(n_11 - 1, n_01, n_02, n_10)
 ```
 
@@ -460,7 +460,7 @@ because in Fisher's exact test, hypergeometric distribution is the exact distrib
 Let's test the runtime of the two functions:
 
 
-```{r}
+```{r hyper-benchmark}
 library(microbenchmark)
 microbenchmark(
     fisher = fisher.test(matrix(c(n_11, n_12, n_21, n_22), nrow = 2, byrow = TRUE),
@@ -536,10 +536,10 @@ of genes. Thus, naturally, a collection of gene sets can be represented as a
 list of vectors. In the following example, there are three gene sets with 3, 5
 and 2 genes. Some genes exist in multiple gene sets.
 
-```{r}
+```{r gene-set-list}
 lt <- list(gene_set_1 = c("gene_1", "gene_2", "gene_3"),
-     gene_set_2 = c("gene_1", "gene_3", "gene_4", "gene_5", "gene_6"),
-     gene_set_3 = c("gene_4", "gene_7")
+           gene_set_2 = c("gene_1", "gene_3", "gene_4", "gene_5", "gene_6"),
+           gene_set_3 = c("gene_4", "gene_7")
 )
 lt
 ```
@@ -549,7 +549,7 @@ two-column data frame. The order of the gene set column and the gene column,
 i.e. which column locates as the first column, are quite arbitrary. Different
 tools may require differently.
 
-```{r}
+```{r gene-set-df}
 data.frame(gene_set = rep(names(lt), times = sapply(lt, length)),
            gene = unname(unlist(lt)))
 ```
@@ -557,7 +557,7 @@ data.frame(gene_set = rep(names(lt), times = sapply(lt, length)),
 Or genes be in the first column:
 
 
-```{r, echo = FALSE}
+```{r gene-set-df-2, echo = FALSE}
 data.frame(gene = unname(unlist(lt)),
            gene_set = rep(names(lt), times = sapply(lt, length)))
 ```
@@ -584,17 +584,17 @@ list to a two-column data frame?
 
 ::::::::::::::::::::::::::::::::::: solution
 
-```{r}
+```{r gene-set-convert-list}
 lt <- list(gene_set_1 = c("gene_1", "gene_2", "gene_3"),
-     gene_set_2 = c("gene_1", "gene_3", "gene_4", "gene_5", "gene_6"),
-     gene_set_3 = c("gene_4", "gene_7")
+           gene_set_2 = c("gene_1", "gene_3", "gene_4", "gene_5", "gene_6"),
+           gene_set_3 = c("gene_4", "gene_7")
 )
 ```
 
 To convert `lt` to a data frame (e.g. let's put gene sets in the first
 column):
 
-```{r}
+```{r gene-set-convert-todf}
 df = data.frame(gene_set = rep(names(lt), times = sapply(lt, length)),
                 gene = unname(unlist(lt)))
 df
@@ -602,7 +602,7 @@ df
 
 To convert `df` back to the list:
 
-```{r}
+```{r gene-set-convert-tolist}
 split(df$gene, df$gene_set)
 ```
 
@@ -662,7 +662,7 @@ it from the `org.Hs.eg.db` object.
 All the columns (the key column or the source column) can be obtained by
 `keytypes()`:
 
-```{r}
+```{r keytypes-orghsegdb}
 library(org.Hs.eg.db)
 keytypes(org.Hs.eg.db)
 ```
@@ -672,9 +672,9 @@ process) namespace. As shown in the output from `keytype()`, `"ONTOLOGY"` is als
 valid "key column", thus we can query "_select all GO IDs where the corresponding
 ONTOLOGY is BP_", which is translated into the following code:
 
-```{r}
+```{r mapids-gobp}
 BP_Id = mapIds(org.Hs.eg.db, keys = "BP", keytype = "ONTOLOGY", 
-    column = "GO", multiVals = "list")[[1]]
+               column = "GO", multiVals = "list")[[1]]
 head(BP_Id)
 ```
 
@@ -686,9 +686,9 @@ the first element from the list returned by `mapIds()`.
 Next we do mapping from GO IDs to gene Entrez IDs. Now the query becomes "_providing
 a vector of GO IDs, select ENTREZIDs which correspond to every one of them_".
 
-```{r}
+```{r mapids-goall}
 BPGeneSets = mapIds(org.Hs.eg.db, keys = BP_Id, keytype = "GOALL", 
-    column = "ENTREZID", multiVals = "list")
+                    column = "ENTREZID", multiVals = "list")
 ```
 
 You may have noticed there is a "GO" key column as well a "GOALL" column in
@@ -704,7 +704,7 @@ annotations which is not complete, and mapping between `"GOALL"` and
 
 We filter out GO gene sets with no gene annotated.
 
-```{r}
+```{r filter-empty-genesets}
 BPGeneSets = BPGeneSets[sapply(BPGeneSets, length) > 0]
 BPGeneSets[2:3] # BPGeneSets[[1]] is too long
 ```
@@ -768,7 +768,7 @@ with the function `url()`, you can pretend to directly read data from the
 remote web server.
 
 
-```{r}
+```{r kegg}
 keggGeneSets = read.table(url("https://rest.kegg.jp/link/pathway/hsa"), sep = "\t")
 head(keggGeneSets)
 ```
@@ -777,7 +777,7 @@ In this two-column table, the first column contains genes in the Entrez ID type.
 Let's remove the `"hsa:"` prefix, also we remove the `"path:"` prefix for
 pathway IDs in the second column.
 
-```{r}
+```{r kegg-fix}
 keggGeneSets[, 1] = gsub("hsa:", "", keggGeneSets[, 1])
 keggGeneSets[, 2] = gsub("path:", "", keggGeneSets[, 2])
 head(keggGeneSets)
@@ -785,7 +785,7 @@ head(keggGeneSets)
 
 The full pathway names can be obtained via the "list" command.
 
-```{r}
+```{r kegg-names}
 keggNames = read.table(url("https://rest.kegg.jp/list/pathway/hsa"), sep = "\t")
 head(keggNames)
 ```
@@ -833,11 +833,11 @@ One convenient way is to use the **msigdbr** package. The advantages is
 
 Let's check which organisms are supported and which gene sets collections it provides.
 
-```{r, echo = FALSE}
+```{r pillar-options, echo = FALSE}
 options(pillar.print_max = 30)
 ```
 
-```{r}
+```{r msigdbr}
 library(msigdbr)
 msigdbr_species()
 msigdbr_collections()
@@ -859,7 +859,7 @@ msigdbr(species, category, subcategory)
 
 For example, we want to obtain the hallmark gene sets for mouse.
 
-```{r}
+```{r msigdbr-h}
 MSigDBGeneSets = msigdbr(species = "mouse", category = "H")
 head(MSigDBGeneSets)
 ```
@@ -870,7 +870,7 @@ worry, just take it as a table. As you can see, The three major gene IDs type
 table. So users can easily pick one with the same gene ID type as in the DE gene
 list. For example:
 
-```{r}
+```{r msigdb-ids}
 MSigDBGeneSets[, c("gs_name", "ensembl_gene")]
 # or put genes in the first column
 MSigDBGeneSets[, c("ensembl_gene", "gs_name")]
@@ -906,7 +906,7 @@ genes, we additionally add a filtering on the log2 fold change. This is
 recommended when the number of DE genes is too large. The filtering on log2
 fold change can be thought as a filtering from the biology aspect.
 
-```{r}
+```{r de-time}
 resTime <- DESeq2::results(dds, contrast = c("time", "Day8", "Day0"))
 timeDE <- as.data.frame(subset(resTime, 
                                padj < 0.05 & abs(log2FoldChange) > log2(1.5)
@@ -919,7 +919,7 @@ length(timeDEgenes)
 Let's confirm that there are around one thousand DE genes, and the DE
 genes are in gene symbols.
 
-```{r, echo = FALSE}
+```{r load-more-pkg, echo = FALSE}
 suppressPackageStartupMessages(library(clusterProfiler))
 suppressPackageStartupMessages(library(org.Mm.eg.db))
 ```
@@ -933,7 +933,7 @@ is from mouse), also the GO namespace (one of `"BP"`, `"CC"` and `"MF"`). The
 GO gene sets are automatically retrieved and processed from `org.Mm.eg.db` in
 `enrichGO()`.
 
-```{r, message = TRUE, warning = TRUE}
+```{r enrichgo-time-bp, message = TRUE, warning = TRUE}
 library(clusterProfiler)
 library(org.Mm.eg.db)
 resTimeGO = enrichGO(gene = timeDEgenes, 
@@ -955,7 +955,7 @@ In the next code, we additionally specify `keyType = "SYMBOL"` to explicitly
 tell the function that DE genes are in gene symbols. Recall that all valid values
 for `keyType` are in `keytypes(org.Mm.eg.db)`.
 
-```{r message = TRUE, warning = TRUE}
+```{r enrichgo-time-bp-symbol, message = TRUE, warning = TRUE}
 resTimeGO = enrichGO(gene = timeDEgenes, 
                      keyType = "SYMBOL",
                      ont = "BP", 
@@ -1015,7 +1015,7 @@ _p_-values and _q_-values are always non-smaller than raw _p_-values). Thus it
 is suggested to set both `pvalueCutoff` and `qvalueCutoff` to 1 in
 `enrichGO()`.
 
-```{r message = TRUE, warning = TRUE}
+```{r enrichgo-time-bp-all, message = TRUE, warning = TRUE}
 resTimeGO = enrichGO(gene = timeDEgenes, 
                      keyType = "SYMBOL",
                      ont = "BP", 
@@ -1060,9 +1060,9 @@ genes with no mapping available (with `NA` after the mapping)^[You can also
 use `select()` function: `select(org.Mm.eg.db, keys = timeDEgenes, keytype =
 "SYMBOL", column = "ENTREZID")`].
 
-```{r, message = TRUE, warning = TRUE}
+```{r get-entrez, message = TRUE, warning = TRUE}
 EntrezIDs = mapIds(org.Mm.eg.db, keys = timeDEgenes, 
-    keytype = "SYMBOL", column = "ENTREZID", multiVals = "first")
+                   keytype = "SYMBOL", column = "ENTREZID", multiVals = "first")
 EntrezIDs = EntrezIDs[!is.na(EntrezIDs)]
 head(EntrezIDs)
 ```
@@ -1072,7 +1072,7 @@ to set `pvalueCutoff` and `qvalueCutoff` both to 1 and convert the result to a
 data frame.
 
 
-```{r}
+```{r enrichkegg}
 resTimeKEGG = enrichKEGG(gene = EntrezIDs, 
                          organism = "mmu",
                          pvalueCutoff = 1,
@@ -1102,7 +1102,7 @@ self-defined gene sets. The gene sets should be in a format of a two-column
 data frame of genes and gene sets (or a class that can be converted to a data
 frame).
 
-```{r message = TRUE, warning = TRUE}
+```{r get-msigdb-gs, message = TRUE, warning = TRUE}
 library(msigdbr)
 gene_sets = msigdbr(category = "H", species = "mouse")
 head(gene_sets)
@@ -1111,7 +1111,7 @@ head(gene_sets)
 As mentioned before, it is important the gene ID type in the gene sets should
 be the same as in the DE genes, so here we choose the `"gene_symbol"` column.
 
-```{r}
+```{r enricher-time-h}
 resTimeHallmark = enricher(gene = timeDEgenes, 
                            TERM2GENE = gene_sets[, c("gs_name", "gene_symbol")],
                            pvalueCutoff = 1,
@@ -1128,7 +1128,7 @@ head(resTimeHallmarkTable)
 Implementing ORA is rather simple. The following function `ora()` performs ORA
 on a list of gene sets. Try to read and understand the code.
 
-```{r}
+```{r ora}
 ora = function(genes, gene_sets, universe = NULL) {
     if(is.null(universe)) {
         universe = unique(unlist(gene_sets))
@@ -1163,9 +1163,9 @@ ora = function(genes, gene_sets, universe = NULL) {
 
 Test on the MSigDB hallmark gene sets:
 
-```{r}
-HallmakrGeneSets = split(gene_sets$gene_symbol, gene_sets$gs_name)
-df = ora(timeDEgenes, HallmakrGeneSets, rownames(se))
+```{r ora-hallmark}
+HallmarkGeneSets = split(gene_sets$gene_symbol, gene_sets$gs_name)
+df = ora(timeDEgenes, HallmarkGeneSets, rownames(se))
 head(df)
 ```
 
@@ -1234,13 +1234,13 @@ We can do a simple experiment on the small MSigDB hallmark gene sets. We use
 the `ora()` function which we have implemented in previous "Further reading"
 section and we compare three different universe settings.
 
-```{r}
+```{r compare-universe}
 # all genes in the gene sets collection ~ 4k genes
-df1 = ora(timeDEgenes, HallmakrGeneSets)
+df1 = ora(timeDEgenes, HallmarkGeneSets)
 # all protein-coding genes, ~ 20k genes
-df2 = ora(timeDEgenes, HallmakrGeneSets, rownames(se))
+df2 = ora(timeDEgenes, HallmarkGeneSets, rownames(se))
 # all genes in org.Mm.eg.db ~ 70k genes
-df3 = ora(timeDEgenes, HallmakrGeneSets, 
+df3 = ora(timeDEgenes, HallmarkGeneSets, 
     keys(org.Mm.eg.db, keytype = "SYMBOL"))
 
 # df1, df2, and df3 are in the same row order, 
@@ -1279,7 +1279,7 @@ https://yulab-smu.top/biomedical-knowledge-mining-book/enrichplot.html.
 
 We first re-generate the enrichment table.
 
-```{r}
+```{r enrichplot}
 library(enrichplot)
 resTimeGO = enrichGO(gene = timeDEgenes, 
                      keyType = "SYMBOL",
@@ -1294,7 +1294,7 @@ head(resTimeGOTable)
 `barplot()` and `dotplot()` generate plots for a small number of significant gene sets.
 Note the two functions are directly applied on `resTimeGO` returned by `enrichGO()`.
 
-```{r}
+```{r more-enrichplots}
 barplot(resTimeGO, showCategory = 20)
 dotplot(resTimeGO, showCategory = 20)
 ```
@@ -1332,10 +1332,10 @@ Now let's try to make a more reasonable barplot and dotplot to show the
 enrichment of ORA.
 
 First, let's define some metrics which measure the "enrichment" of DE genes on
-gene sets. Recall the denotations in the 2x2 contigency table (we are too far
+gene sets. Recall the denotations in the 2x2 contingency table (we are too far
 from that!). Let's take these numbers from the enrichment table.
 
-```{r}
+```{r metrics}
 n_11 = resTimeGOTable$Count
 n_10 = 983  # length(intersect(resTimeGO@gene, resTimeGO@universe))
 n_01 = as.numeric(gsub("/.*$", "", resTimeGOTable$BgRatio))
@@ -1345,7 +1345,7 @@ n = 28943  # length(resTimeGO@universe)
 Instead of using `GeneRatio`, we use the fraction of DE genes in the gene sets
 which are kind like a "scaled" value for all gene sets. Let's calculate it:
 
-```{r}
+```{r get-ratio}
 resTimeGOTable$DE_Ratio = n_11/n_01
 resTimeGOTable$GS_size = n_01  # size of gene sets
 ```
@@ -1363,7 +1363,7 @@ which is the log2 of the ratio of _DE% in the gene set_ and _DE% in the
 universe_ or the log2 of the ratio of _gene\_set% in the DE genes_ and
 _gene\_set% in the universe_. The two are identical.
 
-```{r}
+```{r set-enrichment}
 resTimeGOTable$log2_Enrichment = log( (n_11/n_10)/(n_01/n) )
 ```
 
@@ -1376,7 +1376,7 @@ hypergeometric
 distribution](https://en.wikipedia.org/wiki/Hypergeometric_distribution). They
 can be calculated as:
 
-```{r}
+```{r hyper-z}
 hyper_mean = n_01*n_10/n
 
 n_02 = n - n_01
@@ -1394,7 +1394,7 @@ labels on the bars.
 In `resTimeGOTable`, gene sets are already ordered by the significance, so we
 take the first 10 gene sets which are the 10 most significant gene sets.
 
-```{r, fig.width= 8, fig.height = 6}
+```{r plot-enrichment, fig.width= 8, fig.height = 6}
 library(ggplot2)
 ggplot(resTimeGOTable[1:10, ], 
         aes(x = log2_Enrichment, y = factor(Description, levels = rev(Description)), 
@@ -1408,7 +1408,7 @@ ggplot(resTimeGOTable[1:10, ],
 In the next example, we use _z_-score as the primary variable to map to the
 offset to origin, `DE_Ratio` and `Count` to map to dot colors and sizes.
 
-```{r, fig.width = 8, fig.height = 6}
+```{r plot-z, fig.width = 8, fig.height = 6}
 ggplot(resTimeGOTable[1:10, ], 
         aes(x = zScore, y = factor(Description, levels = rev(Description)), 
             col = DE_Ratio, size = Count)) +
@@ -1430,7 +1430,7 @@ We can set two cutoffs on the log2 fold enrichment and adjusted _p_-values,
 then the gene sets on the top right region can be thought as being both
 statistically significant and also biologically sensible.
 
-```{r}
+```{r plot-enrichment-padj}
 ggplot(resTimeGOTable, 
     aes(x = log2_Enrichment, y = -log10(p.adjust), 
         color = DE_Ratio, size = GS_size)) +
@@ -1454,7 +1454,7 @@ down-regulated separately. And we want to combine the significant gene sets from
 the two ORA analysis in one plot. In the following code, we first generate
 two enrichment tables for up-regulated genes and down-regulated separately.
 
-```{r}
+```{r ora-up-down}
 # up-regulated genes
 timeDEup <- as.data.frame(subset(resTime, padj < 0.05 & log2FoldChange > log2(1.5)))
 timeDEupGenes <- rownames(timeDEup)
@@ -1496,7 +1496,7 @@ As an example, let's simply take the first 5 most significant terms for
 up-regulated genes and the first 5 most significant terms for down-regulated
 genes. The following **ggplot2** code should be easy to read.
 
-```{r, fig.width= 10, fig.height = 6}
+```{r plot-up-down, fig.width= 10, fig.height = 6}
 # The name of the 3rd term is too long, we wrap it into two lines.
 resTimeGOupTable[3, "Description"] = paste(strwrap(resTimeGOupTable[3, "Description"]), collapse = "\n")
 
@@ -1524,7 +1524,7 @@ summarizes their common functions via word clouds.
 The input of the `simplifyGO()` function is a vector of GO IDs. It is recommended
 to have at least 100 GO IDs for summarization and visualization.
 
-```{r, eval = FALSE}
+```{r simplifygo, eval = FALSE}
 GO_ID = resTimeGOTable$ID[resTimeGOTable$p.adjust < 0.1]
 library(simplifyEnrichment)
 simplifyGO(GO_ID)
