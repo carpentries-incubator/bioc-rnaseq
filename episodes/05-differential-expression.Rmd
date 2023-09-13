@@ -324,7 +324,7 @@ Check the heatmap and top DE genes. Do you find something expected/unexpected in
 
 We may want to to output our results out of R to have a stand-alone file. The format of `resTime` only has the gene symbols as rownames, so let us join the gene annotation information, and then write out as .csv file:
 
-```{r save-results}
+```{r save-results, eval=FALSE}
 head(as.data.frame(resTime))
 head(as.data.frame(rowRanges(se)))
 
