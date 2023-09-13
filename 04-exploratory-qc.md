@@ -24,16 +24,6 @@ editor_options:
 
 ::::::::::::::::::::::::::::::::::::::::::::::::::
 
-:::::::::::::::::::::::::::::::::::::::::  callout
-
-### Contribute!
-
-This episode is intended to introduce various types of exploratory analysis
-and QC steps taken before a formal statistical analysis is done.
-
-
-::::::::::::::::::::::::::::::::::::::::::::::::::
-
 
 ## Load packages
 
@@ -50,6 +40,7 @@ suppressPackageStartupMessages({
     library(ComplexHeatmap)
     library(RColorBrewer)
     library(hexbin)
+    library(iSEE)
 })
 ```
 
@@ -91,12 +82,17 @@ nrow(se)
 
 ## Challenge: What kind of genes survived this filtering?
 
-Last episode we discussed subsetting down to only mRNA genes. Here we subsetted based on a minimal expression level. How many of each type of gene survived the filtering?
+Last episode we discussed subsetting down to only mRNA genes. Here we subsetted based on a minimal expression level.
+  
+  1. How many of each type of gene survived the filtering?
+  2. Compare the number of genes that survived filtering using different thresholds.
+  3. What are pros and cons of more aggressive filtering? What are important considerations? 
   
 ::::::::::::::::::::::::::::::::::::::::::::::::::
 
 ::::::::::::::::::::::::::::::::::: solution
 
+1.
 
 ```r
 table(rowData(se)$gbkey)
@@ -110,8 +106,43 @@ table(rowData(se)$gbkey)
          6789           362             2            64            22 
 ```
 
-:::::::::::::::::::::::::::::::::::
+2.
 
+```r
+nrow(se)  # represents the number of genes using 5 as filtering threshold
+```
+
+```{.output}
+[1] 27430
+```
+
+```r
+length(which(rowSums(assay(se, "counts")) > 10))
+```
+
+```{.output}
+[1] 25736
+```
+
+```r
+length(which(rowSums(assay(se, "counts")) > 20))
+```
+
+```{.output}
+[1] 23860
+```
+
+3.
+Cons: Risk of removing interesting information
+Pros: 
+ - Not or lowly expressed genes are unlikely to be biological meaningful.
+ - Reduces number of statistical tests (multiple testing).
+ - More reliable estimation of mean-variance relationship
+ 
+Potential considerations:
+ - Is a gene expressed in both groups?
+ - How many samples of each group express a gene?
+:::::::::::::::::::::::::::::::::::
 
 ## Library size differences
 
@@ -253,6 +284,102 @@ ggplot(pcaData, aes(x = PC1, y = PC2)) +
 
 <img src="fig/04-exploratory-qc-rendered-pca-1.png" style="display: block; margin: auto;" />
 
+:::::::::::::::::::::::::::::::::::::::  challenge
+
+## Challenge: Discuss the following points with your neighbour
+
+1. Assume you are mainly interested in expression changes associated with the time after infection (Reminder Day0 -> before infection). What do you need to consider in downstream analysis?
+
+2. Consider an experimental design where you have multiple sample from the same donor. You are still interested in differences by time and observe the following PCA plot. What does this PCA plot suggest?
+
+<img src="fig/04-exploratory-qc-rendered-pca-exercise-1.png" style="display: block; margin: auto;" />
+
+
+
+
+::::::::::::::::::::::::::::::::::::::::::::::::::
+
+::::::::::::::::::::::::::::::::::: solution
+1. The major signal in this data (37% variance) is associated with sex. As we are not interested in sex-specific changes over time, we need to adjust for this in downstream analysis (see [next episodes](../episodes/05-differential-expression.Rmd)) and keep it in mind for further exploratory downstream analysis. A possible way to do so is to remove genes on sex chromosomes.
+
+2.
+ - A strong donor effect, that needs to be accounted for. 
+ - What does PC1 (37% variance) represent? Looks like 2 donor groups?
+ - No association of PC1 and PC2 with time --> no or weak transcriptional effect of time
+    --> Check association with higher PCs (e.g., PC3,PC4, ..)
+ 
+:::::::::::::::::::::::::::::::::::
+
+
+
+:::::::::::::::::::::::::::::::::::::::  challenge
+
+## Challenge: Plot the PCA colored by library sizes. 
+
+Compare before and after variance stablizing transformation.
+
+*Hint: The `DESeq2::plotPCA` expect an object of the class `DESeqTransform` as input. You can transform a `SummarizedExperiment` object using `plotPCA(DESeqTransform(se))`*
+
+::::::::::::::::::::::::::::::::::::::::::::::::::
+
+::::::::::::::::::::::::::::::::::: solution
+
+
+```r
+pcaData <- DESeq2::plotPCA(vsd, intgroup = c("libSize"),
+                           returnData = TRUE)
+percentVar <- round(100 * attr(pcaData, "percentVar"))
+ggplot(pcaData, aes(x = PC1, y = PC2)) +
+    geom_point(aes(color = libSize/ 1e6), size = 5) +
+    theme_minimal() +
+    xlab(paste0("PC1: ", percentVar[1], "% variance")) +
+    ylab(paste0("PC2: ", percentVar[2], "% variance")) +
+    coord_fixed() + 
+    scale_color_continuous("Total count in millions", type ="viridis")
+```
+
+<img src="fig/04-exploratory-qc-rendered-pca-lib-1.png" style="display: block; margin: auto;" />
+
+
+
+```r
+pcaData <- DESeq2::plotPCA(DESeqTransform(se), intgroup = c("libSize"),
+                           returnData = TRUE)
+percentVar <- round(100 * attr(pcaData, "percentVar"))
+ggplot(pcaData, aes(x = PC1, y = PC2)) +
+    geom_point(aes(color = libSize/ 1e6), size = 5) +
+    theme_minimal() +
+    xlab(paste0("PC1: ", percentVar[1], "% variance")) +
+    ylab(paste0("PC2: ", percentVar[2], "% variance")) +
+    coord_fixed() + 
+    scale_color_continuous("Total count in millions", type ="viridis")
+```
+
+<img src="fig/04-exploratory-qc-rendered-pca-lib-vst-1.png" style="display: block; margin: auto;" />
+
+
+:::::::::::::::::::::::::::::::::::
+
+## Interactive exploratory data analysis
+
+Often it is useful to look at QC plots in an interactive way to directly explore different experimental factors or get insides from someone without coding experience.
+Useful tools for interactive exploratory data analysis for RNA-seq are [glimma](https://bioconductor.org/packages/release/bioc/html/Glimma.html) and [iSEE](https://bioconductor.org/packages/release/bioc/html/iSEE.html)
+
+
+:::::::::::::::::::::::::::::::::::::::  challenge
+
+## Challenge: Interactively explore our data using iSEE 
+
+
+```r
+app <- iSEE(se)
+shiny::runApp(app)
+```
+
+
+::::::::::::::::::::::::::::::::::::::::::::::::::
+
+
 ## Session info
 
 
@@ -283,37 +410,48 @@ attached base packages:
 [8] methods   base     
 
 other attached packages:
- [1] hexbin_1.28.3               RColorBrewer_1.1-3         
- [3] ComplexHeatmap_2.16.0       ggplot2_3.4.3              
- [5] vsn_3.68.0                  DESeq2_1.40.2              
- [7] SummarizedExperiment_1.30.2 Biobase_2.60.0             
- [9] MatrixGenerics_1.12.3       matrixStats_1.0.0          
-[11] GenomicRanges_1.52.0        GenomeInfoDb_1.36.2        
-[13] IRanges_2.34.1              S4Vectors_0.38.1           
-[15] BiocGenerics_0.46.0        
+ [1] iSEE_2.12.0                 SingleCellExperiment_1.22.0
+ [3] hexbin_1.28.3               RColorBrewer_1.1-3         
+ [5] ComplexHeatmap_2.16.0       ggplot2_3.4.3              
+ [7] vsn_3.68.0                  DESeq2_1.40.2              
+ [9] SummarizedExperiment_1.30.2 Biobase_2.60.0             
+[11] MatrixGenerics_1.12.3       matrixStats_1.0.0          
+[13] GenomicRanges_1.52.0        GenomeInfoDb_1.36.2        
+[15] IRanges_2.34.1              S4Vectors_0.38.1           
+[17] BiocGenerics_0.46.0        
 
 loaded via a namespace (and not attached):
- [1] shape_1.4.6             circlize_0.4.15         gtable_0.3.4           
- [4] rjson_0.2.21            xfun_0.40               GlobalOptions_0.1.2    
- [7] lattice_0.21-8          vctrs_0.6.3             tools_4.3.1            
-[10] bitops_1.0-7            generics_0.1.3          parallel_4.3.1         
-[13] tibble_3.2.1            fansi_1.0.4             highr_0.10             
-[16] cluster_2.1.4           pkgconfig_2.0.3         Matrix_1.6-1           
-[19] lifecycle_1.0.3         GenomeInfoDbData_1.2.10 farver_2.1.1           
-[22] compiler_4.3.1          munsell_0.5.0           codetools_0.2-19       
-[25] clue_0.3-64             RCurl_1.98-1.12         yaml_2.3.7             
-[28] preprocessCore_1.62.1   pillar_1.9.0            crayon_1.5.2           
-[31] BiocParallel_1.34.2     affy_1.78.2             DelayedArray_0.26.7    
-[34] limma_3.56.2            iterators_1.0.14        abind_1.4-5            
-[37] foreach_1.5.2           tidyselect_1.2.0        locfit_1.5-9.8         
-[40] digest_0.6.33           dplyr_1.1.3             labeling_0.4.3         
-[43] colorspace_2.1-0        cli_3.6.1               magrittr_2.0.3         
-[46] S4Arrays_1.0.6          utf8_1.2.3              withr_2.5.0            
-[49] scales_1.2.1            XVector_0.40.0          affyio_1.70.0          
-[52] GetoptLong_1.0.5        png_0.1-8               evaluate_0.21          
-[55] knitr_1.43              doParallel_1.0.17       rlang_1.1.1            
-[58] Rcpp_1.0.11             glue_1.6.2              BiocManager_1.30.22    
-[61] renv_1.0.2              R6_2.5.1                zlibbioc_1.46.0        
+ [1] bitops_1.0-7            rlang_1.1.1             magrittr_2.0.3         
+ [4] shinydashboard_0.7.2    clue_0.3-64             GetoptLong_1.0.5       
+ [7] compiler_4.3.1          mgcv_1.9-0              png_0.1-8              
+[10] vctrs_0.6.3             pkgconfig_2.0.3         shape_1.4.6            
+[13] crayon_1.5.2            fastmap_1.1.1           XVector_0.40.0         
+[16] ellipsis_0.3.2          labeling_0.4.3          utf8_1.2.3             
+[19] promises_1.2.1          preprocessCore_1.62.1   shinyAce_0.4.2         
+[22] xfun_0.40               cachem_1.0.8            zlibbioc_1.46.0        
+[25] jsonlite_1.8.7          highr_0.10              later_1.3.1            
+[28] DelayedArray_0.26.7     BiocParallel_1.34.2     parallel_4.3.1         
+[31] cluster_2.1.4           R6_2.5.1                bslib_0.5.1            
+[34] limma_3.56.2            jquerylib_0.1.4         Rcpp_1.0.11            
+[37] iterators_1.0.14        knitr_1.43              httpuv_1.6.11          
+[40] Matrix_1.6-1            splines_4.3.1           igraph_1.5.1           
+[43] tidyselect_1.2.0        abind_1.4-5             yaml_2.3.7             
+[46] doParallel_1.0.17       codetools_0.2-19        affy_1.78.2            
+[49] miniUI_0.1.1.1          lattice_0.21-8          tibble_3.2.1           
+[52] shiny_1.7.5             withr_2.5.0             evaluate_0.21          
+[55] circlize_0.4.15         pillar_1.9.0            affyio_1.70.0          
+[58] BiocManager_1.30.22     renv_1.0.2              DT_0.29                
+[61] foreach_1.5.2           shinyjs_2.1.0           generics_0.1.3         
+[64] RCurl_1.98-1.12         munsell_0.5.0           scales_1.2.1           
+[67] xtable_1.8-4            glue_1.6.2              tools_4.3.1            
+[70] colourpicker_1.3.0      locfit_1.5-9.8          colorspace_2.1-0       
+[73] nlme_3.1-163            GenomeInfoDbData_1.2.10 vipor_0.4.5            
+[76] cli_3.6.1               fansi_1.0.4             viridisLite_0.4.2      
+[79] S4Arrays_1.0.6          dplyr_1.1.3             gtable_0.3.4           
+[82] rintrojs_0.3.2          sass_0.4.7              digest_0.6.33          
+[85] ggrepel_0.9.3           farver_2.1.1            rjson_0.2.21           
+[88] htmlwidgets_1.6.2       htmltools_0.5.6         lifecycle_1.0.3        
+[91] shinyWidgets_0.8.0      GlobalOptions_0.1.2     mime_0.12              
 ```
 
 :::::::::::::::::::::::::::::::::::::::: keypoints

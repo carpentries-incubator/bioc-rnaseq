@@ -489,67 +489,12 @@ We may want to to output our results out of R to have a stand-alone file. The fo
 
 ```r
 head(as.data.frame(resTime))
-```
-
-```{.output}
-                 baseMean log2FoldChange      lfcSE       stat       pvalue
-Xkr4         1937.7555653     -0.2357302 0.10803980 -2.1818832 0.0291181539
-LOC105243853    0.9625883      0.5255058 1.18970791  0.4417099 0.6586991283
-LOC105242387  169.9134003      0.4560421 0.13852747  3.2920702 0.0009945278
-LOC105242467    3.4350732      0.2731728 0.58356846  0.4681075 0.6397077096
-Rp1             2.2734558     -0.2592924 0.68213996 -0.3801161 0.7038592599
-Sox17         251.0059632     -0.3197312 0.08312448 -3.8464143 0.0001198590
-                     padj
-Xkr4         0.0827056088
-LOC105243853           NA
-LOC105242387 0.0048763349
-LOC105242467 0.7801530335
-Rp1          0.8244991509
-Sox17        0.0007933796
-```
-
-```r
 head(as.data.frame(rowRanges(se)))
-```
 
-```{.output}
-             seqnames   start     end width strand  ENTREZID
-Xkr4                1 3670552 3671742  1191      -    497097
-LOC105243853        1 3357323 3366505  9183      + 105243853
-LOC105242387        1 3658847 3670456 11610      - 105242387
-LOC105242467        1 4233436 4233728   293      - 105242467
-Rp1                 1 4409170 4409241    72      -     19888
-Sox17               1 4496291 4497354  1064      -     20671
-                                                                                 product
-Xkr4         X Kell blood group precursor related family member 4, transcript variant X1
-LOC105243853                         uncharacterized LOC105243853, transcript variant X2
-LOC105242387                                                uncharacterized LOC105242387
-LOC105242467    lipoxygenase homology domain-containing protein 1, transcript variant X2
-Rp1                                 retinitis pigmentosa 1 (human), transcript variant 2
-Sox17                        SRY (sex determining region Y)-box 17, transcript variant 5
-             gbkey
-Xkr4          mRNA
-LOC105243853 ncRNA
-LOC105242387 ncRNA
-LOC105242467  mRNA
-Rp1           mRNA
-Sox17         mRNA
-```
-
-```r
 temp <- cbind(as.data.frame(rowRanges(se)),
               as.data.frame(resTime))
 
 write.csv(temp, file = "output/Day8vsDay0.csv")
-```
-
-```{.warning}
-Warning in file(file, ifelse(append, "a", "w")): cannot open file
-'output/Day8vsDay0.csv': No such file or directory
-```
-
-```{.error}
-Error in file(file, ifelse(append, "a", "w")): cannot open the connection
 ```
 
 
