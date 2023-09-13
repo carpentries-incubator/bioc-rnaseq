@@ -194,6 +194,7 @@
 <li><a href="#transform-data">Transform data</a></li>
 <li><a href="#heatmaps-and-clustering">Heatmaps and clustering</a></li>
 <li><a href="#pca">PCA</a></li>
+<li><a href="#interactive-exploratory-data-analysis">Interactive exploratory data analysis</a></li>
 <li><a href="#session-info">Session info</a></li>
         </ul></div><!--/div.accordion-body-->
     </div><!--/div.accordion-collapse-->
@@ -288,7 +289,7 @@
       </div>
       <hr></nav><main id="main-content" class="main-content"><div class="container lesson-content">
         <h1>Exploratory analysis and quality control</h1>
-        <p> Last updated on 2023-09-08 | 
+        <p> Last updated on 2023-09-13 | 
         
         <a href="https://github.com/carpentries-incubator/bioc-rnaseq/edit/main/episodes/04-exploratory-qc.Rmd" class="external-link">Edit this page <i aria-hidden="true" data-feather="edit"></i></a></p>
         
@@ -328,20 +329,6 @@ analysis.</li>
 </div>
 </div>
 </div>
-<div id="contribute" class="callout callout">
-<div class="callout-square">
-<i class="callout-icon" data-feather="bell"></i>
-</div>
-<div id="contribute" class="callout-inner">
-<h3 class="callout-title">Contribute!<a class="anchor" aria-label="anchor" href="#contribute"></a>
-</h3>
-<div class="callout-content">
-<p>This episode is intended to introduce various types of exploratory
-analysis and QC steps taken before a formal statistical analysis is
-done.</p>
-</div>
-</div>
-</div>
 <section id="load-packages"><h2 class="section-heading">Load packages<a class="anchor" aria-label="anchor" href="#load-packages"></a>
 </h2>
 <hr class="half-width"><p>Assuming you just started RStudio again, load some packages we will
@@ -359,6 +346,7 @@ object we created in the last lesson.</p>
 <span>    <span class="kw">library</span><span class="op">(</span><span class="va">ComplexHeatmap</span><span class="op">)</span></span>
 <span>    <span class="kw">library</span><span class="op">(</span><span class="va">RColorBrewer</span><span class="op">)</span></span>
 <span>    <span class="kw">library</span><span class="op">(</span><span class="va">hexbin</span><span class="op">)</span></span>
+<span>    <span class="kw">library</span><span class="op">(</span><span class="va">iSEE</span><span class="op">)</span></span>
 <span><span class="op">}</span><span class="op">)</span></span></code></pre>
 </div>
 <div class="codewrapper sourceCode" id="cb2">
@@ -418,9 +406,13 @@ filtering?<a class="anchor" aria-label="anchor" href="#challenge-what-kind-of-ge
 </h3>
 <div class="callout-content">
 <p>Last episode we discussed subsetting down to only mRNA genes. Here we
-subsetted based on a minimal expression level. How many of each type of
-gene survived the filtering?</p>
-</div>
+subsetted based on a minimal expression level.</p>
+<ol style="list-style-type: decimal"><li>How many of each type of gene survived the filtering?</li>
+<li>Compare the number of genes that survived filtering using different
+thresholds.</li>
+<li>What are pros and cons of more aggressive filtering? What are
+important considerations?</li>
+</ol></div>
 </div>
 </div>
 <div id="accordionSolution1" class="accordion challenge-accordion accordion-flush">
@@ -430,9 +422,10 @@ gene survived the filtering?</p>
   Show me the solution
   </h4>
 </button>
-<div id="collapseSolution1" class="accordion-collapse collapse" aria-labelledby="headingSolution1" data-bs-parent="#accordionSolution1">
+<div id="collapseSolution1" class="accordion-collapse collapse" data-bs-parent="#accordionSolution1" aria-labelledby="headingSolution1">
 <div class="accordion-body">
-<div class="codewrapper sourceCode" id="cb7">
+<ol style="list-style-type: decimal"><li>
+</li></ol><div class="codewrapper sourceCode" id="cb7">
 <h3 class="code-label">R<i aria-hidden="true" data-feather="chevron-left"></i><i aria-hidden="true" data-feather="chevron-right"></i>
 </h3>
 <pre class="downlit sourceCode r">
@@ -447,6 +440,47 @@ gene survived the filtering?</p>
         ncRNA precursor_RNA          rRNA          tRNA     V_segment 
          6789           362             2            64            22 </code></pre>
 </div>
+<ol start="2" style="list-style-type: decimal"><li>
+</li></ol><div class="codewrapper sourceCode" id="cb9">
+<h3 class="code-label">R<i aria-hidden="true" data-feather="chevron-left"></i><i aria-hidden="true" data-feather="chevron-right"></i>
+</h3>
+<pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="fu">nrow</span><span class="op">(</span><span class="va">se</span><span class="op">)</span>  <span class="co"># represents the number of genes using 5 as filtering threshold</span></span></code></pre>
+</div>
+<div class="codewrapper">
+<h3 class="code-label">OUTPUT<i aria-hidden="true" data-feather="chevron-left"></i><i aria-hidden="true" data-feather="chevron-right"></i>
+</h3>
+<pre class="output" tabindex="0"><code>[1] 27430</code></pre>
+</div>
+<div class="codewrapper sourceCode" id="cb11">
+<h3 class="code-label">R<i aria-hidden="true" data-feather="chevron-left"></i><i aria-hidden="true" data-feather="chevron-right"></i>
+</h3>
+<pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="fu">length</span><span class="op">(</span><span class="fu">which</span><span class="op">(</span><span class="fu">rowSums</span><span class="op">(</span><span class="fu">assay</span><span class="op">(</span><span class="va">se</span>, <span class="st">"counts"</span><span class="op">)</span><span class="op">)</span> <span class="op">&gt;</span> <span class="fl">10</span><span class="op">)</span><span class="op">)</span></span></code></pre>
+</div>
+<div class="codewrapper">
+<h3 class="code-label">OUTPUT<i aria-hidden="true" data-feather="chevron-left"></i><i aria-hidden="true" data-feather="chevron-right"></i>
+</h3>
+<pre class="output" tabindex="0"><code>[1] 25736</code></pre>
+</div>
+<div class="codewrapper sourceCode" id="cb13">
+<h3 class="code-label">R<i aria-hidden="true" data-feather="chevron-left"></i><i aria-hidden="true" data-feather="chevron-right"></i>
+</h3>
+<pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="fu">length</span><span class="op">(</span><span class="fu">which</span><span class="op">(</span><span class="fu">rowSums</span><span class="op">(</span><span class="fu">assay</span><span class="op">(</span><span class="va">se</span>, <span class="st">"counts"</span><span class="op">)</span><span class="op">)</span> <span class="op">&gt;</span> <span class="fl">20</span><span class="op">)</span><span class="op">)</span></span></code></pre>
+</div>
+<div class="codewrapper">
+<h3 class="code-label">OUTPUT<i aria-hidden="true" data-feather="chevron-left"></i><i aria-hidden="true" data-feather="chevron-right"></i>
+</h3>
+<pre class="output" tabindex="0"><code>[1] 23860</code></pre>
+</div>
+<ol start="3" style="list-style-type: decimal"><li>Cons: Risk of removing interesting information Pros:</li>
+</ol><ul><li>Not or lowly expressed genes are unlikely to be biological
+meaningful.</li>
+<li>Reduces number of statistical tests (multiple testing).</li>
+<li>More reliable estimation of mean-variance relationship</li>
+</ul><p>Potential considerations: - Is a gene expressed in both groups? - How
+many samples of each group express a gene?</p>
 </div>
 </div>
 </div>
@@ -462,7 +496,7 @@ overall higher number of reads in that sample. In the rest of this
 section, we will use the term <em>library size</em> to refer to the
 total number of reads assigned to genes for a sample. First we should
 compare the library sizes of all samples.</p>
-<div class="codewrapper sourceCode" id="cb9">
+<div class="codewrapper sourceCode" id="cb15">
 <h3 class="code-label">R<i aria-hidden="true" data-feather="chevron-left"></i><i aria-hidden="true" data-feather="chevron-right"></i>
 </h3>
 <pre class="downlit sourceCode r">
@@ -507,7 +541,7 @@ low counts. We now switch our <code>SummarizedExperiment</code> object
 over to a <code>DESeqDataSet</code> as it has the internal structure to
 store these size factors. We also need to tell it our main experiment
 design, which is sex and time:</p>
-<div class="codewrapper sourceCode" id="cb10">
+<div class="codewrapper sourceCode" id="cb16">
 <h3 class="code-label">R<i aria-hidden="true" data-feather="chevron-left"></i><i aria-hidden="true" data-feather="chevron-right"></i>
 </h3>
 <pre class="downlit sourceCode r">
@@ -519,7 +553,7 @@ design, which is sex and time:</p>
 <pre class="warning" tabindex="0"><code>Warning in DESeq2::DESeqDataSet(se, design = ~sex + time): some variables in
 design formula are characters, converting to factors</code></pre>
 </div>
-<div class="codewrapper sourceCode" id="cb12">
+<div class="codewrapper sourceCode" id="cb18">
 <h3 class="code-label">R<i aria-hidden="true" data-feather="chevron-left"></i><i aria-hidden="true" data-feather="chevron-right"></i>
 </h3>
 <pre class="downlit sourceCode r">
@@ -542,7 +576,7 @@ of these work best in situations where the variance of the input data
 (here, each gene) is relatively independent of the average value. For
 read count data such as RNA-seq, this is not the case. In fact, the
 variance increases with the average read count.</p>
-<div class="codewrapper sourceCode" id="cb13">
+<div class="codewrapper sourceCode" id="cb19">
 <h3 class="code-label">R<i aria-hidden="true" data-feather="chevron-left"></i><i aria-hidden="true" data-feather="chevron-right"></i>
 </h3>
 <pre class="downlit sourceCode r">
@@ -555,7 +589,7 @@ explored; however, at the moment the second approach is arguably more
 widely applied in practice. We can transform our data using DESeq2’s
 variance stablizing transformation and then verify that is had removed
 the correlation between average read count and variance.</p>
-<div class="codewrapper sourceCode" id="cb14">
+<div class="codewrapper sourceCode" id="cb20">
 <h3 class="code-label">R<i aria-hidden="true" data-feather="chevron-left"></i><i aria-hidden="true" data-feather="chevron-right"></i>
 </h3>
 <pre class="downlit sourceCode r">
@@ -572,7 +606,7 @@ visualize the distances in color. From this, we infer that the Day 8
 samples are more similar to each other than the rest of the samples,
 although Day 4 and Day 0 do not separate distinctly. Instead, males and
 females reliably separate.</p>
-<div class="codewrapper sourceCode" id="cb15">
+<div class="codewrapper sourceCode" id="cb21">
 <h3 class="code-label">R<i aria-hidden="true" data-feather="chevron-left"></i><i aria-hidden="true" data-feather="chevron-right"></i>
 </h3>
 <pre class="downlit sourceCode r">
@@ -610,7 +644,7 @@ ones. The fraction of explained variance is a measure of how much of the
 ‘signal’ in the data that is retained when we project the samples from
 the original, high-dimensional space to the low-dimensional space for
 visualization.</p>
-<div class="codewrapper sourceCode" id="cb16">
+<div class="codewrapper sourceCode" id="cb22">
 <h3 class="code-label">R<i aria-hidden="true" data-feather="chevron-left"></i><i aria-hidden="true" data-feather="chevron-right"></i>
 </h3>
 <pre class="downlit sourceCode r">
@@ -625,9 +659,140 @@ visualization.</p>
 <span>    <span class="fu">coord_fixed</span><span class="op">(</span><span class="op">)</span> <span class="op">+</span> </span>
 <span>    <span class="fu">scale_color_manual</span><span class="op">(</span>values <span class="op">=</span> <span class="fu">c</span><span class="op">(</span>Male <span class="op">=</span> <span class="st">"blue"</span>, Female <span class="op">=</span> <span class="st">"red"</span><span class="op">)</span><span class="op">)</span></span></code></pre>
 </div>
-<figure><img src="fig/04-exploratory-qc-rendered-pca-1.png" style="display: block; margin: auto;" class="figure mx-auto d-block"></figure></section><section id="session-info"><h2 class="section-heading">Session info<a class="anchor" aria-label="anchor" href="#session-info"></a>
+<figure><img src="fig/04-exploratory-qc-rendered-pca-1.png" style="display: block; margin: auto;" class="figure mx-auto d-block"></figure><div id="challenge-discuss-the-following-points-with-your-neighbour" class="callout discussion">
+<div class="callout-square">
+<i class="callout-icon" data-feather="message-circle"></i>
+</div>
+<div id="challenge-discuss-the-following-points-with-your-neighbour" class="callout-inner">
+<h3 class="callout-title">Challenge: Discuss the following points with
+your neighbour<a class="anchor" aria-label="anchor" href="#challenge-discuss-the-following-points-with-your-neighbour"></a>
+</h3>
+<div class="callout-content">
+<ol style="list-style-type: decimal"><li><p>Assume you are mainly interested in expression changes associated
+with the time after infection (Reminder Day0 -&gt; before infection).
+What do you need to consider in downstream analysis?</p></li>
+<li><p>Consider an experimental design where you have multiple sample
+from the same donor. You are still interested in differences by time and
+observe the following PCA plot. What does this PCA plot
+suggest?</p></li>
+</ol><figure><img src="fig/04-exploratory-qc-rendered-pca-exercise-1.png" style="display: block; margin: auto;" class="figure mx-auto d-block"></figure></div>
+</div>
+</div>
+<div id="accordionSolution2" class="accordion challenge-accordion accordion-flush">
+<div class="accordion-item">
+<button class="accordion-button solution-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapseSolution2" aria-expanded="false" aria-controls="collapseSolution2">
+  <h4 class="accordion-header" id="headingSolution2">
+  Show me the solution
+  </h4>
+</button>
+<div id="collapseSolution2" class="accordion-collapse collapse" data-bs-parent="#accordionSolution2" aria-labelledby="headingSolution2">
+<div class="accordion-body">
+<ol style="list-style-type: decimal"><li><p>The major signal in this data (37% variance) is associated with
+sex. As we are not interested in sex-specific changes over time, we need
+to adjust for this in downstream analysis (see <a href="05-differential-expression.html">next episodes</a>) and keep it in
+mind for further exploratory downstream analysis. A possible way to do
+so is to remove genes on sex chromosomes.</p></li>
+<li>
+</li>
+</ol><ul><li>A strong donor effect, that needs to be accounted for.</li>
+<li>What does PC1 (37% variance) represent? Looks like 2 donor
+groups?</li>
+<li>No association of PC1 and PC2 with time –&gt; no or weak
+transcriptional effect of time –&gt; Check association with higher PCs
+(e.g., PC3,PC4, ..)</li>
+</ul></div>
+</div>
+</div>
+</div>
+<div id="challenge-plot-the-pca-colored-by-library-sizes." class="callout discussion">
+<div class="callout-square">
+<i class="callout-icon" data-feather="message-circle"></i>
+</div>
+<div id="challenge-plot-the-pca-colored-by-library-sizes." class="callout-inner">
+<h3 class="callout-title">Challenge: Plot the PCA colored by library
+sizes.<a class="anchor" aria-label="anchor" href="#challenge-plot-the-pca-colored-by-library-sizes."></a>
+</h3>
+<div class="callout-content">
+<p>Compare before and after variance stablizing transformation.</p>
+<p><em>Hint: The <code>DESeq2::plotPCA</code> expect an object of the
+class <code>DESeqTransform</code> as input. You can transform a
+<code>SummarizedExperiment</code> object using
+<code>plotPCA(DESeqTransform(se))</code></em></p>
+</div>
+</div>
+</div>
+<div id="accordionSolution3" class="accordion challenge-accordion accordion-flush">
+<div class="accordion-item">
+<button class="accordion-button solution-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapseSolution3" aria-expanded="false" aria-controls="collapseSolution3">
+  <h4 class="accordion-header" id="headingSolution3">
+  Show me the solution
+  </h4>
+</button>
+<div id="collapseSolution3" class="accordion-collapse collapse" data-bs-parent="#accordionSolution3" aria-labelledby="headingSolution3">
+<div class="accordion-body">
+<div class="codewrapper sourceCode" id="cb23">
+<h3 class="code-label">R<i aria-hidden="true" data-feather="chevron-left"></i><i aria-hidden="true" data-feather="chevron-right"></i>
+</h3>
+<pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="va">pcaData</span> <span class="op">&lt;-</span> <span class="fu">DESeq2</span><span class="fu">::</span><span class="fu">plotPCA</span><span class="op">(</span><span class="va">vsd</span>, intgroup <span class="op">=</span> <span class="fu">c</span><span class="op">(</span><span class="st">"libSize"</span><span class="op">)</span>,</span>
+<span>                           returnData <span class="op">=</span> <span class="cn">TRUE</span><span class="op">)</span></span>
+<span><span class="va">percentVar</span> <span class="op">&lt;-</span> <span class="fu">round</span><span class="op">(</span><span class="fl">100</span> <span class="op">*</span> <span class="fu">attr</span><span class="op">(</span><span class="va">pcaData</span>, <span class="st">"percentVar"</span><span class="op">)</span><span class="op">)</span></span>
+<span><span class="fu">ggplot</span><span class="op">(</span><span class="va">pcaData</span>, <span class="fu">aes</span><span class="op">(</span>x <span class="op">=</span> <span class="va">PC1</span>, y <span class="op">=</span> <span class="va">PC2</span><span class="op">)</span><span class="op">)</span> <span class="op">+</span></span>
+<span>    <span class="fu">geom_point</span><span class="op">(</span><span class="fu">aes</span><span class="op">(</span>color <span class="op">=</span> <span class="va">libSize</span><span class="op">/</span> <span class="fl">1e6</span><span class="op">)</span>, size <span class="op">=</span> <span class="fl">5</span><span class="op">)</span> <span class="op">+</span></span>
+<span>    <span class="fu">theme_minimal</span><span class="op">(</span><span class="op">)</span> <span class="op">+</span></span>
+<span>    <span class="fu">xlab</span><span class="op">(</span><span class="fu">paste0</span><span class="op">(</span><span class="st">"PC1: "</span>, <span class="va">percentVar</span><span class="op">[</span><span class="fl">1</span><span class="op">]</span>, <span class="st">"% variance"</span><span class="op">)</span><span class="op">)</span> <span class="op">+</span></span>
+<span>    <span class="fu">ylab</span><span class="op">(</span><span class="fu">paste0</span><span class="op">(</span><span class="st">"PC2: "</span>, <span class="va">percentVar</span><span class="op">[</span><span class="fl">2</span><span class="op">]</span>, <span class="st">"% variance"</span><span class="op">)</span><span class="op">)</span> <span class="op">+</span></span>
+<span>    <span class="fu">coord_fixed</span><span class="op">(</span><span class="op">)</span> <span class="op">+</span> </span>
+<span>    <span class="fu">scale_color_continuous</span><span class="op">(</span><span class="st">"Total count in millions"</span>, type <span class="op">=</span><span class="st">"viridis"</span><span class="op">)</span></span></code></pre>
+</div>
+<figure><img src="fig/04-exploratory-qc-rendered-pca-lib-1.png" style="display: block; margin: auto;" class="figure mx-auto d-block"></figure><div class="codewrapper sourceCode" id="cb24">
+<h3 class="code-label">R<i aria-hidden="true" data-feather="chevron-left"></i><i aria-hidden="true" data-feather="chevron-right"></i>
+</h3>
+<pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="va">pcaData</span> <span class="op">&lt;-</span> <span class="fu">DESeq2</span><span class="fu">::</span><span class="fu">plotPCA</span><span class="op">(</span><span class="fu">DESeqTransform</span><span class="op">(</span><span class="va">se</span><span class="op">)</span>, intgroup <span class="op">=</span> <span class="fu">c</span><span class="op">(</span><span class="st">"libSize"</span><span class="op">)</span>,</span>
+<span>                           returnData <span class="op">=</span> <span class="cn">TRUE</span><span class="op">)</span></span>
+<span><span class="va">percentVar</span> <span class="op">&lt;-</span> <span class="fu">round</span><span class="op">(</span><span class="fl">100</span> <span class="op">*</span> <span class="fu">attr</span><span class="op">(</span><span class="va">pcaData</span>, <span class="st">"percentVar"</span><span class="op">)</span><span class="op">)</span></span>
+<span><span class="fu">ggplot</span><span class="op">(</span><span class="va">pcaData</span>, <span class="fu">aes</span><span class="op">(</span>x <span class="op">=</span> <span class="va">PC1</span>, y <span class="op">=</span> <span class="va">PC2</span><span class="op">)</span><span class="op">)</span> <span class="op">+</span></span>
+<span>    <span class="fu">geom_point</span><span class="op">(</span><span class="fu">aes</span><span class="op">(</span>color <span class="op">=</span> <span class="va">libSize</span><span class="op">/</span> <span class="fl">1e6</span><span class="op">)</span>, size <span class="op">=</span> <span class="fl">5</span><span class="op">)</span> <span class="op">+</span></span>
+<span>    <span class="fu">theme_minimal</span><span class="op">(</span><span class="op">)</span> <span class="op">+</span></span>
+<span>    <span class="fu">xlab</span><span class="op">(</span><span class="fu">paste0</span><span class="op">(</span><span class="st">"PC1: "</span>, <span class="va">percentVar</span><span class="op">[</span><span class="fl">1</span><span class="op">]</span>, <span class="st">"% variance"</span><span class="op">)</span><span class="op">)</span> <span class="op">+</span></span>
+<span>    <span class="fu">ylab</span><span class="op">(</span><span class="fu">paste0</span><span class="op">(</span><span class="st">"PC2: "</span>, <span class="va">percentVar</span><span class="op">[</span><span class="fl">2</span><span class="op">]</span>, <span class="st">"% variance"</span><span class="op">)</span><span class="op">)</span> <span class="op">+</span></span>
+<span>    <span class="fu">coord_fixed</span><span class="op">(</span><span class="op">)</span> <span class="op">+</span> </span>
+<span>    <span class="fu">scale_color_continuous</span><span class="op">(</span><span class="st">"Total count in millions"</span>, type <span class="op">=</span><span class="st">"viridis"</span><span class="op">)</span></span></code></pre>
+</div>
+<figure><img src="fig/04-exploratory-qc-rendered-pca-lib-vst-1.png" style="display: block; margin: auto;" class="figure mx-auto d-block"></figure></div>
+</div>
+</div>
+</div>
+</section><section id="interactive-exploratory-data-analysis"><h2 class="section-heading">Interactive exploratory data analysis<a class="anchor" aria-label="anchor" href="#interactive-exploratory-data-analysis"></a>
 </h2>
-<hr class="half-width"><div class="codewrapper sourceCode" id="cb17">
+<hr class="half-width"><p>Often it is useful to look at QC plots in an interactive way to
+directly explore different experimental factors or get insides from
+someone without coding experience. Useful tools for interactive
+exploratory data analysis for RNA-seq are <a href="https://bioconductor.org/packages/release/bioc/html/Glimma.html" class="external-link">glimma</a>
+and <a href="https://bioconductor.org/packages/release/bioc/html/iSEE.html" class="external-link">iSEE</a></p>
+<div id="challenge-interactively-explore-our-data-using-isee" class="callout discussion">
+<div class="callout-square">
+<i class="callout-icon" data-feather="message-circle"></i>
+</div>
+<div id="challenge-interactively-explore-our-data-using-isee" class="callout-inner">
+<h3 class="callout-title">Challenge: Interactively explore our data
+using iSEE<a class="anchor" aria-label="anchor" href="#challenge-interactively-explore-our-data-using-isee"></a>
+</h3>
+<div class="callout-content">
+<div class="codewrapper sourceCode" id="cb25">
+<h3 class="code-label">R<i aria-hidden="true" data-feather="chevron-left"></i><i aria-hidden="true" data-feather="chevron-right"></i>
+</h3>
+<pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="va">app</span> <span class="op">&lt;-</span> <span class="fu">iSEE</span><span class="op">(</span><span class="va">se</span><span class="op">)</span></span>
+<span><span class="fu">shiny</span><span class="fu">::</span><span class="fu">runApp</span><span class="op">(</span><span class="va">app</span><span class="op">)</span></span></code></pre>
+</div>
+</div>
+</div>
+</div>
+</section><section id="session-info"><h2 class="section-heading">Session info<a class="anchor" aria-label="anchor" href="#session-info"></a>
+</h2>
+<hr class="half-width"><div class="codewrapper sourceCode" id="cb26">
 <h3 class="code-label">R<i aria-hidden="true" data-feather="chevron-left"></i><i aria-hidden="true" data-feather="chevron-right"></i>
 </h3>
 <pre class="downlit sourceCode r">
@@ -658,37 +823,48 @@ attached base packages:
 [8] methods   base     
 
 other attached packages:
- [1] hexbin_1.28.3               RColorBrewer_1.1-3         
- [3] ComplexHeatmap_2.16.0       ggplot2_3.4.3              
- [5] vsn_3.68.0                  DESeq2_1.40.2              
- [7] SummarizedExperiment_1.30.2 Biobase_2.60.0             
- [9] MatrixGenerics_1.12.3       matrixStats_1.0.0          
-[11] GenomicRanges_1.52.0        GenomeInfoDb_1.36.2        
-[13] IRanges_2.34.1              S4Vectors_0.38.1           
-[15] BiocGenerics_0.46.0        
+ [1] iSEE_2.12.0                 SingleCellExperiment_1.22.0
+ [3] hexbin_1.28.3               RColorBrewer_1.1-3         
+ [5] ComplexHeatmap_2.16.0       ggplot2_3.4.3              
+ [7] vsn_3.68.0                  DESeq2_1.40.2              
+ [9] SummarizedExperiment_1.30.2 Biobase_2.60.0             
+[11] MatrixGenerics_1.12.3       matrixStats_1.0.0          
+[13] GenomicRanges_1.52.0        GenomeInfoDb_1.36.2        
+[15] IRanges_2.34.1              S4Vectors_0.38.1           
+[17] BiocGenerics_0.46.0        
 
 loaded via a namespace (and not attached):
- [1] shape_1.4.6             circlize_0.4.15         gtable_0.3.4           
- [4] rjson_0.2.21            xfun_0.40               GlobalOptions_0.1.2    
- [7] lattice_0.21-8          vctrs_0.6.3             tools_4.3.1            
-[10] bitops_1.0-7            generics_0.1.3          parallel_4.3.1         
-[13] tibble_3.2.1            fansi_1.0.4             highr_0.10             
-[16] cluster_2.1.4           pkgconfig_2.0.3         Matrix_1.6-1           
-[19] lifecycle_1.0.3         GenomeInfoDbData_1.2.10 farver_2.1.1           
-[22] compiler_4.3.1          munsell_0.5.0           codetools_0.2-19       
-[25] clue_0.3-64             RCurl_1.98-1.12         yaml_2.3.7             
-[28] preprocessCore_1.62.1   pillar_1.9.0            crayon_1.5.2           
-[31] BiocParallel_1.34.2     affy_1.78.2             DelayedArray_0.26.7    
-[34] limma_3.56.2            iterators_1.0.14        abind_1.4-5            
-[37] foreach_1.5.2           tidyselect_1.2.0        locfit_1.5-9.8         
-[40] digest_0.6.33           dplyr_1.1.3             labeling_0.4.3         
-[43] colorspace_2.1-0        cli_3.6.1               magrittr_2.0.3         
-[46] S4Arrays_1.0.6          utf8_1.2.3              withr_2.5.0            
-[49] scales_1.2.1            XVector_0.40.0          affyio_1.70.0          
-[52] GetoptLong_1.0.5        png_0.1-8               evaluate_0.21          
-[55] knitr_1.43              doParallel_1.0.17       rlang_1.1.1            
-[58] Rcpp_1.0.11             glue_1.6.2              BiocManager_1.30.22    
-[61] renv_1.0.2              R6_2.5.1                zlibbioc_1.46.0        </code></pre>
+ [1] bitops_1.0-7            rlang_1.1.1             magrittr_2.0.3         
+ [4] shinydashboard_0.7.2    clue_0.3-64             GetoptLong_1.0.5       
+ [7] compiler_4.3.1          mgcv_1.9-0              png_0.1-8              
+[10] vctrs_0.6.3             pkgconfig_2.0.3         shape_1.4.6            
+[13] crayon_1.5.2            fastmap_1.1.1           XVector_0.40.0         
+[16] ellipsis_0.3.2          labeling_0.4.3          utf8_1.2.3             
+[19] promises_1.2.1          preprocessCore_1.62.1   shinyAce_0.4.2         
+[22] xfun_0.40               cachem_1.0.8            zlibbioc_1.46.0        
+[25] jsonlite_1.8.7          highr_0.10              later_1.3.1            
+[28] DelayedArray_0.26.7     BiocParallel_1.34.2     parallel_4.3.1         
+[31] cluster_2.1.4           R6_2.5.1                bslib_0.5.1            
+[34] limma_3.56.2            jquerylib_0.1.4         Rcpp_1.0.11            
+[37] iterators_1.0.14        knitr_1.43              httpuv_1.6.11          
+[40] Matrix_1.6-1            splines_4.3.1           igraph_1.5.1           
+[43] tidyselect_1.2.0        abind_1.4-5             yaml_2.3.7             
+[46] doParallel_1.0.17       codetools_0.2-19        affy_1.78.2            
+[49] miniUI_0.1.1.1          lattice_0.21-8          tibble_3.2.1           
+[52] shiny_1.7.5             withr_2.5.0             evaluate_0.21          
+[55] circlize_0.4.15         pillar_1.9.0            affyio_1.70.0          
+[58] BiocManager_1.30.22     renv_1.0.2              DT_0.29                
+[61] foreach_1.5.2           shinyjs_2.1.0           generics_0.1.3         
+[64] RCurl_1.98-1.12         munsell_0.5.0           scales_1.2.1           
+[67] xtable_1.8-4            glue_1.6.2              tools_4.3.1            
+[70] colourpicker_1.3.0      locfit_1.5-9.8          colorspace_2.1-0       
+[73] nlme_3.1-163            GenomeInfoDbData_1.2.10 vipor_0.4.5            
+[76] cli_3.6.1               fansi_1.0.4             viridisLite_0.4.2      
+[79] S4Arrays_1.0.6          dplyr_1.1.3             gtable_0.3.4           
+[82] rintrojs_0.3.2          sass_0.4.7              digest_0.6.33          
+[85] ggrepel_0.9.3           farver_2.1.1            rjson_0.2.21           
+[88] htmlwidgets_1.6.2       htmltools_0.5.6         lifecycle_1.0.3        
+[91] shinyWidgets_0.8.0      GlobalOptions_0.1.2     mime_0.12              </code></pre>
 </div>
 <div id="keypoints1" class="callout keypoints">
 <div class="callout-square">
@@ -761,8 +937,8 @@ work directly on the raw counts.</li>
   "url": "https://carpentries-incubator.github.io/bioc-rnaseq/04-exploratory-qc.html",
   "identifier": "https://carpentries-incubator.github.io/bioc-rnaseq/04-exploratory-qc.html",
   "dateCreated": "2020-09-15",
-  "dateModified": "2023-09-08",
-  "datePublished": "2023-09-12"
+  "dateModified": "2023-09-13",
+  "datePublished": "2023-09-13"
 }
 
   </script><script>
