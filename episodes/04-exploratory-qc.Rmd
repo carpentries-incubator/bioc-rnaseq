@@ -26,16 +26,6 @@ source("download_data.R")
 
 ::::::::::::::::::::::::::::::::::::::::::::::::::
 
-:::::::::::::::::::::::::::::::::::::::::  callout
-
-### Contribute!
-
-This episode is intended to introduce various types of exploratory analysis
-and QC steps taken before a formal statistical analysis is done.
-
-
-::::::::::::::::::::::::::::::::::::::::::::::::::
-
 
 ## Load packages
 
@@ -51,6 +41,7 @@ suppressPackageStartupMessages({
     library(ComplexHeatmap)
     library(RColorBrewer)
     library(hexbin)
+    library(iSEE)
 })
 ```
 
@@ -80,18 +71,39 @@ nrow(se)
 
 ## Challenge: What kind of genes survived this filtering?
 
-Last episode we discussed subsetting down to only mRNA genes. Here we subsetted based on a minimal expression level. How many of each type of gene survived the filtering?
+Last episode we discussed subsetting down to only mRNA genes. Here we subsetted based on a minimal expression level.
+  
+  1. How many of each type of gene survived the filtering?
+  2. Compare the number of genes that survived filtering using different thresholds.
+  3. What are pros and cons of more aggressive filtering? What are important considerations? 
   
 ::::::::::::::::::::::::::::::::::::::::::::::::::
 
 ::::::::::::::::::::::::::::::::::: solution
 
+1.
 ```{r table-gbkey}
 table(rowData(se)$gbkey)
 ```
 
-:::::::::::::::::::::::::::::::::::
+2.
+```{r filter thresholds}
+nrow(se)  # represents the number of genes using 5 as filtering threshold
+length(which(rowSums(assay(se, "counts")) > 10))
+length(which(rowSums(assay(se, "counts")) > 20))
+```
 
+3.
+Cons: Risk of removing interesting information
+Pros: 
+ - Not or lowly expressed genes are unlikely to be biological meaningful.
+ - Reduces number of statistical tests (multiple testing).
+ - More reliable estimation of mean-variance relationship
+ 
+Potential considerations:
+ - Is a gene expressed in both groups?
+ - How many samples of each group express a gene?
+:::::::::::::::::::::::::::::::::::
 
 ## Library size differences
 
@@ -209,6 +221,111 @@ ggplot(pcaData, aes(x = PC1, y = PC2)) +
     coord_fixed() + 
     scale_color_manual(values = c(Male = "blue", Female = "red"))
 ```
+
+:::::::::::::::::::::::::::::::::::::::  challenge
+
+## Challenge: Discuss the following points with your neighbour
+
+1. Assume you are mainly interested in expression changes associated with the time after infection (Reminder Day0 -> before infection). What do you need to consider in downstream analysis?
+
+2. Consider an experimental design where you have multiple sample from the same donor. You are still interested in differences by time and observe the following PCA plot. What does this PCA plot suggest?
+
+```{r pca-exercise, eval=TRUE, echo=FALSE, include=TRUE}
+vsd_ex <- vsd
+vsd_ex$sample <- vsd_ex$Group
+levels(vsd_ex$sample) <- c("sampleA", "sampleB", "sampleC", 
+                              "sampleD", "sampleE", "sampleF")
+vsd_ex$time <- sample(vsd_ex$time)
+
+pcaData <- DESeq2::plotPCA(vsd_ex, intgroup = c("sample", "time"),
+                           returnData = TRUE)
+percentVar <- round(100 * attr(pcaData, "percentVar"))
+ggplot(pcaData, aes(x = PC1, y = PC2)) +
+    geom_point(aes(color = sample, shape = time), size = 5) +
+    theme_minimal() +
+    xlab(paste0("PC1: ", percentVar[1], "% variance")) +
+    ylab(paste0("PC2: ", percentVar[2], "% variance")) +
+    coord_fixed() 
+```
+
+
+
+
+::::::::::::::::::::::::::::::::::::::::::::::::::
+
+::::::::::::::::::::::::::::::::::: solution
+1. The major signal in this data (37% variance) is associated with sex. As we are not interested in sex-specific changes over time, we need to adjust for this in downstream analysis (see [next episodes](../episodes/05-differential-expression.Rmd)) and keep it in mind for further exploratory downstream analysis. A possible way to do so is to remove genes on sex chromosomes.
+
+2.
+ - A strong donor effect, that needs to be accounted for. 
+ - What does PC1 (37% variance) represent? Looks like 2 donor groups?
+ - No association of PC1 and PC2 with time --> no or weak transcriptional effect of time
+    --> Check association with higher PCs (e.g., PC3,PC4, ..)
+ 
+:::::::::::::::::::::::::::::::::::
+
+
+
+:::::::::::::::::::::::::::::::::::::::  challenge
+
+## Challenge: Plot the PCA colored by library sizes. 
+
+Compare before and after variance stablizing transformation.
+
+*Hint: The `DESeq2::plotPCA` expect an object of the class `DESeqTransform` as input. You can transform a `SummarizedExperiment` object using `plotPCA(DESeqTransform(se))`*
+
+::::::::::::::::::::::::::::::::::::::::::::::::::
+
+::::::::::::::::::::::::::::::::::: solution
+
+```{r pca-lib}
+pcaData <- DESeq2::plotPCA(vsd, intgroup = c("libSize"),
+                           returnData = TRUE)
+percentVar <- round(100 * attr(pcaData, "percentVar"))
+ggplot(pcaData, aes(x = PC1, y = PC2)) +
+    geom_point(aes(color = libSize/ 1e6), size = 5) +
+    theme_minimal() +
+    xlab(paste0("PC1: ", percentVar[1], "% variance")) +
+    ylab(paste0("PC2: ", percentVar[2], "% variance")) +
+    coord_fixed() + 
+    scale_color_continuous("Total count in millions", type ="viridis")
+```
+
+
+```{r pca-lib-vst}
+pcaData <- DESeq2::plotPCA(DESeqTransform(se), intgroup = c("libSize"),
+                           returnData = TRUE)
+percentVar <- round(100 * attr(pcaData, "percentVar"))
+ggplot(pcaData, aes(x = PC1, y = PC2)) +
+    geom_point(aes(color = libSize/ 1e6), size = 5) +
+    theme_minimal() +
+    xlab(paste0("PC1: ", percentVar[1], "% variance")) +
+    ylab(paste0("PC2: ", percentVar[2], "% variance")) +
+    coord_fixed() + 
+    scale_color_continuous("Total count in millions", type ="viridis")
+```
+
+
+:::::::::::::::::::::::::::::::::::
+
+## Interactive exploratory data analysis
+
+Often it is useful to look at QC plots in an interactive way to directly explore different experimental factors or get insides from someone without coding experience.
+Useful tools for interactive exploratory data analysis for RNA-seq are [glimma](https://bioconductor.org/packages/release/bioc/html/Glimma.html) and [iSEE](https://bioconductor.org/packages/release/bioc/html/iSEE.html)
+
+
+:::::::::::::::::::::::::::::::::::::::  challenge
+
+## Challenge: Interactively explore our data using iSEE 
+
+```{r isee, eval=FALSE}
+app <- iSEE(se)
+shiny::runApp(app)
+```
+
+
+::::::::::::::::::::::::::::::::::::::::::::::::::
+
 
 ## Session info
 
