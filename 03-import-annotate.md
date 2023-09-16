@@ -519,6 +519,68 @@ Male_Day8_24          24   Male_Day8_24 Male_Day8
 se$Label <- factor(se$Label, levels = se$Label)
 ```
 
+:::::::::::::::::::::::::::::::::::::::  challenge
+
+1. How many samples are there for each level of the `Infection` variable?
+2. Create 2 objects named `se_infected` and `se_noninfected` containing
+a subset of `se` with only infected and non-infected samples, respectively.
+Then, calculate the mean expression levels of the first 500 genes for each
+object, and use the `summary()` function to explore the distribution
+of expression levels for infected and non-infected samples based on these genes.
+3. How many samples represent female mice infected with Influenza A on day 8?
+
+
+::::::::::::::::::::::::::::::::::::::::::::::::::
+
+::::::::::::::::::::::::::::::::::: solution
+
+
+```r
+# 1
+table(se$infection)
+```
+
+```{.output}
+
+ InfluenzaA NonInfected 
+         15           7 
+```
+
+```r
+# 2
+se_infected <- se[se$infection == "InfluenzaA", ]
+se_noninfected <- se[se$infection == "NonInfected", ]
+
+means_infected <- rowMeans(assay(se_infected)[1:500, ])
+means_noninfected <- rowMeans(assay(se_noninfected)[1:500, ])
+
+summary(means_infected)
+```
+
+```{.output}
+     Min.   1st Qu.    Median      Mean   3rd Qu.      Max. 
+    0.000     0.136     2.114   667.037   334.568 18810.409 
+```
+
+```r
+summary(means_noninfected)
+```
+
+```{.output}
+     Min.   1st Qu.    Median      Mean   3rd Qu.      Max. 
+    0.000     0.273     7.523  1003.466   558.477 25190.455 
+```
+
+```r
+# 3
+ncol(se[se$sex == "Female" & se$infection == "InfluenzaA" & se$time == "Day8", ])
+```
+
+```{.output}
+[1] 22
+```
+
+:::::::::::::::::::::::::::::::::::
 
 
 ## Save SummarizedExperiment
