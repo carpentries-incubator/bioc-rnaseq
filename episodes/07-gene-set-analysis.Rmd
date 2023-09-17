@@ -115,7 +115,7 @@ between genders. The following code performs **DESeq2** analysis which you
 should have already learnt in the previous episode. In the end, we have a list
 of DE genes filtered by FDR < 0.05, and save it in the object `sexDEgenes`.
 
-The file `data/GSE96870_se.rds` contains a `RangedSummarizedExperiment` contains RNA-Seq counts that were downloaded in [Episode 2](../episodes/02-setup.Rmd) and constructed in [Episode 3](../episodes/03-import-annotate.Rmd) (minimal codes for downloading and constructing in the script
+The file `data/GSE96870_se.rds` contains a `RangedSummarizedExperiment` that contains RNA-Seq counts that were downloaded in [Episode 2](../episodes/02-setup.Rmd) and constructed in [Episode 3](../episodes/03-import-annotate.Rmd) (minimal codes for downloading and constructing in the script
 [`download_data.R`](https://github.com/carpentries-incubator/bioc-rnaseq/blob/main/episodes/download_data.R).
 In the following code, there are also comments that explain every step of the
 analysis.
@@ -183,7 +183,7 @@ consistent in the two. Later in this episode, we will learn how to perform
 gene ID conversion in the ORA analysis.
 
 
-Since the DE genes and the gene set can be mathematically thought as two sets,
+Since the DE genes and the gene set can be mathematically thought of as two sets,
 a natural way is to first visualize them with a Venn diagram.
 
 ```{r venn-diagram, fig.width = 5*2, fig.height = 5*2, dpi = 72*2}
@@ -208,7 +208,7 @@ go to the next section.
 ### Fisher's exact test
 
 To statistically measure the enrichment, the relationship of DE genes and the
-gene set is normally formatted into the following 2x2 contigency table, where
+gene set is normally formatted into the following 2x2 contingency table, where
 in the table are the numbers of genes in different categories. $n_{+1}$ is the
 size of the _XY gene set_ (i.e. the number of member genes), $n_{1+}$ is the
 number of DE genes, $n$ is the number of total genes.
@@ -248,7 +248,7 @@ matrix(c(n_11, n_12, n_10, n_21, n_22, n_20, n_01, n_02, n),
     nrow = 3, byrow = TRUE)
 ```
 
-And we fill these numbers into the 2x2 contigency table:
+And we fill these numbers into the 2x2 contingency table:
 
 
 <center>
@@ -284,13 +284,13 @@ t <- fisher.test(matrix(c(n_11, n_12, n_21, n_22), nrow = 2, byrow = TRUE),
 t$p.value
 ```
 
-Odd ratio from the Fisher's exact test is defined as follows:
+Odds ratio from the Fisher's exact test is defined as follows:
 
 $$ 
-\mathrm{Odd\_ratio} = \frac{n_{11}/n_{21}}{n_{12}/n_{22}} = \frac{n_{11}/n_{12}}{n_{21}/n_{22}} = \frac{n_{11} * n_{22}}{n_{12} * n_{21}}
+\mathrm{Odds\_ratio} = \frac{n_{11}/n_{21}}{n_{12}/n_{22}} = \frac{n_{11}/n_{12}}{n_{21}/n_{22}} = \frac{n_{11} * n_{22}}{n_{12} * n_{21}}
 $$
 
-If there is no association between DE genes and the gene set, odd ratio is
+If there is no association between DE genes and the gene set, odds ratio is
 expected to be 1. And it is larger than 1 if there is an over-representation
 of DE genes on the gene set.
 
@@ -299,7 +299,7 @@ of DE genes on the gene set.
 
 ### Further reading
 
-The 2x2 contigency table can be transposed and it does not affect the Fisher's
+The 2x2 contingency table can be transposed and it does not affect the Fisher's
 exact test. E.g. let's put whether genes are in the gene sets on rows,
 and put whether genes are DE on columns.
 
@@ -403,8 +403,7 @@ written as:
 $$ X \sim \mathrm{Hyper}(n, n_{1+}, n_{+1})$$
 
 The _p_-value of the enrichment is calculated as the probability of having an
-observation equal to or larger than $n_{11}$ (or it can be understood as the
-probability of being over-representated):
+observation equal to or larger than $n_{11}$ under the assumption of independence:
 
 $$
 \mathrm{Pr}( X \geqslant  n_{11} ) = \sum_{x \in \{ {n_{11}, n_{11}+1, ..., \min\{n_{1+}, n_{+1}\} \}}} \mathrm{Pr}(X = x)
@@ -622,8 +621,8 @@ Gene Ontology (GO) is the standard source for gene set enrichment analysis. GO
 contains three namespaces of biological process (BP), cellular components (CC)
 and molecular function (MF) which describe a biological entity from different
 aspect. The associations between GO terms and genes are integrated in the
-Bioconductor standard packages: _the oragnism annotation packages_. In current
-Bioconductor release 3.17, there are the following organism packages:
+Bioconductor standard packages: _the organism annotation packages_. In the current
+Bioconductor release (3.17), there are the following organism packages:
 
 <center>
 
@@ -741,13 +740,13 @@ object can be directly used in the ORA analysis introduced in the next section.
 A biological pathway is a series of interactions among molecules in a cell
 that leads to a certain product or a change in a cell^[The definition is from
 Wikipedia: https://en.wikipedia.org/wiki/Biological_pathway.]. A pathway
-involes a list of genes playing different roles which constructs the "pathway
+involves a list of genes playing different roles which constructs the "pathway
 gene set". [KEGG pathway](https://www.genome.jp/kegg/pathway.html) is the
 mostly used database for pathways. It provides its data via a REST API
 (https://rest.kegg.jp/). There are several commands to retrieve specific types
 of data. To retrieve the pathway gene sets, we can use the "link" command as
 shown in the following URL ("link" means to link genes to pathways). When you
-enter the URL in the web brower:
+enter the URL in the web browser:
 
 ```
 https://rest.kegg.jp/link/pathway/hsa
@@ -865,7 +864,7 @@ head(MSigDBGeneSets)
 ```
 
 The output is in the `tibble` class. If you have no experience with it, don't
-worry, just take it as a table. As you can see, The three major gene IDs type
+worry, just take it as a table. As you can see, the three major gene IDs type
 `"gene_symbol"`, `"entrez_gene"` and `"ensembl_gene"` are all included in the
 table. So users can easily pick one with the same gene ID type as in the DE gene
 list. For example:
@@ -887,17 +886,17 @@ msigdbr(species = "mouse", category = "C2", subcategory = "CP:KEGG")
 
 The ORA method itself is quite simple and it has been implemented in a large
 number of R packages. Among them, the **clusterProfiler** package especially
-does a good job that it has a seamless integration to the Bioconductor
+does a good job in that it has a seamless integration to the Bioconductor
 annotation resources which allows extending GSEA analysis to other organisms
 easily; it has pre-defined functions for common analysis tasks, e.g. GO
-enrichment, KEGG enrichment; and it implements a variaty of different
+enrichment, KEGG enrichment; and it implements a variety of different
 visualization methods on the GSEA results. In this section, we will learn how
-to perform ORA anlaysis with **clusterProfiler**.
+to perform ORA analysis with **clusterProfiler**.
 
 Here we will use a list of DE genes from a different comparison. As you may
 still remember, there are only 54 DE genes between genders, which may not be a
-good case for GSEA analysis, since after overlapping to a collection fo gene
-sets, majority of the gene sets will have few or even no gene overlapped.
+good case for GSEA analysis, since after overlapping to a collection of gene
+sets, the majority of the gene sets will have few or even no gene overlapped.
 In this example we use the list of DE genes from the comparison between
 different time points.
 
@@ -965,15 +964,15 @@ head(resTimeGOTable)
 ```
 
 Now `enrichGO()` went through! The returned object `resTimeGO` is in a special
-format which looks like a table but actually not! To get rid of the confusion, in
+format which looks like a table but actually is not! To get rid of the confusion, in
 the code it is converted to a real data frame `resTimeGOTable`.
 
 In the output data frame, there are the following columns:
 
 - `ID`: ID of the gene set. In this example analysis, it is the GO ID.
-- `Description`: Readable description. Here is the name of the GO term.
-- `GeneRatio`: Number of DE genes in the gene set / total number of DE genes
-- `BgRatio`: size of the gene set / total number of genes.
+- `Description`: Readable description. Here it is the name of the GO term.
+- `GeneRatio`: Number of DE genes in the gene set / total number of DE genes.
+- `BgRatio`: Size of the gene set / total number of genes.
 - `pvalue`: _p_-value calculated from the hypergeometric distribution.
 - `p.adjust`: Adjusted _p_-value by the BH method.
 - `qvalue`: _q_-value which is another way for controlling false positives in multiple testings.
@@ -989,7 +988,7 @@ of all genes in ORA, which we will touch in the end of this section.
 There are several additional arguments in `enrichGO()`:
 
 - `universe`: the universe set of genes, i.e. total genes to use. By default it
-  uses union of genes in all gene sets. If it is set, DE genes and all gene
+  uses the union of the genes in all gene sets. If it is set, DE genes and all gene
   sets will take intersections with it. We will discuss it in the end of this section.
 - `minGSSize`: Minimal size of gene sets. Normally gene sets with very small
   size have very specific biological meanings which are not helpful too much
@@ -1049,7 +1048,7 @@ To perform KEGG pathway enrichment analysis, there is also a function
 automatically. Thus, if the ID type is not Entrez ID, we have to convert it by
 hand.
 
-Note if you have also set `universe`, it should be convereted to Entrez IDs as
+Note if you have also set `universe`, it should be converted to Entrez IDs as
 well.
 
 We use the `mapIds()` function to convert genes from symbols to Entrez IDs.
@@ -1203,13 +1202,13 @@ genes or non-gene-set genes.
 </center>
 
 
-In the contigency table, we are testing the dependency of whether genes being
+In the contingency table, we are testing the dependency of whether genes being
 DE and whether genes being in the gene set. In the model, each gene has a
 definite attribute of being either DE or non-DE and each gene has a second
 definite attribute of either belonging to the gene set or not. If a larger
 universe is used, such as total genes where there are genes not measured nor
 will never annotated to gene sets (let's call them _non-informative genes_,
-e.g. non-proteining coding genes or not-expressed genes), all the
+e.g. non-protein coding genes or not-expressed genes), all the
 non-informative genes are implicitly assigned with an attribute of being
 non-DE or not in the gene set. This implicit assignment is not proper because
 these genes provide no information and they should not be included in the
@@ -1306,11 +1305,11 @@ table. Both plots include the top 20 most significant terms. On dotplot,
 terms are ordered by the values on x-axis (the `GeneRatio`).
 
 Now we need to talk about "what is a good visualization?". The essential two
-questions are "_what is the key message a plot transfer to readers?_" and
+questions are "_what is the key message a plot transfers to readers?_" and
 "_what is the major graphical element in the plot?_". In the barplot or
 dotplot, the major graphical element which readers may notice the easiest is
 the height of bars or the offset of dots to the origin. The most important
-message of the ORA anaysis is of course "the enrichment". The two examples from
+message of the ORA analysis is of course "the enrichment". The two examples from
 `barplot()` and `dotplot()` actually fail to transfer such information to
 readers. In the first barplot where `"Count"` is used as values on x-axis, the
 numer of DE genes in gene sets is not a good measure of the enrichment because
@@ -1321,7 +1320,7 @@ It is the same reason for dotplot where `"GeneRatio"` is used as values on
 x-axis. Gene ratio is calculated as the fraction of DE genes from a certain
 gene set (GeneRatio = Count/Total_DE_Genes). The dotplot puts multiple gene
 sets in the same plot and the aim is to compare between gene sets, thus gene
-sets should be "scaled" to make them comparible. `"GeneRatio"` is not scaled
+sets should be "scaled" to make them comparable. `"GeneRatio"` is not scaled
 for different gene sets and it still has a positive relation to the gene set
 size, which can be observed in the dotplot where higher the gene ratio, larger
 the dot size. Actually "GeneRatio" has the same effect as "Count" (GeneRatio =
@@ -1343,7 +1342,7 @@ n = 28943  # length(resTimeGO@universe)
 ```
 
 Instead of using `GeneRatio`, we use the fraction of DE genes in the gene sets
-which are kind like a "scaled" value for all gene sets. Let's calculate it:
+which are kind of like a "scaled" value for all gene sets. Let's calculate it:
 
 ```{r get-ratio}
 resTimeGOTable$DE_Ratio = n_11/n_01
