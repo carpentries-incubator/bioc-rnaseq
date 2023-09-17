@@ -223,7 +223,7 @@ meanSdPlot(assay(dds), ranks = FALSE)
 <img src="fig/04-exploratory-qc-rendered-mean-sd-plot-raw-1.png" style="display: block; margin: auto;" />
 
 There are two ways around this: either we develop methods specifically adapted to count data, or we adapt (transform) the count data so that the existing methods are applicable.
-Both ways have been explored; however, at the moment the second approach is arguably more widely applied in practice. We can transform our data using DESeq2's variance stablizing transformation and then verify that is had removed the correlation between average read count and variance.
+Both ways have been explored; however, at the moment the second approach is arguably more widely applied in practice. We can transform our data using DESeq2's variance stabilizing transformation and then verify that it has removed the correlation between average read count and variance.
 
 
 ```r
@@ -290,7 +290,7 @@ ggplot(pcaData, aes(x = PC1, y = PC2)) +
 
 1. Assume you are mainly interested in expression changes associated with the time after infection (Reminder Day0 -> before infection). What do you need to consider in downstream analysis?
 
-2. Consider an experimental design where you have multiple sample from the same donor. You are still interested in differences by time and observe the following PCA plot. What does this PCA plot suggest?
+2. Consider an experimental design where you have multiple samples from the same donor. You are still interested in differences by time and observe the following PCA plot. What does this PCA plot suggest?
 
 <img src="fig/04-exploratory-qc-rendered-pca-exercise-1.png" style="display: block; margin: auto;" />
 
@@ -316,7 +316,7 @@ ggplot(pcaData, aes(x = PC1, y = PC2)) +
 
 ## Challenge: Plot the PCA colored by library sizes. 
 
-Compare before and after variance stablizing transformation.
+Compare before and after variance stabilizing transformation.
 
 *Hint: The `DESeq2::plotPCA` expect an object of the class `DESeqTransform` as input. You can transform a `SummarizedExperiment` object using `plotPCA(DESeqTransform(se))`*
 
@@ -363,7 +363,7 @@ ggplot(pcaData, aes(x = PC1, y = PC2)) +
 ## Interactive exploratory data analysis
 
 Often it is useful to look at QC plots in an interactive way to directly explore different experimental factors or get insides from someone without coding experience.
-Useful tools for interactive exploratory data analysis for RNA-seq are [glimma](https://bioconductor.org/packages/release/bioc/html/Glimma.html) and [iSEE](https://bioconductor.org/packages/release/bioc/html/iSEE.html)
+Useful tools for interactive exploratory data analysis for RNA-seq are [Glimma](https://bioconductor.org/packages/release/bioc/html/Glimma.html) and [iSEE](https://bioconductor.org/packages/release/bioc/html/iSEE.html)
 
 
 :::::::::::::::::::::::::::::::::::::::  challenge
