@@ -59,7 +59,7 @@ dim(counts)
 # View(counts)
 ```
 
-Genes are in rows and samples are in columns, so we have counts for 41,786 genes and 22 samples. The `View()` command has been comment out for the website, but running it will open a tab in RStudio that lets us look at the data and even sort the table by a particular column. However, the viewer cannot change the data inside the `counts` object, so we can only look, not permanently sort nor edit the entries. When finished, close the viewer using the X in the tab. Looks like the rownames are gene symbols and the column names are the GEO sample IDs, which are not very informative for telling us which sample is what.
+Genes are in rows and samples are in columns, so we have counts for 41,786 genes and 22 samples. The `View()` command has been commented out for the website, but running it will open a tab in RStudio that lets us look at the data and even sort the table by a particular column. However, the viewer cannot change the data inside the `counts` object, so we can only look, not permanently sort nor edit the entries. When finished, close the viewer using the X in the tab. Looks like the rownames are gene symbols and the column names are the GEO sample IDs, which are not very informative for telling us which sample is what.
 
 ### Sample annotations
 
@@ -349,7 +349,7 @@ manual curation.
 You can find more information in Bioconductor [Annotation Workshop](https://jmacdon.github.io/Bioc2022Anno/articles/AnnotationWorkshop.html)
 material.
 
-Bioconductor has many packages and functions that can help you to get additional annotation information for your genes. The available resources are covered in more detail in [Episode 6 Gene set enrichment analysis](https://carpentries-incubator.github.io/bioc-rnaseq/06-gene-set-analysis.html#gene-set-resources). 
+Bioconductor has many packages and functions that can help you to get additional annotation information for your genes. The available resources are covered in more detail in [Episode 7 Gene set enrichment analysis](https://carpentries-incubator.github.io/bioc-rnaseq/07-gene-set-analysis.html#gene-set-resources). 
 
 Here, we will introduce one of the gene ID mapping functions, `mapIds`:
 ```
@@ -357,6 +357,7 @@ mapIds(annopkg, keys, column, keytype, ..., multiVals)
 ```
 
 Where 
+
 - *annopkg* is the annotation package        
 - *keys* are the IDs that we **know**       
 - *column* is the value we **want**    
