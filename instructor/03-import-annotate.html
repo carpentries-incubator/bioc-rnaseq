@@ -287,7 +287,7 @@
       </div>
       <hr></nav><main id="main-content" class="main-content"><div class="container lesson-content">
         <h1>Importing and annotating quantified data into R</h1>
-        <p> Last updated on 2023-09-16 | 
+        <p> Last updated on 2023-09-17 | 
         
         <a href="https://github.com/carpentries-incubator/bioc-rnaseq/edit/main/episodes/03-import-annotate.Rmd" class="external-link">Edit this page <i aria-hidden="true" data-feather="edit"></i></a></p>
         
@@ -356,18 +356,17 @@ commands above to load them.</p>
 and saved them on our computer. But we do not have these files loaded
 into R yet so that we can work with them. The original experimental
 design in <a href="https://pubmed.ncbi.nlm.nih.gov/28696309/" class="external-link">Blackmore
-et al. 2017</a> was fairly complex: 8-12 weeks old male and female mice,
-with two different genetic backgrounds (wild-type and D2D), were
-collected at Day 0 (before influenza infection), Day 4 and Day 8 after
-influenza infection. From each mouse, cerebellum and spinal cord tissues
-were taken for RNA-seq. There were originally 4 mice per ‘Sex X Day x
-Genotype’ group, but a few were lost along the way resulting in a total
-of 45 samples. For this workshop, we are going to simplify the analysis
-by only using the 22 cerebellum samples. Expression quantification was
-done using STAR to align to the mouse genome and then counting reads
-that map to genes. In addition to the counts per gene per sample, we
-also need information on which sample belongs to which Sex/Time
-point/Replicate. And for the genes, it is helpful to have extra
+et al. 2017</a> was fairly complex: 8 week old male and female C57BL/6
+mice were collected at Day 0 (before influenza infection), Day 4 and Day
+8 after influenza infection. From each mouse, cerebellum and spinal cord
+tissues were taken for RNA-seq. There were originally 4 mice per ‘Sex x
+Time x Tissue’ group, but a few were lost along the way resulting in a
+total of 45 samples. For this workshop, we are going to simplify the
+analysis by only using the 22 cerebellum samples. Expression
+quantification was done using STAR to align to the mouse genome and then
+counting reads that map to genes. In addition to the counts per gene per
+sample, we also need information on which sample belongs to which
+Sex/Time point/Replicate. And for the genes, it is helpful to have extra
 information called annotation. Let’s read in the data files that we
 downloaded in the last episode and start to explore them:</p>
 <div class="section level3">
@@ -393,7 +392,7 @@ downloaded in the last episode and start to explore them:</p>
 </div>
 <p>Genes are in rows and samples are in columns, so we have counts for
 41,786 genes and 22 samples. The <code>View()</code> command has been
-comment out for the website, but running it will open a tab in RStudio
+commented out for the website, but running it will open a tab in RStudio
 that lets us look at the data and even sort the table by a particular
 column. However, the viewer cannot change the data inside the
 <code>counts</code> object, so we can only look, not permanently sort
@@ -528,7 +527,7 @@ have to do to remove those (generally speaking, not exact codes)?</li>
   Show me the solution
   </h4>
 </button>
-<div id="collapseSolution1" class="accordion-collapse collapse" aria-labelledby="headingSolution1" data-bs-parent="#accordionSolution1">
+<div id="collapseSolution1" class="accordion-collapse collapse" data-bs-parent="#accordionSolution1" aria-labelledby="headingSolution1">
 <div class="accordion-body">
 <ol style="list-style-type: decimal"><li>In <code>counts</code>, the rows are genes just like the rows in
 <code>rowranges</code>. The columns in <code>counts</code> are the
@@ -650,7 +649,7 @@ codes.</p>
   Show me the solution
   </h4>
 </button>
-<div id="collapseSolution2" class="accordion-collapse collapse" aria-labelledby="headingSolution2" data-bs-parent="#accordionSolution2">
+<div id="collapseSolution2" class="accordion-collapse collapse" data-bs-parent="#accordionSolution2" aria-labelledby="headingSolution2">
 <div class="accordion-body">
 <div class="codewrapper sourceCode" id="cb19">
 <h3 class="code-label">R<i aria-hidden="true" data-feather="chevron-left"></i><i aria-hidden="true" data-feather="chevron-right"></i>
@@ -1029,7 +1028,7 @@ day 8?</li>
   Show me the solution
   </h4>
 </button>
-<div id="collapseSolution3" class="accordion-collapse collapse" aria-labelledby="headingSolution3" data-bs-parent="#accordionSolution3">
+<div id="collapseSolution3" class="accordion-collapse collapse" data-bs-parent="#accordionSolution3" aria-labelledby="headingSolution3">
 <div class="accordion-body">
 <div class="codewrapper sourceCode" id="cb46">
 <h3 class="code-label">R<i aria-hidden="true" data-feather="chevron-left"></i><i aria-hidden="true" data-feather="chevron-right"></i>
@@ -1158,7 +1157,7 @@ codes and then check you correctly got the 21,198 mRNA genes:</p>
   Show me the solution
   </h4>
 </button>
-<div id="collapseSolution4" class="accordion-collapse collapse" aria-labelledby="headingSolution4" data-bs-parent="#accordionSolution4">
+<div id="collapseSolution4" class="accordion-collapse collapse" data-bs-parent="#accordionSolution4" aria-labelledby="headingSolution4">
 <div class="accordion-body">
 <div class="codewrapper sourceCode" id="cb55">
 <h3 class="code-label">R<i aria-hidden="true" data-feather="chevron-left"></i><i aria-hidden="true" data-feather="chevron-right"></i>
@@ -1192,16 +1191,21 @@ genes contain both automated genome annotation and manual curation.</p>
 Workshop</a> material.</p>
 <p>Bioconductor has many packages and functions that can help you to get
 additional annotation information for your genes. The available
-resources are covered in more detail in <a href="https://carpentries-incubator.github.io/bioc-rnaseq/06-gene-set-analysis.html#gene-set-resources" class="external-link">Episode
-6 Gene set enrichment analysis</a>.</p>
+resources are covered in more detail in <a href="https://carpentries-incubator.github.io/bioc-rnaseq/07-gene-set-analysis.html#gene-set-resources" class="external-link">Episode
+7 Gene set enrichment analysis</a>.</p>
 <p>Here, we will introduce one of the gene ID mapping functions,
 <code>mapIds</code>:</p>
 <pre><code><span><span class="fu">mapIds</span><span class="op">(</span><span class="va">annopkg</span>, <span class="va">keys</span>, <span class="va">column</span>, <span class="va">keytype</span>, <span class="va">...</span>, <span class="va">multiVals</span><span class="op">)</span></span></code></pre>
-<p>Where - <em>annopkg</em> is the annotation package<br>
-- <em>keys</em> are the IDs that we <strong>know</strong><br>
-- <em>column</em> is the value we <strong>want</strong><br>
-- <em>keytype</em> is the type of key used</p>
-<div class="codewrapper sourceCode" id="cb58">
+<p>Where</p>
+<ul><li>
+<em>annopkg</em> is the annotation package<br></li>
+<li>
+<em>keys</em> are the IDs that we <strong>know</strong><br></li>
+<li>
+<em>column</em> is the value we <strong>want</strong><br></li>
+<li>
+<em>keytype</em> is the type of key used</li>
+</ul><div class="codewrapper sourceCode" id="cb58">
 <h3 class="code-label">R<i aria-hidden="true" data-feather="chevron-left"></i><i aria-hidden="true" data-feather="chevron-right"></i>
 </h3>
 <pre class="downlit sourceCode r">
@@ -1428,8 +1432,8 @@ analysis, with gene symbols added for easier interpretation.</li>
   "url": "https://carpentries-incubator.github.io/bioc-rnaseq/instructor/03-import-annotate.html",
   "identifier": "https://carpentries-incubator.github.io/bioc-rnaseq/instructor/03-import-annotate.html",
   "dateCreated": "2020-09-15",
-  "dateModified": "2023-09-16",
-  "datePublished": "2023-09-16"
+  "dateModified": "2023-09-17",
+  "datePublished": "2023-09-17"
 }
 
   </script><script>

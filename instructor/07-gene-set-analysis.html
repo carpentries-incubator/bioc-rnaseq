@@ -284,7 +284,7 @@
       </div>
       <hr></nav><main id="main-content" class="main-content"><div class="container lesson-content">
         <h1>Gene set enrichment analysis</h1>
-        <p> Last updated on 2023-09-13 | 
+        <p> Last updated on 2023-09-17 | 
         
         <a href="https://github.com/carpentries-incubator/bioc-rnaseq/edit/main/episodes/07-gene-set-analysis.Rmd" class="external-link">Edit this page <i aria-hidden="true" data-feather="edit"></i></a></p>
         
@@ -385,10 +385,10 @@ comparison between genders. The following code performs
 the previous episode. In the end, we have a list of DE genes filtered by
 FDR &lt; 0.05, and save it in the object <code>sexDEgenes</code>.</p>
 <p>The file <code>data/GSE96870_se.rds</code> contains a
-<code>RangedSummarizedExperiment</code> contains RNA-Seq counts that
-were downloaded in <a href="02-setup.html">Episode 2</a> and constructed
-in <a href="03-import-annotate.html">Episode 3</a> (minimal codes for
-downloading and constructing in the script <a href="https://github.com/carpentries-incubator/bioc-rnaseq/blob/main/episodes/download_data.R" class="external-link"><code>download_data.R</code></a>.
+<code>RangedSummarizedExperiment</code> that contains RNA-Seq counts
+that were downloaded in <a href="02-setup.html">Episode 2</a> and
+constructed in <a href="03-import-annotate.html">Episode 3</a> (minimal
+codes for downloading and constructing in the script <a href="https://github.com/carpentries-incubator/bioc-rnaseq/blob/main/episodes/download_data.R" class="external-link"><code>download_data.R</code></a>.
 In the following code, there are also comments that explain every step
 of the analysis.</p>
 <div class="codewrapper sourceCode" id="cb2">
@@ -487,8 +487,8 @@ in general, DE genes and gene sets are from two different sources
 public databases), it is very possible that gene IDs are not consistent
 in the two. Later in this episode, we will learn how to perform gene ID
 conversion in the ORA analysis.</p>
-<p>Since the DE genes and the gene set can be mathematically thought as
-two sets, a natural way is to first visualize them with a Venn
+<p>Since the DE genes and the gene set can be mathematically thought of
+as two sets, a natural way is to first visualize them with a Venn
 diagram.</p>
 <div class="codewrapper sourceCode" id="cb11">
 <h3 class="code-label">R<i aria-hidden="true" data-feather="chevron-left"></i><i aria-hidden="true" data-feather="chevron-right"></i>
@@ -513,10 +513,12 @@ over-representation? Let’s go to the next section.</p>
 <div class="section level3">
 <h3 id="fishers-exact-test">Fisher’s exact test<a class="anchor" aria-label="anchor" href="#fishers-exact-test"></a></h3>
 <p>To statistically measure the enrichment, the relationship of DE genes
-and the gene set is normally formatted into the following 2x2 contigency
-table, where in the table are the numbers of genes in different
-categories. <span class="math inline">\(n_{+1}\)</span> is the size of
-the <em>XY gene set</em> (i.e. the number of member genes), <span class="math inline">\(n_{1+}\)</span> is the number of DE genes, <span class="math inline">\(n\)</span> is the number of total genes.</p>
+and the gene set is normally formatted into the following 2x2
+contingency table, where in the table are the numbers of genes in
+different categories. <span class="math inline">\(n_{+1}\)</span> is the
+size of the <em>XY gene set</em> (i.e. the number of member genes),
+<span class="math inline">\(n_{1+}\)</span> is the number of DE genes,
+<span class="math inline">\(n\)</span> is the number of total genes.</p>
 <center>
 <table class="table"><thead><tr class="header"><th></th>
 <th>In the gene set</th>
@@ -573,7 +575,7 @@ the <em>XY gene set</em> (i.e. the number of member genes), <span class="math i
 [2,] 1121 20023 21144
 [3,] 1134 20064 21198</code></pre>
 </div>
-<p>And we fill these numbers into the 2x2 contigency table:</p>
+<p>And we fill these numbers into the 2x2 contingency table:</p>
 <center>
 <table class="table"><thead><tr class="header"><th></th>
 <th>In the gene set</th>
@@ -640,13 +642,13 @@ obtained by <code>t$p.value</code>.</p>
 </h3>
 <pre class="output" tabindex="0"><code>[1] 3.9059e-06</code></pre>
 </div>
-<p>Odd ratio from the Fisher’s exact test is defined as follows:</p>
+<p>Odds ratio from the Fisher’s exact test is defined as follows:</p>
 <p><span class="math display">\[
-\mathrm{Odd\_ratio} = \frac{n_{11}/n_{21}}{n_{12}/n_{22}} =
+\mathrm{Odds\_ratio} = \frac{n_{11}/n_{21}}{n_{12}/n_{22}} =
 \frac{n_{11}/n_{12}}{n_{21}/n_{22}} = \frac{n_{11} * n_{22}}{n_{12} *
 n_{21}}
 \]</span></p>
-<p>If there is no association between DE genes and the gene set, odd
+<p>If there is no association between DE genes and the gene set, odds
 ratio is expected to be 1. And it is larger than 1 if there is an
 over-representation of DE genes on the gene set.</p>
 <div id="further-reading" class="callout callout">
@@ -657,9 +659,9 @@ over-representation of DE genes on the gene set.</p>
 <h3 class="callout-title">Further reading<a class="anchor" aria-label="anchor" href="#further-reading"></a>
 </h3>
 <div class="callout-content">
-<p>The 2x2 contigency table can be transposed and it does not affect the
-Fisher’s exact test. E.g. let’s put whether genes are in the gene sets
-on rows, and put whether genes are DE on columns.</p>
+<p>The 2x2 contingency table can be transposed and it does not affect
+the Fisher’s exact test. E.g. let’s put whether genes are in the gene
+sets on rows, and put whether genes are DE on columns.</p>
 <center>
 <table class="table"><thead><tr class="header"><th></th>
 <th>DE</th>
@@ -747,8 +749,8 @@ with parameters <span class="math inline">\(n\)</span>, <span class="math inline
 <p><span class="math display">\[ X \sim \mathrm{Hyper}(n, n_{1+},
 n_{+1})\]</span></p>
 <p>The <em>p</em>-value of the enrichment is calculated as the
-probability of having an observation equal to or larger than <span class="math inline">\(n_{11}\)</span> (or it can be understood as the
-probability of being over-representated):</p>
+probability of having an observation equal to or larger than <span class="math inline">\(n_{11}\)</span> under the assumption of
+independence:</p>
 <p><span class="math display">\[
 \mathrm{Pr}( X \geqslant  n_{11} ) = \sum_{x \in \{ {n_{11}, n_{11}+1,
 ..., \min\{n_{1+}, n_{+1}\} \}}} \mathrm{Pr}(X = x)
@@ -841,9 +843,9 @@ distribution of its statistic.</p>
 <h3 class="code-label">OUTPUT<i aria-hidden="true" data-feather="chevron-left"></i><i aria-hidden="true" data-feather="chevron-right"></i>
 </h3>
 <pre class="output" tabindex="0"><code>Unit: microseconds
-   expr   min     lq    mean median     uq   max neval
- fisher 435.2 467.90 530.516 498.95 552.85 974.6   100
-  hyper   1.7   2.65   5.114   5.20   6.10  47.5   100</code></pre>
+   expr   min    lq    mean median     uq   max neval
+ fisher 285.4 291.1 303.952 297.05 307.55 542.8   100
+  hyper   1.6   1.8   2.560   2.35   2.80  19.9   100</code></pre>
 </div>
 <p>It is very astonishing that <code>phyper()</code> is hundreds of
 times faster than <code>fisher.test()</code>. Main reason is in
@@ -1002,7 +1004,7 @@ convert a list to a two-column data frame?</p>
   Show me the solution
   </h4>
 </button>
-<div id="collapseSolution1" class="accordion-collapse collapse" aria-labelledby="headingSolution1" data-bs-parent="#accordionSolution1">
+<div id="collapseSolution1" class="accordion-collapse collapse" data-bs-parent="#accordionSolution1" aria-labelledby="headingSolution1">
 <div class="accordion-body">
 <div class="codewrapper sourceCode" id="cb38">
 <h3 class="code-label">R<i aria-hidden="true" data-feather="chevron-left"></i><i aria-hidden="true" data-feather="chevron-right"></i>
@@ -1070,8 +1072,8 @@ analysis. GO contains three namespaces of biological process (BP),
 cellular components (CC) and molecular function (MF) which describe a
 biological entity from different aspect. The associations between GO
 terms and genes are integrated in the Bioconductor standard packages:
-<em>the oragnism annotation packages</em>. In current Bioconductor
-release 3.17, there are the following organism packages:</p>
+<em>the organism annotation packages</em>. In the current Bioconductor
+release (3.17), there are the following organism packages:</p>
 <center>
 <table class="table"><colgroup><col width="27%"><col width="25%"><col width="36%"><col width="10%"></colgroup><thead><tr class="header"><th>Package</th>
 <th>Organism</th>
@@ -1250,7 +1252,7 @@ introduced in the next section.</p>
 <div class="section level3">
 <h3 id="kegg-gene-sets">KEGG gene sets<a class="anchor" aria-label="anchor" href="#kegg-gene-sets"></a></h3>
 <p>A biological pathway is a series of interactions among molecules in a
-cell that leads to a certain product or a change in a cell<a href="#fn3" class="footnote-ref" id="fnref3"><sup>3</sup></a>. A pathway involes a
+cell that leads to a certain product or a change in a cell<a href="#fn3" class="footnote-ref" id="fnref3"><sup>3</sup></a>. A pathway involves a
 list of genes playing different roles which constructs the “pathway gene
 set”. <a href="https://www.genome.jp/kegg/pathway.html" class="external-link">KEGG pathway</a>
 is the mostly used database for pathways. It provides its data via a
@@ -1258,7 +1260,7 @@ REST API (<a href="https://rest.kegg.jp/" class="external-link uri">https://rest
 retrieve specific types of data. To retrieve the pathway gene sets, we
 can use the “link” command as shown in the following URL (“link” means
 to link genes to pathways). When you enter the URL in the web
-brower:</p>
+browser:</p>
 <pre><code>https://rest.kegg.jp/link/pathway/hsa</code></pre>
 <p>there will be a text table which contains a column of genes and a
 column of pathway IDs.</p>
@@ -1481,7 +1483,7 @@ specific category (or a subcategory if it exists).</p>
 </div>
 <p>The output is in the <code>tibble</code> class. If you have no
 experience with it, don’t worry, just take it as a table. As you can
-see, The three major gene IDs type <code>"gene_symbol"</code>,
+see, the three major gene IDs type <code>"gene_symbol"</code>,
 <code>"entrez_gene"</code> and <code>"ensembl_gene"</code> are all
 included in the table. So users can easily pick one with the same gene
 ID type as in the DE gene list. For example:</p>
@@ -1549,19 +1551,20 @@ arguments:</p>
 </h2>
 <hr class="half-width"><p>The ORA method itself is quite simple and it has been implemented in
 a large number of R packages. Among them, the
-<strong>clusterProfiler</strong> package especially does a good job that
-it has a seamless integration to the Bioconductor annotation resources
-which allows extending GSEA analysis to other organisms easily; it has
-pre-defined functions for common analysis tasks, e.g. GO enrichment,
-KEGG enrichment; and it implements a variaty of different visualization
-methods on the GSEA results. In this section, we will learn how to
-perform ORA anlaysis with <strong>clusterProfiler</strong>.</p>
+<strong>clusterProfiler</strong> package especially does a good job in
+that it has a seamless integration to the Bioconductor annotation
+resources which allows extending GSEA analysis to other organisms
+easily; it has pre-defined functions for common analysis tasks, e.g. GO
+enrichment, KEGG enrichment; and it implements a variety of different
+visualization methods on the GSEA results. In this section, we will
+learn how to perform ORA analysis with
+<strong>clusterProfiler</strong>.</p>
 <p>Here we will use a list of DE genes from a different comparison. As
 you may still remember, there are only 54 DE genes between genders,
 which may not be a good case for GSEA analysis, since after overlapping
-to a collection fo gene sets, majority of the gene sets will have few or
-even no gene overlapped. In this example we use the list of DE genes
-from the comparison between different time points.</p>
+to a collection of gene sets, the majority of the gene sets will have
+few or even no gene overlapped. In this example we use the list of DE
+genes from the comparison between different time points.</p>
 <p>Another thing worth to mention is, in the following code where we
 filter DE genes, we additionally add a filtering on the log2 fold
 change. This is recommended when the number of DE genes is too large.
@@ -1625,7 +1628,7 @@ sets are automatically retrieved and processed from
 <div class="codewrapper">
 <h3 class="code-label">OUTPUT<i aria-hidden="true" data-feather="chevron-left"></i><i aria-hidden="true" data-feather="chevron-right"></i>
 </h3>
-<pre class="output" tabindex="0"><code>--&gt; Expected input gene ID: 100503361,21975,21853,70465,245944,18442</code></pre>
+<pre class="output" tabindex="0"><code>--&gt; Expected input gene ID: 19017,320752,239528,14610,20779,14725</code></pre>
 </div>
 <div class="codewrapper">
 <h3 class="code-label">OUTPUT<i aria-hidden="true" data-feather="chevron-left"></i><i aria-hidden="true" data-feather="chevron-right"></i>
@@ -1690,20 +1693,20 @@ GO:0097529    31</code></pre>
 </div>
 <p>Now <code>enrichGO()</code> went through! The returned object
 <code>resTimeGO</code> is in a special format which looks like a table
-but actually not! To get rid of the confusion, in the code it is
+but actually is not! To get rid of the confusion, in the code it is
 converted to a real data frame <code>resTimeGOTable</code>.</p>
 <p>In the output data frame, there are the following columns:</p>
 <ul><li>
 <code>ID</code>: ID of the gene set. In this example analysis, it is
 the GO ID.</li>
 <li>
-<code>Description</code>: Readable description. Here is the name of
-the GO term.</li>
+<code>Description</code>: Readable description. Here it is the name
+of the GO term.</li>
 <li>
 <code>GeneRatio</code>: Number of DE genes in the gene set / total
-number of DE genes</li>
+number of DE genes.</li>
 <li>
-<code>BgRatio</code>: size of the gene set / total number of
+<code>BgRatio</code>: Size of the gene set / total number of
 genes.</li>
 <li>
 <code>pvalue</code>: <em>p</em>-value calculated from the
@@ -1728,9 +1731,9 @@ we will touch in the end of this section.</p>
 <code>enrichGO()</code>:</p>
 <ul><li>
 <code>universe</code>: the universe set of genes, i.e. total genes
-to use. By default it uses union of genes in all gene sets. If it is
-set, DE genes and all gene sets will take intersections with it. We will
-discuss it in the end of this section.</li>
+to use. By default it uses the union of the genes in all gene sets. If
+it is set, DE genes and all gene sets will take intersections with it.
+We will discuss it in the end of this section.</li>
 <li>
 <code>minGSSize</code>: Minimal size of gene sets. Normally gene
 sets with very small size have very specific biological meanings which
@@ -1830,7 +1833,7 @@ the <strong>AnnotationHub</strong> package.</li>
 gene ID conversion automatically. Thus, if the ID type is not Entrez ID,
 we have to convert it by hand.</p>
 <p>Note if you have also set <code>universe</code>, it should be
-convereted to Entrez IDs as well.</p>
+converted to Entrez IDs as well.</p>
 <p>We use the <code>mapIds()</code> function to convert genes from
 symbols to Entrez IDs. Since the ID mapping is not always one-to-one. We
 only take the first one if there are multiple hits by setting
@@ -2135,13 +2138,13 @@ non-DE genes or non-gene-set genes.</p>
 <td><span class="math inline">\(\color{red}{n_{+2}}\)</span></td>
 <td><span class="math inline">\(\color{red}{n}\)</span></td>
 </tr></tbody></table></center>
-<p>In the contigency table, we are testing the dependency of whether
+<p>In the contingency table, we are testing the dependency of whether
 genes being DE and whether genes being in the gene set. In the model,
 each gene has a definite attribute of being either DE or non-DE and each
 gene has a second definite attribute of either belonging to the gene set
 or not. If a larger universe is used, such as total genes where there
 are genes not measured nor will never annotated to gene sets (let’s call
-them <em>non-informative genes</em>, e.g. non-proteining coding genes or
+them <em>non-informative genes</em>, e.g. non-protein coding genes or
 not-expressed genes), all the non-informative genes are implicitly
 assigned with an attribute of being non-DE or not in the gene set. This
 implicit assignment is not proper because these genes provide no
@@ -2281,24 +2284,24 @@ names of the result table. Both plots include the top 20 most
 significant terms. On dotplot, terms are ordered by the values on x-axis
 (the <code>GeneRatio</code>).</p>
 <p>Now we need to talk about “what is a good visualization?”. The
-essential two questions are “<em>what is the key message a plot transfer
-to readers?</em>” and “<em>what is the major graphical element in the
-plot?</em>”. In the barplot or dotplot, the major graphical element
-which readers may notice the easiest is the height of bars or the offset
-of dots to the origin. The most important message of the ORA anaysis is
-of course “the enrichment”. The two examples from <code>barplot()</code>
-and <code>dotplot()</code> actually fail to transfer such information to
-readers. In the first barplot where <code>"Count"</code> is used as
-values on x-axis, the numer of DE genes in gene sets is not a good
-measure of the enrichment because it has a positive relation to the size
-of gene sets. A high value of <code>"Count"</code> does not mean the
-gene set is more enriched.</p>
+essential two questions are “<em>what is the key message a plot
+transfers to readers?</em>” and “<em>what is the major graphical element
+in the plot?</em>”. In the barplot or dotplot, the major graphical
+element which readers may notice the easiest is the height of bars or
+the offset of dots to the origin. The most important message of the ORA
+analysis is of course “the enrichment”. The two examples from
+<code>barplot()</code> and <code>dotplot()</code> actually fail to
+transfer such information to readers. In the first barplot where
+<code>"Count"</code> is used as values on x-axis, the numer of DE genes
+in gene sets is not a good measure of the enrichment because it has a
+positive relation to the size of gene sets. A high value of
+<code>"Count"</code> does not mean the gene set is more enriched.</p>
 <p>It is the same reason for dotplot where <code>"GeneRatio"</code> is
 used as values on x-axis. Gene ratio is calculated as the fraction of DE
 genes from a certain gene set (GeneRatio = Count/Total_DE_Genes). The
 dotplot puts multiple gene sets in the same plot and the aim is to
 compare between gene sets, thus gene sets should be “scaled” to make
-them comparible. <code>"GeneRatio"</code> is not scaled for different
+them comparable. <code>"GeneRatio"</code> is not scaled for different
 gene sets and it still has a positive relation to the gene set size,
 which can be observed in the dotplot where higher the gene ratio, larger
 the dot size. Actually “GeneRatio” has the same effect as “Count”
@@ -2321,8 +2324,8 @@ enrichment table.</p>
 <span><span class="va">n</span> <span class="op">=</span> <span class="fl">28943</span>  <span class="co"># length(resTimeGO@universe)</span></span></code></pre>
 </div>
 <p>Instead of using <code>GeneRatio</code>, we use the fraction of DE
-genes in the gene sets which are kind like a “scaled” value for all gene
-sets. Let’s calculate it:</p>
+genes in the gene sets which are kind of like a “scaled” value for all
+gene sets. Let’s calculate it:</p>
 <div class="codewrapper sourceCode" id="cb101">
 <h3 class="code-label">R<i aria-hidden="true" data-feather="chevron-left"></i><i aria-hidden="true" data-feather="chevron-right"></i>
 </h3>
@@ -2646,8 +2649,8 @@ topological relations in the GO hierarchy.<a href="#fnref7" class="footnote-back
   "url": "https://carpentries-incubator.github.io/bioc-rnaseq/instructor/07-gene-set-analysis.html",
   "identifier": "https://carpentries-incubator.github.io/bioc-rnaseq/instructor/07-gene-set-analysis.html",
   "dateCreated": "2020-09-15",
-  "dateModified": "2023-09-13",
-  "datePublished": "2023-09-16"
+  "dateModified": "2023-09-17",
+  "datePublished": "2023-09-17"
 }
 
   </script><script>

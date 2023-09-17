@@ -288,7 +288,7 @@
       </div>
       <hr></nav><main id="main-content" class="main-content"><div class="container lesson-content">
         <h1>Differential expression analysis</h1>
-        <p> Last updated on 2023-09-13 | 
+        <p> Last updated on 2023-09-17 | 
         
         <a href="https://github.com/carpentries-incubator/bioc-rnaseq/edit/main/episodes/05-differential-expression.Rmd" class="external-link">Edit this page <i aria-hidden="true" data-feather="edit"></i></a></p>
         
@@ -428,7 +428,7 @@ design formula are characters, converting to factors</code></pre>
   Instructor Note
   </h3>
 </button>
-<div id="collapseInstructor1" class="accordion-collapse collapse" aria-labelledby="headingInstructor1" data-bs-parent="#accordionInstructor1">
+<div id="collapseInstructor1" class="accordion-collapse collapse" data-bs-parent="#accordionInstructor1" aria-labelledby="headingInstructor1">
 <div class="accordion-body">
 <p>The function to generate a <code>DESeqDataSet</code> needs to be
 adapted depending on the input type, e.g,</p>
@@ -477,7 +477,7 @@ function from the previous section:</p>
   Instructor Note
   </h3>
 </button>
-<div id="collapseInstructor2" class="accordion-collapse collapse" aria-labelledby="headingInstructor2" data-bs-parent="#accordionInstructor2">
+<div id="collapseInstructor2" class="accordion-collapse collapse" data-bs-parent="#accordionInstructor2" aria-labelledby="headingInstructor2">
 <div class="accordion-body">
 <p><em>DESeq2</em> uses the <strong>“Relative Log Expression”
 (RLE)</strong> method to calculate sample-wise <em>size factors</em>
@@ -506,9 +506,9 @@ negative binomial distribution with mean <span class="math inline">\(\mu\)</span
 gene-specific <strong>dispersion</strong>, a measure of variability or
 spread in the data. As a second step, we need to estimate gene-wise
 dispersions to get the expected within-group variance and test for group
-differences. Good dispersion estimates are challenging with a few sample
-per group only. Thus, information from genes with similar expression
-pattern are “borrowed”. Gene-wise dispersion estimates are
+differences. Good dispersion estimates are challenging with a few
+samples per group only. Thus, information from genes with similar
+expression pattern are “borrowed”. Gene-wise dispersion estimates are
 <em>shrinked</em> towards center values of the observed distribution of
 dispersions. With <code>DESeq2</code> we can get dispersion estimates
 using the <code>estimateDispersions()</code> function. We can visualize
@@ -548,15 +548,13 @@ the effect of <em>shrinkage</em> using <code>plotDispEsts()</code>:</p>
 compute <em>log2 fold changes</em> (synonymous with “GLM coefficients”,
 “beta coefficients” or “effect size”) corresponding to the variables of
 the <em>design matrix</em>. The <em>design matrix</em> is directly
-related to the <em>design formular</em> and automatically derived from
-it. Assume a design formular with one variable
-(<code>~ treatment</code>) and two factor level (treatment and control).
-The mean expression <span class="math inline">\(\mu_{j}\)</span> of a
-specific gene in sample <span class="math inline">\(j\)</span> will be
-modeled as following:</p>
+related to the <em>design formula</em> and automatically derived from
+it. Assume a design formula with one variable (<code>~ treatment</code>)
+and two factor levels (treatment and control). The mean expression <span class="math inline">\(\mu_{j}\)</span> of a specific gene in sample
+<span class="math inline">\(j\)</span> will be modeled as following:</p>
 <p><span class="math inline">\(log(μ_j) = β_0 + x_j β_T\)</span>,</p>
 <p>with <span class="math inline">\(β_T\)</span> corresponding to the
-log2 fold change of the treatment group, <span class="math inline">\(x_j\)</span> = 1, if <span class="math inline">\(j\)</span> belongs to the treatment group and
+log2 fold change of the treatment groups, <span class="math inline">\(x_j\)</span> = 1, if <span class="math inline">\(j\)</span> belongs to the treatment group and
 <span class="math inline">\(x_j\)</span> = 0, if <span class="math inline">\(j\)</span> belongs to the control group.</p>
 <p>Finally, the estimated log2 fold changes are scaled by their standard
 error and tested for being significantly different from 0 using the
@@ -603,14 +601,14 @@ test statistics, such as log2 fold changes and (adjusted) p-values. The
 comparison of interest can be defined using contrasts, which are linear
 combinations of the model coefficients (equivalent to combinations of
 columns within the <em>design matrix</em>) and thus directly related to
-the design formular. A detailed explanation of design matrices and how
-to use them to specify different contrasts of interest can be found in
-the section on the <a href="06-extra-design.html">exploration of design
+the design formula. A detailed explanation of design matrices and how to
+use them to specify different contrasts of interest can be found in the
+section on the <a href="06-extra-design.html">exploration of design
 matrices</a>. In the <code>results()</code> function a contrast can be
 represented by the variable of interest (reference variable) and the
 related level to compare using the <code>contrast</code> argument. By
 default the reference variable will be the <strong>last
-variable</strong> of the design formular, the <em>reference level</em>
+variable</strong> of the design formula, the <em>reference level</em>
 will be the first factor level and the <em>last level</em> will be used
 for comparison. You can also explicitly specify a contrast by the
 <code>name</code> argument of the <code>results()</code> function. Names
@@ -628,8 +626,7 @@ of all available contrasts can be accessed using
 level</strong> and <strong>“last level”</strong> for comparisons when
 running <code>results(dds)</code> for the example used in this
 lesson?</p>
-<p><em>Hint: Check the design formular used to build the
-object.</em></p>
+<p><em>Hint: Check the design formula used to build the object.</em></p>
 </div>
 </div>
 </div>
@@ -640,9 +637,9 @@ object.</em></p>
   Show me the solution
   </h4>
 </button>
-<div id="collapseSolution1" class="accordion-collapse collapse" aria-labelledby="headingSolution1" data-bs-parent="#accordionSolution1">
+<div id="collapseSolution1" class="accordion-collapse collapse" data-bs-parent="#accordionSolution1" aria-labelledby="headingSolution1">
 <div class="accordion-body">
-<p>In the lesson example the last variable of the design formular is
+<p>In the lesson example the last variable of the design formula is
 <code>time</code>. The <strong>reference level</strong> (first in
 alphabetical order) is <code>Day0</code> and the <strong>last
 level</strong> is <code>Day8</code></p>
@@ -732,7 +729,7 @@ A330076C08Rik 3.01518e-48</code></pre>
   Instructor Note
   </h3>
 </button>
-<div id="collapseInstructor3" class="accordion-collapse collapse" aria-labelledby="headingInstructor3" data-bs-parent="#accordionInstructor3">
+<div id="collapseInstructor3" class="accordion-collapse collapse" data-bs-parent="#accordionInstructor3" aria-labelledby="headingInstructor3">
 <div class="accordion-body">
 <p>Both of the below ways of specifying the contrast are essentially
 equivalent. The <code>name</code> parameter can be accessed using
@@ -770,7 +767,7 @@ time.</p>
   Show me the solution
   </h4>
 </button>
-<div id="collapseSolution2" class="accordion-collapse collapse" aria-labelledby="headingSolution2" data-bs-parent="#accordionSolution2">
+<div id="collapseSolution2" class="accordion-collapse collapse" data-bs-parent="#accordionSolution2" aria-labelledby="headingSolution2">
 <div class="accordion-body">
 <div class="codewrapper sourceCode" id="cb22">
 <h3 class="code-label">R<i aria-hidden="true" data-feather="chevron-left"></i><i aria-hidden="true" data-feather="chevron-right"></i>
@@ -837,7 +834,7 @@ LOC105243748  1.11194e-48</code></pre>
 <div class="callout-content">
 <p>Due to the high number of tests (one per gene) our DE results will
 contain a substantial number of <strong>false positives</strong>. For
-example, if we tested 20,000 genes at a threshold of <span class="math inline">\(\alpha = 0.05\)</span> we would expect 1000
+example, if we tested 20,000 genes at a threshold of <span class="math inline">\(\alpha = 0.05\)</span> we would expect 1,000
 significant DE genes with no differential expression.</p>
 <p>To account for this expected high number of false positives, we can
 correct our results for <strong>multiple testing</strong>. By default
@@ -913,7 +910,7 @@ results then?</p>
   Show me the solution
   </h4>
 </button>
-<div id="collapseSolution3" class="accordion-collapse collapse" aria-labelledby="headingSolution3" data-bs-parent="#accordionSolution3">
+<div id="collapseSolution3" class="accordion-collapse collapse" data-bs-parent="#accordionSolution3" aria-labelledby="headingSolution3">
 <div class="accordion-body">
 <div class="codewrapper sourceCode" id="cb30">
 <h3 class="code-label">R<i aria-hidden="true" data-feather="chevron-left"></i><i aria-hidden="true" data-feather="chevron-right"></i>
@@ -1105,8 +1102,8 @@ beneficial.</li>
   "url": "https://carpentries-incubator.github.io/bioc-rnaseq/instructor/05-differential-expression.html",
   "identifier": "https://carpentries-incubator.github.io/bioc-rnaseq/instructor/05-differential-expression.html",
   "dateCreated": "2020-09-15",
-  "dateModified": "2023-09-13",
-  "datePublished": "2023-09-16"
+  "dateModified": "2023-09-17",
+  "datePublished": "2023-09-17"
 }
 
   </script><script>
