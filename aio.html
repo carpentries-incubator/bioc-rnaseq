@@ -2143,7 +2143,7 @@ analysis, with gene symbols added for easier interpretation.</li>
 </div>
 </section></section><section id="aio-04-exploratory-qc"><p>Content from <a href="04-exploratory-qc.html">Exploratory analysis and quality control</a></p>
 <hr>
-<p> Last updated on 2023-09-17 | 
+<p> Last updated on 2023-09-18 | 
         
         <a href="https://github.com/carpentries-incubator/bioc-rnaseq/edit/main/episodes/04-exploratory-qc.Rmd" class="external-link">Edit this page <i aria-hidden="true" data-feather="edit"></i></a></p>
 <div class="text-end">
@@ -2660,7 +2660,19 @@ using iSEE<a class="anchor" aria-label="anchor" href="#challenge-interactively-e
 <h3 class="code-label">R<i aria-hidden="true" data-feather="chevron-left"></i><i aria-hidden="true" data-feather="chevron-right"></i>
 </h3>
 <pre class="downlit sourceCode r">
-<code class="sourceCode R"><span><span class="va">app</span> <span class="op">&lt;-</span> <span class="fu">iSEE</span><span class="op">(</span><span class="va">se</span><span class="op">)</span></span>
+<code class="sourceCode R"><span><span class="co">## Convert DESeqDataSet object to a SingleCellExperiment object, in order to </span></span>
+<span><span class="co">## be able to store the PCA representation</span></span>
+<span><span class="va">sce</span> <span class="op">&lt;-</span> <span class="fu">as</span><span class="op">(</span><span class="va">dds</span>, <span class="st">"SingleCellExperiment"</span><span class="op">)</span></span>
+<span></span>
+<span><span class="co">## Add PCA to the 'reducedDim' slot</span></span>
+<span><span class="fu">stopifnot</span><span class="op">(</span><span class="fu">rownames</span><span class="op">(</span><span class="va">pcaData</span><span class="op">)</span> <span class="op">==</span> <span class="fu">colnames</span><span class="op">(</span><span class="va">sce</span><span class="op">)</span><span class="op">)</span></span>
+<span><span class="fu">reducedDim</span><span class="op">(</span><span class="va">sce</span>, <span class="st">"PCA"</span><span class="op">)</span> <span class="op">&lt;-</span> <span class="fu">as.matrix</span><span class="op">(</span><span class="va">pcaData</span><span class="op">[</span>, <span class="fu">c</span><span class="op">(</span><span class="st">"PC1"</span>, <span class="st">"PC2"</span><span class="op">)</span><span class="op">]</span><span class="op">)</span></span>
+<span></span>
+<span><span class="co">## Add variance-stabilized data as a new assay</span></span>
+<span><span class="fu">stopifnot</span><span class="op">(</span><span class="fu">colnames</span><span class="op">(</span><span class="va">vsd</span><span class="op">)</span> <span class="op">==</span> <span class="fu">colnames</span><span class="op">(</span><span class="va">sce</span><span class="op">)</span><span class="op">)</span></span>
+<span><span class="fu">assay</span><span class="op">(</span><span class="va">sce</span>, <span class="st">"vsd"</span><span class="op">)</span> <span class="op">&lt;-</span> <span class="fu">assay</span><span class="op">(</span><span class="va">vsd</span><span class="op">)</span></span>
+<span></span>
+<span><span class="va">app</span> <span class="op">&lt;-</span> <span class="fu">iSEE</span><span class="op">(</span><span class="va">sce</span><span class="op">)</span></span>
 <span><span class="fu">shiny</span><span class="fu">::</span><span class="fu">runApp</span><span class="op">(</span><span class="va">app</span><span class="op">)</span></span></code></pre>
 </div>
 </div>
@@ -7713,8 +7725,8 @@ quantified.</li>
   "url": "https://carpentries-incubator.github.io/bioc-rnaseq/aio.html",
   "identifier": "https://carpentries-incubator.github.io/bioc-rnaseq/aio.html",
   "dateCreated": "2020-09-15",
-  "dateModified": "2023-09-17",
-  "datePublished": "2023-09-17"
+  "dateModified": "2023-09-18",
+  "datePublished": "2023-09-18"
 }
 
   </script><script>
