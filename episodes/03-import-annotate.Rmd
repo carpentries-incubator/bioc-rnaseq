@@ -281,8 +281,8 @@ of expression levels for infected and non-infected samples based on these genes.
 table(se$infection)
 
 # 2
-se_infected <- se[se$infection == "InfluenzaA", ]
-se_noninfected <- se[se$infection == "NonInfected", ]
+se_infected <- se[, se$infection == "InfluenzaA"]
+se_noninfected <- se[, se$infection == "NonInfected"]
 
 means_infected <- rowMeans(assay(se_infected)[1:500, ])
 means_noninfected <- rowMeans(assay(se_noninfected)[1:500, ])
@@ -291,7 +291,7 @@ summary(means_infected)
 summary(means_noninfected)
 
 # 3
-ncol(se[se$sex == "Female" & se$infection == "InfluenzaA" & se$time == "Day8", ])
+ncol(se[, se$sex == "Female" & se$infection == "InfluenzaA" & se$time == "Day8"])
 ```
 
 :::::::::::::::::::::::::::::::::::
