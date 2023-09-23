@@ -287,7 +287,7 @@
       </div>
       <hr></nav><main id="main-content" class="main-content"><div class="container lesson-content">
         <h1>Importing and annotating quantified data into R</h1>
-        <p> Last updated on 2023-09-17 | 
+        <p> Last updated on 2023-09-23 | 
         
         <a href="https://github.com/carpentries-incubator/bioc-rnaseq/edit/main/episodes/03-import-annotate.Rmd" class="external-link">Edit this page <i aria-hidden="true" data-feather="edit"></i></a></p>
         
@@ -527,7 +527,7 @@ have to do to remove those (generally speaking, not exact codes)?</li>
   Show me the solution
   </h4>
 </button>
-<div id="collapseSolution1" class="accordion-collapse collapse" aria-labelledby="headingSolution1" data-bs-parent="#accordionSolution1">
+<div id="collapseSolution1" class="accordion-collapse collapse" data-bs-parent="#accordionSolution1" aria-labelledby="headingSolution1">
 <div class="accordion-body">
 <ol style="list-style-type: decimal"><li>In <code>counts</code>, the rows are genes just like the rows in
 <code>rowranges</code>. The columns in <code>counts</code> are the
@@ -649,7 +649,7 @@ codes.</p>
   Show me the solution
   </h4>
 </button>
-<div id="collapseSolution2" class="accordion-collapse collapse" aria-labelledby="headingSolution2" data-bs-parent="#accordionSolution2">
+<div id="collapseSolution2" class="accordion-collapse collapse" data-bs-parent="#accordionSolution2" aria-labelledby="headingSolution2">
 <div class="accordion-body">
 <div class="codewrapper sourceCode" id="cb19">
 <h3 class="code-label">R<i aria-hidden="true" data-feather="chevron-left"></i><i aria-hidden="true" data-feather="chevron-right"></i>
@@ -1028,7 +1028,7 @@ day 8?</li>
   Show me the solution
   </h4>
 </button>
-<div id="collapseSolution3" class="accordion-collapse collapse" aria-labelledby="headingSolution3" data-bs-parent="#accordionSolution3">
+<div id="collapseSolution3" class="accordion-collapse collapse" data-bs-parent="#accordionSolution3" aria-labelledby="headingSolution3">
 <div class="accordion-body">
 <div class="codewrapper sourceCode" id="cb46">
 <h3 class="code-label">R<i aria-hidden="true" data-feather="chevron-left"></i><i aria-hidden="true" data-feather="chevron-right"></i>
@@ -1049,8 +1049,8 @@ day 8?</li>
 </h3>
 <pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="co"># 2</span></span>
-<span><span class="va">se_infected</span> <span class="op">&lt;-</span> <span class="va">se</span><span class="op">[</span><span class="va">se</span><span class="op">$</span><span class="va">infection</span> <span class="op">==</span> <span class="st">"InfluenzaA"</span>, <span class="op">]</span></span>
-<span><span class="va">se_noninfected</span> <span class="op">&lt;-</span> <span class="va">se</span><span class="op">[</span><span class="va">se</span><span class="op">$</span><span class="va">infection</span> <span class="op">==</span> <span class="st">"NonInfected"</span>, <span class="op">]</span></span>
+<span><span class="va">se_infected</span> <span class="op">&lt;-</span> <span class="va">se</span><span class="op">[</span>, <span class="va">se</span><span class="op">$</span><span class="va">infection</span> <span class="op">==</span> <span class="st">"InfluenzaA"</span><span class="op">]</span></span>
+<span><span class="va">se_noninfected</span> <span class="op">&lt;-</span> <span class="va">se</span><span class="op">[</span>, <span class="va">se</span><span class="op">$</span><span class="va">infection</span> <span class="op">==</span> <span class="st">"NonInfected"</span><span class="op">]</span></span>
 <span></span>
 <span><span class="va">means_infected</span> <span class="op">&lt;-</span> <span class="fu">rowMeans</span><span class="op">(</span><span class="fu">assay</span><span class="op">(</span><span class="va">se_infected</span><span class="op">)</span><span class="op">[</span><span class="fl">1</span><span class="op">:</span><span class="fl">500</span>, <span class="op">]</span><span class="op">)</span></span>
 <span><span class="va">means_noninfected</span> <span class="op">&lt;-</span> <span class="fu">rowMeans</span><span class="op">(</span><span class="fu">assay</span><span class="op">(</span><span class="va">se_noninfected</span><span class="op">)</span><span class="op">[</span><span class="fl">1</span><span class="op">:</span><span class="fl">500</span>, <span class="op">]</span><span class="op">)</span></span>
@@ -1061,7 +1061,7 @@ day 8?</li>
 <h3 class="code-label">OUTPUT<i aria-hidden="true" data-feather="chevron-left"></i><i aria-hidden="true" data-feather="chevron-right"></i>
 </h3>
 <pre class="output" tabindex="0"><code>     Min.   1st Qu.    Median      Mean   3rd Qu.      Max. 
-    0.000     0.136     2.114   667.037   334.568 18810.409 </code></pre>
+    0.000     0.133     2.867   764.068   337.417 18896.600 </code></pre>
 </div>
 <div class="codewrapper sourceCode" id="cb50">
 <h3 class="code-label">R<i aria-hidden="true" data-feather="chevron-left"></i><i aria-hidden="true" data-feather="chevron-right"></i>
@@ -1073,19 +1073,19 @@ day 8?</li>
 <h3 class="code-label">OUTPUT<i aria-hidden="true" data-feather="chevron-left"></i><i aria-hidden="true" data-feather="chevron-right"></i>
 </h3>
 <pre class="output" tabindex="0"><code>     Min.   1st Qu.    Median      Mean   3rd Qu.      Max. 
-    0.000     0.273     7.523  1003.466   558.477 25190.455 </code></pre>
+    0.000     0.143     3.143   771.017   366.571 20010.143 </code></pre>
 </div>
 <div class="codewrapper sourceCode" id="cb52">
 <h3 class="code-label">R<i aria-hidden="true" data-feather="chevron-left"></i><i aria-hidden="true" data-feather="chevron-right"></i>
 </h3>
 <pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="co"># 3</span></span>
-<span><span class="fu">ncol</span><span class="op">(</span><span class="va">se</span><span class="op">[</span><span class="va">se</span><span class="op">$</span><span class="va">sex</span> <span class="op">==</span> <span class="st">"Female"</span> <span class="op">&amp;</span> <span class="va">se</span><span class="op">$</span><span class="va">infection</span> <span class="op">==</span> <span class="st">"InfluenzaA"</span> <span class="op">&amp;</span> <span class="va">se</span><span class="op">$</span><span class="va">time</span> <span class="op">==</span> <span class="st">"Day8"</span>, <span class="op">]</span><span class="op">)</span></span></code></pre>
+<span><span class="fu">ncol</span><span class="op">(</span><span class="va">se</span><span class="op">[</span>, <span class="va">se</span><span class="op">$</span><span class="va">sex</span> <span class="op">==</span> <span class="st">"Female"</span> <span class="op">&amp;</span> <span class="va">se</span><span class="op">$</span><span class="va">infection</span> <span class="op">==</span> <span class="st">"InfluenzaA"</span> <span class="op">&amp;</span> <span class="va">se</span><span class="op">$</span><span class="va">time</span> <span class="op">==</span> <span class="st">"Day8"</span><span class="op">]</span><span class="op">)</span></span></code></pre>
 </div>
 <div class="codewrapper">
 <h3 class="code-label">OUTPUT<i aria-hidden="true" data-feather="chevron-left"></i><i aria-hidden="true" data-feather="chevron-right"></i>
 </h3>
-<pre class="output" tabindex="0"><code>[1] 22</code></pre>
+<pre class="output" tabindex="0"><code>[1] 4</code></pre>
 </div>
 </div>
 </div>
@@ -1157,7 +1157,7 @@ codes and then check you correctly got the 21,198 mRNA genes:</p>
   Show me the solution
   </h4>
 </button>
-<div id="collapseSolution4" class="accordion-collapse collapse" aria-labelledby="headingSolution4" data-bs-parent="#accordionSolution4">
+<div id="collapseSolution4" class="accordion-collapse collapse" data-bs-parent="#accordionSolution4" aria-labelledby="headingSolution4">
 <div class="accordion-body">
 <div class="codewrapper sourceCode" id="cb55">
 <h3 class="code-label">R<i aria-hidden="true" data-feather="chevron-left"></i><i aria-hidden="true" data-feather="chevron-right"></i>
@@ -1348,7 +1348,7 @@ other attached packages:
 
 loaded via a namespace (and not attached):
  [1] Matrix_1.6-1            bit_4.0.5               highr_0.10             
- [4] compiler_4.3.1          BiocManager_1.30.22     renv_1.0.2             
+ [4] compiler_4.3.1          BiocManager_1.30.22     renv_1.0.3             
  [7] crayon_1.5.2            blob_1.2.4              Biostrings_2.68.1      
 [10] bitops_1.0-7            png_0.1-8               fastmap_1.1.1          
 [13] yaml_2.3.7              lattice_0.21-8          R6_2.5.1               
@@ -1409,7 +1409,7 @@ analysis, with gene symbols added for easier interpretation.</li>
         <p>Materials licensed under <a href="../LICENSE.html">CC-BY 4.0</a> by the authors</p>
         
         <p><a href="https://creativecommons.org/licenses/by-sa/4.0/" class="external-link">Template licensed under CC-BY 4.0</a> by <a href="https://carpentries.org" class="external-link">The Carpentries</a></p>
-        <p>Built with <a href="https://github.com/carpentries/sandpaper/tree/0.13.1" class="external-link">sandpaper (0.13.1)</a>,
+        <p>Built with <a href="https://github.com/carpentries/sandpaper/tree/0.13.3" class="external-link">sandpaper (0.13.3)</a>,
         <a href="https://github.com/carpentries/pegboard/tree/0.6.1" class="external-link">pegboard (0.6.1)</a>,
       and <a href="https://github.com/mblue9/varnish/tree/3403ad0dd37f7641c6442330fcc182937e7964c5" class="external-link">varnish (0.2.16)</a>.</p>
 			</div>
@@ -1432,8 +1432,8 @@ analysis, with gene symbols added for easier interpretation.</li>
   "url": "https://carpentries-incubator.github.io/bioc-rnaseq/instructor/03-import-annotate.html",
   "identifier": "https://carpentries-incubator.github.io/bioc-rnaseq/instructor/03-import-annotate.html",
   "dateCreated": "2020-09-15",
-  "dateModified": "2023-09-17",
-  "datePublished": "2023-09-19"
+  "dateModified": "2023-09-23",
+  "datePublished": "2023-09-23"
 }
 
   </script><script>
