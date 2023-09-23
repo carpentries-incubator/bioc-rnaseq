@@ -548,8 +548,8 @@ table(se$infection)
 
 ```r
 # 2
-se_infected <- se[se$infection == "InfluenzaA", ]
-se_noninfected <- se[se$infection == "NonInfected", ]
+se_infected <- se[, se$infection == "InfluenzaA"]
+se_noninfected <- se[, se$infection == "NonInfected"]
 
 means_infected <- rowMeans(assay(se_infected)[1:500, ])
 means_noninfected <- rowMeans(assay(se_noninfected)[1:500, ])
@@ -559,7 +559,7 @@ summary(means_infected)
 
 ```{.output}
      Min.   1st Qu.    Median      Mean   3rd Qu.      Max. 
-    0.000     0.136     2.114   667.037   334.568 18810.409 
+    0.000     0.133     2.867   764.068   337.417 18896.600 
 ```
 
 ```r
@@ -568,16 +568,16 @@ summary(means_noninfected)
 
 ```{.output}
      Min.   1st Qu.    Median      Mean   3rd Qu.      Max. 
-    0.000     0.273     7.523  1003.466   558.477 25190.455 
+    0.000     0.143     3.143   771.017   366.571 20010.143 
 ```
 
 ```r
 # 3
-ncol(se[se$sex == "Female" & se$infection == "InfluenzaA" & se$time == "Day8", ])
+ncol(se[, se$sex == "Female" & se$infection == "InfluenzaA" & se$time == "Day8"])
 ```
 
 ```{.output}
-[1] 22
+[1] 4
 ```
 
 :::::::::::::::::::::::::::::::::::
@@ -784,7 +784,7 @@ other attached packages:
 
 loaded via a namespace (and not attached):
  [1] Matrix_1.6-1            bit_4.0.5               highr_0.10             
- [4] compiler_4.3.1          BiocManager_1.30.22     renv_1.0.2             
+ [4] compiler_4.3.1          BiocManager_1.30.22     renv_1.0.3             
  [7] crayon_1.5.2            blob_1.2.4              Biostrings_2.68.1      
 [10] bitops_1.0-7            png_0.1-8               fastmap_1.1.1          
 [13] yaml_2.3.7              lattice_0.21-8          R6_2.5.1               
