@@ -1,8 +1,8 @@
 ---
 source: Rmd
 title: Introduction to RNA-seq
-teaching: 45
-exercises: 30
+teaching: 65
+exercises: 35
 ---
 
 

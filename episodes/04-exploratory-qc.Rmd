@@ -1,8 +1,8 @@
 ---
 source: Rmd
 title: Exploratory analysis and quality control
-teaching: 60
-exercises: 45
+teaching: 120
+exercises: 60
 editor_options:
   chunk_output_type: console
 ---
