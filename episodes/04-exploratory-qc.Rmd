@@ -237,10 +237,10 @@ levels(vsd_ex$sample) <- c("sampleA", "sampleB", "sampleC",
                               "sampleD", "sampleE", "sampleF")
 vsd_ex$time <- sample(vsd_ex$time)
 
-pcaData <- DESeq2::plotPCA(vsd_ex, intgroup = c("sample", "time"),
-                           returnData = TRUE)
-percentVar <- round(100 * attr(pcaData, "percentVar"))
-ggplot(pcaData, aes(x = PC1, y = PC2)) +
+pcaDataEx <- DESeq2::plotPCA(vsd_ex, intgroup = c("sample", "time"),
+                             returnData = TRUE)
+percentVar <- round(100 * attr(pcaDataEx, "percentVar"))
+ggplot(pcaDataEx, aes(x = PC1, y = PC2)) +
     geom_point(aes(color = sample, shape = time), size = 5) +
     theme_minimal() +
     xlab(paste0("PC1: ", percentVar[1], "% variance")) +
@@ -279,30 +279,30 @@ Compare before and after variance stabilizing transformation.
 ::::::::::::::::::::::::::::::::::: solution
 
 ```{r pca-lib}
-pcaData <- DESeq2::plotPCA(vsd, intgroup = c("libSize"),
-                           returnData = TRUE)
-percentVar <- round(100 * attr(pcaData, "percentVar"))
-ggplot(pcaData, aes(x = PC1, y = PC2)) +
-    geom_point(aes(color = libSize/ 1e6), size = 5) +
+pcaDataVst <- DESeq2::plotPCA(vsd, intgroup = c("libSize"),
+                              returnData = TRUE)
+percentVar <- round(100 * attr(pcaDataVst, "percentVar"))
+ggplot(pcaDataVst, aes(x = PC1, y = PC2)) +
+    geom_point(aes(color = libSize / 1e6), size = 5) +
     theme_minimal() +
     xlab(paste0("PC1: ", percentVar[1], "% variance")) +
     ylab(paste0("PC2: ", percentVar[2], "% variance")) +
     coord_fixed() + 
-    scale_color_continuous("Total count in millions", type ="viridis")
+    scale_color_continuous("Total count in millions", type = "viridis")
 ```
 
 
 ```{r pca-lib-vst}
-pcaData <- DESeq2::plotPCA(DESeqTransform(se), intgroup = c("libSize"),
-                           returnData = TRUE)
-percentVar <- round(100 * attr(pcaData, "percentVar"))
-ggplot(pcaData, aes(x = PC1, y = PC2)) +
-    geom_point(aes(color = libSize/ 1e6), size = 5) +
+pcaDataCts <- DESeq2::plotPCA(DESeqTransform(se), intgroup = c("libSize"),
+                              returnData = TRUE)
+percentVar <- round(100 * attr(pcaDataCts, "percentVar"))
+ggplot(pcaDataCts, aes(x = PC1, y = PC2)) +
+    geom_point(aes(color = libSize / 1e6), size = 5) +
     theme_minimal() +
     xlab(paste0("PC1: ", percentVar[1], "% variance")) +
     ylab(paste0("PC2: ", percentVar[2], "% variance")) +
     coord_fixed() + 
-    scale_color_continuous("Total count in millions", type ="viridis")
+    scale_color_continuous("Total count in millions", type = "viridis")
 ```
 
 
