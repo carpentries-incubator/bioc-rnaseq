@@ -1,8 +1,8 @@
 ---
 source: Rmd
 title: Introduction to RNA-seq
-teaching: 45
-exercises: 30
+teaching: 65
+exercises: 35
 ---
 
 
@@ -172,7 +172,7 @@ If you are mapping your reads to the transcriptome, you will instead need a file
 
 ## Challenge
 
-Download the latest mouse transcriptome fasta file from GENCODE and uncompress it. What do the entries look like? Tip: to read the file into R, consider the `Biostrings` package.
+Download the latest mouse transcriptome fasta file from GENCODE. What do the entries look like? Tip: to read the file into R, consider the `readDNAStringSet()` function from the `Biostrings` package.
   
 ::::::::::::::::::::::::::::::::::::::::::::::::::
 
