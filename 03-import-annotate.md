@@ -1,11 +1,11 @@
 ---
 title: "Importing and annotating quantified data into R"
 source: Rmd
-teaching: 75
+teaching: 80
 output:
   html_document:
     df_print: paged
-exercises: 30
+exercises: 40
 ---
 
 

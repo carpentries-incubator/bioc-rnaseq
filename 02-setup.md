@@ -2,7 +2,7 @@
 source: Rmd
 title: RStudio Project and Experimental Data
 teaching: 20
-exercises: 20
+exercises: 10
 ---
 
 :::::::::::::::::::::::::::::::::::::: questions 
