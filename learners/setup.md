@@ -10,7 +10,7 @@ episode of the [Introduction to data analysis with R and Bioconductor](https://c
 Additionally, you will also need to install the following packages that will be used throughout the lesson. 
 
 ```r
-install.packages("BiocManager")
+install.packages(c("BiocManager", "remotes"))
 BiocManager::install(c("tidyverse", "SummarizedExperiment",
                        "ExploreModelMatrix", "AnnotationDbi", "org.Hs.eg.db", 
                        "org.Mm.eg.db", "csoneson/ConfoundingExplorer",
@@ -18,7 +18,8 @@ BiocManager::install(c("tidyverse", "SummarizedExperiment",
                        "RColorBrewer", "hexbin", "cowplot", "iSEE",
                        "clusterProfiler", "enrichplot", "kableExtra",
                        "msigdbr", "gplots", "ggplot2", "simplifyEnrichment",
-                       "apeglm", "microbenchmark", "Biostrings"))
+                       "apeglm", "microbenchmark", "Biostrings",
+                       "SingleCellExperiment"))
 
 ```
 
