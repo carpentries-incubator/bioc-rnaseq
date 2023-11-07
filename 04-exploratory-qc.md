@@ -424,45 +424,45 @@ attached base packages:
 other attached packages:
  [1] iSEE_2.12.0                 SingleCellExperiment_1.22.0
  [3] hexbin_1.28.3               RColorBrewer_1.1-3         
- [5] ComplexHeatmap_2.16.0       ggplot2_3.4.3              
+ [5] ComplexHeatmap_2.16.0       ggplot2_3.4.4              
  [7] vsn_3.68.0                  DESeq2_1.40.2              
  [9] SummarizedExperiment_1.30.2 Biobase_2.60.0             
 [11] MatrixGenerics_1.12.3       matrixStats_1.0.0          
-[13] GenomicRanges_1.52.0        GenomeInfoDb_1.36.2        
-[15] IRanges_2.34.1              S4Vectors_0.38.1           
+[13] GenomicRanges_1.52.1        GenomeInfoDb_1.36.4        
+[15] IRanges_2.34.1              S4Vectors_0.38.2           
 [17] BiocGenerics_0.46.0        
 
 loaded via a namespace (and not attached):
- [1] bitops_1.0-7            rlang_1.1.1             magrittr_2.0.3         
- [4] shinydashboard_0.7.2    clue_0.3-64             GetoptLong_1.0.5       
+ [1] bitops_1.0-7            rlang_1.1.2             magrittr_2.0.3         
+ [4] shinydashboard_0.7.2    clue_0.3-65             GetoptLong_1.0.5       
  [7] compiler_4.3.1          mgcv_1.9-0              png_0.1-8              
-[10] vctrs_0.6.3             pkgconfig_2.0.3         shape_1.4.6            
+[10] vctrs_0.6.4             pkgconfig_2.0.3         shape_1.4.6            
 [13] crayon_1.5.2            fastmap_1.1.1           XVector_0.40.0         
-[16] ellipsis_0.3.2          labeling_0.4.3          utf8_1.2.3             
+[16] ellipsis_0.3.2          labeling_0.4.3          utf8_1.2.4             
 [19] promises_1.2.1          preprocessCore_1.62.1   shinyAce_0.4.2         
-[22] xfun_0.40               cachem_1.0.8            zlibbioc_1.46.0        
+[22] xfun_0.41               cachem_1.0.8            zlibbioc_1.46.0        
 [25] jsonlite_1.8.7          highr_0.10              later_1.3.1            
 [28] DelayedArray_0.26.7     BiocParallel_1.34.2     parallel_4.3.1         
 [31] cluster_2.1.4           R6_2.5.1                bslib_0.5.1            
 [34] limma_3.56.2            jquerylib_0.1.4         Rcpp_1.0.11            
-[37] iterators_1.0.14        knitr_1.43              httpuv_1.6.11          
-[40] Matrix_1.6-1            splines_4.3.1           igraph_1.5.1           
+[37] iterators_1.0.14        knitr_1.45              httpuv_1.6.12          
+[40] Matrix_1.6-1.1          splines_4.3.1           igraph_1.5.1           
 [43] tidyselect_1.2.0        abind_1.4-5             yaml_2.3.7             
 [46] doParallel_1.0.17       codetools_0.2-19        affy_1.78.2            
-[49] miniUI_0.1.1.1          lattice_0.21-8          tibble_3.2.1           
-[52] shiny_1.7.5             withr_2.5.0             evaluate_0.21          
+[49] miniUI_0.1.1.1          lattice_0.22-5          tibble_3.2.1           
+[52] shiny_1.7.5.1           withr_2.5.2             evaluate_0.23          
 [55] circlize_0.4.15         pillar_1.9.0            affyio_1.70.0          
-[58] BiocManager_1.30.22     renv_1.0.3              DT_0.29                
+[58] BiocManager_1.30.22     renv_1.0.3              DT_0.30                
 [61] foreach_1.5.2           shinyjs_2.1.0           generics_0.1.3         
-[64] RCurl_1.98-1.12         munsell_0.5.0           scales_1.2.1           
+[64] RCurl_1.98-1.13         munsell_0.5.0           scales_1.2.1           
 [67] xtable_1.8-4            glue_1.6.2              tools_4.3.1            
 [70] colourpicker_1.3.0      locfit_1.5-9.8          colorspace_2.1-0       
 [73] nlme_3.1-163            GenomeInfoDbData_1.2.10 vipor_0.4.5            
-[76] cli_3.6.1               fansi_1.0.4             viridisLite_0.4.2      
+[76] cli_3.6.1               fansi_1.0.5             viridisLite_0.4.2      
 [79] S4Arrays_1.0.6          dplyr_1.1.3             gtable_0.3.4           
-[82] rintrojs_0.3.2          sass_0.4.7              digest_0.6.33          
-[85] ggrepel_0.9.3           farver_2.1.1            rjson_0.2.21           
-[88] htmlwidgets_1.6.2       htmltools_0.5.6         lifecycle_1.0.3        
+[82] rintrojs_0.3.3          sass_0.4.7              digest_0.6.33          
+[85] ggrepel_0.9.4           farver_2.1.1            rjson_0.2.21           
+[88] htmlwidgets_1.6.2       htmltools_0.5.7         lifecycle_1.0.3        
 [91] shinyWidgets_0.8.0      GlobalOptions_0.1.2     mime_0.12              
 ```
 

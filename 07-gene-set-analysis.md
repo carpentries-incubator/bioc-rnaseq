@@ -501,8 +501,8 @@ microbenchmark(
 ```{.output}
 Unit: microseconds
    expr   min    lq    mean median     uq   max neval
- fisher 285.4 291.1 303.952 297.05 307.55 542.8   100
-  hyper   1.6   1.8   2.560   2.35   2.80  19.9   100
+ fisher 282.4 288.6 300.440 293.35 303.65 552.9   100
+  hyper   1.7   1.8   2.585   2.40   2.80  20.8   100
 ```
 
 It is very astonishing that `phyper()` is hundreds of times faster than
@@ -1230,7 +1230,7 @@ resTimeGO = enrichGO(gene = timeDEgenes,
 ```
 
 ```{.output}
---> Expected input gene ID: 19017,320752,239528,14610,20779,14725
+--> Expected input gene ID: 11498,268903,217116,320558,83560,225182
 ```
 
 ```{.output}
@@ -1470,13 +1470,13 @@ mmu00592                               alpha-Linolenic acid metabolism - Mus mus
 mmu00591                                      Linoleic acid metabolism - Mus musculus (house mouse)
 mmu04913                                       Ovarian steroidogenesis - Mus musculus (house mouse)
 mmu04061 Viral protein interaction with cytokine and cytokine receptor - Mus musculus (house mouse)
-         GeneRatio BgRatio       pvalue     p.adjust       qvalue
-mmu00590    16/452 85/9334 2.512075e-06 0.0007686949 0.0006795824
-mmu00565    11/452 48/9334 1.348878e-05 0.0015117273 0.0013364772
-mmu00592     8/452 25/9334 1.482086e-05 0.0015117273 0.0013364772
-mmu00591    11/452 50/9334 2.042533e-05 0.0015625374 0.0013813971
-mmu04913    12/452 63/9334 4.023622e-05 0.0024624567 0.0021769913
-mmu04061    14/452 95/9334 1.772022e-04 0.0081077454 0.0071678382
+         GeneRatio BgRatio       pvalue     p.adjust      qvalue
+mmu00590    16/454 85/9391 2.460363e-06 0.0007553315 0.000665593
+mmu00565    11/454 48/9391 1.328428e-05 0.0014986747 0.001320622
+mmu00592     8/454 25/9391 1.464503e-05 0.0014986747 0.001320622
+mmu00591    11/454 50/9391 2.011850e-05 0.0015440945 0.001360646
+mmu04913    12/454 63/9391 3.960315e-05 0.0024316333 0.002142739
+mmu04061    14/454 95/9391 1.742386e-04 0.0079797049 0.007031662
                                                                                                        geneID
 mmu00590 18783/19215/211429/329502/78390/19223/67103/242546/13118/18781/18784/11689/232889/15446/237625/11687
 mmu00565                               18783/211429/329502/78390/22239/18781/18784/232889/320981/237625/53897

@@ -778,23 +778,23 @@ other attached packages:
  [3] org.Mm.eg.db_3.17.0         AnnotationDbi_1.62.2       
  [5] SummarizedExperiment_1.30.2 Biobase_2.60.0             
  [7] MatrixGenerics_1.12.3       matrixStats_1.0.0          
- [9] GenomicRanges_1.52.0        GenomeInfoDb_1.36.2        
-[11] IRanges_2.34.1              S4Vectors_0.38.1           
-[13] BiocGenerics_0.46.0         knitr_1.43                 
+ [9] GenomicRanges_1.52.1        GenomeInfoDb_1.36.4        
+[11] IRanges_2.34.1              S4Vectors_0.38.2           
+[13] BiocGenerics_0.46.0         knitr_1.45                 
 
 loaded via a namespace (and not attached):
- [1] Matrix_1.6-1            bit_4.0.5               highr_0.10             
+ [1] Matrix_1.6-1.1          bit_4.0.5               highr_0.10             
  [4] compiler_4.3.1          BiocManager_1.30.22     renv_1.0.3             
  [7] crayon_1.5.2            blob_1.2.4              Biostrings_2.68.1      
 [10] bitops_1.0-7            png_0.1-8               fastmap_1.1.1          
-[13] yaml_2.3.7              lattice_0.21-8          R6_2.5.1               
+[13] yaml_2.3.7              lattice_0.22-5          R6_2.5.1               
 [16] XVector_0.40.0          S4Arrays_1.0.6          DelayedArray_0.26.7    
-[19] GenomeInfoDbData_1.2.10 DBI_1.1.3               rlang_1.1.1            
-[22] KEGGREST_1.40.0         cachem_1.0.8            xfun_0.40              
-[25] bit64_4.0.5             RSQLite_2.3.1           memoise_2.0.1          
+[19] GenomeInfoDbData_1.2.10 DBI_1.1.3               rlang_1.1.2            
+[22] KEGGREST_1.40.1         cachem_1.0.8            xfun_0.41              
+[25] bit64_4.0.5             RSQLite_2.3.3           memoise_2.0.1          
 [28] cli_3.6.1               zlibbioc_1.46.0         grid_4.3.1             
-[31] vctrs_0.6.3             evaluate_0.21           abind_1.4-5            
-[34] RCurl_1.98-1.12         httr_1.4.7              pkgconfig_2.0.3        
+[31] vctrs_0.6.4             evaluate_0.23           abind_1.4-5            
+[34] RCurl_1.98-1.13         httr_1.4.7              pkgconfig_2.0.3        
 [37] tools_4.3.1            
 ```
 
