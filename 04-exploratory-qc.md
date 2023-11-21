@@ -400,7 +400,7 @@ sessionInfo()
 ```
 
 ```{.output}
-R version 4.3.1 (2023-06-16)
+R version 4.3.2 (2023-10-31)
 Platform: x86_64-pc-linux-gnu (64-bit)
 Running under: Ubuntu 22.04.3 LTS
 
@@ -435,18 +435,18 @@ other attached packages:
 loaded via a namespace (and not attached):
  [1] bitops_1.0-7            rlang_1.1.2             magrittr_2.0.3         
  [4] shinydashboard_0.7.2    clue_0.3-65             GetoptLong_1.0.5       
- [7] compiler_4.3.1          mgcv_1.9-0              png_0.1-8              
+ [7] compiler_4.3.2          mgcv_1.9-0              png_0.1-8              
 [10] vctrs_0.6.4             pkgconfig_2.0.3         shape_1.4.6            
 [13] crayon_1.5.2            fastmap_1.1.1           XVector_0.40.0         
 [16] ellipsis_0.3.2          labeling_0.4.3          utf8_1.2.4             
 [19] promises_1.2.1          preprocessCore_1.62.1   shinyAce_0.4.2         
 [22] xfun_0.41               cachem_1.0.8            zlibbioc_1.46.0        
 [25] jsonlite_1.8.7          highr_0.10              later_1.3.1            
-[28] DelayedArray_0.26.7     BiocParallel_1.34.2     parallel_4.3.1         
+[28] DelayedArray_0.26.7     BiocParallel_1.34.2     parallel_4.3.2         
 [31] cluster_2.1.4           R6_2.5.1                bslib_0.5.1            
 [34] limma_3.56.2            jquerylib_0.1.4         Rcpp_1.0.11            
 [37] iterators_1.0.14        knitr_1.45              httpuv_1.6.12          
-[40] Matrix_1.6-1.1          splines_4.3.1           igraph_1.5.1           
+[40] Matrix_1.6-1.1          splines_4.3.2           igraph_1.5.1           
 [43] tidyselect_1.2.0        abind_1.4-5             yaml_2.3.7             
 [46] doParallel_1.0.17       codetools_0.2-19        affy_1.78.2            
 [49] miniUI_0.1.1.1          lattice_0.22-5          tibble_3.2.1           
@@ -455,7 +455,7 @@ loaded via a namespace (and not attached):
 [58] BiocManager_1.30.22     renv_1.0.3              DT_0.30                
 [61] foreach_1.5.2           shinyjs_2.1.0           generics_0.1.3         
 [64] RCurl_1.98-1.13         munsell_0.5.0           scales_1.2.1           
-[67] xtable_1.8-4            glue_1.6.2              tools_4.3.1            
+[67] xtable_1.8-4            glue_1.6.2              tools_4.3.2            
 [70] colourpicker_1.3.0      locfit_1.5-9.8          colorspace_2.1-0       
 [73] nlme_3.1-163            GenomeInfoDbData_1.2.10 vipor_0.4.5            
 [76] cli_3.6.1               fansi_1.0.5             viridisLite_0.4.2      

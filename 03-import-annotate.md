@@ -752,7 +752,7 @@ sessionInfo()
 ```
 
 ```{.output}
-R version 4.3.1 (2023-06-16)
+R version 4.3.2 (2023-10-31)
 Platform: x86_64-pc-linux-gnu (64-bit)
 Running under: Ubuntu 22.04.3 LTS
 
@@ -784,7 +784,7 @@ other attached packages:
 
 loaded via a namespace (and not attached):
  [1] Matrix_1.6-1.1          bit_4.0.5               highr_0.10             
- [4] compiler_4.3.1          BiocManager_1.30.22     renv_1.0.3             
+ [4] compiler_4.3.2          BiocManager_1.30.22     renv_1.0.3             
  [7] crayon_1.5.2            blob_1.2.4              Biostrings_2.68.1      
 [10] bitops_1.0-7            png_0.1-8               fastmap_1.1.1          
 [13] yaml_2.3.7              lattice_0.22-5          R6_2.5.1               
@@ -792,10 +792,10 @@ loaded via a namespace (and not attached):
 [19] GenomeInfoDbData_1.2.10 DBI_1.1.3               rlang_1.1.2            
 [22] KEGGREST_1.40.1         cachem_1.0.8            xfun_0.41              
 [25] bit64_4.0.5             RSQLite_2.3.3           memoise_2.0.1          
-[28] cli_3.6.1               zlibbioc_1.46.0         grid_4.3.1             
+[28] cli_3.6.1               zlibbioc_1.46.0         grid_4.3.2             
 [31] vctrs_0.6.4             evaluate_0.23           abind_1.4-5            
 [34] RCurl_1.98-1.13         httr_1.4.7              pkgconfig_2.0.3        
-[37] tools_4.3.1            
+[37] tools_4.3.2            
 ```
 
 ::: keypoints
