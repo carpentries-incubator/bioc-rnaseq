@@ -285,7 +285,7 @@
       </div>
       <hr></nav><main id="main-content" class="main-content"><div class="container lesson-content">
         <h1>Gene set enrichment analysis</h1>
-        <p> Last updated on 2023-11-21 | 
+        <p> Last updated on 2024-01-02 | 
         
         <a href="https://github.com/carpentries-incubator/bioc-rnaseq/edit/main/episodes/07-gene-set-analysis.Rmd" class="external-link">Edit this page <i aria-hidden="true" data-feather="edit"></i></a></p>
         
@@ -842,9 +842,9 @@ distribution of its statistic.</p>
 <h3 class="code-label">OUTPUT<i aria-hidden="true" data-feather="chevron-left"></i><i aria-hidden="true" data-feather="chevron-right"></i>
 </h3>
 <pre class="output" tabindex="0"><code>Unit: microseconds
-   expr     min      lq      mean   median       uq     max neval
- fisher 238.465 243.715 252.68149 246.8705 252.3760 488.411   100
-  hyper   1.352   1.543   2.23699   2.5545   2.8355   5.901   100</code></pre>
+   expr     min       lq      mean   median       uq     max neval
+ fisher 238.455 241.8405 250.98679 244.1705 251.2475 552.429   100
+  hyper   1.332   1.5180   2.38207   2.5445   2.8055  17.983   100</code></pre>
 </div>
 <p>It is very astonishing that <code>phyper()</code> is hundreds of
 times faster than <code>fisher.test()</code>. Main reason is in
@@ -1001,7 +1001,7 @@ convert a list to a two-column data frame?</p>
 <button class="accordion-button solution-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapseSolution1" aria-expanded="false" aria-controls="collapseSolution1">
   <h4 class="accordion-header" id="headingSolution1">Show me the solution</h4>
 </button>
-<div id="collapseSolution1" class="accordion-collapse collapse" aria-labelledby="headingSolution1" data-bs-parent="#accordionSolution1">
+<div id="collapseSolution1" class="accordion-collapse collapse" data-bs-parent="#accordionSolution1" aria-labelledby="headingSolution1">
 <div class="accordion-body">
 <div class="codewrapper sourceCode" id="cb38">
 <h3 class="code-label">R<i aria-hidden="true" data-feather="chevron-left"></i><i aria-hidden="true" data-feather="chevron-right"></i>
@@ -1625,7 +1625,7 @@ sets are automatically retrieved and processed from
 <div class="codewrapper">
 <h3 class="code-label">OUTPUT<i aria-hidden="true" data-feather="chevron-left"></i><i aria-hidden="true" data-feather="chevron-right"></i>
 </h3>
-<pre class="output" tabindex="0"><code>--&gt; Expected input gene ID: 76867,320214,23797,110355,217011,103583</code></pre>
+<pre class="output" tabindex="0"><code>--&gt; Expected input gene ID: 20317,622554,21681,105988,67000,239731</code></pre>
 </div>
 <div class="codewrapper">
 <h3 class="code-label">OUTPUT<i aria-hidden="true" data-feather="chevron-left"></i><i aria-hidden="true" data-feather="chevron-right"></i>
@@ -1896,12 +1896,12 @@ mmu00591                                      Linoleic acid metabolism - Mus mus
 mmu04913                                       Ovarian steroidogenesis - Mus musculus (house mouse)
 mmu04061 Viral protein interaction with cytokine and cytokine receptor - Mus musculus (house mouse)
          GeneRatio BgRatio       pvalue     p.adjust       qvalue
-mmu00590    16/454 85/9392 2.456998e-06 0.0007542983 0.0006620963
-mmu00565    11/454 48/9392 1.327107e-05 0.0014975168 0.0013144670
-mmu00592     8/454 25/9392 1.463371e-05 0.0014975168 0.0013144670
-mmu00591    11/454 50/9392 2.009867e-05 0.0015425732 0.0013540159
-mmu04913    12/454 63/9392 3.956222e-05 0.0024291201 0.0021321953
-mmu04061    14/454 95/9392 1.740468e-04 0.0079696743 0.0069954967
+mmu00590    16/454 85/9408 2.403809e-06 0.0007379694 0.0006452329
+mmu00565    11/454 48/9408 1.306159e-05 0.0014791271 0.0012932536
+mmu00592     8/454 25/9408 1.445401e-05 0.0014791271 0.0012932536
+mmu00591    11/454 50/9408 1.978440e-05 0.0015184527 0.0013276373
+mmu04913    12/454 63/9408 3.891349e-05 0.0023892882 0.0020890399
+mmu04061    14/454 95/9408 1.710081e-04 0.0078109667 0.0068294068
                                                                                                        geneID
 mmu00590 18783/19215/211429/329502/78390/19223/67103/242546/13118/18781/18784/11689/232889/15446/237625/11687
 mmu00565                               18783/211429/329502/78390/22239/18781/18784/232889/320981/237625/53897
@@ -2647,7 +2647,7 @@ topological relations in the GO hierarchy.<a href="#fnref7" class="footnote-back
   "url": "https://carpentries-incubator.github.io/bioc-rnaseq/07-gene-set-analysis.html",
   "identifier": "https://carpentries-incubator.github.io/bioc-rnaseq/07-gene-set-analysis.html",
   "dateCreated": "2020-09-15",
-  "dateModified": "2023-11-21",
+  "dateModified": "2024-01-02",
   "datePublished": "2024-01-02"
 }
 
