@@ -433,7 +433,7 @@ other attached packages:
 [17] BiocGenerics_0.46.0        
 
 loaded via a namespace (and not attached):
- [1] bitops_1.0-7            rlang_1.1.2             magrittr_2.0.3         
+ [1] bitops_1.0-7            rlang_1.1.3             magrittr_2.0.3         
  [4] shinydashboard_0.7.2    clue_0.3-65             GetoptLong_1.0.5       
  [7] compiler_4.3.2          mgcv_1.9-1              png_0.1-8              
 [10] vctrs_0.6.5             pkgconfig_2.0.3         shape_1.4.6            
@@ -444,26 +444,26 @@ loaded via a namespace (and not attached):
 [25] jsonlite_1.8.8          highr_0.10              later_1.3.2            
 [28] DelayedArray_0.26.7     BiocParallel_1.34.2     parallel_4.3.2         
 [31] cluster_2.1.6           R6_2.5.1                bslib_0.6.1            
-[34] limma_3.56.2            jquerylib_0.1.4         Rcpp_1.0.11            
-[37] iterators_1.0.14        knitr_1.45              httpuv_1.6.13          
-[40] Matrix_1.6-4            splines_4.3.2           igraph_1.6.0           
+[34] limma_3.56.2            jquerylib_0.1.4         Rcpp_1.0.12            
+[37] iterators_1.0.14        knitr_1.45              httpuv_1.6.14          
+[40] Matrix_1.6-5            splines_4.3.2           igraph_2.0.1.1         
 [43] tidyselect_1.2.0        abind_1.4-5             yaml_2.3.8             
 [46] doParallel_1.0.17       codetools_0.2-19        affy_1.78.2            
 [49] miniUI_0.1.1.1          lattice_0.22-5          tibble_3.2.1           
-[52] shiny_1.8.0             withr_2.5.2             evaluate_0.23          
+[52] shiny_1.8.0             withr_3.0.0             evaluate_0.23          
 [55] circlize_0.4.15         pillar_1.9.0            affyio_1.70.0          
 [58] BiocManager_1.30.22     renv_1.0.3              DT_0.31                
 [61] foreach_1.5.2           shinyjs_2.1.0           generics_0.1.3         
-[64] RCurl_1.98-1.13         munsell_0.5.0           scales_1.3.0           
-[67] xtable_1.8-4            glue_1.6.2              tools_4.3.2            
+[64] RCurl_1.98-1.14         munsell_0.5.0           scales_1.3.0           
+[67] xtable_1.8-4            glue_1.7.0              tools_4.3.2            
 [70] colourpicker_1.3.0      locfit_1.5-9.8          colorspace_2.1-0       
 [73] nlme_3.1-164            GenomeInfoDbData_1.2.10 vipor_0.4.7            
 [76] cli_3.6.2               fansi_1.0.6             viridisLite_0.4.2      
 [79] S4Arrays_1.0.6          dplyr_1.1.4             gtable_0.3.4           
-[82] rintrojs_0.3.3          sass_0.4.8              digest_0.6.33          
-[85] ggrepel_0.9.4           farver_2.1.1            rjson_0.2.21           
+[82] rintrojs_0.3.4          sass_0.4.8              digest_0.6.34          
+[85] ggrepel_0.9.5           farver_2.1.1            rjson_0.2.21           
 [88] htmlwidgets_1.6.4       htmltools_0.5.7         lifecycle_1.0.4        
-[91] shinyWidgets_0.8.0      GlobalOptions_0.1.2     mime_0.12              
+[91] shinyWidgets_0.8.1      GlobalOptions_0.1.2     mime_0.12              
 ```
 
 :::::::::::::::::::::::::::::::::::::::: keypoints
