@@ -279,7 +279,7 @@
       </div>
       <hr></nav><main id="main-content" class="main-content"><div class="container lesson-content">
         <h1>Gene set enrichment analysis</h1>
-        <p> Last updated on 2024-02-06 | 
+        <p> Last updated on 2024-02-27 | 
         
         <a href="https://github.com/carpentries-incubator/bioc-rnaseq/edit/main/episodes/07-gene-set-analysis.Rmd" class="external-link">Edit this page <i aria-hidden="true" data-feather="edit"></i></a></p>
         
@@ -836,9 +836,9 @@ distribution of its statistic.</p>
 <h3 class="code-label">OUTPUT<i aria-hidden="true" data-feather="chevron-left"></i><i aria-hidden="true" data-feather="chevron-right"></i>
 </h3>
 <pre class="output" tabindex="0"><code>Unit: microseconds
-   expr     min      lq      mean   median      uq     max neval
- fisher 238.013 243.950 253.90205 246.4450 253.859 580.073   100
-  hyper   1.332   1.518   2.25909   2.4645   2.675  10.669   100</code></pre>
+   expr     min      lq      mean  median      uq     max neval
+ fisher 238.395 247.371 259.92009 251.464 261.573 469.346   100
+  hyper   1.362   1.553   2.44718   2.615   2.825  17.543   100</code></pre>
 </div>
 <p>It is very astonishing that <code>phyper()</code> is hundreds of
 times faster than <code>fisher.test()</code>. Main reason is in
@@ -1619,7 +1619,7 @@ sets are automatically retrieved and processed from
 <div class="codewrapper">
 <h3 class="code-label">OUTPUT<i aria-hidden="true" data-feather="chevron-left"></i><i aria-hidden="true" data-feather="chevron-right"></i>
 </h3>
-<pre class="output" tabindex="0"><code>--&gt; Expected input gene ID: 11479,19733,17886,22339,17128,399599</code></pre>
+<pre class="output" tabindex="0"><code>--&gt; Expected input gene ID: 12235,19701,13874,16882,235036,245944</code></pre>
 </div>
 <div class="codewrapper">
 <h3 class="code-label">OUTPUT<i aria-hidden="true" data-feather="chevron-left"></i><i aria-hidden="true" data-feather="chevron-right"></i>
@@ -1890,12 +1890,12 @@ mmu00591                                      Linoleic acid metabolism - Mus mus
 mmu04913                                       Ovarian steroidogenesis - Mus musculus (house mouse)
 mmu04061 Viral protein interaction with cytokine and cytokine receptor - Mus musculus (house mouse)
          GeneRatio BgRatio       pvalue     p.adjust       qvalue
-mmu00590    16/454 85/9467 2.217966e-06 0.0006809156 0.0005930141
-mmu00565    11/454 48/9467 1.231965e-05 0.0014134739 0.0012310042
-mmu00592     8/454 25/9467 1.381245e-05 0.0014134739 0.0012310042
-mmu00591    11/454 50/9467 1.867087e-05 0.0014329892 0.0012480002
-mmu04913    12/454 63/9467 3.661862e-05 0.0022483832 0.0019581324
-mmu04061    14/454 95/9467 1.602808e-04 0.0072537406 0.0063173328
+mmu00590    16/454 85/9465 2.224011e-06 0.0006827712 0.0005946302
+mmu00565    11/454 48/9465 1.234403e-05 0.0014156451 0.0012328951
+mmu00592     8/454 25/9465 1.383367e-05 0.0014156451 0.0012328951
+mmu00591    11/454 50/9465 1.870748e-05 0.0014357990 0.0012504473
+mmu04913    12/454 63/9465 3.669398e-05 0.0022530101 0.0019621620
+mmu04061    14/454 95/9465 1.606325e-04 0.0072719317 0.0063331756
                                                                                                        geneID
 mmu00590 18783/19215/211429/329502/78390/19223/67103/242546/13118/18781/18784/11689/232889/15446/237625/11687
 mmu00565                               18783/211429/329502/78390/22239/18781/18784/232889/320981/237625/53897
@@ -2641,8 +2641,8 @@ topological relations in the GO hierarchy.<a href="#fnref7" class="footnote-back
   "url": "https://carpentries-incubator.github.io/bioc-rnaseq/07-gene-set-analysis.html",
   "identifier": "https://carpentries-incubator.github.io/bioc-rnaseq/07-gene-set-analysis.html",
   "dateCreated": "2020-09-15",
-  "dateModified": "2024-02-06",
-  "datePublished": "2024-02-20"
+  "dateModified": "2024-02-27",
+  "datePublished": "2024-02-27"
 }
 
   </script><script>
