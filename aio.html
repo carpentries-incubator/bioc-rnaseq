@@ -826,7 +826,7 @@ directory, create the four fundamental directories previously discussed
 <button class="accordion-button solution-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapseSolution1" aria-expanded="false" aria-controls="collapseSolution1">
   <h4 class="accordion-header" id="headingSolution1">Show me the solution</h4>
 </button>
-<div id="collapseSolution1" class="accordion-collapse collapse" data-bs-parent="#accordionSolution1" aria-labelledby="headingSolution1">
+<div id="collapseSolution1" class="accordion-collapse collapse" aria-labelledby="headingSolution1" data-bs-parent="#accordionSolution1">
 <div class="accordion-body">
 <figure style="text-align: center"><img src="fig/02_setup/folders_working_dir.png" alt="Your working directory should look like this" width="1221" class="figure mx-auto d-block"><figcaption>
 Your working directory should look like this
@@ -970,7 +970,7 @@ into the <code>data</code> folder in your working directory.</p>
 <button class="accordion-button solution-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapseSolution2" aria-expanded="false" aria-controls="collapseSolution2">
   <h4 class="accordion-header" id="headingSolution2">Show me the solution</h4>
 </button>
-<div id="collapseSolution2" class="accordion-collapse collapse" data-bs-parent="#accordionSolution2" aria-labelledby="headingSolution2">
+<div id="collapseSolution2" class="accordion-collapse collapse" aria-labelledby="headingSolution2" data-bs-parent="#accordionSolution2">
 <div class="accordion-body">
 <div class="codewrapper sourceCode" id="cb2">
 <h3 class="code-label">R<i aria-hidden="true" data-feather="chevron-left"></i><i aria-hidden="true" data-feather="chevron-right"></i>
@@ -2991,12 +2991,12 @@ error and tested for being significantly different from 0 using the
 <pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">dds</span> <span class="op">&lt;-</span> <span class="fu">nbinomWaldTest</span><span class="op">(</span><span class="va">dds</span><span class="op">)</span></span></code></pre>
 </div>
-<div id="note" class="callout callout">
+<div id="callout1" class="callout">
 <div class="callout-square">
 <i class="callout-icon" data-feather="bell"></i>
 </div>
-<div id="note" class="callout-inner">
-<h3 class="callout-title">Note<a class="anchor" aria-label="anchor" href="#note"></a>
+<div class="section level3 callout-title callout-inner">
+<h3 class="callout-title" id="note">Note<a class="anchor" aria-label="anchor" href="#note"></a>
 </h3>
 <div class="callout-content">
 <p>Standard differential expression analysis as performed above is
@@ -3062,7 +3062,7 @@ lesson?</p>
 <button class="accordion-button solution-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapseSolution1" aria-expanded="false" aria-controls="collapseSolution1">
   <h4 class="accordion-header" id="headingSolution1">Show me the solution</h4>
 </button>
-<div id="collapseSolution1" class="accordion-collapse collapse" aria-labelledby="headingSolution1" data-bs-parent="#accordionSolution1">
+<div id="collapseSolution1" class="accordion-collapse collapse" data-bs-parent="#accordionSolution1" aria-labelledby="headingSolution1">
 <div class="accordion-body">
 <p>In the lesson example the last variable of the design formula is
 <code>time</code>. The <strong>reference level</strong> (first in
@@ -3167,7 +3167,7 @@ time.</p>
 <button class="accordion-button solution-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapseSolution2" aria-expanded="false" aria-controls="collapseSolution2">
   <h4 class="accordion-header" id="headingSolution2">Show me the solution</h4>
 </button>
-<div id="collapseSolution2" class="accordion-collapse collapse" aria-labelledby="headingSolution2" data-bs-parent="#accordionSolution2">
+<div id="collapseSolution2" class="accordion-collapse collapse" data-bs-parent="#accordionSolution2" aria-labelledby="headingSolution2">
 <div class="accordion-body">
 <div class="codewrapper sourceCode" id="cb22">
 <h3 class="code-label">R<i aria-hidden="true" data-feather="chevron-left"></i><i aria-hidden="true" data-feather="chevron-right"></i>
@@ -3224,12 +3224,12 @@ LOC105243748  1.11194e-48</code></pre>
 </div>
 </div>
 </div>
-<div id="multiple-testing-correction" class="callout callout">
+<div id="callout2" class="callout">
 <div class="callout-square">
 <i class="callout-icon" data-feather="bell"></i>
 </div>
-<div id="multiple-testing-correction" class="callout-inner">
-<h3 class="callout-title">Multiple testing correction<a class="anchor" aria-label="anchor" href="#multiple-testing-correction"></a>
+<div class="section level3 callout-title callout-inner">
+<h3 class="callout-title" id="multiple-testing-correction">Multiple testing correction<a class="anchor" aria-label="anchor" href="#multiple-testing-correction"></a>
 </h3>
 <div class="callout-content">
 <p>Due to the high number of tests (one per gene) our DE results will
@@ -3309,7 +3309,7 @@ results then?</p>
 <button class="accordion-button solution-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapseSolution3" aria-expanded="false" aria-controls="collapseSolution3">
   <h4 class="accordion-header" id="headingSolution3">Show me the solution</h4>
 </button>
-<div id="collapseSolution3" class="accordion-collapse collapse" aria-labelledby="headingSolution3" data-bs-parent="#accordionSolution3">
+<div id="collapseSolution3" class="accordion-collapse collapse" data-bs-parent="#accordionSolution3" aria-labelledby="headingSolution3">
 <div class="accordion-body">
 <div class="codewrapper sourceCode" id="cb30">
 <h3 class="code-label">R<i aria-hidden="true" data-feather="chevron-left"></i><i aria-hidden="true" data-feather="chevron-right"></i>
@@ -5511,12 +5511,12 @@ n_{21}}
 <p>If there is no association between DE genes and the gene set, odds
 ratio is expected to be 1. And it is larger than 1 if there is an
 over-representation of DE genes on the gene set.</p>
-<div id="further-reading" class="callout callout">
+<div id="callout1" class="callout">
 <div class="callout-square">
 <i class="callout-icon" data-feather="bell"></i>
 </div>
-<div id="further-reading" class="callout-inner">
-<h3 class="callout-title">Further reading<a class="anchor" aria-label="anchor" href="#further-reading"></a>
+<div class="section level3 callout-title callout-inner">
+<h3 class="callout-title" id="further-reading">Further reading<a class="anchor" aria-label="anchor" href="#further-reading"></a>
 </h3>
 <div class="callout-content">
 <p>The 2x2 contingency table can be transposed and it does not affect
@@ -5727,12 +5727,12 @@ times faster than <code>fisher.test()</code>. Main reason is in
 <code>fisher.test()</code>, there are many additional calculations
 besides calculating the <em>p</em>-value. So if you want to implement
 ORA analysis by yourself, always consider to use <code>phyper()</code><a href="#fn2" class="footnote-ref" id="fnref2"><sup>2</sup></a>.</p>
-<div id="further-reading-1" class="callout callout">
+<div id="callout2" class="callout">
 <div class="callout-square">
 <i class="callout-icon" data-feather="bell"></i>
 </div>
-<div id="further-reading-1" class="callout-inner">
-<h3 class="callout-title">Further reading<a class="anchor" aria-label="anchor" href="#further-reading-1"></a>
+<div class="section level3 callout-title callout-inner">
+<h3 class="callout-title" id="further-reading-1">Further reading<a class="anchor" aria-label="anchor" href="#further-reading-1"></a>
 </h3>
 <div class="callout-content">
 <p>Current tools also use Binomial distribution or chi-square test for
@@ -6129,12 +6129,12 @@ $`GO:0001869`
 data structure, most tools can automatically construct GO gene sets
 internally. There is no need for users to touch such low-level
 processings.</p>
-<div id="further-reading-2" class="callout callout">
+<div id="callout3" class="callout">
 <div class="callout-square">
 <i class="callout-icon" data-feather="bell"></i>
 </div>
-<div id="further-reading-2" class="callout-inner">
-<h3 class="callout-title">Further reading<a class="anchor" aria-label="anchor" href="#further-reading-2"></a>
+<div class="section level3 callout-title callout-inner">
+<h3 class="callout-title" id="further-reading-2">Further reading<a class="anchor" aria-label="anchor" href="#further-reading-2"></a>
 </h3>
 <div class="callout-content">
 <p>Mapping between various databases can also be done with the general
@@ -6246,12 +6246,12 @@ found from the <a href="https://www.genome.jp/kegg/" class="external-link">KEGG 
 <p>Keep in mind, KEGG pathways are only free for academic users. If you
 use it for commercial purposes, <a href="https://www.kegg.jp/kegg/legal.html" class="external-link">please contact the KEGG team
 to get a licence</a>.</p>
-<div id="further-reading-3" class="callout callout">
+<div id="callout4" class="callout">
 <div class="callout-square">
 <i class="callout-icon" data-feather="bell"></i>
 </div>
-<div id="further-reading-3" class="callout-inner">
-<h3 class="callout-title">Further reading<a class="anchor" aria-label="anchor" href="#further-reading-3"></a>
+<div class="section level3 callout-title callout-inner">
+<h3 class="callout-title" id="further-reading-3">Further reading<a class="anchor" aria-label="anchor" href="#further-reading-3"></a>
 </h3>
 <div class="callout-content">
 <p>Instead directly reading from the URLs, there are also R packages
@@ -6721,12 +6721,12 @@ GO:0060326    39
 GO:0035456    17
 GO:0097529    31</code></pre>
 </div>
-<div id="perform-go-enrichment-on-other-organisms" class="callout callout">
+<div id="callout5" class="callout">
 <div class="callout-square">
 <i class="callout-icon" data-feather="bell"></i>
 </div>
-<div id="perform-go-enrichment-on-other-organisms" class="callout-inner">
-<h3 class="callout-title">Perform GO enrichment on other organisms<a class="anchor" aria-label="anchor" href="#perform-go-enrichment-on-other-organisms"></a>
+<div class="section level3 callout-title callout-inner">
+<h3 class="callout-title" id="perform-go-enrichment-on-other-organisms">Perform GO enrichment on other organisms<a class="anchor" aria-label="anchor" href="#perform-go-enrichment-on-other-organisms"></a>
 </h3>
 <div class="callout-content">
 <p>Gene sets are provided as an <code>OrgDb</code> object in
@@ -6838,12 +6838,12 @@ mmu00591    11
 mmu04913    12
 mmu04061    14</code></pre>
 </div>
-<div id="perform-kegg-pathway-enrichment-on-other-organisms" class="callout callout">
+<div id="callout6" class="callout">
 <div class="callout-square">
 <i class="callout-icon" data-feather="bell"></i>
 </div>
-<div id="perform-kegg-pathway-enrichment-on-other-organisms" class="callout-inner">
-<h3 class="callout-title">Perform KEGG pathway enrichment on other
+<div class="section level3 callout-title callout-inner">
+<h3 class="callout-title" id="perform-kegg-pathway-enrichment-on-other-organisms">Perform KEGG pathway enrichment on other
 organisms<a class="anchor" aria-label="anchor" href="#perform-kegg-pathway-enrichment-on-other-organisms"></a>
 </h3>
 <div class="callout-content">
@@ -6942,12 +6942,12 @@ HALLMARK_ALLOGRAFT_REJECTION       23
 HALLMARK_ESTROGEN_RESPONSE_LATE    23
 HALLMARK_INFLAMMATORY_RESPONSE     22</code></pre>
 </div>
-<div id="further-reading-4" class="callout callout">
+<div id="callout7" class="callout">
 <div class="callout-square">
 <i class="callout-icon" data-feather="bell"></i>
 </div>
-<div id="further-reading-4" class="callout-inner">
-<h3 class="callout-title">Further reading<a class="anchor" aria-label="anchor" href="#further-reading-4"></a>
+<div class="section level3 callout-title callout-inner">
+<h3 class="callout-title" id="further-reading-4">Further reading<a class="anchor" aria-label="anchor" href="#further-reading-4"></a>
 </h3>
 <div class="callout-content">
 <p>Implementing ORA is rather simple. The following function
@@ -7465,12 +7465,12 @@ visualization.</p>
 <!-- Carpentry CI cannot install RcppParallel which is indirectly depended by simplifyenrichment,
     so the plot is not generated on the fly.
  -->
-<figure><img src="fig/simplifyEnrichment.png" class="figure mx-auto d-block"></figure><div id="further-reading-5" class="callout callout">
+<figure><img src="fig/simplifyEnrichment.png" class="figure mx-auto d-block"></figure><div id="callout8" class="callout">
 <div class="callout-square">
 <i class="callout-icon" data-feather="bell"></i>
 </div>
-<div id="further-reading-5" class="callout-inner">
-<h3 class="callout-title">Further reading<a class="anchor" aria-label="anchor" href="#further-reading-5"></a>
+<div class="section level3 callout-title callout-inner">
+<h3 class="callout-title" id="further-reading-5">Further reading<a class="anchor" aria-label="anchor" href="#further-reading-5"></a>
 </h3>
 <div class="callout-content">
 <p>ORA analysis actually applies a binary conversion on genes where
@@ -7691,8 +7691,8 @@ quantified.</li>
   "url": "https://carpentries-incubator.github.io/bioc-rnaseq/aio.html",
   "identifier": "https://carpentries-incubator.github.io/bioc-rnaseq/aio.html",
   "dateCreated": "2020-09-15",
-  "dateModified": "2024-02-27",
-  "datePublished": "2024-02-27"
+  "dateModified": "2024-03-05",
+  "datePublished": "2024-03-05"
 }
 
   </script><script>

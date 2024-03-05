@@ -1121,7 +1121,7 @@
       "Package": "curl",
       "Version": "5.2.0",
       "Source": "Repository",
-      "Repository": "https://carpentries.r-universe.dev",
+      "Repository": "carpentries",
       "Requirements": [
         "R"
       ],
@@ -1754,7 +1754,7 @@
       "Package": "httpuv",
       "Version": "1.6.14",
       "Source": "Repository",
-      "Repository": "https://carpentries.r-universe.dev",
+      "Repository": "carpentries",
       "Requirements": [
         "R",
         "R6",
@@ -2587,7 +2587,7 @@
       "Package": "stringi",
       "Version": "1.8.3",
       "Source": "Repository",
-      "Repository": "https://carpentries.r-universe.dev",
+      "Repository": "RSPM",
       "Requirements": [
         "R",
         "stats",
@@ -2624,7 +2624,7 @@
       "Package": "systemfonts",
       "Version": "1.0.5",
       "Source": "Repository",
-      "Repository": "https://carpentries.r-universe.dev",
+      "Repository": "carpentries",
       "Requirements": [
         "R",
         "cpp11"
@@ -2749,11 +2749,11 @@
       "Version": "1.27.0.002",
       "Source": "GitHub",
       "RemoteType": "github",
-      "RemoteHost": "api.github.com",
       "RemoteUsername": "GuangchuangYu",
       "RemoteRepo": "treeio",
       "RemoteRef": "devel",
       "RemoteSha": "c58405e2b3959e9e0dff9696a7de01f86fdae6c1",
+      "RemoteHost": "api.github.com",
       "Requirements": [
         "R",
         "ape",
