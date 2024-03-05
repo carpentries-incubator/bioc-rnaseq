@@ -784,13 +784,13 @@ other attached packages:
 
 loaded via a namespace (and not attached):
  [1] Matrix_1.6-5            bit_4.0.5               highr_0.10             
- [4] compiler_4.3.2          BiocManager_1.30.22     renv_1.0.4             
+ [4] compiler_4.3.2          BiocManager_1.30.22     renv_1.0.5             
  [7] crayon_1.5.2            blob_1.2.4              Biostrings_2.68.1      
 [10] bitops_1.0-7            png_0.1-8               fastmap_1.1.1          
 [13] yaml_2.3.8              lattice_0.22-5          R6_2.5.1               
 [16] XVector_0.40.0          S4Arrays_1.0.6          DelayedArray_0.26.7    
-[19] GenomeInfoDbData_1.2.10 DBI_1.2.1               rlang_1.1.3            
-[22] KEGGREST_1.40.1         cachem_1.0.8            xfun_0.41              
+[19] GenomeInfoDbData_1.2.10 DBI_1.2.2               rlang_1.1.3            
+[22] KEGGREST_1.40.1         cachem_1.0.8            xfun_0.42              
 [25] bit64_4.0.5             RSQLite_2.3.5           memoise_2.0.1          
 [28] cli_3.6.2               zlibbioc_1.46.0         grid_4.3.2             
 [31] vctrs_0.6.5             evaluate_0.23           abind_1.4-5            
