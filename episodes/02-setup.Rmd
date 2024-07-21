@@ -185,6 +185,70 @@ download.file(
 )
 ```
 
+
+:::::::::::::::::::::::::::::::::::::::  challenge
+
+## Check that the data file matches the raw data on GEO
+
+This is a substantial challenge.  You don't need to do it!  But you needn't trust us, either. 
+You can verify that the raw data deposited on GEO is directly comparable to the prepared CSV.
+To look up raw data for samples (GSMxxxx) on GEO, we can use the [GEOquery](https://doi.org/10.1093/bioinformatics/btm254) package.
+The `GEOquery::getGEOSuppFiles()` function then allows one to download or read the raw data files in question.
+The tricky part of this is writing a function to extract the data of interest from the raw data files on GEO.
+Once we have that function, we can check that the provided CSV file contains the same counts as the raw data.
+
+```{r check-geo-data}
+
+# Below, we read the summarized data file into a data.frame and inspect its dimensions (how many rows, how many columns).
+counts_URL <- "https://github.com/carpentries-incubator/bioc-rnaseq/raw/main/episodes/data/GSE96870_counts_cerebellum.csv"
+counts_cerebellum <- read.csv(url(counts_URL), row.names=1)
+dim(counts_cerebellum)
+# [1] 41786    22
+
+# Each column in the data.frame represents one of 22 GSMs (GEO Samples). 
+GSMs_cerebellum <- colnames(counts_cerebellum)
+
+# GEOquery can look up the raw data locations for these GSMs.
+library(GEOquery)
+GSM_URLs <- sapply(GSMs_cerebellum,
+                     function(GSM) getGEOSuppFiles(GSM, fetch=FALSE)[1, "url"])
+
+# To extract the read counts per gene for each sample, we write a small function.
+fetch_featcounts <- function(GSM_URL) {
+  message("Processing ", GSM_URL)
+  tsv <- readLines(gzcon(url(GSM_URL)))[-1][-1] # drop header and colnames 
+  genes <- sapply(strsplit(tsv, "\t"), `[[`, 1)
+  featcounts <- as.integer(sapply(strsplit(tsv, "\t"), `[[`, 7))
+  names(featcounts) <- genes
+  return(featcounts)
+}
+
+# We can use do.call() and cbind() to make each result a column of read counts:
+counts_GSMs <- data.frame(do.call(cbind, lapply(GSM_URLs, fetch_featcounts)))
+dim(counts_GSMs)
+# [1] 41786    22
+
+```
+
+Above we demonstrate that the numbers of genes and samples are the same. 
+However, that does not demonstrate that the read counts are the same.
+Is there a function in R that will check whether two objects are identical?
+
+:::::::::::::::::::::::::::::::::::::  solution
+
+The `identical()` function verifies that two objects in R are the same, save for their name.
+
+```{r check-geo-data-solution}
+stopifnot(identical(dim(counts_cerebellum), dim(counts_GSMs)))
+identical(counts_cerebellum, counts_GSMs)
+# [1] TRUE
+```
+
+The prepared data file does indeed contain the same counts per gene as the raw GEO data files.
+
+:::::::::::::::::::::::::::::::::::::
+
+
 If you navigate to the `data` folder in your working directory, you should now find a file named
 `GSE96870_counts_cerebellum.csv`.
 
