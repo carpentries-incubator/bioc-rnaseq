@@ -217,13 +217,13 @@ GSM_URLs <- sapply(GSMs_cerebellum,
 fetch_featcounts <- function(GSM_URL) {
   message("Processing ", GSM_URL)
   tsv <- readLines(gzcon(url(GSM_URL)))[-1][-1] # drop header and colnames 
-  genes <- sapply(strsplit(tsv, "\t"), `[[`, 1)
-  featcounts <- as.integer(sapply(strsplit(tsv, "\t"), `[[`, 7))
+  genes <- sapply(strsplit(tsv, "\t"), "[[", 1)
+  featcounts <- as.integer(sapply(strsplit(tsv, "\t"), "[[", 7))
   names(featcounts) <- genes
   return(featcounts)
 }
 
-# We can use do.call() and cbind() to make each result a column of read counts:
+# We use lapply(), cbind(), and do.call() to add each column of read counts:
 counts_GSMs <- data.frame(do.call(cbind, lapply(GSM_URLs, fetch_featcounts)))
 dim(counts_GSMs)
 # [1] 41786    22
@@ -239,7 +239,11 @@ Is there a function in R that will check whether two objects are identical?
 The `identical()` function verifies that two objects in R are the same, save for their name.
 
 ```{r check-geo-data-solution}
+
+# Don't bother checking the raw data if the dimensions don't match.
 stopifnot(identical(dim(counts_cerebellum), dim(counts_GSMs)))
+
+# If the dimensions do match, check if the data matches, too.
 identical(counts_cerebellum, counts_GSMs)
 # [1] TRUE
 ```
