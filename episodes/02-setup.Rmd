@@ -209,6 +209,8 @@ dim(counts_cerebellum)
 GSMs_cerebellum <- colnames(counts_cerebellum)
 
 # GEOquery can look up the raw data locations for these GSMs.
+if (!require("BiocManager")) install.packages("BiocManager")
+if (!require("GEOquery")) BiocManager::install("GEOquery")
 library(GEOquery)
 GSM_URLs <- sapply(GSMs_cerebellum,
                      function(GSM) getGEOSuppFiles(GSM, fetch=FALSE)[1, "url"])
