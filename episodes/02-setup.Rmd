@@ -209,11 +209,42 @@ dim(counts_cerebellum)
 GSMs_cerebellum <- colnames(counts_cerebellum)
 
 # GEOquery can look up the raw data locations for these GSMs.
-if (!require("BiocManager")) install.packages("BiocManager")
-if (!require("GEOquery")) BiocManager::install("GEOquery")
-library(GEOquery)
-GSM_URLs <- sapply(GSMs_cerebellum,
-                     function(GSM) getGEOSuppFiles(GSM, fetch=FALSE)[1, "url"])
+# Unfortunately, the dependencies for it crash this build!
+# We will illustrate the procedure and then use the results.
+if (FALSE) { 
+  if (!require("BiocManager")) install.packages("BiocManager")
+  if (!require("GEOquery")) BiocManager::install("GEOquery")
+  library(GEOquery)
+  getSuppURL <- function(GSM) GEOquery::getGEOSuppFiles(GSM, fetch=FALSE)[1, "url"]
+  GSM_URLs <- sapply(GSMs_cerebellum, getSuppURL)
+} else {
+  GSM_URLprefix <- "https://ftp.ncbi.nlm.nih.gov/geo/samples/GSM2545nnn"
+  GSM_URLsep <- "suppl"
+  GSM_files <- c("GSM2545336_10C_CTGAAGCT-GTACTGAC_L00M_featCounts.txt.gz",
+                 "GSM2545337_11C_TAATGCGC-TATAGCCT_L00M_featCounts.txt.gz",
+                 "GSM2545338_12C_TAATGCGC-ATAGAGGC_L00M_featCounts.txt.gz",
+                 "GSM2545339_13C_TAATGCGC-CCTATCCT_L00M_featCounts.txt.gz",
+                 "GSM2545340_14C_TAATGCGC-GGCTCTGA_L00M_featCounts.txt.gz",
+                 "GSM2545341_17C_TAATGCGC-AGGCGAAG_L00M_featCounts.txt.gz",
+                 "GSM2545342_1C_CTGAAGCT-TATAGCCT_L00M_featCounts.txt.gz",
+                 "GSM2545343_20C_TAATGCGC-GTACTGAC_L00M_featCounts.txt.gz",
+                 "GSM2545344_21C_CGGCTATG-TATAGCCT_L00M_featCounts.txt.gz",
+                 "GSM2545345_22C_CGGCTATG-ATAGAGGC_L00M_featCounts.txt.gz",
+                 "GSM2545346_25C_CGGCTATG-CCTATCCT_L00M_featCounts.txt.gz",
+                 "GSM2545347_26C_CGGCTATG-GGCTCTGA_L00M_featCounts.txt.gz",
+                 "GSM2545348_27C_CGGCTATG-AGGCGAAG_L00M_featCounts.txt.gz",
+                 "GSM2545349_28C_CGGCTATG-TAATCTTA_L00M_featCounts.txt.gz",
+                 "GSM2545350_29C_CGGCTATG-CAGGACGT_L00M_featCounts.txt.gz",
+                 "GSM2545351_2C_CTGAAGCT-ATAGAGGC_L00M_featCounts.txt.gz",
+                 "GSM2545352_30C_CGGCTATG-GTACTGAC_L00M_featCounts.txt.gz",
+                 "GSM2545353_3C_CTGAAGCT-CCTATCCT_L00M_featCounts.txt.gz",
+                 "GSM2545354_4C_CTGAAGCT-GGCTCTGA_L00M_featCounts.txt.gz",
+                 "GSM2545362_5C_CTGAAGCT-AGGCGAAG_L00M_featCounts.txt.gz",
+                 "GSM2545363_6C_CTGAAGCT-TAATCTTA_L00M_featCounts.txt.gz",
+                 "GSM2545380_9C_CTGAAGCT-CAGGACGT_L00M_featCounts.txt.gz")
+  GSM_URLs <- paste(GSM_URLprefix, GSMs_cerebellum, "suppl", GSM_files, sep="/")
+  names(GSM_URLs) <- GSMs_cerebellum
+}
 
 # To extract the read counts per gene for each sample, we write a small function.
 fetch_featcounts <- function(GSM_URL) {
