@@ -70,6 +70,7 @@ jobs:
     needs: check_token
     if: ${{ needs.check_token.outputs.repo== 'true' }}
     runs-on: ubuntu-latest
+    container: bioconductor/bioconductor:devel
     env:
       GITHUB_PAT: ${{ secrets.GITHUB_TOKEN }}
       RENV_PATHS_ROOT: ~/.local/share/renv/

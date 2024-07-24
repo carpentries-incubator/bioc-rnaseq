@@ -49,6 +49,7 @@ jobs:
     name: "Build markdown source files if valid"
     needs: test-pr
     runs-on: ubuntu-latest
+    container: bioconductor/bioconductor:devel
     if: ${{ needs.test-pr.outputs.is_valid == 'true' }}
     env:
       GITHUB_PAT: ${{ secrets.GITHUB_TOKEN }}
