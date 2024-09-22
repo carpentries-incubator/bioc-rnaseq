@@ -275,8 +275,9 @@
     },
     "ExploreModelMatrix": {
       "Package": "ExploreModelMatrix",
-      "Version": "1.12.0",
+      "Version": "1.16.0",
       "Source": "Bioconductor",
+      "Repository": "Bioconductor 3.19",
       "Requirements": [
         "DT",
         "MASS",
@@ -297,7 +298,7 @@
         "tidyr",
         "utils"
       ],
-      "Hash": "f460a3a7d68926b1b102c1f2f1472656"
+      "Hash": "f974925f7e8e3bfde57a8d02fd677876"
     },
     "GO.db": {
       "Package": "GO.db",
@@ -820,8 +821,9 @@
     },
     "apeglm": {
       "Package": "apeglm",
-      "Version": "1.22.1",
+      "Version": "1.26.1",
       "Source": "Bioconductor",
+      "Repository": "Bioconductor 3.19",
       "Requirements": [
         "GenomicRanges",
         "Rcpp",
@@ -833,7 +835,7 @@
         "stats",
         "utils"
       ],
-      "Hash": "7aa41e1a8217e28969c58d82a5477512"
+      "Hash": "f5a5163561b01c55c599aecbac168564"
     },
     "aplot": {
       "Package": "aplot",
@@ -1062,8 +1064,9 @@
     },
     "clusterProfiler": {
       "Package": "clusterProfiler",
-      "Version": "4.8.3",
+      "Version": "4.12.6",
       "Source": "Bioconductor",
+      "Repository": "Bioconductor 3.19",
       "Requirements": [
         "AnnotationDbi",
         "DOSE",
@@ -1074,6 +1077,8 @@
         "dplyr",
         "enrichplot",
         "gson",
+        "httr",
+        "igraph",
         "magrittr",
         "methods",
         "plyr",
@@ -1084,7 +1089,7 @@
         "utils",
         "yulab.utils"
       ],
-      "Hash": "358573de6d0ae89b2a9c27bb1f061898"
+      "Hash": "88d3784995eb4de87a53f7a7260b1a2a"
     },
     "coda": {
       "Package": "coda",
@@ -1878,8 +1883,9 @@
     },
     "iSEE": {
       "Package": "iSEE",
-      "Version": "2.12.0",
+      "Version": "2.16.0",
       "Source": "Bioconductor",
+      "Repository": "Bioconductor 3.19",
       "Requirements": [
         "BiocGenerics",
         "ComplexHeatmap",
@@ -1895,6 +1901,7 @@
         "graphics",
         "grid",
         "igraph",
+        "listviewer",
         "methods",
         "mgcv",
         "rintrojs",
@@ -1908,7 +1915,7 @@
         "vipor",
         "viridisLite"
       ],
-      "Hash": "d7fca086ca345b01e2f313222e9d7f23"
+      "Hash": "5ae9a8ed50502eafbe7b2a39badfc846"
     },
     "igraph": {
       "Package": "igraph",
@@ -2077,6 +2084,18 @@
         "utils"
       ],
       "Hash": "b75950d7143715041064b21f3120f19e"
+    },
+    "listviewer": {
+      "Package": "listviewer",
+      "Version": "4.0.0",
+      "Source": "Repository",
+      "Repository": "CRAN",
+      "Requirements": [
+        "htmltools",
+        "htmlwidgets",
+        "shiny"
+      ],
+      "Hash": "6ec1630c8af7fa1d4e877806b0d2d08a"
     },
     "locfit": {
       "Package": "locfit",
@@ -2256,14 +2275,14 @@
     },
     "org.Mm.eg.db": {
       "Package": "org.Mm.eg.db",
-      "Version": "3.17.0",
+      "Version": "3.19.1",
       "Source": "Bioconductor",
       "Requirements": [
         "AnnotationDbi",
         "R",
         "methods"
       ],
-      "Hash": "a78df53519d3e976b4269414bddc2513"
+      "Hash": "3798992dbae16046c472adb1b5fcd04b"
     },
     "patchwork": {
       "Package": "patchwork",
@@ -2962,8 +2981,9 @@
     },
     "vsn": {
       "Package": "vsn",
-      "Version": "3.68.0",
+      "Version": "3.72.0",
       "Source": "Bioconductor",
+      "Repository": "Bioconductor 3.19",
       "Requirements": [
         "Biobase",
         "R",
@@ -2973,7 +2993,7 @@
         "limma",
         "methods"
       ],
-      "Hash": "dc93221cb7cf860a86e60c28ef9db2ca"
+      "Hash": "72603bed69ebcf4fe1e81de3587e9624"
     },
     "withr": {
       "Package": "withr",
