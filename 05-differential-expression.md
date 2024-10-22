@@ -40,7 +40,7 @@ The *design formula* expresses the variables which will be used in modeling. The
 ### Load packages
 
 
-```r
+``` r
 suppressPackageStartupMessages({
     library(SummarizedExperiment)
     library(DESeq2)
@@ -57,7 +57,7 @@ suppressPackageStartupMessages({
 Let's load in our `SummarizedExperiment` object again. In the last episode for quality control exploration, we removed ~35% genes that had 5 or fewer counts because they had too little information in them. For DESeq2 statistical analysis, we do not technically have to remove these genes because by default it will do some independent filtering, but it can reduce the memory size of the `DESeqDataSet` object resulting in faster computation. Plus, we do not want these genes cluttering up some of the visualizations. 
 
 
-```r
+``` r
 se <- readRDS("data/GSE96870_se.rds")
 se <- se[rowSums(assay(se, "counts")) > 5, ]
 ```
@@ -67,12 +67,12 @@ se <- se[rowSums(assay(se, "counts")) > 5, ]
 The design matrix we will use in this example is `~ sex + time`. This will allow us test the difference between males and females (averaged over time point) and the difference between day 0, 4 and 8 (averaged over males and females). If we wanted to test other comparisons (e.g., Female.Day8 vs. Female.Day0 and also Male.Day8 vs. Male.Day0) we could use a different design matrix to more easily extract those pairwise comparisons. 
 
 
-```r
+``` r
 dds <- DESeq2::DESeqDataSet(se,
                             design = ~ sex + time)
 ```
 
-```{.warning}
+``` warning
 Warning in DESeq2::DESeqDataSet(se, design = ~sex + time): some variables in
 design formula are characters, converting to factors
 ```
@@ -82,7 +82,7 @@ design formula are characters, converting to factors
 The function to generate a `DESeqDataSet` needs to be adapted depending on the input type, e.g, 
 
 
-```r
+``` r
 #From SummarizedExperiment object
 ddsSE <- DESeqDataSet(se, design = ~ sex + time)
 
@@ -106,7 +106,7 @@ As shown in the [previous section](../episodes/04-exploratory-qc.Rmd) on explora
 Recall the `estimateSizeFactors()` function from the previous section:
 
 
-```r
+``` r
 dds <- estimateSizeFactors(dds)
 ```
 
@@ -132,23 +132,23 @@ $\theta$ represents the gene-specific __dispersion__, a measure of variability o
 We can visualize the effect of *shrinkage* using `plotDispEsts()`:
 
 
-```r
+``` r
 dds <- estimateDispersions(dds)
 ```
 
-```{.output}
+``` output
 gene-wise dispersion estimates
 ```
 
-```{.output}
+``` output
 mean-dispersion relationship
 ```
 
-```{.output}
+``` output
 final dispersion estimates
 ```
 
-```r
+``` r
 plotDispEsts(dds)
 ```
 
@@ -166,7 +166,7 @@ Finally, the estimated log2 fold changes are scaled by their standard error and 
 
 
 
-```r
+``` r
 dds <- nbinomWaldTest(dds)
 ```
 
@@ -177,12 +177,12 @@ dds <- nbinomWaldTest(dds)
 Standard differential expression analysis as performed above is wrapped into a single function, `DESeq()`. Running the first code chunk is equivalent to running the second one:
 
 
-```r
+``` r
 dds <- DESeq(dds)
 ```
 
 
-```r
+``` r
 dds <- estimateSizeFactors(dds)
 dds <- estimateDispersions(dds)
 dds <- nbinomWaldTest(dds)
@@ -209,11 +209,11 @@ In the lesson example the last variable of the design formula is `time`.
 The __reference level__ (first in alphabetical order) is `Day0` and the __last level__ is `Day8` 
 
 
-```r
+``` r
 levels(dds$time)
 ```
 
-```{.output}
+``` output
 [1] "Day0" "Day4" "Day8"
 ```
 
@@ -226,13 +226,13 @@ To explore the output of the `results()` function we can use the `summary()` fun
 
 
 
-```r
+``` r
 ## Day 8 vs Day 0
 resTime <- results(dds, contrast = c("time", "Day8", "Day0"))
 summary(resTime)
 ```
 
-```{.output}
+``` output
 
 out of 27430 with nonzero total read count
 adjusted p-value < 0.1
@@ -245,12 +245,12 @@ low counts [2]     : 3723, 14%
 [2] see 'independentFiltering' argument of ?results
 ```
 
-```r
+``` r
 # View(resTime)
 head(resTime[order(resTime$pvalue), ])
 ```
 
-```{.output}
+``` output
 log2 fold change (MLE): time Day8 vs Day0 
 Wald test p-value: time Day8 vs Day0 
 DataFrame with 6 rows and 6 columns
@@ -277,7 +277,7 @@ Both of the below ways of specifying the contrast are essentially equivalent.
 The `name` parameter can be accessed using `resultsNames()`.
 
 
-```r
+``` r
 resTime <- results(dds, contrast = c("time", "Day8", "Day0"))
 resTime <- results(dds, name = "time_Day8_vs_Day0")
 ```
@@ -295,13 +295,13 @@ Explore the DE genes between males and females independent of time.
 
 
 
-```r
+``` r
 ## Male vs Female
 resSex <- results(dds, contrast = c("sex", "Male", "Female"))
 summary(resSex)
 ```
 
-```{.output}
+``` output
 
 out of 27430 with nonzero total read count
 adjusted p-value < 0.1
@@ -314,11 +314,11 @@ low counts [2]     : 8504, 31%
 [2] see 'independentFiltering' argument of ?results
 ```
 
-```r
+``` r
 head(resSex[order(resSex$pvalue), ])
 ```
 
-```{.output}
+``` output
 log2 fold change (MLE): sex Male vs Female 
 Wald test p-value: sex Male vs Female 
 DataFrame with 6 rows and 6 columns
@@ -362,7 +362,7 @@ We can visualize the results in many ways. A good check is to explore the relati
 `DESeq2` provides a useful function to do so, `plotMA()`.
 
 
-```r
+``` r
 plotMA(resTime)
 ```
 
@@ -373,18 +373,18 @@ This is caused by counts from lowly expressed genes tending to be very noisy.
 We can *shrink* the log fold changes of these genes with low mean and high dispersion, as they contain little information.
 
 
-```r
+``` r
 resTimeLfc <- lfcShrink(dds, coef = "time_Day8_vs_Day0", res = resTime)
 ```
 
-```{.output}
+``` output
 using 'apeglm' for LFC shrinkage. If used in published research, please cite:
     Zhu, A., Ibrahim, J.G., Love, M.I. (2018) Heavy-tailed prior distributions for
     sequence count data: removing the noise and preserving large differences.
     Bioinformatics. https://doi.org/10.1093/bioinformatics/bty895
 ```
 
-```r
+``` r
 plotMA(resTimeLfc)
 ```
 
@@ -398,14 +398,14 @@ By default `independentFiltering` is set to `TRUE`. What happens without filteri
 :::::::::::::::::::::::: solution 
 
 
-```r
+``` r
 resTimeNotFiltered <- results(dds,
                               contrast = c("time", "Day8", "Day0"), 
                               independentFiltering = FALSE)
 summary(resTime)
 ```
 
-```{.output}
+``` output
 
 out of 27430 with nonzero total read count
 adjusted p-value < 0.1
@@ -418,11 +418,11 @@ low counts [2]     : 3723, 14%
 [2] see 'independentFiltering' argument of ?results
 ```
 
-```r
+``` r
 summary(resTimeNotFiltered)
 ```
 
-```{.output}
+``` output
 
 out of 27430 with nonzero total read count
 adjusted p-value < 0.1
@@ -449,7 +449,7 @@ We will use transformed data (see [exploratory data analysis](../episodes/04-exp
 
 
 
-```r
+``` r
 # Transform counts
 vsd <- vst(dds, blind = TRUE)
 
@@ -487,7 +487,7 @@ Check the heatmap and top DE genes. Do you find something expected/unexpected in
 We may want to to output our results out of R to have a stand-alone file. The format of `resTime` only has the gene symbols as rownames, so let us join the gene annotation information, and then write out as .csv file:
 
 
-```r
+``` r
 head(as.data.frame(resTime))
 head(as.data.frame(rowRanges(se)))
 

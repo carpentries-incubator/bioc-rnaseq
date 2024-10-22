@@ -32,7 +32,7 @@ We start by loading a few packages that will be needed in this episode.
 In particular, the [ExploreModelMatrix](https://bioconductor.org/packages/ExploreModelMatrix/) package provides resources for exploring design matrices in a graphical fashion, for easier interpretation. 
 
 
-```r
+``` r
 suppressPackageStartupMessages({
     library(SummarizedExperiment)
     library(ExploreModelMatrix)
@@ -47,12 +47,12 @@ Moreover, all mice have the same age (8 weeks).
 Hence, in the first part of this episode we consider only the sex, tissue and time variables further. 
 
 
-```r
+``` r
 meta <- read.csv("data/GSE96870_coldata_all.csv", row.names = 1)
 meta
 ```
 
-```{.output}
+``` output
                      title geo_accession     organism     age    sex
 GSM2545336 CNS_RNA-seq_10C    GSM2545336 Mus musculus 8 weeks Female
 GSM2545337 CNS_RNA-seq_11C    GSM2545337 Mus musculus 8 weeks Female
@@ -147,11 +147,11 @@ GSM2545379  InfluenzaA C57BL/6 Day8 Spinalcord    24
 GSM2545380  InfluenzaA C57BL/6 Day8 Cerebellum    19
 ```
 
-```r
+``` r
 table(meta$time, meta$infection)
 ```
 
-```{.output}
+``` output
       
        InfluenzaA NonInfected
   Day0          0          15
@@ -159,11 +159,11 @@ table(meta$time, meta$infection)
   Day8         14           0
 ```
 
-```r
+``` r
 table(meta$age)
 ```
 
-```{.output}
+``` output
 
 8 weeks 
      45 
@@ -172,19 +172,19 @@ table(meta$age)
 We can start by visualizing the number of observations for each combination of the three predictor variables. 
 
 
-```r
+``` r
 vd <- VisualizeDesign(sampleData = meta, 
                       designFormula = ~ tissue + time + sex)
 vd$cooccurrenceplots
 ```
 
-```{.output}
+``` output
 $`tissue = Cerebellum`
 ```
 
 <img src="fig/06-extra-design-rendered-cooccplots-1.png" style="display: block; margin: auto;" />
 
-```{.output}
+``` output
 
 $`tissue = Spinalcord`
 ```
@@ -210,14 +210,14 @@ This intercept will represent the 'baseline' level of the predictor variable, wh
 If not explicitly specified, R will order the values of the predictor in alphabetical order and select the first one as the reference or baseline level. 
 
 
-```r
+``` r
 ## Subset metadata
 meta_noninf_spc <- meta %>% filter(time == "Day0" & 
                                        tissue == "Spinalcord")
 meta_noninf_spc
 ```
 
-```{.output}
+``` output
                      title geo_accession     organism     age    sex
 GSM2545356 CNS_RNA-seq_574    GSM2545356 Mus musculus 8 weeks   Male
 GSM2545357 CNS_RNA-seq_575    GSM2545357 Mus musculus 8 weeks   Male
@@ -238,7 +238,7 @@ GSM2545366 NonInfected C57BL/6 Day0 Spinalcord    10
 GSM2545367 NonInfected C57BL/6 Day0 Spinalcord    11
 ```
 
-```r
+``` r
 ## Use ExploreModelMatrix to create a design matrix and visualizations, given 
 ## the desired design formula. 
 vd <- VisualizeDesign(sampleData = meta_noninf_spc, 
@@ -246,7 +246,7 @@ vd <- VisualizeDesign(sampleData = meta_noninf_spc,
 vd$designmatrix
 ```
 
-```{.output}
+``` output
            (Intercept) sexMale
 GSM2545356           1       1
 GSM2545357           1       1
@@ -258,22 +258,22 @@ GSM2545366           1       0
 GSM2545367           1       1
 ```
 
-```r
+``` r
 vd$plotlist
 ```
 
-```{.output}
+``` output
 [[1]]
 ```
 
 <img src="fig/06-extra-design-rendered-male-vs-female-1.png" style="display: block; margin: auto;" />
 
-```r
+``` r
 ## Note that we can also generate the design matrix like this
 model.matrix(~ sex, data = meta_noninf_spc)
 ```
 
-```{.output}
+``` output
            (Intercept) sexMale
 GSM2545356           1       1
 GSM2545357           1       1
@@ -309,13 +309,13 @@ Set up the design formula to compare male and female spinal cord samples from Da
 ### Solution
 
 
-```r
+``` r
 meta_noninf_spc <- meta %>% filter(time == "Day0" & 
                                        tissue == "Spinalcord")
 meta_noninf_spc
 ```
 
-```{.output}
+``` output
                      title geo_accession     organism     age    sex
 GSM2545356 CNS_RNA-seq_574    GSM2545356 Mus musculus 8 weeks   Male
 GSM2545357 CNS_RNA-seq_575    GSM2545357 Mus musculus 8 weeks   Male
@@ -336,13 +336,13 @@ GSM2545366 NonInfected C57BL/6 Day0 Spinalcord    10
 GSM2545367 NonInfected C57BL/6 Day0 Spinalcord    11
 ```
 
-```r
+``` r
 vd <- VisualizeDesign(sampleData = meta_noninf_spc, 
                       designFormula = ~ 0 + sex)
 vd$designmatrix
 ```
 
-```{.output}
+``` output
            sexFemale sexMale
 GSM2545356         0       1
 GSM2545357         0       1
@@ -354,11 +354,11 @@ GSM2545366         1       0
 GSM2545367         0       1
 ```
 
-```r
+``` r
 vd$plotlist
 ```
 
-```{.output}
+``` output
 [[1]]
 ```
 
@@ -379,12 +379,12 @@ Set up the design formula to compare the three time points (Day0, Day4, Day8) in
 ### Solution
 
 
-```r
+``` r
 meta_male_spc <- meta %>% filter(sex == "Male" & tissue == "Spinalcord")
 meta_male_spc
 ```
 
-```{.output}
+``` output
                      title geo_accession     organism     age  sex   infection
 GSM2545355 CNS_RNA-seq_571    GSM2545355 Mus musculus 8 weeks Male  InfluenzaA
 GSM2545356 CNS_RNA-seq_574    GSM2545356 Mus musculus 8 weeks Male NonInfected
@@ -413,12 +413,12 @@ GSM2545378 C57BL/6 Day8 Spinalcord    23
 GSM2545379 C57BL/6 Day8 Spinalcord    24
 ```
 
-```r
+``` r
 vd <- VisualizeDesign(sampleData = meta_male_spc, designFormula = ~ time)
 vd$designmatrix
 ```
 
-```{.output}
+``` output
            (Intercept) timeDay4 timeDay8
 GSM2545355           1        1        0
 GSM2545356           1        0        0
@@ -434,11 +434,11 @@ GSM2545378           1        0        1
 GSM2545379           1        0        1
 ```
 
-```r
+``` r
 vd$plotlist
 ```
 
-```{.output}
+``` output
 [[1]]
 ```
 
@@ -454,12 +454,12 @@ Next, we again consider only non-infected mice, but fit a model incorporating bo
 We assume that the tissue differences are the same for both male and female mice, and consequently fit an additive model, without interaction terms. 
 
 
-```r
+``` r
 meta_noninf <- meta %>% filter(time == "Day0")
 meta_noninf
 ```
 
-```{.output}
+``` output
                      title geo_accession     organism     age    sex
 GSM2545337 CNS_RNA-seq_11C    GSM2545337 Mus musculus 8 weeks Female
 GSM2545338 CNS_RNA-seq_12C    GSM2545338 Mus musculus 8 weeks Female
@@ -494,13 +494,13 @@ GSM2545366 NonInfected C57BL/6 Day0 Spinalcord    10
 GSM2545367 NonInfected C57BL/6 Day0 Spinalcord    11
 ```
 
-```r
+``` r
 vd <- VisualizeDesign(sampleData = meta_noninf, 
                       designFormula = ~ sex + tissue)
 vd$designmatrix
 ```
 
-```{.output}
+``` output
            (Intercept) sexMale tissueSpinalcord
 GSM2545337           1       0                0
 GSM2545338           1       0                0
@@ -519,11 +519,11 @@ GSM2545366           1       0                1
 GSM2545367           1       1                1
 ```
 
-```r
+``` r
 vd$plotlist
 ```
 
-```{.output}
+``` output
 [[1]]
 ```
 
@@ -535,12 +535,12 @@ In the previous model, we assumed that the tissue differences were the same for 
 To allow for the estimation of sex-specific tissue differences (at the expense of having one additional coefficient to estimate from the data), we can include an interaction term in the model. 
 
 
-```r
+``` r
 meta_noninf <- meta %>% filter(time == "Day0")
 meta_noninf
 ```
 
-```{.output}
+``` output
                      title geo_accession     organism     age    sex
 GSM2545337 CNS_RNA-seq_11C    GSM2545337 Mus musculus 8 weeks Female
 GSM2545338 CNS_RNA-seq_12C    GSM2545338 Mus musculus 8 weeks Female
@@ -575,7 +575,7 @@ GSM2545366 NonInfected C57BL/6 Day0 Spinalcord    10
 GSM2545367 NonInfected C57BL/6 Day0 Spinalcord    11
 ```
 
-```r
+``` r
 ## Define a design including an interaction term
 ## Note that ~ sex * tissue is equivalent to 
 ## ~ sex + tissue + sex:tissue
@@ -584,7 +584,7 @@ vd <- VisualizeDesign(sampleData = meta_noninf,
 vd$designmatrix
 ```
 
-```{.output}
+``` output
            (Intercept) sexMale tissueSpinalcord sexMale:tissueSpinalcord
 GSM2545337           1       0                0                        0
 GSM2545338           1       0                0                        0
@@ -603,11 +603,11 @@ GSM2545366           1       0                1                        0
 GSM2545367           1       1                1                        1
 ```
 
-```r
+``` r
 vd$plotlist
 ```
 
-```{.output}
+``` output
 [[1]]
 ```
 
@@ -619,13 +619,13 @@ Sometimes, for experiments with multiple factors, it is easier to interpret coef
 Let's consider the previous example again, using this approach:
 
 
-```r
+``` r
 meta_noninf <- meta %>% filter(time == "Day0")
 meta_noninf$sex_tissue <- paste0(meta_noninf$sex, "_", meta_noninf$tissue)
 meta_noninf
 ```
 
-```{.output}
+``` output
                      title geo_accession     organism     age    sex
 GSM2545337 CNS_RNA-seq_11C    GSM2545337 Mus musculus 8 weeks Female
 GSM2545338 CNS_RNA-seq_12C    GSM2545338 Mus musculus 8 weeks Female
@@ -660,13 +660,13 @@ GSM2545366 NonInfected C57BL/6 Day0 Spinalcord    10 Female_Spinalcord
 GSM2545367 NonInfected C57BL/6 Day0 Spinalcord    11   Male_Spinalcord
 ```
 
-```r
+``` r
 vd <- VisualizeDesign(sampleData = meta_noninf, 
                       designFormula = ~ 0 + sex_tissue)
 vd$designmatrix
 ```
 
-```{.output}
+``` output
            sex_tissueFemale_Cerebellum sex_tissueFemale_Spinalcord
 GSM2545337                           1                           0
 GSM2545338                           1                           0
@@ -701,11 +701,11 @@ GSM2545366                         0                         0
 GSM2545367                         0                         1
 ```
 
-```r
+``` r
 vd$plotlist
 ```
 
-```{.output}
+``` output
 [[1]]
 ```
 
@@ -720,7 +720,7 @@ However, accounting for it can increase power to detect tissue differences by el
 Here, we define a paired design for the female non-infected mice, aimed at testing for differences between tissues after accounting for baseline differences between mice.
 
 
-```r
+``` r
 meta_fem_day0 <- meta %>% filter(sex == "Female" & 
                                      time == "Day0")
 
@@ -730,7 +730,7 @@ meta_fem_day0$mouse <- factor(meta_fem_day0$mouse)
 meta_fem_day0
 ```
 
-```{.output}
+``` output
                      title geo_accession     organism     age    sex
 GSM2545337 CNS_RNA-seq_11C    GSM2545337 Mus musculus 8 weeks Female
 GSM2545338 CNS_RNA-seq_12C    GSM2545338 Mus musculus 8 weeks Female
@@ -751,13 +751,13 @@ GSM2545365 NonInfected C57BL/6 Day0 Spinalcord     9
 GSM2545366 NonInfected C57BL/6 Day0 Spinalcord    10
 ```
 
-```r
+``` r
 vd <- VisualizeDesign(sampleData = meta_fem_day0,
                       designFormula = ~ mouse + tissue)
 vd$designmatrix
 ```
 
-```{.output}
+``` output
            (Intercept) mouse8 mouse9 mouse10 tissueSpinalcord
 GSM2545337           1      0      1       0                0
 GSM2545338           1      0      0       1                0
@@ -769,11 +769,11 @@ GSM2545365           1      0      1       0                1
 GSM2545366           1      0      0       1                1
 ```
 
-```r
+``` r
 vd$plotlist
 ```
 
-```{.output}
+``` output
 [[1]]
 ```
 
@@ -788,7 +788,7 @@ One way to view this type of design is as two paired experiments, one for each i
 We can then easily compare the two tissues in each infection group, and contrast the tissue differences between the infection groups. 
 
 
-```r
+``` r
 meta_fem_day04 <- meta %>% 
     filter(sex == "Female" & 
                time %in% c("Day0", "Day4")) %>%
@@ -799,7 +799,7 @@ meta_fem_day04$mouse <- factor(meta_fem_day04$mouse)
 meta_fem_day04
 ```
 
-```{.output}
+``` output
                      title geo_accession     organism     age    sex
 GSM2545337 CNS_RNA-seq_11C    GSM2545337 Mus musculus 8 weeks Female
 GSM2545338 CNS_RNA-seq_12C    GSM2545338 Mus musculus 8 weeks Female
@@ -836,7 +836,7 @@ GSM2545376  InfluenzaA C57BL/6 Day4 Spinalcord    21
 GSM2545377  InfluenzaA C57BL/6 Day4 Spinalcord    22
 ```
 
-```r
+``` r
 design <- model.matrix(~ mouse, data = meta_fem_day04)
 design <- cbind(design, 
                 Spc.Day0 = meta_fem_day04$tissue == "Spinalcord" & 
@@ -847,7 +847,7 @@ rownames(design) <- rownames(meta_fem_day04)
 design
 ```
 
-```{.output}
+``` output
            (Intercept) mouse8 mouse9 mouse10 mouse15 mouse20 mouse21 mouse22
 GSM2545337           1      0      1       0       0       0       0       0
 GSM2545338           1      0      0       1       0       0       0       0
@@ -884,7 +884,7 @@ GSM2545376        0        1
 GSM2545377        0        1
 ```
 
-```r
+``` r
 vd <- VisualizeDesign(sampleData = meta_fem_day04 %>%
                           select(time, tissue, mouse),
                       designFormula = NULL, 
@@ -892,7 +892,7 @@ vd <- VisualizeDesign(sampleData = meta_fem_day04 %>%
 vd$designmatrix
 ```
 
-```{.output}
+``` output
            (Intercept) mouse8 mouse9 mouse10 mouse15 mouse20 mouse21 mouse22
 GSM2545337           1      0      1       0       0       0       0       0
 GSM2545338           1      0      0       1       0       0       0       0
@@ -929,17 +929,17 @@ GSM2545376        0        1
 GSM2545377        0        1
 ```
 
-```r
+``` r
 vd$plotlist
 ```
 
-```{.output}
+``` output
 $`time = Day0`
 ```
 
 <img src="fig/06-extra-design-rendered-within-and-between-1.png" style="display: block; margin: auto;" />
 
-```{.output}
+``` output
 
 $`time = Day4`
 ```
@@ -952,45 +952,45 @@ Now that we have learnt more about interpreting design matrices, let's look back
 We will repeat the main lines of code here.
 
 
-```r
+``` r
 se <- readRDS("data/GSE96870_se.rds")
 se <- se[rowSums(assay(se, "counts")) > 5, ]
 dds <- DESeq2::DESeqDataSet(se, design = ~ sex + time)
 dds <- DESeq(dds)
 ```
 
-```{.output}
+``` output
 estimating size factors
 ```
 
-```{.output}
+``` output
 estimating dispersions
 ```
 
-```{.output}
+``` output
 gene-wise dispersion estimates
 ```
 
-```{.output}
+``` output
 mean-dispersion relationship
 ```
 
-```{.output}
+``` output
 final dispersion estimates
 ```
 
-```{.output}
+``` output
 fitting model and testing
 ```
 
 `DESeq2` stores the design matrix in the object: 
 
 
-```r
+``` r
 attr(dds, "modelMatrix")
 ```
 
-```{.output}
+``` output
                Intercept sex_Male_vs_Female time_Day4_vs_Day0 time_Day8_vs_Day0
 Female_Day0_9          1                  0                 0                 0
 Female_Day0_10         1                  0                 0                 0
@@ -1027,11 +1027,11 @@ attr(,"contrasts")$time
 The column names can be obtained via the `resultsNames` function:
 
 
-```r
+``` r
 resultsNames(dds)
 ```
 
-```{.output}
+``` output
 [1] "Intercept"          "sex_Male_vs_Female" "time_Day4_vs_Day0" 
 [4] "time_Day8_vs_Day0" 
 ```
@@ -1039,14 +1039,14 @@ resultsNames(dds)
 Let's visualize this design: 
 
 
-```r
+``` r
 vd <- VisualizeDesign(sampleData = colData(dds)[, c("sex", "time")], 
                       designMatrix = attr(dds, "modelMatrix"), 
                       flipCoordFitted = TRUE)
 vd$plotlist
 ```
 
-```{.output}
+``` output
 [[1]]
 ```
 
@@ -1055,7 +1055,7 @@ vd$plotlist
 In the previous episode, we performed a test comparing Day8 samples to Day0 samples:
 
 
-```r
+``` r
 resTime <- results(dds, contrast = c("time", "Day8", "Day0"))
 ```
 
@@ -1063,18 +1063,18 @@ From the figure above, we see that this comparison is represented by the `time_D
 Thus, an alternative way of specifying the contrast for the test would be: 
 
 
-```r
+``` r
 resTimeNum <- results(dds, contrast = c(0, 0, 0, 1))
 ```
 
 Let's check if the results are comparable: 
 
 
-```r
+``` r
 summary(resTime)
 ```
 
-```{.output}
+``` output
 
 out of 27430 with nonzero total read count
 adjusted p-value < 0.1
@@ -1087,11 +1087,11 @@ low counts [2]     : 3723, 14%
 [2] see 'independentFiltering' argument of ?results
 ```
 
-```r
+``` r
 summary(resTimeNum)
 ```
 
-```{.output}
+``` output
 
 out of 27430 with nonzero total read count
 adjusted p-value < 0.1
@@ -1104,7 +1104,7 @@ low counts [2]     : 3723, 14%
 [2] see 'independentFiltering' argument of ?results
 ```
 
-```r
+``` r
 ## logFC
 plot(resTime$log2FoldChange, resTimeNum$log2FoldChange)
 abline(0, 1)
@@ -1112,7 +1112,7 @@ abline(0, 1)
 
 <img src="fig/06-extra-design-rendered-compare-tests-sex-time-1.png" style="display: block; margin: auto;" />
 
-```r
+``` r
 ## -log10(p-value)
 plot(-log10(resTime$pvalue), -log10(resTimeNum$pvalue))
 abline(0, 1)
@@ -1127,42 +1127,42 @@ We still consider the sex and time predictors, but now we allow an interaction b
 In other words, we allow the time effect to be different for males and females. 
 
 
-```r
+``` r
 se <- readRDS("data/GSE96870_se.rds")
 se <- se[rowSums(assay(se, "counts")) > 5, ]
 dds <- DESeq2::DESeqDataSet(se, design = ~ sex * time)
 dds <- DESeq(dds)
 ```
 
-```{.output}
+``` output
 estimating size factors
 ```
 
-```{.output}
+``` output
 estimating dispersions
 ```
 
-```{.output}
+``` output
 gene-wise dispersion estimates
 ```
 
-```{.output}
+``` output
 mean-dispersion relationship
 ```
 
-```{.output}
+``` output
 final dispersion estimates
 ```
 
-```{.output}
+``` output
 fitting model and testing
 ```
 
-```r
+``` r
 attr(dds, "modelMatrix")
 ```
 
-```{.output}
+``` output
                Intercept sex_Male_vs_Female time_Day4_vs_Day0 time_Day8_vs_Day0
 Female_Day0_9          1                  0                 0                 0
 Female_Day0_10         1                  0                 0                 0
@@ -1222,14 +1222,14 @@ attr(,"contrasts")$time
 Let's visualize this design: 
 
 
-```r
+``` r
 vd <- VisualizeDesign(sampleData = colData(dds)[, c("sex", "time")], 
                       designMatrix = attr(dds, "modelMatrix"), 
                       flipCoordFitted = TRUE)
 vd$plotlist
 ```
 
-```{.output}
+``` output
 [[1]]
 ```
 
@@ -1239,7 +1239,7 @@ Note that now, the `time_Day8_vs_Day0` coefficient represents the difference bet
 To get the corresponding difference for the male samples, we need to also add the interaction effect (`sexMale.timeDay8`). 
 
 
-```r
+``` r
 ## Day8 vs Day0, female
 resTimeFemale <- results(dds, contrast = c("time", "Day8", "Day0"))
 
@@ -1250,7 +1250,7 @@ resTimeInt <- results(dds, name = "sexMale.timeDay8")
 Let's try to fit this model with the second approach mentioned above, namely to create a single factor.
 
 
-```r
+``` r
 se <- readRDS("data/GSE96870_se.rds")
 se <- se[rowSums(assay(se, "counts")) > 5, ]
 se$sex_time <- paste0(se$sex, "_", se$time)
@@ -1258,35 +1258,35 @@ dds <- DESeq2::DESeqDataSet(se, design = ~ 0 + sex_time)
 dds <- DESeq(dds)
 ```
 
-```{.output}
+``` output
 estimating size factors
 ```
 
-```{.output}
+``` output
 estimating dispersions
 ```
 
-```{.output}
+``` output
 gene-wise dispersion estimates
 ```
 
-```{.output}
+``` output
 mean-dispersion relationship
 ```
 
-```{.output}
+``` output
 final dispersion estimates
 ```
 
-```{.output}
+``` output
 fitting model and testing
 ```
 
-```r
+``` r
 attr(dds, "modelMatrix")
 ```
 
-```{.output}
+``` output
                sex_timeFemale_Day0 sex_timeFemale_Day4 sex_timeFemale_Day8
 Female_Day0_9                    1                   0                   0
 Female_Day0_10                   1                   0                   0
@@ -1343,14 +1343,14 @@ attr(,"contrasts")$sex_time
 We again visualize this design: 
 
 
-```r
+``` r
 vd <- VisualizeDesign(sampleData = colData(dds)[, c("sex", "time")], 
                       designMatrix = attr(dds, "modelMatrix"), 
                       flipCoordFitted = TRUE)
 vd$plotlist
 ```
 
-```{.output}
+``` output
 [[1]]
 ```
 
@@ -1359,7 +1359,7 @@ vd$plotlist
 We then set up the same contrasts as above
 
 
-```r
+``` r
 ## Day8 vs Day0, female
 resTimeFemaleSingle <- results(dds, contrast = c("sex_time", "Female_Day8", "Female_Day0"))
 
@@ -1367,23 +1367,23 @@ resTimeFemaleSingle <- results(dds, contrast = c("sex_time", "Female_Day8", "Fem
 resultsNames(dds)
 ```
 
-```{.output}
+``` output
 [1] "sex_timeFemale_Day0" "sex_timeFemale_Day4" "sex_timeFemale_Day8"
 [4] "sex_timeMale_Day0"   "sex_timeMale_Day4"   "sex_timeMale_Day8"  
 ```
 
-```r
+``` r
 resTimeIntSingle <- results(dds, contrast = c(1, 0, -1, -1, 0, 1))
 ```
 
 Check that these results agree with the ones obtained by fitting the model with the two factors and the interaction term. 
 
 
-```r
+``` r
 summary(resTimeFemale)
 ```
 
-```{.output}
+``` output
 
 out of 27430 with nonzero total read count
 adjusted p-value < 0.1
@@ -1396,11 +1396,11 @@ low counts [2]     : 6382, 23%
 [2] see 'independentFiltering' argument of ?results
 ```
 
-```r
+``` r
 summary(resTimeFemaleSingle)
 ```
 
-```{.output}
+``` output
 
 out of 27430 with nonzero total read count
 adjusted p-value < 0.1
@@ -1413,18 +1413,18 @@ low counts [2]     : 6382, 23%
 [2] see 'independentFiltering' argument of ?results
 ```
 
-```r
+``` r
 plot(-log10(resTimeFemale$pvalue), -log10(resTimeFemaleSingle$pvalue))
 abline(0, 1)
 ```
 
 <img src="fig/06-extra-design-rendered-compare-sex-time-int-1.png" style="display: block; margin: auto;" />
 
-```r
+``` r
 summary(resTimeInt)
 ```
 
-```{.output}
+``` output
 
 out of 27430 with nonzero total read count
 adjusted p-value < 0.1
@@ -1437,11 +1437,11 @@ low counts [2]     : 0, 0%
 [2] see 'independentFiltering' argument of ?results
 ```
 
-```r
+``` r
 summary(resTimeIntSingle)
 ```
 
-```{.output}
+``` output
 
 out of 27430 with nonzero total read count
 adjusted p-value < 0.1
@@ -1454,7 +1454,7 @@ low counts [2]     : 0, 0%
 [2] see 'independentFiltering' argument of ?results
 ```
 
-```r
+``` r
 plot(-log10(resTimeInt$pvalue), -log10(resTimeIntSingle$pvalue))
 abline(0, 1)
 ```

@@ -27,7 +27,7 @@ exercises: 40
 In this episode we will use some functions from add-on R packages. In order to use them, we need to load them from our `library`:
 
 
-```r
+``` r
 suppressPackageStartupMessages({
     library(AnnotationDbi)
     library(org.Mm.eg.db)
@@ -47,17 +47,17 @@ Let's read in the data files that we downloaded in the last episode and start to
 ### Counts
 
 
-```r
+``` r
 counts <- read.csv("data/GSE96870_counts_cerebellum.csv", 
                    row.names = 1)
 dim(counts)
 ```
 
-```{.output}
+``` output
 [1] 41786    22
 ```
 
-```r
+``` r
 # View(counts)
 ```
 
@@ -68,17 +68,17 @@ Genes are in rows and samples are in columns, so we have counts for 41,786 genes
 Next read in the sample annotations. Because samples are in columns in the count matrix, we will name the object `coldata`:
 
 
-```r
+``` r
 coldata <- read.csv("data/GSE96870_coldata_cerebellum.csv",
                     row.names = 1)
 dim(coldata)
 ```
 
-```{.output}
+``` output
 [1] 22 10
 ```
 
-```r
+``` r
 # View(coldata)
 ```
 
@@ -88,7 +88,7 @@ Now samples are in rows with the GEO sample IDs as the rownames, and we have 10 
 The counts only have gene symbols, which while short and somewhat recognizable to the human brain, are not always good absolute identifiers for exactly what gene was measured. For this we need additional gene annotations that were provided by the authors. The `count` and `coldata` files were in comma separated value (.csv) format, but we cannot use that for our gene annotation file because the descriptions can contain commas that would prevent a .csv file from being read in correctly. Instead the gene annotation file is in tab separated value (.tsv) format. Likewise, the descriptions can contain the single quote `'` (e.g., 5'), which by default R assumes indicates a character entry. So we have to use a more generic function `read.delim()` with extra arguments to specify that we have tab-separated data (`sep = "\t"`) with no quotes used (`quote = ""`). We also put in other arguments to specify that the first row contains our column names (`header = TRUE`), the gene symbols that should be our `row.names` are in the 5th column (`row.names = 5`), and that NCBI's species-specific gene ID (i.e., ENTREZID) should be read in as character data even though they look like numbers (`colClasses` argument). You can look up this details on available arguments by simply entering the function name starting with question mark. (e.g., `?read.delim`)
 
 
-```r
+``` r
 rowranges <- read.delim("data/GSE96870_rowranges.tsv", 
                         sep = "\t", 
                         colClasses = c(ENTREZID = "character"),
@@ -98,11 +98,11 @@ rowranges <- read.delim("data/GSE96870_rowranges.tsv",
 dim(rowranges)
 ```
 
-```{.output}
+``` output
 [1] 41786     7
 ```
 
-```r
+``` r
 # View(rowranges)
 ```
 
@@ -113,11 +113,11 @@ useful for the downstream analysis. For example, from the `gbkey` column, we
 can check what types of genes and how many of them are in our dataset:
 
 
-```r
+``` r
 table(rowranges$gbkey)
 ```
 
-```{.output}
+``` output
 
      C_region     D_segment          exon     J_segment      misc_RNA 
            20            23          4008            94          1988 
@@ -163,23 +163,23 @@ Before we put them together, you ABSOLUTELY MUST MAKE SURE THE SAMPLES AND GENES
 
 
 
-```r
+``` r
 all.equal(colnames(counts), rownames(coldata)) # samples
 ```
 
-```{.output}
+``` output
 [1] TRUE
 ```
 
-```r
+``` r
 all.equal(rownames(counts), rownames(rowranges)) # genes
 ```
 
-```{.output}
+``` output
 [1] TRUE
 ```
 
-```r
+``` r
 # If the first is not TRUE, you can match up the samples/columns in
 # counts with the samples/rows in coldata like this (which is fine
 # to run even if the first was TRUE):
@@ -191,7 +191,7 @@ coldata <- coldata[tempindex, ]
 all.equal(colnames(counts), rownames(coldata)) 
 ```
 
-```{.output}
+``` output
 [1] TRUE
 ```
 
@@ -206,7 +206,7 @@ Write the codes.
 ::::::::::::::::::::::::::::::::::: solution
 
 
-```r
+``` r
 tempindex <- match(rownames(counts), rownames(rowranges))
 rowranges <- rowranges[tempindex, ]
 
@@ -221,7 +221,7 @@ Once we have verified that samples and genes are in the same order, we can
 then create our `SummarizedExperiment` object.
 
 
-```r
+``` r
 # One final check:
 stopifnot(rownames(rowranges) == rownames(counts), # features
           rownames(coldata) == colnames(counts)) # samples
@@ -238,7 +238,7 @@ Because matching the genes and samples is so important, the `SummarizedExperimen
 genes/samples and the sample/row names match. If not, you will get some error messages:
 
 
-```r
+``` r
 # wrong number of samples:
 
 bad1 <- SummarizedExperiment(
@@ -248,14 +248,14 @@ bad1 <- SummarizedExperiment(
 )
 ```
 
-```{.error}
+``` error
 Error in validObject(.Object): invalid class "SummarizedExperiment" object: 
     nb of cols in 'assay' (22) must equal nb of rows in 'colData' (3)
 ```
 
 
 
-```r
+``` r
 # same number of genes but in different order:
 
 bad2 <- SummarizedExperiment(
@@ -265,7 +265,7 @@ bad2 <- SummarizedExperiment(
 )
 ```
 
-```{.error}
+``` error
 Error in SummarizedExperiment(assays = list(counts = as.matrix(counts)), : the rownames and colnames of the supplied assay(s) must be NULL or
   identical to those of the RangedSummarizedExperiment object (or
   derivative) to construct
@@ -276,12 +276,12 @@ Error in SummarizedExperiment(assays = list(counts = as.matrix(counts)), : the r
 A brief recap of how to access the various data slots in a `SummarizedExperiment` and how to make some manipulations:
 
 
-```r
+``` r
 # Access the counts
 head(assay(se))
 ```
 
-```{.output}
+``` output
              GSM2545336 GSM2545337 GSM2545338 GSM2545339 GSM2545340 GSM2545341
 Xkr4               1891       2410       2159       1980       1977       1945
 LOC105243853          0          0          1          4          0          0
@@ -312,15 +312,15 @@ Rp1                   3          3          1          0
 Sox17               273        197        310        246
 ```
 
-```r
+``` r
 dim(assay(se))
 ```
 
-```{.output}
+``` output
 [1] 41786    22
 ```
 
-```r
+``` r
 # The above works now because we only have one assay, "counts"
 # But if there were more than one assay, we would have to specify
 # which one like so:
@@ -328,7 +328,7 @@ dim(assay(se))
 head(assay(se, "counts"))
 ```
 
-```{.output}
+``` output
              GSM2545336 GSM2545337 GSM2545338 GSM2545339 GSM2545340 GSM2545341
 Xkr4               1891       2410       2159       1980       1977       1945
 LOC105243853          0          0          1          4          0          0
@@ -359,12 +359,12 @@ Rp1                   3          3          1          0
 Sox17               273        197        310        246
 ```
 
-```r
+``` r
 # Access the sample annotations
 colData(se)
 ```
 
-```{.output}
+``` output
 DataFrame with 22 rows and 10 columns
                      title geo_accession     organism         age         sex
                <character>   <character>  <character> <character> <character>
@@ -394,20 +394,20 @@ GSM2545363  InfluenzaA     C57BL/6        Day4  Cerebellum        12
 GSM2545380  InfluenzaA     C57BL/6        Day8  Cerebellum        19
 ```
 
-```r
+``` r
 dim(colData(se))
 ```
 
-```{.output}
+``` output
 [1] 22 10
 ```
 
-```r
+``` r
 # Access the gene annotations
 head(rowData(se))
 ```
 
-```{.output}
+``` output
 DataFrame with 6 rows and 3 columns
                 ENTREZID                product       gbkey
              <character>            <character> <character>
@@ -419,22 +419,22 @@ Rp1                19888 retinitis pigmentosa..        mRNA
 Sox17              20671 SRY (sex determining..        mRNA
 ```
 
-```r
+``` r
 dim(rowData(se))
 ```
 
-```{.output}
+``` output
 [1] 41786     3
 ```
 
-```r
+``` r
 # Make better sample IDs that show sex, time and mouse ID:
 
 se$Label <- paste(se$sex, se$time, se$mouse, sep = "_")
 se$Label
 ```
 
-```{.output}
+``` output
  [1] "Female_Day8_14" "Female_Day0_9"  "Female_Day0_10" "Female_Day4_15"
  [5] "Male_Day4_18"   "Male_Day8_6"    "Female_Day8_5"  "Male_Day0_11"  
  [9] "Female_Day4_22" "Male_Day4_13"   "Male_Day8_23"   "Male_Day8_24"  
@@ -443,7 +443,7 @@ se$Label
 [21] "Male_Day4_12"   "Female_Day8_19"
 ```
 
-```r
+``` r
 colnames(se) <- se$Label
 
 # Our samples are not in order based on sex and time
@@ -451,7 +451,7 @@ se$Group <- paste(se$sex, se$time, sep = "_")
 se$Group
 ```
 
-```{.output}
+``` output
  [1] "Female_Day8" "Female_Day0" "Female_Day0" "Female_Day4" "Male_Day4"  
  [6] "Male_Day8"   "Female_Day8" "Male_Day0"   "Female_Day4" "Male_Day4"  
 [11] "Male_Day8"   "Male_Day8"   "Female_Day0" "Male_Day0"   "Male_Day4"  
@@ -459,7 +459,7 @@ se$Group
 [21] "Male_Day4"   "Female_Day8"
 ```
 
-```r
+``` r
 # change this to factor data with the levels in order 
 # that we want, then rearrange the se object:
 
@@ -470,7 +470,7 @@ se <- se[, order(se$Group)]
 colData(se)
 ```
 
-```{.output}
+``` output
 DataFrame with 22 rows and 12 columns
                          title geo_accession     organism         age
                    <character>   <character>  <character> <character>
@@ -513,7 +513,7 @@ Male_Day8_23          23   Male_Day8_23 Male_Day8
 Male_Day8_24          24   Male_Day8_24 Male_Day8  
 ```
 
-```r
+``` r
 # Finally, also factor the Label column to keep in order in plots:
 
 se$Label <- factor(se$Label, levels = se$Label)
@@ -535,18 +535,18 @@ of expression levels for infected and non-infected samples based on these genes.
 ::::::::::::::::::::::::::::::::::: solution
 
 
-```r
+``` r
 # 1
 table(se$infection)
 ```
 
-```{.output}
+``` output
 
  InfluenzaA NonInfected 
          15           7 
 ```
 
-```r
+``` r
 # 2
 se_infected <- se[, se$infection == "InfluenzaA"]
 se_noninfected <- se[, se$infection == "NonInfected"]
@@ -557,26 +557,26 @@ means_noninfected <- rowMeans(assay(se_noninfected)[1:500, ])
 summary(means_infected)
 ```
 
-```{.output}
+``` output
      Min.   1st Qu.    Median      Mean   3rd Qu.      Max. 
     0.000     0.133     2.867   764.068   337.417 18896.600 
 ```
 
-```r
+``` r
 summary(means_noninfected)
 ```
 
-```{.output}
+``` output
      Min.   1st Qu.    Median      Mean   3rd Qu.      Max. 
     0.000     0.143     3.143   771.017   366.571 20010.143 
 ```
 
-```r
+``` r
 # 3
 ncol(se[, se$sex == "Female" & se$infection == "InfluenzaA" & se$time == "Day8"])
 ```
 
-```{.output}
+``` output
 [1] 4
 ```
 
@@ -588,7 +588,7 @@ ncol(se[, se$sex == "Female" & se$infection == "InfluenzaA" & se$time == "Day8"]
 This was a bit of code and time to create our `SummarizedExperiment` object. We will need to keep using it throughout the workshop, so it can be useful to save it as an actual single file on our computer to read it back in to R's memory if we have to shut down RStudio. To save an R-specific file we can use the `saveRDS()` function and later read it back into R using the `readRDS()` function. 
 
 
-```r
+``` r
 saveRDS(se, "data/GSE96870_se.rds")
 rm(se) # remove the object!
 se <- readRDS("data/GSE96870_se.rds")
@@ -613,12 +613,12 @@ Before, we conceptually discussed subsetting to only the mRNA genes. Now that we
 ::::::::::::::::::::::::::::::::::: solution
 
 
-```r
+``` r
 se_mRNA <- se[rowData(se)$gbkey == "mRNA" , ]
 dim(se_mRNA)
 ```
 
-```{.output}
+``` output
 [1] 21198    22
 ```
 
@@ -656,15 +656,15 @@ Where
 - *keytype* is the type of key used    
 
 
-```r
+``` r
 mapIds(org.Mm.eg.db, keys = "497097", column = "SYMBOL", keytype = "ENTREZID")
 ```
 
-```{.output}
+``` output
 'select()' returned 1:1 mapping between keys and columns
 ```
 
-```{.output}
+``` output
 497097 
 "Xkr4" 
 ```
@@ -675,23 +675,23 @@ The below example demonstrate this functionality using the `hgu95av2.db`
 package, an Affymetrix Human Genome U95 Set annotation data.
 
 
-```r
+``` r
 keys <- head(keys(hgu95av2.db, "ENTREZID"))
 last <- function(x){x[[length(x)]]}
 
 mapIds(hgu95av2.db, keys = keys, column = "ALIAS", keytype = "ENTREZID")
 ```
 
-```{.output}
+``` output
 'select()' returned 1:many mapping between keys and columns
 ```
 
-```{.output}
+``` output
        10       100      1000     10000 100008586     10001 
    "AAC2"    "ADA1"   "ACOGS"    "MPPH"     "AL4"   "ARC33" 
 ```
 
-```r
+``` r
 # When there is 1:many mapping, the default behavior was 
 # to output the first match. This can be changed to a function,
 # which we defined above to give us the last match:
@@ -699,26 +699,26 @@ mapIds(hgu95av2.db, keys = keys, column = "ALIAS", keytype = "ENTREZID")
 mapIds(hgu95av2.db, keys = keys, column = "ALIAS", keytype = "ENTREZID", multiVals = last)
 ```
 
-```{.output}
+``` output
 'select()' returned 1:many mapping between keys and columns
 ```
 
-```{.output}
+``` output
        10       100      1000     10000 100008586     10001 
    "NAT2"     "ADA"    "CDH2"    "AKT3" "GAGE12F"    "MED6" 
 ```
 
-```r
+``` r
 # Or we can get back all the many mappings:
 
 mapIds(hgu95av2.db, keys = keys, column = "ALIAS", keytype = "ENTREZID", multiVals = "list")
 ```
 
-```{.output}
+``` output
 'select()' returned 1:many mapping between keys and columns
 ```
 
-```{.output}
+``` output
 $`10`
 [1] "AAC2"  "NAT-2" "PNAT"  "NAT2" 
 
@@ -747,14 +747,14 @@ $`10001`
 ## Session info
 
 
-```r
+``` r
 sessionInfo()
 ```
 
-```{.output}
-R version 4.3.2 (2023-10-31)
-Platform: x86_64-pc-linux-gnu (64-bit)
-Running under: Ubuntu 22.04.4 LTS
+``` output
+R version 4.4.1 (2024-06-14)
+Platform: x86_64-pc-linux-gnu
+Running under: Ubuntu 22.04.5 LTS
 
 Matrix products: default
 BLAS:   /usr/lib/x86_64-linux-gnu/blas/libblas.so.3.10.0 
@@ -774,28 +774,28 @@ attached base packages:
 [8] base     
 
 other attached packages:
- [1] hgu95av2.db_3.13.0          org.Hs.eg.db_3.17.0        
- [3] org.Mm.eg.db_3.17.0         AnnotationDbi_1.62.2       
- [5] SummarizedExperiment_1.30.2 Biobase_2.60.0             
- [7] MatrixGenerics_1.12.3       matrixStats_1.2.0          
- [9] GenomicRanges_1.52.1        GenomeInfoDb_1.36.4        
-[11] IRanges_2.34.1              S4Vectors_0.38.2           
-[13] BiocGenerics_0.46.0         knitr_1.45                 
+ [1] hgu95av2.db_3.13.0          org.Hs.eg.db_3.19.1        
+ [3] org.Mm.eg.db_3.19.1         AnnotationDbi_1.66.0       
+ [5] SummarizedExperiment_1.34.0 Biobase_2.64.0             
+ [7] MatrixGenerics_1.16.0       matrixStats_1.4.1          
+ [9] GenomicRanges_1.56.1        GenomeInfoDb_1.40.1        
+[11] IRanges_2.38.1              S4Vectors_0.42.1           
+[13] BiocGenerics_0.50.0         knitr_1.48                 
 
 loaded via a namespace (and not attached):
- [1] Matrix_1.6-5            bit_4.0.5               highr_0.10             
- [4] compiler_4.3.2          BiocManager_1.30.22     renv_1.0.5             
- [7] crayon_1.5.2            blob_1.2.4              Biostrings_2.68.1      
-[10] bitops_1.0-7            png_0.1-8               fastmap_1.1.1          
-[13] yaml_2.3.8              lattice_0.22-5          R6_2.5.1               
-[16] XVector_0.40.0          S4Arrays_1.0.6          DelayedArray_0.26.7    
-[19] GenomeInfoDbData_1.2.10 DBI_1.2.2               rlang_1.1.3            
-[22] KEGGREST_1.40.1         cachem_1.0.8            xfun_0.42              
-[25] bit64_4.0.5             RSQLite_2.3.5           memoise_2.0.1          
-[28] cli_3.6.2               zlibbioc_1.46.0         grid_4.3.2             
-[31] vctrs_0.6.5             evaluate_0.23           abind_1.4-5            
-[34] RCurl_1.98-1.14         httr_1.4.7              pkgconfig_2.0.3        
-[37] tools_4.3.2            
+ [1] Matrix_1.7-0            bit_4.5.0               jsonlite_1.8.9         
+ [4] highr_0.11              compiler_4.4.1          BiocManager_1.30.25    
+ [7] renv_1.0.11             crayon_1.5.3            blob_1.2.4             
+[10] Biostrings_2.72.1       png_0.1-8               fastmap_1.2.0          
+[13] yaml_2.3.10             lattice_0.22-6          R6_2.5.1               
+[16] XVector_0.44.0          S4Arrays_1.4.1          DelayedArray_0.30.1    
+[19] GenomeInfoDbData_1.2.12 DBI_1.2.3               rlang_1.1.4            
+[22] KEGGREST_1.44.1         cachem_1.1.0            xfun_0.47              
+[25] bit64_4.0.5             memoise_2.0.1           SparseArray_1.4.8      
+[28] RSQLite_2.3.7           cli_3.6.3               zlibbioc_1.50.0        
+[31] grid_4.4.1              vctrs_0.6.5             evaluate_1.0.0         
+[34] abind_1.4-8             httr_1.4.7              pkgconfig_2.0.3        
+[37] tools_4.4.1             UCSC.utils_1.0.0       
 ```
 
 ::: keypoints

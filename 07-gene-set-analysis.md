@@ -70,7 +70,7 @@ Following is a list of packages that will be used in this episode:
 
 
 
-```r
+``` r
 library(SummarizedExperiment)
 library(DESeq2)
 library(gplots)
@@ -99,7 +99,7 @@ In the following code, there are also comments that explain every step of the
 analysis.
 
 
-```r
+``` r
 library(SummarizedExperiment)
 library(DESeq2)
 
@@ -125,19 +125,19 @@ Let's check the number of DE genes and how they look like. It seems the number
 of DE genes is very small, but it is OK for this example.
 
 
-```r
+``` r
 length(sexDEgenes)
 ```
 
-```{.output}
+``` output
 [1] 54
 ```
 
-```r
+``` r
 head(sexDEgenes)
 ```
 
-```{.output}
+``` output
 [1] "Lgr6"   "Myoc"   "Fibcd1" "Kcna4"  "Ctxn2"  "S100a9"
 ```
 
@@ -152,22 +152,22 @@ format and we need to explicitly convert it to a normal vector by
 `as.vector()`.
 
 
-```r
+``` r
 geneGR <- rowRanges(se)
 totalGenes <- rownames(se)
 XYGeneSet <- totalGenes[as.vector(seqnames(geneGR)) %in% c("X", "Y")]
 head(XYGeneSet)
 ```
 
-```{.output}
+``` output
 [1] "Gm21950"   "Gm14346"   "Gm14345"   "Gm14351"   "Spin2-ps1" "Gm3701"   
 ```
 
-```r
+``` r
 length(XYGeneSet)
 ```
 
-```{.output}
+``` output
 [1] 1134
 ```
 
@@ -189,7 +189,7 @@ Since the DE genes and the gene set can be mathematically thought of as two sets
 a natural way is to first visualize them with a Venn diagram.
 
 
-```r
+``` r
 library(gplots)
 plot(venn(list("sexDEgenes"  = sexDEgenes, 
                "XY gene set" = XYGeneSet)))
@@ -230,7 +230,7 @@ These numbers can be obtained as in the following code^[Genes must be unique in 
 R variable names.
 
 
-```r
+``` r
 n    <- nrow(se)
 n_01 <- length(XYGeneSet)
 n_10 <- length(sexDEgenes)
@@ -240,7 +240,7 @@ n_11 <- length(intersect(sexDEgenes, XYGeneSet))
 Other values can be obtained by:
 
 
-```r
+``` r
 n_12 <- n_10 - n_11
 n_21 <- n_01 - n_11
 n_20 <- n    - n_10
@@ -251,12 +251,12 @@ n_22 <- n_02 - n_12
 All the values are:
 
 
-```r
+``` r
 matrix(c(n_11, n_12, n_10, n_21, n_22, n_20, n_01, n_02, n),
     nrow = 3, byrow = TRUE)
 ```
 
-```{.output}
+``` output
      [,1]  [,2]  [,3]
 [1,]   13    41    54
 [2,] 1121 20023 21144
@@ -283,12 +283,12 @@ the test. The input is the top-left 2x2 sub-matrix. We specify `alternative =
 over-representation.
 
 
-```r
+``` r
 fisher.test(matrix(c(n_11, n_12, n_21, n_22), nrow = 2, byrow = TRUE),
     alternative = "greater")
 ```
 
-```{.output}
+``` output
 
 	Fisher's Exact Test for Count Data
 
@@ -309,13 +309,13 @@ Results of the Fisher's Exact test can be saved into an object `t`, which is a
 simple list, and the _p_-value can be obtained by `t$p.value`.
 
 
-```r
+``` r
 t <- fisher.test(matrix(c(n_11, n_12, n_21, n_22), nrow = 2, byrow = TRUE),
     alternative = "greater")
 t$p.value
 ```
 
-```{.output}
+``` output
 [1] 3.9059e-06
 ```
 
@@ -350,12 +350,12 @@ and put whether genes are DE on columns.
 And the corresponding `fisher.test()` is:
 
 
-```r
+``` r
 fisher.test(matrix(c(13, 1121, 41, 20023), nrow = 2, byrow = TRUE),
     alternative = "greater")
 ```
 
-```{.output}
+``` output
 
 	Fisher's Exact Test for Count Data
 
@@ -451,11 +451,11 @@ Then, the correct use of `phyper()` is:
 Let's plugin our variables:
 
 
-```r
+``` r
 1 - phyper(n_11 - 1, n_10, n_20, n_01)
 ```
 
-```{.output}
+``` output
 [1] 3.9059e-06
 ```
 
@@ -463,22 +463,22 @@ Optionally, `lower.tail` argument can be specified which directly calculates
 _p_-values from the upper tail of the distribution.
 
 
-```r
+``` r
 phyper(n_11 - 1, n_10, n_20, n_01, lower.tail = FALSE)
 ```
 
-```{.output}
+``` output
 [1] 3.9059e-06
 ```
 
 If we switch `n_01` and `n_10`, the _p_-values are identical:
 
 
-```r
+``` r
 1 - phyper(n_11 - 1, n_01, n_02, n_10)
 ```
 
-```{.output}
+``` output
 [1] 3.9059e-06
 ```
 
@@ -489,7 +489,7 @@ Let's test the runtime of the two functions:
 
 
 
-```r
+``` r
 library(microbenchmark)
 microbenchmark(
     fisher = fisher.test(matrix(c(n_11, n_12, n_21, n_22), nrow = 2, byrow = TRUE),
@@ -498,11 +498,11 @@ microbenchmark(
 )
 ```
 
-```{.output}
+``` output
 Unit: microseconds
-   expr     min      lq      mean  median       uq      max neval
- fisher 238.955 243.980 270.67608 248.163 259.2635 1920.491   100
-  hyper   1.333   1.488   2.28346   2.550   2.8505    6.953   100
+   expr     min       lq      mean  median      uq      max neval
+ fisher 247.441 253.1220 287.03204 261.883 275.659 2133.728   100
+  hyper   1.453   1.6835   2.51601   1.999   3.061    9.678   100
 ```
 
 It is very astonishing that `phyper()` is hundreds of times faster than
@@ -573,7 +573,7 @@ list of vectors. In the following example, there are three gene sets with 3, 5
 and 2 genes. Some genes exist in multiple gene sets.
 
 
-```r
+``` r
 lt <- list(gene_set_1 = c("gene_1", "gene_2", "gene_3"),
            gene_set_2 = c("gene_1", "gene_3", "gene_4", "gene_5", "gene_6"),
            gene_set_3 = c("gene_4", "gene_7")
@@ -581,7 +581,7 @@ lt <- list(gene_set_1 = c("gene_1", "gene_2", "gene_3"),
 lt
 ```
 
-```{.output}
+``` output
 $gene_set_1
 [1] "gene_1" "gene_2" "gene_3"
 
@@ -598,12 +598,12 @@ i.e. which column locates as the first column, are quite arbitrary. Different
 tools may require differently.
 
 
-```r
+``` r
 data.frame(gene_set = rep(names(lt), times = sapply(lt, length)),
            gene = unname(unlist(lt)))
 ```
 
-```{.output}
+``` output
      gene_set   gene
 1  gene_set_1 gene_1
 2  gene_set_1 gene_2
@@ -621,7 +621,7 @@ Or genes be in the first column:
 
 
 
-```{.output}
+``` output
      gene   gene_set
 1  gene_1 gene_set_1
 2  gene_2 gene_set_1
@@ -658,7 +658,7 @@ list to a two-column data frame?
 ::::::::::::::::::::::::::::::::::: solution
 
 
-```r
+``` r
 lt <- list(gene_set_1 = c("gene_1", "gene_2", "gene_3"),
            gene_set_2 = c("gene_1", "gene_3", "gene_4", "gene_5", "gene_6"),
            gene_set_3 = c("gene_4", "gene_7")
@@ -669,13 +669,13 @@ To convert `lt` to a data frame (e.g. let's put gene sets in the first
 column):
 
 
-```r
+``` r
 df = data.frame(gene_set = rep(names(lt), times = sapply(lt, length)),
                 gene = unname(unlist(lt)))
 df
 ```
 
-```{.output}
+``` output
      gene_set   gene
 1  gene_set_1 gene_1
 2  gene_set_1 gene_2
@@ -692,11 +692,11 @@ df
 To convert `df` back to the list:
 
 
-```r
+``` r
 split(df$gene, df$gene_set)
 ```
 
-```{.output}
+``` output
 $gene_set_1
 [1] "gene_1" "gene_2" "gene_3"
 
@@ -764,12 +764,12 @@ All the columns (the key column or the source column) can be obtained by
 `keytypes()`:
 
 
-```r
+``` r
 library(org.Hs.eg.db)
 keytypes(org.Hs.eg.db)
 ```
 
-```{.output}
+``` output
  [1] "ACCNUM"       "ALIAS"        "ENSEMBL"      "ENSEMBLPROT"  "ENSEMBLTRANS"
  [6] "ENTREZID"     "ENZYME"       "EVIDENCE"     "EVIDENCEALL"  "GENENAME"    
 [11] "GENETYPE"     "GO"           "GOALL"        "IPI"          "MAP"         
@@ -784,13 +784,13 @@ valid "key column", thus we can query "_select all GO IDs where the correspondin
 ONTOLOGY is BP_", which is translated into the following code:
 
 
-```r
+``` r
 BP_Id = mapIds(org.Hs.eg.db, keys = "BP", keytype = "ONTOLOGY", 
                column = "GO", multiVals = "list")[[1]]
 head(BP_Id)
 ```
 
-```{.output}
+``` output
 [1] "GO:0008150" "GO:0001553" "GO:0001869" "GO:0002438" "GO:0006953"
 [6] "GO:0007584"
 ```
@@ -804,7 +804,7 @@ Next we do mapping from GO IDs to gene Entrez IDs. Now the query becomes "_provi
 a vector of GO IDs, select ENTREZIDs which correspond to every one of them_".
 
 
-```r
+``` r
 BPGeneSets = mapIds(org.Hs.eg.db, keys = BP_Id, keytype = "GOALL", 
                     column = "ENTREZID", multiVals = "list")
 ```
@@ -823,12 +823,12 @@ annotations which is not complete, and mapping between `"GOALL"` and
 We filter out GO gene sets with no gene annotated.
 
 
-```r
+``` r
 BPGeneSets = BPGeneSets[sapply(BPGeneSets, length) > 0]
 BPGeneSets[2:3] # BPGeneSets[[1]] is too long
 ```
 
-```{.output}
+``` output
 $`GO:0001553`
  [1] "2"     "2516"  "2661"  "2661"  "3624"  "4313"  "5156"  "5798"  "6777" 
 [10] "8322"  "8879"  "56729" "59338"
@@ -897,12 +897,12 @@ remote web server.
 
 
 
-```r
+``` r
 keggGeneSets = read.table(url("https://rest.kegg.jp/link/pathway/hsa"), sep = "\t")
 head(keggGeneSets)
 ```
 
-```{.output}
+``` output
          V1            V2
 1 hsa:10327 path:hsa00010
 2   hsa:124 path:hsa00010
@@ -917,13 +917,13 @@ Let's remove the `"hsa:"` prefix, also we remove the `"path:"` prefix for
 pathway IDs in the second column.
 
 
-```r
+``` r
 keggGeneSets[, 1] = gsub("hsa:", "", keggGeneSets[, 1])
 keggGeneSets[, 2] = gsub("path:", "", keggGeneSets[, 2])
 head(keggGeneSets)
 ```
 
-```{.output}
+``` output
      V1       V2
 1 10327 hsa00010
 2   124 hsa00010
@@ -936,12 +936,12 @@ head(keggGeneSets)
 The full pathway names can be obtained via the "list" command.
 
 
-```r
+``` r
 keggNames = read.table(url("https://rest.kegg.jp/list/pathway/hsa"), sep = "\t")
 head(keggNames)
 ```
 
-```{.output}
+``` output
         V1                                                     V2
 1 hsa01100              Metabolic pathways - Homo sapiens (human)
 2 hsa01200               Carbon metabolism - Homo sapiens (human)
@@ -997,12 +997,12 @@ Let's check which organisms are supported and which gene sets collections it pro
 
 
 
-```r
+``` r
 library(msigdbr)
 msigdbr_species()
 ```
 
-```{.output}
+``` output
 # A tibble: 20 × 2
    species_name                    species_common_name                          
    <chr>                           <chr>                                        
@@ -1028,11 +1028,11 @@ msigdbr_species()
 20 Xenopus tropicalis              tropical clawed frog, western clawed frog    
 ```
 
-```r
+``` r
 msigdbr_collections()
 ```
 
-```{.output}
+``` output
 # A tibble: 23 × 3
    gs_cat gs_subcat         num_genesets
    <chr>  <chr>                    <int>
@@ -1078,12 +1078,12 @@ msigdbr(species, category, subcategory)
 For example, we want to obtain the hallmark gene sets for mouse.
 
 
-```r
+``` r
 MSigDBGeneSets = msigdbr(species = "mouse", category = "H")
 head(MSigDBGeneSets)
 ```
 
-```{.output}
+``` output
 # A tibble: 6 × 18
   gs_cat gs_subcat gs_name               gene_symbol entrez_gene ensembl_gene   
   <chr>  <chr>     <chr>                 <chr>             <int> <chr>          
@@ -1106,11 +1106,11 @@ table. So users can easily pick one with the same gene ID type as in the DE gene
 list. For example:
 
 
-```r
+``` r
 MSigDBGeneSets[, c("gs_name", "ensembl_gene")]
 ```
 
-```{.output}
+``` output
 # A tibble: 7,384 × 2
    gs_name               ensembl_gene      
    <chr>                 <chr>             
@@ -1127,12 +1127,12 @@ MSigDBGeneSets[, c("gs_name", "ensembl_gene")]
 # ℹ 7,374 more rows
 ```
 
-```r
+``` r
 # or put genes in the first column
 MSigDBGeneSets[, c("ensembl_gene", "gs_name")]
 ```
 
-```{.output}
+``` output
 # A tibble: 7,384 × 2
    ensembl_gene       gs_name              
    <chr>              <chr>                
@@ -1180,7 +1180,7 @@ recommended when the number of DE genes is too large. The filtering on log2
 fold change can be thought as a filtering from the biology aspect.
 
 
-```r
+``` r
 resTime <- DESeq2::results(dds, contrast = c("time", "Day8", "Day0"))
 timeDE <- as.data.frame(subset(resTime, 
                                padj < 0.05 & abs(log2FoldChange) > log2(1.5)
@@ -1189,16 +1189,16 @@ timeDEgenes <- rownames(timeDE)
 head(timeDEgenes)
 ```
 
-```{.output}
+``` output
 [1] "3110035E14Rik" "Sgk3"          "Kcnb2"         "Sbspon"       
 [5] "Gsta3"         "Lman2l"       
 ```
 
-```r
+``` r
 length(timeDEgenes)
 ```
 
-```{.output}
+``` output
 [1] 1134
 ```
 
@@ -1217,7 +1217,7 @@ GO gene sets are automatically retrieved and processed from `org.Mm.eg.db` in
 `enrichGO()`.
 
 
-```r
+``` r
 library(clusterProfiler)
 library(org.Mm.eg.db)
 resTimeGO = enrichGO(gene = timeDEgenes, 
@@ -1225,15 +1225,15 @@ resTimeGO = enrichGO(gene = timeDEgenes,
                      OrgDb = org.Mm.eg.db)
 ```
 
-```{.output}
+``` output
 --> No gene can be mapped....
 ```
 
-```{.output}
---> Expected input gene ID: 23920,12589,22068,330470,21808,74716
+``` output
+--> Expected input gene ID: 22702,16578,19113,192287,14211,210529
 ```
 
-```{.output}
+``` output
 --> return NULL...
 ```
 
@@ -1252,7 +1252,7 @@ tell the function that DE genes are in gene symbols. Recall that all valid value
 for `keyType` are in `keytypes(org.Mm.eg.db)`.
 
 
-```r
+``` r
 resTimeGO = enrichGO(gene = timeDEgenes, 
                      keyType = "SYMBOL",
                      ont = "BP", 
@@ -1261,35 +1261,35 @@ resTimeGOTable = as.data.frame(resTimeGO)
 head(resTimeGOTable)
 ```
 
-```{.output}
-                   ID                 Description GeneRatio   BgRatio
-GO:0050900 GO:0050900         leukocyte migration    49/969 386/28564
-GO:0030595 GO:0030595        leukocyte chemotaxis    35/969 230/28564
-GO:0071674 GO:0071674  mononuclear cell migration    30/969 185/28564
-GO:0060326 GO:0060326             cell chemotaxis    39/969 308/28564
-GO:0035456 GO:0035456 response to interferon-beta    17/969  71/28564
-GO:0097529 GO:0097529 myeloid leukocyte migration    31/969 242/28564
-                 pvalue     p.adjust       qvalue
-GO:0050900 2.163956e-15 1.096260e-11 8.402981e-12
-GO:0030595 1.066463e-13 2.701351e-10 2.070622e-10
-GO:0071674 1.143223e-12 1.930522e-09 1.479771e-09
-GO:0060326 1.728979e-12 2.189752e-09 1.678475e-09
-GO:0035456 1.681085e-10 1.703276e-07 1.305584e-07
-GO:0097529 2.447325e-10 2.066358e-07 1.583892e-07
-                                                                                                                                                                                                                                                                                       geneID
-GO:0050900 Tnfsf18/Sell/Slamf9/Fut7/Itga4/Mdk/Grem1/Ada/Prex1/Edn3/P2ry12/Il12a/S100a8/S100a9/Nbl1/Padi2/Bst1/Cxcl5/Ppbp/Pf4/Cxcl1/Ptn/Alox5/Trpm4/Hsd3b7/Itgam/Adam8/Calr/Ccl17/Enpp1/Aire/Ccl2/Ccl7/Ccl5/Ccl6/Ccr7/Aoc3/Itgb3/Ccl28/Lgals3/Ptk2b/Emp2/Apod/Retnlg/Plg/Dusp1/Ager/Il33/Ch25h
-GO:0030595                                                                           Tnfsf18/Sell/Slamf9/Mdk/Grem1/Prex1/Edn3/Il12a/S100a8/S100a9/Nbl1/Padi2/Bst1/Cxcl5/Ppbp/Pf4/Cxcl1/Ptn/Alox5/Trpm4/Hsd3b7/Itgam/Adam8/Calr/Ccl17/Ccl2/Ccl7/Ccl5/Ccl6/Ccr7/Lgals3/Ptk2b/Retnlg/Dusp1/Ch25h
-GO:0071674                                                                                                         Tnfsf18/Slamf9/Fut7/Itga4/Mdk/Grem1/Il12a/Nbl1/Padi2/Alox5/Trpm4/Hsd3b7/Adam8/Calr/Ccl17/Aire/Ccl2/Ccl7/Ccl5/Ccl6/Ccr7/Itgb3/Lgals3/Ptk2b/Apod/Retnlg/Plg/Dusp1/Ager/Ch25h
-GO:0060326                                                  Tnfsf18/Sell/Slamf9/Mdk/Grem1/Prex1/Edn3/Il12a/S100a8/S100a9/Lpar1/Nbl1/Padi2/Bst1/Cxcl5/Ppbp/Pf4/Cxcl1/Ptn/Alox5/Trpm4/Hsd3b7/Itgam/Adam8/Calr/Ccl17/Ccl2/Ccl7/Ccl5/Ccl6/Ccr7/Ccl28/Lgals3/Ptk2b/Nr4a1/Retnlg/Dusp1/Ch25h/Plxnb3
-GO:0035456                                                                                                                                                                      Aim2/Ifi204/Gbp6/Oas1c/Ifitm6/Bst2/Irgm1/Tgtp1/Tgtp2/Ifi47/Igtp/Irgm2/Ifitm7/Gm4951/F830016B08Rik/Iigp1/Ifit1
-GO:0097529                                                                                                    Tnfsf18/Sell/Fut7/Mdk/Grem1/Prex1/Edn3/P2ry12/S100a8/S100a9/Nbl1/Bst1/Cxcl5/Ppbp/Pf4/Cxcl1/Itgam/Adam8/Ccl17/Enpp1/Ccl2/Ccl7/Ccl5/Ccl6/Ccr7/Lgals3/Ptk2b/Emp2/Retnlg/Dusp1/Ager
+``` output
+                   ID                Description GeneRatio   BgRatio RichFactor
+GO:0050900 GO:0050900        leukocyte migration    51/968 402/28905  0.1268657
+GO:0006935 GO:0006935                 chemotaxis    52/968 465/28905  0.1118280
+GO:0042330 GO:0042330                      taxis    52/968 467/28905  0.1113490
+GO:0030595 GO:0030595       leukocyte chemotaxis    36/968 242/28905  0.1487603
+GO:0071674 GO:0071674 mononuclear cell migration    32/968 203/28905  0.1576355
+GO:0060326 GO:0060326            cell chemotaxis    41/968 334/28905  0.1227545
+           FoldEnrichment    zScore       pvalue     p.adjust       qvalue
+GO:0050900       3.788277 10.479256 3.536123e-16 1.795643e-12 1.304643e-12
+GO:0006935       3.339243  9.465940 3.336947e-14 6.712316e-11 4.876903e-11
+GO:0042330       3.324942  9.428613 3.965528e-14 6.712316e-11 4.876903e-11
+GO:0030595       4.442063 10.009042 6.591196e-14 8.367524e-11 6.079511e-11
+GO:0071674       4.707080  9.866216 3.208410e-13 3.258461e-10 2.367469e-10
+GO:0060326       3.665515  9.120495 8.641191e-13 7.313328e-10 5.313575e-10
+                                                                                                                                                                                                                                                                                                               geneID
+GO:0050900              Tnfsf18/Sell/Slamf9/Fut7/Itga4/Mdk/Grem1/Ada/Prex1/Edn3/P2ry12/Il12a/S100a8/S100a9/Nbl1/Padi2/Bst1/Cxcl5/Ppbp/Pf4/Cxcl1/Ptn/Alox5/Trpm4/Hsd3b7/Itgam/Adam8/Ascl2/Calr/Ccl17/Enpp1/Aire/Ccl2/Ccl7/Ccl5/Ccl6/Ccr7/Aoc3/Itgb3/Ccl28/Lgals3/Ptk2b/Emp2/Apod/Retnlg/Plg/Fpr2/Dusp1/Ager/Il33/Ch25h
+GO:0006935 Tnfsf18/Sell/Slamf9/Mdk/Grem1/Prex1/Edn3/P2ry12/Il12a/S100a8/S100a9/Lpar1/Nbl1/Padi2/Bst1/Cxcl5/Ppbp/Pf4/Cxcl1/Ptn/Alox5/Ntf3/Trpm4/Hsd3b7/Itgam/Adam8/Lsp1/Calr/Ccl17/Robo3/Cmtm7/Ccl2/Ccl7/Ccl5/Ccl6/Ccr7/Itgb3/Tubb2b/Ccl28/Lgals3/Cmtm5/Ptk2b/Nr4a1/Casr/Retnlg/Fpr2/Dusp1/Ager/Stx3/Ch25h/Plxnb3/Nox1
+GO:0042330 Tnfsf18/Sell/Slamf9/Mdk/Grem1/Prex1/Edn3/P2ry12/Il12a/S100a8/S100a9/Lpar1/Nbl1/Padi2/Bst1/Cxcl5/Ppbp/Pf4/Cxcl1/Ptn/Alox5/Ntf3/Trpm4/Hsd3b7/Itgam/Adam8/Lsp1/Calr/Ccl17/Robo3/Cmtm7/Ccl2/Ccl7/Ccl5/Ccl6/Ccr7/Itgb3/Tubb2b/Ccl28/Lgals3/Cmtm5/Ptk2b/Nr4a1/Casr/Retnlg/Fpr2/Dusp1/Ager/Stx3/Ch25h/Plxnb3/Nox1
+GO:0030595                                                                                              Tnfsf18/Sell/Slamf9/Mdk/Grem1/Prex1/Edn3/Il12a/S100a8/S100a9/Nbl1/Padi2/Bst1/Cxcl5/Ppbp/Pf4/Cxcl1/Ptn/Alox5/Trpm4/Hsd3b7/Itgam/Adam8/Calr/Ccl17/Ccl2/Ccl7/Ccl5/Ccl6/Ccr7/Lgals3/Ptk2b/Retnlg/Fpr2/Dusp1/Ch25h
+GO:0071674                                                                                                                      Tnfsf18/Slamf9/Fut7/Itga4/Mdk/Grem1/Il12a/Nbl1/Padi2/Alox5/Trpm4/Hsd3b7/Adam8/Ascl2/Calr/Ccl17/Aire/Ccl2/Ccl7/Ccl5/Ccl6/Ccr7/Itgb3/Lgals3/Ptk2b/Apod/Retnlg/Plg/Fpr2/Dusp1/Ager/Ch25h
+GO:0060326                                                                Tnfsf18/Sell/Slamf9/Mdk/Grem1/Prex1/Edn3/Il12a/S100a8/S100a9/Lpar1/Nbl1/Padi2/Bst1/Cxcl5/Ppbp/Pf4/Cxcl1/Ptn/Alox5/Trpm4/Hsd3b7/Itgam/Adam8/Calr/Ccl17/Ccl2/Ccl7/Ccl5/Ccl6/Ccr7/Ccl28/Lgals3/Ptk2b/Nr4a1/Retnlg/Fpr2/Dusp1/Ch25h/Plxnb3/Nox1
            Count
-GO:0050900    49
-GO:0030595    35
-GO:0071674    30
-GO:0060326    39
-GO:0035456    17
-GO:0097529    31
+GO:0050900    51
+GO:0006935    52
+GO:0042330    52
+GO:0030595    36
+GO:0071674    32
+GO:0060326    41
 ```
 
 Now `enrichGO()` went through! The returned object `resTimeGO` is in a special
@@ -1344,7 +1344,7 @@ is suggested to set both `pvalueCutoff` and `qvalueCutoff` to 1 in
 `enrichGO()`.
 
 
-```r
+``` r
 resTimeGO = enrichGO(gene = timeDEgenes, 
                      keyType = "SYMBOL",
                      ont = "BP", 
@@ -1355,35 +1355,35 @@ resTimeGOTable = as.data.frame(resTimeGO)
 head(resTimeGOTable)
 ```
 
-```{.output}
-                   ID                 Description GeneRatio   BgRatio
-GO:0050900 GO:0050900         leukocyte migration    49/969 386/28564
-GO:0030595 GO:0030595        leukocyte chemotaxis    35/969 230/28564
-GO:0071674 GO:0071674  mononuclear cell migration    30/969 185/28564
-GO:0060326 GO:0060326             cell chemotaxis    39/969 308/28564
-GO:0035456 GO:0035456 response to interferon-beta    17/969  71/28564
-GO:0097529 GO:0097529 myeloid leukocyte migration    31/969 242/28564
-                 pvalue     p.adjust       qvalue
-GO:0050900 2.163956e-15 1.096260e-11 8.402981e-12
-GO:0030595 1.066463e-13 2.701351e-10 2.070622e-10
-GO:0071674 1.143223e-12 1.930522e-09 1.479771e-09
-GO:0060326 1.728979e-12 2.189752e-09 1.678475e-09
-GO:0035456 1.681085e-10 1.703276e-07 1.305584e-07
-GO:0097529 2.447325e-10 2.066358e-07 1.583892e-07
-                                                                                                                                                                                                                                                                                       geneID
-GO:0050900 Tnfsf18/Sell/Slamf9/Fut7/Itga4/Mdk/Grem1/Ada/Prex1/Edn3/P2ry12/Il12a/S100a8/S100a9/Nbl1/Padi2/Bst1/Cxcl5/Ppbp/Pf4/Cxcl1/Ptn/Alox5/Trpm4/Hsd3b7/Itgam/Adam8/Calr/Ccl17/Enpp1/Aire/Ccl2/Ccl7/Ccl5/Ccl6/Ccr7/Aoc3/Itgb3/Ccl28/Lgals3/Ptk2b/Emp2/Apod/Retnlg/Plg/Dusp1/Ager/Il33/Ch25h
-GO:0030595                                                                           Tnfsf18/Sell/Slamf9/Mdk/Grem1/Prex1/Edn3/Il12a/S100a8/S100a9/Nbl1/Padi2/Bst1/Cxcl5/Ppbp/Pf4/Cxcl1/Ptn/Alox5/Trpm4/Hsd3b7/Itgam/Adam8/Calr/Ccl17/Ccl2/Ccl7/Ccl5/Ccl6/Ccr7/Lgals3/Ptk2b/Retnlg/Dusp1/Ch25h
-GO:0071674                                                                                                         Tnfsf18/Slamf9/Fut7/Itga4/Mdk/Grem1/Il12a/Nbl1/Padi2/Alox5/Trpm4/Hsd3b7/Adam8/Calr/Ccl17/Aire/Ccl2/Ccl7/Ccl5/Ccl6/Ccr7/Itgb3/Lgals3/Ptk2b/Apod/Retnlg/Plg/Dusp1/Ager/Ch25h
-GO:0060326                                                  Tnfsf18/Sell/Slamf9/Mdk/Grem1/Prex1/Edn3/Il12a/S100a8/S100a9/Lpar1/Nbl1/Padi2/Bst1/Cxcl5/Ppbp/Pf4/Cxcl1/Ptn/Alox5/Trpm4/Hsd3b7/Itgam/Adam8/Calr/Ccl17/Ccl2/Ccl7/Ccl5/Ccl6/Ccr7/Ccl28/Lgals3/Ptk2b/Nr4a1/Retnlg/Dusp1/Ch25h/Plxnb3
-GO:0035456                                                                                                                                                                      Aim2/Ifi204/Gbp6/Oas1c/Ifitm6/Bst2/Irgm1/Tgtp1/Tgtp2/Ifi47/Igtp/Irgm2/Ifitm7/Gm4951/F830016B08Rik/Iigp1/Ifit1
-GO:0097529                                                                                                    Tnfsf18/Sell/Fut7/Mdk/Grem1/Prex1/Edn3/P2ry12/S100a8/S100a9/Nbl1/Bst1/Cxcl5/Ppbp/Pf4/Cxcl1/Itgam/Adam8/Ccl17/Enpp1/Ccl2/Ccl7/Ccl5/Ccl6/Ccr7/Lgals3/Ptk2b/Emp2/Retnlg/Dusp1/Ager
+``` output
+                   ID                Description GeneRatio   BgRatio RichFactor
+GO:0050900 GO:0050900        leukocyte migration    51/968 402/28905  0.1268657
+GO:0006935 GO:0006935                 chemotaxis    52/968 465/28905  0.1118280
+GO:0042330 GO:0042330                      taxis    52/968 467/28905  0.1113490
+GO:0030595 GO:0030595       leukocyte chemotaxis    36/968 242/28905  0.1487603
+GO:0071674 GO:0071674 mononuclear cell migration    32/968 203/28905  0.1576355
+GO:0060326 GO:0060326            cell chemotaxis    41/968 334/28905  0.1227545
+           FoldEnrichment    zScore       pvalue     p.adjust       qvalue
+GO:0050900       3.788277 10.479256 3.536123e-16 1.795643e-12 1.304643e-12
+GO:0006935       3.339243  9.465940 3.336947e-14 6.712316e-11 4.876903e-11
+GO:0042330       3.324942  9.428613 3.965528e-14 6.712316e-11 4.876903e-11
+GO:0030595       4.442063 10.009042 6.591196e-14 8.367524e-11 6.079511e-11
+GO:0071674       4.707080  9.866216 3.208410e-13 3.258461e-10 2.367469e-10
+GO:0060326       3.665515  9.120495 8.641191e-13 7.313328e-10 5.313575e-10
+                                                                                                                                                                                                                                                                                                               geneID
+GO:0050900              Tnfsf18/Sell/Slamf9/Fut7/Itga4/Mdk/Grem1/Ada/Prex1/Edn3/P2ry12/Il12a/S100a8/S100a9/Nbl1/Padi2/Bst1/Cxcl5/Ppbp/Pf4/Cxcl1/Ptn/Alox5/Trpm4/Hsd3b7/Itgam/Adam8/Ascl2/Calr/Ccl17/Enpp1/Aire/Ccl2/Ccl7/Ccl5/Ccl6/Ccr7/Aoc3/Itgb3/Ccl28/Lgals3/Ptk2b/Emp2/Apod/Retnlg/Plg/Fpr2/Dusp1/Ager/Il33/Ch25h
+GO:0006935 Tnfsf18/Sell/Slamf9/Mdk/Grem1/Prex1/Edn3/P2ry12/Il12a/S100a8/S100a9/Lpar1/Nbl1/Padi2/Bst1/Cxcl5/Ppbp/Pf4/Cxcl1/Ptn/Alox5/Ntf3/Trpm4/Hsd3b7/Itgam/Adam8/Lsp1/Calr/Ccl17/Robo3/Cmtm7/Ccl2/Ccl7/Ccl5/Ccl6/Ccr7/Itgb3/Tubb2b/Ccl28/Lgals3/Cmtm5/Ptk2b/Nr4a1/Casr/Retnlg/Fpr2/Dusp1/Ager/Stx3/Ch25h/Plxnb3/Nox1
+GO:0042330 Tnfsf18/Sell/Slamf9/Mdk/Grem1/Prex1/Edn3/P2ry12/Il12a/S100a8/S100a9/Lpar1/Nbl1/Padi2/Bst1/Cxcl5/Ppbp/Pf4/Cxcl1/Ptn/Alox5/Ntf3/Trpm4/Hsd3b7/Itgam/Adam8/Lsp1/Calr/Ccl17/Robo3/Cmtm7/Ccl2/Ccl7/Ccl5/Ccl6/Ccr7/Itgb3/Tubb2b/Ccl28/Lgals3/Cmtm5/Ptk2b/Nr4a1/Casr/Retnlg/Fpr2/Dusp1/Ager/Stx3/Ch25h/Plxnb3/Nox1
+GO:0030595                                                                                              Tnfsf18/Sell/Slamf9/Mdk/Grem1/Prex1/Edn3/Il12a/S100a8/S100a9/Nbl1/Padi2/Bst1/Cxcl5/Ppbp/Pf4/Cxcl1/Ptn/Alox5/Trpm4/Hsd3b7/Itgam/Adam8/Calr/Ccl17/Ccl2/Ccl7/Ccl5/Ccl6/Ccr7/Lgals3/Ptk2b/Retnlg/Fpr2/Dusp1/Ch25h
+GO:0071674                                                                                                                      Tnfsf18/Slamf9/Fut7/Itga4/Mdk/Grem1/Il12a/Nbl1/Padi2/Alox5/Trpm4/Hsd3b7/Adam8/Ascl2/Calr/Ccl17/Aire/Ccl2/Ccl7/Ccl5/Ccl6/Ccr7/Itgb3/Lgals3/Ptk2b/Apod/Retnlg/Plg/Fpr2/Dusp1/Ager/Ch25h
+GO:0060326                                                                Tnfsf18/Sell/Slamf9/Mdk/Grem1/Prex1/Edn3/Il12a/S100a8/S100a9/Lpar1/Nbl1/Padi2/Bst1/Cxcl5/Ppbp/Pf4/Cxcl1/Ptn/Alox5/Trpm4/Hsd3b7/Itgam/Adam8/Calr/Ccl17/Ccl2/Ccl7/Ccl5/Ccl6/Ccr7/Ccl28/Lgals3/Ptk2b/Nr4a1/Retnlg/Fpr2/Dusp1/Ch25h/Plxnb3/Nox1
            Count
-GO:0050900    49
-GO:0030595    35
-GO:0071674    30
-GO:0060326    39
-GO:0035456    17
-GO:0097529    31
+GO:0050900    51
+GO:0006935    52
+GO:0042330    52
+GO:0030595    36
+GO:0071674    32
+GO:0060326    41
 ```
 
 
@@ -1421,21 +1421,21 @@ use `select()` function: `select(org.Mm.eg.db, keys = timeDEgenes, keytype =
 "SYMBOL", column = "ENTREZID")`].
 
 
-```r
+``` r
 EntrezIDs = mapIds(org.Mm.eg.db, keys = timeDEgenes, 
                    keytype = "SYMBOL", column = "ENTREZID", multiVals = "first")
 ```
 
-```{.output}
+``` output
 'select()' returned 1:1 mapping between keys and columns
 ```
 
-```r
+``` r
 EntrezIDs = EntrezIDs[!is.na(EntrezIDs)]
 head(EntrezIDs)
 ```
 
-```{.output}
+``` output
     Sgk3    Kcnb2   Sbspon    Gsta3   Lman2l  Ankrd39 
 "170755"  "98741" "226866"  "14859" "214895" "109346" 
 ```
@@ -1446,7 +1446,7 @@ data frame.
 
 
 
-```r
+``` r
 resTimeKEGG = enrichKEGG(gene = EntrezIDs, 
                          organism = "mmu",
                          pvalueCutoff = 1,
@@ -1455,40 +1455,54 @@ resTimeKEGGTable = as.data.frame(resTimeKEGG)
 head(resTimeKEGGTable)
 ```
 
-```{.output}
-               ID
-mmu00590 mmu00590
-mmu00565 mmu00565
-mmu00592 mmu00592
-mmu00591 mmu00591
-mmu04913 mmu04913
-mmu04061 mmu04061
+``` output
+                                     category
+mmu00590                           Metabolism
+mmu00591                           Metabolism
+mmu00565                           Metabolism
+mmu00592                           Metabolism
+mmu04913                   Organismal Systems
+mmu04061 Environmental Information Processing
+                                 subcategory       ID
+mmu00590                    Lipid metabolism mmu00590
+mmu00591                    Lipid metabolism mmu00591
+mmu00565                    Lipid metabolism mmu00565
+mmu00592                    Lipid metabolism mmu00592
+mmu04913                    Endocrine system mmu04913
+mmu04061 Signaling molecules and interaction mmu04061
                                                                                         Description
 mmu00590                                   Arachidonic acid metabolism - Mus musculus (house mouse)
+mmu00591                                      Linoleic acid metabolism - Mus musculus (house mouse)
 mmu00565                                        Ether lipid metabolism - Mus musculus (house mouse)
 mmu00592                               alpha-Linolenic acid metabolism - Mus musculus (house mouse)
-mmu00591                                      Linoleic acid metabolism - Mus musculus (house mouse)
 mmu04913                                       Ovarian steroidogenesis - Mus musculus (house mouse)
 mmu04061 Viral protein interaction with cytokine and cytokine receptor - Mus musculus (house mouse)
-         GeneRatio BgRatio       pvalue     p.adjust       qvalue
-mmu00590    16/454 85/9465 2.224011e-06 0.0006827712 0.0005946302
-mmu00565    11/454 48/9465 1.234403e-05 0.0014156451 0.0012328951
-mmu00592     8/454 25/9465 1.383367e-05 0.0014156451 0.0012328951
-mmu00591    11/454 50/9465 1.870748e-05 0.0014357990 0.0012504473
-mmu04913    12/454 63/9465 3.669398e-05 0.0022530101 0.0019621620
-mmu04061    14/454 95/9465 1.606325e-04 0.0072719317 0.0063331756
+         GeneRatio BgRatio RichFactor FoldEnrichment   zScore       pvalue
+mmu00590    16/460 89/9787  0.1797753       3.824915 5.945245 3.232256e-06
+mmu00591    12/460 55/9787  0.2181818       4.642055 6.015024 6.976725e-06
+mmu00565    11/460 48/9787  0.2291667       4.875770 5.977670 1.021306e-05
+mmu00592     8/460 25/9787  0.3200000       6.808348 6.457490 1.194030e-05
+mmu04913    12/460 64/9787  0.1875000       3.989266 5.328009 3.553165e-05
+mmu04061    14/460 95/9787  0.1473684       3.135423 4.644614 1.301689e-04
+             p.adjust       qvalue
+mmu00590 0.0009253733 0.0008012571
+mmu00591 0.0009253733 0.0008012571
+mmu00565 0.0009253733 0.0008012571
+mmu00592 0.0009253733 0.0008012571
+mmu04913 0.0022029625 0.0019074887
+mmu04061 0.0067253926 0.0058233450
                                                                                                        geneID
 mmu00590 18783/19215/211429/329502/78390/19223/67103/242546/13118/18781/18784/11689/232889/15446/237625/11687
+mmu00591                        18783/211429/329502/78390/242546/18781/18784/13113/622127/232889/237625/11687
 mmu00565                               18783/211429/329502/78390/22239/18781/18784/232889/320981/237625/53897
 mmu00592                                                  18783/211429/329502/78390/18781/18784/232889/237625
-mmu00591                               18783/211429/329502/78390/242546/18781/18784/13113/232889/237625/11687
 mmu04913                          18783/211429/329502/78390/242546/11689/232889/13076/13070/15485/13078/16867
 mmu04061                  16174/20311/57349/56744/14825/20295/20296/20306/20304/20305/12775/56838/16185/16186
          Count
 mmu00590    16
+mmu00591    12
 mmu00565    11
 mmu00592     8
-mmu00591    11
 mmu04913    12
 mmu04061    14
 ```
@@ -1515,13 +1529,13 @@ data frame of genes and gene sets (or a class that can be converted to a data
 frame).
 
 
-```r
+``` r
 library(msigdbr)
 gene_sets = msigdbr(category = "H", species = "mouse")
 head(gene_sets)
 ```
 
-```{.output}
+``` output
 # A tibble: 6 × 18
   gs_cat gs_subcat gs_name               gene_symbol entrez_gene ensembl_gene   
   <chr>  <chr>     <chr>                 <chr>             <int> <chr>          
@@ -1541,7 +1555,7 @@ As mentioned before, it is important the gene ID type in the gene sets should
 be the same as in the DE genes, so here we choose the `"gene_symbol"` column.
 
 
-```r
+``` r
 resTimeHallmark = enricher(gene = timeDEgenes, 
                            TERM2GENE = gene_sets[, c("gs_name", "gene_symbol")],
                            pvalueCutoff = 1,
@@ -1550,7 +1564,7 @@ resTimeHallmarkTable = as.data.frame(resTimeHallmark)
 head(resTimeHallmarkTable)
 ```
 
-```{.output}
+``` output
                                                              ID
 HALLMARK_MYOGENESIS                         HALLMARK_MYOGENESIS
 HALLMARK_COMPLEMENT                         HALLMARK_COMPLEMENT
@@ -1565,13 +1579,20 @@ HALLMARK_COAGULATION                       HALLMARK_COAGULATION    20/291
 HALLMARK_ALLOGRAFT_REJECTION       HALLMARK_ALLOGRAFT_REJECTION    23/291
 HALLMARK_ESTROGEN_RESPONSE_LATE HALLMARK_ESTROGEN_RESPONSE_LATE    23/291
 HALLMARK_INFLAMMATORY_RESPONSE   HALLMARK_INFLAMMATORY_RESPONSE    22/291
-                                 BgRatio       pvalue     p.adjust       qvalue
-HALLMARK_MYOGENESIS             201/4394 5.710171e-06 0.0002740882 0.0002284068
-HALLMARK_COMPLEMENT             196/4394 4.300844e-04 0.0103220246 0.0086016872
-HALLMARK_COAGULATION            139/4394 7.088433e-04 0.0113414921 0.0094512434
-HALLMARK_ALLOGRAFT_REJECTION    201/4394 6.397659e-03 0.0767719033 0.0639765861
-HALLMARK_ESTROGEN_RESPONSE_LATE 206/4394 8.584183e-03 0.0824081536 0.0686734614
-HALLMARK_INFLAMMATORY_RESPONSE  201/4394 1.256794e-02 0.0960740794 0.0800617329
+                                 BgRatio RichFactor FoldEnrichment   zScore
+HALLMARK_MYOGENESIS             201/4394  0.1542289       2.328803 5.135378
+HALLMARK_COMPLEMENT             196/4394  0.1326531       2.003016 3.825523
+HALLMARK_COAGULATION            139/4394  0.1438849       2.172612 3.741006
+HALLMARK_ALLOGRAFT_REJECTION    201/4394  0.1144279       1.727821 2.812786
+HALLMARK_ESTROGEN_RESPONSE_LATE 206/4394  0.1116505       1.685884 2.685080
+HALLMARK_INFLAMMATORY_RESPONSE  201/4394  0.1094527       1.652699 2.522462
+                                      pvalue     p.adjust       qvalue
+HALLMARK_MYOGENESIS             5.710171e-06 0.0002740882 0.0002284068
+HALLMARK_COMPLEMENT             4.300844e-04 0.0103220246 0.0086016872
+HALLMARK_COAGULATION            7.088433e-04 0.0113414921 0.0094512434
+HALLMARK_ALLOGRAFT_REJECTION    6.397659e-03 0.0767719033 0.0639765861
+HALLMARK_ESTROGEN_RESPONSE_LATE 8.584183e-03 0.0824081536 0.0686734614
+HALLMARK_INFLAMMATORY_RESPONSE  1.256794e-02 0.0960740794 0.0800617329
                                                                                                                                                                                                                 geneID
 HALLMARK_MYOGENESIS             Myl1/Casq1/Aplnr/Tnnc2/Ptgis/Gja5/Col15a1/Cav3/Tnnt1/Ryr1/Cox6a2/Tnni2/Lsp1/Nqo1/Hspb2/Cryab/Erbb3/Stc2/Gpx3/Sparc/Myh3/Myh1/Col1a1/Cacng1/Itgb4/Bdkrb2/Mapk12/Apod/Spdef/Cdkn1a/Actn3
 HALLMARK_COMPLEMENT                                                Serpinb2/Pla2g4a/Cd46/Hspa5/Cp/Gnb4/S100a9/Cda/Cxcl1/Apoc1/Itgam/Irf7/Klkb1/Mmp15/Mmp8/Ccl5/Lgals3/Gzmb/Tmprss6/Maff/Plg/Psmb9/Hspa1a/C3/Dusp5/Phex
@@ -1597,7 +1618,7 @@ Implementing ORA is rather simple. The following function `ora()` performs ORA
 on a list of gene sets. Try to read and understand the code.
 
 
-```r
+``` r
 ora = function(genes, gene_sets, universe = NULL) {
     if(is.null(universe)) {
         universe = unique(unlist(gene_sets))
@@ -1633,13 +1654,13 @@ ora = function(genes, gene_sets, universe = NULL) {
 Test on the MSigDB hallmark gene sets:
 
 
-```r
+``` r
 HallmarkGeneSets = split(gene_sets$gene_symbol, gene_sets$gs_name)
 df = ora(timeDEgenes, HallmarkGeneSets, rownames(se))
 head(df)
 ```
 
-```{.output}
+``` output
                                                  gene_set hits n_genes
 HALLMARK_ADIPOGENESIS               HALLMARK_ADIPOGENESIS    9    1134
 HALLMARK_ALLOGRAFT_REJECTION HALLMARK_ALLOGRAFT_REJECTION   23    1134
@@ -1722,7 +1743,7 @@ the `ora()` function which we have implemented in previous "Further reading"
 section and we compare three different universe settings.
 
 
-```r
+``` r
 # all genes in the gene sets collection ~ 4k genes
 df1 = ora(timeDEgenes, HallmarkGeneSets)
 # all protein-coding genes, ~ 20k genes
@@ -1770,7 +1791,7 @@ https://yulab-smu.top/biomedical-knowledge-mining-book/enrichplot.html.
 We first re-generate the enrichment table.
 
 
-```r
+``` r
 library(enrichplot)
 resTimeGO = enrichGO(gene = timeDEgenes, 
                      keyType = "SYMBOL",
@@ -1782,48 +1803,48 @@ resTimeGOTable = as.data.frame(resTimeGO)
 head(resTimeGOTable)
 ```
 
-```{.output}
-                   ID                 Description GeneRatio   BgRatio
-GO:0050900 GO:0050900         leukocyte migration    49/969 386/28564
-GO:0030595 GO:0030595        leukocyte chemotaxis    35/969 230/28564
-GO:0071674 GO:0071674  mononuclear cell migration    30/969 185/28564
-GO:0060326 GO:0060326             cell chemotaxis    39/969 308/28564
-GO:0035456 GO:0035456 response to interferon-beta    17/969  71/28564
-GO:0097529 GO:0097529 myeloid leukocyte migration    31/969 242/28564
-                 pvalue     p.adjust       qvalue
-GO:0050900 2.163956e-15 1.096260e-11 8.402981e-12
-GO:0030595 1.066463e-13 2.701351e-10 2.070622e-10
-GO:0071674 1.143223e-12 1.930522e-09 1.479771e-09
-GO:0060326 1.728979e-12 2.189752e-09 1.678475e-09
-GO:0035456 1.681085e-10 1.703276e-07 1.305584e-07
-GO:0097529 2.447325e-10 2.066358e-07 1.583892e-07
-                                                                                                                                                                                                                                                                                       geneID
-GO:0050900 Tnfsf18/Sell/Slamf9/Fut7/Itga4/Mdk/Grem1/Ada/Prex1/Edn3/P2ry12/Il12a/S100a8/S100a9/Nbl1/Padi2/Bst1/Cxcl5/Ppbp/Pf4/Cxcl1/Ptn/Alox5/Trpm4/Hsd3b7/Itgam/Adam8/Calr/Ccl17/Enpp1/Aire/Ccl2/Ccl7/Ccl5/Ccl6/Ccr7/Aoc3/Itgb3/Ccl28/Lgals3/Ptk2b/Emp2/Apod/Retnlg/Plg/Dusp1/Ager/Il33/Ch25h
-GO:0030595                                                                           Tnfsf18/Sell/Slamf9/Mdk/Grem1/Prex1/Edn3/Il12a/S100a8/S100a9/Nbl1/Padi2/Bst1/Cxcl5/Ppbp/Pf4/Cxcl1/Ptn/Alox5/Trpm4/Hsd3b7/Itgam/Adam8/Calr/Ccl17/Ccl2/Ccl7/Ccl5/Ccl6/Ccr7/Lgals3/Ptk2b/Retnlg/Dusp1/Ch25h
-GO:0071674                                                                                                         Tnfsf18/Slamf9/Fut7/Itga4/Mdk/Grem1/Il12a/Nbl1/Padi2/Alox5/Trpm4/Hsd3b7/Adam8/Calr/Ccl17/Aire/Ccl2/Ccl7/Ccl5/Ccl6/Ccr7/Itgb3/Lgals3/Ptk2b/Apod/Retnlg/Plg/Dusp1/Ager/Ch25h
-GO:0060326                                                  Tnfsf18/Sell/Slamf9/Mdk/Grem1/Prex1/Edn3/Il12a/S100a8/S100a9/Lpar1/Nbl1/Padi2/Bst1/Cxcl5/Ppbp/Pf4/Cxcl1/Ptn/Alox5/Trpm4/Hsd3b7/Itgam/Adam8/Calr/Ccl17/Ccl2/Ccl7/Ccl5/Ccl6/Ccr7/Ccl28/Lgals3/Ptk2b/Nr4a1/Retnlg/Dusp1/Ch25h/Plxnb3
-GO:0035456                                                                                                                                                                      Aim2/Ifi204/Gbp6/Oas1c/Ifitm6/Bst2/Irgm1/Tgtp1/Tgtp2/Ifi47/Igtp/Irgm2/Ifitm7/Gm4951/F830016B08Rik/Iigp1/Ifit1
-GO:0097529                                                                                                    Tnfsf18/Sell/Fut7/Mdk/Grem1/Prex1/Edn3/P2ry12/S100a8/S100a9/Nbl1/Bst1/Cxcl5/Ppbp/Pf4/Cxcl1/Itgam/Adam8/Ccl17/Enpp1/Ccl2/Ccl7/Ccl5/Ccl6/Ccr7/Lgals3/Ptk2b/Emp2/Retnlg/Dusp1/Ager
+``` output
+                   ID                Description GeneRatio   BgRatio RichFactor
+GO:0050900 GO:0050900        leukocyte migration    51/968 402/28905  0.1268657
+GO:0006935 GO:0006935                 chemotaxis    52/968 465/28905  0.1118280
+GO:0042330 GO:0042330                      taxis    52/968 467/28905  0.1113490
+GO:0030595 GO:0030595       leukocyte chemotaxis    36/968 242/28905  0.1487603
+GO:0071674 GO:0071674 mononuclear cell migration    32/968 203/28905  0.1576355
+GO:0060326 GO:0060326            cell chemotaxis    41/968 334/28905  0.1227545
+           FoldEnrichment    zScore       pvalue     p.adjust       qvalue
+GO:0050900       3.788277 10.479256 3.536123e-16 1.795643e-12 1.304643e-12
+GO:0006935       3.339243  9.465940 3.336947e-14 6.712316e-11 4.876903e-11
+GO:0042330       3.324942  9.428613 3.965528e-14 6.712316e-11 4.876903e-11
+GO:0030595       4.442063 10.009042 6.591196e-14 8.367524e-11 6.079511e-11
+GO:0071674       4.707080  9.866216 3.208410e-13 3.258461e-10 2.367469e-10
+GO:0060326       3.665515  9.120495 8.641191e-13 7.313328e-10 5.313575e-10
+                                                                                                                                                                                                                                                                                                               geneID
+GO:0050900              Tnfsf18/Sell/Slamf9/Fut7/Itga4/Mdk/Grem1/Ada/Prex1/Edn3/P2ry12/Il12a/S100a8/S100a9/Nbl1/Padi2/Bst1/Cxcl5/Ppbp/Pf4/Cxcl1/Ptn/Alox5/Trpm4/Hsd3b7/Itgam/Adam8/Ascl2/Calr/Ccl17/Enpp1/Aire/Ccl2/Ccl7/Ccl5/Ccl6/Ccr7/Aoc3/Itgb3/Ccl28/Lgals3/Ptk2b/Emp2/Apod/Retnlg/Plg/Fpr2/Dusp1/Ager/Il33/Ch25h
+GO:0006935 Tnfsf18/Sell/Slamf9/Mdk/Grem1/Prex1/Edn3/P2ry12/Il12a/S100a8/S100a9/Lpar1/Nbl1/Padi2/Bst1/Cxcl5/Ppbp/Pf4/Cxcl1/Ptn/Alox5/Ntf3/Trpm4/Hsd3b7/Itgam/Adam8/Lsp1/Calr/Ccl17/Robo3/Cmtm7/Ccl2/Ccl7/Ccl5/Ccl6/Ccr7/Itgb3/Tubb2b/Ccl28/Lgals3/Cmtm5/Ptk2b/Nr4a1/Casr/Retnlg/Fpr2/Dusp1/Ager/Stx3/Ch25h/Plxnb3/Nox1
+GO:0042330 Tnfsf18/Sell/Slamf9/Mdk/Grem1/Prex1/Edn3/P2ry12/Il12a/S100a8/S100a9/Lpar1/Nbl1/Padi2/Bst1/Cxcl5/Ppbp/Pf4/Cxcl1/Ptn/Alox5/Ntf3/Trpm4/Hsd3b7/Itgam/Adam8/Lsp1/Calr/Ccl17/Robo3/Cmtm7/Ccl2/Ccl7/Ccl5/Ccl6/Ccr7/Itgb3/Tubb2b/Ccl28/Lgals3/Cmtm5/Ptk2b/Nr4a1/Casr/Retnlg/Fpr2/Dusp1/Ager/Stx3/Ch25h/Plxnb3/Nox1
+GO:0030595                                                                                              Tnfsf18/Sell/Slamf9/Mdk/Grem1/Prex1/Edn3/Il12a/S100a8/S100a9/Nbl1/Padi2/Bst1/Cxcl5/Ppbp/Pf4/Cxcl1/Ptn/Alox5/Trpm4/Hsd3b7/Itgam/Adam8/Calr/Ccl17/Ccl2/Ccl7/Ccl5/Ccl6/Ccr7/Lgals3/Ptk2b/Retnlg/Fpr2/Dusp1/Ch25h
+GO:0071674                                                                                                                      Tnfsf18/Slamf9/Fut7/Itga4/Mdk/Grem1/Il12a/Nbl1/Padi2/Alox5/Trpm4/Hsd3b7/Adam8/Ascl2/Calr/Ccl17/Aire/Ccl2/Ccl7/Ccl5/Ccl6/Ccr7/Itgb3/Lgals3/Ptk2b/Apod/Retnlg/Plg/Fpr2/Dusp1/Ager/Ch25h
+GO:0060326                                                                Tnfsf18/Sell/Slamf9/Mdk/Grem1/Prex1/Edn3/Il12a/S100a8/S100a9/Lpar1/Nbl1/Padi2/Bst1/Cxcl5/Ppbp/Pf4/Cxcl1/Ptn/Alox5/Trpm4/Hsd3b7/Itgam/Adam8/Calr/Ccl17/Ccl2/Ccl7/Ccl5/Ccl6/Ccr7/Ccl28/Lgals3/Ptk2b/Nr4a1/Retnlg/Fpr2/Dusp1/Ch25h/Plxnb3/Nox1
            Count
-GO:0050900    49
-GO:0030595    35
-GO:0071674    30
-GO:0060326    39
-GO:0035456    17
-GO:0097529    31
+GO:0050900    51
+GO:0006935    52
+GO:0042330    52
+GO:0030595    36
+GO:0071674    32
+GO:0060326    41
 ```
 
 `barplot()` and `dotplot()` generate plots for a small number of significant gene sets.
 Note the two functions are directly applied on `resTimeGO` returned by `enrichGO()`.
 
 
-```r
+``` r
 barplot(resTimeGO, showCategory = 20)
 ```
 
 <img src="fig/07-gene-set-analysis-rendered-more-enrichplots-1.png" style="display: block; margin: auto;" />
 
-```r
+``` r
 dotplot(resTimeGO, showCategory = 20)
 ```
 
@@ -1866,7 +1887,7 @@ gene sets. Recall the denotations in the 2x2 contingency table (we are too far
 from that!). Let's take these numbers from the enrichment table.
 
 
-```r
+``` r
 n_11 = resTimeGOTable$Count
 n_10 = 983  # length(intersect(resTimeGO@gene, resTimeGO@universe))
 n_01 = as.numeric(gsub("/.*$", "", resTimeGOTable$BgRatio))
@@ -1877,7 +1898,7 @@ Instead of using `GeneRatio`, we use the fraction of DE genes in the gene sets
 which are kind of like a "scaled" value for all gene sets. Let's calculate it:
 
 
-```r
+``` r
 resTimeGOTable$DE_Ratio = n_11/n_01
 resTimeGOTable$GS_size = n_01  # size of gene sets
 ```
@@ -1896,7 +1917,7 @@ universe_ or the log2 of the ratio of _gene\_set% in the DE genes_ and
 _gene\_set% in the universe_. The two are identical.
 
 
-```r
+``` r
 resTimeGOTable$log2_Enrichment = log( (n_11/n_10)/(n_01/n) )
 ```
 
@@ -1910,7 +1931,7 @@ distribution](https://en.wikipedia.org/wiki/Hypergeometric_distribution). They
 can be calculated as:
 
 
-```r
+``` r
 hyper_mean = n_01*n_10/n
 
 n_02 = n - n_01
@@ -1929,7 +1950,7 @@ In `resTimeGOTable`, gene sets are already ordered by the significance, so we
 take the first 10 gene sets which are the 10 most significant gene sets.
 
 
-```r
+``` r
 library(ggplot2)
 ggplot(resTimeGOTable[1:10, ], 
         aes(x = log2_Enrichment, y = factor(Description, levels = rev(Description)), 
@@ -1946,7 +1967,7 @@ In the next example, we use _z_-score as the primary variable to map to the
 offset to origin, `DE_Ratio` and `Count` to map to dot colors and sizes.
 
 
-```r
+``` r
 ggplot(resTimeGOTable[1:10, ], 
         aes(x = zScore, y = factor(Description, levels = rev(Description)), 
             col = DE_Ratio, size = Count)) +
@@ -1971,7 +1992,7 @@ then the gene sets on the top right region can be thought as being both
 statistically significant and also biologically sensible.
 
 
-```r
+``` r
 ggplot(resTimeGOTable, 
     aes(x = log2_Enrichment, y = -log10(p.adjust), 
         color = DE_Ratio, size = GS_size)) +
@@ -1998,7 +2019,7 @@ the two ORA analysis in one plot. In the following code, we first generate
 two enrichment tables for up-regulated genes and down-regulated separately.
 
 
-```r
+``` r
 # up-regulated genes
 timeDEup <- as.data.frame(subset(resTime, padj < 0.05 & log2FoldChange > log2(1.5)))
 timeDEupGenes <- rownames(timeDEup)
@@ -2041,7 +2062,7 @@ up-regulated genes and the first 5 most significant terms for down-regulated
 genes. The following **ggplot2** code should be easy to read.
 
 
-```r
+``` r
 # The name of the 3rd term is too long, we wrap it into two lines.
 resTimeGOupTable[3, "Description"] = paste(strwrap(resTimeGOupTable[3, "Description"]), collapse = "\n")
 
@@ -2072,7 +2093,7 @@ The input of the `simplifyGO()` function is a vector of GO IDs. It is recommende
 to have at least 100 GO IDs for summarization and visualization.
 
 
-```r
+``` r
 GO_ID = resTimeGOTable$ID[resTimeGOTable$p.adjust < 0.1]
 library(simplifyEnrichment)
 simplifyGO(GO_ID)

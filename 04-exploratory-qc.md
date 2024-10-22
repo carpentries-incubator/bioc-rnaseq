@@ -31,7 +31,7 @@ Assuming you just started RStudio again, load some packages we will use in this 
 
 
 
-```r
+``` r
 suppressPackageStartupMessages({
     library(SummarizedExperiment)
     library(DESeq2)
@@ -45,7 +45,7 @@ suppressPackageStartupMessages({
 ```
 
 
-```r
+``` r
 se <- readRDS("data/GSE96870_se.rds")
 ```
 
@@ -59,21 +59,21 @@ These tools are in no way limited to (or developed for) analysis of RNA-seq data
 However, there are certain characteristics of count assays that need to be taken into account when they are applied to this type of data. First of all, not all mouse genes in the genome will be expressed in our Cerebellum samples. There are many different threshold you could use to say whether a gene's expression was detectable or not; here we are going to use a very minimal one that if a gene does not have more than 5 counts total across all samples, there is simply not enough data to be able to do anything with it anyway. 
 
 
-```r
+``` r
 nrow(se)
 ```
 
-```{.output}
+``` output
 [1] 41786
 ```
 
-```r
+``` r
 # Remove genes/rows that do not have > 5 total counts 
 se <- se[rowSums(assay(se, "counts")) > 5, ]
 nrow(se)
 ```
 
-```{.output}
+``` output
 [1] 27430
 ```
 
@@ -94,11 +94,11 @@ Last episode we discussed subsetting down to only mRNA genes. Here we subsetted 
 
 1.
 
-```r
+``` r
 table(rowData(se)$gbkey)
 ```
 
-```{.output}
+``` output
 
      C_region          exon     J_segment      misc_RNA          mRNA 
            14          1765            14          1539         16859 
@@ -108,27 +108,27 @@ table(rowData(se)$gbkey)
 
 2.
 
-```r
+``` r
 nrow(se)  # represents the number of genes using 5 as filtering threshold
 ```
 
-```{.output}
+``` output
 [1] 27430
 ```
 
-```r
+``` r
 length(which(rowSums(assay(se, "counts")) > 10))
 ```
 
-```{.output}
+``` output
 [1] 25736
 ```
 
-```r
+``` r
 length(which(rowSums(assay(se, "counts")) > 20))
 ```
 
-```{.output}
+``` output
 [1] 23860
 ```
 
@@ -150,7 +150,7 @@ Differences in the total number of reads assigned to genes between samples typic
 In the rest of this section, we will use the term *library size* to refer to the total number of reads assigned to genes for a sample. First we should compare the library sizes of all samples. 
 
 
-```r
+``` r
 # Add in the sum of all counts
 
 se$libSize <-  colSums(assay(se))
@@ -183,16 +183,16 @@ The latter is important due to the compositional nature of RNA-seq data.
 There is a fixed number of reads to distribute between the genes, and if a single (or a few) very highly expressed gene consume a large part of the reads, all other genes will consequently receive very low counts. We now switch our `SummarizedExperiment` object over to a `DESeqDataSet` as it has the internal structure to store these size factors. We also need to tell it our main experiment design, which is sex and time: 
 
 
-```r
+``` r
 dds <- DESeq2::DESeqDataSet(se, design = ~ sex + time)
 ```
 
-```{.warning}
+``` warning
 Warning in DESeq2::DESeqDataSet(se, design = ~sex + time): some variables in
 design formula are characters, converting to factors
 ```
 
-```r
+``` r
 dds <- estimateSizeFactors(dds)
 
 # Plot the size factors against library size
@@ -216,7 +216,7 @@ For read count data such as RNA-seq, this is not the case.
 In fact, the variance increases with the average read count.
 
 
-```r
+``` r
 meanSdPlot(assay(dds), ranks = FALSE)
 ```
 
@@ -226,7 +226,7 @@ There are two ways around this: either we develop methods specifically adapted t
 Both ways have been explored; however, at the moment the second approach is arguably more widely applied in practice. We can transform our data using DESeq2's variance stabilizing transformation and then verify that it has removed the correlation between average read count and variance.
 
 
-```r
+``` r
 vsd <- DESeq2::vst(dds, blind = TRUE)
 meanSdPlot(assay(vsd), ranks = FALSE)
 ```
@@ -238,7 +238,7 @@ meanSdPlot(assay(vsd), ranks = FALSE)
 There are many ways to cluster samples based on their similarity of expression patterns. One simple way is to calculate Euclidean distances between all pairs of samples (longer distance = more different) and then display the results with both a branching dendrogram and a heatmap to visualize the distances in color. From this, we infer that the Day 8 samples are more similar to each other than the rest of the samples, although Day 4 and Day 0 do not separate distinctly. Instead, males and females reliably separate.
 
 
-```r
+``` r
 dst <- dist(t(assay(vsd)))
 colors <- colorRampPalette(brewer.pal(9, "Blues"))(255)
 ComplexHeatmap::Heatmap(
@@ -269,9 +269,16 @@ By definition, the first principal component will always represent more of the v
 The fraction of explained variance is a measure of how much of the 'signal' in the data that is retained when we project the samples from the original, high-dimensional space to the low-dimensional space for visualization.
 
 
-```r
+``` r
 pcaData <- DESeq2::plotPCA(vsd, intgroup = c("sex", "time"),
                            returnData = TRUE)
+```
+
+``` output
+using ntop=500 top features by variance
+```
+
+``` r
 percentVar <- round(100 * attr(pcaData, "percentVar"))
 ggplot(pcaData, aes(x = PC1, y = PC2)) +
     geom_point(aes(color = sex, shape = time), size = 5) +
@@ -291,6 +298,11 @@ ggplot(pcaData, aes(x = PC1, y = PC2)) +
 1. Assume you are mainly interested in expression changes associated with the time after infection (Reminder Day0 -> before infection). What do you need to consider in downstream analysis?
 
 2. Consider an experimental design where you have multiple samples from the same donor. You are still interested in differences by time and observe the following PCA plot. What does this PCA plot suggest?
+
+
+``` output
+using ntop=500 top features by variance
+```
 
 <img src="fig/04-exploratory-qc-rendered-pca-exercise-1.png" style="display: block; margin: auto;" />
 
@@ -325,9 +337,16 @@ Compare before and after variance stabilizing transformation.
 ::::::::::::::::::::::::::::::::::: solution
 
 
-```r
+``` r
 pcaDataVst <- DESeq2::plotPCA(vsd, intgroup = c("libSize"),
                               returnData = TRUE)
+```
+
+``` output
+using ntop=500 top features by variance
+```
+
+``` r
 percentVar <- round(100 * attr(pcaDataVst, "percentVar"))
 ggplot(pcaDataVst, aes(x = PC1, y = PC2)) +
     geom_point(aes(color = libSize / 1e6), size = 5) +
@@ -342,9 +361,16 @@ ggplot(pcaDataVst, aes(x = PC1, y = PC2)) +
 
 
 
-```r
+``` r
 pcaDataCts <- DESeq2::plotPCA(DESeqTransform(se), intgroup = c("libSize"),
                               returnData = TRUE)
+```
+
+``` output
+using ntop=500 top features by variance
+```
+
+``` r
 percentVar <- round(100 * attr(pcaDataCts, "percentVar"))
 ggplot(pcaDataCts, aes(x = PC1, y = PC2)) +
     geom_point(aes(color = libSize / 1e6), size = 5) +
@@ -371,7 +397,7 @@ Useful tools for interactive exploratory data analysis for RNA-seq are [Glimma](
 ## Challenge: Interactively explore our data using iSEE 
 
 
-```r
+``` r
 ## Convert DESeqDataSet object to a SingleCellExperiment object, in order to 
 ## be able to store the PCA representation
 sce <- as(dds, "SingleCellExperiment")
@@ -395,14 +421,14 @@ shiny::runApp(app)
 ## Session info
 
 
-```r
+``` r
 sessionInfo()
 ```
 
-```{.output}
-R version 4.3.2 (2023-10-31)
-Platform: x86_64-pc-linux-gnu (64-bit)
-Running under: Ubuntu 22.04.4 LTS
+``` output
+R version 4.4.1 (2024-06-14)
+Platform: x86_64-pc-linux-gnu
+Running under: Ubuntu 22.04.5 LTS
 
 Matrix products: default
 BLAS:   /usr/lib/x86_64-linux-gnu/blas/libblas.so.3.10.0 
@@ -422,48 +448,49 @@ attached base packages:
 [8] methods   base     
 
 other attached packages:
- [1] iSEE_2.12.0                 SingleCellExperiment_1.22.0
- [3] hexbin_1.28.3               RColorBrewer_1.1-3         
- [5] ComplexHeatmap_2.16.0       ggplot2_3.5.0              
- [7] vsn_3.68.0                  DESeq2_1.40.2              
- [9] SummarizedExperiment_1.30.2 Biobase_2.60.0             
-[11] MatrixGenerics_1.12.3       matrixStats_1.2.0          
-[13] GenomicRanges_1.52.1        GenomeInfoDb_1.36.4        
-[15] IRanges_2.34.1              S4Vectors_0.38.2           
-[17] BiocGenerics_0.46.0        
+ [1] iSEE_2.16.0                 SingleCellExperiment_1.26.0
+ [3] hexbin_1.28.4               RColorBrewer_1.1-3         
+ [5] ComplexHeatmap_2.20.0       ggplot2_3.5.1              
+ [7] vsn_3.72.0                  DESeq2_1.44.0              
+ [9] SummarizedExperiment_1.34.0 Biobase_2.64.0             
+[11] MatrixGenerics_1.16.0       matrixStats_1.4.1          
+[13] GenomicRanges_1.56.1        GenomeInfoDb_1.40.1        
+[15] IRanges_2.38.1              S4Vectors_0.42.1           
+[17] BiocGenerics_0.50.0        
 
 loaded via a namespace (and not attached):
- [1] bitops_1.0-7            rlang_1.1.3             magrittr_2.0.3         
- [4] shinydashboard_0.7.2    clue_0.3-65             GetoptLong_1.0.5       
- [7] compiler_4.3.2          mgcv_1.9-1              png_0.1-8              
-[10] vctrs_0.6.5             pkgconfig_2.0.3         shape_1.4.6.1          
-[13] crayon_1.5.2            fastmap_1.1.1           XVector_0.40.0         
-[16] ellipsis_0.3.2          labeling_0.4.3          utf8_1.2.4             
-[19] promises_1.2.1          preprocessCore_1.62.1   shinyAce_0.4.2         
-[22] xfun_0.42               cachem_1.0.8            zlibbioc_1.46.0        
-[25] jsonlite_1.8.8          highr_0.10              later_1.3.2            
-[28] DelayedArray_0.26.7     BiocParallel_1.34.2     parallel_4.3.2         
-[31] cluster_2.1.6           R6_2.5.1                bslib_0.6.1            
-[34] limma_3.56.2            jquerylib_0.1.4         Rcpp_1.0.12            
-[37] iterators_1.0.14        knitr_1.45              httpuv_1.6.14          
-[40] Matrix_1.6-5            splines_4.3.2           igraph_2.0.2           
-[43] tidyselect_1.2.0        abind_1.4-5             yaml_2.3.8             
-[46] doParallel_1.0.17       codetools_0.2-19        affy_1.78.2            
-[49] miniUI_0.1.1.1          lattice_0.22-5          tibble_3.2.1           
-[52] shiny_1.8.0             withr_3.0.0             evaluate_0.23          
-[55] circlize_0.4.16         pillar_1.9.0            affyio_1.70.0          
-[58] BiocManager_1.30.22     renv_1.0.5              DT_0.32                
+ [1] rlang_1.1.4             magrittr_2.0.3          shinydashboard_0.7.2   
+ [4] clue_0.3-65             GetoptLong_1.0.5        compiler_4.4.1         
+ [7] mgcv_1.9-1              png_0.1-8               vctrs_0.6.5            
+[10] pkgconfig_2.0.3         shape_1.4.6.1           crayon_1.5.3           
+[13] fastmap_1.2.0           XVector_0.44.0          labeling_0.4.3         
+[16] utf8_1.2.4              promises_1.3.0          shinyAce_0.4.2         
+[19] UCSC.utils_1.0.0        preprocessCore_1.66.0   xfun_0.47              
+[22] cachem_1.1.0            zlibbioc_1.50.0         jsonlite_1.8.9         
+[25] listviewer_4.0.0        highr_0.11              later_1.3.2            
+[28] DelayedArray_0.30.1     BiocParallel_1.38.0     parallel_4.4.1         
+[31] cluster_2.1.6           R6_2.5.1                bslib_0.8.0            
+[34] limma_3.60.4            jquerylib_0.1.4         Rcpp_1.0.13            
+[37] iterators_1.0.14        knitr_1.48              httpuv_1.6.15          
+[40] Matrix_1.7-0            splines_4.4.1           igraph_2.0.3           
+[43] tidyselect_1.2.1        abind_1.4-8             yaml_2.3.10            
+[46] doParallel_1.0.17       codetools_0.2-20        affy_1.82.0            
+[49] miniUI_0.1.1.1          lattice_0.22-6          tibble_3.2.1           
+[52] shiny_1.9.1             withr_3.0.1             evaluate_1.0.0         
+[55] circlize_0.4.16         pillar_1.9.0            affyio_1.74.0          
+[58] BiocManager_1.30.25     renv_1.0.11             DT_0.33                
 [61] foreach_1.5.2           shinyjs_2.1.0           generics_0.1.3         
-[64] RCurl_1.98-1.14         munsell_0.5.0           scales_1.3.0           
-[67] xtable_1.8-4            glue_1.7.0              tools_4.3.2            
-[70] colourpicker_1.3.0      locfit_1.5-9.9          colorspace_2.1-0       
-[73] nlme_3.1-164            GenomeInfoDbData_1.2.10 vipor_0.4.7            
-[76] cli_3.6.2               fansi_1.0.6             viridisLite_0.4.2      
-[79] S4Arrays_1.0.6          dplyr_1.1.4             gtable_0.3.4           
-[82] rintrojs_0.3.4          sass_0.4.8              digest_0.6.34          
-[85] ggrepel_0.9.5           farver_2.1.1            rjson_0.2.21           
-[88] htmlwidgets_1.6.4       htmltools_0.5.7         lifecycle_1.0.4        
-[91] shinyWidgets_0.8.2      GlobalOptions_0.1.2     mime_0.12              
+[64] munsell_0.5.1           scales_1.3.0            xtable_1.8-4           
+[67] glue_1.7.0              tools_4.4.1             colourpicker_1.3.0     
+[70] locfit_1.5-9.10         colorspace_2.1-1        nlme_3.1-164           
+[73] GenomeInfoDbData_1.2.12 vipor_0.4.7             cli_3.6.3              
+[76] fansi_1.0.6             viridisLite_0.4.2       S4Arrays_1.4.1         
+[79] dplyr_1.1.4             gtable_0.3.5            rintrojs_0.3.4         
+[82] sass_0.4.9              digest_0.6.37           SparseArray_1.4.8      
+[85] ggrepel_0.9.6           farver_2.1.2            rjson_0.2.23           
+[88] htmlwidgets_1.6.4       htmltools_0.5.8.1       lifecycle_1.0.4        
+[91] shinyWidgets_0.8.6      httr_1.4.7              GlobalOptions_0.1.2    
+[94] statmod_1.5.0           mime_0.12              
 ```
 
 :::::::::::::::::::::::::::::::::::::::: keypoints

@@ -182,7 +182,7 @@ The data file is located at https://github.com/carpentries-incubator/bioc-rnaseq
 We shall save the downloaded file in the `data` folder of our working directory with the name `GSE96870_counts_cerebellum.csv`.
 
 
-```r
+``` r
 download.file(
     url = "https://github.com/carpentries-incubator/bioc-rnaseq/raw/main/episodes/data/GSE96870_counts_cerebellum.csv", 
     destfile = "data/GSE96870_counts_cerebellum.csv"
@@ -215,7 +215,7 @@ working directory.
 :::::::::::::::::::::::::::::::::::::  solution
 
 
-```r
+``` r
 download.file(
     url = "https://github.com/carpentries-incubator/bioc-rnaseq/raw/main/episodes/data/GSE96870_coldata_cerebellum.csv", 
     destfile = "data/GSE96870_coldata_cerebellum.csv"
