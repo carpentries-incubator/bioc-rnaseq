@@ -426,7 +426,7 @@ sessionInfo()
 ```
 
 ``` output
-R version 4.4.1 (2024-06-14)
+R version 4.4.2 (2024-10-31)
 Platform: x86_64-pc-linux-gnu
 Running under: Ubuntu 22.04.5 LTS
 
@@ -460,7 +460,7 @@ other attached packages:
 
 loaded via a namespace (and not attached):
  [1] rlang_1.1.4             magrittr_2.0.3          shinydashboard_0.7.2   
- [4] clue_0.3-65             GetoptLong_1.0.5        compiler_4.4.1         
+ [4] clue_0.3-65             GetoptLong_1.0.5        compiler_4.4.2         
  [7] mgcv_1.9-1              png_0.1-8               vctrs_0.6.5            
 [10] pkgconfig_2.0.3         shape_1.4.6.1           crayon_1.5.3           
 [13] fastmap_1.2.0           XVector_0.44.0          labeling_0.4.3         
@@ -468,11 +468,11 @@ loaded via a namespace (and not attached):
 [19] UCSC.utils_1.0.0        preprocessCore_1.66.0   xfun_0.49              
 [22] cachem_1.1.0            zlibbioc_1.50.0         jsonlite_1.8.9         
 [25] listviewer_4.0.0        highr_0.11              later_1.3.2            
-[28] DelayedArray_0.30.1     BiocParallel_1.38.0     parallel_4.4.1         
+[28] DelayedArray_0.30.1     BiocParallel_1.38.0     parallel_4.4.2         
 [31] cluster_2.1.6           R6_2.5.1                bslib_0.8.0            
 [34] limma_3.60.6            jquerylib_0.1.4         Rcpp_1.0.13-1          
 [37] iterators_1.0.14        knitr_1.48              httpuv_1.6.15          
-[40] Matrix_1.7-1            splines_4.4.1           igraph_2.1.1           
+[40] Matrix_1.7-1            splines_4.4.2           igraph_2.1.1           
 [43] tidyselect_1.2.1        abind_1.4-8             yaml_2.3.10            
 [46] doParallel_1.0.17       codetools_0.2-20        affy_1.82.0            
 [49] miniUI_0.1.1.1          lattice_0.22-6          tibble_3.2.1           
@@ -481,7 +481,7 @@ loaded via a namespace (and not attached):
 [58] BiocManager_1.30.25     renv_1.0.11             DT_0.33                
 [61] foreach_1.5.2           shinyjs_2.1.0           generics_0.1.3         
 [64] munsell_0.5.1           scales_1.3.0            xtable_1.8-4           
-[67] glue_1.8.0              tools_4.4.1             colourpicker_1.3.0     
+[67] glue_1.8.0              tools_4.4.2             colourpicker_1.3.0     
 [70] locfit_1.5-9.10         colorspace_2.1-1        nlme_3.1-166           
 [73] GenomeInfoDbData_1.2.12 vipor_0.4.7             cli_3.6.3              
 [76] fansi_1.0.6             viridisLite_0.4.2       S4Arrays_1.4.1         
