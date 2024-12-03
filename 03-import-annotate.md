@@ -780,22 +780,22 @@ other attached packages:
  [7] MatrixGenerics_1.16.0       matrixStats_1.4.1          
  [9] GenomicRanges_1.56.2        GenomeInfoDb_1.40.1        
 [11] IRanges_2.38.1              S4Vectors_0.42.1           
-[13] BiocGenerics_0.50.0         knitr_1.48                 
+[13] BiocGenerics_0.50.0         knitr_1.49                 
 
 loaded via a namespace (and not attached):
  [1] Matrix_1.7-1            bit_4.5.0               jsonlite_1.8.9         
- [4] highr_0.11              compiler_4.4.2          BiocManager_1.30.25    
- [7] renv_1.0.11             crayon_1.5.3            blob_1.2.4             
-[10] Biostrings_2.72.1       png_0.1-8               fastmap_1.2.0          
-[13] yaml_2.3.10             lattice_0.22-6          R6_2.5.1               
-[16] XVector_0.44.0          S4Arrays_1.4.1          DelayedArray_0.30.1    
-[19] GenomeInfoDbData_1.2.12 DBI_1.2.3               rlang_1.1.4            
-[22] KEGGREST_1.44.1         cachem_1.1.0            xfun_0.49              
-[25] bit64_4.5.2             memoise_2.0.1           SparseArray_1.4.8      
-[28] RSQLite_2.3.7           cli_3.6.3               zlibbioc_1.50.0        
-[31] grid_4.4.2              vctrs_0.6.5             evaluate_1.0.1         
-[34] abind_1.4-8             httr_1.4.7              pkgconfig_2.0.3        
-[37] tools_4.4.2             UCSC.utils_1.0.0       
+ [4] compiler_4.4.2          BiocManager_1.30.25     renv_1.0.11            
+ [7] crayon_1.5.3            blob_1.2.4              Biostrings_2.72.1      
+[10] png_0.1-8               fastmap_1.2.0           yaml_2.3.10            
+[13] lattice_0.22-6          R6_2.5.1                XVector_0.44.0         
+[16] S4Arrays_1.4.1          DelayedArray_0.30.1     GenomeInfoDbData_1.2.12
+[19] DBI_1.2.3               rlang_1.1.4             KEGGREST_1.44.1        
+[22] cachem_1.1.0            xfun_0.49               bit64_4.5.2            
+[25] memoise_2.0.1           SparseArray_1.4.8       RSQLite_2.3.8          
+[28] cli_3.6.3               zlibbioc_1.50.0         grid_4.4.2             
+[31] vctrs_0.6.5             evaluate_1.0.1          abind_1.4-8            
+[34] httr_1.4.7              pkgconfig_2.0.3         tools_4.4.2            
+[37] UCSC.utils_1.0.0       
 ```
 
 ::: keypoints
