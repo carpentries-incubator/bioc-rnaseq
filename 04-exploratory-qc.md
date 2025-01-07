@@ -464,33 +464,32 @@ loaded via a namespace (and not attached):
  [7] mgcv_1.9-1              png_0.1-8               vctrs_0.6.5            
 [10] pkgconfig_2.0.3         shape_1.4.6.1           crayon_1.5.3           
 [13] fastmap_1.2.0           XVector_0.44.0          labeling_0.4.3         
-[16] utf8_1.2.4              promises_1.3.2          shinyAce_0.4.3         
-[19] UCSC.utils_1.0.0        preprocessCore_1.66.0   xfun_0.49              
-[22] cachem_1.1.0            zlibbioc_1.50.0         jsonlite_1.8.9         
-[25] listviewer_4.0.0        later_1.4.1             DelayedArray_0.30.1    
-[28] BiocParallel_1.38.0     parallel_4.4.2          cluster_2.1.6          
-[31] R6_2.5.1                bslib_0.8.0             limma_3.60.6           
-[34] jquerylib_0.1.4         Rcpp_1.0.13-1           iterators_1.0.14       
-[37] knitr_1.49              httpuv_1.6.15           Matrix_1.7-1           
-[40] splines_4.4.2           igraph_2.1.1            tidyselect_1.2.1       
-[43] abind_1.4-8             yaml_2.3.10             doParallel_1.0.17      
-[46] codetools_0.2-20        affy_1.82.0             miniUI_0.1.1.1         
-[49] lattice_0.22-6          tibble_3.2.1            shiny_1.9.1            
-[52] withr_3.0.2             evaluate_1.0.1          circlize_0.4.16        
-[55] pillar_1.9.0            affyio_1.74.0           BiocManager_1.30.25    
-[58] renv_1.0.11             DT_0.33                 foreach_1.5.2          
-[61] shinyjs_2.1.0           generics_0.1.3          munsell_0.5.1          
-[64] scales_1.3.0            xtable_1.8-4            glue_1.8.0             
-[67] tools_4.4.2             colourpicker_1.3.0      locfit_1.5-9.10        
-[70] colorspace_2.1-1        nlme_3.1-166            GenomeInfoDbData_1.2.12
-[73] vipor_0.4.7             cli_3.6.3               fansi_1.0.6            
-[76] viridisLite_0.4.2       S4Arrays_1.4.1          dplyr_1.1.4            
-[79] gtable_0.3.6            rintrojs_0.3.4          sass_0.4.9             
-[82] digest_0.6.37           SparseArray_1.4.8       ggrepel_0.9.6          
-[85] farver_2.1.2            rjson_0.2.23            htmlwidgets_1.6.4      
-[88] htmltools_0.5.8.1       lifecycle_1.0.4         shinyWidgets_0.8.7     
-[91] httr_1.4.7              GlobalOptions_0.1.2     statmod_1.5.0          
-[94] mime_0.12              
+[16] promises_1.3.2          shinyAce_0.4.3          UCSC.utils_1.0.0       
+[19] preprocessCore_1.66.0   xfun_0.49               cachem_1.1.0           
+[22] zlibbioc_1.50.0         jsonlite_1.8.9          listviewer_4.0.0       
+[25] later_1.4.1             DelayedArray_0.30.1     BiocParallel_1.38.0    
+[28] parallel_4.4.2          cluster_2.1.8           R6_2.5.1               
+[31] bslib_0.8.0             limma_3.60.6            jquerylib_0.1.4        
+[34] Rcpp_1.0.13-1           iterators_1.0.14        knitr_1.49             
+[37] httpuv_1.6.15           Matrix_1.7-1            splines_4.4.2          
+[40] igraph_2.1.2            tidyselect_1.2.1        abind_1.4-8            
+[43] yaml_2.3.10             doParallel_1.0.17       codetools_0.2-20       
+[46] affy_1.82.0             miniUI_0.1.1.1          lattice_0.22-6         
+[49] tibble_3.2.1            shiny_1.10.0            withr_3.0.2            
+[52] evaluate_1.0.1          circlize_0.4.16         pillar_1.10.0          
+[55] affyio_1.74.0           BiocManager_1.30.25     renv_1.0.11            
+[58] DT_0.33                 foreach_1.5.2           shinyjs_2.1.0          
+[61] generics_0.1.3          munsell_0.5.1           scales_1.3.0           
+[64] xtable_1.8-4            glue_1.8.0              tools_4.4.2            
+[67] colourpicker_1.3.0      locfit_1.5-9.10         colorspace_2.1-1       
+[70] nlme_3.1-166            GenomeInfoDbData_1.2.12 vipor_0.4.7            
+[73] cli_3.6.3               viridisLite_0.4.2       S4Arrays_1.4.1         
+[76] dplyr_1.1.4             gtable_0.3.6            rintrojs_0.3.4         
+[79] sass_0.4.9              digest_0.6.37           SparseArray_1.4.8      
+[82] ggrepel_0.9.6           farver_2.1.2            rjson_0.2.23           
+[85] htmlwidgets_1.6.4       htmltools_0.5.8.1       lifecycle_1.0.4        
+[88] shinyWidgets_0.8.7      httr_1.4.7              GlobalOptions_0.1.2    
+[91] statmod_1.5.0           mime_0.12              
 ```
 
 :::::::::::::::::::::::::::::::::::::::: keypoints
