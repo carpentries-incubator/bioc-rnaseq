@@ -477,7 +477,7 @@ loaded via a namespace (and not attached):
 [46] affy_1.82.0             miniUI_0.1.1.1          lattice_0.22-6         
 [49] tibble_3.2.1            shiny_1.10.0            withr_3.0.2            
 [52] evaluate_1.0.1          circlize_0.4.16         pillar_1.10.0          
-[55] affyio_1.74.0           BiocManager_1.30.25     renv_1.0.11            
+[55] affyio_1.74.0           BiocManager_1.30.25     renv_1.1.0             
 [58] DT_0.33                 foreach_1.5.2           shinyjs_2.1.0          
 [61] generics_0.1.3          munsell_0.5.1           scales_1.3.0           
 [64] xtable_1.8-4            glue_1.8.0              tools_4.4.2            
