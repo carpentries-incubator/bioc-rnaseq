@@ -110,7 +110,7 @@ Potential considerations:
 Differences in the total number of reads assigned to genes between samples typically occur for technical reasons. In practice, it means that we can not simply compare a gene's raw read count directly between samples and conclude that a sample with a higher read count also expresses the gene more strongly - the higher count may be caused by an overall higher number of reads in that sample.
 In the rest of this section, we will use the term *library size* to refer to the total number of reads assigned to genes for a sample. First we should compare the library sizes of all samples. 
 
-```{r lib-size}
+```{r lib-size, fig.width = 9}
 # Add in the sum of all counts
 
 se$libSize <-  colSums(assay(se))
@@ -123,6 +123,9 @@ colData(se) |>
   as.data.frame() |>
   ggplot(aes(x = Label, y = libSize / 1e6, fill = Group)) + 
          geom_bar(stat = "identity") + theme_bw() + 
+         scale_fill_manual(values = c(Female_Day0 = "#f5cac6", Female_Day4 = "#f28e85",
+                                      Female_Day8 = "#ea3323", Male_Day0 = "#cbcbf7",
+                                      Male_Day4 = "#9c9cf7", Male_Day8 = "#0000f5")) + 
          labs(x = "Sample", y = "Total count in millions") + 
          theme(axis.text.x = element_text(angle = 45, hjust = 1, vjust = 1))
 
@@ -154,6 +157,9 @@ ggplot(data.frame(libSize = colSums(assay(dds)),
                   Group = dds$Group),
        aes(x = libSize, y = sizeFactor, col = Group)) + 
     geom_point(size = 5) + theme_bw() + 
+    scale_color_manual(values = c(Female_Day0 = "#f5cac6", Female_Day4 = "#f28e85",
+                                  Female_Day8 = "#ea3323", Male_Day0 = "#cbcbf7",
+                                  Male_Day4 = "#9c9cf7", Male_Day8 = "#0000f5")) + 
     labs(x = "Library size", y = "Size factor")
 ```
 
