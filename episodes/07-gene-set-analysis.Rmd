@@ -852,9 +852,9 @@ following figure.
 The core function `msigdbr()` retrieves gene sets in a specific category (or a
 subcategory if it exists).
 
-```r
+
 msigdbr(species, category, subcategory)
-```
+
 
 For example, we want to obtain the hallmark gene sets for mouse.
 
