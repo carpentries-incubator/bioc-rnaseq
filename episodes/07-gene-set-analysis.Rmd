@@ -838,6 +838,7 @@ options(pillar.print_max = 30)
 
 ```{r msigdbr}
 library(msigdbr)
+library(msigdbdf)
 msigdbr_species()
 msigdbr_collections()
 ```
