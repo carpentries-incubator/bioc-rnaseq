@@ -110,7 +110,7 @@ Potential considerations:
 Differences in the total number of reads assigned to genes between samples typically occur for technical reasons. In practice, it means that we can not simply compare a gene's raw read count directly between samples and conclude that a sample with a higher read count also expresses the gene more strongly - the higher count may be caused by an overall higher number of reads in that sample.
 In the rest of this section, we will use the term *library size* to refer to the total number of reads assigned to genes for a sample. First we should compare the library sizes of all samples. 
 
-```{r lib-size}
+```{r lib-size, fig.alt="Barplot with total count on the y-axis and sample name on the x-axis, with bars colored by the group annotation. The total count varies between approximately 32 and 43 million."}
 # Add in the sum of all counts
 
 se$libSize <-  colSums(assay(se))
@@ -141,7 +141,7 @@ The size factors estimated by this function combines an adjustment for differenc
 The latter is important due to the compositional nature of RNA-seq data.
 There is a fixed number of reads to distribute between the genes, and if a single (or a few) very highly expressed gene consume a large part of the reads, all other genes will consequently receive very low counts. We now switch our `SummarizedExperiment` object over to a `DESeqDataSet` as it has the internal structure to store these size factors. We also need to tell it our main experiment design, which is sex and time: 
 
-```{r est-size-factors}
+```{r est-size-factors, fig.alt="Scatterplot with library size on the x-axis and size factor on the y-axis, showing a high correlation between the two variables."}
 
 dds <- DESeq2::DESeqDataSet(se, design = ~ sex + time)
 dds <- estimateSizeFactors(dds)
@@ -164,14 +164,14 @@ Most of these work best in situations where the variance of the input data (here
 For read count data such as RNA-seq, this is not the case.
 In fact, the variance increases with the average read count.
 
-```{r mean-sd-plot-raw}
+```{r mean-sd-plot-raw, fig.alt="Hexagonal heatmap with the mean count on the x-axis and the standard deviation of the count on the y-axis, showing a generally increasing standard deviation with increasing mean. The density of points is highest for low count values."}
 meanSdPlot(assay(dds), ranks = FALSE)
 ```
 
 There are two ways around this: either we develop methods specifically adapted to count data, or we adapt (transform) the count data so that the existing methods are applicable.
 Both ways have been explored; however, at the moment the second approach is arguably more widely applied in practice. We can transform our data using DESeq2's variance stabilizing transformation and then verify that it has removed the correlation between average read count and variance.
 
-```{r mean-sd-plot-vst}
+```{r mean-sd-plot-vst, fig.alt="Hexagonal heatmap with the mean variance-stabilized values on the x-axis and the standard deviation of these on the y-axis. The trend is generally flat, with no clear association between the mean and standard deviation."}
 vsd <- DESeq2::vst(dds, blind = TRUE)
 meanSdPlot(assay(vsd), ranks = FALSE)
 ```
@@ -180,7 +180,7 @@ meanSdPlot(assay(vsd), ranks = FALSE)
 
 There are many ways to cluster samples based on their similarity of expression patterns. One simple way is to calculate Euclidean distances between all pairs of samples (longer distance = more different) and then display the results with both a branching dendrogram and a heatmap to visualize the distances in color. From this, we infer that the Day 8 samples are more similar to each other than the rest of the samples, although Day 4 and Day 0 do not separate distinctly. Instead, males and females reliably separate.
 
-```{r heatmap}
+```{r heatmap, fig.alt="Heatmap of Euclidean distances between all pairs of samples, with hierarchical cluster dendrogram for both rows and columns. Samples from day 8 cluster separately from samples from days 0 and 4. Within days 0 and 4, the main clustering is instead by sex."}
 dst <- dist(t(assay(vsd)))
 colors <- colorRampPalette(brewer.pal(9, "Blues"))(255)
 ComplexHeatmap::Heatmap(
@@ -209,7 +209,7 @@ For each of the two dimensions, we indicate the fraction of the total variance t
 By definition, the first principal component will always represent more of the variance than the subsequent ones.
 The fraction of explained variance is a measure of how much of the 'signal' in the data that is retained when we project the samples from the original, high-dimensional space to the low-dimensional space for visualization.
 
-```{r pca}
+```{r pca, fig.alt="Scatterplot of samples projected onto the first two principal components, colored by sex and shaped according to the experimental day. The main separation along PC1 is between male and female samples. The main separation along PC2 is between samples from day 8 and samples from days 0 and 4."}
 pcaData <- DESeq2::plotPCA(vsd, intgroup = c("sex", "time"),
                            returnData = TRUE)
 percentVar <- round(100 * attr(pcaData, "percentVar"))
@@ -230,7 +230,7 @@ ggplot(pcaData, aes(x = PC1, y = PC2)) +
 
 2. Consider an experimental design where you have multiple samples from the same donor. You are still interested in differences by time and observe the following PCA plot. What does this PCA plot suggest?
 
-```{r pca-exercise, eval=TRUE, echo=FALSE, include=TRUE}
+```{r pca-exercise, eval=TRUE, echo=FALSE, include=TRUE, fig.alt="Scatterplot of samples projected onto the first two principal components, colored by a hypothetical sample ID annotation and shaped according to a hypothetical experimental day annotation. In the plot, samples with the same sample ID tend to cluster together."}
 vsd_ex <- vsd
 vsd_ex$sample <- vsd_ex$Group
 levels(vsd_ex$sample) <- c("sampleA", "sampleB", "sampleC", 
@@ -278,7 +278,7 @@ Compare before and after variance stabilizing transformation.
 
 ::::::::::::::::::::::::::::::::::: solution
 
-```{r pca-lib}
+```{r pca-lib, fig.alt="Scatterplot of samples projected onto the first two principal components of the variance-stabilized data, colored by library size. The library sizes are between approximately 32.5 and 42.5 million. There is no strong association between the library sizes and the principal components."}
 pcaDataVst <- DESeq2::plotPCA(vsd, intgroup = c("libSize"),
                               returnData = TRUE)
 percentVar <- round(100 * attr(pcaDataVst, "percentVar"))
@@ -292,7 +292,7 @@ ggplot(pcaDataVst, aes(x = PC1, y = PC2)) +
 ```
 
 
-```{r pca-lib-vst}
+```{r pca-lib-vst, fig.alt="Scatterplot of samples projected onto the first two principal components of the count matrix, colored by library size. The library sizes are between approximately 32.5 and 42.5 million. The first principal component is strongly correlated with the library size."}
 pcaDataCts <- DESeq2::plotPCA(DESeqTransform(se), intgroup = c("libSize"),
                               returnData = TRUE)
 percentVar <- round(100 * attr(pcaDataCts, "percentVar"))

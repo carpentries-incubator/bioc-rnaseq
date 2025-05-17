@@ -123,7 +123,7 @@ $var = \mu + \theta \mu^2$
 $\theta$ represents the gene-specific __dispersion__, a measure of variability or spread in the data. As a second step, we need to estimate gene-wise dispersions to get the expected within-group variance and test for group differences. Good dispersion estimates are challenging with a few samples per group only. Thus, information from genes with similar expression pattern are "borrowed". Gene-wise dispersion estimates are *shrinked* towards center values of the observed distribution of dispersions. With `DESeq2` we can get dispersion estimates using the `estimateDispersions()` function.
 We can visualize the effect of *shrinkage* using `plotDispEsts()`:
 
-```{r estimate-dispersions}
+```{r estimate-dispersions, fig.alt="Scatterplot with the mean of normalized counts on the x-axis and the dispersion on the y-axis. The plot shows black dots corresponding to gene-wise estimates of the dispersion, a red line corresponding to the fitted trend, and blue dots corresponding to the final dispersion estimates. There is a general trend of decreasing dispersion with increasing mean normalized counts."}
 dds <- estimateDispersions(dds)
 plotDispEsts(dds)
 ```
@@ -248,7 +248,7 @@ to calculate __adjusted p-values__ (padj) for DE results.
 We can visualize the results in many ways. A good check is to explore the relationship between *log2fold changes*, *significant DE genes* and the *genes mean count*.
 `DESeq2` provides a useful function to do so, `plotMA()`.
 
-```{r plot-ma}
+```{r plot-ma, fig.alt="MA plot showing the mean normalized counts on the x-axis and the log fold change on the y-axis. Significantly differentially expressed genes are colored in blue. The range of log fold changes is larger for low values of the mean normalized counts."}
 plotMA(resTime)
 ```
 
@@ -256,7 +256,7 @@ We can see that genes with a low mean count tend to have larger log fold changes
 This is caused by counts from lowly expressed genes tending to be very noisy. 
 We can *shrink* the log fold changes of these genes with low mean and high dispersion, as they contain little information.
 
-```{r res-time-lfc}
+```{r res-time-lfc, fig.alt="MA plot showing the mean normalized counts on the x-axis and the shrunken log fold change on the y-axis. Significantly differentially expressed genes are colored in blue. Most log fold changes for low mean normalized counts have been shrunken to be close to zero."}
 resTimeLfc <- lfcShrink(dds, coef = "time_Day8_vs_Day0", res = resTime)
 plotMA(resTimeLfc)
 ```
@@ -289,7 +289,7 @@ The amount of DE genes can be overwhelming and a ranked list of genes can still 
 We will use transformed data (see [exploratory data analysis](../episodes/04-exploratory-qc.Rmd)) and the top differentially expressed genes for visualization. A heatmap can reveal expression pattern across sample groups (columns) and automatically orders genes (rows) according to their similarity. 
 
 
-```{r heatmap-time}
+```{r heatmap-time, fig.alt="Heatmap showing the vsd-transformed expression levels for the ten most significantly differentially expressed genes over time, in all the samples."}
 # Transform counts
 vsd <- vst(dds, blind = TRUE)
 
@@ -305,7 +305,6 @@ heatmapData <- t(scale(t(heatmapData)))
 # Add annotation
 heatmapColAnnot <- data.frame(colData(vsd)[, c("time", "sex")])
 heatmapColAnnot <- HeatmapAnnotation(df = heatmapColAnnot)
-
 
 # Plot as heatmap
 ComplexHeatmap::Heatmap(heatmapData,
