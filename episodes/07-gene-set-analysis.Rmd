@@ -827,7 +827,8 @@ MSigDB categorizes gene sets into nine collections where each collection
 focuses on a specific topic. For some collections, they are additionally split
 into sub-collections. There are several ways to obtain gene sets from MSigDB.
 One convenient way is to use the **msigdb** package. Another option is to use 
-the **msigdbr** CRAN package. 
+the **msigdbr** CRAN package, which supports organisms other than human and 
+mouse by mapping to orthologs.
 
 **msigdb** provides mouse and human gene sets, defined using either gene 
 symbols or Entrez IDs. Let's get the mouse collection.
