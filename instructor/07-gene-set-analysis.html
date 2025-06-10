@@ -279,7 +279,7 @@
       </div>
       <hr></nav><main id="main-content" class="main-content"><div class="container lesson-content">
         <h1>Gene set enrichment analysis</h1>
-        <p> Last updated on 2025-02-04 |
+        <p> Last updated on 2025-06-10 |
 
         <a href="https://github.com/carpentries-incubator/bioc-rnaseq/edit/main/episodes/07-gene-set-analysis.Rmd" class="external-link">Edit this page <i aria-hidden="true" data-feather="edit"></i></a></p>
 
@@ -366,7 +366,7 @@ episode:</p>
 <span><span class="kw">library</span><span class="op">(</span><span class="va">microbenchmark</span><span class="op">)</span></span>
 <span><span class="kw">library</span><span class="op">(</span><span class="va">org.Hs.eg.db</span><span class="op">)</span></span>
 <span><span class="kw">library</span><span class="op">(</span><span class="va">org.Mm.eg.db</span><span class="op">)</span></span>
-<span><span class="kw">library</span><span class="op">(</span><span class="va">msigdbr</span><span class="op">)</span></span>
+<span><span class="kw">library</span><span class="op">(</span><span class="va">msigdb</span><span class="op">)</span></span>
 <span><span class="kw">library</span><span class="op">(</span><span class="va">clusterProfiler</span><span class="op">)</span></span>
 <span><span class="kw">library</span><span class="op">(</span><span class="va">enrichplot</span><span class="op">)</span></span>
 <span><span class="kw">library</span><span class="op">(</span><span class="va">ggplot2</span><span class="op">)</span></span>
@@ -836,9 +836,9 @@ distribution of its statistic.</p>
 <h3 class="code-label">OUTPUT<i aria-hidden="true" data-feather="chevron-left"></i><i aria-hidden="true" data-feather="chevron-right"></i>
 </h3>
 <pre class="output" tabindex="0"><code>Unit: microseconds
-   expr     min      lq      mean  median      uq     max neval
- fisher 243.615 246.164 256.87370 249.585 254.885 499.832   100
-  hyper   1.523   1.789   2.64215   2.625   2.890  18.635   100</code></pre>
+   expr     min       lq      mean   median       uq     max neval
+ fisher 248.173 252.7765 265.06756 257.8255 269.2875 550.656   100
+  hyper   1.513   1.7785   2.53346   2.8255   3.0000   7.143   100</code></pre>
 </div>
 <p>It is very astonishing that <code>phyper()</code> is hundreds of
 times faster than <code>fisher.test()</code>. Main reason is in
@@ -992,7 +992,7 @@ convert a list to a two-column data frame?</p>
 <button class="accordion-button solution-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapseSolution1" aria-expanded="false" aria-controls="collapseSolution1">
   <h4 class="accordion-header" id="headingSolution1"> Show me the solution </h4>
 </button>
-<div id="collapseSolution1" class="accordion-collapse collapse" data-bs-parent="#accordionSolution1" aria-labelledby="headingSolution1">
+<div id="collapseSolution1" class="accordion-collapse collapse" aria-labelledby="headingSolution1" data-bs-parent="#accordionSolution1">
 <div class="accordion-body">
 <div class="codewrapper sourceCode" id="cb38">
 <h3 class="code-label">R<i aria-hidden="true" data-feather="chevron-left"></i><i aria-hidden="true" data-feather="chevron-right"></i>
@@ -1061,7 +1061,7 @@ cellular components (CC) and molecular function (MF) which describe a
 biological entity from different aspect. The associations between GO
 terms and genes are integrated in the Bioconductor standard packages:
 <em>the organism annotation packages</em>. In the current Bioconductor
-release (3.17), there are the following organism packages:</p>
+release, there are the following organism packages:</p>
 <center>
 <table class="table"><colgroup><col width="27%"><col width="25%"><col width="36%"><col width="10%"></colgroup><thead><tr class="header"><th>Package</th>
 <th>Organism</th>
@@ -1158,7 +1158,7 @@ following code:</p>
 <div class="codewrapper">
 <h3 class="code-label">OUTPUT<i aria-hidden="true" data-feather="chevron-left"></i><i aria-hidden="true" data-feather="chevron-right"></i>
 </h3>
-<pre class="output" tabindex="0"><code>[1] "GO:0008150" "GO:0001553" "GO:0001869" "GO:0002438" "GO:0006953"
+<pre class="output" tabindex="0"><code>[1] "GO:0002764" "GO:0001553" "GO:0001869" "GO:0002438" "GO:0006953"
 [6] "GO:0007584"</code></pre>
 </div>
 <p><code>mapIds()</code> maps IDs between two sources. Since a GO
@@ -1355,183 +1355,150 @@ and in total 843 gene sets. Now in the newest version of MSigDB
 collection focuses on a specific topic. For some collections, they are
 additionally split into sub-collections. There are several ways to
 obtain gene sets from MSigDB. One convenient way is to use the
-<strong>msigdbr</strong> package. The advantages is
-<strong>msigdbr</strong> supports many other organisms by mapping to
-orthologs.</p>
-<p>Let’s check which organisms are supported and which gene sets
-collections it provides.</p>
+<strong>msigdb</strong> package. Another option is to use the
+<strong>msigdbr</strong> CRAN package, which supports organisms other
+than human and mouse by mapping to orthologs.</p>
+<p><strong>msigdb</strong> provides mouse and human gene sets, defined
+using either gene symbols or Entrez IDs. Let’s get the mouse
+collection.</p>
 <div class="codewrapper sourceCode" id="cb58">
 <h3 class="code-label">R<i aria-hidden="true" data-feather="chevron-left"></i><i aria-hidden="true" data-feather="chevron-right"></i>
 </h3>
 <pre class="downlit sourceCode r">
-<code class="sourceCode R"><span><span class="kw">library</span><span class="op">(</span><span class="va">msigdbr</span><span class="op">)</span></span>
-<span><span class="fu">msigdbr_species</span><span class="op">(</span><span class="op">)</span></span></code></pre>
+<code class="sourceCode R"><span><span class="kw">library</span><span class="op">(</span><span class="va">msigdb</span><span class="op">)</span></span>
+<span><span class="kw">library</span><span class="op">(</span><span class="va">ExperimentHub</span><span class="op">)</span></span>
+<span><span class="kw">library</span><span class="op">(</span><span class="va">GSEABase</span><span class="op">)</span></span>
+<span><span class="va">MSigDBGeneSets</span> <span class="op">&lt;-</span> <span class="fu">getMsigdb</span><span class="op">(</span>org <span class="op">=</span> <span class="st">"mm"</span>, id <span class="op">=</span> <span class="st">"SYM"</span>, version <span class="op">=</span> <span class="st">"7.4"</span><span class="op">)</span></span></code></pre>
+</div>
+<p>The <code>msigdb</code> object above is a
+<code>GeneSetCollection</code>, storing all gene sets from MSigDB. The
+<code>GeneSetCollection</code> object class is defined in the
+<code>GSEABase</code> package, and it is a linear data structure similar
+to a base list object, but with additional metadata such as the type of
+gene identifier or provenance information about the gene sets.</p>
+<div class="codewrapper sourceCode" id="cb59">
+<h3 class="code-label">R<i aria-hidden="true" data-feather="chevron-left"></i><i aria-hidden="true" data-feather="chevron-right"></i>
+</h3>
+<pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="va">MSigDBGeneSets</span></span></code></pre>
 </div>
 <div class="codewrapper">
 <h3 class="code-label">OUTPUT<i aria-hidden="true" data-feather="chevron-left"></i><i aria-hidden="true" data-feather="chevron-right"></i>
 </h3>
-<pre class="output" tabindex="0"><code># A tibble: 20 × 2
-   species_name                    species_common_name
-   &lt;chr&gt;                           &lt;chr&gt;
- 1 Anolis carolinensis             Carolina anole, green anole
- 2 Bos taurus                      bovine, cattle, cow, dairy cow, domestic cat…
- 3 Caenorhabditis elegans          &lt;NA&gt;
- 4 Canis lupus familiaris          dog, dogs
- 5 Danio rerio                     leopard danio, zebra danio, zebra fish, zebr…
- 6 Drosophila melanogaster         fruit fly
- 7 Equus caballus                  domestic horse, equine, horse
- 8 Felis catus                     cat, cats, domestic cat
- 9 Gallus gallus                   bantam, chicken, chickens, Gallus domesticus
-10 Homo sapiens                    human
-11 Macaca mulatta                  rhesus macaque, rhesus macaques, Rhesus monk…
-12 Monodelphis domestica           gray short-tailed opossum
-13 Mus musculus                    house mouse, mouse
-14 Ornithorhynchus anatinus        duck-billed platypus, duckbill platypus, pla…
-15 Pan troglodytes                 chimpanzee
-16 Rattus norvegicus               brown rat, Norway rat, rat, rats
-17 Saccharomyces cerevisiae        baker's yeast, brewer's yeast, S. cerevisiae
-18 Schizosaccharomyces pombe 972h- &lt;NA&gt;
-19 Sus scrofa                      pig, pigs, swine, wild boar
-20 Xenopus tropicalis              tropical clawed frog, western clawed frog    </code></pre>
+<pre class="output" tabindex="0"><code>GeneSetCollection
+  names: 10qA1, 10qA2, ..., ZZZ3_TARGET_GENES (44688 total)
+  unique identifiers: Epm2a, Esr1, ..., Gm52481 (53805 total)
+  types in collection:
+    geneIdType: SymbolIdentifier (1 total)
+    collectionType: BroadCollection (1 total)</code></pre>
 </div>
-<div class="codewrapper sourceCode" id="cb60">
+<div class="codewrapper sourceCode" id="cb61">
 <h3 class="code-label">R<i aria-hidden="true" data-feather="chevron-left"></i><i aria-hidden="true" data-feather="chevron-right"></i>
 </h3>
 <pre class="downlit sourceCode r">
-<code class="sourceCode R"><span><span class="fu">msigdbr_collections</span><span class="op">(</span><span class="op">)</span></span></code></pre>
+<code class="sourceCode R"><span><span class="fu">length</span><span class="op">(</span><span class="va">MSigDBGeneSets</span><span class="op">)</span></span></code></pre>
 </div>
 <div class="codewrapper">
 <h3 class="code-label">OUTPUT<i aria-hidden="true" data-feather="chevron-left"></i><i aria-hidden="true" data-feather="chevron-right"></i>
 </h3>
-<pre class="output" tabindex="0"><code># A tibble: 23 × 3
-   gs_cat gs_subcat         num_genesets
-   &lt;chr&gt;  &lt;chr&gt;                    &lt;int&gt;
- 1 C1     ""                         299
- 2 C2     "CGP"                     3384
- 3 C2     "CP"                        29
- 4 C2     "CP:BIOCARTA"              292
- 5 C2     "CP:KEGG"                  186
- 6 C2     "CP:PID"                   196
- 7 C2     "CP:REACTOME"             1615
- 8 C2     "CP:WIKIPATHWAYS"          664
- 9 C3     "MIR:MIRDB"               2377
-10 C3     "MIR:MIR_Legacy"           221
-11 C3     "TFT:GTRD"                 518
-12 C3     "TFT:TFT_Legacy"           610
-13 C4     "CGN"                      427
-14 C4     "CM"                       431
-15 C5     "GO:BP"                   7658
-16 C5     "GO:CC"                   1006
-17 C5     "GO:MF"                   1738
-18 C5     "HPO"                     5071
-19 C6     ""                         189
-20 C7     "IMMUNESIGDB"             4872
-21 C7     "VAX"                      347
-22 C8     ""                         700
-23 H      ""                          50</code></pre>
+<pre class="output" tabindex="0"><code>[1] 44688</code></pre>
 </div>
-<p>The first column in the above output is the primary category of gene
-sets. Some gene sets collections may have sub-collections, and they are
-shown in the second column. The description of gene sets collections
-from MSigDB is in the following figure.</p>
-<figure><img src="../fig/msigdb.png" class="figure mx-auto d-block"></figure><p>The core function <code>msigdbr()</code> retrieves gene sets in a
-specific category (or a subcategory if it exists).</p>
-<div class="codewrapper sourceCode" id="cb62">
-<h3 class="code-label">R<i aria-hidden="true" data-feather="chevron-left"></i><i aria-hidden="true" data-feather="chevron-right"></i>
-</h3>
-<pre class="downlit sourceCode r">
-<code class="sourceCode R"><span><span class="fu">msigdbr</span><span class="op">(</span><span class="va">species</span>, <span class="va">category</span>, <span class="va">subcategory</span><span class="op">)</span></span></code></pre>
-</div>
-<p>For example, we want to obtain the hallmark gene sets for mouse.</p>
+<p>Each signature is stored in a <code>GeneSet</code> object, also
+defined in the <code>GSEABase</code> package.</p>
 <div class="codewrapper sourceCode" id="cb63">
 <h3 class="code-label">R<i aria-hidden="true" data-feather="chevron-left"></i><i aria-hidden="true" data-feather="chevron-right"></i>
 </h3>
 <pre class="downlit sourceCode r">
-<code class="sourceCode R"><span><span class="va">MSigDBGeneSets</span> <span class="op">=</span> <span class="fu">msigdbr</span><span class="op">(</span>species <span class="op">=</span> <span class="st">"mouse"</span>, category <span class="op">=</span> <span class="st">"H"</span><span class="op">)</span></span>
-<span><span class="fu">head</span><span class="op">(</span><span class="va">MSigDBGeneSets</span><span class="op">)</span></span></code></pre>
+<code class="sourceCode R"><span><span class="va">gs</span> <span class="op">&lt;-</span> <span class="va">MSigDBGeneSets</span><span class="op">[[</span><span class="fl">2000</span><span class="op">]</span><span class="op">]</span></span>
+<span><span class="va">gs</span></span></code></pre>
 </div>
 <div class="codewrapper">
 <h3 class="code-label">OUTPUT<i aria-hidden="true" data-feather="chevron-left"></i><i aria-hidden="true" data-feather="chevron-right"></i>
 </h3>
-<pre class="output" tabindex="0"><code># A tibble: 6 × 18
-  gs_cat gs_subcat gs_name               gene_symbol entrez_gene ensembl_gene
-  &lt;chr&gt;  &lt;chr&gt;     &lt;chr&gt;                 &lt;chr&gt;             &lt;int&gt; &lt;chr&gt;
-1 H      ""        HALLMARK_ADIPOGENESIS Abca1             11303 ENSMUSG0000001…
-2 H      ""        HALLMARK_ADIPOGENESIS Abcb8             74610 ENSMUSG0000002…
-3 H      ""        HALLMARK_ADIPOGENESIS Acaa2             52538 ENSMUSG0000003…
-4 H      ""        HALLMARK_ADIPOGENESIS Acadl             11363 ENSMUSG0000002…
-5 H      ""        HALLMARK_ADIPOGENESIS Acadm             11364 ENSMUSG0000006…
-6 H      ""        HALLMARK_ADIPOGENESIS Acads             11409 ENSMUSG0000002…
-# ℹ 12 more variables: human_gene_symbol &lt;chr&gt;, human_entrez_gene &lt;int&gt;,
-#   human_ensembl_gene &lt;chr&gt;, gs_id &lt;chr&gt;, gs_pmid &lt;chr&gt;, gs_geoid &lt;chr&gt;,
-#   gs_exact_source &lt;chr&gt;, gs_url &lt;chr&gt;, gs_description &lt;chr&gt;, taxon_id &lt;int&gt;,
-#   ortholog_sources &lt;chr&gt;, num_ortholog_sources &lt;dbl&gt;</code></pre>
+<pre class="output" tabindex="0"><code>setName: DESCARTES_MAIN_FETAL_CHROMAFFIN_CELLS
+geneIds: Asic5, Cntfr, ..., Slc22a22 (total: 28)
+geneIdType: Symbol
+collectionType: Broad
+  bcCategory: c8 (Cell Type Signatures)
+  bcSubCategory: NA
+details: use 'details(object)'</code></pre>
 </div>
-<p>The output is in the <code>tibble</code> class. If you have no
-experience with it, don’t worry, just take it as a table. As you can
-see, the three major gene IDs type <code>"gene_symbol"</code>,
-<code>"entrez_gene"</code> and <code>"ensembl_gene"</code> are all
-included in the table. So users can easily pick one with the same gene
-ID type as in the DE gene list. For example:</p>
 <div class="codewrapper sourceCode" id="cb65">
 <h3 class="code-label">R<i aria-hidden="true" data-feather="chevron-left"></i><i aria-hidden="true" data-feather="chevron-right"></i>
 </h3>
 <pre class="downlit sourceCode r">
-<code class="sourceCode R"><span><span class="va">MSigDBGeneSets</span><span class="op">[</span>, <span class="fu">c</span><span class="op">(</span><span class="st">"gs_name"</span>, <span class="st">"ensembl_gene"</span><span class="op">)</span><span class="op">]</span></span></code></pre>
+<code class="sourceCode R"><span><span class="fu">collectionType</span><span class="op">(</span><span class="va">gs</span><span class="op">)</span></span></code></pre>
 </div>
 <div class="codewrapper">
 <h3 class="code-label">OUTPUT<i aria-hidden="true" data-feather="chevron-left"></i><i aria-hidden="true" data-feather="chevron-right"></i>
 </h3>
-<pre class="output" tabindex="0"><code># A tibble: 7,384 × 2
-   gs_name               ensembl_gene
-   &lt;chr&gt;                 &lt;chr&gt;
- 1 HALLMARK_ADIPOGENESIS ENSMUSG00000015243
- 2 HALLMARK_ADIPOGENESIS ENSMUSG00000028973
- 3 HALLMARK_ADIPOGENESIS ENSMUSG00000036880
- 4 HALLMARK_ADIPOGENESIS ENSMUSG00000026003
- 5 HALLMARK_ADIPOGENESIS ENSMUSG00000062908
- 6 HALLMARK_ADIPOGENESIS ENSMUSG00000029545
- 7 HALLMARK_ADIPOGENESIS ENSMUSG00000020917
- 8 HALLMARK_ADIPOGENESIS ENSMUSG00000022477
- 9 HALLMARK_ADIPOGENESIS ENSMUSG00000020777
-10 HALLMARK_ADIPOGENESIS ENSMUSG00000022994
-# ℹ 7,374 more rows</code></pre>
+<pre class="output" tabindex="0"><code>collectionType: Broad
+  bcCategory: c8 (Cell Type Signatures)
+  bcSubCategory: NA</code></pre>
 </div>
 <div class="codewrapper sourceCode" id="cb67">
 <h3 class="code-label">R<i aria-hidden="true" data-feather="chevron-left"></i><i aria-hidden="true" data-feather="chevron-right"></i>
 </h3>
 <pre class="downlit sourceCode r">
-<code class="sourceCode R"><span><span class="co"># or put genes in the first column</span></span>
-<span><span class="va">MSigDBGeneSets</span><span class="op">[</span>, <span class="fu">c</span><span class="op">(</span><span class="st">"ensembl_gene"</span>, <span class="st">"gs_name"</span><span class="op">)</span><span class="op">]</span></span></code></pre>
+<code class="sourceCode R"><span><span class="fu">geneIds</span><span class="op">(</span><span class="va">gs</span><span class="op">)</span></span></code></pre>
 </div>
 <div class="codewrapper">
 <h3 class="code-label">OUTPUT<i aria-hidden="true" data-feather="chevron-left"></i><i aria-hidden="true" data-feather="chevron-right"></i>
 </h3>
-<pre class="output" tabindex="0"><code># A tibble: 7,384 × 2
-   ensembl_gene       gs_name
-   &lt;chr&gt;              &lt;chr&gt;
- 1 ENSMUSG00000015243 HALLMARK_ADIPOGENESIS
- 2 ENSMUSG00000028973 HALLMARK_ADIPOGENESIS
- 3 ENSMUSG00000036880 HALLMARK_ADIPOGENESIS
- 4 ENSMUSG00000026003 HALLMARK_ADIPOGENESIS
- 5 ENSMUSG00000062908 HALLMARK_ADIPOGENESIS
- 6 ENSMUSG00000029545 HALLMARK_ADIPOGENESIS
- 7 ENSMUSG00000020917 HALLMARK_ADIPOGENESIS
- 8 ENSMUSG00000022477 HALLMARK_ADIPOGENESIS
- 9 ENSMUSG00000020777 HALLMARK_ADIPOGENESIS
-10 ENSMUSG00000022994 HALLMARK_ADIPOGENESIS
-# ℹ 7,374 more rows</code></pre>
+<pre class="output" tabindex="0"><code> [1] "Asic5"    "Cntfr"    "Galnt16"  "Galnt14"  "Gip"      "Hmx1"
+ [7] "Il7"      "Insl5"    "Insm2"    "Insm1"    "Mab21l1"  "Mab21l2"
+[13] "Npy"      "Pyy"      "Ntrk1"    "Ntrk2"    "Ntrk3"    "Phox2a"
+[19] "Ptchd1"   "Ptchd4"   "Reg4"     "Slc22a26" "Slc22a30" "Slc22a19"
+[25] "Slc22a27" "Slc22a29" "Slc22a28" "Slc22a22"</code></pre>
 </div>
-<p>If you only want to use a sub-category gene sets,
-e.g. <code>"CP:KEGG"</code> from <code>"C2"</code>, you can simply
-specify both <code>category</code> and <code>subcategory</code>
-arguments:</p>
+<p>We can also subset the collection. First, let’s list the available
+collections and subcollections.</p>
 <div class="codewrapper sourceCode" id="cb69">
 <h3 class="code-label">R<i aria-hidden="true" data-feather="chevron-left"></i><i aria-hidden="true" data-feather="chevron-right"></i>
 </h3>
 <pre class="downlit sourceCode r">
-<code class="sourceCode R"><span><span class="fu">msigdbr</span><span class="op">(</span>species <span class="op">=</span> <span class="st">"mouse"</span>, category <span class="op">=</span> <span class="st">"C2"</span>, subcategory <span class="op">=</span> <span class="st">"CP:KEGG"</span><span class="op">)</span></span></code></pre>
+<code class="sourceCode R"><span><span class="fu">listCollections</span><span class="op">(</span><span class="va">MSigDBGeneSets</span><span class="op">)</span></span></code></pre>
 </div>
+<div class="codewrapper">
+<h3 class="code-label">OUTPUT<i aria-hidden="true" data-feather="chevron-left"></i><i aria-hidden="true" data-feather="chevron-right"></i>
+</h3>
+<pre class="output" tabindex="0"><code>[1] "c1" "c3" "c2" "c8" "c6" "c7" "c4" "c5" "h" </code></pre>
+</div>
+<div class="codewrapper sourceCode" id="cb71">
+<h3 class="code-label">R<i aria-hidden="true" data-feather="chevron-left"></i><i aria-hidden="true" data-feather="chevron-right"></i>
+</h3>
+<pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="fu">listSubCollections</span><span class="op">(</span><span class="va">MSigDBGeneSets</span><span class="op">)</span></span></code></pre>
+</div>
+<div class="codewrapper">
+<h3 class="code-label">OUTPUT<i aria-hidden="true" data-feather="chevron-left"></i><i aria-hidden="true" data-feather="chevron-right"></i>
+</h3>
+<pre class="output" tabindex="0"><code> [1] "MIR:MIR_Legacy"  "TFT:TFT_Legacy"  "CGP"             "TFT:GTRD"
+ [5] "VAX"             "CP:BIOCARTA"     "CGN"             "GO:BP"
+ [9] "GO:CC"           "IMMUNESIGDB"     "GO:MF"           "HPO"
+[13] "MIR:MIRDB"       "CM"              "CP"              "CP:PID"
+[17] "CP:REACTOME"     "CP:WIKIPATHWAYS"</code></pre>
+</div>
+<p>Then, we retrieve only the ‘hallmarks’ collection.</p>
+<div class="codewrapper sourceCode" id="cb73">
+<h3 class="code-label">R<i aria-hidden="true" data-feather="chevron-left"></i><i aria-hidden="true" data-feather="chevron-right"></i>
+</h3>
+<pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="op">(</span><span class="va">hm</span> <span class="op">&lt;-</span> <span class="fu">subsetCollection</span><span class="op">(</span><span class="va">MSigDBGeneSets</span>, collection <span class="op">=</span> <span class="st">"h"</span><span class="op">)</span><span class="op">)</span></span></code></pre>
+</div>
+<div class="codewrapper">
+<h3 class="code-label">OUTPUT<i aria-hidden="true" data-feather="chevron-left"></i><i aria-hidden="true" data-feather="chevron-right"></i>
+</h3>
+<pre class="output" tabindex="0"><code>GeneSetCollection
+  names: HALLMARK_ADIPOGENESIS, HALLMARK_ALLOGRAFT_REJECTION, ..., HALLMARK_XENOBIOTIC_METABOLISM (50 total)
+  unique identifiers: Abca1, Abca4, ..., Upb1 (5435 total)
+  types in collection:
+    geneIdType: SymbolIdentifier (1 total)
+    collectionType: BroadCollection (1 total)</code></pre>
+</div>
+<p>If you only want to use a sub-category, specify both the
+<code>collection</code> and <code>subcollection</code> arguments to
+<code>subsetCollection</code>.</p>
 </div>
 </section><section><h2 class="section-heading" id="ora-with-clusterprofiler">ORA with clusterProfiler<a class="anchor" aria-label="anchor" href="#ora-with-clusterprofiler"></a></h2>
 <hr class="half-width"><p>The ORA method itself is quite simple and it has been implemented in
@@ -1555,7 +1522,7 @@ filter DE genes, we additionally add a filtering on the log2 fold
 change. This is recommended when the number of DE genes is too large.
 The filtering on log2 fold change can be thought as a filtering from the
 biology aspect.</p>
-<div class="codewrapper sourceCode" id="cb70">
+<div class="codewrapper sourceCode" id="cb75">
 <h3 class="code-label">R<i aria-hidden="true" data-feather="chevron-left"></i><i aria-hidden="true" data-feather="chevron-right"></i>
 </h3>
 <pre class="downlit sourceCode r">
@@ -1572,7 +1539,7 @@ biology aspect.</p>
 <pre class="output" tabindex="0"><code>[1] "3110035E14Rik" "Sgk3"          "Kcnb2"         "Sbspon"
 [5] "Gsta3"         "Lman2l"       </code></pre>
 </div>
-<div class="codewrapper sourceCode" id="cb72">
+<div class="codewrapper sourceCode" id="cb77">
 <h3 class="code-label">R<i aria-hidden="true" data-feather="chevron-left"></i><i aria-hidden="true" data-feather="chevron-right"></i>
 </h3>
 <pre class="downlit sourceCode r">
@@ -1595,7 +1562,7 @@ object which is from the organism package <strong>org.Mm.eg.db</strong>
 <code>"BP"</code>, <code>"CC"</code> and <code>"MF"</code>). The GO gene
 sets are automatically retrieved and processed from
 <code>org.Mm.eg.db</code> in <code>enrichGO()</code>.</p>
-<div class="codewrapper sourceCode" id="cb74">
+<div class="codewrapper sourceCode" id="cb79">
 <h3 class="code-label">R<i aria-hidden="true" data-feather="chevron-left"></i><i aria-hidden="true" data-feather="chevron-right"></i>
 </h3>
 <pre class="downlit sourceCode r">
@@ -1613,7 +1580,7 @@ sets are automatically retrieved and processed from
 <div class="codewrapper">
 <h3 class="code-label">OUTPUT<i aria-hidden="true" data-feather="chevron-left"></i><i aria-hidden="true" data-feather="chevron-right"></i>
 </h3>
-<pre class="output" tabindex="0"><code>--&gt; Expected input gene ID: 76856,74386,26362,381229,18109,228421</code></pre>
+<pre class="output" tabindex="0"><code>--&gt; Expected input gene ID: 50709,50755,170472,57294,22210,56505</code></pre>
 </div>
 <div class="codewrapper">
 <h3 class="code-label">OUTPUT<i aria-hidden="true" data-feather="chevron-left"></i><i aria-hidden="true" data-feather="chevron-right"></i>
@@ -1633,7 +1600,7 @@ conversion job (recall various gene ID types are also stored in the
 <code>keyType = "SYMBOL"</code> to explicitly tell the function that DE
 genes are in gene symbols. Recall that all valid values for
 <code>keyType</code> are in <code>keytypes(org.Mm.eg.db)</code>.</p>
-<div class="codewrapper sourceCode" id="cb78">
+<div class="codewrapper sourceCode" id="cb83">
 <h3 class="code-label">R<i aria-hidden="true" data-feather="chevron-left"></i><i aria-hidden="true" data-feather="chevron-right"></i>
 </h3>
 <pre class="downlit sourceCode r">
@@ -1648,33 +1615,33 @@ genes are in gene symbols. Recall that all valid values for
 <h3 class="code-label">OUTPUT<i aria-hidden="true" data-feather="chevron-left"></i><i aria-hidden="true" data-feather="chevron-right"></i>
 </h3>
 <pre class="output" tabindex="0"><code>                   ID                Description GeneRatio   BgRatio RichFactor
-GO:0050900 GO:0050900        leukocyte migration    51/968 402/28905  0.1268657
-GO:0006935 GO:0006935                 chemotaxis    52/968 465/28905  0.1118280
-GO:0042330 GO:0042330                      taxis    52/968 467/28905  0.1113490
-GO:0030595 GO:0030595       leukocyte chemotaxis    36/968 242/28905  0.1487603
-GO:0071674 GO:0071674 mononuclear cell migration    32/968 203/28905  0.1576355
-GO:0060326 GO:0060326            cell chemotaxis    41/968 334/28905  0.1227545
+GO:0050900 GO:0050900        leukocyte migration    50/965 408/28832  0.1225490
+GO:0006935 GO:0006935                 chemotaxis    54/965 475/28832  0.1136842
+GO:0042330 GO:0042330                      taxis    54/965 477/28832  0.1132075
+GO:0030595 GO:0030595       leukocyte chemotaxis    35/965 242/28832  0.1446281
+GO:0060326 GO:0060326            cell chemotaxis    41/965 337/28832  0.1216617
+GO:0071674 GO:0071674 mononuclear cell migration    32/965 229/28832  0.1397380
            FoldEnrichment    zScore       pvalue     p.adjust       qvalue
-GO:0050900       3.788277 10.479256 3.536123e-16 1.795643e-12 1.304643e-12
-GO:0006935       3.339243  9.465940 3.336947e-14 6.712316e-11 4.876903e-11
-GO:0042330       3.324942  9.428613 3.965528e-14 6.712316e-11 4.876903e-11
-GO:0030595       4.442063 10.009042 6.591196e-14 8.367524e-11 6.079511e-11
-GO:0071674       4.707080  9.866216 3.208410e-13 3.258461e-10 2.367469e-10
-GO:0060326       3.665515  9.120495 8.641191e-13 7.313328e-10 5.313575e-10
-                                                                                                                                                                                                                                                                                                               geneID
-GO:0050900              Tnfsf18/Sell/Slamf9/Fut7/Itga4/Mdk/Grem1/Ada/Prex1/Edn3/P2ry12/Il12a/S100a8/S100a9/Nbl1/Padi2/Bst1/Cxcl5/Ppbp/Pf4/Cxcl1/Ptn/Alox5/Trpm4/Hsd3b7/Itgam/Adam8/Ascl2/Calr/Ccl17/Enpp1/Aire/Ccl2/Ccl7/Ccl5/Ccl6/Ccr7/Aoc3/Itgb3/Ccl28/Lgals3/Ptk2b/Emp2/Apod/Retnlg/Plg/Fpr2/Dusp1/Ager/Il33/Ch25h
-GO:0006935 Tnfsf18/Sell/Slamf9/Mdk/Grem1/Prex1/Edn3/P2ry12/Il12a/S100a8/S100a9/Lpar1/Nbl1/Padi2/Bst1/Cxcl5/Ppbp/Pf4/Cxcl1/Ptn/Alox5/Ntf3/Trpm4/Hsd3b7/Itgam/Adam8/Lsp1/Calr/Ccl17/Robo3/Cmtm7/Ccl2/Ccl7/Ccl5/Ccl6/Ccr7/Itgb3/Tubb2b/Ccl28/Lgals3/Cmtm5/Ptk2b/Nr4a1/Casr/Retnlg/Fpr2/Dusp1/Ager/Stx3/Ch25h/Plxnb3/Nox1
-GO:0042330 Tnfsf18/Sell/Slamf9/Mdk/Grem1/Prex1/Edn3/P2ry12/Il12a/S100a8/S100a9/Lpar1/Nbl1/Padi2/Bst1/Cxcl5/Ppbp/Pf4/Cxcl1/Ptn/Alox5/Ntf3/Trpm4/Hsd3b7/Itgam/Adam8/Lsp1/Calr/Ccl17/Robo3/Cmtm7/Ccl2/Ccl7/Ccl5/Ccl6/Ccr7/Itgb3/Tubb2b/Ccl28/Lgals3/Cmtm5/Ptk2b/Nr4a1/Casr/Retnlg/Fpr2/Dusp1/Ager/Stx3/Ch25h/Plxnb3/Nox1
-GO:0030595                                                                                              Tnfsf18/Sell/Slamf9/Mdk/Grem1/Prex1/Edn3/Il12a/S100a8/S100a9/Nbl1/Padi2/Bst1/Cxcl5/Ppbp/Pf4/Cxcl1/Ptn/Alox5/Trpm4/Hsd3b7/Itgam/Adam8/Calr/Ccl17/Ccl2/Ccl7/Ccl5/Ccl6/Ccr7/Lgals3/Ptk2b/Retnlg/Fpr2/Dusp1/Ch25h
-GO:0071674                                                                                                                      Tnfsf18/Slamf9/Fut7/Itga4/Mdk/Grem1/Il12a/Nbl1/Padi2/Alox5/Trpm4/Hsd3b7/Adam8/Ascl2/Calr/Ccl17/Aire/Ccl2/Ccl7/Ccl5/Ccl6/Ccr7/Itgb3/Lgals3/Ptk2b/Apod/Retnlg/Plg/Fpr2/Dusp1/Ager/Ch25h
-GO:0060326                                                                Tnfsf18/Sell/Slamf9/Mdk/Grem1/Prex1/Edn3/Il12a/S100a8/S100a9/Lpar1/Nbl1/Padi2/Bst1/Cxcl5/Ppbp/Pf4/Cxcl1/Ptn/Alox5/Trpm4/Hsd3b7/Itgam/Adam8/Calr/Ccl17/Ccl2/Ccl7/Ccl5/Ccl6/Ccr7/Ccl28/Lgals3/Ptk2b/Nr4a1/Retnlg/Fpr2/Dusp1/Ch25h/Plxnb3/Nox1
+GO:0050900       3.661485 10.075346 2.751321e-15 1.053782e-11 7.745382e-12
+GO:0006935       3.396625  9.800882 5.186751e-15 1.053782e-11 7.745382e-12
+GO:0042330       3.382383  9.763475 6.190224e-15 1.053782e-11 7.745382e-12
+GO:0030595       4.321158  9.654694 3.373742e-13 4.307425e-10 3.165991e-10
+GO:0060326       3.634975  9.054313 1.137629e-12 1.161974e-09 8.540597e-10
+GO:0071674       4.175053  8.976588 8.861995e-12 6.891923e-09 5.065617e-09
+                                                                                                                                                                                                                                                                                                                             geneID
+GO:0050900                                 Tnfsf18/Sell/Slamf9/Fut7/Itga4/Mdk/Grem1/Ada/Prex1/Edn3/P2ry12/Il12a/S100a8/S100a9/Nbl1/Padi2/Bst1/Cxcl5/Ppbp/Pf4/Cxcl1/Ptn/Alox5/Trpm4/Hsd3b7/Itgam/Adam8/Ascl2/Gdf15/Calr/Enpp1/Aire/Ccl2/Ccl7/Ccl5/Ccr7/Aoc3/Itgb3/Ccl28/Lgals3/Ptk2b/Emp2/Apod/Retnlg/Plg/Fpr2/Dusp1/Ager/Il33/Ch25h
+GO:0006935 Tnfsf18/Sell/Slamf9/Mdk/Grem1/Prex1/Edn3/P2ry12/Il12a/S100a7a/S100a8/S100a9/Lpar1/Ptgr1/Nbl1/Padi2/Bst1/Cxcl5/Ppbp/Pf4/Cxcl1/Ptn/Alox5/Ntf3/Trpm4/Hsd3b7/Itgam/Adam8/Lsp1/Calr/Ccl17/Robo3/Cmtm7/Ccl2/Ccl7/Ccl5/Ccl6/Ccr7/Itgb3/Tubb2b/Ccl28/Lgals3/Cmtm5/Ptk2b/Nr4a1/Casr/Retnlg/Fpr2/Dusp1/Ager/Stx3/Ch25h/Plxnb3/Nox1
+GO:0042330 Tnfsf18/Sell/Slamf9/Mdk/Grem1/Prex1/Edn3/P2ry12/Il12a/S100a7a/S100a8/S100a9/Lpar1/Ptgr1/Nbl1/Padi2/Bst1/Cxcl5/Ppbp/Pf4/Cxcl1/Ptn/Alox5/Ntf3/Trpm4/Hsd3b7/Itgam/Adam8/Lsp1/Calr/Ccl17/Robo3/Cmtm7/Ccl2/Ccl7/Ccl5/Ccl6/Ccr7/Itgb3/Tubb2b/Ccl28/Lgals3/Cmtm5/Ptk2b/Nr4a1/Casr/Retnlg/Fpr2/Dusp1/Ager/Stx3/Ch25h/Plxnb3/Nox1
+GO:0030595                                                                                                                 Tnfsf18/Sell/Slamf9/Mdk/Grem1/Prex1/Edn3/Il12a/S100a8/S100a9/Nbl1/Padi2/Bst1/Cxcl5/Ppbp/Pf4/Cxcl1/Ptn/Alox5/Trpm4/Hsd3b7/Itgam/Adam8/Calr/Ccl2/Ccl7/Ccl5/Ccr7/Ccl28/Lgals3/Ptk2b/Retnlg/Fpr2/Dusp1/Ch25h
+GO:0060326                                                                              Tnfsf18/Sell/Slamf9/Mdk/Grem1/Prex1/Edn3/Il12a/S100a8/S100a9/Lpar1/Nbl1/Padi2/Bst1/Cxcl5/Ppbp/Pf4/Cxcl1/Ptn/Alox5/Trpm4/Hsd3b7/Itgam/Adam8/Calr/Ccl17/Ccl2/Ccl7/Ccl5/Ccl6/Ccr7/Ccl28/Lgals3/Ptk2b/Nr4a1/Retnlg/Fpr2/Dusp1/Ch25h/Plxnb3/Nox1
+GO:0071674                                                                                                                                  Tnfsf18/Slamf9/Fut7/Itga4/Mdk/Grem1/P2ry12/Il12a/Nbl1/Padi2/Alox5/Trpm4/Hsd3b7/Adam8/Ascl2/Calr/Enpp1/Aire/Ccl2/Ccl7/Ccl5/Ccr7/Itgb3/Lgals3/Ptk2b/Apod/Retnlg/Plg/Fpr2/Dusp1/Ager/Ch25h
            Count
-GO:0050900    51
-GO:0006935    52
-GO:0042330    52
-GO:0030595    36
-GO:0071674    32
-GO:0060326    41</code></pre>
+GO:0050900    50
+GO:0006935    54
+GO:0042330    54
+GO:0030595    35
+GO:0060326    41
+GO:0071674    32</code></pre>
 </div>
 <p>Now <code>enrichGO()</code> went through! The returned object
 <code>resTimeGO</code> is in a special format which looks like a table
@@ -1746,7 +1713,7 @@ table for downstream anlaysis. Second, the meaning of
 <em>p</em>-values). Thus it is suggested to set both
 <code>pvalueCutoff</code> and <code>qvalueCutoff</code> to 1 in
 <code>enrichGO()</code>.</p>
-<div class="codewrapper sourceCode" id="cb80">
+<div class="codewrapper sourceCode" id="cb85">
 <h3 class="code-label">R<i aria-hidden="true" data-feather="chevron-left"></i><i aria-hidden="true" data-feather="chevron-right"></i>
 </h3>
 <pre class="downlit sourceCode r">
@@ -1763,33 +1730,33 @@ table for downstream anlaysis. Second, the meaning of
 <h3 class="code-label">OUTPUT<i aria-hidden="true" data-feather="chevron-left"></i><i aria-hidden="true" data-feather="chevron-right"></i>
 </h3>
 <pre class="output" tabindex="0"><code>                   ID                Description GeneRatio   BgRatio RichFactor
-GO:0050900 GO:0050900        leukocyte migration    51/968 402/28905  0.1268657
-GO:0006935 GO:0006935                 chemotaxis    52/968 465/28905  0.1118280
-GO:0042330 GO:0042330                      taxis    52/968 467/28905  0.1113490
-GO:0030595 GO:0030595       leukocyte chemotaxis    36/968 242/28905  0.1487603
-GO:0071674 GO:0071674 mononuclear cell migration    32/968 203/28905  0.1576355
-GO:0060326 GO:0060326            cell chemotaxis    41/968 334/28905  0.1227545
+GO:0050900 GO:0050900        leukocyte migration    50/965 408/28832  0.1225490
+GO:0006935 GO:0006935                 chemotaxis    54/965 475/28832  0.1136842
+GO:0042330 GO:0042330                      taxis    54/965 477/28832  0.1132075
+GO:0030595 GO:0030595       leukocyte chemotaxis    35/965 242/28832  0.1446281
+GO:0060326 GO:0060326            cell chemotaxis    41/965 337/28832  0.1216617
+GO:0071674 GO:0071674 mononuclear cell migration    32/965 229/28832  0.1397380
            FoldEnrichment    zScore       pvalue     p.adjust       qvalue
-GO:0050900       3.788277 10.479256 3.536123e-16 1.795643e-12 1.304643e-12
-GO:0006935       3.339243  9.465940 3.336947e-14 6.712316e-11 4.876903e-11
-GO:0042330       3.324942  9.428613 3.965528e-14 6.712316e-11 4.876903e-11
-GO:0030595       4.442063 10.009042 6.591196e-14 8.367524e-11 6.079511e-11
-GO:0071674       4.707080  9.866216 3.208410e-13 3.258461e-10 2.367469e-10
-GO:0060326       3.665515  9.120495 8.641191e-13 7.313328e-10 5.313575e-10
-                                                                                                                                                                                                                                                                                                               geneID
-GO:0050900              Tnfsf18/Sell/Slamf9/Fut7/Itga4/Mdk/Grem1/Ada/Prex1/Edn3/P2ry12/Il12a/S100a8/S100a9/Nbl1/Padi2/Bst1/Cxcl5/Ppbp/Pf4/Cxcl1/Ptn/Alox5/Trpm4/Hsd3b7/Itgam/Adam8/Ascl2/Calr/Ccl17/Enpp1/Aire/Ccl2/Ccl7/Ccl5/Ccl6/Ccr7/Aoc3/Itgb3/Ccl28/Lgals3/Ptk2b/Emp2/Apod/Retnlg/Plg/Fpr2/Dusp1/Ager/Il33/Ch25h
-GO:0006935 Tnfsf18/Sell/Slamf9/Mdk/Grem1/Prex1/Edn3/P2ry12/Il12a/S100a8/S100a9/Lpar1/Nbl1/Padi2/Bst1/Cxcl5/Ppbp/Pf4/Cxcl1/Ptn/Alox5/Ntf3/Trpm4/Hsd3b7/Itgam/Adam8/Lsp1/Calr/Ccl17/Robo3/Cmtm7/Ccl2/Ccl7/Ccl5/Ccl6/Ccr7/Itgb3/Tubb2b/Ccl28/Lgals3/Cmtm5/Ptk2b/Nr4a1/Casr/Retnlg/Fpr2/Dusp1/Ager/Stx3/Ch25h/Plxnb3/Nox1
-GO:0042330 Tnfsf18/Sell/Slamf9/Mdk/Grem1/Prex1/Edn3/P2ry12/Il12a/S100a8/S100a9/Lpar1/Nbl1/Padi2/Bst1/Cxcl5/Ppbp/Pf4/Cxcl1/Ptn/Alox5/Ntf3/Trpm4/Hsd3b7/Itgam/Adam8/Lsp1/Calr/Ccl17/Robo3/Cmtm7/Ccl2/Ccl7/Ccl5/Ccl6/Ccr7/Itgb3/Tubb2b/Ccl28/Lgals3/Cmtm5/Ptk2b/Nr4a1/Casr/Retnlg/Fpr2/Dusp1/Ager/Stx3/Ch25h/Plxnb3/Nox1
-GO:0030595                                                                                              Tnfsf18/Sell/Slamf9/Mdk/Grem1/Prex1/Edn3/Il12a/S100a8/S100a9/Nbl1/Padi2/Bst1/Cxcl5/Ppbp/Pf4/Cxcl1/Ptn/Alox5/Trpm4/Hsd3b7/Itgam/Adam8/Calr/Ccl17/Ccl2/Ccl7/Ccl5/Ccl6/Ccr7/Lgals3/Ptk2b/Retnlg/Fpr2/Dusp1/Ch25h
-GO:0071674                                                                                                                      Tnfsf18/Slamf9/Fut7/Itga4/Mdk/Grem1/Il12a/Nbl1/Padi2/Alox5/Trpm4/Hsd3b7/Adam8/Ascl2/Calr/Ccl17/Aire/Ccl2/Ccl7/Ccl5/Ccl6/Ccr7/Itgb3/Lgals3/Ptk2b/Apod/Retnlg/Plg/Fpr2/Dusp1/Ager/Ch25h
-GO:0060326                                                                Tnfsf18/Sell/Slamf9/Mdk/Grem1/Prex1/Edn3/Il12a/S100a8/S100a9/Lpar1/Nbl1/Padi2/Bst1/Cxcl5/Ppbp/Pf4/Cxcl1/Ptn/Alox5/Trpm4/Hsd3b7/Itgam/Adam8/Calr/Ccl17/Ccl2/Ccl7/Ccl5/Ccl6/Ccr7/Ccl28/Lgals3/Ptk2b/Nr4a1/Retnlg/Fpr2/Dusp1/Ch25h/Plxnb3/Nox1
+GO:0050900       3.661485 10.075346 2.751321e-15 1.053782e-11 7.745382e-12
+GO:0006935       3.396625  9.800882 5.186751e-15 1.053782e-11 7.745382e-12
+GO:0042330       3.382383  9.763475 6.190224e-15 1.053782e-11 7.745382e-12
+GO:0030595       4.321158  9.654694 3.373742e-13 4.307425e-10 3.165991e-10
+GO:0060326       3.634975  9.054313 1.137629e-12 1.161974e-09 8.540597e-10
+GO:0071674       4.175053  8.976588 8.861995e-12 6.891923e-09 5.065617e-09
+                                                                                                                                                                                                                                                                                                                             geneID
+GO:0050900                                 Tnfsf18/Sell/Slamf9/Fut7/Itga4/Mdk/Grem1/Ada/Prex1/Edn3/P2ry12/Il12a/S100a8/S100a9/Nbl1/Padi2/Bst1/Cxcl5/Ppbp/Pf4/Cxcl1/Ptn/Alox5/Trpm4/Hsd3b7/Itgam/Adam8/Ascl2/Gdf15/Calr/Enpp1/Aire/Ccl2/Ccl7/Ccl5/Ccr7/Aoc3/Itgb3/Ccl28/Lgals3/Ptk2b/Emp2/Apod/Retnlg/Plg/Fpr2/Dusp1/Ager/Il33/Ch25h
+GO:0006935 Tnfsf18/Sell/Slamf9/Mdk/Grem1/Prex1/Edn3/P2ry12/Il12a/S100a7a/S100a8/S100a9/Lpar1/Ptgr1/Nbl1/Padi2/Bst1/Cxcl5/Ppbp/Pf4/Cxcl1/Ptn/Alox5/Ntf3/Trpm4/Hsd3b7/Itgam/Adam8/Lsp1/Calr/Ccl17/Robo3/Cmtm7/Ccl2/Ccl7/Ccl5/Ccl6/Ccr7/Itgb3/Tubb2b/Ccl28/Lgals3/Cmtm5/Ptk2b/Nr4a1/Casr/Retnlg/Fpr2/Dusp1/Ager/Stx3/Ch25h/Plxnb3/Nox1
+GO:0042330 Tnfsf18/Sell/Slamf9/Mdk/Grem1/Prex1/Edn3/P2ry12/Il12a/S100a7a/S100a8/S100a9/Lpar1/Ptgr1/Nbl1/Padi2/Bst1/Cxcl5/Ppbp/Pf4/Cxcl1/Ptn/Alox5/Ntf3/Trpm4/Hsd3b7/Itgam/Adam8/Lsp1/Calr/Ccl17/Robo3/Cmtm7/Ccl2/Ccl7/Ccl5/Ccl6/Ccr7/Itgb3/Tubb2b/Ccl28/Lgals3/Cmtm5/Ptk2b/Nr4a1/Casr/Retnlg/Fpr2/Dusp1/Ager/Stx3/Ch25h/Plxnb3/Nox1
+GO:0030595                                                                                                                 Tnfsf18/Sell/Slamf9/Mdk/Grem1/Prex1/Edn3/Il12a/S100a8/S100a9/Nbl1/Padi2/Bst1/Cxcl5/Ppbp/Pf4/Cxcl1/Ptn/Alox5/Trpm4/Hsd3b7/Itgam/Adam8/Calr/Ccl2/Ccl7/Ccl5/Ccr7/Ccl28/Lgals3/Ptk2b/Retnlg/Fpr2/Dusp1/Ch25h
+GO:0060326                                                                              Tnfsf18/Sell/Slamf9/Mdk/Grem1/Prex1/Edn3/Il12a/S100a8/S100a9/Lpar1/Nbl1/Padi2/Bst1/Cxcl5/Ppbp/Pf4/Cxcl1/Ptn/Alox5/Trpm4/Hsd3b7/Itgam/Adam8/Calr/Ccl17/Ccl2/Ccl7/Ccl5/Ccl6/Ccr7/Ccl28/Lgals3/Ptk2b/Nr4a1/Retnlg/Fpr2/Dusp1/Ch25h/Plxnb3/Nox1
+GO:0071674                                                                                                                                  Tnfsf18/Slamf9/Fut7/Itga4/Mdk/Grem1/P2ry12/Il12a/Nbl1/Padi2/Alox5/Trpm4/Hsd3b7/Adam8/Ascl2/Calr/Enpp1/Aire/Ccl2/Ccl7/Ccl5/Ccr7/Itgb3/Lgals3/Ptk2b/Apod/Retnlg/Plg/Fpr2/Dusp1/Ager/Ch25h
            Count
-GO:0050900    51
-GO:0006935    52
-GO:0042330    52
-GO:0030595    36
-GO:0071674    32
-GO:0060326    41</code></pre>
+GO:0050900    50
+GO:0006935    54
+GO:0042330    54
+GO:0030595    35
+GO:0060326    41
+GO:0071674    32</code></pre>
 </div>
 <div id="perform-go-enrichment-on-other-organisms" class="callout">
 <div class="callout-square">
@@ -1825,7 +1792,7 @@ only take the first one if there are multiple hits by setting
 options for <code>multiVals</code>, check the documentation). We also
 remove genes with no mapping available (with <code>NA</code> after the
 mapping)<a href="#fn5" class="footnote-ref" id="fnref5"><sup>5</sup></a>.</p>
-<div class="codewrapper sourceCode" id="cb82">
+<div class="codewrapper sourceCode" id="cb87">
 <h3 class="code-label">R<i aria-hidden="true" data-feather="chevron-left"></i><i aria-hidden="true" data-feather="chevron-right"></i>
 </h3>
 <pre class="downlit sourceCode r">
@@ -1837,7 +1804,7 @@ mapping)<a href="#fn5" class="footnote-ref" id="fnref5"><sup>5</sup></a>.</p>
 </h3>
 <pre class="output" tabindex="0"><code>'select()' returned 1:1 mapping between keys and columns</code></pre>
 </div>
-<div class="codewrapper sourceCode" id="cb84">
+<div class="codewrapper sourceCode" id="cb89">
 <h3 class="code-label">R<i aria-hidden="true" data-feather="chevron-left"></i><i aria-hidden="true" data-feather="chevron-right"></i>
 </h3>
 <pre class="downlit sourceCode r">
@@ -1854,7 +1821,7 @@ mapping)<a href="#fn5" class="footnote-ref" id="fnref5"><sup>5</sup></a>.</p>
 it is suggested to set <code>pvalueCutoff</code> and
 <code>qvalueCutoff</code> both to 1 and convert the result to a data
 frame.</p>
-<div class="codewrapper sourceCode" id="cb86">
+<div class="codewrapper sourceCode" id="cb91">
 <h3 class="code-label">R<i aria-hidden="true" data-feather="chevron-left"></i><i aria-hidden="true" data-feather="chevron-right"></i>
 </h3>
 <pre class="downlit sourceCode r">
@@ -1882,27 +1849,27 @@ mmu00565                    Lipid metabolism mmu00565
 mmu00592                    Lipid metabolism mmu00592
 mmu04913                    Endocrine system mmu04913
 mmu04061 Signaling molecules and interaction mmu04061
-                                                                                        Description
-mmu00590                                   Arachidonic acid metabolism - Mus musculus (house mouse)
-mmu00591                                      Linoleic acid metabolism - Mus musculus (house mouse)
-mmu00565                                        Ether lipid metabolism - Mus musculus (house mouse)
-mmu00592                               alpha-Linolenic acid metabolism - Mus musculus (house mouse)
-mmu04913                                       Ovarian steroidogenesis - Mus musculus (house mouse)
-mmu04061 Viral protein interaction with cytokine and cytokine receptor - Mus musculus (house mouse)
+                                                           Description
+mmu00590                                   Arachidonic acid metabolism
+mmu00591                                      Linoleic acid metabolism
+mmu00565                                        Ether lipid metabolism
+mmu00592                               alpha-Linolenic acid metabolism
+mmu04913                                       Ovarian steroidogenesis
+mmu04061 Viral protein interaction with cytokine and cytokine receptor
          GeneRatio BgRatio RichFactor FoldEnrichment   zScore       pvalue
-mmu00590    16/451 89/9574  0.1797753       3.816338 5.934780 3.315964e-06
-mmu00591    12/451 55/9574  0.2181818       4.631647 6.005273 7.123538e-06
-mmu00565    11/451 48/9574  0.2291667       4.864837 5.968154 1.041382e-05
-mmu00592     8/451 25/9574  0.3200000       6.793082 6.448285 1.212562e-05
-mmu04913    12/451 64/9574  0.1875000       3.980322 5.318710 3.625358e-05
-mmu04061    14/451 95/9574  0.1473684       3.128393 4.635279 1.329918e-04
+mmu00590    16/451 89/9577  0.1797753       3.817534 5.936315 3.302731e-06
+mmu00591    12/451 55/9577  0.2181818       4.633098 6.006680 7.100991e-06
+mmu00565    11/451 48/9577  0.2291667       4.866362 5.969522 1.038323e-05
+mmu00592     8/451 25/9577  0.3200000       6.795211 6.449591 1.209800e-05
+mmu04913    12/451 64/9577  0.1875000       3.981569 5.320056 3.614324e-05
+mmu04061    14/451 95/9577  0.1473684       3.129373 4.636644 1.325575e-04
              p.adjust       qvalue
-mmu00590 0.0009488299 0.0008232659
-mmu00591 0.0009488299 0.0008232659
-mmu00565 0.0009488299 0.0008232659
-mmu00592 0.0009488299 0.0008232659
-mmu04913 0.0022694740 0.0019691418
-mmu04061 0.0069377408 0.0060196305
+mmu00590 0.0009496932 0.0008245744
+mmu00591 0.0009496932 0.0008245744
+mmu00565 0.0009496932 0.0008245744
+mmu00592 0.0009496932 0.0008245744
+mmu04913 0.0022697955 0.0019707578
+mmu04061 0.0069371755 0.0060232264
                                                                                                        geneID
 mmu00590 18783/19215/211429/329502/78390/19223/67103/242546/13118/18781/18784/11689/232889/15446/237625/11687
 mmu00591                        18783/211429/329502/78390/242546/18781/18784/13113/622127/232889/237625/11687
@@ -1938,41 +1905,38 @@ mmu04061    14</code></pre>
 need to directly use the low-level enrichment function
 <code>enricher()</code> which accepts self-defined gene sets. The gene
 sets should be in a format of a two-column data frame of genes and gene
-sets (or a class that can be converted to a data frame).</p>
-<div class="codewrapper sourceCode" id="cb88">
+sets (or a class that can be converted to a data frame). Let’s use the
+hallmark collection (<code>hm</code>) that we generated above.</p>
+<div class="codewrapper sourceCode" id="cb93">
 <h3 class="code-label">R<i aria-hidden="true" data-feather="chevron-left"></i><i aria-hidden="true" data-feather="chevron-right"></i>
 </h3>
 <pre class="downlit sourceCode r">
-<code class="sourceCode R"><span><span class="kw">library</span><span class="op">(</span><span class="va">msigdbr</span><span class="op">)</span></span>
-<span><span class="va">gene_sets</span> <span class="op">=</span> <span class="fu">msigdbr</span><span class="op">(</span>category <span class="op">=</span> <span class="st">"H"</span>, species <span class="op">=</span> <span class="st">"mouse"</span><span class="op">)</span></span>
+<code class="sourceCode R"><span><span class="va">gene_sets</span> <span class="op">&lt;-</span> <span class="fu">stack</span><span class="op">(</span><span class="fu">geneIds</span><span class="op">(</span><span class="va">hm</span><span class="op">)</span><span class="op">)</span> <span class="op">|&gt;</span></span>
+<span>    <span class="fu">as.data.frame</span><span class="op">(</span><span class="op">)</span> <span class="op">|&gt;</span></span>
+<span>    <span class="fu">dplyr</span><span class="fu">::</span><span class="fu">select</span><span class="op">(</span><span class="va">ind</span>, <span class="va">values</span><span class="op">)</span> <span class="op">|&gt;</span></span>
+<span>    <span class="fu">dplyr</span><span class="fu">::</span><span class="fu">rename</span><span class="op">(</span>gs_name <span class="op">=</span> <span class="va">ind</span>, gene_symbol <span class="op">=</span> <span class="va">values</span><span class="op">)</span></span>
 <span><span class="fu">head</span><span class="op">(</span><span class="va">gene_sets</span><span class="op">)</span></span></code></pre>
 </div>
 <div class="codewrapper">
 <h3 class="code-label">OUTPUT<i aria-hidden="true" data-feather="chevron-left"></i><i aria-hidden="true" data-feather="chevron-right"></i>
 </h3>
-<pre class="output" tabindex="0"><code># A tibble: 6 × 18
-  gs_cat gs_subcat gs_name               gene_symbol entrez_gene ensembl_gene
-  &lt;chr&gt;  &lt;chr&gt;     &lt;chr&gt;                 &lt;chr&gt;             &lt;int&gt; &lt;chr&gt;
-1 H      ""        HALLMARK_ADIPOGENESIS Abca1             11303 ENSMUSG0000001…
-2 H      ""        HALLMARK_ADIPOGENESIS Abcb8             74610 ENSMUSG0000002…
-3 H      ""        HALLMARK_ADIPOGENESIS Acaa2             52538 ENSMUSG0000003…
-4 H      ""        HALLMARK_ADIPOGENESIS Acadl             11363 ENSMUSG0000002…
-5 H      ""        HALLMARK_ADIPOGENESIS Acadm             11364 ENSMUSG0000006…
-6 H      ""        HALLMARK_ADIPOGENESIS Acads             11409 ENSMUSG0000002…
-# ℹ 12 more variables: human_gene_symbol &lt;chr&gt;, human_entrez_gene &lt;int&gt;,
-#   human_ensembl_gene &lt;chr&gt;, gs_id &lt;chr&gt;, gs_pmid &lt;chr&gt;, gs_geoid &lt;chr&gt;,
-#   gs_exact_source &lt;chr&gt;, gs_url &lt;chr&gt;, gs_description &lt;chr&gt;, taxon_id &lt;int&gt;,
-#   ortholog_sources &lt;chr&gt;, num_ortholog_sources &lt;dbl&gt;</code></pre>
+<pre class="output" tabindex="0"><code>                gs_name gene_symbol
+1 HALLMARK_ADIPOGENESIS       Abca1
+2 HALLMARK_ADIPOGENESIS       Abca4
+3 HALLMARK_ADIPOGENESIS       Abca7
+4 HALLMARK_ADIPOGENESIS      Abca13
+5 HALLMARK_ADIPOGENESIS      Abca12
+6 HALLMARK_ADIPOGENESIS      Abca17</code></pre>
 </div>
 <p>As mentioned before, it is important the gene ID type in the gene
 sets should be the same as in the DE genes, so here we choose the
 <code>"gene_symbol"</code> column.</p>
-<div class="codewrapper sourceCode" id="cb90">
+<div class="codewrapper sourceCode" id="cb95">
 <h3 class="code-label">R<i aria-hidden="true" data-feather="chevron-left"></i><i aria-hidden="true" data-feather="chevron-right"></i>
 </h3>
 <pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">resTimeHallmark</span> <span class="op">=</span> <span class="fu">enricher</span><span class="op">(</span>gene <span class="op">=</span> <span class="va">timeDEgenes</span>, </span>
-<span>                           TERM2GENE <span class="op">=</span> <span class="va">gene_sets</span><span class="op">[</span>, <span class="fu">c</span><span class="op">(</span><span class="st">"gs_name"</span>, <span class="st">"gene_symbol"</span><span class="op">)</span><span class="op">]</span>,</span>
+<span>                           TERM2GENE <span class="op">=</span> <span class="va">gene_sets</span>,</span>
 <span>                           pvalueCutoff <span class="op">=</span> <span class="fl">1</span>,</span>
 <span>                           qvalueCutoff <span class="op">=</span> <span class="fl">1</span><span class="op">)</span></span>
 <span><span class="va">resTimeHallmarkTable</span> <span class="op">=</span> <span class="fu">as.data.frame</span><span class="op">(</span><span class="va">resTimeHallmark</span><span class="op">)</span></span>
@@ -1981,48 +1945,48 @@ sets should be the same as in the DE genes, so here we choose the
 <div class="codewrapper">
 <h3 class="code-label">OUTPUT<i aria-hidden="true" data-feather="chevron-left"></i><i aria-hidden="true" data-feather="chevron-right"></i>
 </h3>
-<pre class="output" tabindex="0"><code>                                                             ID
-HALLMARK_MYOGENESIS                         HALLMARK_MYOGENESIS
-HALLMARK_COMPLEMENT                         HALLMARK_COMPLEMENT
-HALLMARK_COAGULATION                       HALLMARK_COAGULATION
-HALLMARK_ALLOGRAFT_REJECTION       HALLMARK_ALLOGRAFT_REJECTION
-HALLMARK_ESTROGEN_RESPONSE_LATE HALLMARK_ESTROGEN_RESPONSE_LATE
-HALLMARK_INFLAMMATORY_RESPONSE   HALLMARK_INFLAMMATORY_RESPONSE
-                                                    Description GeneRatio
-HALLMARK_MYOGENESIS                         HALLMARK_MYOGENESIS    31/291
-HALLMARK_COMPLEMENT                         HALLMARK_COMPLEMENT    26/291
-HALLMARK_COAGULATION                       HALLMARK_COAGULATION    20/291
-HALLMARK_ALLOGRAFT_REJECTION       HALLMARK_ALLOGRAFT_REJECTION    23/291
-HALLMARK_ESTROGEN_RESPONSE_LATE HALLMARK_ESTROGEN_RESPONSE_LATE    23/291
-HALLMARK_INFLAMMATORY_RESPONSE   HALLMARK_INFLAMMATORY_RESPONSE    22/291
-                                 BgRatio RichFactor FoldEnrichment   zScore
-HALLMARK_MYOGENESIS             201/4394  0.1542289       2.328803 5.135378
-HALLMARK_COMPLEMENT             196/4394  0.1326531       2.003016 3.825523
-HALLMARK_COAGULATION            139/4394  0.1438849       2.172612 3.741006
-HALLMARK_ALLOGRAFT_REJECTION    201/4394  0.1144279       1.727821 2.812786
-HALLMARK_ESTROGEN_RESPONSE_LATE 206/4394  0.1116505       1.685884 2.685080
-HALLMARK_INFLAMMATORY_RESPONSE  201/4394  0.1094527       1.652699 2.522462
-                                      pvalue     p.adjust       qvalue
-HALLMARK_MYOGENESIS             5.710171e-06 0.0002740882 0.0002284068
-HALLMARK_COMPLEMENT             4.300844e-04 0.0103220246 0.0086016872
-HALLMARK_COAGULATION            7.088433e-04 0.0113414921 0.0094512434
-HALLMARK_ALLOGRAFT_REJECTION    6.397659e-03 0.0767719033 0.0639765861
-HALLMARK_ESTROGEN_RESPONSE_LATE 8.584183e-03 0.0824081536 0.0686734614
-HALLMARK_INFLAMMATORY_RESPONSE  1.256794e-02 0.0960740794 0.0800617329
-                                                                                                                                                                                                                geneID
-HALLMARK_MYOGENESIS             Myl1/Casq1/Aplnr/Tnnc2/Ptgis/Gja5/Col15a1/Cav3/Tnnt1/Ryr1/Cox6a2/Tnni2/Lsp1/Nqo1/Hspb2/Cryab/Erbb3/Stc2/Gpx3/Sparc/Myh3/Myh1/Col1a1/Cacng1/Itgb4/Bdkrb2/Mapk12/Apod/Spdef/Cdkn1a/Actn3
-HALLMARK_COMPLEMENT                                                Serpinb2/Pla2g4a/Cd46/Hspa5/Cp/Gnb4/S100a9/Cda/Cxcl1/Apoc1/Itgam/Irf7/Klkb1/Mmp15/Mmp8/Ccl5/Lgals3/Gzmb/Tmprss6/Maff/Plg/Psmb9/Hspa1a/C3/Dusp5/Phex
-HALLMARK_COAGULATION                                                                                         Serpinb2/Ctse/C8g/Ctsk/Masp2/Pf4/Sh2b2/Vwf/Apoc1/Klkb1/Mmp15/Mmp8/Trf/Sparc/Itgb3/Dct/Tmprss6/Maff/Plg/C3
-HALLMARK_ALLOGRAFT_REJECTION                                                           Il18rap/Cd247/Il12a/Pf4/Capg/Ccnd2/Igsf6/Irf7/Il12rb1/Icosl/Itk/Nos2/Ccl2/Ccl7/Ccl5/Gpr65/Gzmb/Il2rb/Tap1/Tap2/H2-T23/Cfp/Il2rg
-HALLMARK_ESTROGEN_RESPONSE_LATE                                                    Clic3/Ass1/Mdk/S100a9/Cdc20/Nbl1/Cav1/Idh2/Th/Pdlim3/Ascl1/Xbp1/Top2a/Dcxr/Fos/Serpina3n/Dhrs2/Tst/Emp2/Fkbp5/Mapk13/Cyp4f15/Kif20a
-HALLMARK_INFLAMMATORY_RESPONSE                                                              Il18rap/Sell/Aplnr/Abca1/Lpar1/Cxcl5/Adm/Irf7/Msr1/Bst2/Ccl17/Icosl/Ccl2/Ccl7/Ccl5/Ccr7/Itgb3/Has2/Il2rb/Cdkn1a/Cd70/Best1
-                                Count
-HALLMARK_MYOGENESIS                31
-HALLMARK_COMPLEMENT                26
-HALLMARK_COAGULATION               20
-HALLMARK_ALLOGRAFT_REJECTION       23
-HALLMARK_ESTROGEN_RESPONSE_LATE    23
-HALLMARK_INFLAMMATORY_RESPONSE     22</code></pre>
+<pre class="output" tabindex="0"><code>                                                                   ID
+HALLMARK_MYOGENESIS                               HALLMARK_MYOGENESIS
+HALLMARK_INTERFERON_GAMMA_RESPONSE HALLMARK_INTERFERON_GAMMA_RESPONSE
+HALLMARK_COAGULATION                             HALLMARK_COAGULATION
+HALLMARK_ALLOGRAFT_REJECTION             HALLMARK_ALLOGRAFT_REJECTION
+HALLMARK_INTERFERON_ALPHA_RESPONSE HALLMARK_INTERFERON_ALPHA_RESPONSE
+HALLMARK_IL2_STAT5_SIGNALING             HALLMARK_IL2_STAT5_SIGNALING
+                                                          Description GeneRatio
+HALLMARK_MYOGENESIS                               HALLMARK_MYOGENESIS    39/333
+HALLMARK_INTERFERON_GAMMA_RESPONSE HALLMARK_INTERFERON_GAMMA_RESPONSE    35/333
+HALLMARK_COAGULATION                             HALLMARK_COAGULATION    27/333
+HALLMARK_ALLOGRAFT_REJECTION             HALLMARK_ALLOGRAFT_REJECTION    33/333
+HALLMARK_INTERFERON_ALPHA_RESPONSE HALLMARK_INTERFERON_ALPHA_RESPONSE    21/333
+HALLMARK_IL2_STAT5_SIGNALING             HALLMARK_IL2_STAT5_SIGNALING    30/333
+                                    BgRatio RichFactor FoldEnrichment   zScore
+HALLMARK_MYOGENESIS                307/5435  0.1270358       2.073393 4.946130
+HALLMARK_INTERFERON_GAMMA_RESPONSE 298/5435  0.1174497       1.916934 4.159135
+HALLMARK_COAGULATION               211/5435  0.1279621       2.088510 4.119874
+HALLMARK_ALLOGRAFT_REJECTION       285/5435  0.1157895       1.889837 3.942222
+HALLMARK_INTERFERON_ALPHA_RESPONSE 171/5435  0.1228070       2.004373 3.409155
+HALLMARK_IL2_STAT5_SIGNALING       280/5435  0.1071429       1.748713 3.286183
+                                         pvalue     p.adjust       qvalue
+HALLMARK_MYOGENESIS                7.558671e-06 0.0003779335 0.0002784773
+HALLMARK_INTERFERON_GAMMA_RESPONSE 1.194293e-04 0.0029857318 0.0022000129
+HALLMARK_COAGULATION               1.819948e-04 0.0030332474 0.0022350244
+HALLMARK_ALLOGRAFT_REJECTION       2.467925e-04 0.0030849069 0.0022730893
+HALLMARK_INTERFERON_ALPHA_RESPONSE 1.614367e-03 0.0141933353 0.0104582471
+HALLMARK_IL2_STAT5_SIGNALING       1.703200e-03 0.0141933353 0.0104582471
+                                                                                                                                                                                                                                                                         geneID
+HALLMARK_MYOGENESIS                Myl1/Vil1/Casq1/Aplnr/Tnnc2/Ptgis/Bche/Gja5/Col15a1/Slc6a12/Tnnt1/Ryr1/Mybpc2/Tnni2/Lsp1/Hspb2/Cryab/Fabp7/Avil/Myo1a/Erbb3/Myh3/Myh1/Myh13/Smtnl2/Nos2/Myo1d/Col1a1/Itgb3/Cacng1/Itgb4/Bdkrb2/Mapk12/Myh15/Spdef/Mapk13/Cdkn1a/Actn3/Plxnb3
+HALLMARK_INTERFERON_GAMMA_RESPONSE                         Pla2g4a/Zbp1/Gbp5/Bst1/Gbp9/Gbp4/Gbp6/Oas2/Mthfd2/Ifitm6/Irf7/Bst2/Ccl2/Ccl7/Ccl5/Itgb3/Lgals3bp/Ifi27l2a/Apol6/Csf2rb/Il2rb/Mettl7a3/Ifitm7/Fpr2/Cdkn1a/H2-K1/Psmb9/Tap1/Psmb8/H2-Q1/H2-Q2/H2-Q6/H2-T23/Cd274/Ifit1
+HALLMARK_COAGULATION                                                                                                            Vil1/Serpinb2/Ctse/C8g/Gnb4/Ctsk/Masp2/Pf4/Sh2b2/Vwf/Apoc1/Klkb1/Mmp15/Mmp8/Pcsk4/Avil/Itgb3/Hmgcs1/Dct/Tmprss6/Maff/Plg/C4b/Crip3/C3/Fbn2/Tll2
+HALLMARK_ALLOGRAFT_REJECTION                                                          Il18rap/Cd247/Bche/Ctsk/Gbp5/Gm21104/Pf4/Gbp9/Gbp4/Gbp6/Capg/Ccnd2/Irf7/Il12rb1/Icosl/Erbb3/Nos2/Ccl2/Ccl7/Ccl5/Itgb3/Gpr65/Gzmb/Il2rb/H2-K1/Tap1/Tap2/H2-Q1/H2-Q2/H2-Q6/H2-T23/Cfp/Il2rg
+HALLMARK_INTERFERON_ALPHA_RESPONSE                                                                                                               Sell/Gbp5/Gbp9/Gbp4/Gbp6/Oas1c/Trim5/Ifitm6/Irf7/Bst2/Lgals3bp/Ifi27l2a/Ifitm7/H2-K1/Psmb9/Tap1/Psmb8/H2-Q1/H2-Q2/H2-Q6/H2-T23
+HALLMARK_IL2_STAT5_SIGNALING                                                                      Il1r2/Sell/Traf1/Scn7a/Gbp5/Ttc39a/Hopx/Gbp9/Gbp4/Gbp6/Capg/Ccnd2/Ifitm6/Scn11a/Enpp1/Enpp3/P4ha1/Hkdc1/Pcsk4/Phlda1/Myo1a/Xbp1/Myo1d/Etv4/Gpr65/Il2rb/Maff/Ifitm7/Ager/Gsto2
+                                   Count
+HALLMARK_MYOGENESIS                   39
+HALLMARK_INTERFERON_GAMMA_RESPONSE    35
+HALLMARK_COAGULATION                  27
+HALLMARK_ALLOGRAFT_REJECTION          33
+HALLMARK_INTERFERON_ALPHA_RESPONSE    21
+HALLMARK_IL2_STAT5_SIGNALING          30</code></pre>
 </div>
 <div id="further-reading-4" class="callout">
 <div class="callout-square">
@@ -2034,7 +1998,7 @@ HALLMARK_INFLAMMATORY_RESPONSE     22</code></pre>
 <p>Implementing ORA is rather simple. The following function
 <code>ora()</code> performs ORA on a list of gene sets. Try to read and
 understand the code.</p>
-<div class="codewrapper sourceCode" id="cb92">
+<div class="codewrapper sourceCode" id="cb97">
 <h3 class="code-label">R<i aria-hidden="true" data-feather="chevron-left"></i><i aria-hidden="true" data-feather="chevron-right"></i>
 </h3>
 <pre class="downlit sourceCode r">
@@ -2070,7 +2034,7 @@ understand the code.</p>
 <span><span class="op">}</span></span></code></pre>
 </div>
 <p>Test on the MSigDB hallmark gene sets:</p>
-<div class="codewrapper sourceCode" id="cb93">
+<div class="codewrapper sourceCode" id="cb98">
 <h3 class="code-label">R<i aria-hidden="true" data-feather="chevron-left"></i><i aria-hidden="true" data-feather="chevron-right"></i>
 </h3>
 <pre class="downlit sourceCode r">
@@ -2082,19 +2046,19 @@ understand the code.</p>
 <h3 class="code-label">OUTPUT<i aria-hidden="true" data-feather="chevron-left"></i><i aria-hidden="true" data-feather="chevron-right"></i>
 </h3>
 <pre class="output" tabindex="0"><code>                                                 gene_set hits n_genes
-HALLMARK_ADIPOGENESIS               HALLMARK_ADIPOGENESIS    9    1134
-HALLMARK_ALLOGRAFT_REJECTION HALLMARK_ALLOGRAFT_REJECTION   23    1134
-HALLMARK_ANDROGEN_RESPONSE     HALLMARK_ANDROGEN_RESPONSE    6    1134
-HALLMARK_ANGIOGENESIS               HALLMARK_ANGIOGENESIS    4    1134
-HALLMARK_APICAL_JUNCTION         HALLMARK_APICAL_JUNCTION   14    1134
-HALLMARK_APICAL_SURFACE           HALLMARK_APICAL_SURFACE    3    1134
-                             gene_set_size n_total     p_value    p_adjust
-HALLMARK_ADIPOGENESIS                  185   21198 0.662392856 0.871569547
-HALLMARK_ALLOGRAFT_REJECTION           191   21198 0.000234807 0.002935087
-HALLMARK_ANDROGEN_RESPONSE             107   21198 0.512665196 0.753919406
-HALLMARK_ANGIOGENESIS                   36   21198 0.124351058 0.260206520
-HALLMARK_APICAL_JUNCTION               186   21198 0.124899130 0.260206520
-HALLMARK_APICAL_SURFACE                 41   21198 0.376915129 0.588929889</code></pre>
+HALLMARK_ADIPOGENESIS               HALLMARK_ADIPOGENESIS   13    1134
+HALLMARK_ALLOGRAFT_REJECTION HALLMARK_ALLOGRAFT_REJECTION   33    1134
+HALLMARK_ANDROGEN_RESPONSE     HALLMARK_ANDROGEN_RESPONSE    7    1134
+HALLMARK_ANGIOGENESIS               HALLMARK_ANGIOGENESIS    6    1134
+HALLMARK_APICAL_JUNCTION         HALLMARK_APICAL_JUNCTION   28    1134
+HALLMARK_APICAL_SURFACE           HALLMARK_APICAL_SURFACE    4    1134
+                             gene_set_size n_total      p_value     p_adjust
+HALLMARK_ADIPOGENESIS                  247   21198 5.645290e-01 8.301897e-01
+HALLMARK_ALLOGRAFT_REJECTION           264   21198 5.248132e-06 8.746887e-05
+HALLMARK_ANDROGEN_RESPONSE             155   21198 7.290317e-01 9.424457e-01
+HALLMARK_ANGIOGENESIS                   51   21198 5.368200e-02 1.118375e-01
+HALLMARK_APICAL_JUNCTION               304   21198 3.728233e-03 1.331512e-02
+HALLMARK_APICAL_SURFACE                 84   21198 6.640741e-01 8.973974e-01</code></pre>
 </div>
 </div>
 </div>
@@ -2170,7 +2134,7 @@ collection</em></a>. Thus the universe setting in
 We use the <code>ora()</code> function which we have implemented in
 previous “Further reading” section and we compare three different
 universe settings.</p>
-<div class="codewrapper sourceCode" id="cb95">
+<div class="codewrapper sourceCode" id="cb100">
 <h3 class="code-label">R<i aria-hidden="true" data-feather="chevron-left"></i><i aria-hidden="true" data-feather="chevron-right"></i>
 </h3>
 <pre class="downlit sourceCode r">
@@ -2216,7 +2180,7 @@ normally do better jobs. Recently the visualization code in
 <strong>enrichplot</strong> package. The full sets of visualizations
 that <strong>enrichplot</strong> supports can be found from <a href="https://yulab-smu.top/biomedical-knowledge-mining-book/enrichplot.html" class="external-link uri">https://yulab-smu.top/biomedical-knowledge-mining-book/enrichplot.html</a>.</p>
 <p>We first re-generate the enrichment table.</p>
-<div class="codewrapper sourceCode" id="cb96">
+<div class="codewrapper sourceCode" id="cb101">
 <h3 class="code-label">R<i aria-hidden="true" data-feather="chevron-left"></i><i aria-hidden="true" data-feather="chevron-right"></i>
 </h3>
 <pre class="downlit sourceCode r">
@@ -2234,45 +2198,45 @@ that <strong>enrichplot</strong> supports can be found from <a href="https://yul
 <h3 class="code-label">OUTPUT<i aria-hidden="true" data-feather="chevron-left"></i><i aria-hidden="true" data-feather="chevron-right"></i>
 </h3>
 <pre class="output" tabindex="0"><code>                   ID                Description GeneRatio   BgRatio RichFactor
-GO:0050900 GO:0050900        leukocyte migration    51/968 402/28905  0.1268657
-GO:0006935 GO:0006935                 chemotaxis    52/968 465/28905  0.1118280
-GO:0042330 GO:0042330                      taxis    52/968 467/28905  0.1113490
-GO:0030595 GO:0030595       leukocyte chemotaxis    36/968 242/28905  0.1487603
-GO:0071674 GO:0071674 mononuclear cell migration    32/968 203/28905  0.1576355
-GO:0060326 GO:0060326            cell chemotaxis    41/968 334/28905  0.1227545
+GO:0050900 GO:0050900        leukocyte migration    50/965 408/28832  0.1225490
+GO:0006935 GO:0006935                 chemotaxis    54/965 475/28832  0.1136842
+GO:0042330 GO:0042330                      taxis    54/965 477/28832  0.1132075
+GO:0030595 GO:0030595       leukocyte chemotaxis    35/965 242/28832  0.1446281
+GO:0060326 GO:0060326            cell chemotaxis    41/965 337/28832  0.1216617
+GO:0071674 GO:0071674 mononuclear cell migration    32/965 229/28832  0.1397380
            FoldEnrichment    zScore       pvalue     p.adjust       qvalue
-GO:0050900       3.788277 10.479256 3.536123e-16 1.795643e-12 1.304643e-12
-GO:0006935       3.339243  9.465940 3.336947e-14 6.712316e-11 4.876903e-11
-GO:0042330       3.324942  9.428613 3.965528e-14 6.712316e-11 4.876903e-11
-GO:0030595       4.442063 10.009042 6.591196e-14 8.367524e-11 6.079511e-11
-GO:0071674       4.707080  9.866216 3.208410e-13 3.258461e-10 2.367469e-10
-GO:0060326       3.665515  9.120495 8.641191e-13 7.313328e-10 5.313575e-10
-                                                                                                                                                                                                                                                                                                               geneID
-GO:0050900              Tnfsf18/Sell/Slamf9/Fut7/Itga4/Mdk/Grem1/Ada/Prex1/Edn3/P2ry12/Il12a/S100a8/S100a9/Nbl1/Padi2/Bst1/Cxcl5/Ppbp/Pf4/Cxcl1/Ptn/Alox5/Trpm4/Hsd3b7/Itgam/Adam8/Ascl2/Calr/Ccl17/Enpp1/Aire/Ccl2/Ccl7/Ccl5/Ccl6/Ccr7/Aoc3/Itgb3/Ccl28/Lgals3/Ptk2b/Emp2/Apod/Retnlg/Plg/Fpr2/Dusp1/Ager/Il33/Ch25h
-GO:0006935 Tnfsf18/Sell/Slamf9/Mdk/Grem1/Prex1/Edn3/P2ry12/Il12a/S100a8/S100a9/Lpar1/Nbl1/Padi2/Bst1/Cxcl5/Ppbp/Pf4/Cxcl1/Ptn/Alox5/Ntf3/Trpm4/Hsd3b7/Itgam/Adam8/Lsp1/Calr/Ccl17/Robo3/Cmtm7/Ccl2/Ccl7/Ccl5/Ccl6/Ccr7/Itgb3/Tubb2b/Ccl28/Lgals3/Cmtm5/Ptk2b/Nr4a1/Casr/Retnlg/Fpr2/Dusp1/Ager/Stx3/Ch25h/Plxnb3/Nox1
-GO:0042330 Tnfsf18/Sell/Slamf9/Mdk/Grem1/Prex1/Edn3/P2ry12/Il12a/S100a8/S100a9/Lpar1/Nbl1/Padi2/Bst1/Cxcl5/Ppbp/Pf4/Cxcl1/Ptn/Alox5/Ntf3/Trpm4/Hsd3b7/Itgam/Adam8/Lsp1/Calr/Ccl17/Robo3/Cmtm7/Ccl2/Ccl7/Ccl5/Ccl6/Ccr7/Itgb3/Tubb2b/Ccl28/Lgals3/Cmtm5/Ptk2b/Nr4a1/Casr/Retnlg/Fpr2/Dusp1/Ager/Stx3/Ch25h/Plxnb3/Nox1
-GO:0030595                                                                                              Tnfsf18/Sell/Slamf9/Mdk/Grem1/Prex1/Edn3/Il12a/S100a8/S100a9/Nbl1/Padi2/Bst1/Cxcl5/Ppbp/Pf4/Cxcl1/Ptn/Alox5/Trpm4/Hsd3b7/Itgam/Adam8/Calr/Ccl17/Ccl2/Ccl7/Ccl5/Ccl6/Ccr7/Lgals3/Ptk2b/Retnlg/Fpr2/Dusp1/Ch25h
-GO:0071674                                                                                                                      Tnfsf18/Slamf9/Fut7/Itga4/Mdk/Grem1/Il12a/Nbl1/Padi2/Alox5/Trpm4/Hsd3b7/Adam8/Ascl2/Calr/Ccl17/Aire/Ccl2/Ccl7/Ccl5/Ccl6/Ccr7/Itgb3/Lgals3/Ptk2b/Apod/Retnlg/Plg/Fpr2/Dusp1/Ager/Ch25h
-GO:0060326                                                                Tnfsf18/Sell/Slamf9/Mdk/Grem1/Prex1/Edn3/Il12a/S100a8/S100a9/Lpar1/Nbl1/Padi2/Bst1/Cxcl5/Ppbp/Pf4/Cxcl1/Ptn/Alox5/Trpm4/Hsd3b7/Itgam/Adam8/Calr/Ccl17/Ccl2/Ccl7/Ccl5/Ccl6/Ccr7/Ccl28/Lgals3/Ptk2b/Nr4a1/Retnlg/Fpr2/Dusp1/Ch25h/Plxnb3/Nox1
+GO:0050900       3.661485 10.075346 2.751321e-15 1.053782e-11 7.745382e-12
+GO:0006935       3.396625  9.800882 5.186751e-15 1.053782e-11 7.745382e-12
+GO:0042330       3.382383  9.763475 6.190224e-15 1.053782e-11 7.745382e-12
+GO:0030595       4.321158  9.654694 3.373742e-13 4.307425e-10 3.165991e-10
+GO:0060326       3.634975  9.054313 1.137629e-12 1.161974e-09 8.540597e-10
+GO:0071674       4.175053  8.976588 8.861995e-12 6.891923e-09 5.065617e-09
+                                                                                                                                                                                                                                                                                                                             geneID
+GO:0050900                                 Tnfsf18/Sell/Slamf9/Fut7/Itga4/Mdk/Grem1/Ada/Prex1/Edn3/P2ry12/Il12a/S100a8/S100a9/Nbl1/Padi2/Bst1/Cxcl5/Ppbp/Pf4/Cxcl1/Ptn/Alox5/Trpm4/Hsd3b7/Itgam/Adam8/Ascl2/Gdf15/Calr/Enpp1/Aire/Ccl2/Ccl7/Ccl5/Ccr7/Aoc3/Itgb3/Ccl28/Lgals3/Ptk2b/Emp2/Apod/Retnlg/Plg/Fpr2/Dusp1/Ager/Il33/Ch25h
+GO:0006935 Tnfsf18/Sell/Slamf9/Mdk/Grem1/Prex1/Edn3/P2ry12/Il12a/S100a7a/S100a8/S100a9/Lpar1/Ptgr1/Nbl1/Padi2/Bst1/Cxcl5/Ppbp/Pf4/Cxcl1/Ptn/Alox5/Ntf3/Trpm4/Hsd3b7/Itgam/Adam8/Lsp1/Calr/Ccl17/Robo3/Cmtm7/Ccl2/Ccl7/Ccl5/Ccl6/Ccr7/Itgb3/Tubb2b/Ccl28/Lgals3/Cmtm5/Ptk2b/Nr4a1/Casr/Retnlg/Fpr2/Dusp1/Ager/Stx3/Ch25h/Plxnb3/Nox1
+GO:0042330 Tnfsf18/Sell/Slamf9/Mdk/Grem1/Prex1/Edn3/P2ry12/Il12a/S100a7a/S100a8/S100a9/Lpar1/Ptgr1/Nbl1/Padi2/Bst1/Cxcl5/Ppbp/Pf4/Cxcl1/Ptn/Alox5/Ntf3/Trpm4/Hsd3b7/Itgam/Adam8/Lsp1/Calr/Ccl17/Robo3/Cmtm7/Ccl2/Ccl7/Ccl5/Ccl6/Ccr7/Itgb3/Tubb2b/Ccl28/Lgals3/Cmtm5/Ptk2b/Nr4a1/Casr/Retnlg/Fpr2/Dusp1/Ager/Stx3/Ch25h/Plxnb3/Nox1
+GO:0030595                                                                                                                 Tnfsf18/Sell/Slamf9/Mdk/Grem1/Prex1/Edn3/Il12a/S100a8/S100a9/Nbl1/Padi2/Bst1/Cxcl5/Ppbp/Pf4/Cxcl1/Ptn/Alox5/Trpm4/Hsd3b7/Itgam/Adam8/Calr/Ccl2/Ccl7/Ccl5/Ccr7/Ccl28/Lgals3/Ptk2b/Retnlg/Fpr2/Dusp1/Ch25h
+GO:0060326                                                                              Tnfsf18/Sell/Slamf9/Mdk/Grem1/Prex1/Edn3/Il12a/S100a8/S100a9/Lpar1/Nbl1/Padi2/Bst1/Cxcl5/Ppbp/Pf4/Cxcl1/Ptn/Alox5/Trpm4/Hsd3b7/Itgam/Adam8/Calr/Ccl17/Ccl2/Ccl7/Ccl5/Ccl6/Ccr7/Ccl28/Lgals3/Ptk2b/Nr4a1/Retnlg/Fpr2/Dusp1/Ch25h/Plxnb3/Nox1
+GO:0071674                                                                                                                                  Tnfsf18/Slamf9/Fut7/Itga4/Mdk/Grem1/P2ry12/Il12a/Nbl1/Padi2/Alox5/Trpm4/Hsd3b7/Adam8/Ascl2/Calr/Enpp1/Aire/Ccl2/Ccl7/Ccl5/Ccr7/Itgb3/Lgals3/Ptk2b/Apod/Retnlg/Plg/Fpr2/Dusp1/Ager/Ch25h
            Count
-GO:0050900    51
-GO:0006935    52
-GO:0042330    52
-GO:0030595    36
-GO:0071674    32
-GO:0060326    41</code></pre>
+GO:0050900    50
+GO:0006935    54
+GO:0042330    54
+GO:0030595    35
+GO:0060326    41
+GO:0071674    32</code></pre>
 </div>
 <p><code>barplot()</code> and <code>dotplot()</code> generate plots for
 a small number of significant gene sets. Note the two functions are
 directly applied on <code>resTimeGO</code> returned by
 <code>enrichGO()</code>.</p>
-<div class="codewrapper sourceCode" id="cb98">
+<div class="codewrapper sourceCode" id="cb103">
 <h3 class="code-label">R<i aria-hidden="true" data-feather="chevron-left"></i><i aria-hidden="true" data-feather="chevron-right"></i>
 </h3>
 <pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="fu">barplot</span><span class="op">(</span><span class="va">resTimeGO</span>, showCategory <span class="op">=</span> <span class="fl">20</span><span class="op">)</span></span></code></pre>
 </div>
-<figure><img src="../fig/07-gene-set-analysis-rendered-more-enrichplots-1.png" style="display: block; margin: auto;" class="figure mx-auto d-block"></figure><div class="codewrapper sourceCode" id="cb99">
+<figure><img src="../fig/07-gene-set-analysis-rendered-more-enrichplots-1.png" style="display: block; margin: auto;" class="figure mx-auto d-block"></figure><div class="codewrapper sourceCode" id="cb104">
 <h3 class="code-label">R<i aria-hidden="true" data-feather="chevron-left"></i><i aria-hidden="true" data-feather="chevron-right"></i>
 </h3>
 <pre class="downlit sourceCode r">
@@ -2315,7 +2279,7 @@ the enrichment of ORA.</p>
 genes on gene sets. Recall the denotations in the 2x2 contingency table
 (we are too far from that!). Let’s take these numbers from the
 enrichment table.</p>
-<div class="codewrapper sourceCode" id="cb100">
+<div class="codewrapper sourceCode" id="cb105">
 <h3 class="code-label">R<i aria-hidden="true" data-feather="chevron-left"></i><i aria-hidden="true" data-feather="chevron-right"></i>
 </h3>
 <pre class="downlit sourceCode r">
@@ -2327,7 +2291,7 @@ enrichment table.</p>
 <p>Instead of using <code>GeneRatio</code>, we use the fraction of DE
 genes in the gene sets which are kind of like a “scaled” value for all
 gene sets. Let’s calculate it:</p>
-<div class="codewrapper sourceCode" id="cb101">
+<div class="codewrapper sourceCode" id="cb106">
 <h3 class="code-label">R<i aria-hidden="true" data-feather="chevron-left"></i><i aria-hidden="true" data-feather="chevron-right"></i>
 </h3>
 <pre class="downlit sourceCode r">
@@ -2345,7 +2309,7 @@ enrichment, defined as:</p>
 <em>DE% in the universe</em> or the log2 of the ratio of <em>gene_set%
 in the DE genes</em> and <em>gene_set% in the universe</em>. The two are
 identical.</p>
-<div class="codewrapper sourceCode" id="cb102">
+<div class="codewrapper sourceCode" id="cb107">
 <h3 class="code-label">R<i aria-hidden="true" data-feather="chevron-left"></i><i aria-hidden="true" data-feather="chevron-right"></i>
 </h3>
 <pre class="downlit sourceCode r">
@@ -2357,7 +2321,7 @@ identical.</p>
 <p>where <span class="math inline">\(\mu\)</span> and <span class="math inline">\(\sigma\)</span> are <a href="https://en.wikipedia.org/wiki/Hypergeometric_distribution" class="external-link">the
 mean and standard deviation of the hypergeometric distribution</a>. They
 can be calculated as:</p>
-<div class="codewrapper sourceCode" id="cb103">
+<div class="codewrapper sourceCode" id="cb108">
 <h3 class="code-label">R<i aria-hidden="true" data-feather="chevron-left"></i><i aria-hidden="true" data-feather="chevron-right"></i>
 </h3>
 <pre class="downlit sourceCode r">
@@ -2376,7 +2340,7 @@ bars.</p>
 <p>In <code>resTimeGOTable</code>, gene sets are already ordered by the
 significance, so we take the first 10 gene sets which are the 10 most
 significant gene sets.</p>
-<div class="codewrapper sourceCode" id="cb104">
+<div class="codewrapper sourceCode" id="cb109">
 <h3 class="code-label">R<i aria-hidden="true" data-feather="chevron-left"></i><i aria-hidden="true" data-feather="chevron-right"></i>
 </h3>
 <pre class="downlit sourceCode r">
@@ -2392,7 +2356,7 @@ significant gene sets.</p>
 <figure><img src="../fig/07-gene-set-analysis-rendered-plot-enrichment-1.png" style="display: block; margin: auto;" class="figure mx-auto d-block"></figure><p>In the next example, we use <em>z</em>-score as the primary variable
 to map to the offset to origin, <code>DE_Ratio</code> and
 <code>Count</code> to map to dot colors and sizes.</p>
-<div class="codewrapper sourceCode" id="cb105">
+<div class="codewrapper sourceCode" id="cb110">
 <h3 class="code-label">R<i aria-hidden="true" data-feather="chevron-left"></i><i aria-hidden="true" data-feather="chevron-right"></i>
 </h3>
 <pre class="downlit sourceCode r">
@@ -2414,7 +2378,7 @@ one-sided. We can set two cutoffs on the log2 fold enrichment and
 adjusted <em>p</em>-values, then the gene sets on the top right region
 can be thought as being both statistically significant and also
 biologically sensible.</p>
-<div class="codewrapper sourceCode" id="cb106">
+<div class="codewrapper sourceCode" id="cb111">
 <h3 class="code-label">R<i aria-hidden="true" data-feather="chevron-left"></i><i aria-hidden="true" data-feather="chevron-right"></i>
 </h3>
 <pre class="downlit sourceCode r">
@@ -2438,7 +2402,7 @@ and down-regulated separately. And we want to combine the significant
 gene sets from the two ORA analysis in one plot. In the following code,
 we first generate two enrichment tables for up-regulated genes and
 down-regulated separately.</p>
-<div class="codewrapper sourceCode" id="cb107">
+<div class="codewrapper sourceCode" id="cb112">
 <h3 class="code-label">R<i aria-hidden="true" data-feather="chevron-left"></i><i aria-hidden="true" data-feather="chevron-right"></i>
 </h3>
 <pre class="downlit sourceCode r">
@@ -2482,7 +2446,7 @@ down-regulated separately.</p>
 for up-regulated genes and the first 5 most significant terms for
 down-regulated genes. The following <strong>ggplot2</strong> code should
 be easy to read.</p>
-<div class="codewrapper sourceCode" id="cb108">
+<div class="codewrapper sourceCode" id="cb113">
 <h3 class="code-label">R<i aria-hidden="true" data-feather="chevron-left"></i><i aria-hidden="true" data-feather="chevron-right"></i>
 </h3>
 <pre class="downlit sourceCode r">
@@ -2510,7 +2474,7 @@ common functions via word clouds.</p>
 <p>The input of the <code>simplifyGO()</code> function is a vector of GO
 IDs. It is recommended to have at least 100 GO IDs for summarization and
 visualization.</p>
-<div class="codewrapper sourceCode" id="cb109">
+<div class="codewrapper sourceCode" id="cb114">
 <h3 class="code-label">R<i aria-hidden="true" data-feather="chevron-left"></i><i aria-hidden="true" data-feather="chevron-right"></i>
 </h3>
 <pre class="downlit sourceCode r">
@@ -2625,8 +2589,8 @@ topological relations in the GO hierarchy.<a href="#fnref7" class="footnote-back
         <p>Materials licensed under <a href="../LICENSE.html">CC-BY 4.0</a> by the authors</p>
 
         <p><a href="https://creativecommons.org/licenses/by-sa/4.0/" class="external-link">Template licensed under CC-BY 4.0</a> by <a href="https://carpentries.org" class="external-link">The Carpentries</a></p>
-        <p>Built with <a href="https://github.com/carpentries/sandpaper/tree/0.16.11" class="external-link">sandpaper (0.16.11)</a>,
-        <a href="https://github.com/carpentries/pegboard/tree/0.7.7" class="external-link">pegboard (0.7.7)</a>,
+        <p>Built with <a href="https://github.com/carpentries/sandpaper/tree/0.16.12" class="external-link">sandpaper (0.16.12)</a>,
+        <a href="https://github.com/carpentries/pegboard/tree/0.7.9" class="external-link">pegboard (0.7.9)</a>,
       and <a href="https://github.com/mblue9/varnish/tree/3403ad0dd37f7641c6442330fcc182937e7964c5" class="external-link">varnish (0.2.16)</a>.</p>
 			</div>
 		</footer></div> <!-- / div.container -->
@@ -2638,10 +2602,10 @@ topological relations in the GO hierarchy.<a href="#fnref7" class="footnote-back
   <script type="application/ld+json">
     {
   "@context": "https://schema.org",
-  "@type": "TrainingMaterial",
+  "@type": "LearningResource",
   "@id": "https://carpentries-incubator.github.io/bioc-rnaseq/instructor/07-gene-set-analysis.html",
   "inLanguage": "en",
-  "dct:conformsTo": "https://bioschemas.org/profiles/TrainingMaterial/1.0-RELEASE",
+  "dct:conformsTo": "https://bioschemas.org/profiles/LearningResource/1.0-RELEASE",
   "description": "A Carpentries Lesson teaching foundational data and coding skills to researchers worldwide",
   "keywords": "software, data, lesson, The Carpentries",
   "name": "Gene set enrichment analysis",
@@ -2649,8 +2613,8 @@ topological relations in the GO hierarchy.<a href="#fnref7" class="footnote-back
   "url": "https://carpentries-incubator.github.io/bioc-rnaseq/instructor/07-gene-set-analysis.html",
   "identifier": "https://carpentries-incubator.github.io/bioc-rnaseq/instructor/07-gene-set-analysis.html",
   "dateCreated": "2020-09-15",
-  "dateModified": "2025-02-04",
-  "datePublished": "2025-02-04"
+  "dateModified": "2025-06-10",
+  "datePublished": "2025-06-10"
 }
 
   </script><script>

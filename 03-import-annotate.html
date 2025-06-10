@@ -282,7 +282,7 @@
       </div>
       <hr></nav><main id="main-content" class="main-content"><div class="container lesson-content">
         <h1>Importing and annotating quantified data into R</h1>
-        <p> Last updated on 2025-02-04 |
+        <p> Last updated on 2025-06-10 |
 
         <a href="https://github.com/carpentries-incubator/bioc-rnaseq/edit/main/episodes/03-import-annotate.Rmd" class="external-link">Edit this page <i aria-hidden="true" data-feather="edit"></i></a></p>
 
@@ -514,7 +514,7 @@ have to do to remove those (generally speaking, not exact codes)?</li>
 <button class="accordion-button solution-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapseSolution1" aria-expanded="false" aria-controls="collapseSolution1">
   <h4 class="accordion-header" id="headingSolution1"> Show me the solution </h4>
 </button>
-<div id="collapseSolution1" class="accordion-collapse collapse" aria-labelledby="headingSolution1" data-bs-parent="#accordionSolution1">
+<div id="collapseSolution1" class="accordion-collapse collapse" data-bs-parent="#accordionSolution1" aria-labelledby="headingSolution1">
 <div class="accordion-body">
 <ol style="list-style-type: decimal"><li>In <code>counts</code>, the rows are genes just like the rows in
 <code>rowranges</code>. The columns in <code>counts</code> are the
@@ -537,7 +537,7 @@ the <a href="https://carpentries-incubator.github.io/bioc-intro/60-next-steps.ht
 to data analysis with R and Bioconductor</a> workshop. As a reminder,
 let’s take a look at the figure below representing the anatomy of the
 <code>SummarizedExperiment</code> class:</p>
-<figure><img src="https://uclouvain-cbio.github.io/WSBIM1322/figs/SE.svg" width="80%" style="display: block; margin: auto;" class="figure mx-auto d-block"></figure><p>It is designed to hold any type of quantitative ’omics data
+<figure><img src="https://uclouvain-cbio.github.io/WSBIM1322/figs/SE.svg" alt="Schematic showing the composition of a SummarizedExperiment object, with three assay matrices of equal dimension, rowData with feature annotations, colData with sample annotations, and a metadata list." width="80%" style="display: block; margin: auto;" class="figure mx-auto d-block"></figure><p>It is designed to hold any type of quantitative ’omics data
 (<code>assays</code>) along with linked sample annotations
 (<code>colData</code>) and feature annotations with
 (<code>rowRanges</code>) or without (<code>rowData</code>) chromosome,
@@ -632,7 +632,7 @@ codes.</p>
 <button class="accordion-button solution-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapseSolution2" aria-expanded="false" aria-controls="collapseSolution2">
   <h4 class="accordion-header" id="headingSolution2"> Show me the solution </h4>
 </button>
-<div id="collapseSolution2" class="accordion-collapse collapse" aria-labelledby="headingSolution2" data-bs-parent="#accordionSolution2">
+<div id="collapseSolution2" class="accordion-collapse collapse" data-bs-parent="#accordionSolution2" aria-labelledby="headingSolution2">
 <div class="accordion-body">
 <div class="codewrapper sourceCode" id="cb19">
 <h3 class="code-label">R<i aria-hidden="true" data-feather="chevron-left"></i><i aria-hidden="true" data-feather="chevron-right"></i>
@@ -700,9 +700,9 @@ sample/row names match. If not, you will get some error messages:</p>
 <div class="codewrapper">
 <h3 class="code-label">ERROR<i aria-hidden="true" data-feather="chevron-left"></i><i aria-hidden="true" data-feather="chevron-right"></i>
 </h3>
-<pre class="error" tabindex="0"><code>Error in SummarizedExperiment(assays = list(counts = as.matrix(counts)), : the rownames and colnames of the supplied assay(s) must be NULL or
-  identical to those of the RangedSummarizedExperiment object (or
-  derivative) to construct</code></pre>
+<pre class="error" tabindex="0"><code>Error in SummarizedExperiment(assays = list(counts = as.matrix(counts)), : the rownames and colnames of the supplied assay(s) must be NULL or identical
+  to those of the RangedSummarizedExperiment object (or derivative) to
+  construct</code></pre>
 </div>
 <p>A brief recap of how to access the various data slots in a
 <code>SummarizedExperiment</code> and how to make some
@@ -1008,7 +1008,7 @@ day 8?</li>
 <button class="accordion-button solution-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapseSolution3" aria-expanded="false" aria-controls="collapseSolution3">
   <h4 class="accordion-header" id="headingSolution3"> Show me the solution </h4>
 </button>
-<div id="collapseSolution3" class="accordion-collapse collapse" aria-labelledby="headingSolution3" data-bs-parent="#accordionSolution3">
+<div id="collapseSolution3" class="accordion-collapse collapse" data-bs-parent="#accordionSolution3" aria-labelledby="headingSolution3">
 <div class="accordion-body">
 <div class="codewrapper sourceCode" id="cb46">
 <h3 class="code-label">R<i aria-hidden="true" data-feather="chevron-left"></i><i aria-hidden="true" data-feather="chevron-right"></i>
@@ -1041,7 +1041,7 @@ day 8?</li>
 <h3 class="code-label">OUTPUT<i aria-hidden="true" data-feather="chevron-left"></i><i aria-hidden="true" data-feather="chevron-right"></i>
 </h3>
 <pre class="output" tabindex="0"><code>     Min.   1st Qu.    Median      Mean   3rd Qu.      Max.
-    0.000     0.133     2.867   764.068   337.417 18896.600 </code></pre>
+0.000e+00 1.333e-01 2.867e+00 7.641e+02 3.374e+02 1.890e+04 </code></pre>
 </div>
 <div class="codewrapper sourceCode" id="cb50">
 <h3 class="code-label">R<i aria-hidden="true" data-feather="chevron-left"></i><i aria-hidden="true" data-feather="chevron-right"></i>
@@ -1053,7 +1053,7 @@ day 8?</li>
 <h3 class="code-label">OUTPUT<i aria-hidden="true" data-feather="chevron-left"></i><i aria-hidden="true" data-feather="chevron-right"></i>
 </h3>
 <pre class="output" tabindex="0"><code>     Min.   1st Qu.    Median      Mean   3rd Qu.      Max.
-    0.000     0.143     3.143   771.017   366.571 20010.143 </code></pre>
+0.000e+00 1.429e-01 3.143e+00 7.710e+02 3.666e+02 2.001e+04 </code></pre>
 </div>
 <div class="codewrapper sourceCode" id="cb52">
 <h3 class="code-label">R<i aria-hidden="true" data-feather="chevron-left"></i><i aria-hidden="true" data-feather="chevron-right"></i>
@@ -1132,7 +1132,7 @@ codes and then check you correctly got the 21,198 mRNA genes:</p>
 <button class="accordion-button solution-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapseSolution4" aria-expanded="false" aria-controls="collapseSolution4">
   <h4 class="accordion-header" id="headingSolution4"> Show me the solution </h4>
 </button>
-<div id="collapseSolution4" class="accordion-collapse collapse" aria-labelledby="headingSolution4" data-bs-parent="#accordionSolution4">
+<div id="collapseSolution4" class="accordion-collapse collapse" data-bs-parent="#accordionSolution4" aria-labelledby="headingSolution4">
 <div class="accordion-body">
 <div class="codewrapper sourceCode" id="cb55">
 <h3 class="code-label">R<i aria-hidden="true" data-feather="chevron-left"></i><i aria-hidden="true" data-feather="chevron-right"></i>
@@ -1289,13 +1289,13 @@ $`10001`
 <div class="codewrapper">
 <h3 class="code-label">OUTPUT<i aria-hidden="true" data-feather="chevron-left"></i><i aria-hidden="true" data-feather="chevron-right"></i>
 </h3>
-<pre class="output" tabindex="0"><code>R version 4.4.2 (2024-10-31)
+<pre class="output" tabindex="0"><code>R version 4.5.0 (2025-04-11)
 Platform: x86_64-pc-linux-gnu
 Running under: Ubuntu 22.04.5 LTS
 
 Matrix products: default
 BLAS:   /usr/lib/x86_64-linux-gnu/blas/libblas.so.3.10.0
-LAPACK: /usr/lib/x86_64-linux-gnu/lapack/liblapack.so.3.10.0
+LAPACK: /usr/lib/x86_64-linux-gnu/lapack/liblapack.so.3.10.0  LAPACK version 3.10.0
 
 locale:
  [1] LC_CTYPE=C.UTF-8       LC_NUMERIC=C           LC_TIME=C.UTF-8
@@ -1311,28 +1311,28 @@ attached base packages:
 [8] base
 
 other attached packages:
- [1] hgu95av2.db_3.13.0          org.Hs.eg.db_3.19.1
- [3] org.Mm.eg.db_3.19.1         AnnotationDbi_1.66.0
- [5] SummarizedExperiment_1.34.0 Biobase_2.64.0
- [7] MatrixGenerics_1.16.0       matrixStats_1.4.1
- [9] GenomicRanges_1.56.2        GenomeInfoDb_1.40.1
-[11] IRanges_2.38.1              S4Vectors_0.42.1
-[13] BiocGenerics_0.50.0         knitr_1.49
+ [1] hgu95av2.db_3.13.0          org.Hs.eg.db_3.21.0
+ [3] org.Mm.eg.db_3.21.0         AnnotationDbi_1.70.0
+ [5] SummarizedExperiment_1.38.1 Biobase_2.68.0
+ [7] MatrixGenerics_1.20.0       matrixStats_1.5.0
+ [9] GenomicRanges_1.60.0        GenomeInfoDb_1.44.0
+[11] IRanges_2.42.0              S4Vectors_0.46.0
+[13] BiocGenerics_0.54.0         generics_0.1.4
+[15] knitr_1.50
 
 loaded via a namespace (and not attached):
- [1] Matrix_1.7-1            bit_4.5.0.1             jsonlite_1.8.9
- [4] compiler_4.4.2          BiocManager_1.30.25     renv_1.1.0
- [7] crayon_1.5.3            blob_1.2.4              Biostrings_2.72.1
+ [1] Matrix_1.7-3            bit_4.6.0               jsonlite_2.0.0
+ [4] compiler_4.5.0          BiocManager_1.30.26     renv_1.1.4
+ [7] crayon_1.5.3            blob_1.2.4              Biostrings_2.76.0
 [10] png_0.1-8               fastmap_1.2.0           yaml_2.3.10
-[13] lattice_0.22-6          R6_2.5.1                XVector_0.44.0
-[16] S4Arrays_1.4.1          DelayedArray_0.30.1     GenomeInfoDbData_1.2.12
-[19] DBI_1.2.3               rlang_1.1.4             KEGGREST_1.44.1
-[22] cachem_1.1.0            xfun_0.49               bit64_4.5.2
-[25] memoise_2.0.1           SparseArray_1.4.8       RSQLite_2.3.9
-[28] cli_3.6.3               zlibbioc_1.50.0         grid_4.4.2
-[31] vctrs_0.6.5             evaluate_1.0.1          abind_1.4-8
-[34] httr_1.4.7              pkgconfig_2.0.3         tools_4.4.2
-[37] UCSC.utils_1.0.0       </code></pre>
+[13] lattice_0.22-7          R6_2.6.1                XVector_0.48.0
+[16] S4Arrays_1.8.1          DelayedArray_0.34.1     GenomeInfoDbData_1.2.14
+[19] DBI_1.2.3               rlang_1.1.6             KEGGREST_1.48.0
+[22] cachem_1.1.0            xfun_0.52               bit64_4.6.0-1
+[25] memoise_2.0.1           SparseArray_1.8.0       RSQLite_2.4.1
+[28] cli_3.6.5               grid_4.5.0              vctrs_0.6.5
+[31] evaluate_1.0.3          abind_1.4-8             httr_1.4.7
+[34] pkgconfig_2.0.3         tools_4.5.0             UCSC.utils_1.4.0       </code></pre>
 </div>
 <div id="keypoints1" class="callout keypoints">
 <div class="callout-square">
@@ -1381,8 +1381,8 @@ analysis, with gene symbols added for easier interpretation.</li>
         <p>Materials licensed under <a href="LICENSE.html">CC-BY 4.0</a> by the authors</p>
 
         <p><a href="https://creativecommons.org/licenses/by-sa/4.0/" class="external-link">Template licensed under CC-BY 4.0</a> by <a href="https://carpentries.org" class="external-link">The Carpentries</a></p>
-        <p>Built with <a href="https://github.com/carpentries/sandpaper/tree/0.16.11" class="external-link">sandpaper (0.16.11)</a>,
-        <a href="https://github.com/carpentries/pegboard/tree/0.7.7" class="external-link">pegboard (0.7.7)</a>,
+        <p>Built with <a href="https://github.com/carpentries/sandpaper/tree/0.16.12" class="external-link">sandpaper (0.16.12)</a>,
+        <a href="https://github.com/carpentries/pegboard/tree/0.7.9" class="external-link">pegboard (0.7.9)</a>,
       and <a href="https://github.com/mblue9/varnish/tree/3403ad0dd37f7641c6442330fcc182937e7964c5" class="external-link">varnish (0.2.16)</a>.</p>
 			</div>
 		</footer></div> <!-- / div.container -->
@@ -1394,10 +1394,10 @@ analysis, with gene symbols added for easier interpretation.</li>
   <script type="application/ld+json">
     {
   "@context": "https://schema.org",
-  "@type": "TrainingMaterial",
+  "@type": "LearningResource",
   "@id": "https://carpentries-incubator.github.io/bioc-rnaseq/03-import-annotate.html",
   "inLanguage": "en",
-  "dct:conformsTo": "https://bioschemas.org/profiles/TrainingMaterial/1.0-RELEASE",
+  "dct:conformsTo": "https://bioschemas.org/profiles/LearningResource/1.0-RELEASE",
   "description": "A Carpentries Lesson teaching foundational data and coding skills to researchers worldwide",
   "keywords": "software, data, lesson, The Carpentries",
   "name": "Importing and annotating quantified data into R",
@@ -1405,8 +1405,8 @@ analysis, with gene symbols added for easier interpretation.</li>
   "url": "https://carpentries-incubator.github.io/bioc-rnaseq/03-import-annotate.html",
   "identifier": "https://carpentries-incubator.github.io/bioc-rnaseq/03-import-annotate.html",
   "dateCreated": "2020-09-15",
-  "dateModified": "2025-02-04",
-  "datePublished": "2025-02-04"
+  "dateModified": "2025-06-10",
+  "datePublished": "2025-06-10"
 }
 
   </script><script>
