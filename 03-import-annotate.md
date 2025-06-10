@@ -148,7 +148,7 @@ table(rowranges$gbkey)
 You can see how keeping related information in separate objects could easily lead to mis-matches between our counts, gene annotations and sample annotations. This is why Bioconductor has created a specialized S4 class called a `SummarizedExperiment`. The details of a `SummarizedExperiment` were covered extensively at the end of the [Introduction to data analysis with R and Bioconductor](https://carpentries-incubator.github.io/bioc-intro/60-next-steps.html#next-steps) workshop. 
 As a reminder, let's take a look at the figure below representing the anatomy of the `SummarizedExperiment` class:
 
-<img src="https://uclouvain-cbio.github.io/WSBIM1322/figs/SE.svg" width="80%" style="display: block; margin: auto;" />
+<img src="https://uclouvain-cbio.github.io/WSBIM1322/figs/SE.svg" alt="Schematic showing the composition of a SummarizedExperiment object, with three assay matrices of equal dimension, rowData with feature annotations, colData with sample annotations, and a metadata list." width="80%" style="display: block; margin: auto;" />
 
 It is designed to hold any type of quantitative 'omics data (`assays`) along with linked sample annotations (`colData`) and feature annotations with (`rowRanges`) or without (`rowData`) chromosome, start and stop positions. Once these three tables are (correctly!) linked, subsetting either samples and/or features will correctly subset the `assay`, `colData` and `rowRanges`. Additionally, most Bioconductor packages are built around the same core data infrastructure so they will recognize and be able to manipulate `SummarizedExperiment` objects. Two of the most popular RNA-seq statistical analysis packages have their own extended S4 classes similar to a `SummarizedExperiment` with the additional slots for statistical results: [DESeq2](https://bioconductor.org/packages/devel/bioc/vignettes/DESeq2/inst/doc/DESeq2.html#the-deseqdataset)'s `DESeqDataSet` and [edgeR](https://www.rdocumentation.org/packages/edgeR/versions/3.14.0/topics/DGEList-class)'s `DGEList`. No matter which one you end up using for statistical analysis, you can start by putting your data in a `SummarizedExperiment`. 
 
@@ -266,9 +266,9 @@ bad2 <- SummarizedExperiment(
 ```
 
 ``` error
-Error in SummarizedExperiment(assays = list(counts = as.matrix(counts)), : the rownames and colnames of the supplied assay(s) must be NULL or
-  identical to those of the RangedSummarizedExperiment object (or
-  derivative) to construct
+Error in SummarizedExperiment(assays = list(counts = as.matrix(counts)), : the rownames and colnames of the supplied assay(s) must be NULL or identical
+  to those of the RangedSummarizedExperiment object (or derivative) to
+  construct
 ```
 
 
@@ -559,7 +559,7 @@ summary(means_infected)
 
 ``` output
      Min.   1st Qu.    Median      Mean   3rd Qu.      Max. 
-    0.000     0.133     2.867   764.068   337.417 18896.600 
+0.000e+00 1.333e-01 2.867e+00 7.641e+02 3.374e+02 1.890e+04 
 ```
 
 ``` r
@@ -568,7 +568,7 @@ summary(means_noninfected)
 
 ``` output
      Min.   1st Qu.    Median      Mean   3rd Qu.      Max. 
-    0.000     0.143     3.143   771.017   366.571 20010.143 
+0.000e+00 1.429e-01 3.143e+00 7.710e+02 3.666e+02 2.001e+04 
 ```
 
 ``` r
@@ -752,13 +752,13 @@ sessionInfo()
 ```
 
 ``` output
-R version 4.4.2 (2024-10-31)
+R version 4.5.0 (2025-04-11)
 Platform: x86_64-pc-linux-gnu
 Running under: Ubuntu 22.04.5 LTS
 
 Matrix products: default
 BLAS:   /usr/lib/x86_64-linux-gnu/blas/libblas.so.3.10.0 
-LAPACK: /usr/lib/x86_64-linux-gnu/lapack/liblapack.so.3.10.0
+LAPACK: /usr/lib/x86_64-linux-gnu/lapack/liblapack.so.3.10.0  LAPACK version 3.10.0
 
 locale:
  [1] LC_CTYPE=C.UTF-8       LC_NUMERIC=C           LC_TIME=C.UTF-8       
@@ -774,28 +774,28 @@ attached base packages:
 [8] base     
 
 other attached packages:
- [1] hgu95av2.db_3.13.0          org.Hs.eg.db_3.19.1        
- [3] org.Mm.eg.db_3.19.1         AnnotationDbi_1.66.0       
- [5] SummarizedExperiment_1.34.0 Biobase_2.64.0             
- [7] MatrixGenerics_1.16.0       matrixStats_1.4.1          
- [9] GenomicRanges_1.56.2        GenomeInfoDb_1.40.1        
-[11] IRanges_2.38.1              S4Vectors_0.42.1           
-[13] BiocGenerics_0.50.0         knitr_1.49                 
+ [1] hgu95av2.db_3.13.0          org.Hs.eg.db_3.21.0        
+ [3] org.Mm.eg.db_3.21.0         AnnotationDbi_1.70.0       
+ [5] SummarizedExperiment_1.38.1 Biobase_2.68.0             
+ [7] MatrixGenerics_1.20.0       matrixStats_1.5.0          
+ [9] GenomicRanges_1.60.0        GenomeInfoDb_1.44.0        
+[11] IRanges_2.42.0              S4Vectors_0.46.0           
+[13] BiocGenerics_0.54.0         generics_0.1.4             
+[15] knitr_1.50                 
 
 loaded via a namespace (and not attached):
- [1] Matrix_1.7-1            bit_4.5.0.1             jsonlite_1.8.9         
- [4] compiler_4.4.2          BiocManager_1.30.25     renv_1.1.0             
- [7] crayon_1.5.3            blob_1.2.4              Biostrings_2.72.1      
+ [1] Matrix_1.7-3            bit_4.6.0               jsonlite_2.0.0         
+ [4] compiler_4.5.0          BiocManager_1.30.26     renv_1.1.4             
+ [7] crayon_1.5.3            blob_1.2.4              Biostrings_2.76.0      
 [10] png_0.1-8               fastmap_1.2.0           yaml_2.3.10            
-[13] lattice_0.22-6          R6_2.5.1                XVector_0.44.0         
-[16] S4Arrays_1.4.1          DelayedArray_0.30.1     GenomeInfoDbData_1.2.12
-[19] DBI_1.2.3               rlang_1.1.4             KEGGREST_1.44.1        
-[22] cachem_1.1.0            xfun_0.49               bit64_4.5.2            
-[25] memoise_2.0.1           SparseArray_1.4.8       RSQLite_2.3.9          
-[28] cli_3.6.3               zlibbioc_1.50.0         grid_4.4.2             
-[31] vctrs_0.6.5             evaluate_1.0.1          abind_1.4-8            
-[34] httr_1.4.7              pkgconfig_2.0.3         tools_4.4.2            
-[37] UCSC.utils_1.0.0       
+[13] lattice_0.22-7          R6_2.6.1                XVector_0.48.0         
+[16] S4Arrays_1.8.1          DelayedArray_0.34.1     GenomeInfoDbData_1.2.14
+[19] DBI_1.2.3               rlang_1.1.6             KEGGREST_1.48.0        
+[22] cachem_1.1.0            xfun_0.52               bit64_4.6.0-1          
+[25] memoise_2.0.1           SparseArray_1.8.0       RSQLite_2.4.1          
+[28] cli_3.6.5               grid_4.5.0              vctrs_0.6.5            
+[31] evaluate_1.0.3          abind_1.4-8             httr_1.4.7             
+[34] pkgconfig_2.0.3         tools_4.5.0             UCSC.utils_1.4.0       
 ```
 
 ::: keypoints

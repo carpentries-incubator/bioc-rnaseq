@@ -152,7 +152,7 @@ final dispersion estimates
 plotDispEsts(dds)
 ```
 
-<img src="fig/05-differential-expression-rendered-estimate-dispersions-1.png" style="display: block; margin: auto;" />
+<img src="fig/05-differential-expression-rendered-estimate-dispersions-1.png" alt="Scatterplot with the mean of normalized counts on the x-axis and the dispersion on the y-axis. The plot shows black dots corresponding to gene-wise estimates of the dispersion, a red line corresponding to the fitted trend, and blue dots corresponding to the final dispersion estimates. There is a general trend of decreasing dispersion with increasing mean normalized counts." style="display: block; margin: auto;" />
 
 ### Testing
 
@@ -366,7 +366,7 @@ We can visualize the results in many ways. A good check is to explore the relati
 plotMA(resTime)
 ```
 
-<img src="fig/05-differential-expression-rendered-plot-ma-1.png" style="display: block; margin: auto;" />
+<img src="fig/05-differential-expression-rendered-plot-ma-1.png" alt="MA plot showing the mean normalized counts on the x-axis and the log fold change on the y-axis. Significantly differentially expressed genes are colored in blue. The range of log fold changes is larger for low values of the mean normalized counts." style="display: block; margin: auto;" />
 
 We can see that genes with a low mean count tend to have larger log fold changes.
 This is caused by counts from lowly expressed genes tending to be very noisy. 
@@ -388,7 +388,7 @@ using 'apeglm' for LFC shrinkage. If used in published research, please cite:
 plotMA(resTimeLfc)
 ```
 
-<img src="fig/05-differential-expression-rendered-res-time-lfc-1.png" style="display: block; margin: auto;" />
+<img src="fig/05-differential-expression-rendered-res-time-lfc-1.png" alt="MA plot showing the mean normalized counts on the x-axis and the shrunken log fold change on the y-axis. Significantly differentially expressed genes are colored in blue. Most log fold changes for low mean normalized counts have been shrunken to be close to zero." style="display: block; margin: auto;" />
 Shrinkage of log fold changes is useful for visualization and ranking of genes, but for result exploration typically the `independentFiltering` argument is used to remove lowly expressed genes.
 
 ::::::::::::::::::::::::::::::::::::: challenge 
@@ -466,14 +466,13 @@ heatmapData <- t(scale(t(heatmapData)))
 heatmapColAnnot <- data.frame(colData(vsd)[, c("time", "sex")])
 heatmapColAnnot <- HeatmapAnnotation(df = heatmapColAnnot)
 
-
 # Plot as heatmap
 ComplexHeatmap::Heatmap(heatmapData,
                         top_annotation = heatmapColAnnot,
                         cluster_rows = TRUE, cluster_columns = FALSE)
 ```
 
-<img src="fig/05-differential-expression-rendered-heatmap-time-1.png" style="display: block; margin: auto;" />
+<img src="fig/05-differential-expression-rendered-heatmap-time-1.png" alt="Heatmap showing the vsd-transformed expression levels for the ten most significantly differentially expressed genes over time, in all the samples." style="display: block; margin: auto;" />
 
 ::::::::::::::::::::::::::::::::::::: challenge 
 
