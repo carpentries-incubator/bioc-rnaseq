@@ -54,7 +54,8 @@ Hence, in the first part of this episode we consider only the sex, tissue and ti
 
 ```{r read-data}
 meta <- read.csv("data/GSE96870_coldata_all.csv", row.names = 1)
-meta
+# Here, for brevity we only print the first rows of the data.frame
+head(meta)
 table(meta$time, meta$infection)
 table(meta$age)
 ```

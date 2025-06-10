@@ -119,7 +119,7 @@ table(rowranges$gbkey)
 You can see how keeping related information in separate objects could easily lead to mis-matches between our counts, gene annotations and sample annotations. This is why Bioconductor has created a specialized S4 class called a `SummarizedExperiment`. The details of a `SummarizedExperiment` were covered extensively at the end of the [Introduction to data analysis with R and Bioconductor](https://carpentries-incubator.github.io/bioc-intro/60-next-steps.html#next-steps) workshop. 
 As a reminder, let's take a look at the figure below representing the anatomy of the `SummarizedExperiment` class:
 
-```{r SE, echo=FALSE, out.width="80%"}
+```{r SE, echo=FALSE, out.width="80%", fig.alt="Schematic showing the composition of a SummarizedExperiment object, with three assay matrices of equal dimension, rowData with feature annotations, colData with sample annotations, and a metadata list."}
 knitr::include_graphics("https://uclouvain-cbio.github.io/WSBIM1322/figs/SE.svg")
 ```
 

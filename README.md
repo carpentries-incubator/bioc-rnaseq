@@ -29,10 +29,10 @@ working with the lesson template
 
 Current maintainers of this lesson are
 
-- Charlotte Soneson
-- Jenny Drnevich
-- Laurent Gatto
-- Robert Castelo
+- [Charlotte Soneson](https://github.com/csoneson)
+- [Jenny Drnevich](https://github.com/jdrnevich)
+- [Laurent Gatto](https://github.com/lgatto)
+- [Robert Castelo](https://github.com/rcastelo)
 
 ## Authors
 

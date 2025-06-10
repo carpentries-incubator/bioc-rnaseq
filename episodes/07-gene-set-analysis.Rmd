@@ -87,7 +87,7 @@ library(gplots)
 library(microbenchmark)
 library(org.Hs.eg.db)
 library(org.Mm.eg.db)
-library(msigdbr)
+library(msigdb)
 library(clusterProfiler)
 library(enrichplot)
 library(ggplot2)
@@ -101,7 +101,7 @@ library(gplots)
 library(microbenchmark)
 library(org.Hs.eg.db)
 library(org.Mm.eg.db)
-library(msigdbr)
+library(msigdb)
 library(clusterProfiler)
 library(enrichplot)
 library(ggplot2)
@@ -622,7 +622,7 @@ contains three namespaces of biological process (BP), cellular components (CC)
 and molecular function (MF) which describe a biological entity from different
 aspect. The associations between GO terms and genes are integrated in the
 Bioconductor standard packages: _the organism annotation packages_. In the current
-Bioconductor release (3.17), there are the following organism packages:
+Bioconductor release, there are the following organism packages:
 
 <center>
 
@@ -826,61 +826,61 @@ of MSigDB (v2023.1.Hs), it has grown into nine gene sets collections, covering
 MSigDB categorizes gene sets into nine collections where each collection
 focuses on a specific topic. For some collections, they are additionally split
 into sub-collections. There are several ways to obtain gene sets from MSigDB.
-One convenient way is to use the **msigdbr** package. The advantages is
-**msigdbr** supports many other organisms by mapping to orthologs.
+One convenient way is to use the **msigdb** package. Another option is to use 
+the **msigdbr** CRAN package, which supports organisms other than human and 
+mouse by mapping to orthologs.
 
-
-Let's check which organisms are supported and which gene sets collections it provides.
+**msigdb** provides mouse and human gene sets, defined using either gene 
+symbols or Entrez IDs. Let's get the mouse collection.
 
 ```{r pillar-options, echo = FALSE}
 options(pillar.print_max = 30)
 ```
 
 ```{r msigdbr}
-library(msigdbr)
-msigdbr_species()
-msigdbr_collections()
+library(msigdb)
+library(ExperimentHub)
+library(GSEABase)
+MSigDBGeneSets <- getMsigdb(org = "mm", id = "SYM", version = "7.4")
 ```
 
-The first column in the above output is the primary category of gene sets.
-Some gene sets collections may have sub-collections, and they are shown in the
-second column. The description of gene sets collections from MSigDB is in the
-following figure.
+The `msigdb` object above is a `GeneSetCollection`, storing all gene sets 
+from MSigDB. The `GeneSetCollection` object class is defined in the `GSEABase` 
+package, and it is a linear data structure similar to a base list object, but 
+with additional metadata such as the type of gene identifier or provenance 
+information about the gene sets.
 
-<img src="fig/msigdb.png" />
-
-The core function `msigdbr()` retrieves gene sets in a specific category (or a
-subcategory if it exists).
-
-```r
-msigdbr(species, category, subcategory)
+```{r msigdbr-view}
+MSigDBGeneSets
+length(MSigDBGeneSets)
 ```
 
-For example, we want to obtain the hallmark gene sets for mouse.
+Each signature is stored in a `GeneSet` object, also defined in the `GSEABase` 
+package.
+
+```{r msigdbr-single}
+gs <- MSigDBGeneSets[[2000]]
+gs
+collectionType(gs)
+geneIds(gs)
+```
+
+We can also subset the collection. First, let's list the available collections 
+and subcollections.
+
+```{r msigdbr-collections}
+listCollections(MSigDBGeneSets)
+listSubCollections(MSigDBGeneSets)
+```
+
+Then, we retrieve only the 'hallmarks' collection.
 
 ```{r msigdbr-h}
-MSigDBGeneSets = msigdbr(species = "mouse", category = "H")
-head(MSigDBGeneSets)
+(hm <- subsetCollection(MSigDBGeneSets, collection = "h"))
 ```
 
-The output is in the `tibble` class. If you have no experience with it, don't
-worry, just take it as a table. As you can see, the three major gene IDs type
-`"gene_symbol"`, `"entrez_gene"` and `"ensembl_gene"` are all included in the
-table. So users can easily pick one with the same gene ID type as in the DE gene
-list. For example:
-
-```{r msigdb-ids}
-MSigDBGeneSets[, c("gs_name", "ensembl_gene")]
-# or put genes in the first column
-MSigDBGeneSets[, c("ensembl_gene", "gs_name")]
-```
-
-If you only want to use a sub-category gene sets, e.g. `"CP:KEGG"` from `"C2"`,
-you can simply specify both `category` and `subcategory` arguments:
-
-```r
-msigdbr(species = "mouse", category = "C2", subcategory = "CP:KEGG")
-```
+If you only want to use a sub-category, specify both the `collection` and 
+`subcollection` arguments to `subsetCollection`. 
 
 ## ORA with clusterProfiler
 
@@ -1099,11 +1099,13 @@ For MSigDB gene sets, there is no pre-defined enrichment function. We need to
 directly use the low-level enrichment function `enricher()` which accepts
 self-defined gene sets. The gene sets should be in a format of a two-column
 data frame of genes and gene sets (or a class that can be converted to a data
-frame).
+frame). Let's use the hallmark collection (`hm`) that we generated above. 
 
 ```{r get-msigdb-gs, message = TRUE, warning = TRUE}
-library(msigdbr)
-gene_sets = msigdbr(category = "H", species = "mouse")
+gene_sets <- stack(geneIds(hm)) |>
+    as.data.frame() |>
+    dplyr::select(ind, values) |>
+    dplyr::rename(gs_name = ind, gene_symbol = values)
 head(gene_sets)
 ```
 
@@ -1112,7 +1114,7 @@ be the same as in the DE genes, so here we choose the `"gene_symbol"` column.
 
 ```{r enricher-time-h}
 resTimeHallmark = enricher(gene = timeDEgenes, 
-                           TERM2GENE = gene_sets[, c("gs_name", "gene_symbol")],
+                           TERM2GENE = gene_sets,
                            pvalueCutoff = 1,
                            qvalueCutoff = 1)
 resTimeHallmarkTable = as.data.frame(resTimeHallmark)
