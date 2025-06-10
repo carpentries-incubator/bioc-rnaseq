@@ -622,7 +622,7 @@ contains three namespaces of biological process (BP), cellular components (CC)
 and molecular function (MF) which describe a biological entity from different
 aspect. The associations between GO terms and genes are integrated in the
 Bioconductor standard packages: _the organism annotation packages_. In the current
-Bioconductor release (3.17), there are the following organism packages:
+Bioconductor release, there are the following organism packages:
 
 <center>
 
