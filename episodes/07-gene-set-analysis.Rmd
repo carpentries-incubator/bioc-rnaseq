@@ -845,14 +845,18 @@ MSigDBGeneSets <- getMsigdb(org = "mm", id = "SYM", version = "7.4")
 ```
 
 The `msigdb` object above is a `GeneSetCollection`, storing all gene sets 
-from MSigDB.
+from MSigDB. The `GeneSetCollection` object class is defined in the `GSEABase` 
+package, and it is a linear data structure similar to a base list object, but 
+with additional metadata such as the type of gene identifier or provenance 
+information about the gene sets.
 
 ```{r msigdbr-view}
-head(MSigDBGeneSets)
+MSigDBGeneSets
 length(MSigDBGeneSets)
 ```
 
-Each signature is stored in a `GeneSet` object.
+Each signature is stored in a `GeneSet` object, also defined in the `GSEABase` 
+package.
 
 ```{r msigdbr-single}
 gs <- MSigDBGeneSets[[2000]]
