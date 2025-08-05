@@ -5537,9 +5537,9 @@
     },
     "limma": {
       "Package": "limma",
-      "Version": "3.64.1",
+      "Version": "3.64.3",
       "Source": "Bioconductor",
-      "Date": "2025-05-21",
+      "Date": "2025-07-30",
       "Title": "Linear Models for Microarray and Omics Data",
       "Description": "Data analysis, linear models and differential expression for omics data.",
       "Author": "Gordon Smyth [cre,aut], Yifang Hu [ctb], Matthew Ritchie [ctb], Jeremy Silver [ctb], James Wettenhall [ctb], Davis McCarthy [ctb], Di Wu [ctb], Wei Shi [ctb], Belinda Phipson [ctb], Aaron Lun [ctb], Natalie Thorne [ctb], Alicia Oshlack [ctb], Carolyn de Graaf [ctb], Yunshun Chen [ctb], Goknur Giner [ctb], Mette Langaas [ctb], Egil Ferkingstad [ctb], Marcus Davy [ctb], Francois Pepin [ctb], Dongseok Choi [ctb], Charity Law [ctb], Mengbo Li [ctb], Lizhong Chen [ctb]",
@@ -5578,8 +5578,8 @@
       "biocViews": "ExonArray, GeneExpression, Transcription, AlternativeSplicing, DifferentialExpression, DifferentialSplicing, GeneSetEnrichment, DataImport, Bayesian, Clustering, Regression, TimeCourse, Microarray, MicroRNAArray, mRNAMicroarray, OneChannel, ProprietaryPlatforms, TwoChannel, Sequencing, RNASeq, BatchEffect, MultipleComparison, Normalization, Preprocessing, QualityControl, BiomedicalInformatics, CellBiology, Cheminformatics, Epigenetics, FunctionalGenomics, Genetics, ImmunoOncology, Metabolomics, Proteomics, SystemsBiology, Transcriptomics",
       "git_url": "https://git.bioconductor.org/packages/limma",
       "git_branch": "RELEASE_3_21",
-      "git_last_commit": "2f25b33",
-      "git_last_commit_date": "2025-05-21",
+      "git_last_commit": "0f42428",
+      "git_last_commit_date": "2025-07-30",
       "Repository": "Bioconductor 3.21",
       "NeedsCompilation": "yes"
     },
