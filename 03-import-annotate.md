@@ -778,7 +778,7 @@ other attached packages:
  [3] org.Mm.eg.db_3.21.0         AnnotationDbi_1.70.0       
  [5] SummarizedExperiment_1.38.1 Biobase_2.68.0             
  [7] MatrixGenerics_1.20.0       matrixStats_1.5.0          
- [9] GenomicRanges_1.60.0        GenomeInfoDb_1.44.1        
+ [9] GenomicRanges_1.60.0        GenomeInfoDb_1.44.2        
 [11] IRanges_2.42.0              S4Vectors_0.46.0           
 [13] BiocGenerics_0.54.0         generics_0.1.4             
 [15] knitr_1.50                 
@@ -791,10 +791,10 @@ loaded via a namespace (and not attached):
 [13] lattice_0.22-7          R6_2.6.1                XVector_0.48.0         
 [16] S4Arrays_1.8.1          DelayedArray_0.34.1     GenomeInfoDbData_1.2.14
 [19] DBI_1.2.3               rlang_1.1.6             KEGGREST_1.48.1        
-[22] cachem_1.1.0            xfun_0.52               bit64_4.6.0-1          
-[25] memoise_2.0.1           SparseArray_1.8.1       RSQLite_2.4.2          
+[22] cachem_1.1.0            xfun_0.53               bit64_4.6.0-1          
+[25] memoise_2.0.1           SparseArray_1.8.1       RSQLite_2.4.3          
 [28] cli_3.6.5               grid_4.5.1              vctrs_0.6.5            
-[31] evaluate_1.0.4          abind_1.4-8             httr_1.4.7             
+[31] evaluate_1.0.5          abind_1.4-8             httr_1.4.7             
 [34] pkgconfig_2.0.3         tools_4.5.1             UCSC.utils_1.4.0       
 ```
 

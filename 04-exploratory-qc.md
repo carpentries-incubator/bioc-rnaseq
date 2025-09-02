@@ -451,10 +451,10 @@ other attached packages:
  [1] iSEE_2.20.0                 SingleCellExperiment_1.30.1
  [3] hexbin_1.28.5               RColorBrewer_1.1-3         
  [5] ComplexHeatmap_2.24.1       ggplot2_3.5.2              
- [7] vsn_3.76.0                  DESeq2_1.48.1              
+ [7] vsn_3.76.0                  DESeq2_1.48.2              
  [9] SummarizedExperiment_1.38.1 Biobase_2.68.0             
 [11] MatrixGenerics_1.20.0       matrixStats_1.5.0          
-[13] GenomicRanges_1.60.0        GenomeInfoDb_1.44.1        
+[13] GenomicRanges_1.60.0        GenomeInfoDb_1.44.2        
 [15] IRanges_2.42.0              S4Vectors_0.46.0           
 [17] BiocGenerics_0.54.0         generics_0.1.4             
 
@@ -465,8 +465,8 @@ loaded via a namespace (and not attached):
 [10] pkgconfig_2.0.3         shape_1.4.6.1           crayon_1.5.3           
 [13] fastmap_1.2.0           XVector_0.48.0          labeling_0.4.3         
 [16] promises_1.3.3          shinyAce_0.4.4          UCSC.utils_1.4.0       
-[19] preprocessCore_1.70.0   xfun_0.52               cachem_1.1.0           
-[22] jsonlite_2.0.0          listviewer_4.0.0        later_1.4.2            
+[19] preprocessCore_1.70.0   xfun_0.53               cachem_1.1.0           
+[22] jsonlite_2.0.0          listviewer_4.0.0        later_1.4.4            
 [25] DelayedArray_0.34.1     BiocParallel_1.42.1     parallel_4.5.1         
 [28] cluster_2.1.8.1         R6_2.6.1                bslib_0.9.0            
 [31] limma_3.64.3            jquerylib_0.1.4         Rcpp_1.1.0             
@@ -475,7 +475,7 @@ loaded via a namespace (and not attached):
 [40] tidyselect_1.2.1        abind_1.4-8             yaml_2.3.10            
 [43] doParallel_1.0.17       codetools_0.2-20        affy_1.86.0            
 [46] miniUI_0.1.2            lattice_0.22-7          tibble_3.3.0           
-[49] shiny_1.11.1            withr_3.0.2             evaluate_1.0.4         
+[49] shiny_1.11.1            withr_3.0.2             evaluate_1.0.5         
 [52] circlize_0.4.16         pillar_1.11.0           affyio_1.78.0          
 [55] BiocManager_1.30.26     renv_1.1.5              DT_0.33                
 [58] foreach_1.5.2           shinyjs_2.1.0           scales_1.4.0           
