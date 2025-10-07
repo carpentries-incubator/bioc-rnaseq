@@ -500,9 +500,9 @@ microbenchmark(
 
 ``` output
 Unit: microseconds
-   expr     min      lq     mean   median       uq     max neval
- fisher 248.745 255.206 265.0806 259.1030 271.2765 452.364   100
-  hyper   1.563   1.829   2.5998   2.6705   3.2860   5.961   100
+   expr     min       lq      mean   median      uq     max neval
+ fisher 253.233 257.3705 270.85999 262.8905 274.938 602.896   100
+  hyper   1.553   1.8580   3.12976   3.1565   3.562  25.818   100
 ```
 
 It is very astonishing that `phyper()` is hundreds of times faster than
@@ -1047,7 +1047,7 @@ setName: DESCARTES_MAIN_FETAL_CHROMAFFIN_CELLS
 geneIds: Asic5, Cntfr, ..., Slc22a22 (total: 28)
 geneIdType: Symbol
 collectionType: Broad
-  bcCategory: c8 (Cell Type Signatures)
+  bcCategory: c8 (Cell Type Signatures)mh (Mouse-Ortholog Hallmark)
   bcSubCategory: NA
 details: use 'details(object)'
 ```
@@ -1058,7 +1058,7 @@ collectionType(gs)
 
 ``` output
 collectionType: Broad
-  bcCategory: c8 (Cell Type Signatures)
+  bcCategory: c8 (Cell Type Signatures)mh (Mouse-Ortholog Hallmark)
   bcSubCategory: NA
 ```
 
@@ -1191,7 +1191,7 @@ resTimeGO = enrichGO(gene = timeDEgenes,
 ```
 
 ``` output
---> Expected input gene ID: 233406,11461,12053,327762,67968,12995
+--> Expected input gene ID: 73247,237877,223970,13831,71890,192287
 ```
 
 ``` output

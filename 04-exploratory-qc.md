@@ -220,6 +220,17 @@ In fact, the variance increases with the average read count.
 meanSdPlot(assay(dds), ranks = FALSE)
 ```
 
+``` warning
+Warning: `aes_string()` was deprecated in ggplot2 3.0.0.
+ℹ Please use tidy evaluation idioms with `aes()`.
+ℹ See also `vignette("ggplot2-in-packages")` for more information.
+ℹ The deprecated feature was likely used in the vsn package.
+  Please report the issue to the authors.
+This warning is displayed once every 8 hours.
+Call `lifecycle::last_lifecycle_warnings()` to see where this warning was
+generated.
+```
+
 <img src="fig/04-exploratory-qc-rendered-mean-sd-plot-raw-1.png" alt="Hexagonal heatmap with the mean count on the x-axis and the standard deviation of the count on the y-axis, showing a generally increasing standard deviation with increasing mean. The density of points is highest for low count values." style="display: block; margin: auto;" />
 
 There are two ways around this: either we develop methods specifically adapted to count data, or we adapt (transform) the count data so that the existing methods are applicable.
@@ -450,16 +461,16 @@ attached base packages:
 other attached packages:
  [1] iSEE_2.20.0                 SingleCellExperiment_1.30.1
  [3] hexbin_1.28.5               RColorBrewer_1.1-3         
- [5] ComplexHeatmap_2.24.1       ggplot2_3.5.2              
+ [5] ComplexHeatmap_2.24.1       ggplot2_4.0.0              
  [7] vsn_3.76.0                  DESeq2_1.48.2              
  [9] SummarizedExperiment_1.38.1 Biobase_2.68.0             
 [11] MatrixGenerics_1.20.0       matrixStats_1.5.0          
-[13] GenomicRanges_1.60.0        GenomeInfoDb_1.44.2        
+[13] GenomicRanges_1.60.0        GenomeInfoDb_1.44.3        
 [15] IRanges_2.42.0              S4Vectors_0.46.0           
 [17] BiocGenerics_0.54.0         generics_0.1.4             
 
 loaded via a namespace (and not attached):
- [1] rlang_1.1.6             magrittr_2.0.3          shinydashboard_0.7.3   
+ [1] rlang_1.1.6             magrittr_2.0.4          shinydashboard_0.7.3   
  [4] clue_0.3-66             GetoptLong_1.0.5        compiler_4.5.1         
  [7] mgcv_1.9-3              png_0.1-8               vctrs_0.6.5            
 [10] pkgconfig_2.0.3         shape_1.4.6.1           crayon_1.5.3           
@@ -467,28 +478,28 @@ loaded via a namespace (and not attached):
 [16] promises_1.3.3          shinyAce_0.4.4          UCSC.utils_1.4.0       
 [19] preprocessCore_1.70.0   xfun_0.53               cachem_1.1.0           
 [22] jsonlite_2.0.0          listviewer_4.0.0        later_1.4.4            
-[25] DelayedArray_0.34.1     BiocParallel_1.42.1     parallel_4.5.1         
+[25] DelayedArray_0.34.1     BiocParallel_1.42.2     parallel_4.5.1         
 [28] cluster_2.1.8.1         R6_2.6.1                bslib_0.9.0            
 [31] limma_3.64.3            jquerylib_0.1.4         Rcpp_1.1.0             
 [34] iterators_1.0.14        knitr_1.50              httpuv_1.6.16          
-[37] Matrix_1.7-3            splines_4.5.1           igraph_2.1.4           
+[37] Matrix_1.7-4            splines_4.5.1           igraph_2.1.4           
 [40] tidyselect_1.2.1        abind_1.4-8             yaml_2.3.10            
 [43] doParallel_1.0.17       codetools_0.2-20        affy_1.86.0            
 [46] miniUI_0.1.2            lattice_0.22-7          tibble_3.3.0           
-[49] shiny_1.11.1            withr_3.0.2             evaluate_1.0.5         
-[52] circlize_0.4.16         pillar_1.11.0           affyio_1.78.0          
-[55] BiocManager_1.30.26     renv_1.1.5              DT_0.33                
-[58] foreach_1.5.2           shinyjs_2.1.0           scales_1.4.0           
-[61] xtable_1.8-4            glue_1.8.0              tools_4.5.1            
-[64] colourpicker_1.3.0      locfit_1.5-9.12         colorspace_2.1-1       
-[67] nlme_3.1-168            GenomeInfoDbData_1.2.14 vipor_0.4.7            
-[70] cli_3.6.5               viridisLite_0.4.2       S4Arrays_1.8.1         
-[73] dplyr_1.1.4             gtable_0.3.6            rintrojs_0.3.4         
-[76] sass_0.4.10             digest_0.6.37           SparseArray_1.8.1      
-[79] ggrepel_0.9.6           rjson_0.2.23            htmlwidgets_1.6.4      
-[82] farver_2.1.2            htmltools_0.5.8.1       lifecycle_1.0.4        
-[85] shinyWidgets_0.9.0      httr_1.4.7              GlobalOptions_0.1.2    
-[88] statmod_1.5.0           mime_0.13              
+[49] shiny_1.11.1            withr_3.0.2             S7_0.2.0               
+[52] evaluate_1.0.5          circlize_0.4.16         pillar_1.11.1          
+[55] affyio_1.78.0           BiocManager_1.30.26     renv_1.1.5             
+[58] DT_0.34.0               foreach_1.5.2           shinyjs_2.1.0          
+[61] scales_1.4.0            xtable_1.8-4            glue_1.8.0             
+[64] tools_4.5.1             colourpicker_1.3.0      locfit_1.5-9.12        
+[67] colorspace_2.1-2        nlme_3.1-168            GenomeInfoDbData_1.2.14
+[70] vipor_0.4.7             cli_3.6.5               viridisLite_0.4.2      
+[73] S4Arrays_1.8.1          dplyr_1.1.4             gtable_0.3.6           
+[76] rintrojs_0.3.4          sass_0.4.10             digest_0.6.37          
+[79] SparseArray_1.8.1       ggrepel_0.9.6           rjson_0.2.23           
+[82] htmlwidgets_1.6.4       farver_2.1.2            htmltools_0.5.8.1      
+[85] lifecycle_1.0.4         shinyWidgets_0.9.0      httr_1.4.7             
+[88] GlobalOptions_0.1.2     statmod_1.5.0           mime_0.13              
 ```
 
 :::::::::::::::::::::::::::::::::::::::: keypoints

@@ -778,13 +778,13 @@ other attached packages:
  [3] org.Mm.eg.db_3.21.0         AnnotationDbi_1.70.0       
  [5] SummarizedExperiment_1.38.1 Biobase_2.68.0             
  [7] MatrixGenerics_1.20.0       matrixStats_1.5.0          
- [9] GenomicRanges_1.60.0        GenomeInfoDb_1.44.2        
+ [9] GenomicRanges_1.60.0        GenomeInfoDb_1.44.3        
 [11] IRanges_2.42.0              S4Vectors_0.46.0           
 [13] BiocGenerics_0.54.0         generics_0.1.4             
 [15] knitr_1.50                 
 
 loaded via a namespace (and not attached):
- [1] Matrix_1.7-3            bit_4.6.0               jsonlite_2.0.0         
+ [1] Matrix_1.7-4            bit_4.6.0               jsonlite_2.0.0         
  [4] compiler_4.5.1          BiocManager_1.30.26     renv_1.1.5             
  [7] crayon_1.5.3            blob_1.2.4              Biostrings_2.76.0      
 [10] png_0.1-8               fastmap_1.2.0           yaml_2.3.10            
