@@ -279,7 +279,7 @@
       </div>
       <hr></nav><main id="main-content" class="main-content"><div class="container lesson-content">
         <h1>Gene set enrichment analysis</h1>
-        <p> Last updated on 2025-09-23 |
+        <p> Last updated on 2025-10-07 |
 
         <a href="https://github.com/carpentries-incubator/bioc-rnaseq/edit/main/episodes/07-gene-set-analysis.Rmd" class="external-link">Edit this page <i aria-hidden="true" data-feather="edit"></i></a></p>
 
@@ -835,9 +835,9 @@ distribution of its statistic.</p>
 <h3 class="code-label">OUTPUT<i aria-hidden="true" data-feather="chevron-left"></i><i aria-hidden="true" data-feather="chevron-right"></i>
 </h3>
 <pre class="output" tabindex="0"><code>Unit: microseconds
-   expr     min      lq     mean   median       uq     max neval
- fisher 248.745 255.206 265.0806 259.1030 271.2765 452.364   100
-  hyper   1.563   1.829   2.5998   2.6705   3.2860   5.961   100</code></pre>
+   expr     min       lq      mean   median      uq     max neval
+ fisher 253.233 257.3705 270.85999 262.8905 274.938 602.896   100
+  hyper   1.553   1.8580   3.12976   3.1565   3.562  25.818   100</code></pre>
 </div>
 <p>It is very astonishing that <code>phyper()</code> is hundreds of
 times faster than <code>fisher.test()</code>. Main reason is in
@@ -993,7 +993,7 @@ convert a list to a two-column data frame?</p>
 <button class="accordion-button solution-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapseSolution1" aria-expanded="false" aria-controls="collapseSolution1">
   <h4 class="accordion-header" id="headingSolution1"> Show me the solution </h4>
 </button>
-<div id="collapseSolution1" class="accordion-collapse collapse" aria-labelledby="headingSolution1" data-bs-parent="#accordionSolution1">
+<div id="collapseSolution1" class="accordion-collapse collapse" data-bs-parent="#accordionSolution1" aria-labelledby="headingSolution1">
 <div class="accordion-body">
 <div class="codewrapper sourceCode" id="cb38">
 <h3 class="code-label">R<i aria-hidden="true" data-feather="chevron-left"></i><i aria-hidden="true" data-feather="chevron-right"></i>
@@ -1422,7 +1422,7 @@ defined in the <code>GSEABase</code> package.</p>
 geneIds: Asic5, Cntfr, ..., Slc22a22 (total: 28)
 geneIdType: Symbol
 collectionType: Broad
-  bcCategory: c8 (Cell Type Signatures)
+  bcCategory: c8 (Cell Type Signatures)mh (Mouse-Ortholog Hallmark)
   bcSubCategory: NA
 details: use 'details(object)'</code></pre>
 </div>
@@ -1436,7 +1436,7 @@ details: use 'details(object)'</code></pre>
 <h3 class="code-label">OUTPUT<i aria-hidden="true" data-feather="chevron-left"></i><i aria-hidden="true" data-feather="chevron-right"></i>
 </h3>
 <pre class="output" tabindex="0"><code>collectionType: Broad
-  bcCategory: c8 (Cell Type Signatures)
+  bcCategory: c8 (Cell Type Signatures)mh (Mouse-Ortholog Hallmark)
   bcSubCategory: NA</code></pre>
 </div>
 <div class="codewrapper sourceCode" id="cb67">
@@ -1583,7 +1583,7 @@ sets are automatically retrieved and processed from
 <div class="codewrapper">
 <h3 class="code-label">OUTPUT<i aria-hidden="true" data-feather="chevron-left"></i><i aria-hidden="true" data-feather="chevron-right"></i>
 </h3>
-<pre class="output" tabindex="0"><code>--&gt; Expected input gene ID: 233406,11461,12053,327762,67968,12995</code></pre>
+<pre class="output" tabindex="0"><code>--&gt; Expected input gene ID: 73247,237877,223970,13831,71890,192287</code></pre>
 </div>
 <div class="codewrapper">
 <h3 class="code-label">OUTPUT<i aria-hidden="true" data-feather="chevron-left"></i><i aria-hidden="true" data-feather="chevron-right"></i>
@@ -2621,7 +2621,7 @@ topological relations in the GO hierarchy.<a href="#fnref7" class="footnote-back
   "url": "https://carpentries-incubator.github.io/bioc-rnaseq/07-gene-set-analysis.html",
   "identifier": "https://carpentries-incubator.github.io/bioc-rnaseq/07-gene-set-analysis.html",
   "dateCreated": "2020-09-15",
-  "dateModified": "2025-09-23",
+  "dateModified": "2025-10-07",
   "datePublished": "2025-10-07"
 }
 
