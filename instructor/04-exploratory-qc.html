@@ -283,7 +283,7 @@
       </div>
       <hr></nav><main id="main-content" class="main-content"><div class="container lesson-content">
         <h1>Exploratory analysis and quality control</h1>
-        <p> Last updated on 2025-11-04 |
+        <p> Last updated on 2025-11-11 |
 
         <a href="https://github.com/carpentries-incubator/bioc-rnaseq/edit/main/episodes/04-exploratory-qc.Rmd" class="external-link">Edit this page <i aria-hidden="true" data-feather="edit"></i></a></p>
 
@@ -414,7 +414,7 @@ important considerations?</li>
 <button class="accordion-button solution-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapseSolution1" aria-expanded="false" aria-controls="collapseSolution1">
   <h4 class="accordion-header" id="headingSolution1"> Show me the solution </h4>
 </button>
-<div id="collapseSolution1" class="accordion-collapse collapse" data-bs-parent="#accordionSolution1" aria-labelledby="headingSolution1">
+<div id="collapseSolution1" class="accordion-collapse collapse" aria-labelledby="headingSolution1" data-bs-parent="#accordionSolution1">
 <div class="accordion-body">
 <ol style="list-style-type: decimal"><li>
 </li></ol><div class="codewrapper sourceCode" id="cb7">
@@ -698,7 +698,7 @@ suggest?</p></li>
 <button class="accordion-button solution-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapseSolution2" aria-expanded="false" aria-controls="collapseSolution2">
   <h4 class="accordion-header" id="headingSolution2"> Show me the solution </h4>
 </button>
-<div id="collapseSolution2" class="accordion-collapse collapse" data-bs-parent="#accordionSolution2" aria-labelledby="headingSolution2">
+<div id="collapseSolution2" class="accordion-collapse collapse" aria-labelledby="headingSolution2" data-bs-parent="#accordionSolution2">
 <div class="accordion-body">
 <ol style="list-style-type: decimal"><li><p>The major signal in this data (37% variance) is associated with
 sex. As we are not interested in sex-specific changes over time, we need
@@ -739,7 +739,7 @@ class <code>DESeqTransform</code> as input. You can transform a
 <button class="accordion-button solution-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapseSolution3" aria-expanded="false" aria-controls="collapseSolution3">
   <h4 class="accordion-header" id="headingSolution3"> Show me the solution </h4>
 </button>
-<div id="collapseSolution3" class="accordion-collapse collapse" data-bs-parent="#accordionSolution3" aria-labelledby="headingSolution3">
+<div id="collapseSolution3" class="accordion-collapse collapse" aria-labelledby="headingSolution3" data-bs-parent="#accordionSolution3">
 <div class="accordion-body">
 <div class="codewrapper sourceCode" id="cb27">
 <h3 class="code-label">R<i aria-hidden="true" data-feather="chevron-left"></i><i aria-hidden="true" data-feather="chevron-right"></i>
@@ -842,7 +842,7 @@ using iSEE</h3>
 <div class="codewrapper">
 <h3 class="code-label">OUTPUT<i aria-hidden="true" data-feather="chevron-left"></i><i aria-hidden="true" data-feather="chevron-right"></i>
 </h3>
-<pre class="output" tabindex="0"><code>R version 4.5.1 (2025-06-13)
+<pre class="output" tabindex="0"><code>R version 4.5.2 (2025-10-31)
 Platform: x86_64-pc-linux-gnu
 Running under: Ubuntu 22.04.5 LTS
 
@@ -877,17 +877,17 @@ other attached packages:
 loaded via a namespace (and not attached):
  [1] rlang_1.1.6             magrittr_2.0.4          shinydashboard_0.7.3
  [4] clue_0.3-66             GetoptLong_1.0.5        otel_0.2.0
- [7] compiler_4.5.1          mgcv_1.9-3              png_0.1-8
+ [7] compiler_4.5.2          mgcv_1.9-3              png_0.1-8
 [10] vctrs_0.6.5             pkgconfig_2.0.3         shape_1.4.6.1
 [13] crayon_1.5.3            fastmap_1.2.0           XVector_0.48.0
 [16] labeling_0.4.3          promises_1.5.0          shinyAce_0.4.4
 [19] UCSC.utils_1.4.0        preprocessCore_1.70.0   xfun_0.54
 [22] cachem_1.1.0            jsonlite_2.0.0          listviewer_4.0.0
 [25] later_1.4.4             DelayedArray_0.34.1     BiocParallel_1.42.2
-[28] parallel_4.5.1          cluster_2.1.8.1         R6_2.6.1
+[28] parallel_4.5.2          cluster_2.1.8.1         R6_2.6.1
 [31] bslib_0.9.0             limma_3.64.3            jquerylib_0.1.4
 [34] Rcpp_1.1.0              iterators_1.0.14        knitr_1.50
-[37] httpuv_1.6.16           Matrix_1.7-4            splines_4.5.1
+[37] httpuv_1.6.16           Matrix_1.7-4            splines_4.5.2
 [40] igraph_2.2.1            tidyselect_1.2.1        abind_1.4-8
 [43] yaml_2.3.10             doParallel_1.0.17       codetools_0.2-20
 [46] affy_1.86.0             miniUI_0.1.2            lattice_0.22-7
@@ -896,7 +896,7 @@ loaded via a namespace (and not attached):
 [55] pillar_1.11.1           affyio_1.78.0           BiocManager_1.30.26
 [58] renv_1.1.5              DT_0.34.0               foreach_1.5.2
 [61] shinyjs_2.1.0           scales_1.4.0            xtable_1.8-4
-[64] glue_1.8.0              tools_4.5.1             colourpicker_1.3.0
+[64] glue_1.8.0              tools_4.5.2             colourpicker_1.3.0
 [67] locfit_1.5-9.12         colorspace_2.1-2        nlme_3.1-168
 [70] GenomeInfoDbData_1.2.14 vipor_0.4.7             cli_3.6.5
 [73] viridisLite_0.4.2       S4Arrays_1.8.1          dplyr_1.1.4
@@ -978,8 +978,8 @@ work directly on the raw counts.</li>
   "url": "https://carpentries-incubator.github.io/bioc-rnaseq/instructor/04-exploratory-qc.html",
   "identifier": "https://carpentries-incubator.github.io/bioc-rnaseq/instructor/04-exploratory-qc.html",
   "dateCreated": "2020-09-15",
-  "dateModified": "2025-11-04",
-  "datePublished": "2025-11-04"
+  "dateModified": "2025-11-11",
+  "datePublished": "2025-11-11"
 }
 
   </script><script>
