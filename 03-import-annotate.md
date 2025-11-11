@@ -752,7 +752,7 @@ sessionInfo()
 ```
 
 ``` output
-R version 4.5.1 (2025-06-13)
+R version 4.5.2 (2025-10-31)
 Platform: x86_64-pc-linux-gnu
 Running under: Ubuntu 22.04.5 LTS
 
@@ -785,7 +785,7 @@ other attached packages:
 
 loaded via a namespace (and not attached):
  [1] Matrix_1.7-4            bit_4.6.0               jsonlite_2.0.0         
- [4] compiler_4.5.1          BiocManager_1.30.26     renv_1.1.5             
+ [4] compiler_4.5.2          BiocManager_1.30.26     renv_1.1.5             
  [7] crayon_1.5.3            blob_1.2.4              Biostrings_2.76.0      
 [10] png_0.1-8               fastmap_1.2.0           yaml_2.3.10            
 [13] lattice_0.22-7          R6_2.6.1                XVector_0.48.0         
@@ -793,9 +793,9 @@ loaded via a namespace (and not attached):
 [19] DBI_1.2.3               rlang_1.1.6             KEGGREST_1.48.1        
 [22] cachem_1.1.0            xfun_0.54               bit64_4.6.0-1          
 [25] memoise_2.0.1           SparseArray_1.8.1       RSQLite_2.4.3          
-[28] cli_3.6.5               grid_4.5.1              vctrs_0.6.5            
+[28] cli_3.6.5               grid_4.5.2              vctrs_0.6.5            
 [31] evaluate_1.0.5          abind_1.4-8             httr_1.4.7             
-[34] pkgconfig_2.0.3         tools_4.5.1             UCSC.utils_1.4.0       
+[34] pkgconfig_2.0.3         tools_4.5.2             UCSC.utils_1.4.0       
 ```
 
 ::: keypoints
