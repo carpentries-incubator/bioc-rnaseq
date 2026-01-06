@@ -329,7 +329,7 @@
         
 <section id="aio-01-intro-to-rnaseq"><p>Content from <a href="01-intro-to-rnaseq.html">Introduction to RNA-seq</a></p>
 <hr>
-<p> Last updated on 2025-11-11 |
+<p> Last updated on 2026-01-06 |
 
         <a href="https://github.com/carpentries-incubator/bioc-rnaseq/edit/main/episodes/01-intro-to-rnaseq.Rmd" class="external-link">Edit this page <i aria-hidden="true" data-feather="edit"></i></a></p>
 <div class="text-end">
@@ -675,7 +675,7 @@ sources, including Ensembl, UCSC and GENCODE.</li>
 </div>
 </div></section><section id="aio-02-setup"><p>Content from <a href="02-setup.html">RStudio Project and Experimental Data</a></p>
 <hr>
-<p> Last updated on 2025-11-11 |
+<p> Last updated on 2026-01-06 |
 
         <a href="https://github.com/carpentries-incubator/bioc-rnaseq/edit/main/episodes/02-setup.Rmd" class="external-link">Edit this page <i aria-hidden="true" data-feather="edit"></i></a></p>
 <div class="text-end">
@@ -825,7 +825,7 @@ directory, create the four fundamental directories previously discussed
 <button class="accordion-button solution-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapseSolution1" aria-expanded="false" aria-controls="collapseSolution1">
   <h4 class="accordion-header" id="headingSolution1"> Show me the solution </h4>
 </button>
-<div id="collapseSolution1" class="accordion-collapse collapse" aria-labelledby="headingSolution1" data-bs-parent="#accordionSolution1">
+<div id="collapseSolution1" class="accordion-collapse collapse" data-bs-parent="#accordionSolution1" aria-labelledby="headingSolution1">
 <div class="accordion-body">
 <figure style="text-align: center"><img src="fig/02_setup/folders_working_dir.png" alt="Your working directory should look like this" width="1221" class="figure mx-auto d-block"><figcaption>
 Your working directory should look like this
@@ -969,7 +969,7 @@ into the <code>data</code> folder in your working directory.</p>
 <button class="accordion-button solution-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapseSolution2" aria-expanded="false" aria-controls="collapseSolution2">
   <h4 class="accordion-header" id="headingSolution2"> Show me the solution </h4>
 </button>
-<div id="collapseSolution2" class="accordion-collapse collapse" aria-labelledby="headingSolution2" data-bs-parent="#accordionSolution2">
+<div id="collapseSolution2" class="accordion-collapse collapse" data-bs-parent="#accordionSolution2" aria-labelledby="headingSolution2">
 <div class="accordion-body">
 <div class="codewrapper sourceCode" id="cb2">
 <h3 class="code-label">R<i aria-hidden="true" data-feather="chevron-left"></i><i aria-hidden="true" data-feather="chevron-right"></i>
@@ -1015,7 +1015,7 @@ downloading datasets from the internet.</li>
 </div>
 </section></section><section id="aio-03-import-annotate"><p>Content from <a href="03-import-annotate.html">Importing and annotating quantified data into R</a></p>
 <hr>
-<p> Last updated on 2025-11-11 |
+<p> Last updated on 2026-01-06 |
 
         <a href="https://github.com/carpentries-incubator/bioc-rnaseq/edit/main/episodes/03-import-annotate.Rmd" class="external-link">Edit this page <i aria-hidden="true" data-feather="edit"></i></a></p>
 <div class="text-end">
@@ -1433,7 +1433,8 @@ sample/row names match. If not, you will get some error messages:</p>
 <div class="codewrapper">
 <h3 class="code-label">ERROR<i aria-hidden="true" data-feather="chevron-left"></i><i aria-hidden="true" data-feather="chevron-right"></i>
 </h3>
-<pre class="error" tabindex="0"><code>Error in validObject(.Object): invalid class "SummarizedExperiment" object:
+<pre class="error" tabindex="0"><code>Error in `validObject()`:
+! invalid class "SummarizedExperiment" object:
     nb of cols in 'assay' (22) must equal nb of rows in 'colData' (3)</code></pre>
 </div>
 <div class="codewrapper sourceCode" id="cb23">
@@ -1451,7 +1452,8 @@ sample/row names match. If not, you will get some error messages:</p>
 <div class="codewrapper">
 <h3 class="code-label">ERROR<i aria-hidden="true" data-feather="chevron-left"></i><i aria-hidden="true" data-feather="chevron-right"></i>
 </h3>
-<pre class="error" tabindex="0"><code>Error in SummarizedExperiment(assays = list(counts = as.matrix(counts)), : the rownames and colnames of the supplied assay(s) must be NULL or identical
+<pre class="error" tabindex="0"><code>Error in `SummarizedExperiment()`:
+! the rownames and colnames of the supplied assay(s) must be NULL or identical
   to those of the RangedSummarizedExperiment object (or derivative) to
   construct</code></pre>
 </div>
@@ -2086,21 +2088,23 @@ other attached packages:
  [9] GenomicRanges_1.60.0        GenomeInfoDb_1.44.3
 [11] IRanges_2.42.0              S4Vectors_0.46.0
 [13] BiocGenerics_0.54.1         generics_0.1.4
-[15] knitr_1.50
+[15] knitr_1.51
 
 loaded via a namespace (and not attached):
  [1] Matrix_1.7-4            bit_4.6.0               jsonlite_2.0.0
- [4] compiler_4.5.2          BiocManager_1.30.26     renv_1.1.5
+ [4] compiler_4.5.2          BiocManager_1.30.27     renv_1.1.5
  [7] crayon_1.5.3            blob_1.2.4              Biostrings_2.76.0
-[10] png_0.1-8               fastmap_1.2.0           yaml_2.3.10
+[10] png_0.1-8               fastmap_1.2.0           yaml_2.3.12
 [13] lattice_0.22-7          R6_2.6.1                XVector_0.48.0
 [16] S4Arrays_1.8.1          DelayedArray_0.34.1     GenomeInfoDbData_1.2.14
-[19] DBI_1.2.3               rlang_1.1.6             KEGGREST_1.48.1
-[22] cachem_1.1.0            xfun_0.54               bit64_4.6.0-1
-[25] memoise_2.0.1           SparseArray_1.8.1       RSQLite_2.4.3
-[28] cli_3.6.5               grid_4.5.2              vctrs_0.6.5
-[31] evaluate_1.0.5          abind_1.4-8             httr_1.4.7
-[34] pkgconfig_2.0.3         tools_4.5.2             UCSC.utils_1.4.0       </code></pre>
+[19] DBI_1.2.3               pillar_1.11.1           rlang_1.1.6
+[22] KEGGREST_1.48.1         cachem_1.1.0            xfun_0.55
+[25] bit64_4.6.0-1           otel_0.2.0              SparseArray_1.8.1
+[28] RSQLite_2.4.5           memoise_2.0.1           cli_3.6.5
+[31] grid_4.5.2              lifecycle_1.0.4         vctrs_0.6.5
+[34] glue_1.8.0              evaluate_1.0.5          abind_1.4-8
+[37] httr_1.4.7              pkgconfig_2.0.3         tools_4.5.2
+[40] UCSC.utils_1.4.0       </code></pre>
 </div>
 <div id="keypoints1" class="callout keypoints">
 <div class="callout-square">
@@ -2123,7 +2127,7 @@ analysis, with gene symbols added for easier interpretation.</li>
 </div>
 </section></section><section id="aio-04-exploratory-qc"><p>Content from <a href="04-exploratory-qc.html">Exploratory analysis and quality control</a></p>
 <hr>
-<p> Last updated on 2025-11-11 |
+<p> Last updated on 2026-01-06 |
 
         <a href="https://github.com/carpentries-incubator/bioc-rnaseq/edit/main/episodes/04-exploratory-qc.Rmd" class="external-link">Edit this page <i aria-hidden="true" data-feather="edit"></i></a></p>
 <div class="text-end">
@@ -2257,7 +2261,7 @@ important considerations?</li>
 <button class="accordion-button solution-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapseSolution1" aria-expanded="false" aria-controls="collapseSolution1">
   <h4 class="accordion-header" id="headingSolution1"> Show me the solution </h4>
 </button>
-<div id="collapseSolution1" class="accordion-collapse collapse" aria-labelledby="headingSolution1" data-bs-parent="#accordionSolution1">
+<div id="collapseSolution1" class="accordion-collapse collapse" data-bs-parent="#accordionSolution1" aria-labelledby="headingSolution1">
 <div class="accordion-body">
 <ol style="list-style-type: decimal"><li>
 </li></ol>
@@ -2558,7 +2562,7 @@ suggest?</p></li>
 <button class="accordion-button solution-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapseSolution2" aria-expanded="false" aria-controls="collapseSolution2">
   <h4 class="accordion-header" id="headingSolution2"> Show me the solution </h4>
 </button>
-<div id="collapseSolution2" class="accordion-collapse collapse" aria-labelledby="headingSolution2" data-bs-parent="#accordionSolution2">
+<div id="collapseSolution2" class="accordion-collapse collapse" data-bs-parent="#accordionSolution2" aria-labelledby="headingSolution2">
 <div class="accordion-body">
 <ol style="list-style-type: decimal">
 <li><p>The major signal in this data (37% variance) is associated with
@@ -2603,7 +2607,7 @@ class <code>DESeqTransform</code> as input. You can transform a
 <button class="accordion-button solution-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapseSolution3" aria-expanded="false" aria-controls="collapseSolution3">
   <h4 class="accordion-header" id="headingSolution3"> Show me the solution </h4>
 </button>
-<div id="collapseSolution3" class="accordion-collapse collapse" aria-labelledby="headingSolution3" data-bs-parent="#accordionSolution3">
+<div id="collapseSolution3" class="accordion-collapse collapse" data-bs-parent="#accordionSolution3" aria-labelledby="headingSolution3">
 <div class="accordion-body">
 <div class="codewrapper sourceCode" id="cb27">
 <h3 class="code-label">R<i aria-hidden="true" data-feather="chevron-left"></i><i aria-hidden="true" data-feather="chevron-right"></i>
@@ -2735,7 +2739,7 @@ attached base packages:
 other attached packages:
  [1] iSEE_2.20.0                 SingleCellExperiment_1.30.1
  [3] hexbin_1.28.5               RColorBrewer_1.1-3
- [5] ComplexHeatmap_2.24.1       ggplot2_4.0.0
+ [5] ComplexHeatmap_2.24.1       ggplot2_4.0.1
  [7] vsn_3.76.0                  DESeq2_1.48.2
  [9] SummarizedExperiment_1.38.1 Biobase_2.68.0
 [11] MatrixGenerics_1.20.0       matrixStats_1.5.0
@@ -2745,24 +2749,24 @@ other attached packages:
 
 loaded via a namespace (and not attached):
  [1] rlang_1.1.6             magrittr_2.0.4          shinydashboard_0.7.3
- [4] clue_0.3-66             GetoptLong_1.0.5        otel_0.2.0
- [7] compiler_4.5.2          mgcv_1.9-3              png_0.1-8
+ [4] clue_0.3-66             GetoptLong_1.1.0        otel_0.2.0
+ [7] compiler_4.5.2          mgcv_1.9-4              png_0.1-8
 [10] vctrs_0.6.5             pkgconfig_2.0.3         shape_1.4.6.1
 [13] crayon_1.5.3            fastmap_1.2.0           XVector_0.48.0
 [16] labeling_0.4.3          promises_1.5.0          shinyAce_0.4.4
-[19] UCSC.utils_1.4.0        preprocessCore_1.70.0   xfun_0.54
+[19] UCSC.utils_1.4.0        preprocessCore_1.70.0   xfun_0.55
 [22] cachem_1.1.0            jsonlite_2.0.0          listviewer_4.0.0
 [25] later_1.4.4             DelayedArray_0.34.1     BiocParallel_1.42.2
 [28] parallel_4.5.2          cluster_2.1.8.1         R6_2.6.1
 [31] bslib_0.9.0             limma_3.64.3            jquerylib_0.1.4
-[34] Rcpp_1.1.0              iterators_1.0.14        knitr_1.50
+[34] Rcpp_1.1.0              iterators_1.0.14        knitr_1.51
 [37] httpuv_1.6.16           Matrix_1.7-4            splines_4.5.2
 [40] igraph_2.2.1            tidyselect_1.2.1        abind_1.4-8
-[43] yaml_2.3.10             doParallel_1.0.17       codetools_0.2-20
+[43] yaml_2.3.12             doParallel_1.0.17       codetools_0.2-20
 [46] affy_1.86.0             miniUI_0.1.2            lattice_0.22-7
-[49] tibble_3.3.0            shiny_1.11.1            withr_3.0.2
-[52] S7_0.2.0                evaluate_1.0.5          circlize_0.4.16
-[55] pillar_1.11.1           affyio_1.78.0           BiocManager_1.30.26
+[49] tibble_3.3.0            shiny_1.12.1            withr_3.0.2
+[52] S7_0.2.1                evaluate_1.0.5          circlize_0.4.17
+[55] pillar_1.11.1           affyio_1.78.0           BiocManager_1.30.27
 [58] renv_1.1.5              DT_0.34.0               foreach_1.5.2
 [61] shinyjs_2.1.0           scales_1.4.0            xtable_1.8-4
 [64] glue_1.8.0              tools_4.5.2             colourpicker_1.3.0
@@ -2770,10 +2774,10 @@ loaded via a namespace (and not attached):
 [70] GenomeInfoDbData_1.2.14 vipor_0.4.7             cli_3.6.5
 [73] viridisLite_0.4.2       S4Arrays_1.8.1          dplyr_1.1.4
 [76] gtable_0.3.6            rintrojs_0.3.4          sass_0.4.10
-[79] digest_0.6.37           SparseArray_1.8.1       ggrepel_0.9.6
+[79] digest_0.6.39           SparseArray_1.8.1       ggrepel_0.9.6
 [82] rjson_0.2.23            htmlwidgets_1.6.4       farver_2.1.2
-[85] htmltools_0.5.8.1       lifecycle_1.0.4         shinyWidgets_0.9.0
-[88] httr_1.4.7              GlobalOptions_0.1.2     statmod_1.5.1
+[85] htmltools_0.5.9         lifecycle_1.0.4         shinyWidgets_0.9.0
+[88] httr_1.4.7              GlobalOptions_0.1.3     statmod_1.5.1
 [91] mime_0.13              </code></pre>
 </div>
 <div id="keypoints1" class="callout keypoints">
@@ -2797,7 +2801,7 @@ work directly on the raw counts.</li>
 </div>
 </section></section><section id="aio-05-differential-expression"><p>Content from <a href="05-differential-expression.html">Differential expression analysis</a></p>
 <hr>
-<p> Last updated on 2025-11-11 |
+<p> Last updated on 2026-01-06 |
 
         <a href="https://github.com/carpentries-incubator/bioc-rnaseq/edit/main/episodes/05-differential-expression.Rmd" class="external-link">Edit this page <i aria-hidden="true" data-feather="edit"></i></a></p>
 <div class="text-end">
@@ -3105,7 +3109,7 @@ lesson?</p>
 <button class="accordion-button solution-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapseSolution1" aria-expanded="false" aria-controls="collapseSolution1">
   <h4 class="accordion-header" id="headingSolution1"> Show me the solution </h4>
 </button>
-<div id="collapseSolution1" class="accordion-collapse collapse" aria-labelledby="headingSolution1" data-bs-parent="#accordionSolution1">
+<div id="collapseSolution1" class="accordion-collapse collapse" data-bs-parent="#accordionSolution1" aria-labelledby="headingSolution1">
 <div class="accordion-body">
 <p>In the lesson example the last variable of the design formula is
 <code>time</code>. The <strong>reference level</strong> (first in
@@ -3210,7 +3214,7 @@ time.</p>
 <button class="accordion-button solution-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapseSolution2" aria-expanded="false" aria-controls="collapseSolution2">
   <h4 class="accordion-header" id="headingSolution2"> Show me the solution </h4>
 </button>
-<div id="collapseSolution2" class="accordion-collapse collapse" aria-labelledby="headingSolution2" data-bs-parent="#accordionSolution2">
+<div id="collapseSolution2" class="accordion-collapse collapse" data-bs-parent="#accordionSolution2" aria-labelledby="headingSolution2">
 <div class="accordion-body">
 <div class="codewrapper sourceCode" id="cb22">
 <h3 class="code-label">R<i aria-hidden="true" data-feather="chevron-left"></i><i aria-hidden="true" data-feather="chevron-right"></i>
@@ -3352,7 +3356,7 @@ results then?</p>
 <button class="accordion-button solution-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapseSolution3" aria-expanded="false" aria-controls="collapseSolution3">
   <h4 class="accordion-header" id="headingSolution3"> Show me the solution </h4>
 </button>
-<div id="collapseSolution3" class="accordion-collapse collapse" aria-labelledby="headingSolution3" data-bs-parent="#accordionSolution3">
+<div id="collapseSolution3" class="accordion-collapse collapse" data-bs-parent="#accordionSolution3" aria-labelledby="headingSolution3">
 <div class="accordion-body">
 <div class="codewrapper sourceCode" id="cb30">
 <h3 class="code-label">R<i aria-hidden="true" data-feather="chevron-left"></i><i aria-hidden="true" data-feather="chevron-right"></i>
@@ -3495,7 +3499,7 @@ beneficial.</li>
 </div>
 </section></section><section id="aio-06-extra-design"><p>Content from <a href="06-extra-design.html">Extra exploration of design matrices</a></p>
 <hr>
-<p> Last updated on 2025-11-11 |
+<p> Last updated on 2026-01-06 |
 
         <a href="https://github.com/carpentries-incubator/bioc-rnaseq/edit/main/episodes/06-extra-design.Rmd" class="external-link">Edit this page <i aria-hidden="true" data-feather="edit"></i></a></p>
 <div class="text-end">
@@ -3626,13 +3630,13 @@ combination of the three predictor variables.</p>
 </h3>
 <pre class="output" tabindex="0"><code>$`tissue = Cerebellum`</code></pre>
 </div>
-<figure><img src="fig/06-extra-design-rendered-cooccplots-1.png" style="display: block; margin: auto;" class="figure mx-auto d-block"></figure><div class="codewrapper">
+<figure><img src="fig/06-extra-design-rendered-cooccplots-1.png" alt="" style="display: block; margin: auto;" class="figure mx-auto d-block"></figure><div class="codewrapper">
 <h3 class="code-label">OUTPUT<i aria-hidden="true" data-feather="chevron-left"></i><i aria-hidden="true" data-feather="chevron-right"></i>
 </h3>
 <pre class="output" tabindex="0"><code>
 $`tissue = Spinalcord`</code></pre>
 </div>
-<figure><img src="fig/06-extra-design-rendered-cooccplots-2.png" style="display: block; margin: auto;" class="figure mx-auto d-block"></figure><div id="challenge" class="callout discussion">
+<figure><img src="fig/06-extra-design-rendered-cooccplots-2.png" alt="" style="display: block; margin: auto;" class="figure mx-auto d-block"></figure><div id="challenge" class="callout discussion">
 <div class="callout-square">
 <i class="callout-icon" data-feather="message-circle"></i>
 </div>
@@ -3725,7 +3729,7 @@ GSM2545367           1       1</code></pre>
 </h3>
 <pre class="output" tabindex="0"><code>[[1]]</code></pre>
 </div>
-<figure><img src="fig/06-extra-design-rendered-male-vs-female-1.png" style="display: block; margin: auto;" class="figure mx-auto d-block"></figure><div class="codewrapper sourceCode" id="cb17">
+<figure><img src="fig/06-extra-design-rendered-male-vs-female-1.png" alt="" style="display: block; margin: auto;" class="figure mx-auto d-block"></figure><div class="codewrapper sourceCode" id="cb17">
 <h3 class="code-label">R<i aria-hidden="true" data-feather="chevron-left"></i><i aria-hidden="true" data-feather="chevron-right"></i>
 </h3>
 <pre class="downlit sourceCode r">
@@ -3848,7 +3852,7 @@ GSM2545367         0       1</code></pre>
 </h3>
 <pre class="output" tabindex="0"><code>[[1]]</code></pre>
 </div>
-<figure><img src="fig/06-extra-design-rendered-male-vs-female-noint-1.png" style="display: block; margin: auto;" class="figure mx-auto d-block"></figure>
+<figure><img src="fig/06-extra-design-rendered-male-vs-female-noint-1.png" alt="" style="display: block; margin: auto;" class="figure mx-auto d-block"></figure>
 </div>
 </div>
 </div>
@@ -3946,7 +3950,7 @@ GSM2545379           1        0        1</code></pre>
 </h3>
 <pre class="output" tabindex="0"><code>[[1]]</code></pre>
 </div>
-<figure><img src="fig/06-extra-design-rendered-all-times-1.png" style="display: block; margin: auto;" class="figure mx-auto d-block"></figure>
+<figure><img src="fig/06-extra-design-rendered-all-times-1.png" alt="" style="display: block; margin: auto;" class="figure mx-auto d-block"></figure>
 </div>
 </div>
 </div>
@@ -4040,7 +4044,7 @@ GSM2545367           1       1                1</code></pre>
 </h3>
 <pre class="output" tabindex="0"><code>[[1]]</code></pre>
 </div>
-<figure><img src="fig/06-extra-design-rendered-factorial-noint-1.png" style="display: block; margin: auto;" class="figure mx-auto d-block"></figure></section><section><h2 class="section-heading" id="factorial-design-with-interactions">Factorial design with interactions<a class="anchor" aria-label="anchor" href="#factorial-design-with-interactions"></a>
+<figure><img src="fig/06-extra-design-rendered-factorial-noint-1.png" alt="" style="display: block; margin: auto;" class="figure mx-auto d-block"></figure></section><section><h2 class="section-heading" id="factorial-design-with-interactions">Factorial design with interactions<a class="anchor" aria-label="anchor" href="#factorial-design-with-interactions"></a>
 </h2>
 <hr class="half-width">
 <p>In the previous model, we assumed that the tissue differences were
@@ -4133,7 +4137,7 @@ GSM2545367           1       1                1                        1</code><
 </h3>
 <pre class="output" tabindex="0"><code>[[1]]</code></pre>
 </div>
-<figure><img src="fig/06-extra-design-rendered-factorial-withint-1.png" style="display: block; margin: auto;" class="figure mx-auto d-block"></figure></section><section><h2 class="section-heading" id="combining-multiple-factors-into-one">Combining multiple factors into one<a class="anchor" aria-label="anchor" href="#combining-multiple-factors-into-one"></a>
+<figure><img src="fig/06-extra-design-rendered-factorial-withint-1.png" alt="" style="display: block; margin: auto;" class="figure mx-auto d-block"></figure></section><section><h2 class="section-heading" id="combining-multiple-factors-into-one">Combining multiple factors into one<a class="anchor" aria-label="anchor" href="#combining-multiple-factors-into-one"></a>
 </h2>
 <hr class="half-width">
 <p>Sometimes, for experiments with multiple factors, it is easier to
@@ -4239,7 +4243,7 @@ GSM2545367                         0                         1</code></pre>
 </h3>
 <pre class="output" tabindex="0"><code>[[1]]</code></pre>
 </div>
-<figure><img src="fig/06-extra-design-rendered-factorial-combine-1.png" style="display: block; margin: auto;" class="figure mx-auto d-block"></figure></section><section><h2 class="section-heading" id="paired-design">Paired design<a class="anchor" aria-label="anchor" href="#paired-design"></a>
+<figure><img src="fig/06-extra-design-rendered-factorial-combine-1.png" alt="" style="display: block; margin: auto;" class="figure mx-auto d-block"></figure></section><section><h2 class="section-heading" id="paired-design">Paired design<a class="anchor" aria-label="anchor" href="#paired-design"></a>
 </h2>
 <hr class="half-width">
 <p>In this particular data set the samples are paired - the same mice
@@ -4316,7 +4320,7 @@ GSM2545366           1      0      0       1                1</code></pre>
 </h3>
 <pre class="output" tabindex="0"><code>[[1]]</code></pre>
 </div>
-<figure><img src="fig/06-extra-design-rendered-paired-1.png" style="display: block; margin: auto;" class="figure mx-auto d-block"></figure></section><section><h2 class="section-heading" id="within--and-between-subject-comparisons">Within- and between-subject comparisons<a class="anchor" aria-label="anchor" href="#within--and-between-subject-comparisons"></a>
+<figure><img src="fig/06-extra-design-rendered-paired-1.png" alt="" style="display: block; margin: auto;" class="figure mx-auto d-block"></figure></section><section><h2 class="section-heading" id="within--and-between-subject-comparisons">Within- and between-subject comparisons<a class="anchor" aria-label="anchor" href="#within--and-between-subject-comparisons"></a>
 </h2>
 <hr class="half-width">
 <p>In some situations, we need to combine the types of models considered
@@ -4490,13 +4494,13 @@ GSM2545377        0        1</code></pre>
 </h3>
 <pre class="output" tabindex="0"><code>$`time = Day0`</code></pre>
 </div>
-<figure><img src="fig/06-extra-design-rendered-within-and-between-1.png" style="display: block; margin: auto;" class="figure mx-auto d-block"></figure><div class="codewrapper">
+<figure><img src="fig/06-extra-design-rendered-within-and-between-1.png" alt="" style="display: block; margin: auto;" class="figure mx-auto d-block"></figure><div class="codewrapper">
 <h3 class="code-label">OUTPUT<i aria-hidden="true" data-feather="chevron-left"></i><i aria-hidden="true" data-feather="chevron-right"></i>
 </h3>
 <pre class="output" tabindex="0"><code>
 $`time = Day4`</code></pre>
 </div>
-<figure><img src="fig/06-extra-design-rendered-within-and-between-2.png" style="display: block; margin: auto;" class="figure mx-auto d-block"></figure></section><section><h2 class="section-heading" id="how-does-this-relate-to-the-deseq2-analysis-we-did-in-the-previous-episode">How does this relate to the DESeq2 analysis we did in the previous
+<figure><img src="fig/06-extra-design-rendered-within-and-between-2.png" alt="" style="display: block; margin: auto;" class="figure mx-auto d-block"></figure></section><section><h2 class="section-heading" id="how-does-this-relate-to-the-deseq2-analysis-we-did-in-the-previous-episode">How does this relate to the DESeq2 analysis we did in the previous
 episode?<a class="anchor" aria-label="anchor" href="#how-does-this-relate-to-the-deseq2-analysis-we-did-in-the-previous-episode"></a>
 </h2>
 <hr class="half-width">
@@ -4613,7 +4617,7 @@ function:</p>
 </h3>
 <pre class="output" tabindex="0"><code>[[1]]</code></pre>
 </div>
-<figure><img src="fig/06-extra-design-rendered-vis-sex-time-1.png" style="display: block; margin: auto;" class="figure mx-auto d-block"></figure><p>In the previous episode, we performed a test comparing Day8 samples
+<figure><img src="fig/06-extra-design-rendered-vis-sex-time-1.png" alt="" style="display: block; margin: auto;" class="figure mx-auto d-block"></figure><p>In the previous episode, we performed a test comparing Day8 samples
 to Day0 samples:</p>
 <div class="codewrapper sourceCode" id="cb77">
 <h3 class="code-label">R<i aria-hidden="true" data-feather="chevron-left"></i><i aria-hidden="true" data-feather="chevron-right"></i>
@@ -4680,7 +4684,7 @@ low counts [2]     : 3723, 14%
 <span><span class="fu">plot</span><span class="op">(</span><span class="va">resTime</span><span class="op">$</span><span class="va">log2FoldChange</span>, <span class="va">resTimeNum</span><span class="op">$</span><span class="va">log2FoldChange</span><span class="op">)</span></span>
 <span><span class="fu">abline</span><span class="op">(</span><span class="fl">0</span>, <span class="fl">1</span><span class="op">)</span></span></code></pre>
 </div>
-<figure><img src="fig/06-extra-design-rendered-compare-tests-sex-time-1.png" style="display: block; margin: auto;" class="figure mx-auto d-block"></figure><div class="codewrapper sourceCode" id="cb84">
+<figure><img src="fig/06-extra-design-rendered-compare-tests-sex-time-1.png" alt="" style="display: block; margin: auto;" class="figure mx-auto d-block"></figure><div class="codewrapper sourceCode" id="cb84">
 <h3 class="code-label">R<i aria-hidden="true" data-feather="chevron-left"></i><i aria-hidden="true" data-feather="chevron-right"></i>
 </h3>
 <pre class="downlit sourceCode r">
@@ -4688,7 +4692,7 @@ low counts [2]     : 3723, 14%
 <span><span class="fu">plot</span><span class="op">(</span><span class="op">-</span><span class="fu">log10</span><span class="op">(</span><span class="va">resTime</span><span class="op">$</span><span class="va">pvalue</span><span class="op">)</span>, <span class="op">-</span><span class="fu">log10</span><span class="op">(</span><span class="va">resTimeNum</span><span class="op">$</span><span class="va">pvalue</span><span class="op">)</span><span class="op">)</span></span>
 <span><span class="fu">abline</span><span class="op">(</span><span class="fl">0</span>, <span class="fl">1</span><span class="op">)</span></span></code></pre>
 </div>
-<figure><img src="fig/06-extra-design-rendered-compare-tests-sex-time-2.png" style="display: block; margin: auto;" class="figure mx-auto d-block"></figure></section><section><h2 class="section-heading" id="redo-deseq2-analysis-with-interaction">Redo DESeq2 analysis with interaction<a class="anchor" aria-label="anchor" href="#redo-deseq2-analysis-with-interaction"></a>
+<figure><img src="fig/06-extra-design-rendered-compare-tests-sex-time-2.png" alt="" style="display: block; margin: auto;" class="figure mx-auto d-block"></figure></section><section><h2 class="section-heading" id="redo-deseq2-analysis-with-interaction">Redo DESeq2 analysis with interaction<a class="anchor" aria-label="anchor" href="#redo-deseq2-analysis-with-interaction"></a>
 </h2>
 <hr class="half-width">
 <p>Next, let’s look at a different setup. We still consider the sex and
@@ -4813,7 +4817,7 @@ attr(,"contrasts")$time
 </h3>
 <pre class="output" tabindex="0"><code>[[1]]</code></pre>
 </div>
-<figure><img src="fig/06-extra-design-rendered-vis-sex-time-int-1.png" style="display: block; margin: auto;" class="figure mx-auto d-block"></figure><p>Note that now, the <code>time_Day8_vs_Day0</code> coefficient
+<figure><img src="fig/06-extra-design-rendered-vis-sex-time-int-1.png" alt="" style="display: block; margin: auto;" class="figure mx-auto d-block"></figure><p>Note that now, the <code>time_Day8_vs_Day0</code> coefficient
 represents the difference between Day8 and Day0 <strong>for the Female
 samples</strong>. To get the corresponding difference for the male
 samples, we need to also add the interaction effect
@@ -4946,7 +4950,7 @@ attr(,"contrasts")$sex_time
 </h3>
 <pre class="output" tabindex="0"><code>[[1]]</code></pre>
 </div>
-<figure><img src="fig/06-extra-design-rendered-vis-sex-time-int-single-1.png" style="display: block; margin: auto;" class="figure mx-auto d-block"></figure><p>We then set up the same contrasts as above</p>
+<figure><img src="fig/06-extra-design-rendered-vis-sex-time-int-single-1.png" alt="" style="display: block; margin: auto;" class="figure mx-auto d-block"></figure><p>We then set up the same contrasts as above</p>
 <div class="codewrapper sourceCode" id="cb108">
 <h3 class="code-label">R<i aria-hidden="true" data-feather="chevron-left"></i><i aria-hidden="true" data-feather="chevron-right"></i>
 </h3>
@@ -5018,7 +5022,7 @@ low counts [2]     : 6382, 23%
 <code class="sourceCode R"><span><span class="fu">plot</span><span class="op">(</span><span class="op">-</span><span class="fu">log10</span><span class="op">(</span><span class="va">resTimeFemale</span><span class="op">$</span><span class="va">pvalue</span><span class="op">)</span>, <span class="op">-</span><span class="fu">log10</span><span class="op">(</span><span class="va">resTimeFemaleSingle</span><span class="op">$</span><span class="va">pvalue</span><span class="op">)</span><span class="op">)</span></span>
 <span><span class="fu">abline</span><span class="op">(</span><span class="fl">0</span>, <span class="fl">1</span><span class="op">)</span></span></code></pre>
 </div>
-<figure><img src="fig/06-extra-design-rendered-compare-sex-time-int-1.png" style="display: block; margin: auto;" class="figure mx-auto d-block"></figure><div class="codewrapper sourceCode" id="cb116">
+<figure><img src="fig/06-extra-design-rendered-compare-sex-time-int-1.png" alt="" style="display: block; margin: auto;" class="figure mx-auto d-block"></figure><div class="codewrapper sourceCode" id="cb116">
 <h3 class="code-label">R<i aria-hidden="true" data-feather="chevron-left"></i><i aria-hidden="true" data-feather="chevron-right"></i>
 </h3>
 <pre class="downlit sourceCode r">
@@ -5065,7 +5069,7 @@ low counts [2]     : 0, 0%
 <code class="sourceCode R"><span><span class="fu">plot</span><span class="op">(</span><span class="op">-</span><span class="fu">log10</span><span class="op">(</span><span class="va">resTimeInt</span><span class="op">$</span><span class="va">pvalue</span><span class="op">)</span>, <span class="op">-</span><span class="fu">log10</span><span class="op">(</span><span class="va">resTimeIntSingle</span><span class="op">$</span><span class="va">pvalue</span><span class="op">)</span><span class="op">)</span></span>
 <span><span class="fu">abline</span><span class="op">(</span><span class="fl">0</span>, <span class="fl">1</span><span class="op">)</span></span></code></pre>
 </div>
-<figure><img src="fig/06-extra-design-rendered-compare-sex-time-int-2.png" style="display: block; margin: auto;" class="figure mx-auto d-block"></figure><div id="keypoints1" class="callout keypoints">
+<figure><img src="fig/06-extra-design-rendered-compare-sex-time-int-2.png" alt="" style="display: block; margin: auto;" class="figure mx-auto d-block"></figure><div id="keypoints1" class="callout keypoints">
 <div class="callout-square">
 <i class="callout-icon" data-feather="key"></i>
 </div>
@@ -5084,7 +5088,7 @@ linear combinations of the model coefficients.</li>
 </div>
 </section></section><section id="aio-07-gene-set-analysis"><p>Content from <a href="07-gene-set-analysis.html">Gene set enrichment analysis</a></p>
 <hr>
-<p> Last updated on 2025-11-11 |
+<p> Last updated on 2026-01-06 |
 
         <a href="https://github.com/carpentries-incubator/bioc-rnaseq/edit/main/episodes/07-gene-set-analysis.Rmd" class="external-link">Edit this page <i aria-hidden="true" data-feather="edit"></i></a></p>
 <div class="text-end">
@@ -5297,7 +5301,7 @@ diagram.</p>
 <span>               <span class="st">"XY gene set"</span> <span class="op">=</span> <span class="va">XYGeneSet</span><span class="op">)</span><span class="op">)</span><span class="op">)</span></span>
 <span><span class="fu">title</span><span class="op">(</span><span class="fu">paste0</span><span class="op">(</span><span class="st">"|universe| = "</span>, <span class="fu">length</span><span class="op">(</span><span class="va">totalGenes</span><span class="op">)</span><span class="op">)</span><span class="op">)</span></span></code></pre>
 </div>
-<figure><img src="fig/07-gene-set-analysis-rendered-venn-diagram-1.png" style="display: block; margin: auto;" class="figure mx-auto d-block"></figure><p>In the Venn diagram, we can observe that around 1.1% (13/1134) of
+<figure><img src="fig/07-gene-set-analysis-rendered-venn-diagram-1.png" alt="" style="display: block; margin: auto;" class="figure mx-auto d-block"></figure><p>In the Venn diagram, we can observe that around 1.1% (13/1134) of
 genes in the <em>XY gene set</em> are DE. Compared to the global
 fraction of DE genes (54/21198 = 0.25%), it seems there is a strong
 relations between DE genes and the gene set. We can also compare the
@@ -5553,7 +5557,7 @@ grab <span class="math inline">\(n_{+1}\)</span> genes (the size of the
 gene set) from the box and we want to ask <strong>what is the
 probability of having <span class="math inline">\(n_{11}\)</span> DE
 genes in our hand?</strong></p>
-<figure><img src="fig/07-gene-set-analysis-rendered-hypergeom-1.png" width="80%" style="display: block; margin: auto;" class="figure mx-auto d-block"></figure><p>We first calculate the total number of ways of picking <span class="math inline">\(n_{+1}\)</span> genes from total <span class="math inline">\(n\)</span> genes, without distinguishing whether
+<figure><img src="fig/07-gene-set-analysis-rendered-hypergeom-1.png" alt="" width="80%" style="display: block; margin: auto;" class="figure mx-auto d-block"></figure><p>We first calculate the total number of ways of picking <span class="math inline">\(n_{+1}\)</span> genes from total <span class="math inline">\(n\)</span> genes, without distinguishing whether
 they are DE or not: <span class="math inline">\(\binom{n}{n_{+1}}\)</span>.</p>
 <p>Next, in the <span class="math inline">\(n_{+1}\)</span> genes that
 have been picked, there are <span class="math inline">\(n_{11}\)</span>
@@ -5681,9 +5685,9 @@ distribution of its statistic.</p>
 <h3 class="code-label">OUTPUT<i aria-hidden="true" data-feather="chevron-left"></i><i aria-hidden="true" data-feather="chevron-right"></i>
 </h3>
 <pre class="output" tabindex="0"><code>Unit: microseconds
-   expr     min      lq      mean   median      uq     max neval
- fisher 249.746 253.743 263.30909 256.2925 267.729 454.958   100
-  hyper   1.553   1.688   2.57982   2.0635   3.091  16.060   100</code></pre>
+   expr     min      lq     mean   median      uq     max neval
+ fisher 260.036 267.570 281.9153 274.9335 286.355 517.377   100
+  hyper   1.612   1.969   2.8406   2.4350   3.236  22.802   100</code></pre>
 </div>
 <p>It is very astonishing that <code>phyper()</code> is hundreds of
 times faster than <code>fisher.test()</code>. Main reason is in
@@ -5843,7 +5847,7 @@ convert a list to a two-column data frame?</p>
 <button class="accordion-button solution-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapseSolution1" aria-expanded="false" aria-controls="collapseSolution1">
   <h4 class="accordion-header" id="headingSolution1"> Show me the solution </h4>
 </button>
-<div id="collapseSolution1" class="accordion-collapse collapse" data-bs-parent="#accordionSolution1" aria-labelledby="headingSolution1">
+<div id="collapseSolution1" class="accordion-collapse collapse" aria-labelledby="headingSolution1" data-bs-parent="#accordionSolution1">
 <div class="accordion-body">
 <div class="codewrapper sourceCode" id="cb38">
 <h3 class="code-label">R<i aria-hidden="true" data-feather="chevron-left"></i><i aria-hidden="true" data-feather="chevron-right"></i>
@@ -6469,7 +6473,7 @@ sets are automatically retrieved and processed from
 <div class="codewrapper">
 <h3 class="code-label">OUTPUT<i aria-hidden="true" data-feather="chevron-left"></i><i aria-hidden="true" data-feather="chevron-right"></i>
 </h3>
-<pre class="output" tabindex="0"><code>--&gt; Expected input gene ID: 52276,64050,74528,74355,77044,21803</code></pre>
+<pre class="output" tabindex="0"><code>--&gt; Expected input gene ID: 100019,17350,233908,19819,110816,27395</code></pre>
 </div>
 <div class="codewrapper">
 <h3 class="code-label">OUTPUT<i aria-hidden="true" data-feather="chevron-left"></i><i aria-hidden="true" data-feather="chevron-right"></i>
@@ -6754,19 +6758,19 @@ mmu00592                               alpha-Linolenic acid metabolism
 mmu04913                                       Ovarian steroidogenesis
 mmu04061 Viral protein interaction with cytokine and cytokine receptor
          GeneRatio  BgRatio RichFactor FoldEnrichment   zScore       pvalue
-mmu00590    16/457 89/10623  0.1797753       4.178890 6.384988 1.029723e-06
-mmu00591    12/457 55/10623  0.2181818       5.071653 6.418624 2.825416e-06
-mmu00565    11/457 49/10623  0.2244898       5.218282 6.274805 5.477871e-06
-mmu00592     8/457 25/10623  0.3200000       7.438425 6.833196 6.249183e-06
-mmu04913    12/457 65/10623  0.1846154       4.291399 5.643292 1.754012e-05
-mmu04061    14/457 95/10623  0.1473684       3.425590 5.034919 5.088522e-05
+mmu00590    16/458 89/10650  0.1797753       4.180364 6.386704 1.025363e-06
+mmu00591    12/458 55/10650  0.2181818       5.073442 6.420219 2.815797e-06
+mmu00565    11/458 49/10650  0.2244898       5.220123 6.276350 5.460561e-06
+mmu00592     8/458 25/10650  0.3200000       7.441048 6.834701 6.233683e-06
+mmu04913    12/458 65/10650  0.1846154       4.292912 5.644804 1.748252e-05
+mmu04061    14/458 95/10650  0.1473684       3.426798 5.036442 5.070450e-05
              p.adjust       qvalue
-mmu00590 0.0003253926 0.0002655603
-mmu00591 0.0004464157 0.0003643300
-mmu00565 0.0004936855 0.0004029078
-mmu00592 0.0004936855 0.0004029078
-mmu04913 0.0011085357 0.0009047010
-mmu04061 0.0026799549 0.0021871717
+mmu00590 0.0003250400 0.0002655150
+mmu00591 0.0004463038 0.0003645716
+mmu00565 0.0004940194 0.0004035489
+mmu00592 0.0004940194 0.0004035489
+mmu04913 0.0011083915 0.0009054103
+mmu04061 0.0026788878 0.0021882996
                                                                                                        geneID
 mmu00590 18783/19215/211429/329502/78390/19223/67103/242546/13118/18781/18784/11689/232889/15446/237625/11687
 mmu00591                        18783/211429/329502/78390/242546/18781/18784/13113/622127/232889/237625/11687
@@ -7081,7 +7085,7 @@ universe settings.</p>
 <span><span class="fu">legend</span><span class="op">(</span><span class="st">"topleft"</span>, legend <span class="op">=</span> <span class="fu">c</span><span class="op">(</span><span class="st">"all protein-coding genes as universe"</span>, <span class="st">"all genes as universe"</span><span class="op">)</span>, </span>
 <span>    pch <span class="op">=</span> <span class="fl">16</span>, col <span class="op">=</span> <span class="fu">c</span><span class="op">(</span><span class="fl">2</span>, <span class="fl">4</span><span class="op">)</span><span class="op">)</span></span></code></pre>
 </div>
-<figure><img src="fig/07-gene-set-analysis-rendered-compare-universe-1.png" style="display: block; margin: auto;" class="figure mx-auto d-block"></figure><p>It is very straightforward to see, with a larger universe, there are
+<figure><img src="fig/07-gene-set-analysis-rendered-compare-universe-1.png" alt="" style="display: block; margin: auto;" class="figure mx-auto d-block"></figure><p>It is very straightforward to see, with a larger universe, there are
 more significant gene sets, which may produce potentially more false
 positives. This is definitely worse when using all genes in the genome
 as universe.</p>
@@ -7164,13 +7168,13 @@ directly applied on <code>resTimeGO</code> returned by
 <pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="fu">barplot</span><span class="op">(</span><span class="va">resTimeGO</span>, showCategory <span class="op">=</span> <span class="fl">20</span><span class="op">)</span></span></code></pre>
 </div>
-<figure><img src="fig/07-gene-set-analysis-rendered-more-enrichplots-1.png" style="display: block; margin: auto;" class="figure mx-auto d-block"></figure><div class="codewrapper sourceCode" id="cb104">
+<figure><img src="fig/07-gene-set-analysis-rendered-more-enrichplots-1.png" alt="" style="display: block; margin: auto;" class="figure mx-auto d-block"></figure><div class="codewrapper sourceCode" id="cb104">
 <h3 class="code-label">R<i aria-hidden="true" data-feather="chevron-left"></i><i aria-hidden="true" data-feather="chevron-right"></i>
 </h3>
 <pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="fu">dotplot</span><span class="op">(</span><span class="va">resTimeGO</span>, showCategory <span class="op">=</span> <span class="fl">20</span><span class="op">)</span></span></code></pre>
 </div>
-<figure><img src="fig/07-gene-set-analysis-rendered-more-enrichplots-2.png" style="display: block; margin: auto;" class="figure mx-auto d-block"></figure><p>Barplots can map two variables to the plot, one to the height of bars
+<figure><img src="fig/07-gene-set-analysis-rendered-more-enrichplots-2.png" alt="" style="display: block; margin: auto;" class="figure mx-auto d-block"></figure><p>Barplots can map two variables to the plot, one to the height of bars
 and the other to the colors of bars; while for dotplot, sizes of dots
 can be mapped to a third variable. The variable names are in the colum
 names of the result table. Both plots include the top 20 most
@@ -7281,7 +7285,7 @@ significant gene sets.</p>
 <span>        label <span class="op">=</span> <span class="fu">sprintf</span><span class="op">(</span><span class="st">"%.2e"</span>, <span class="va">p.adjust</span><span class="op">)</span><span class="op">)</span>, hjust <span class="op">=</span> <span class="fl">1</span>, col <span class="op">=</span> <span class="st">"white"</span><span class="op">)</span> <span class="op">+</span></span>
 <span>    <span class="fu">ylab</span><span class="op">(</span><span class="st">""</span><span class="op">)</span></span></code></pre>
 </div>
-<figure><img src="fig/07-gene-set-analysis-rendered-plot-enrichment-1.png" style="display: block; margin: auto;" class="figure mx-auto d-block"></figure><p>In the next example, we use <em>z</em>-score as the primary variable
+<figure><img src="fig/07-gene-set-analysis-rendered-plot-enrichment-1.png" alt="" style="display: block; margin: auto;" class="figure mx-auto d-block"></figure><p>In the next example, we use <em>z</em>-score as the primary variable
 to map to the offset to origin, <code>DE_Ratio</code> and
 <code>Count</code> to map to dot colors and sizes.</p>
 <div class="codewrapper sourceCode" id="cb110">
@@ -7294,7 +7298,7 @@ to map to the offset to origin, <code>DE_Ratio</code> and
 <span>    <span class="fu">geom_point</span><span class="op">(</span><span class="op">)</span> <span class="op">+</span></span>
 <span>    <span class="fu">ylab</span><span class="op">(</span><span class="st">""</span><span class="op">)</span></span></code></pre>
 </div>
-<figure><img src="fig/07-gene-set-analysis-rendered-plot-z-1.png" style="display: block; margin: auto;" class="figure mx-auto d-block"></figure><p>Both plots can highlight the gene set “leukocyte migration involved
+<figure><img src="fig/07-gene-set-analysis-rendered-plot-z-1.png" alt="" style="display: block; margin: auto;" class="figure mx-auto d-block"></figure><p>Both plots can highlight the gene set “leukocyte migration involved
 in inflammatory response” is relatively small but highly enriched.</p>
 <p>Another useful visualization is the volcano plot. You may be aware of
 in differential expression analysis, in the volcano plot, x-axis
@@ -7317,7 +7321,7 @@ biologically sensible.</p>
 <span>    <span class="fu">geom_hline</span><span class="op">(</span>yintercept <span class="op">=</span> <span class="op">-</span><span class="fu">log10</span><span class="op">(</span><span class="fl">0.01</span><span class="op">)</span>, lty <span class="op">=</span> <span class="fl">2</span>, col <span class="op">=</span> <span class="st">"#444444"</span><span class="op">)</span> <span class="op">+</span></span>
 <span>    <span class="fu">geom_vline</span><span class="op">(</span>xintercept <span class="op">=</span> <span class="fl">1.5</span>, lty <span class="op">=</span> <span class="fl">2</span>, col <span class="op">=</span> <span class="st">"#444444"</span><span class="op">)</span></span></code></pre>
 </div>
-<figure><img src="fig/07-gene-set-analysis-rendered-plot-enrichment-padj-1.png" style="display: block; margin: auto;" class="figure mx-auto d-block"></figure><p>In the “volcano plot”, we can observe the plot is composed by a list
+<figure><img src="fig/07-gene-set-analysis-rendered-plot-enrichment-padj-1.png" alt="" style="display: block; margin: auto;" class="figure mx-auto d-block"></figure><p>In the “volcano plot”, we can observe the plot is composed by a list
 of curves. The trends are especially clear in the right bottom of the
 plot. Actually each “curve” corresponds to a same <code>"Count"</code>
 value (number of DE genes in a gene set). The volcano plot shows very
@@ -7392,7 +7396,7 @@ be easy to read.</p>
 <span>        label <span class="op">=</span> <span class="fu">sprintf</span><span class="op">(</span><span class="st">"%.2e"</span>, <span class="va">p.adjust</span><span class="op">)</span><span class="op">)</span>, hjust <span class="op">=</span> <span class="fl">1</span>, col <span class="op">=</span> <span class="st">"white"</span><span class="op">)</span> <span class="op">+</span></span>
 <span>    <span class="fu">ylab</span><span class="op">(</span><span class="st">""</span><span class="op">)</span></span></code></pre>
 </div>
-<figure><img src="fig/07-gene-set-analysis-rendered-plot-up-down-1.png" style="display: block; margin: auto;" class="figure mx-auto d-block"></figure><p>Specifically for GO enrichment, it is often that GO enrichment
+<figure><img src="fig/07-gene-set-analysis-rendered-plot-up-down-1.png" alt="" style="display: block; margin: auto;" class="figure mx-auto d-block"></figure><p>Specifically for GO enrichment, it is often that GO enrichment
 returns a long list of significant GO terms (e.g. several hundreds).
 This makes it difficult to summarize the common functions from the long
 list. The last package we will introduce is the
@@ -7490,7 +7494,7 @@ topological relations in the GO hierarchy.<a href="#fnref7" class="footnote-back
 </ol>
 </div></section><section id="aio-08-next-steps"><p>Content from <a href="08-next-steps.html">Next steps</a></p>
 <hr>
-<p> Last updated on 2025-11-11 |
+<p> Last updated on 2026-01-06 |
 
         <a href="https://github.com/carpentries-incubator/bioc-rnaseq/edit/main/episodes/08-next-steps.Rmd" class="external-link">Edit this page <i aria-hidden="true" data-feather="edit"></i></a></p>
 <div class="text-end">
