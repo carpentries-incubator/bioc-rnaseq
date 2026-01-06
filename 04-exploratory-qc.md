@@ -461,7 +461,7 @@ attached base packages:
 other attached packages:
  [1] iSEE_2.20.0                 SingleCellExperiment_1.30.1
  [3] hexbin_1.28.5               RColorBrewer_1.1-3         
- [5] ComplexHeatmap_2.24.1       ggplot2_4.0.0              
+ [5] ComplexHeatmap_2.24.1       ggplot2_4.0.1              
  [7] vsn_3.76.0                  DESeq2_1.48.2              
  [9] SummarizedExperiment_1.38.1 Biobase_2.68.0             
 [11] MatrixGenerics_1.20.0       matrixStats_1.5.0          
@@ -471,24 +471,24 @@ other attached packages:
 
 loaded via a namespace (and not attached):
  [1] rlang_1.1.6             magrittr_2.0.4          shinydashboard_0.7.3   
- [4] clue_0.3-66             GetoptLong_1.0.5        otel_0.2.0             
- [7] compiler_4.5.2          mgcv_1.9-3              png_0.1-8              
+ [4] clue_0.3-66             GetoptLong_1.1.0        otel_0.2.0             
+ [7] compiler_4.5.2          mgcv_1.9-4              png_0.1-8              
 [10] vctrs_0.6.5             pkgconfig_2.0.3         shape_1.4.6.1          
 [13] crayon_1.5.3            fastmap_1.2.0           XVector_0.48.0         
 [16] labeling_0.4.3          promises_1.5.0          shinyAce_0.4.4         
-[19] UCSC.utils_1.4.0        preprocessCore_1.70.0   xfun_0.54              
+[19] UCSC.utils_1.4.0        preprocessCore_1.70.0   xfun_0.55              
 [22] cachem_1.1.0            jsonlite_2.0.0          listviewer_4.0.0       
 [25] later_1.4.4             DelayedArray_0.34.1     BiocParallel_1.42.2    
 [28] parallel_4.5.2          cluster_2.1.8.1         R6_2.6.1               
 [31] bslib_0.9.0             limma_3.64.3            jquerylib_0.1.4        
-[34] Rcpp_1.1.0              iterators_1.0.14        knitr_1.50             
+[34] Rcpp_1.1.0              iterators_1.0.14        knitr_1.51             
 [37] httpuv_1.6.16           Matrix_1.7-4            splines_4.5.2          
 [40] igraph_2.2.1            tidyselect_1.2.1        abind_1.4-8            
-[43] yaml_2.3.10             doParallel_1.0.17       codetools_0.2-20       
+[43] yaml_2.3.12             doParallel_1.0.17       codetools_0.2-20       
 [46] affy_1.86.0             miniUI_0.1.2            lattice_0.22-7         
-[49] tibble_3.3.0            shiny_1.11.1            withr_3.0.2            
-[52] S7_0.2.0                evaluate_1.0.5          circlize_0.4.16        
-[55] pillar_1.11.1           affyio_1.78.0           BiocManager_1.30.26    
+[49] tibble_3.3.0            shiny_1.12.1            withr_3.0.2            
+[52] S7_0.2.1                evaluate_1.0.5          circlize_0.4.17        
+[55] pillar_1.11.1           affyio_1.78.0           BiocManager_1.30.27    
 [58] renv_1.1.5              DT_0.34.0               foreach_1.5.2          
 [61] shinyjs_2.1.0           scales_1.4.0            xtable_1.8-4           
 [64] glue_1.8.0              tools_4.5.2             colourpicker_1.3.0     
@@ -496,10 +496,10 @@ loaded via a namespace (and not attached):
 [70] GenomeInfoDbData_1.2.14 vipor_0.4.7             cli_3.6.5              
 [73] viridisLite_0.4.2       S4Arrays_1.8.1          dplyr_1.1.4            
 [76] gtable_0.3.6            rintrojs_0.3.4          sass_0.4.10            
-[79] digest_0.6.37           SparseArray_1.8.1       ggrepel_0.9.6          
+[79] digest_0.6.39           SparseArray_1.8.1       ggrepel_0.9.6          
 [82] rjson_0.2.23            htmlwidgets_1.6.4       farver_2.1.2           
-[85] htmltools_0.5.8.1       lifecycle_1.0.4         shinyWidgets_0.9.0     
-[88] httr_1.4.7              GlobalOptions_0.1.2     statmod_1.5.1          
+[85] htmltools_0.5.9         lifecycle_1.0.4         shinyWidgets_0.9.0     
+[88] httr_1.4.7              GlobalOptions_0.1.3     statmod_1.5.1          
 [91] mime_0.13              
 ```
 

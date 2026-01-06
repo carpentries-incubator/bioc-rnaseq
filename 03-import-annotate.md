@@ -249,7 +249,8 @@ bad1 <- SummarizedExperiment(
 ```
 
 ``` error
-Error in validObject(.Object): invalid class "SummarizedExperiment" object: 
+Error in `validObject()`:
+! invalid class "SummarizedExperiment" object: 
     nb of cols in 'assay' (22) must equal nb of rows in 'colData' (3)
 ```
 
@@ -266,7 +267,8 @@ bad2 <- SummarizedExperiment(
 ```
 
 ``` error
-Error in SummarizedExperiment(assays = list(counts = as.matrix(counts)), : the rownames and colnames of the supplied assay(s) must be NULL or identical
+Error in `SummarizedExperiment()`:
+! the rownames and colnames of the supplied assay(s) must be NULL or identical
   to those of the RangedSummarizedExperiment object (or derivative) to
   construct
 ```
@@ -781,21 +783,23 @@ other attached packages:
  [9] GenomicRanges_1.60.0        GenomeInfoDb_1.44.3        
 [11] IRanges_2.42.0              S4Vectors_0.46.0           
 [13] BiocGenerics_0.54.1         generics_0.1.4             
-[15] knitr_1.50                 
+[15] knitr_1.51                 
 
 loaded via a namespace (and not attached):
  [1] Matrix_1.7-4            bit_4.6.0               jsonlite_2.0.0         
- [4] compiler_4.5.2          BiocManager_1.30.26     renv_1.1.5             
+ [4] compiler_4.5.2          BiocManager_1.30.27     renv_1.1.5             
  [7] crayon_1.5.3            blob_1.2.4              Biostrings_2.76.0      
-[10] png_0.1-8               fastmap_1.2.0           yaml_2.3.10            
+[10] png_0.1-8               fastmap_1.2.0           yaml_2.3.12            
 [13] lattice_0.22-7          R6_2.6.1                XVector_0.48.0         
 [16] S4Arrays_1.8.1          DelayedArray_0.34.1     GenomeInfoDbData_1.2.14
-[19] DBI_1.2.3               rlang_1.1.6             KEGGREST_1.48.1        
-[22] cachem_1.1.0            xfun_0.54               bit64_4.6.0-1          
-[25] memoise_2.0.1           SparseArray_1.8.1       RSQLite_2.4.3          
-[28] cli_3.6.5               grid_4.5.2              vctrs_0.6.5            
-[31] evaluate_1.0.5          abind_1.4-8             httr_1.4.7             
-[34] pkgconfig_2.0.3         tools_4.5.2             UCSC.utils_1.4.0       
+[19] DBI_1.2.3               pillar_1.11.1           rlang_1.1.6            
+[22] KEGGREST_1.48.1         cachem_1.1.0            xfun_0.55              
+[25] bit64_4.6.0-1           otel_0.2.0              SparseArray_1.8.1      
+[28] RSQLite_2.4.5           memoise_2.0.1           cli_3.6.5              
+[31] grid_4.5.2              lifecycle_1.0.4         vctrs_0.6.5            
+[34] glue_1.8.0              evaluate_1.0.5          abind_1.4-8            
+[37] httr_1.4.7              pkgconfig_2.0.3         tools_4.5.2            
+[40] UCSC.utils_1.4.0       
 ```
 
 ::: keypoints

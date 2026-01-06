@@ -196,7 +196,7 @@ plot(venn(list("sexDEgenes"  = sexDEgenes,
 title(paste0("|universe| = ", length(totalGenes)))
 ```
 
-<img src="fig/07-gene-set-analysis-rendered-venn-diagram-1.png" style="display: block; margin: auto;" />
+<img src="fig/07-gene-set-analysis-rendered-venn-diagram-1.png" alt="" style="display: block; margin: auto;" />
 
 In the Venn diagram, we can observe that around 1.1% (13/1134) of genes in the
 _XY gene set_ are DE. Compared to the global fraction of DE genes (54/21198 =
@@ -380,7 +380,7 @@ genes are marked as non-DE genes (in blue). We grab $n_{+1}$ genes (the size
 of the gene set) from the box and we want to ask **what is the probability of
 having $n_{11}$ DE genes in our hand?**
 
-<img src="fig/07-gene-set-analysis-rendered-hypergeom-1.png" width="80%" style="display: block; margin: auto;" />
+<img src="fig/07-gene-set-analysis-rendered-hypergeom-1.png" alt="" width="80%" style="display: block; margin: auto;" />
 
 We first calculate the total number of ways of picking $n_{+1}$ genes from
 total $n$ genes, without distinguishing whether they are DE or not:
@@ -500,9 +500,9 @@ microbenchmark(
 
 ``` output
 Unit: microseconds
-   expr     min      lq      mean   median      uq     max neval
- fisher 249.746 253.743 263.30909 256.2925 267.729 454.958   100
-  hyper   1.553   1.688   2.57982   2.0635   3.091  16.060   100
+   expr     min      lq     mean   median      uq     max neval
+ fisher 260.036 267.570 281.9153 274.9335 286.355 517.377   100
+  hyper   1.612   1.969   2.8406   2.4350   3.236  22.802   100
 ```
 
 It is very astonishing that `phyper()` is hundreds of times faster than
@@ -1191,7 +1191,7 @@ resTimeGO = enrichGO(gene = timeDEgenes,
 ```
 
 ``` output
---> Expected input gene ID: 52276,64050,74528,74355,77044,21803
+--> Expected input gene ID: 100019,17350,233908,19819,110816,27395
 ```
 
 ``` output
@@ -1439,19 +1439,19 @@ mmu00592                               alpha-Linolenic acid metabolism
 mmu04913                                       Ovarian steroidogenesis
 mmu04061 Viral protein interaction with cytokine and cytokine receptor
          GeneRatio  BgRatio RichFactor FoldEnrichment   zScore       pvalue
-mmu00590    16/457 89/10623  0.1797753       4.178890 6.384988 1.029723e-06
-mmu00591    12/457 55/10623  0.2181818       5.071653 6.418624 2.825416e-06
-mmu00565    11/457 49/10623  0.2244898       5.218282 6.274805 5.477871e-06
-mmu00592     8/457 25/10623  0.3200000       7.438425 6.833196 6.249183e-06
-mmu04913    12/457 65/10623  0.1846154       4.291399 5.643292 1.754012e-05
-mmu04061    14/457 95/10623  0.1473684       3.425590 5.034919 5.088522e-05
+mmu00590    16/458 89/10650  0.1797753       4.180364 6.386704 1.025363e-06
+mmu00591    12/458 55/10650  0.2181818       5.073442 6.420219 2.815797e-06
+mmu00565    11/458 49/10650  0.2244898       5.220123 6.276350 5.460561e-06
+mmu00592     8/458 25/10650  0.3200000       7.441048 6.834701 6.233683e-06
+mmu04913    12/458 65/10650  0.1846154       4.292912 5.644804 1.748252e-05
+mmu04061    14/458 95/10650  0.1473684       3.426798 5.036442 5.070450e-05
              p.adjust       qvalue
-mmu00590 0.0003253926 0.0002655603
-mmu00591 0.0004464157 0.0003643300
-mmu00565 0.0004936855 0.0004029078
-mmu00592 0.0004936855 0.0004029078
-mmu04913 0.0011085357 0.0009047010
-mmu04061 0.0026799549 0.0021871717
+mmu00590 0.0003250400 0.0002655150
+mmu00591 0.0004463038 0.0003645716
+mmu00565 0.0004940194 0.0004035489
+mmu00592 0.0004940194 0.0004035489
+mmu04913 0.0011083915 0.0009054103
+mmu04061 0.0026788878 0.0021882996
                                                                                                        geneID
 mmu00590 18783/19215/211429/329502/78390/19223/67103/242546/13118/18781/18784/11689/232889/15446/237625/11687
 mmu00591                        18783/211429/329502/78390/242546/18781/18784/13113/622127/232889/237625/11687
@@ -1721,7 +1721,7 @@ legend("topleft", legend = c("all protein-coding genes as universe", "all genes 
     pch = 16, col = c(2, 4))
 ```
 
-<img src="fig/07-gene-set-analysis-rendered-compare-universe-1.png" style="display: block; margin: auto;" />
+<img src="fig/07-gene-set-analysis-rendered-compare-universe-1.png" alt="" style="display: block; margin: auto;" />
 
 It is very straightforward to see, with a larger universe, there are more
 significant gene sets, which may produce potentially more false positives.
@@ -1799,13 +1799,13 @@ Note the two functions are directly applied on `resTimeGO` returned by `enrichGO
 barplot(resTimeGO, showCategory = 20)
 ```
 
-<img src="fig/07-gene-set-analysis-rendered-more-enrichplots-1.png" style="display: block; margin: auto;" />
+<img src="fig/07-gene-set-analysis-rendered-more-enrichplots-1.png" alt="" style="display: block; margin: auto;" />
 
 ``` r
 dotplot(resTimeGO, showCategory = 20)
 ```
 
-<img src="fig/07-gene-set-analysis-rendered-more-enrichplots-2.png" style="display: block; margin: auto;" />
+<img src="fig/07-gene-set-analysis-rendered-more-enrichplots-2.png" alt="" style="display: block; margin: auto;" />
 
 Barplots can map two variables to the plot, one to the height of bars and the
 other to the colors of bars; while for dotplot, sizes of dots can be mapped to
@@ -1918,7 +1918,7 @@ ggplot(resTimeGOTable[1:10, ],
     ylab("")
 ```
 
-<img src="fig/07-gene-set-analysis-rendered-plot-enrichment-1.png" style="display: block; margin: auto;" />
+<img src="fig/07-gene-set-analysis-rendered-plot-enrichment-1.png" alt="" style="display: block; margin: auto;" />
 
 In the next example, we use _z_-score as the primary variable to map to the
 offset to origin, `DE_Ratio` and `Count` to map to dot colors and sizes.
@@ -1932,7 +1932,7 @@ ggplot(resTimeGOTable[1:10, ],
     ylab("")
 ```
 
-<img src="fig/07-gene-set-analysis-rendered-plot-z-1.png" style="display: block; margin: auto;" />
+<img src="fig/07-gene-set-analysis-rendered-plot-z-1.png" alt="" style="display: block; margin: auto;" />
 
 Both plots can highlight the gene set "leukocyte migration involved in
 inflammatory response" is relatively small but highly enriched.
@@ -1958,7 +1958,7 @@ ggplot(resTimeGOTable,
     geom_vline(xintercept = 1.5, lty = 2, col = "#444444")
 ```
 
-<img src="fig/07-gene-set-analysis-rendered-plot-enrichment-padj-1.png" style="display: block; margin: auto;" />
+<img src="fig/07-gene-set-analysis-rendered-plot-enrichment-padj-1.png" alt="" style="display: block; margin: auto;" />
 
 In the "volcano plot", we can observe the plot is composed by a list of
 curves. The trends are especially clear in the right bottom of the plot.
@@ -2035,7 +2035,7 @@ ggplot(rbind(resTimeGOupTable[1:5, ],
     ylab("")
 ```
 
-<img src="fig/07-gene-set-analysis-rendered-plot-up-down-1.png" style="display: block; margin: auto;" />
+<img src="fig/07-gene-set-analysis-rendered-plot-up-down-1.png" alt="" style="display: block; margin: auto;" />
 
 
 Specifically for GO enrichment, it is often that GO enrichment returns a long

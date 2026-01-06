@@ -105,14 +105,14 @@ vd$cooccurrenceplots
 $`tissue = Cerebellum`
 ```
 
-<img src="fig/06-extra-design-rendered-cooccplots-1.png" style="display: block; margin: auto;" />
+<img src="fig/06-extra-design-rendered-cooccplots-1.png" alt="" style="display: block; margin: auto;" />
 
 ``` output
 
 $`tissue = Spinalcord`
 ```
 
-<img src="fig/06-extra-design-rendered-cooccplots-2.png" style="display: block; margin: auto;" />
+<img src="fig/06-extra-design-rendered-cooccplots-2.png" alt="" style="display: block; margin: auto;" />
 
 :::::::::::::::::::::::::::::::::::::::  challenge
 
@@ -189,7 +189,7 @@ vd$plotlist
 [[1]]
 ```
 
-<img src="fig/06-extra-design-rendered-male-vs-female-1.png" style="display: block; margin: auto;" />
+<img src="fig/06-extra-design-rendered-male-vs-female-1.png" alt="" style="display: block; margin: auto;" />
 
 ``` r
 ## Note that we can also generate the design matrix like this
@@ -285,7 +285,7 @@ vd$plotlist
 [[1]]
 ```
 
-<img src="fig/06-extra-design-rendered-male-vs-female-noint-1.png" style="display: block; margin: auto;" />
+<img src="fig/06-extra-design-rendered-male-vs-female-noint-1.png" alt="" style="display: block; margin: auto;" />
 
 :::::::::::::::::::::::::
 
@@ -365,7 +365,7 @@ vd$plotlist
 [[1]]
 ```
 
-<img src="fig/06-extra-design-rendered-all-times-1.png" style="display: block; margin: auto;" />
+<img src="fig/06-extra-design-rendered-all-times-1.png" alt="" style="display: block; margin: auto;" />
 
 :::::::::::::::::::::::::
 
@@ -450,7 +450,7 @@ vd$plotlist
 [[1]]
 ```
 
-<img src="fig/06-extra-design-rendered-factorial-noint-1.png" style="display: block; margin: auto;" />
+<img src="fig/06-extra-design-rendered-factorial-noint-1.png" alt="" style="display: block; margin: auto;" />
 
 ## Factorial design with interactions
 
@@ -534,7 +534,7 @@ vd$plotlist
 [[1]]
 ```
 
-<img src="fig/06-extra-design-rendered-factorial-withint-1.png" style="display: block; margin: auto;" />
+<img src="fig/06-extra-design-rendered-factorial-withint-1.png" alt="" style="display: block; margin: auto;" />
 
 ## Combining multiple factors into one
 
@@ -632,7 +632,7 @@ vd$plotlist
 [[1]]
 ```
 
-<img src="fig/06-extra-design-rendered-factorial-combine-1.png" style="display: block; margin: auto;" />
+<img src="fig/06-extra-design-rendered-factorial-combine-1.png" alt="" style="display: block; margin: auto;" />
 
 
 ## Paired design
@@ -700,7 +700,7 @@ vd$plotlist
 [[1]]
 ```
 
-<img src="fig/06-extra-design-rendered-paired-1.png" style="display: block; margin: auto;" />
+<img src="fig/06-extra-design-rendered-paired-1.png" alt="" style="display: block; margin: auto;" />
 
 ## Within- and between-subject comparisons
 
@@ -860,14 +860,14 @@ vd$plotlist
 $`time = Day0`
 ```
 
-<img src="fig/06-extra-design-rendered-within-and-between-1.png" style="display: block; margin: auto;" />
+<img src="fig/06-extra-design-rendered-within-and-between-1.png" alt="" style="display: block; margin: auto;" />
 
 ``` output
 
 $`time = Day4`
 ```
 
-<img src="fig/06-extra-design-rendered-within-and-between-2.png" style="display: block; margin: auto;" />
+<img src="fig/06-extra-design-rendered-within-and-between-2.png" alt="" style="display: block; margin: auto;" />
 
 ## How does this relate to the DESeq2 analysis we did in the previous episode? 
 
@@ -973,7 +973,7 @@ vd$plotlist
 [[1]]
 ```
 
-<img src="fig/06-extra-design-rendered-vis-sex-time-1.png" style="display: block; margin: auto;" />
+<img src="fig/06-extra-design-rendered-vis-sex-time-1.png" alt="" style="display: block; margin: auto;" />
 
 In the previous episode, we performed a test comparing Day8 samples to Day0 samples:
 
@@ -1033,7 +1033,7 @@ plot(resTime$log2FoldChange, resTimeNum$log2FoldChange)
 abline(0, 1)
 ```
 
-<img src="fig/06-extra-design-rendered-compare-tests-sex-time-1.png" style="display: block; margin: auto;" />
+<img src="fig/06-extra-design-rendered-compare-tests-sex-time-1.png" alt="" style="display: block; margin: auto;" />
 
 ``` r
 ## -log10(p-value)
@@ -1041,7 +1041,7 @@ plot(-log10(resTime$pvalue), -log10(resTimeNum$pvalue))
 abline(0, 1)
 ```
 
-<img src="fig/06-extra-design-rendered-compare-tests-sex-time-2.png" style="display: block; margin: auto;" />
+<img src="fig/06-extra-design-rendered-compare-tests-sex-time-2.png" alt="" style="display: block; margin: auto;" />
 
 ## Redo DESeq2 analysis with interaction
 
@@ -1156,7 +1156,7 @@ vd$plotlist
 [[1]]
 ```
 
-<img src="fig/06-extra-design-rendered-vis-sex-time-int-1.png" style="display: block; margin: auto;" />
+<img src="fig/06-extra-design-rendered-vis-sex-time-int-1.png" alt="" style="display: block; margin: auto;" />
 
 Note that now, the `time_Day8_vs_Day0` coefficient represents the difference between Day8 and Day0 **for the Female samples**. 
 To get the corresponding difference for the male samples, we need to also add the interaction effect (`sexMale.timeDay8`). 
@@ -1277,7 +1277,7 @@ vd$plotlist
 [[1]]
 ```
 
-<img src="fig/06-extra-design-rendered-vis-sex-time-int-single-1.png" style="display: block; margin: auto;" />
+<img src="fig/06-extra-design-rendered-vis-sex-time-int-single-1.png" alt="" style="display: block; margin: auto;" />
 
 We then set up the same contrasts as above
 
@@ -1341,7 +1341,7 @@ plot(-log10(resTimeFemale$pvalue), -log10(resTimeFemaleSingle$pvalue))
 abline(0, 1)
 ```
 
-<img src="fig/06-extra-design-rendered-compare-sex-time-int-1.png" style="display: block; margin: auto;" />
+<img src="fig/06-extra-design-rendered-compare-sex-time-int-1.png" alt="" style="display: block; margin: auto;" />
 
 ``` r
 summary(resTimeInt)
@@ -1382,7 +1382,7 @@ plot(-log10(resTimeInt$pvalue), -log10(resTimeIntSingle$pvalue))
 abline(0, 1)
 ```
 
-<img src="fig/06-extra-design-rendered-compare-sex-time-int-2.png" style="display: block; margin: auto;" />
+<img src="fig/06-extra-design-rendered-compare-sex-time-int-2.png" alt="" style="display: block; margin: auto;" />
 
 
 :::::::::::::::::::::::::::::::::::::::: keypoints
