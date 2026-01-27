@@ -829,7 +829,7 @@ directory, create the four fundamental directories previously discussed
 <button class="accordion-button solution-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapseSolution1" aria-expanded="false" aria-controls="collapseSolution1">
   <h4 class="accordion-header" id="headingSolution1"> Show me the solution </h4>
 </button>
-<div id="collapseSolution1" class="accordion-collapse collapse" data-bs-parent="#accordionSolution1" aria-labelledby="headingSolution1">
+<div id="collapseSolution1" class="accordion-collapse collapse" aria-labelledby="headingSolution1" data-bs-parent="#accordionSolution1">
 <div class="accordion-body">
 <figure style="text-align: center"><img src="../fig/02_setup/folders_working_dir.png" alt="Your working directory should look like this" width="1221" class="figure mx-auto d-block"><figcaption>
 Your working directory should look like this
@@ -944,20 +944,20 @@ remainder of this lesson.</p>
 <col width="77%">
 <col width="22%">
 </colgroup>
-<thead><tr class="header">
+<thead><tr>
 <th>URL</th>
 <th>Filename</th>
 </tr></thead>
 <tbody>
-<tr class="odd">
+<tr>
 <td><a href="https://github.com/carpentries-incubator/bioc-rnaseq/raw/main/episodes/data/GSE96870_coldata_cerebellum.csv" class="external-link uri">https://github.com/carpentries-incubator/bioc-rnaseq/raw/main/episodes/data/GSE96870_coldata_cerebellum.csv</a></td>
 <td>GSE96870_coldata_cerebellum.csv</td>
 </tr>
-<tr class="even">
+<tr>
 <td><a href="https://github.com/carpentries-incubator/bioc-rnaseq/raw/main/episodes/data/GSE96870_coldata_all.csv" class="external-link uri">https://github.com/carpentries-incubator/bioc-rnaseq/raw/main/episodes/data/GSE96870_coldata_all.csv</a></td>
 <td>GSE96870_coldata_all.csv</td>
 </tr>
-<tr class="odd">
+<tr>
 <td><a href="https://github.com/carpentries-incubator/bioc-rnaseq/raw/main/episodes/data/GSE96870_rowranges.tsv" class="external-link uri">https://github.com/carpentries-incubator/bioc-rnaseq/raw/main/episodes/data/GSE96870_rowranges.tsv</a></td>
 <td>GSE96870_rowranges.tsv</td>
 </tr>
@@ -973,7 +973,7 @@ into the <code>data</code> folder in your working directory.</p>
 <button class="accordion-button solution-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapseSolution2" aria-expanded="false" aria-controls="collapseSolution2">
   <h4 class="accordion-header" id="headingSolution2"> Show me the solution </h4>
 </button>
-<div id="collapseSolution2" class="accordion-collapse collapse" data-bs-parent="#accordionSolution2" aria-labelledby="headingSolution2">
+<div id="collapseSolution2" class="accordion-collapse collapse" aria-labelledby="headingSolution2" data-bs-parent="#accordionSolution2">
 <div class="accordion-body">
 <div class="codewrapper sourceCode" id="cb2">
 <h3 class="code-label">R<i aria-hidden="true" data-feather="chevron-left"></i><i aria-hidden="true" data-feather="chevron-right"></i>
@@ -2066,19 +2066,21 @@ $`10001`
 </h3>
 <pre class="output" tabindex="0"><code>R version 4.5.2 (2025-10-31)
 Platform: x86_64-pc-linux-gnu
-Running under: Ubuntu 22.04.5 LTS
+Running under: Ubuntu 24.04.3 LTS
 
 Matrix products: default
-BLAS:   /usr/lib/x86_64-linux-gnu/blas/libblas.so.3.10.0
-LAPACK: /usr/lib/x86_64-linux-gnu/lapack/liblapack.so.3.10.0  LAPACK version 3.10.0
+BLAS:   /usr/lib/x86_64-linux-gnu/openblas-pthread/libblas.so.3
+LAPACK: /usr/lib/x86_64-linux-gnu/openblas-pthread/libopenblasp-r0.3.26.so;  LAPACK version 3.12.0
 
 locale:
- [1] LC_CTYPE=C.UTF-8       LC_NUMERIC=C           LC_TIME=C.UTF-8
- [4] LC_COLLATE=C.UTF-8     LC_MONETARY=C.UTF-8    LC_MESSAGES=C.UTF-8
- [7] LC_PAPER=C.UTF-8       LC_NAME=C              LC_ADDRESS=C
-[10] LC_TELEPHONE=C         LC_MEASUREMENT=C.UTF-8 LC_IDENTIFICATION=C
+ [1] LC_CTYPE=en_US.UTF-8       LC_NUMERIC=C
+ [3] LC_TIME=en_US.UTF-8        LC_COLLATE=en_US.UTF-8
+ [5] LC_MONETARY=en_US.UTF-8    LC_MESSAGES=en_US.UTF-8
+ [7] LC_PAPER=en_US.UTF-8       LC_NAME=C
+ [9] LC_ADDRESS=C               LC_TELEPHONE=C
+[11] LC_MEASUREMENT=en_US.UTF-8 LC_IDENTIFICATION=C
 
-time zone: UTC
+time zone: Etc/UTC
 tzcode source: system (glibc)
 
 attached base packages:
@@ -2267,7 +2269,7 @@ important considerations?</li>
 <button class="accordion-button solution-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapseSolution1" aria-expanded="false" aria-controls="collapseSolution1">
   <h4 class="accordion-header" id="headingSolution1"> Show me the solution </h4>
 </button>
-<div id="collapseSolution1" class="accordion-collapse collapse" data-bs-parent="#accordionSolution1" aria-labelledby="headingSolution1">
+<div id="collapseSolution1" class="accordion-collapse collapse" aria-labelledby="headingSolution1" data-bs-parent="#accordionSolution1">
 <div class="accordion-body">
 <ol style="list-style-type: decimal"><li>
 </li></ol>
@@ -2568,7 +2570,7 @@ suggest?</p></li>
 <button class="accordion-button solution-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapseSolution2" aria-expanded="false" aria-controls="collapseSolution2">
   <h4 class="accordion-header" id="headingSolution2"> Show me the solution </h4>
 </button>
-<div id="collapseSolution2" class="accordion-collapse collapse" data-bs-parent="#accordionSolution2" aria-labelledby="headingSolution2">
+<div id="collapseSolution2" class="accordion-collapse collapse" aria-labelledby="headingSolution2" data-bs-parent="#accordionSolution2">
 <div class="accordion-body">
 <ol style="list-style-type: decimal">
 <li><p>The major signal in this data (37% variance) is associated with
@@ -2613,7 +2615,7 @@ class <code>DESeqTransform</code> as input. You can transform a
 <button class="accordion-button solution-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapseSolution3" aria-expanded="false" aria-controls="collapseSolution3">
   <h4 class="accordion-header" id="headingSolution3"> Show me the solution </h4>
 </button>
-<div id="collapseSolution3" class="accordion-collapse collapse" data-bs-parent="#accordionSolution3" aria-labelledby="headingSolution3">
+<div id="collapseSolution3" class="accordion-collapse collapse" aria-labelledby="headingSolution3" data-bs-parent="#accordionSolution3">
 <div class="accordion-body">
 <div class="codewrapper sourceCode" id="cb27">
 <h3 class="code-label">R<i aria-hidden="true" data-feather="chevron-left"></i><i aria-hidden="true" data-feather="chevron-right"></i>
@@ -2723,19 +2725,21 @@ using iSEE</h3>
 </h3>
 <pre class="output" tabindex="0"><code>R version 4.5.2 (2025-10-31)
 Platform: x86_64-pc-linux-gnu
-Running under: Ubuntu 22.04.5 LTS
+Running under: Ubuntu 24.04.3 LTS
 
 Matrix products: default
-BLAS:   /usr/lib/x86_64-linux-gnu/blas/libblas.so.3.10.0
-LAPACK: /usr/lib/x86_64-linux-gnu/lapack/liblapack.so.3.10.0  LAPACK version 3.10.0
+BLAS:   /usr/lib/x86_64-linux-gnu/openblas-pthread/libblas.so.3
+LAPACK: /usr/lib/x86_64-linux-gnu/openblas-pthread/libopenblasp-r0.3.26.so;  LAPACK version 3.12.0
 
 locale:
- [1] LC_CTYPE=C.UTF-8       LC_NUMERIC=C           LC_TIME=C.UTF-8
- [4] LC_COLLATE=C.UTF-8     LC_MONETARY=C.UTF-8    LC_MESSAGES=C.UTF-8
- [7] LC_PAPER=C.UTF-8       LC_NAME=C              LC_ADDRESS=C
-[10] LC_TELEPHONE=C         LC_MEASUREMENT=C.UTF-8 LC_IDENTIFICATION=C
+ [1] LC_CTYPE=en_US.UTF-8       LC_NUMERIC=C
+ [3] LC_TIME=en_US.UTF-8        LC_COLLATE=en_US.UTF-8
+ [5] LC_MONETARY=en_US.UTF-8    LC_MESSAGES=en_US.UTF-8
+ [7] LC_PAPER=en_US.UTF-8       LC_NAME=C
+ [9] LC_ADDRESS=C               LC_TELEPHONE=C
+[11] LC_MEASUREMENT=en_US.UTF-8 LC_IDENTIFICATION=C
 
-time zone: UTC
+time zone: Etc/UTC
 tzcode source: system (glibc)
 
 attached base packages:
@@ -5395,26 +5399,26 @@ size of the <em>XY gene set</em> (i.e. the number of member genes),
 <span class="math inline">\(n\)</span> is the number of total genes.</p>
 <center>
 <table class="table">
-<thead><tr class="header">
+<thead><tr>
 <th></th>
 <th>In the gene set</th>
 <th>Not in the gene set</th>
 <th>Total</th>
 </tr></thead>
 <tbody>
-<tr class="odd">
+<tr>
 <td><strong>DE</strong></td>
 <td><span class="math inline">\(n_{11}\)</span></td>
 <td><span class="math inline">\(n_{12}\)</span></td>
 <td><span class="math inline">\(n_{1+}\)</span></td>
 </tr>
-<tr class="even">
+<tr>
 <td><strong>Not DE</strong></td>
 <td><span class="math inline">\(n_{21}\)</span></td>
 <td><span class="math inline">\(n_{22}\)</span></td>
 <td><span class="math inline">\(n_{2+}\)</span></td>
 </tr>
-<tr class="odd">
+<tr>
 <td><strong>Total</strong></td>
 <td><span class="math inline">\(n_{+1}\)</span></td>
 <td><span class="math inline">\(n_{+2}\)</span></td>
@@ -5464,26 +5468,26 @@ size of the <em>XY gene set</em> (i.e. the number of member genes),
 <p>And we fill these numbers into the 2x2 contingency table:</p>
 <center>
 <table class="table">
-<thead><tr class="header">
+<thead><tr>
 <th></th>
 <th>In the gene set</th>
 <th>Not in the gene set</th>
 <th>Total</th>
 </tr></thead>
 <tbody>
-<tr class="odd">
+<tr>
 <td><strong>DE</strong></td>
 <td>13</td>
 <td>41</td>
 <td>54</td>
 </tr>
-<tr class="even">
+<tr>
 <td><strong>Not DE</strong></td>
 <td>1121</td>
 <td>20023</td>
 <td>21144</td>
 </tr>
-<tr class="odd">
+<tr>
 <td><strong>Total</strong></td>
 <td>1134</td>
 <td>20064</td>
@@ -5562,26 +5566,26 @@ the Fisher’s exact test. E.g. let’s put whether genes are in the gene
 sets on rows, and put whether genes are DE on columns.</p>
 <center>
 <table class="table">
-<thead><tr class="header">
+<thead><tr>
 <th></th>
 <th>DE</th>
 <th>Not DE</th>
 <th>Total</th>
 </tr></thead>
 <tbody>
-<tr class="odd">
+<tr>
 <td><strong>In the gene set</strong></td>
 <td>13</td>
 <td>1121</td>
 <td>1134</td>
 </tr>
-<tr class="even">
+<tr>
 <td><strong>Not in the gene set</strong></td>
 <td>41</td>
 <td>20023</td>
 <td>20064</td>
 </tr>
-<tr class="odd">
+<tr>
 <td><strong>Total</strong></td>
 <td>54</td>
 <td>21144</td>
@@ -5756,9 +5760,9 @@ distribution of its statistic.</p>
 <h3 class="code-label">OUTPUT<i aria-hidden="true" data-feather="chevron-left"></i><i aria-hidden="true" data-feather="chevron-right"></i>
 </h3>
 <pre class="output" tabindex="0"><code>Unit: microseconds
-   expr     min       lq      mean  median       uq     max neval
- fisher 252.883 259.3040 268.92651 264.053 273.9065 476.921   100
-  hyper   1.613   1.7835   2.63347   2.214   3.1510  18.194   100</code></pre>
+   expr     min       lq      mean   median       uq     max neval
+ fisher 255.877 259.8345 269.92269 263.2610 275.6290 456.532   100
+  hyper   1.673   1.8280   2.74426   2.0845   3.3365  20.448   100</code></pre>
 </div>
 <p>It is very astonishing that <code>phyper()</code> is hundreds of
 times faster than <code>fisher.test()</code>. Main reason is in
@@ -5997,62 +6001,62 @@ release, there are the following organism packages:</p>
 <col width="36%">
 <col width="10%">
 </colgroup>
-<thead><tr class="header">
+<thead><tr>
 <th>Package</th>
 <th>Organism</th>
 <th>Package</th>
 <th>Organism</th>
 </tr></thead>
 <tbody>
-<tr class="odd">
+<tr>
 <td>org.Hs.eg.db</td>
 <td>Human</td>
 <td>org.Mm.eg.db</td>
 <td>Mouse</td>
 </tr>
-<tr class="even">
+<tr>
 <td>org.Rn.eg.db</td>
 <td>Rat</td>
 <td>org.Dm.eg.db</td>
 <td>Fly</td>
 </tr>
-<tr class="odd">
+<tr>
 <td>org.At.tair.db</td>
 <td>Arabidopsis</td>
 <td>org.Dr.eg.db</td>
 <td>Zebrafish</td>
 </tr>
-<tr class="even">
+<tr>
 <td>org.Sc.sgd.db</td>
 <td>Yeast</td>
 <td>org.Ce.eg.db</td>
 <td>Worm</td>
 </tr>
-<tr class="odd">
+<tr>
 <td>org.Bt.eg.db</td>
 <td>Bovine</td>
 <td>org.Gg.eg.db</td>
 <td>Chicken</td>
 </tr>
-<tr class="even">
+<tr>
 <td>org.Ss.eg.db</td>
 <td>Pig</td>
 <td>org.Mmu.eg.db</td>
 <td>Rhesus</td>
 </tr>
-<tr class="odd">
+<tr>
 <td>org.Cf.eg.db</td>
 <td>Canine</td>
 <td>org.EcK12.eg.db</td>
 <td>E coli strain K12</td>
 </tr>
-<tr class="even">
+<tr>
 <td>org.Xl.eg.db</td>
 <td>Xenopus</td>
 <td>org.Pt.eg.db</td>
 <td>Chimp</td>
 </tr>
-<tr class="odd">
+<tr>
 <td>org.Ag.eg.db</td>
 <td>Anopheles</td>
 <td>org.EcSakai.eg.db</td>
@@ -6544,7 +6548,7 @@ sets are automatically retrieved and processed from
 <div class="codewrapper">
 <h3 class="code-label">OUTPUT<i aria-hidden="true" data-feather="chevron-left"></i><i aria-hidden="true" data-feather="chevron-right"></i>
 </h3>
-<pre class="output" tabindex="0"><code>--&gt; Expected input gene ID: 20133,20877,12628,73247,83945,66362</code></pre>
+<pre class="output" tabindex="0"><code>--&gt; Expected input gene ID: 237211,110109,269400,226409,83945,72103</code></pre>
 </div>
 <div class="codewrapper">
 <h3 class="code-label">OUTPUT<i aria-hidden="true" data-feather="chevron-left"></i><i aria-hidden="true" data-feather="chevron-right"></i>
@@ -7075,26 +7079,26 @@ non-DE genes or non-gene-set genes.</p>
 <col width="38%">
 <col width="13%">
 </colgroup>
-<thead><tr class="header">
+<thead><tr>
 <th></th>
 <th>In the gene set</th>
 <th>Not in the gene set</th>
 <th>Total</th>
 </tr></thead>
 <tbody>
-<tr class="odd">
+<tr>
 <td><strong>DE</strong></td>
 <td><span class="math inline">\(n_{11}\)</span></td>
 <td><span class="math inline">\(n_{12}\)</span></td>
 <td><span class="math inline">\(n_{1+}\)</span></td>
 </tr>
-<tr class="even">
+<tr>
 <td><strong>Not DE</strong></td>
 <td><span class="math inline">\(n_{21}\)</span></td>
 <td><span class="math inline">\(\color{red}{n_{22}}\)</span></td>
 <td><span class="math inline">\(\color{red}{n_{2+}}\)</span></td>
 </tr>
-<tr class="odd">
+<tr>
 <td><strong>Total</strong></td>
 <td><span class="math inline">\(n_{+1}\)</span></td>
 <td><span class="math inline">\(\color{red}{n_{+2}}\)</span></td>
@@ -7688,8 +7692,8 @@ quantified.</li>
         <p>Materials licensed under <a href="../LICENSE.html">CC-BY 4.0</a> by the authors</p>
 
         <p><a href="https://creativecommons.org/licenses/by-sa/4.0/" class="external-link">Template licensed under CC-BY 4.0</a> by <a href="https://carpentries.org" class="external-link">The Carpentries</a></p>
-        <p>Built with <a href="https://github.com/carpentries/sandpaper/tree/0.18.4" class="external-link">sandpaper (0.18.4)</a>,
-        <a href="https://github.com/carpentries/pegboard/tree/0.7.9" class="external-link">pegboard (0.7.9)</a>,
+        <p>Built with <a href="https://github.com/carpentries/sandpaper/tree/" class="external-link">sandpaper (0.18.1)</a>,
+        <a href="https://github.com/carpentries/pegboard/tree/" class="external-link">pegboard (0.7.9)</a>,
       and <a href="https://github.com/mblue9/varnish/tree/3403ad0dd37f7641c6442330fcc182937e7964c5" class="external-link">varnish (0.2.16)</a>.</p>
 			</div>
 		</footer>
