@@ -754,9 +754,9 @@ sessionInfo()
 ```
 
 ``` output
-R version 4.5.2 (2025-10-31)
+R version 4.5.3 (2026-03-11)
 Platform: x86_64-pc-linux-gnu
-Running under: Ubuntu 24.04.3 LTS
+Running under: Ubuntu 24.04.4 LTS
 
 Matrix products: default
 BLAS:   /usr/lib/x86_64-linux-gnu/openblas-pthread/libblas.so.3 
@@ -788,19 +788,19 @@ other attached packages:
 [15] knitr_1.51                 
 
 loaded via a namespace (and not attached):
- [1] Matrix_1.7-4            bit_4.6.0               jsonlite_2.0.0         
- [4] compiler_4.5.2          BiocManager_1.30.27     renv_1.1.7             
+ [1] Matrix_1.7-5            bit_4.6.0               jsonlite_2.0.0         
+ [4] compiler_4.5.3          BiocManager_1.30.27     renv_1.2.2             
  [7] crayon_1.5.3            blob_1.3.0              Biostrings_2.76.0      
-[10] png_0.1-8               fastmap_1.2.0           yaml_2.3.12            
-[13] lattice_0.22-7          R6_2.6.1                XVector_0.48.0         
+[10] png_0.1-9               fastmap_1.2.0           yaml_2.3.12            
+[13] lattice_0.22-9          R6_2.6.1                XVector_0.48.0         
 [16] S4Arrays_1.8.1          DelayedArray_0.34.1     GenomeInfoDbData_1.2.14
-[19] DBI_1.2.3               pillar_1.11.1           rlang_1.1.7            
-[22] KEGGREST_1.48.1         cachem_1.1.0            xfun_0.56              
+[19] DBI_1.3.0               pillar_1.11.1           rlang_1.2.0            
+[22] KEGGREST_1.48.1         cachem_1.1.0            xfun_0.57              
 [25] bit64_4.6.0-1           otel_0.2.0              SparseArray_1.8.1      
-[28] RSQLite_2.4.5           memoise_2.0.1           cli_3.6.5              
-[31] grid_4.5.2              lifecycle_1.0.5         vctrs_0.7.1            
+[28] RSQLite_2.4.6           memoise_2.0.1           cli_3.6.5              
+[31] grid_4.5.3              lifecycle_1.0.5         vctrs_0.7.2            
 [34] glue_1.8.0              evaluate_1.0.5          abind_1.4-8            
-[37] httr_1.4.7              pkgconfig_2.0.3         tools_4.5.2            
+[37] httr_1.4.8              pkgconfig_2.0.3         tools_4.5.3            
 [40] UCSC.utils_1.4.0       
 ```
 
