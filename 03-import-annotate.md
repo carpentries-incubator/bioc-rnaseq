@@ -689,8 +689,8 @@ mapIds(hgu95av2.db, keys = keys, column = "ALIAS", keytype = "ENTREZID")
 ```
 
 ``` output
-       10       100      1000     10000 100008586     10001 
-   "AAC2"    "ADA1"   "ACOGS"    "MPPH"     "AL4"   "ARC33" 
+        10        100       1000      10000  100008586      10001 
+    "AAC2"     "ADA1"    "ACOGS"     "MPPH" "GAGE-12F"    "ARC33" 
 ```
 
 ``` r
@@ -735,8 +735,7 @@ $`10000`
 [6] "RAC-PK-gamma" "RAC-gamma"    "STK-2"        "AKT3"        
 
 $`100008586`
-[1] "AL4"     "CT4.7"   "GAGE-7"  "GAGE-7B" "GAGE-8"  "GAGE7"   "GAGE7B" 
-[8] "GAGE12F"
+[1] "GAGE-12F" "GAGE12F" 
 
 $`10001`
 [1] "ARC33"     "NY-REN-28" "MED6"     
@@ -754,7 +753,7 @@ sessionInfo()
 ```
 
 ``` output
-R version 4.5.3 (2026-03-11)
+R version 4.6.0 (2026-04-24)
 Platform: x86_64-pc-linux-gnu
 Running under: Ubuntu 24.04.4 LTS
 
@@ -778,30 +777,29 @@ attached base packages:
 [8] base     
 
 other attached packages:
- [1] hgu95av2.db_3.13.0          org.Hs.eg.db_3.21.0        
- [3] org.Mm.eg.db_3.21.0         AnnotationDbi_1.70.0       
- [5] SummarizedExperiment_1.38.1 Biobase_2.68.0             
- [7] MatrixGenerics_1.20.0       matrixStats_1.5.0          
- [9] GenomicRanges_1.60.0        GenomeInfoDb_1.44.3        
-[11] IRanges_2.42.0              S4Vectors_0.46.0           
-[13] BiocGenerics_0.54.1         generics_0.1.4             
+ [1] hgu95av2.db_3.13.0          org.Hs.eg.db_3.23.1        
+ [3] org.Mm.eg.db_3.23.0         AnnotationDbi_1.74.0       
+ [5] SummarizedExperiment_1.42.0 Biobase_2.72.0             
+ [7] MatrixGenerics_1.24.0       matrixStats_1.5.0          
+ [9] GenomicRanges_1.64.0        Seqinfo_1.2.0              
+[11] IRanges_2.46.0              S4Vectors_0.50.1           
+[13] BiocGenerics_0.58.1         generics_0.1.4             
 [15] knitr_1.51                 
 
 loaded via a namespace (and not attached):
- [1] Matrix_1.7-5            bit_4.6.0               jsonlite_2.0.0         
- [4] compiler_4.5.3          BiocManager_1.30.27     renv_1.2.2             
- [7] crayon_1.5.3            blob_1.3.0              Biostrings_2.76.0      
-[10] png_0.1-9               fastmap_1.2.0           yaml_2.3.12            
-[13] lattice_0.22-9          R6_2.6.1                XVector_0.48.0         
-[16] S4Arrays_1.8.1          DelayedArray_0.34.1     GenomeInfoDbData_1.2.14
-[19] DBI_1.3.0               pillar_1.11.1           rlang_1.2.0            
-[22] KEGGREST_1.48.1         cachem_1.1.0            xfun_0.57              
-[25] bit64_4.6.0-1           otel_0.2.0              SparseArray_1.8.1      
-[28] RSQLite_2.4.6           memoise_2.0.1           cli_3.6.5              
-[31] grid_4.5.3              lifecycle_1.0.5         vctrs_0.7.2            
-[34] glue_1.8.0              evaluate_1.0.5          abind_1.4-8            
-[37] httr_1.4.8              pkgconfig_2.0.3         tools_4.5.3            
-[40] UCSC.utils_1.4.0       
+ [1] Matrix_1.7-5        bit_4.6.0           crayon_1.5.3       
+ [4] compiler_4.6.0      BiocManager_1.30.27 renv_1.2.3         
+ [7] blob_1.3.0          Biostrings_2.80.1   png_0.1-9          
+[10] yaml_2.3.12         fastmap_1.2.0       lattice_0.22-9     
+[13] R6_2.6.1            XVector_0.52.0      S4Arrays_1.12.0    
+[16] DelayedArray_0.38.2 DBI_1.3.0           pillar_1.11.1      
+[19] rlang_1.3.0         KEGGREST_1.52.2     cachem_1.1.0       
+[22] xfun_0.60           bit64_4.8.2         otel_0.2.0         
+[25] SparseArray_1.12.2  RSQLite_3.53.3      memoise_2.0.1      
+[28] cli_3.6.6           grid_4.6.0          lifecycle_1.0.5    
+[31] vctrs_0.7.3         glue_1.8.1          evaluate_1.0.5     
+[34] abind_1.4-8         httr_1.4.8          pkgconfig_2.0.3    
+[37] tools_4.6.0        
 ```
 
 ::: keypoints
