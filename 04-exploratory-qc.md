@@ -426,7 +426,7 @@ sessionInfo()
 ```
 
 ``` output
-R version 4.6.0 (2026-04-24)
+R version 4.6.1 (2026-06-24)
 Platform: x86_64-pc-linux-gnu
 Running under: Ubuntu 24.04.4 LTS
 
@@ -451,38 +451,38 @@ attached base packages:
 
 other attached packages:
  [1] iSEE_2.24.0                 SingleCellExperiment_1.34.0
- [3] hexbin_1.28.5               RColorBrewer_1.1-3         
+ [3] hexbin_1.28.6               RColorBrewer_1.1-3         
  [5] ComplexHeatmap_2.28.0       ggplot2_4.0.3              
  [7] vsn_3.80.0                  DESeq2_1.52.0              
  [9] SummarizedExperiment_1.42.0 Biobase_2.72.0             
 [11] MatrixGenerics_1.24.0       matrixStats_1.5.0          
 [13] GenomicRanges_1.64.0        Seqinfo_1.2.0              
-[15] IRanges_2.46.0              S4Vectors_0.50.1           
+[15] IRanges_2.46.0              S4Vectors_0.50.2           
 [17] BiocGenerics_0.58.1         generics_0.1.4             
 
 loaded via a namespace (and not attached):
  [1] rlang_1.3.0           magrittr_2.0.5        shinydashboard_0.7.3 
  [4] clue_0.3-68           GetoptLong_1.1.1      otel_0.2.0           
- [7] compiler_4.6.0        mgcv_1.9-4            png_0.1-9            
+ [7] compiler_4.6.1        mgcv_1.9-4            png_0.1-9            
 [10] vctrs_0.7.3           pkgconfig_2.0.3       shape_1.4.6.1        
 [13] crayon_1.5.3          fastmap_1.2.0         XVector_0.52.0       
 [16] labeling_0.4.3        promises_1.5.0        preprocessCore_1.74.0
 [19] shinyAce_0.4.4        xfun_0.60             cachem_1.1.0         
 [22] jsonlite_2.0.0        listviewer_4.0.0      later_1.4.8          
-[25] DelayedArray_0.38.2   BiocParallel_1.46.0   parallel_4.6.0       
-[28] cluster_2.1.8.2       R6_2.6.1              bslib_0.11.0         
-[31] limma_3.68.4          jquerylib_0.1.4       Rcpp_1.1.2           
+[25] DelayedArray_0.38.2   BiocParallel_1.46.0   parallel_4.6.1       
+[28] cluster_2.1.8.2       R6_2.6.1              bslib_0.12.0         
+[31] limma_3.68.5          jquerylib_0.1.4       Rcpp_1.1.2           
 [34] iterators_1.0.14      knitr_1.51            httpuv_1.6.17        
-[37] Matrix_1.7-5          splines_4.6.0         igraph_2.3.3         
+[37] Matrix_1.7-6          splines_4.6.1         igraph_2.3.3         
 [40] tidyselect_1.2.1      abind_1.4-8           yaml_2.3.12          
 [43] doParallel_1.0.17     codetools_0.2-20      affy_1.90.0          
 [46] miniUI_0.1.2          lattice_0.22-9        tibble_3.3.1         
 [49] shiny_1.14.0          withr_3.0.3           S7_0.2.2             
 [52] evaluate_1.0.5        circlize_0.4.18       pillar_1.11.1        
-[55] affyio_1.82.0         BiocManager_1.30.27   renv_1.2.3           
+[55] affyio_1.82.0         BiocManager_1.30.27   renv_1.2.4           
 [58] DT_0.34.0             foreach_1.5.2         shinyjs_2.1.1        
 [61] scales_1.4.0          xtable_1.8-8          glue_1.8.1           
-[64] tools_4.6.0           colourpicker_1.3.0    locfit_1.5-9.12      
+[64] tools_4.6.1           colourpicker_1.3.0    locfit_1.5-9.12      
 [67] colorspace_2.1-3      nlme_3.1-169          vipor_0.4.7          
 [70] cli_3.6.6             viridisLite_0.4.3     S4Arrays_1.12.0      
 [73] dplyr_1.2.1           gtable_0.3.6          rintrojs_0.3.4       
