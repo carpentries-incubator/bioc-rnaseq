@@ -277,12 +277,12 @@
       </div>
       <!-- content for large screens -->
       <div class="d-none d-sm-none d-md-block">
-        <a class="chapter-link" href="02-setup.html" rel="prev"><i aria-hidden="true" class="small-arrow" data-feather="arrow-left"></i>Previous: RStudio Project and</a>
-        <a class="chapter-link float-end" href="04-exploratory-qc.html" rel="next">Next: Exploratory analysis... <i aria-hidden="true" class="small-arrow" data-feather="arrow-right"></i></a>
+        <a class="chapter-link" href="02-setup.html" rel="prev"><i aria-hidden="true" class="small-arrow" data-feather="arrow-left"></i>Previous: RStudio Project and Experimental Data</a>
+        <a class="chapter-link float-end" href="04-exploratory-qc.html" rel="next">Next: Exploratory analysis and quality control... <i aria-hidden="true" class="small-arrow" data-feather="arrow-right"></i></a>
       </div>
       <hr></nav><main id="main-content" class="main-content"><div class="container lesson-content">
         <h1>Importing and annotating quantified data into R</h1>
-        <p> Last updated on 2026-07-14 |
+        <p> Last updated on 2026-09-01 |
 
         <a href="https://github.com/carpentries-incubator/bioc-rnaseq/edit/main/episodes/03-import-annotate.Rmd" class="external-link">Edit this page <i aria-hidden="true" data-feather="edit"></i></a></p>
 
@@ -492,11 +492,11 @@ dataset:</p>
     V_segment
           535 </code></pre>
 </div>
-<div id="challenge-discuss-the-following-points-with-your-neighbor" class="callout discussion">
+<div id="challenge-discuss-the-following-points-with-your-neighbor" class="callout challenge">
 <div class="callout-square">
-<i class="callout-icon" data-feather="message-circle"></i>
+<i class="callout-icon" data-feather="zap"></i>
 </div>
-<span class="callout-header">Discussion</span>
+<span class="callout-header">Challenge</span>
 <div id="challenge-discuss-the-following-points-with-your-neighbor" class="callout-inner">
 <h3 class="callout-title">Challenge: Discuss the following points with
 your neighbor</h3>
@@ -615,11 +615,11 @@ same order. One quick way to check:</p>
 </h3>
 <pre class="output" tabindex="0"><code>[1] TRUE</code></pre>
 </div>
-<div id="discussion2" class="callout discussion">
+<div id="challenge2" class="callout challenge">
 <div class="callout-square">
-<i class="callout-icon" data-feather="message-circle"></i>
+<i class="callout-icon" data-feather="zap"></i>
 </div>
-<span class="callout-header">Discussion</span>
+<span class="callout-header">Challenge</span>
 <div class="callout-inner">
 <h3 class="callout-title">Challenge</h3>
 <div class="callout-content">
@@ -987,11 +987,11 @@ Male_Day8_24          24   Male_Day8_24 Male_Day8  </code></pre>
 <span></span>
 <span><span class="va">se</span><span class="op">$</span><span class="va">Label</span> <span class="op">&lt;-</span> <span class="fu">factor</span><span class="op">(</span><span class="va">se</span><span class="op">$</span><span class="va">Label</span>, levels <span class="op">=</span> <span class="va">se</span><span class="op">$</span><span class="va">Label</span><span class="op">)</span></span></code></pre>
 </div>
-<div id="discussion3" class="callout discussion">
+<div id="challenge3" class="callout challenge">
 <div class="callout-square">
-<i class="callout-icon" data-feather="message-circle"></i>
+<i class="callout-icon" data-feather="zap"></i>
 </div>
-<span class="callout-header">Discussion</span>
+<span class="callout-header">Challenge</span>
 <div class="callout-inner">
 <h3 class="callout-title">Challenge</h3>
 <div class="callout-content">
@@ -1117,11 +1117,11 @@ the R version, add-on package versions and even what operating system
 you use, so make sure to keep track of all this information as well by
 running <code>sessionInfo()</code> and recording the output (see example
 at end of lesson).</p>
-<div id="challenge-how-to-subset-to-mrna-genes" class="callout discussion">
+<div id="challenge-how-to-subset-to-mrna-genes" class="callout challenge">
 <div class="callout-square">
-<i class="callout-icon" data-feather="message-circle"></i>
+<i class="callout-icon" data-feather="zap"></i>
 </div>
-<span class="callout-header">Discussion</span>
+<span class="callout-header">Challenge</span>
 <div id="challenge-how-to-subset-to-mrna-genes" class="callout-inner">
 <h3 class="callout-title">Challenge: How to subset to mRNA genes</h3>
 <div class="callout-content">
@@ -1295,7 +1295,7 @@ $`10001`
 <div class="codewrapper">
 <h3 class="code-label">OUTPUT<i aria-hidden="true" data-feather="chevron-left"></i><i aria-hidden="true" data-feather="chevron-right"></i>
 </h3>
-<pre class="output" tabindex="0"><code>R version 4.6.0 (2026-04-24)
+<pre class="output" tabindex="0"><code>R version 4.6.1 (2026-06-24)
 Platform: x86_64-pc-linux-gnu
 Running under: Ubuntu 24.04.4 LTS
 
@@ -1324,24 +1324,24 @@ other attached packages:
  [5] SummarizedExperiment_1.42.0 Biobase_2.72.0
  [7] MatrixGenerics_1.24.0       matrixStats_1.5.0
  [9] GenomicRanges_1.64.0        Seqinfo_1.2.0
-[11] IRanges_2.46.0              S4Vectors_0.50.1
+[11] IRanges_2.46.0              S4Vectors_0.50.2
 [13] BiocGenerics_0.58.1         generics_0.1.4
 [15] knitr_1.51
 
 loaded via a namespace (and not attached):
- [1] Matrix_1.7-5        bit_4.6.0           crayon_1.5.3
- [4] compiler_4.6.0      BiocManager_1.30.27 renv_1.2.3
+ [1] Matrix_1.7-6        bit_4.6.0           crayon_1.5.3
+ [4] compiler_4.6.1      BiocManager_1.30.27 renv_1.2.4
  [7] blob_1.3.0          Biostrings_2.80.1   png_0.1-9
 [10] yaml_2.3.12         fastmap_1.2.0       lattice_0.22-9
 [13] R6_2.6.1            XVector_0.52.0      S4Arrays_1.12.0
 [16] DelayedArray_0.38.2 DBI_1.3.0           pillar_1.11.1
 [19] rlang_1.3.0         KEGGREST_1.52.2     cachem_1.1.0
-[22] xfun_0.60           bit64_4.8.2         otel_0.2.0
+[22] xfun_0.60           bit64_4.8.4         otel_0.2.0
 [25] SparseArray_1.12.2  RSQLite_3.53.3      memoise_2.0.1
-[28] cli_3.6.6           grid_4.6.0          lifecycle_1.0.5
+[28] cli_3.6.6           grid_4.6.1          lifecycle_1.0.5
 [31] vctrs_0.7.3         glue_1.8.1          evaluate_1.0.5
 [34] abind_1.4-8         httr_1.4.8          pkgconfig_2.0.3
-[37] tools_4.6.0        </code></pre>
+[37] tools_4.6.1        </code></pre>
 </div>
 <div id="keypoints1" class="callout keypoints">
 <div class="callout-square">
@@ -1367,8 +1367,8 @@ analysis, with gene symbols added for easier interpretation.</li>
       </div>
       <!-- content for large screens -->
       <div class="d-none d-sm-none d-md-block">
-        <a class="chapter-link" href="02-setup.html" rel="prev"><i aria-hidden="true" class="small-arrow" data-feather="arrow-left"></i>Previous: RStudio Project and</a>
-        <a class="chapter-link float-end" href="04-exploratory-qc.html" rel="next">Next: Exploratory analysis... <i aria-hidden="true" class="small-arrow" data-feather="arrow-right"></i></a>
+        <a class="chapter-link" href="02-setup.html" rel="prev"><i aria-hidden="true" class="small-arrow" data-feather="arrow-left"></i>Previous: RStudio Project and Experimental Data</a>
+        <a class="chapter-link float-end" href="04-exploratory-qc.html" rel="next">Next: Exploratory analysis and quality control... <i aria-hidden="true" class="small-arrow" data-feather="arrow-right"></i></a>
       </div>
     </nav></div> <!-- / div.primary-content.col-xs-12 -->
 <!-- END:   inst/pkgdown/templates/content-instructor.html-->
@@ -1390,7 +1390,7 @@ analysis, with gene symbols added for easier interpretation.</li>
         <p>Materials licensed under <a href="LICENSE.html">CC-BY 4.0</a> by the authors</p>
 
         <p><a href="https://creativecommons.org/licenses/by-sa/4.0/" class="external-link">Template licensed under CC-BY 4.0</a> by <a href="https://carpentries.org" class="external-link">The Carpentries</a></p>
-        <p>Built with <a href="https://github.com/carpentries/sandpaper/tree/" class="external-link">sandpaper (0.20.2)</a>,
+        <p>Built with <a href="https://github.com/carpentries/sandpaper/tree/" class="external-link">sandpaper (0.21.0)</a>,
         <a href="https://github.com/carpentries/pegboard/tree/" class="external-link">pegboard (0.7.9)</a>,
       and <a href="https://github.com/mblue9/varnish/tree/3403ad0dd37f7641c6442330fcc182937e7964c5" class="external-link">varnish (0.2.16)</a>.</p>
 			</div>
@@ -1414,8 +1414,8 @@ analysis, with gene symbols added for easier interpretation.</li>
   "url": "https://carpentries-incubator.github.io/bioc-rnaseq/03-import-annotate.html",
   "identifier": "https://carpentries-incubator.github.io/bioc-rnaseq/03-import-annotate.html",
   "dateCreated": "2020-09-15",
-  "dateModified": "2026-07-14",
-  "datePublished": "2026-08-25"
+  "dateModified": "2026-09-01",
+  "datePublished": "2026-09-01"
 }
 
   </script><script>
