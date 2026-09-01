@@ -753,7 +753,7 @@ sessionInfo()
 ```
 
 ``` output
-R version 4.6.0 (2026-04-24)
+R version 4.6.1 (2026-06-24)
 Platform: x86_64-pc-linux-gnu
 Running under: Ubuntu 24.04.4 LTS
 
@@ -787,8 +787,8 @@ other attached packages:
 [15] knitr_1.51                 
 
 loaded via a namespace (and not attached):
- [1] Matrix_1.7-5        bit_4.6.0           crayon_1.5.3       
- [4] compiler_4.6.0      BiocManager_1.30.27 renv_1.2.3         
+ [1] Matrix_1.7-6        bit_4.6.0           crayon_1.5.3       
+ [4] compiler_4.6.1      BiocManager_1.30.27 renv_1.2.4         
  [7] blob_1.3.0          Biostrings_2.80.1   png_0.1-9          
 [10] yaml_2.3.12         fastmap_1.2.0       lattice_0.22-9     
 [13] R6_2.6.1            XVector_0.52.0      S4Arrays_1.12.0    
@@ -796,10 +796,10 @@ loaded via a namespace (and not attached):
 [19] rlang_1.3.0         KEGGREST_1.52.2     cachem_1.1.0       
 [22] xfun_0.60           bit64_4.8.2         otel_0.2.0         
 [25] SparseArray_1.12.2  RSQLite_3.53.3      memoise_2.0.1      
-[28] cli_3.6.6           grid_4.6.0          lifecycle_1.0.5    
+[28] cli_3.6.6           grid_4.6.1          lifecycle_1.0.5    
 [31] vctrs_0.7.3         glue_1.8.1          evaluate_1.0.5     
 [34] abind_1.4-8         httr_1.4.8          pkgconfig_2.0.3    
-[37] tools_4.6.0        
+[37] tools_4.6.1        
 ```
 
 ::: keypoints
