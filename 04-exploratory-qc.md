@@ -479,7 +479,7 @@ loaded via a namespace (and not attached):
 [46] miniUI_0.1.2          lattice_0.22-9        tibble_3.3.1         
 [49] shiny_1.14.0          withr_3.0.3           S7_0.2.2             
 [52] evaluate_1.0.5        circlize_0.4.18       pillar_1.11.1        
-[55] affyio_1.82.0         BiocManager_1.30.27   renv_1.2.4           
+[55] affyio_1.82.0         BiocManager_1.30.27   renv_1.3.0           
 [58] DT_0.34.0             foreach_1.5.2         shinyjs_2.1.1        
 [61] scales_1.4.0          xtable_1.8-8          glue_1.8.1           
 [64] tools_4.6.1           colourpicker_1.3.0    locfit_1.5-9.12      

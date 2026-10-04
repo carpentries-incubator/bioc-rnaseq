@@ -499,10 +499,10 @@ microbenchmark(
 ```
 
 ``` output
-Unit: nanoseconds
-   expr    min       lq      mean   median     uq    max neval
- fisher 129705 132288.5 139491.47 135533.5 139014 399520   100
-  hyper    971   1032.0   1430.05   1176.5   1337  22614   100
+Unit: microseconds
+   expr     min       lq      mean  median       uq     max neval
+ fisher 136.184 144.5815 155.31885 149.364 157.5465 467.812   100
+  hyper   1.011   1.1220   1.41382   1.342   1.5175   5.729   100
 ```
 
 It is very astonishing that `phyper()` is hundreds of times faster than
@@ -1277,12 +1277,12 @@ GO:0030595       4.299808  9.908597 6.859406e-14 8.672004e-11 2.404815e-11
 GO:0060326       3.528237  9.052150 7.528704e-13 7.614531e-10 2.111569e-10
 GO:0071674       4.020191  8.990078 4.993702e-12 3.786134e-09 1.049925e-09
                                                                                                                                                                                                                                                                                                                                          geneID
-GO:0050900                   Cxcl5/Ccl5/Ccr7/Lgals3/Trpm4/Ccl7/Ccl28/Ptn/Ccl2/Tnfsf18/Edn3/Nbl1/Gdf15/Mdk/Il33/Slamf9/Fut7/Aire/Ager/Alox5/Ch25h/Hsd3b7/Cd209a/Retnlg/Ada/Fpr2/Aoc3/Ptk2b/Apod/Il12a/S100a9/Prex1/Sell/S100a8/Bst1/Itgb3/Itgam/Enpp1/Cxcl1/Calr/C3/Emp2/Dusp1/Ppbp/Itga4/Pf4/Padi2/P2ry12/Plg/Axdnd1/AI182371/Ascl2/Grem1/Adam8
-GO:0006935 Cxcl5/Plxnb3/Ccl5/Ccr7/Lgals3/Trpm4/Ccl7/Ccl28/Ptn/Ccl2/Lsp1/Tnfsf18/Edn3/Robo3/Tubb2b/Nbl1/Mdk/Slamf9/Cmtm7/Ptgr1/Nox1/Ager/Alox5/Ch25h/Hsd3b7/Nr4a1/Retnlg/Fpr2/Ccl17/Ptk2b/Il12a/S100a9/Prex1/Sell/Lpar1/S100a8/Bst1/Itgb3/Itgam/Casr/Cxcl1/Calr/C3/Ntf3/Dusp1/Ppbp/S100a7a/Pf4/Padi2/P2ry12/Ccl6/AI182371/Cmtm5/Stx3/Grem1/Adam8
-GO:0042330 Cxcl5/Plxnb3/Ccl5/Ccr7/Lgals3/Trpm4/Ccl7/Ccl28/Ptn/Ccl2/Lsp1/Tnfsf18/Edn3/Robo3/Tubb2b/Nbl1/Mdk/Slamf9/Cmtm7/Ptgr1/Nox1/Ager/Alox5/Ch25h/Hsd3b7/Nr4a1/Retnlg/Fpr2/Ccl17/Ptk2b/Il12a/S100a9/Prex1/Sell/Lpar1/S100a8/Bst1/Itgb3/Itgam/Casr/Cxcl1/Calr/C3/Ntf3/Dusp1/Ppbp/S100a7a/Pf4/Padi2/P2ry12/Ccl6/AI182371/Cmtm5/Stx3/Grem1/Adam8
-GO:0030595                                                                                                                 Cxcl5/Ccl5/Ccr7/Lgals3/Trpm4/Ccl7/Ccl28/Ptn/Ccl2/Tnfsf18/Edn3/Nbl1/Mdk/Slamf9/Alox5/Ch25h/Hsd3b7/Retnlg/Fpr2/Ptk2b/Il12a/S100a9/Prex1/Sell/S100a8/Bst1/Itgam/Cxcl1/Calr/C3/Dusp1/Ppbp/Pf4/Padi2/AI182371/Grem1/Adam8
-GO:0060326                                                                              Cxcl5/Plxnb3/Ccl5/Ccr7/Lgals3/Trpm4/Ccl7/Ccl28/Ptn/Ccl2/Tnfsf18/Edn3/Nbl1/Mdk/Slamf9/Nox1/Alox5/Ch25h/Hsd3b7/Nr4a1/Retnlg/Fpr2/Ccl17/Ptk2b/Il12a/S100a9/Prex1/Sell/Lpar1/S100a8/Bst1/Itgam/Cxcl1/Calr/C3/Dusp1/Ppbp/Pf4/Padi2/Ccl6/AI182371/Grem1/Adam8
-GO:0071674                                                                                                                              Ccl5/Ccr7/Lgals3/Trpm4/Ccl7/Ccl2/Tnfsf18/Nbl1/Mdk/Slamf9/Fut7/Aire/Ager/Alox5/Ch25h/Hsd3b7/Cd209a/Retnlg/Fpr2/Ptk2b/Apod/Il12a/Itgb3/Enpp1/Calr/Dusp1/Itga4/Padi2/P2ry12/Plg/AI182371/Ascl2/Grem1/Adam8
+GO:0050900                   Ccr7/Ptn/Fpr2/Enpp1/Edn3/Itga4/Cxcl5/Aire/Ager/Retnlg/Mdk/Ada/Itgb3/Ppbp/Axdnd1/C3/S100a9/Ch25h/Ccl28/Hsd3b7/S100a8/Gdf15/Aoc3/Sell/Tnfsf18/Il33/Ccl7/Cd209a/Nbl1/Il12a/Prex1/Padi2/Emp2/Alox5/Slamf9/Ccl5/Ptk2b/Pf4/Apod/Calr/Ccl2/Adam8/Itgam/Lgals3/Trpm4/AI182371/Ascl2/Dusp1/Cxcl1/P2ry12/Grem1/Fut7/Plg/Bst1
+GO:0006935 Ccr7/Nr4a1/Cmtm7/Ptgr1/Lsp1/Ptn/Fpr2/Edn3/Cxcl5/Ager/Plxnb3/Retnlg/Mdk/Itgb3/Ppbp/S100a7a/C3/S100a9/Ch25h/Ccl28/Hsd3b7/Casr/S100a8/Cmtm5/Sell/Ccl17/Tnfsf18/Ccl7/Tubb2b/Ntf3/Nbl1/Il12a/Prex1/Padi2/Lpar1/Alox5/Stx3/Slamf9/Ccl5/Ccl6/Ptk2b/Nox1/Pf4/Calr/Ccl2/Adam8/Itgam/Lgals3/Trpm4/AI182371/Dusp1/Cxcl1/P2ry12/Grem1/Robo3/Bst1
+GO:0042330 Ccr7/Nr4a1/Cmtm7/Ptgr1/Lsp1/Ptn/Fpr2/Edn3/Cxcl5/Ager/Plxnb3/Retnlg/Mdk/Itgb3/Ppbp/S100a7a/C3/S100a9/Ch25h/Ccl28/Hsd3b7/Casr/S100a8/Cmtm5/Sell/Ccl17/Tnfsf18/Ccl7/Tubb2b/Ntf3/Nbl1/Il12a/Prex1/Padi2/Lpar1/Alox5/Stx3/Slamf9/Ccl5/Ccl6/Ptk2b/Nox1/Pf4/Calr/Ccl2/Adam8/Itgam/Lgals3/Trpm4/AI182371/Dusp1/Cxcl1/P2ry12/Grem1/Robo3/Bst1
+GO:0030595                                                                                                                 Ccr7/Ptn/Fpr2/Edn3/Cxcl5/Retnlg/Mdk/Ppbp/C3/S100a9/Ch25h/Ccl28/Hsd3b7/S100a8/Sell/Tnfsf18/Ccl7/Nbl1/Il12a/Prex1/Padi2/Alox5/Slamf9/Ccl5/Ptk2b/Pf4/Calr/Ccl2/Adam8/Itgam/Lgals3/Trpm4/AI182371/Dusp1/Cxcl1/Grem1/Bst1
+GO:0060326                                                                              Ccr7/Nr4a1/Ptn/Fpr2/Edn3/Cxcl5/Plxnb3/Retnlg/Mdk/Ppbp/C3/S100a9/Ch25h/Ccl28/Hsd3b7/S100a8/Sell/Ccl17/Tnfsf18/Ccl7/Nbl1/Il12a/Prex1/Padi2/Lpar1/Alox5/Slamf9/Ccl5/Ccl6/Ptk2b/Nox1/Pf4/Calr/Ccl2/Adam8/Itgam/Lgals3/Trpm4/AI182371/Dusp1/Cxcl1/Grem1/Bst1
+GO:0071674                                                                                                                              Ccr7/Fpr2/Enpp1/Itga4/Aire/Ager/Retnlg/Mdk/Itgb3/Ch25h/Hsd3b7/Tnfsf18/Ccl7/Cd209a/Nbl1/Il12a/Padi2/Alox5/Slamf9/Ccl5/Ptk2b/Apod/Calr/Ccl2/Adam8/Lgals3/Trpm4/AI182371/Ascl2/Dusp1/P2ry12/Grem1/Fut7/Plg
            Count
 GO:0050900    54
 GO:0006935    56
@@ -1383,12 +1383,12 @@ GO:0030595       4.299808  9.908597 6.859406e-14 8.672004e-11 2.404815e-11
 GO:0060326       3.528237  9.052150 7.528704e-13 7.614531e-10 2.111569e-10
 GO:0071674       4.020191  8.990078 4.993702e-12 3.786134e-09 1.049925e-09
                                                                                                                                                                                                                                                                                                                                          geneID
-GO:0050900                   Cxcl5/Ccl5/Ccr7/Lgals3/Trpm4/Ccl7/Ccl28/Ptn/Ccl2/Tnfsf18/Edn3/Nbl1/Gdf15/Mdk/Il33/Slamf9/Fut7/Aire/Ager/Alox5/Ch25h/Hsd3b7/Cd209a/Retnlg/Ada/Fpr2/Aoc3/Ptk2b/Apod/Il12a/S100a9/Prex1/Sell/S100a8/Bst1/Itgb3/Itgam/Enpp1/Cxcl1/Calr/C3/Emp2/Dusp1/Ppbp/Itga4/Pf4/Padi2/P2ry12/Plg/Axdnd1/AI182371/Ascl2/Grem1/Adam8
-GO:0006935 Cxcl5/Plxnb3/Ccl5/Ccr7/Lgals3/Trpm4/Ccl7/Ccl28/Ptn/Ccl2/Lsp1/Tnfsf18/Edn3/Robo3/Tubb2b/Nbl1/Mdk/Slamf9/Cmtm7/Ptgr1/Nox1/Ager/Alox5/Ch25h/Hsd3b7/Nr4a1/Retnlg/Fpr2/Ccl17/Ptk2b/Il12a/S100a9/Prex1/Sell/Lpar1/S100a8/Bst1/Itgb3/Itgam/Casr/Cxcl1/Calr/C3/Ntf3/Dusp1/Ppbp/S100a7a/Pf4/Padi2/P2ry12/Ccl6/AI182371/Cmtm5/Stx3/Grem1/Adam8
-GO:0042330 Cxcl5/Plxnb3/Ccl5/Ccr7/Lgals3/Trpm4/Ccl7/Ccl28/Ptn/Ccl2/Lsp1/Tnfsf18/Edn3/Robo3/Tubb2b/Nbl1/Mdk/Slamf9/Cmtm7/Ptgr1/Nox1/Ager/Alox5/Ch25h/Hsd3b7/Nr4a1/Retnlg/Fpr2/Ccl17/Ptk2b/Il12a/S100a9/Prex1/Sell/Lpar1/S100a8/Bst1/Itgb3/Itgam/Casr/Cxcl1/Calr/C3/Ntf3/Dusp1/Ppbp/S100a7a/Pf4/Padi2/P2ry12/Ccl6/AI182371/Cmtm5/Stx3/Grem1/Adam8
-GO:0030595                                                                                                                 Cxcl5/Ccl5/Ccr7/Lgals3/Trpm4/Ccl7/Ccl28/Ptn/Ccl2/Tnfsf18/Edn3/Nbl1/Mdk/Slamf9/Alox5/Ch25h/Hsd3b7/Retnlg/Fpr2/Ptk2b/Il12a/S100a9/Prex1/Sell/S100a8/Bst1/Itgam/Cxcl1/Calr/C3/Dusp1/Ppbp/Pf4/Padi2/AI182371/Grem1/Adam8
-GO:0060326                                                                              Cxcl5/Plxnb3/Ccl5/Ccr7/Lgals3/Trpm4/Ccl7/Ccl28/Ptn/Ccl2/Tnfsf18/Edn3/Nbl1/Mdk/Slamf9/Nox1/Alox5/Ch25h/Hsd3b7/Nr4a1/Retnlg/Fpr2/Ccl17/Ptk2b/Il12a/S100a9/Prex1/Sell/Lpar1/S100a8/Bst1/Itgam/Cxcl1/Calr/C3/Dusp1/Ppbp/Pf4/Padi2/Ccl6/AI182371/Grem1/Adam8
-GO:0071674                                                                                                                              Ccl5/Ccr7/Lgals3/Trpm4/Ccl7/Ccl2/Tnfsf18/Nbl1/Mdk/Slamf9/Fut7/Aire/Ager/Alox5/Ch25h/Hsd3b7/Cd209a/Retnlg/Fpr2/Ptk2b/Apod/Il12a/Itgb3/Enpp1/Calr/Dusp1/Itga4/Padi2/P2ry12/Plg/AI182371/Ascl2/Grem1/Adam8
+GO:0050900                   Ccr7/Ptn/Fpr2/Enpp1/Edn3/Itga4/Cxcl5/Aire/Ager/Retnlg/Mdk/Ada/Itgb3/Ppbp/Axdnd1/C3/S100a9/Ch25h/Ccl28/Hsd3b7/S100a8/Gdf15/Aoc3/Sell/Tnfsf18/Il33/Ccl7/Cd209a/Nbl1/Il12a/Prex1/Padi2/Emp2/Alox5/Slamf9/Ccl5/Ptk2b/Pf4/Apod/Calr/Ccl2/Adam8/Itgam/Lgals3/Trpm4/AI182371/Ascl2/Dusp1/Cxcl1/P2ry12/Grem1/Fut7/Plg/Bst1
+GO:0006935 Ccr7/Nr4a1/Cmtm7/Ptgr1/Lsp1/Ptn/Fpr2/Edn3/Cxcl5/Ager/Plxnb3/Retnlg/Mdk/Itgb3/Ppbp/S100a7a/C3/S100a9/Ch25h/Ccl28/Hsd3b7/Casr/S100a8/Cmtm5/Sell/Ccl17/Tnfsf18/Ccl7/Tubb2b/Ntf3/Nbl1/Il12a/Prex1/Padi2/Lpar1/Alox5/Stx3/Slamf9/Ccl5/Ccl6/Ptk2b/Nox1/Pf4/Calr/Ccl2/Adam8/Itgam/Lgals3/Trpm4/AI182371/Dusp1/Cxcl1/P2ry12/Grem1/Robo3/Bst1
+GO:0042330 Ccr7/Nr4a1/Cmtm7/Ptgr1/Lsp1/Ptn/Fpr2/Edn3/Cxcl5/Ager/Plxnb3/Retnlg/Mdk/Itgb3/Ppbp/S100a7a/C3/S100a9/Ch25h/Ccl28/Hsd3b7/Casr/S100a8/Cmtm5/Sell/Ccl17/Tnfsf18/Ccl7/Tubb2b/Ntf3/Nbl1/Il12a/Prex1/Padi2/Lpar1/Alox5/Stx3/Slamf9/Ccl5/Ccl6/Ptk2b/Nox1/Pf4/Calr/Ccl2/Adam8/Itgam/Lgals3/Trpm4/AI182371/Dusp1/Cxcl1/P2ry12/Grem1/Robo3/Bst1
+GO:0030595                                                                                                                 Ccr7/Ptn/Fpr2/Edn3/Cxcl5/Retnlg/Mdk/Ppbp/C3/S100a9/Ch25h/Ccl28/Hsd3b7/S100a8/Sell/Tnfsf18/Ccl7/Nbl1/Il12a/Prex1/Padi2/Alox5/Slamf9/Ccl5/Ptk2b/Pf4/Calr/Ccl2/Adam8/Itgam/Lgals3/Trpm4/AI182371/Dusp1/Cxcl1/Grem1/Bst1
+GO:0060326                                                                              Ccr7/Nr4a1/Ptn/Fpr2/Edn3/Cxcl5/Plxnb3/Retnlg/Mdk/Ppbp/C3/S100a9/Ch25h/Ccl28/Hsd3b7/S100a8/Sell/Ccl17/Tnfsf18/Ccl7/Nbl1/Il12a/Prex1/Padi2/Lpar1/Alox5/Slamf9/Ccl5/Ccl6/Ptk2b/Nox1/Pf4/Calr/Ccl2/Adam8/Itgam/Lgals3/Trpm4/AI182371/Dusp1/Cxcl1/Grem1/Bst1
+GO:0071674                                                                                                                              Ccr7/Fpr2/Enpp1/Itga4/Aire/Ager/Retnlg/Mdk/Itgb3/Ch25h/Hsd3b7/Tnfsf18/Ccl7/Cd209a/Nbl1/Il12a/Padi2/Alox5/Slamf9/Ccl5/Ptk2b/Apod/Calr/Ccl2/Adam8/Lgals3/Trpm4/AI182371/Ascl2/Dusp1/P2ry12/Grem1/Fut7/Plg
            Count
 GO:0050900    54
 GO:0006935    56
@@ -1490,26 +1490,26 @@ mmu00592                               alpha-Linolenic acid metabolism
 mmu04913                                       Ovarian steroidogenesis
 mmu04061 Viral protein interaction with cytokine and cytokine receptor
          GeneRatio  BgRatio RichFactor FoldEnrichment   zScore       pvalue
-mmu00590    16/464 89/11213  0.1797753       4.344440 6.581190 6.203165e-07
-mmu00591    12/464 55/11213  0.2181818       5.272571 6.599240 1.895007e-06
-mmu00565    11/464 49/11213  0.2244898       5.425009 6.449392 3.788551e-06
-mmu00592     8/464 25/11213  0.3200000       7.733103 7.002056 4.699285e-06
-mmu04913    12/464 64/11213  0.1875000       4.531115 5.885731 1.010956e-05
-mmu04061    14/464 95/11213  0.1473684       3.561298 5.208648 3.347720e-05
+mmu00590    16/465 89/11244  0.1797753       4.347082 6.584229 6.155892e-07
+mmu00591    12/465 55/11244  0.2181818       5.275777 6.602055 1.883519e-06
+mmu00565    11/465 49/11244  0.2244898       5.428308 6.452116 3.767289e-06
+mmu00592     8/465 25/11244  0.3200000       7.737806 7.004704 4.678765e-06
+mmu04913    12/465 64/11244  0.1875000       4.533871 5.888411 1.005020e-05
+mmu04061    14/465 95/11244  0.1473684       3.563463 5.211339 3.326425e-05
              p.adjust       qvalue
-mmu00590 0.0001978810 0.0001505862
-mmu00591 0.0003022536 0.0002300131
-mmu00565 0.0003747680 0.0002851961
-mmu00592 0.0003747680 0.0002851961
-mmu04913 0.0006449897 0.0004908331
-mmu04061 0.0017798713 0.0013544710
+mmu00590 0.0001963730 0.0001562132
+mmu00591 0.0003004213 0.0002389829
+mmu00565 0.0003731315 0.0002968233
+mmu00592 0.0003731315 0.0002968233
+mmu04913 0.0006412027 0.0005100719
+mmu04061 0.0017685491 0.0014068674
                                                                                                        geneID
-mmu00590 13118/78390/67103/11689/18781/242546/18784/18783/232889/211429/11687/15446/237625/329502/19223/19215
-mmu00591                        78390/18781/242546/18784/13113/18783/232889/211429/11687/237625/329502/622127
-mmu00565                               78390/18781/22239/53897/18784/18783/232889/320981/211429/237625/329502
-mmu00592                                                  78390/18781/18784/18783/232889/211429/237625/329502
-mmu04913                          13070/78390/11689/13078/242546/18783/232889/16867/15485/211429/329502/13076
-mmu04061                  20311/20304/12775/20306/56838/20296/16186/20295/16185/14825/57349/56744/16174/20305
+mmu00590 67103/13118/242546/211429/237625/18784/232889/15446/329502/18781/19215/11687/11689/18783/78390/19223
+mmu00591                        242546/211429/237625/622127/18784/232889/329502/18781/13113/11687/18783/78390
+mmu00565                               211429/22239/53897/237625/18784/232889/329502/18781/18783/78390/320981
+mmu00592                                                  211429/237625/18784/232889/329502/18781/18783/78390
+mmu04913                          242546/211429/232889/329502/13078/11689/18783/16867/13070/13076/78390/15485
+mmu04061                  12775/16186/20311/57349/56838/16185/20295/20306/16174/20304/20305/56744/20296/14825
          Count
 mmu00590    16
 mmu00591    12
@@ -1602,12 +1602,12 @@ HALLMARK_ALLOGRAFT_REJECTION       2.467925e-04 0.0030849069 0.0030849069
 HALLMARK_INTERFERON_ALPHA_RESPONSE 1.614367e-03 0.0141933353 0.0141933353
 HALLMARK_IL2_STAT5_SIGNALING       1.703200e-03 0.0141933353 0.0141933353
                                                                                                                                                                                                                                                                          geneID
-HALLMARK_MYOGENESIS                Hspb2/Tnni2/Myh3/Ptgis/Aplnr/Mapk13/Myh1/Myh15/Erbb3/Tnnc2/Mybpc2/Plxnb3/Actn3/Col1a1/Spdef/Col15a1/Cacng1/Itgb3/Bdkrb2/Tnnt1/Mapk12/Myh13/Lsp1/Smtnl2/Gja5/Bche/Avil/Slc6a12/Myo1d/Vil1/Casq1/Cdkn1a/Cryab/Myo1a/Myl1/Ryr1/Nos2/Itgb4/Fabp7
-HALLMARK_INTERFERON_GAMMA_RESPONSE                         Bst1/Zbp1/Gbp9/Ifi27l2a/Pla2g4a/Tap1/Mthfd2/Itgb3/H2-Q1/Gbp6/H2-T23/Psmb8/Lgals3bp/Apol6/Gbp4/Ccl7/Psmb9/H2-K1/Il2rb/Gbp5/Ifitm6/Cdkn1a/Csf2rb/Fpr2/Ccl2/Irf7/H2-Q6/Cd274/Ifit1/Oas2/H2-Q2/Mettl7a3/Ccl5/Bst2/Ifitm7
-HALLMARK_COAGULATION                                                                                                            Pf4/Dct/Ctse/Apoc1/Plg/Tll2/C3/Serpinb2/Mmp15/Gnb4/Itgb3/Pcsk4/Ctsk/Fbn2/Hmgcs1/Crip3/Mmp8/Avil/Klkb1/Vil1/Tmprss6/Maff/Sh2b2/Vwf/C4b/Masp2/C8g
-HALLMARK_ALLOGRAFT_REJECTION                                                          Pf4/Capg/Erbb3/Cd247/Gbp9/Tap1/Icosl/Gzmb/Cfp/Itgb3/Ccnd2/H2-Q1/Gbp6/H2-T23/Gpr65/Gm21104/Ctsk/Bche/Tap2/Gbp4/Ccl7/Il18rap/H2-K1/Il2rb/Gbp5/Ccl2/Il2rg/Irf7/H2-Q6/Il12rb1/Nos2/H2-Q2/Ccl5
-HALLMARK_INTERFERON_ALPHA_RESPONSE                                                                                                               Gbp9/Ifi27l2a/Tap1/H2-Q1/Gbp6/H2-T23/Psmb8/Lgals3bp/Gbp4/Trim5/Oas1c/Psmb9/H2-K1/Gbp5/Ifitm6/Irf7/H2-Q6/Sell/H2-Q2/Bst2/Ifitm7
-HALLMARK_IL2_STAT5_SIGNALING                                                                      Capg/Gbp9/Scn11a/Phlda1/Il1r2/Enpp3/Enpp1/Ttc39a/Ccnd2/Gbp6/Pcsk4/Gpr65/Ager/Xbp1/P4ha1/Gbp4/Gsto2/Myo1d/Traf1/Il2rb/Gbp5/Scn7a/Maff/Ifitm6/Hopx/Myo1a/Sell/Etv4/Hkdc1/Ifitm7
+HALLMARK_MYOGENESIS                Casq1/Col1a1/Ryr1/Cacng1/Myh15/Slc6a12/Avil/Tnni2/Myo1d/Myh13/Ptgis/Itgb3/Itgb4/Mapk13/Myl1/Myo1a/Mybpc2/Spdef/Tnnt1/Mapk12/Col15a1/Myh1/Erbb3/Smtnl2/Nos2/Lsp1/Gja5/Fabp7/Hspb2/Plxnb3/Vil1/Cryab/Myh3/Bche/Actn3/Aplnr/Tnnc2/Bdkrb2/Cdkn1a
+HALLMARK_INTERFERON_GAMMA_RESPONSE                         Ifi27l2a/Ccl2/H2-Q2/Mthfd2/Zbp1/Itgb3/Cd274/Fpr2/Pla2g4a/Ifit1/Gbp4/H2-K1/Psmb9/Lgals3bp/H2-T23/Apol6/Oas2/Psmb8/Bst1/Ifitm6/Il2rb/Gbp5/Mettl7a3/Ccl5/Irf7/H2-Q6/H2-Q1/Gbp6/Ccl7/Gbp9/Cdkn1a/Csf2rb/Tap1/Bst2/Ifitm7
+HALLMARK_COAGULATION                                                                                                            Tll2/Plg/Hmgcs1/Crip3/Fbn2/Mmp8/Mmp15/Avil/Serpinb2/Pf4/C4b/Itgb3/Pcsk4/Gnb4/Dct/C3/Ctsk/Sh2b2/Vwf/Maff/Apoc1/Ctse/Vil1/Tmprss6/Klkb1/Masp2/C8g
+HALLMARK_ALLOGRAFT_REJECTION                                                          Capg/Gm21104/Cd247/Ccl2/H2-Q2/Pf4/Gpr65/Il12rb1/Itgb3/Ccnd2/Gbp4/H2-K1/Ctsk/H2-T23/Erbb3/Nos2/Icosl/Il2rb/Gbp5/Tap2/Il18rap/Ccl5/Il2rg/Bche/Irf7/Gzmb/H2-Q6/H2-Q1/Gbp6/Cfp/Ccl7/Gbp9/Tap1
+HALLMARK_INTERFERON_ALPHA_RESPONSE                                                                                                               Ifi27l2a/Sell/H2-Q2/Gbp4/H2-K1/Psmb9/Lgals3bp/H2-T23/Oas1c/Psmb8/Ifitm6/Trim5/Gbp5/Irf7/H2-Q6/H2-Q1/Gbp6/Gbp9/Tap1/Bst2/Ifitm7
+HALLMARK_IL2_STAT5_SIGNALING                                                                      Capg/Il1r2/Sell/Traf1/Hopx/Enpp3/Myo1d/Gpr65/Etv4/Ccnd2/Pcsk4/Myo1a/Gbp4/Ttc39a/Ager/Maff/Xbp1/Scn7a/Ifitm6/Il2rb/Gbp5/Gsto2/Hkdc1/Phlda1/Enpp1/Scn11a/Gbp6/Gbp9/P4ha1/Ifitm7
                                    Count
 HALLMARK_MYOGENESIS                   39
 HALLMARK_INTERFERON_GAMMA_RESPONSE    35
@@ -1827,12 +1827,12 @@ GO:0030595       4.299808  9.908597 6.859406e-14 8.672004e-11 2.404815e-11
 GO:0060326       3.528237  9.052150 7.528704e-13 7.614531e-10 2.111569e-10
 GO:0071674       4.020191  8.990078 4.993702e-12 3.786134e-09 1.049925e-09
                                                                                                                                                                                                                                                                                                                                          geneID
-GO:0050900                   Cxcl5/Ccl5/Ccr7/Lgals3/Trpm4/Ccl7/Ccl28/Ptn/Ccl2/Tnfsf18/Edn3/Nbl1/Gdf15/Mdk/Il33/Slamf9/Fut7/Aire/Ager/Alox5/Ch25h/Hsd3b7/Cd209a/Retnlg/Ada/Fpr2/Aoc3/Ptk2b/Apod/Il12a/S100a9/Prex1/Sell/S100a8/Bst1/Itgb3/Itgam/Enpp1/Cxcl1/Calr/C3/Emp2/Dusp1/Ppbp/Itga4/Pf4/Padi2/P2ry12/Plg/Axdnd1/AI182371/Ascl2/Grem1/Adam8
-GO:0006935 Cxcl5/Plxnb3/Ccl5/Ccr7/Lgals3/Trpm4/Ccl7/Ccl28/Ptn/Ccl2/Lsp1/Tnfsf18/Edn3/Robo3/Tubb2b/Nbl1/Mdk/Slamf9/Cmtm7/Ptgr1/Nox1/Ager/Alox5/Ch25h/Hsd3b7/Nr4a1/Retnlg/Fpr2/Ccl17/Ptk2b/Il12a/S100a9/Prex1/Sell/Lpar1/S100a8/Bst1/Itgb3/Itgam/Casr/Cxcl1/Calr/C3/Ntf3/Dusp1/Ppbp/S100a7a/Pf4/Padi2/P2ry12/Ccl6/AI182371/Cmtm5/Stx3/Grem1/Adam8
-GO:0042330 Cxcl5/Plxnb3/Ccl5/Ccr7/Lgals3/Trpm4/Ccl7/Ccl28/Ptn/Ccl2/Lsp1/Tnfsf18/Edn3/Robo3/Tubb2b/Nbl1/Mdk/Slamf9/Cmtm7/Ptgr1/Nox1/Ager/Alox5/Ch25h/Hsd3b7/Nr4a1/Retnlg/Fpr2/Ccl17/Ptk2b/Il12a/S100a9/Prex1/Sell/Lpar1/S100a8/Bst1/Itgb3/Itgam/Casr/Cxcl1/Calr/C3/Ntf3/Dusp1/Ppbp/S100a7a/Pf4/Padi2/P2ry12/Ccl6/AI182371/Cmtm5/Stx3/Grem1/Adam8
-GO:0030595                                                                                                                 Cxcl5/Ccl5/Ccr7/Lgals3/Trpm4/Ccl7/Ccl28/Ptn/Ccl2/Tnfsf18/Edn3/Nbl1/Mdk/Slamf9/Alox5/Ch25h/Hsd3b7/Retnlg/Fpr2/Ptk2b/Il12a/S100a9/Prex1/Sell/S100a8/Bst1/Itgam/Cxcl1/Calr/C3/Dusp1/Ppbp/Pf4/Padi2/AI182371/Grem1/Adam8
-GO:0060326                                                                              Cxcl5/Plxnb3/Ccl5/Ccr7/Lgals3/Trpm4/Ccl7/Ccl28/Ptn/Ccl2/Tnfsf18/Edn3/Nbl1/Mdk/Slamf9/Nox1/Alox5/Ch25h/Hsd3b7/Nr4a1/Retnlg/Fpr2/Ccl17/Ptk2b/Il12a/S100a9/Prex1/Sell/Lpar1/S100a8/Bst1/Itgam/Cxcl1/Calr/C3/Dusp1/Ppbp/Pf4/Padi2/Ccl6/AI182371/Grem1/Adam8
-GO:0071674                                                                                                                              Ccl5/Ccr7/Lgals3/Trpm4/Ccl7/Ccl2/Tnfsf18/Nbl1/Mdk/Slamf9/Fut7/Aire/Ager/Alox5/Ch25h/Hsd3b7/Cd209a/Retnlg/Fpr2/Ptk2b/Apod/Il12a/Itgb3/Enpp1/Calr/Dusp1/Itga4/Padi2/P2ry12/Plg/AI182371/Ascl2/Grem1/Adam8
+GO:0050900                   Ccr7/Ptn/Fpr2/Enpp1/Edn3/Itga4/Cxcl5/Aire/Ager/Retnlg/Mdk/Ada/Itgb3/Ppbp/Axdnd1/C3/S100a9/Ch25h/Ccl28/Hsd3b7/S100a8/Gdf15/Aoc3/Sell/Tnfsf18/Il33/Ccl7/Cd209a/Nbl1/Il12a/Prex1/Padi2/Emp2/Alox5/Slamf9/Ccl5/Ptk2b/Pf4/Apod/Calr/Ccl2/Adam8/Itgam/Lgals3/Trpm4/AI182371/Ascl2/Dusp1/Cxcl1/P2ry12/Grem1/Fut7/Plg/Bst1
+GO:0006935 Ccr7/Nr4a1/Cmtm7/Ptgr1/Lsp1/Ptn/Fpr2/Edn3/Cxcl5/Ager/Plxnb3/Retnlg/Mdk/Itgb3/Ppbp/S100a7a/C3/S100a9/Ch25h/Ccl28/Hsd3b7/Casr/S100a8/Cmtm5/Sell/Ccl17/Tnfsf18/Ccl7/Tubb2b/Ntf3/Nbl1/Il12a/Prex1/Padi2/Lpar1/Alox5/Stx3/Slamf9/Ccl5/Ccl6/Ptk2b/Nox1/Pf4/Calr/Ccl2/Adam8/Itgam/Lgals3/Trpm4/AI182371/Dusp1/Cxcl1/P2ry12/Grem1/Robo3/Bst1
+GO:0042330 Ccr7/Nr4a1/Cmtm7/Ptgr1/Lsp1/Ptn/Fpr2/Edn3/Cxcl5/Ager/Plxnb3/Retnlg/Mdk/Itgb3/Ppbp/S100a7a/C3/S100a9/Ch25h/Ccl28/Hsd3b7/Casr/S100a8/Cmtm5/Sell/Ccl17/Tnfsf18/Ccl7/Tubb2b/Ntf3/Nbl1/Il12a/Prex1/Padi2/Lpar1/Alox5/Stx3/Slamf9/Ccl5/Ccl6/Ptk2b/Nox1/Pf4/Calr/Ccl2/Adam8/Itgam/Lgals3/Trpm4/AI182371/Dusp1/Cxcl1/P2ry12/Grem1/Robo3/Bst1
+GO:0030595                                                                                                                 Ccr7/Ptn/Fpr2/Edn3/Cxcl5/Retnlg/Mdk/Ppbp/C3/S100a9/Ch25h/Ccl28/Hsd3b7/S100a8/Sell/Tnfsf18/Ccl7/Nbl1/Il12a/Prex1/Padi2/Alox5/Slamf9/Ccl5/Ptk2b/Pf4/Calr/Ccl2/Adam8/Itgam/Lgals3/Trpm4/AI182371/Dusp1/Cxcl1/Grem1/Bst1
+GO:0060326                                                                              Ccr7/Nr4a1/Ptn/Fpr2/Edn3/Cxcl5/Plxnb3/Retnlg/Mdk/Ppbp/C3/S100a9/Ch25h/Ccl28/Hsd3b7/S100a8/Sell/Ccl17/Tnfsf18/Ccl7/Nbl1/Il12a/Prex1/Padi2/Lpar1/Alox5/Slamf9/Ccl5/Ccl6/Ptk2b/Nox1/Pf4/Calr/Ccl2/Adam8/Itgam/Lgals3/Trpm4/AI182371/Dusp1/Cxcl1/Grem1/Bst1
+GO:0071674                                                                                                                              Ccr7/Fpr2/Enpp1/Itga4/Aire/Ager/Retnlg/Mdk/Itgb3/Ch25h/Hsd3b7/Tnfsf18/Ccl7/Cd209a/Nbl1/Il12a/Padi2/Alox5/Slamf9/Ccl5/Ptk2b/Apod/Calr/Ccl2/Adam8/Lgals3/Trpm4/AI182371/Ascl2/Dusp1/P2ry12/Grem1/Fut7/Plg
            Count
 GO:0050900    54
 GO:0006935    56
