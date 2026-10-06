@@ -87,7 +87,7 @@ library(gplots)
 library(microbenchmark)
 library(org.Hs.eg.db)
 library(org.Mm.eg.db)
-library(msigdb)
+library(msigdbr)
 library(clusterProfiler)
 library(enrichplot)
 library(ggplot2)
@@ -101,7 +101,7 @@ library(gplots)
 library(microbenchmark)
 library(org.Hs.eg.db)
 library(org.Mm.eg.db)
-library(msigdb)
+library(msigdbr)
 library(clusterProfiler)
 library(enrichplot)
 library(ggplot2)
@@ -820,67 +820,75 @@ as a supplementary dataset for [the original GSEA
 paper](https://www.nature.com/articles/ng1180). Later it has been separated
 out and developed independently. In the first version in 2005, there were only
 two gene sets collections and in total 843 gene sets. Now in the newest version
-of MSigDB (v2023.1.Hs), it has grown into nine gene sets collections, covering
-> 30K gene sets. It provides gene sets on a variety of topics.
+of MSigDB (v2026.1.Hs for human and v2026.1.Ms for mouse), it has grown into 
+10 gene sets collections for human and 7 gene sets collections for mouse, covering
+a variety of topics of gene functions.
 
-MSigDB categorizes gene sets into nine collections where each collection
+MSigDB categorizes human gene sets into ten collections where each collection
 focuses on a specific topic. For some collections, they are additionally split
 into sub-collections. There are several ways to obtain gene sets from MSigDB.
-One convenient way is to use the **msigdb** package. Another option is to use 
-the **msigdbr** CRAN package, which supports organisms other than human and 
-mouse by mapping to orthologs.
+One convenient way is to use the **msigdbr** package, which uses human as the primary species,
+and additionally supports other species by mapping to orthologs.
 
-**msigdb** provides mouse and human gene sets, defined using either gene 
-symbols or Entrez IDs. Let's get the mouse collection.
+Let's run the main function `msigdbr()` from the **msigdbr** package.
 
 ```{r pillar-options, echo = FALSE}
 options(pillar.print_max = 30)
 ```
 
 ```{r msigdbr}
-library(msigdb)
-library(ExperimentHub)
-library(GSEABase)
-MSigDBGeneSets <- getMsigdb(org = "mm", id = "SYM", version = "7.4")
+library(msigdbr)
+msigdbr()
 ```
 
-The `msigdb` object above is a `GeneSetCollection`, storing all gene sets 
-from MSigDB. The `GeneSetCollection` object class is defined in the `GSEABase` 
-package, and it is a linear data structure similar to a base list object, but 
-with additional metadata such as the type of gene identifier or provenance 
-information about the gene sets.
+`msigdbr()` returns a giant table with many columns, containing the complete dataset from MSigDB. Important columns are listed as follows:
 
-```{r msigdbr-view}
-MSigDBGeneSets
-length(MSigDBGeneSets)
+- `gs_cat`, `gs_subcat` and `gs_name`: the collection, the sub-collection and the name of the gene set.
+- `gene_symbol`, `entrez_gene`, `ensembl_gene`: **msigdbr** provides gene sets for a specific species by mapping to human, so these three columns contains gene IDs for the inquery species.
+- `human_gene_symbol`, `human_entrez_gene`, `human_ensembl_gene`: gene symbol, EntreZ ID, and Ensembl ID of the gene for human.
+
+`msigdbr_collections()` lists all supported gene set categories and sub-categories.
+
+```{r, msigdb-collection}
+msigdbr_collections()
 ```
 
-Each signature is stored in a `GeneSet` object, also defined in the `GSEABase` 
-package.
+`msigdbr_species()` lists all supported species:
 
-```{r msigdbr-single}
-gs <- MSigDBGeneSets[[2000]]
-gs
-collectionType(gs)
-geneIds(gs)
+```{r, msigdb-species}
+msigdbr_species()
 ```
 
-We can also subset the collection. First, let's list the available collections 
-and subcollections.
+You can specify the `species`, `category` and `subcategory` arguments to obtain gene sets for a specific gene set collection of a specific species.
 
-```{r msigdbr-collections}
-listCollections(MSigDBGeneSets)
-listSubCollections(MSigDBGeneSets)
+```{r, msigdb-h}
+msigdbr(species = "rat", category = "H")
+msigdbr(category = "C2", subcategory = "KEGG")
 ```
 
-Then, we retrieve only the 'hallmarks' collection.
+`msigdbr()` returns a table which contains mappings between two species, and even for a single species, it provides mappings from three gene IDs. Thus, for two specific mapping columns, there might be 1. mappings are duplicated, 2. mappings are not available. The possible reasons are 1. a gene may not exist in another species, 2. gene symbol, EntreZ ID and Ensembl ID are not 1-to-1 mapping. Let's take hallmark genesets for rat as an example:
 
-```{r msigdbr-h}
-(hm <- subsetCollection(MSigDBGeneSets, collection = "h"))
+```{r}
+gs = msigdbr(species = "rat", category = "H")
 ```
 
-If you only want to use a sub-category, specify both the `collection` and 
-`subcollection` arguments to `subsetCollection`. 
+If we take EntreZ ID as gene ID in gene sets, there do exist duplications and non-mapping records.
+
+```{r}
+gs[, c("gs_name", "entrez_gene")] |> nrow()
+gs[, c("gs_name", "entrez_gene")] |> unique() |> nrow()
+gs[["entrez_gene"]] |> is.na() |> which()
+```
+
+One last thing to note when using `msigdbr()` is that the `entrez_gene` (as well as the `human_entrez_gene`) column is stored in 
+the integer mode. This may cause problems when doing gene ID convertion later. It is recommended to explitely convert these two columns into characters:
+
+```{r}
+gs[["entrez_gene"]] = as.character(gs[["entrez_gene"]])
+```
+
+It is not clear whether and how the packages that do gene set enrichment analysis handle these situations, but it is always good to keep these things in mind.
+
 
 ## ORA with clusterProfiler
 
@@ -1099,13 +1107,12 @@ For MSigDB gene sets, there is no pre-defined enrichment function. We need to
 directly use the low-level enrichment function `enricher()` which accepts
 self-defined gene sets. The gene sets should be in a format of a two-column
 data frame of genes and gene sets (or a class that can be converted to a data
-frame). Let's use the hallmark collection (`hm`) that we generated above. 
+frame). Let's use the hallmark collection. 
 
 ```{r get-msigdb-gs, message = TRUE, warning = TRUE}
-gene_sets <- stack(geneIds(hm)) |>
-    as.data.frame() |>
-    dplyr::select(ind, values) |>
-    dplyr::rename(gs_name = ind, gene_symbol = values)
+gene_sets = msigdbr(species = "mouse", category = "H")
+gene_sets = gene_sets[, c("gs_name", "gene_symbol")]
+gene_sets = unique(gene_sets)
 head(gene_sets)
 ```
 
