@@ -457,7 +457,7 @@ other attached packages:
  [9] SummarizedExperiment_1.42.0 Biobase_2.72.0             
 [11] MatrixGenerics_1.24.0       matrixStats_1.5.0          
 [13] GenomicRanges_1.64.0        Seqinfo_1.2.0              
-[15] IRanges_2.46.0              S4Vectors_0.50.2           
+[15] IRanges_2.46.0              S4Vectors_0.50.3           
 [17] BiocGenerics_0.58.1         generics_0.1.4             
 
 loaded via a namespace (and not attached):
@@ -467,13 +467,13 @@ loaded via a namespace (and not attached):
 [10] vctrs_0.7.3           pkgconfig_2.0.3       shape_1.4.6.1        
 [13] crayon_1.5.3          fastmap_1.2.0         XVector_0.52.0       
 [16] labeling_0.4.3        promises_1.5.0        preprocessCore_1.74.0
-[19] shinyAce_0.4.4        xfun_0.60             cachem_1.1.0         
+[19] shinyAce_0.4.4        xfun_0.61             cachem_1.1.0         
 [22] jsonlite_2.0.0        listviewer_4.0.0      later_1.4.8          
 [25] DelayedArray_0.38.2   BiocParallel_1.46.0   parallel_4.6.1       
 [28] cluster_2.1.8.2       R6_2.6.1              bslib_0.12.0         
 [31] limma_3.68.5          jquerylib_0.1.4       Rcpp_1.1.2           
-[34] iterators_1.0.14      knitr_1.51            httpuv_1.6.17        
-[37] Matrix_1.7-6          splines_4.6.1         igraph_2.3.3         
+[34] iterators_1.0.14      knitr_1.52            httpuv_1.6.17        
+[37] Matrix_1.7-6          splines_4.6.1         igraph_2.3.4         
 [40] tidyselect_1.2.1      abind_1.4-8           yaml_2.3.12          
 [43] doParallel_1.0.17     codetools_0.2-20      affy_1.90.0          
 [46] miniUI_0.1.2          lattice_0.22-9        tibble_3.3.1         
@@ -484,9 +484,9 @@ loaded via a namespace (and not attached):
 [61] scales_1.4.0          xtable_1.8-8          glue_1.8.1           
 [64] tools_4.6.1           colourpicker_1.3.0    locfit_1.5-9.12      
 [67] colorspace_2.1-3      nlme_3.1-169          vipor_0.4.7          
-[70] cli_3.6.6             viridisLite_0.4.3     S4Arrays_1.12.0      
+[70] cli_3.6.6             viridisLite_0.4.3     S4Arrays_1.12.1      
 [73] dplyr_1.2.1           gtable_0.3.6          rintrojs_0.3.4       
-[76] sass_0.4.10           digest_0.6.39         SparseArray_1.12.2   
+[76] sass_0.4.10           digest_0.6.39         SparseArray_1.12.3   
 [79] ggrepel_0.9.8         rjson_0.2.23          htmlwidgets_1.6.4    
 [82] farver_2.1.2          htmltools_0.5.9       lifecycle_1.0.5      
 [85] shinyWidgets_0.9.1    GlobalOptions_0.1.4   statmod_1.5.2        
