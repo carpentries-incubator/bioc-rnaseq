@@ -279,7 +279,7 @@
       </div>
       <hr></nav><main id="main-content" class="main-content"><div class="container lesson-content">
         <h1>Gene set enrichment analysis</h1>
-        <p> Last updated on 2026-11-03 |
+        <p> Last updated on 2026-11-10 |
 
         <a href="https://github.com/carpentries-incubator/bioc-rnaseq/edit/main/episodes/07-gene-set-analysis.Rmd" class="external-link">Edit this page <i aria-hidden="true" data-feather="edit"></i></a></p>
 
@@ -836,10 +836,10 @@ distribution of its statistic.</p>
 <div class="codewrapper">
 <h3 class="code-label">OUTPUT<i aria-hidden="true" data-feather="chevron-left"></i><i aria-hidden="true" data-feather="chevron-right"></i>
 </h3>
-<pre class="output" tabindex="0"><code>Unit: microseconds
-   expr     min       lq      mean  median       uq     max neval
- fisher 194.069 202.3755 217.57400 211.482 224.3355 498.680   100
-  hyper   1.388   1.5545   2.20776   1.952   2.2205  21.343   100</code></pre>
+<pre class="output" tabindex="0"><code>Unit: nanoseconds
+   expr    min     lq      mean   median       uq    max neval
+ fisher 123776 128142 136437.56 131873.0 136880.5 389905   100
+  hyper    911    991   1256.42   1171.5   1362.0   5498   100</code></pre>
 </div>
 <p>It is very astonishing that <code>phyper()</code> is hundreds of
 times faster than <code>fisher.test()</code>. Main reason is in
@@ -995,7 +995,7 @@ convert a list to a two-column data frame?</p>
 <button class="accordion-button solution-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapseSolution1" aria-expanded="false" aria-controls="collapseSolution1">
   <h4 class="accordion-header" id="headingSolution1"> Show me the solution </h4>
 </button>
-<div id="collapseSolution1" class="accordion-collapse collapse" aria-labelledby="headingSolution1" data-bs-parent="#accordionSolution1">
+<div id="collapseSolution1" class="accordion-collapse collapse" data-bs-parent="#accordionSolution1" aria-labelledby="headingSolution1">
 <div class="accordion-body">
 <div class="codewrapper sourceCode" id="cb38">
 <h3 class="code-label">R<i aria-hidden="true" data-feather="chevron-left"></i><i aria-hidden="true" data-feather="chevron-right"></i>
@@ -1609,7 +1609,7 @@ sets are automatically retrieved and processed from
 <div class="codewrapper">
 <h3 class="code-label">OUTPUT<i aria-hidden="true" data-feather="chevron-left"></i><i aria-hidden="true" data-feather="chevron-right"></i>
 </h3>
-<pre class="output" tabindex="0"><code>--&gt; Expected input gene ID: 58186,14581,54402,15270,54388,12649</code></pre>
+<pre class="output" tabindex="0"><code>--&gt; Expected input gene ID: 22042,56702,19264,319583,19891,67278</code></pre>
 </div>
 <div class="codewrapper">
 <h3 class="code-label">OUTPUT<i aria-hidden="true" data-feather="chevron-left"></i><i aria-hidden="true" data-feather="chevron-right"></i>
@@ -1933,19 +1933,19 @@ mmu00592                               alpha-Linolenic acid metabolism
 mmu04913                                       Ovarian steroidogenesis
 mmu04061 Viral protein interaction with cytokine and cytokine receptor
          GeneRatio  BgRatio RichFactor FoldEnrichment oddsRatio   zScore
-mmu00590    16/465 89/11244  0.1797753       4.347082  5.226104 6.584229
-mmu00591    12/465 55/11244  0.2181818       5.275777  6.613892 6.602055
-mmu00565    11/465 49/11244  0.2244898       5.428308  6.848539 6.452116
-mmu00592     8/465 25/11244  0.3200000       7.737806 11.081993 7.004704
-mmu04913    12/465 64/11244  0.1875000       4.533871  5.464595 5.888411
-mmu04061    14/465 95/11244  0.1473684       3.563463  4.099860 5.211339
+mmu00590    16/467 89/11273  0.1797753       4.339629  5.216050 6.575384
+mmu00591    12/467 55/11273  0.2181818       5.266732  6.601380 6.593946
+mmu00565    11/467 49/11273  0.2244898       5.419001  6.835642 6.444285
+mmu00592     8/467 25/11273  0.3200000       7.724540 11.061387 6.997153
+mmu04913    12/467 64/11273  0.1875000       4.526097  5.454269 5.880677
+mmu04061    14/467 95/11273  0.1473684       3.557354  4.092061 5.203517
                pvalue     p.adjust       qvalue
-mmu00590 6.155892e-07 0.0001963730 0.0001562132
-mmu00591 1.883519e-06 0.0003004213 0.0002389829
-mmu00565 3.767289e-06 0.0003731315 0.0002968233
-mmu00592 4.678765e-06 0.0003731315 0.0002968233
-mmu04913 1.005020e-05 0.0006412027 0.0005100719
-mmu04061 3.326425e-05 0.0017685491 0.0014068674
+mmu00590 6.300997e-07 0.0002016319 0.0001598828
+mmu00591 1.918096e-06 0.0003068953 0.0002433508
+mmu00565 3.830924e-06 0.0003791420 0.0003006384
+mmu00592 4.739275e-06 0.0003791420 0.0003006384
+mmu04913 1.022837e-05 0.0006546155 0.0005190735
+mmu04061 3.390701e-05 0.0018083740 0.0014339395
                                                                                                        geneID
 mmu00590 18783/19215/211429/329502/78390/19223/67103/242546/13118/18781/18784/11689/232889/15446/237625/11687
 mmu00591                        18783/211429/329502/78390/242546/18781/18784/13113/622127/232889/237625/11687
@@ -1954,12 +1954,12 @@ mmu00592                                                  18783/211429/329502/78
 mmu04913                          18783/211429/329502/78390/242546/11689/232889/13076/13070/15485/13078/16867
 mmu04061                  16174/20311/57349/56744/14825/20295/20296/20306/20304/20305/12775/56838/16185/16186
          Count SetSize DESize UniverseSize
-mmu00590    16      89    465        11244
-mmu00591    12      55    465        11244
-mmu00565    11      49    465        11244
-mmu00592     8      25    465        11244
-mmu04913    12      64    465        11244
-mmu04061    14      95    465        11244</code></pre>
+mmu00590    16      89    467        11273
+mmu00591    12      55    467        11273
+mmu00565    11      49    467        11273
+mmu00592     8      25    467        11273
+mmu04913    12      64    467        11273
+mmu04061    14      95    467        11273</code></pre>
 </div>
 <div id="perform-kegg-pathway-enrichment-on-other-organisms" class="callout">
 <div class="callout-square">
@@ -2707,8 +2707,8 @@ topological relations in the GO hierarchy.<a href="#fnref7" class="footnote-back
   "url": "https://carpentries-incubator.github.io/bioc-rnaseq/instructor/07-gene-set-analysis.html",
   "identifier": "https://carpentries-incubator.github.io/bioc-rnaseq/instructor/07-gene-set-analysis.html",
   "dateCreated": "2020-09-15",
-  "dateModified": "2026-11-03",
-  "datePublished": "2026-11-03"
+  "dateModified": "2026-11-10",
+  "datePublished": "2026-11-10"
 }
 
   </script><script>
